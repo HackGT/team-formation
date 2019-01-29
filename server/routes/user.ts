@@ -57,6 +57,43 @@ userRoutes.route("/signup").post(postParser, async (request, response) => {
 	}
 });
 
+userRoutes.route("/email").post(postParser, async (request, response) => {
+    let email: string = request.body.email || "";
+    let password: string = request.body.password || "";
+    email = email.trim();
+    if (!email || !password) {
+        response.status(400).json({
+            "error": "Email or password not specified"
+        });
+        return;
+    }
+    let user = await User.findOne({ email: email });
+    if (!user) {
+        response.status(404).json({
+            "error": "Email not registered"
+        });
+    } else {
+        response.status(200).json({
+            "success": true
+        });
+    }
+
+	try {
+		await user.save();
+		response.status(200).json({
+			"success": true
+		});
+	}
+	catch (err) {
+		console.error(err);
+		response.status(500).json({
+			"error": "An error occurred while logging in"
+		});
+	}
+
+
+});
+
 userRoutes.route("/login").post(postParser, async (request, response) => {
 	if (request.cookies.auth) {
 		let authKey: string = request.cookies.auth;

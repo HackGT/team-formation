@@ -14,8 +14,8 @@ import * as multer from "multer";
 import * as morgan from "morgan";
 
 const PORT = parseInt(process.env.PORT) || 3000;
-const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost/";
-const UNIQUE_APP_ID = process.env.UNIQUE_APP_ID || "registration";
+const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:hackgt123@ds121599.mlab.com:21599/hackgt-team-formation";
+const UNIQUE_APP_ID = process.env.UNIQUE_APP_ID || "team-formation";
 const STATIC_ROOT = "../client";
 
 const VERSION_NUMBER = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json"), "utf8")).version;
