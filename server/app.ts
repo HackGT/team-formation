@@ -13,7 +13,7 @@ import * as cookieParser from "cookie-parser";
 import * as multer from "multer";
 import * as morgan from "morgan";
 
-const PORT = parseInt(process.env.PORT) || 3000;
+const PORT = process.env.PORT || 3000;
 const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:teamformation123@ds121599.mlab.com:21599/hackgt-team-formation";
 const UNIQUE_APP_ID = process.env.UNIQUE_APP_ID || "team-formation";
 const STATIC_ROOT = "../client";
@@ -24,17 +24,18 @@ const VERSION_HASH = require("git-rev-sync").short();
 export let app = express();
 app.use(morgan("dev"));
 app.use(compression());
+
 let cookieParserInstance = cookieParser(undefined, {
 	"path": "/",
 	"maxAge": 1000 * 60 * 60 * 24 * 30 * 6, // 6 months
 	"secure": false,
 	"httpOnly": true
-});
+} as cookieParser.CookieParseOptions);
 app.use(cookieParserInstance);
 
 import * as mongoose from "mongoose";
 (<any>mongoose).Promise = global.Promise;
-mongoose.connect(url.resolve(MONGO_URL, UNIQUE_APP_ID));
+mongoose.connect(MONGO_URL);
 export {mongoose}; // For future unit testing and dependent routes; see https://github.com/HackGT/Ultimate-Checkin/blob/master/test/api.ts#L11
 
 import {

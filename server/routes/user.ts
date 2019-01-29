@@ -14,9 +14,11 @@ import {
 export let userRoutes = express.Router();
 
 userRoutes.route("/signup").post(postParser, async (request, response) => {
+    console.log(request.body)
 	let email: string = request.body.email || "";
 	let password: string = request.body.password || "";
 	email = email.trim();
+    console.log(email, password);
 	if (!email || !password) {
 		response.status(400).json({
 			"error": "Email or password not specified"
@@ -26,7 +28,7 @@ userRoutes.route("/signup").post(postParser, async (request, response) => {
 
 	let salt = crypto.randomBytes(32);
 	let passwordHashed = await pbkdf2Async(password, salt, 500000, 128, "sha256");
-	
+
 	let user = new User({
 		email: email,
 		login: {
@@ -36,7 +38,7 @@ userRoutes.route("/signup").post(postParser, async (request, response) => {
 		auth_keys: [],
 		admin: false
 	});
-	
+
 	try {
 		await user.save();
 		response.status(201).json({
@@ -59,11 +61,10 @@ userRoutes.route("/signup").post(postParser, async (request, response) => {
 
 userRoutes.route("/email").post(postParser, async (request, response) => {
     let email: string = request.body.email || "";
-    let password: string = request.body.password || "";
     email = email.trim();
-    if (!email || !password) {
+    if (!email) {
         response.status(400).json({
-            "error": "Email or password not specified"
+            "error": "Email not specified"
         });
         return;
     }
@@ -72,6 +73,7 @@ userRoutes.route("/email").post(postParser, async (request, response) => {
         response.status(404).json({
             "error": "Email not registered"
         });
+        return;
     } else {
         response.status(200).json({
             "success": true
@@ -79,7 +81,6 @@ userRoutes.route("/email").post(postParser, async (request, response) => {
     }
 
 	try {
-		await user.save();
 		response.status(200).json({
 			"success": true
 		});

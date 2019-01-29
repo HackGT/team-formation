@@ -43,4 +43,6 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
 	auth_keys: [String],
 
 	admin: Boolean
+},{
+  usePushEach: true
 }));
