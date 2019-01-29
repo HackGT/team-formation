@@ -21,15 +21,40 @@ export interface IUser {
 	admin?: boolean;
 }
 export type IUserMongoose = IUser & mongoose.Document;
-
+export const Team = mongoose.model("Team", new mongoose.Schema({
+    name: {
+        required: true,
+        type: String,
+        unique: true
+    },
+    picture: String,
+    members: {
+        required: true
+    },
+    interests: [String],
+    description: String
+},{
+  usePushEach: true
+}));
 export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
 	email: {
 		type: String,
 		required: true,
 		unique: true
 	},
+    secondary_email: {
+        type:String,
+        required: false,
+        unique: false
+    },
 	name: String,
-
+    school: String,
+    grad_year: String,
+    skills: [String],
+    interests: [String],
+    beginner: Boolean,
+    description: String,
+    image: String,
 	login: {
 		hash: {
 			type: String,
