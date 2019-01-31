@@ -91,8 +91,6 @@ userRoutes.route("/email").post(postParser, async (request, response) => {
 			"error": "An error occurred while logging in"
 		});
 	}
-
-
 });
 
 userRoutes.route("/login").post(postParser, async (request, response) => {

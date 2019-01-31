@@ -29,7 +29,9 @@ export const Team = mongoose.model("Team", new mongoose.Schema({
     },
     picture: String,
     members: {
-        required: true
+        required: true,
+        type: [String],
+        unique: true
     },
     interests: [String],
     description: String
