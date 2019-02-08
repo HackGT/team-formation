@@ -69,14 +69,37 @@ userRoutes.route("/signup").post(postParser, async (request, response) => {
 	}
 });
 
-/*userRoutes.route("/make_profile").post(postParser, async (request, response) => {
-    if (request.cookies.auth) {
-		let authKey: string = request.cookies.auth;
-		await User.update({ "auth_keys": authKey }, { $pull: { "auth_keys": authKey } }).exec();
-		response.clearCookie("auth");
-	}*/
+userRoutes.route("/make_profile").post(postParser, async (request, response) => {
+    //add checking for stuff
+    if (!request.user) {
+        response.status(400).json({
+            "error": "User not logged in"
+        });
+        return;
+    }
+    let user = await User.findOne({ email: request.user.email });
+    if (user != null) {
+        for (var key in request.body) {
+            if (Object.prototype.hasOwnProperty.call(request.body,key)) {
+                user[key] = request.body[key];
+            }
+        }
+        try {
+            await user.save();
+            response.status(200).json({
+                "success": true
+            });
+        }
+        catch (err) {
+            console.error(err);
+            response.status(500).json({
+                "error": "An error occurred while making profile"
+            });
+        }
+    }
+    //write to mongodb
 
-
+});
 userRoutes.route("/email").post(postParser, async (request, response) => {
     let email: string = request.body.email || "";
     email = email.trim();
@@ -97,18 +120,7 @@ userRoutes.route("/email").post(postParser, async (request, response) => {
             "success": true
         });
     }
-
-	try {
-		response.status(200).json({
-			"success": true
-		});
-	}
-	catch (err) {
-		console.error(err);
-		response.status(500).json({
-			"error": "An error occurred while logging in"
-		});
-	}
+    
 
 
 });
