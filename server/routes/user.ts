@@ -8,7 +8,7 @@ import {
 	postParser
 } from "../app";
 import {
-	IUser, IUserMongoose, User
+	IUser, IUserMongoose, User, ITeam, ITeamMongoose, Team
 } from "../schema";
 import * as passport from "passport";
 import { request } from "https";
@@ -70,7 +70,7 @@ userRoutes.route("/signup").post(postParser, async (request, response) => {
 });
 
 userRoutes.route("/make_profile").post(postParser, async (request, response) => {
-    //add checking for stuff
+
     if (!request.user) {
         response.status(400).json({
             "error": "User not logged in"
@@ -86,7 +86,7 @@ userRoutes.route("/make_profile").post(postParser, async (request, response) => 
         }
         try {
             await user.save();
-            response.status(200).json({
+            response.status(201).json({
                 "success": true
             });
         }
@@ -95,11 +95,45 @@ userRoutes.route("/make_profile").post(postParser, async (request, response) => 
             response.status(500).json({
                 "error": "An error occurred while making profile"
             });
+            return;
         }
     }
     //write to mongodb
 
 });
+
+userRoutes.route("/make_team").post(postParser, async (request, response) => {
+
+    if (!request.user) {
+        response.status(400).json({
+            "error": "User not logged in"
+        });
+        return;
+    }
+    let team = new Team({creator: request.user.name});
+    for (var key in request.body) {
+        if (Object.prototype.hasOwnProperty.call(request.body,key)) {
+            team[key] = request.body[key];
+        }
+    }
+    try {
+        await team.save();
+        response.status(201).json({
+            "success": true
+        });
+    }
+    catch (err) {
+        console.error(err);
+        response.status(500).json({
+            "error": "An error occurred while making team"
+        });
+        return;
+    }
+    
+    //write to mongodb
+
+});
+
 userRoutes.route("/email").post(postParser, async (request, response) => {
     let email: string = request.body.email || "";
     email = email.trim();

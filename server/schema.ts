@@ -33,6 +33,8 @@ export interface IUser {
 
 }
 export interface ITeam {
+    _id: mongoose.Types.ObjectId;
+    creator: string;
 	name: string;
 	picture?: string;
     members: string[];
@@ -43,6 +45,10 @@ export interface ITeam {
 export type IUserMongoose = IUser & mongoose.Document;
 export type ITeamMongoose = ITeam & mongoose.Document;
 export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
+    creator: {
+        required: true,
+        type: String
+    },
     name: {
         required: true,
         type: String,
@@ -61,13 +67,7 @@ export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
   usePushEach: true
 }));
 export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
-    /*uuid: {
-		type: String,
-		required: true,
-		index: true,
-        unique: true,
-        default: uuid.v4
-	},*/
+
     email: {
 		type: String,
 		required: true,
