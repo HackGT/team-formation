@@ -1,0 +1,34 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    user(name: ID, email: String, grad_year: String, school: String): [User!]!
+    users(pagination_token: ID, n: Int!, filter: UserFilter): [User!]!
+    search_user_simple(search: String!, use_regex: Boolean = false, offset: Int!, n: Int!, filter: UserFilter): [User!]!
+}
+
+type Mutation {
+    update_user(id: ID, name: String, email: String, grad_year: String, school: String): User!
+}
+
+input UserFilter {
+    name: String
+    school: String
+    grad_year: String
+    skills: String
+    interests: String
+    beginner: Boolean
+}
+
+type User {
+    id: ID
+    name: String
+    email: String
+    school: String
+    grad_year: String
+    interests: [String]
+    beginner: Boolean
+    skills: [String]
+}

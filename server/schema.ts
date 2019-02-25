@@ -20,6 +20,13 @@ export interface IUser {
 
 	admin?: boolean;
 }
+export interface ITeam {
+    name: string,
+    picture: string,
+    memebrs: string[],
+    interests: string[],
+    description: string
+}
 export type IUserMongoose = IUser & mongoose.Document;
 export const Team = mongoose.model("Team", new mongoose.Schema({
     name: {
@@ -29,7 +36,9 @@ export const Team = mongoose.model("Team", new mongoose.Schema({
     },
     picture: String,
     members: {
-        required: true
+        required: true,
+        type: [String],
+        unique: true
     },
     interests: [String],
     description: String
