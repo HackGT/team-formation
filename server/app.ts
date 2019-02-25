@@ -12,6 +12,9 @@ import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import * as multer from "multer";
 import * as morgan from "morgan";
+import * as express_graphql from "express-graphql"
+import * as cors from "cors"
+import {buildSchema} from "graphql"
 
 const PORT = process.env.PORT || 3000;
 const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:teamformation123@ds121599.mlab.com:21599/hackgt-team-formation";
@@ -20,10 +23,12 @@ const STATIC_ROOT = "../client";
 
 const VERSION_NUMBER = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json"), "utf8")).version;
 const VERSION_HASH = require("git-rev-sync").short();
+const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 
 export let app = express();
 app.use(morgan("dev"));
 app.use(compression());
+app.use('*', cors());
 
 let cookieParserInstance = cookieParser(undefined, {
 	"path": "/",
@@ -39,7 +44,7 @@ mongoose.connect(MONGO_URL);
 export {mongoose}; // For future unit testing and dependent routes; see https://github.com/HackGT/Ultimate-Checkin/blob/master/test/api.ts#L11
 
 import {
-	IUser, IUserMongoose, User
+	IUser, IUserMongoose, User, ITeam, Team
 } from "./schema";
 
 // Check for number of admin users and create default admin account if none
@@ -132,13 +137,41 @@ export let authenticateWithRedirect = async function (request: express.Request, 
 		next();
 	}
 };
+let getUser = async function(args) {
+    let name = args.name
+    console.log(args)
+    let users = await User.find(args)
+    console.log(users)
+    if(!users) {
+        return null;
+    }
+    return users
 
+}
+let updateUser = async function(args) {
+    let id = args.id
+    console.log(args.id)
+    let updated = User.findByIdAndUpdate(args.id, {"$set": args},{new: true})
+    console.log("ard",updated)
+    return updated
+}
 let apiRouter = express.Router();
 // API routes go here
 import {userRoutes} from "./routes/user";
+let root = {
+    user: getUser,
+    update_user: updateUser
+
+};
+
 apiRouter.use("/user", userRoutes);
 
 app.use("/api", apiRouter);
+app.use('/graphql', express_graphql({
+    schema: buildSchema(typeDefs),
+    rootValue: root,
+    graphiql: true
+}));
 
 app.route("/").get((request, response) => {
 	response.send("Rendered handlebars template here");
