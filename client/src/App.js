@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Input } from 'semantic-ui-react';
 import Headers from './components/Headers';
-import EmailInput from './components/EmailInput';
 import Content from './components/Content'
 // import logo from './logo.svg';
 import './App.css';
@@ -10,7 +9,7 @@ class App extends Component {
 
 	state = {
 		subHeader: 'Team Formation',
-		content: 'email-input'
+		content: 'login'
 	};
 
   render() {

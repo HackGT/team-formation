@@ -23,7 +23,8 @@
     "multer": "^1.2.1",
     "semantic-ui": "^2.4.2",
     "semantic-ui-react": "^0.84.0",
-    "serve-static": "^1.11.1"
+    "serve-static": "^1.11.1",
+    "typescript": "^3.3.3333"
   },
   "devDependencies": {
     "@types/ajv": "^1.0.0",
