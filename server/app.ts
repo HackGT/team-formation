@@ -19,7 +19,7 @@ import * as express_graphql from "express-graphql"
 import * as cors from "cors"
 import {buildSchema} from "graphql"
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:teamformation123@ds121599.mlab.com:21599/hackgt-team-formation";
 const UNIQUE_APP_ID = process.env.UNIQUE_APP_ID || "team-formation";
 const STATIC_ROOT = "../client";
@@ -100,7 +100,19 @@ export function pbkdf2Async (...params: any[]) {
 		crypto.pbkdf2.apply(null, params);
 	});
 }
-
+export function loggedInErr(req, res, next) {
+    if (req.user) {
+        console.log('user');
+        res.status(200).json({
+            success: true
+        });
+        next()
+    }
+    else {
+        res.status(401).json({ "error": "User not logged in", success: false });
+        return;
+    }
+}
 export let postParser = bodyParser.urlencoded({
 	extended: false
 });
@@ -177,7 +189,8 @@ let root = {
 apiRouter.use("/user", userRoutes);
 
 app.use("/api", apiRouter);
-app.use('/graphql', express_graphql({
+app.use('/graphql', loggedInErr, express_graphql({
+
     schema: buildSchema(typeDefs),
     rootValue: root,
     graphiql: true
