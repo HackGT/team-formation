@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
-import ProfileSetup from './ProfileSetup';
+import EditProfile from './EditProfile';
+import Feed from './Feed'
 
 class Content extends Component {
 	state = {
@@ -18,8 +19,10 @@ class Content extends Component {
 			cur_display = <PasswordInput
 				onNextClick={this.onNextClick}/>;
 		} else if (this.state.cur_state == 'setup-profile') {
-			cur_display = <ProfileSetup
+			cur_display = <EditProfile
 				onNextClick={this.onNextClick}/>;
+		} else if (this.state.cur_state == 'feed') {
+			cur_display = <Feed/>;
 		}
 		return (
 			<div className="Content-container">
