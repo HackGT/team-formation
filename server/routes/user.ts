@@ -154,9 +154,18 @@ userRoutes.route("/email").post(postParser, async (request, response) => {
             "success": true
         });
     }
-    
 
-
+	try {
+		response.status(200).json({
+			"success": true
+		});
+	}
+	catch (err) {
+		console.error(err);
+		response.status(500).json({
+			"error": "An error occurred while logging in"
+		});
+	}
 });
 
 userRoutes.route("/login").post(postParser, loggedIn, passport.authenticate('local'), async (request, response) => {

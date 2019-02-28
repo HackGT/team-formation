@@ -15,6 +15,10 @@ import * as morgan from "morgan";
 import * as passport from "passport";
 import * as passportLocal from "passport-local"
 import * as session from "express-session"
+import * as express_graphql from "express-graphql"
+import * as cors from "cors"
+import {buildSchema} from "graphql"
+
 const PORT = process.env.PORT || 3000;
 const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:teamformation123@ds121599.mlab.com:21599/hackgt-team-formation";
 const UNIQUE_APP_ID = process.env.UNIQUE_APP_ID || "team-formation";
@@ -22,6 +26,7 @@ const STATIC_ROOT = "../client";
 
 const VERSION_NUMBER = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json"), "utf8")).version;
 const VERSION_HASH = require("git-rev-sync").short();
+const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 
 export let app = express();
 app.use(session({ 
@@ -29,6 +34,8 @@ app.use(session({
     }));
 app.use(morgan("dev"));
 app.use(compression());
+app.use('*', cors());
+
 let cookieParserInstance = cookieParser(undefined, {
 	"path": "/",
 	"maxAge": 1000 * 60 * 60 * 24 * 30 * 6, // 6 months
@@ -47,7 +54,7 @@ mongoose.connect(MONGO_URL);
 export {mongoose}; // For future unit testing and dependent routes; see https://github.com/HackGT/Ultimate-Checkin/blob/master/test/api.ts#L11
 
 import {
-	IUser, IUserMongoose, User
+	IUser, IUserMongoose, User, ITeam, Team
 } from "./schema";
 
 // Check for number of admin users and create default admin account if none
@@ -137,38 +144,69 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, don
             
         }
         return done(undefined, user);
-        /*let authKey = crypto.randomBytes(32).toString("hex");
-        user.auth_keys.push(authKey);
-    
-        try {
-            await user.save();
-            response.cookie("auth", authKey);
-            response.status(200).json({
-                "success": true
-            });
-        }
-        catch (err) {
-            console.error(err);
-            response.status(500).json({
-                "error": "An error occurred while logging in"
-            });
-        } */
-      /*user.comparePassword(password, (err: Error, isMatch: boolean) => {
-        if (err) { return done(err); }
-        if (isMatch) {
-          return done(undefined, user);
-        }
-        return done(undefined, false, { message: "Invalid email or password." });
-      });*/
+       
     });
   }));
+export let authenticateWithReject = async function (request: express.Request, response: express.Response, next: express.NextFunction) {
+	let authKey = request.cookies.auth;
+	let user = await User.findOne({"auth_keys": authKey});
+	if (!user) {
+		response.status(401).json({
+			"error": "You must log in to access this endpoint"
+		});
+	}
+	else {
+		response.locals.email = user.email;
+		next();
+	}
+};
+// For directly user facing endpoints
+export let authenticateWithRedirect = async function (request: express.Request, response: express.Response, next: express.NextFunction) {
+	let authKey = request.cookies.auth;
+	let user = await User.findOne({"auth_keys": authKey});
+	if (!user) {
+		response.redirect("/login");
+	}
+	else {
+		response.locals.email = user.email;
+		next();
+	}
+};
+let getUser = async function(args) {
+    let name = args.name
+    console.log(args)
+    let users = await User.find(args)
+    console.log(users)
+    if(!users) {
+        return null;
+    }
+    return users
 
+}
+let updateUser = async function(args) {
+    let id = args.id
+    console.log(args.id)
+    let updated = User.findByIdAndUpdate(args.id, {"$set": args},{new: true})
+    console.log("ard",updated)
+    return updated
+}
 let apiRouter = express.Router();
 // API routes go here
 import {userRoutes} from "./routes/user";
+let root = {
+    user: getUser,
+    update_user: updateUser
+
+};
+
 apiRouter.use("/user", userRoutes);
 
 app.use("/api", apiRouter);
+app.use('/graphql', express_graphql({
+    schema: buildSchema(typeDefs),
+    rootValue: root,
+    graphiql: true
+}));
 
 app.route("/").get((request, response) => {
 	response.send("Rendered handlebars template here");

@@ -42,6 +42,13 @@ export interface ITeam {
     description?: string;
 
 }
+export interface ITeam {
+    name: string,
+    picture: string,
+    memebrs: string[],
+    interests: string[],
+    description: string
+}
 export type IUserMongoose = IUser & mongoose.Document;
 export type ITeamMongoose = ITeam & mongoose.Document;
 export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
@@ -57,7 +64,10 @@ export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
     picture: String,
     members: {
         required: true,
+<<<<<<< HEAD
         //Change type to mongo objectid?
+=======
+>>>>>>> ca59614528ab62ab41d7bfb3ee8d1a0959e48042
         type: [String],
         unique: true
     },
