@@ -15,6 +15,9 @@ import * as morgan from "morgan";
 import * as express_graphql from "express-graphql"
 import * as cors from "cors"
 import {buildSchema} from "graphql"
+import * as passport from "passport";
+import * as passportLocal from "passport-local"
+import * as session from "express-session"
 
 const PORT = process.env.PORT || 3000;
 const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:teamformation123@ds121599.mlab.com:21599/hackgt-team-formation";
@@ -26,10 +29,16 @@ const VERSION_HASH = require("git-rev-sync").short();
 const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 
 export let app = express();
+app.use(session({
+    secret: 'something',
+    }));
 app.use(morgan("dev"));
 app.use(compression());
+<<<<<<< HEAD
 app.use('*', cors());
 
+=======
+>>>>>>> origin/abhinav
 let cookieParserInstance = cookieParser(undefined, {
 	"path": "/",
 	"maxAge": 1000 * 60 * 60 * 24 * 30 * 6, // 6 months
@@ -37,6 +46,10 @@ let cookieParserInstance = cookieParser(undefined, {
 	"httpOnly": true
 } as cookieParser.CookieParseOptions);
 app.use(cookieParserInstance);
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 import * as mongoose from "mongoose";
 (<any>mongoose).Promise = global.Promise;
@@ -76,7 +89,7 @@ Created default admin user
 **Delete this user after you have used it to set up your account**
 	`);
 })();
-
+const LocalStrategy = passportLocal.Strategy;
 // Promise version of crypto.pbkdf2()
 export function pbkdf2Async (...params: any[]) {
 	return new Promise<Buffer>((resolve, reject) => {
@@ -112,6 +125,7 @@ export let uploadHandler = multer({
 });
 
 // For API endpoints
+<<<<<<< HEAD
 export let authenticateWithReject = async function (request: express.Request, response: express.Response, next: express.NextFunction) {
 	let authKey = request.cookies.auth;
 	let user = await User.findOne({"auth_keys": authKey});
@@ -146,6 +160,55 @@ let getUser = async function(args) {
         return null;
     }
     return users
+=======
+passport.serializeUser<IUser, string>((user, done) => {
+	done(null, user._id.toString());
+});
+passport.deserializeUser<IUser, string>((id, done) => {
+    User.findById(id, (err, user) => {
+		done(err, user!);
+	});
+});
+passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
+    User.findOne({ email: email.toLowerCase() }, async function(err, user: any)  {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(undefined, false, { message: `Email ${email} not found.` });
+        }
+
+        let salt = Buffer.from(user.login.salt, "hex");
+        let passwordHashed = await pbkdf2Async(password, salt, 500000, 128, "sha256");
+        if (!user || user.login.hash !== passwordHashed.toString("hex")) {
+            return done(undefined, false, { message: "Invalid email or password." });
+
+        }
+        return done(undefined, user);
+        /*let authKey = crypto.randomBytes(32).toString("hex");
+        user.auth_keys.push(authKey);
+
+        try {
+            await user.save();
+            response.cookie("auth", authKey);
+            response.status(200).json({
+                "success": true
+            });
+        }
+        catch (err) {
+            console.error(err);
+            response.status(500).json({
+                "error": "An error occurred while logging in"
+            });
+        } */
+      /*user.comparePassword(password, (err: Error, isMatch: boolean) => {
+        if (err) { return done(err); }
+        if (isMatch) {
+          return done(undefined, user);
+        }
+        return done(undefined, false, { message: "Invalid email or password." });
+      });*/
+    });
+  }));
+>>>>>>> origin/abhinav
 
 }
 let updateUser = async function(args) {

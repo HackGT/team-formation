@@ -3,22 +3,32 @@ import * as express from "express";
 import {
 	pbkdf2Async,
 	mongoose,
-	authenticateWithReject,
-	authenticateWithRedirect,
+	/*authenticateWithReject,
+	authenticateWithRedirect,*/
 	postParser
 } from "../app";
 import {
-	IUser, IUserMongoose, User
+	IUser, IUserMongoose, User, ITeam, ITeamMongoose, Team
 } from "../schema";
-
+import * as passport from "passport";
+import { request } from "https";
 export let userRoutes = express.Router();
 
+function loggedIn(req, res, next) {
+    if (req.user) {
+        console.log('user');
+        res.status(200).json({
+            "success": true
+        });
+    }
+    else {
+        next();
+    }
+}
 userRoutes.route("/signup").post(postParser, async (request, response) => {
-    console.log(request.body)
 	let email: string = request.body.email || "";
 	let password: string = request.body.password || "";
 	email = email.trim();
-    console.log(email, password);
 	if (!email || !password) {
 		response.status(400).json({
 			"error": "Email or password not specified"
@@ -59,6 +69,71 @@ userRoutes.route("/signup").post(postParser, async (request, response) => {
 	}
 });
 
+userRoutes.route("/make_profile").post(postParser, async (request, response) => {
+
+    if (!request.user) {
+        response.status(400).json({
+            "error": "User not logged in"
+        });
+        return;
+    }
+    let user = await User.findOne({ email: request.user.email });
+    if (user != null) {
+        for (var key in request.body) {
+            if (Object.prototype.hasOwnProperty.call(request.body,key)) {
+                user[key] = request.body[key];
+            }
+        }
+        try {
+            await user.save();
+            response.status(201).json({
+                "success": true
+            });
+        }
+        catch (err) {
+            console.error(err);
+            response.status(500).json({
+                "error": "An error occurred while making profile"
+            });
+            return;
+        }
+    }
+    //write to mongodb
+
+});
+
+userRoutes.route("/make_team").post(postParser, async (request, response) => {
+
+    if (!request.user) {
+        response.status(400).json({
+            "error": "User not logged in"
+        });
+        return;
+    }
+    let team = new Team({creator: request.user.name});
+    for (var key in request.body) {
+        if (Object.prototype.hasOwnProperty.call(request.body,key)) {
+            team[key] = request.body[key];
+        }
+    }
+    try {
+        await team.save();
+        response.status(201).json({
+            "success": true
+        });
+    }
+    catch (err) {
+        console.error(err);
+        response.status(500).json({
+            "error": "An error occurred while making team"
+        });
+        return;
+    }
+
+    //write to mongodb
+
+});
+
 userRoutes.route("/email").post(postParser, async (request, response) => {
     let email: string = request.body.email || "";
     email = email.trim();
@@ -80,20 +155,16 @@ userRoutes.route("/email").post(postParser, async (request, response) => {
         });
     }
 
-	try {
-		response.status(200).json({
-			"success": true
-		});
-	}
-	catch (err) {
-		console.error(err);
-		response.status(500).json({
-			"error": "An error occurred while logging in"
-		});
-	}
+
+
 });
 
-userRoutes.route("/login").post(postParser, async (request, response) => {
+userRoutes.route("/login").post(postParser, loggedIn, passport.authenticate('local'), async (request, response) => {
+    response.status(200).json({
+        "success": true
+    });
+});
+    /*
 	if (request.cookies.auth) {
 		let authKey: string = request.cookies.auth;
 		await User.update({ "auth_keys": authKey }, { $pull: { "auth_keys": authKey } }).exec();
@@ -141,8 +212,7 @@ userRoutes.route("/login").post(postParser, async (request, response) => {
 		response.status(500).json({
 			"error": "An error occurred while logging in"
 		});
-	}
-});
+    }*/
 
 userRoutes.route("/logout").all(async (request, response) => {
 	try {
