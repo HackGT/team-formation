@@ -147,31 +147,6 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, don
        
     });
   }));
-export let authenticateWithReject = async function (request: express.Request, response: express.Response, next: express.NextFunction) {
-	let authKey = request.cookies.auth;
-	let user = await User.findOne({"auth_keys": authKey});
-	if (!user) {
-		response.status(401).json({
-			"error": "You must log in to access this endpoint"
-		});
-	}
-	else {
-		response.locals.email = user.email;
-		next();
-	}
-};
-// For directly user facing endpoints
-export let authenticateWithRedirect = async function (request: express.Request, response: express.Response, next: express.NextFunction) {
-	let authKey = request.cookies.auth;
-	let user = await User.findOne({"auth_keys": authKey});
-	if (!user) {
-		response.redirect("/login");
-	}
-	else {
-		response.locals.email = user.email;
-		next();
-	}
-};
 let getUser = async function(args) {
     let name = args.name
     console.log(args)
