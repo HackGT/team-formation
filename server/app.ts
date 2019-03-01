@@ -12,6 +12,9 @@ import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import * as multer from "multer";
 import * as morgan from "morgan";
+import * as passport from "passport";
+import * as passportLocal from "passport-local"
+import * as session from "express-session"
 import * as express_graphql from "express-graphql"
 import * as cors from "cors"
 import {buildSchema} from "graphql"
@@ -19,7 +22,7 @@ import * as passport from "passport";
 import * as passportLocal from "passport-local"
 import * as session from "express-session"
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:teamformation123@ds121599.mlab.com:21599/hackgt-team-formation";
 const UNIQUE_APP_ID = process.env.UNIQUE_APP_ID || "team-formation";
 const STATIC_ROOT = "../client";
@@ -29,16 +32,13 @@ const VERSION_HASH = require("git-rev-sync").short();
 const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 
 export let app = express();
-app.use(session({
-    secret: 'something',
+app.use(session({ 
+    secret: 'something', 
     }));
 app.use(morgan("dev"));
 app.use(compression());
-<<<<<<< HEAD
 app.use('*', cors());
 
-=======
->>>>>>> origin/abhinav
 let cookieParserInstance = cookieParser(undefined, {
 	"path": "/",
 	"maxAge": 1000 * 60 * 60 * 24 * 30 * 6, // 6 months
@@ -103,7 +103,19 @@ export function pbkdf2Async (...params: any[]) {
 		crypto.pbkdf2.apply(null, params);
 	});
 }
-
+export function loggedInErr(req, res, next) {
+    if (req.user) {
+        console.log('user');
+        res.status(200).json({
+            success: true
+        });
+        next()
+    }
+    else {
+        res.status(401).json({ "error": "User not logged in", success: false });
+        return;
+    }
+}
 export let postParser = bodyParser.urlencoded({
 	extended: false
 });
@@ -125,32 +137,32 @@ export let uploadHandler = multer({
 });
 
 // For API endpoints
-<<<<<<< HEAD
-export let authenticateWithReject = async function (request: express.Request, response: express.Response, next: express.NextFunction) {
-	let authKey = request.cookies.auth;
-	let user = await User.findOne({"auth_keys": authKey});
-	if (!user) {
-		response.status(401).json({
-			"error": "You must log in to access this endpoint"
-		});
-	}
-	else {
-		response.locals.email = user.email;
-		next();
-	}
-};
-// For directly user facing endpoints
-export let authenticateWithRedirect = async function (request: express.Request, response: express.Response, next: express.NextFunction) {
-	let authKey = request.cookies.auth;
-	let user = await User.findOne({"auth_keys": authKey});
-	if (!user) {
-		response.redirect("/login");
-	}
-	else {
-		response.locals.email = user.email;
-		next();
-	}
-};
+passport.serializeUser<IUser, string>((user, done) => {
+	done(null, user._id.toString());
+});
+passport.deserializeUser<IUser, string>((id, done) => {
+    User.findById(id, (err, user) => {
+		done(err, user!);
+	});
+});
+passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
+    User.findOne({ email: email.toLowerCase() }, async function(err, user: any)  {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(undefined, false, { message: `Email ${email} not found.` });
+        }
+
+        let salt = Buffer.from(user.login.salt, "hex");
+        let passwordHashed = await pbkdf2Async(password, salt, 500000, 128, "sha256");
+        if (!user || user.login.hash !== passwordHashed.toString("hex")) {
+            return done(undefined, false, { message: "Invalid email or password." });
+            
+        }
+        return done(undefined, user);
+       
+    });
+  }));
+
 let getUser = async function(args) {
     let name = args.name
     console.log(args)
@@ -160,7 +172,6 @@ let getUser = async function(args) {
         return null;
     }
     return users
-=======
 passport.serializeUser<IUser, string>((user, done) => {
 	done(null, user._id.toString());
 });
@@ -183,32 +194,9 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, don
 
         }
         return done(undefined, user);
-        /*let authKey = crypto.randomBytes(32).toString("hex");
-        user.auth_keys.push(authKey);
-
-        try {
-            await user.save();
-            response.cookie("auth", authKey);
-            response.status(200).json({
-                "success": true
-            });
-        }
-        catch (err) {
-            console.error(err);
-            response.status(500).json({
-                "error": "An error occurred while logging in"
-            });
-        } */
-      /*user.comparePassword(password, (err: Error, isMatch: boolean) => {
-        if (err) { return done(err); }
-        if (isMatch) {
-          return done(undefined, user);
-        }
-        return done(undefined, false, { message: "Invalid email or password." });
-      });*/
+        
     });
   }));
->>>>>>> origin/abhinav
 
 }
 let updateUser = async function(args) {
@@ -230,7 +218,8 @@ let root = {
 apiRouter.use("/user", userRoutes);
 
 app.use("/api", apiRouter);
-app.use('/graphql', express_graphql({
+app.use('/graphql', loggedInErr, express_graphql({
+
     schema: buildSchema(typeDefs),
     rootValue: root,
     graphiql: true

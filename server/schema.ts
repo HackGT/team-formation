@@ -31,6 +31,7 @@ export interface IUser {
     description?: string;
     image?: string;
 
+
 }
 export interface ITeam {
     _id: mongoose.Types.ObjectId;
@@ -40,15 +41,9 @@ export interface ITeam {
     members: string[];
     interests?: string[];
     description?: string;
+ 
+}
 
-}
-export interface ITeam {
-    name: string,
-    picture: string,
-    memebrs: string[],
-    interests: string[],
-    description: string
-}
 export type IUserMongoose = IUser & mongoose.Document;
 export type ITeamMongoose = ITeam & mongoose.Document;
 export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
