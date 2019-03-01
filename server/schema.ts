@@ -6,6 +6,7 @@ import * as path from "path";
 import * as mongoose from "mongoose";
 import * as ajv from "ajv";
 import * as passport from "passport";
+import * as uuid from "node-uuid";
 
 // We need to find some way of integrating these static types with a config that
 // can be adapted with different questions and data in a JSON schema file
@@ -30,6 +31,7 @@ export interface IUser {
     description?: string;
     image?: string;
 
+
 }
 export interface ITeam {
     _id: mongoose.Types.ObjectId;
@@ -39,7 +41,7 @@ export interface ITeam {
     members: string[];
     interests?: string[];
     description?: string;
-
+ 
 }
 
 export type IUserMongoose = IUser & mongoose.Document;
@@ -57,6 +59,7 @@ export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
     picture: String,
     members: {
         required: true,
+        //Change type to mongo objectid?
         type: [String],
         unique: true
     },

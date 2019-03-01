@@ -18,6 +18,9 @@ import * as session from "express-session"
 import * as express_graphql from "express-graphql"
 import * as cors from "cors"
 import {buildSchema} from "graphql"
+import * as passport from "passport";
+import * as passportLocal from "passport-local"
+import * as session from "express-session"
 
 const PORT = process.env.PORT || 3001;
 const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:teamformation123@ds121599.mlab.com:21599/hackgt-team-formation";
@@ -159,6 +162,7 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, don
        
     });
   }));
+
 let getUser = async function(args) {
     let name = args.name
     console.log(args)
@@ -168,6 +172,31 @@ let getUser = async function(args) {
         return null;
     }
     return users
+passport.serializeUser<IUser, string>((user, done) => {
+	done(null, user._id.toString());
+});
+passport.deserializeUser<IUser, string>((id, done) => {
+    User.findById(id, (err, user) => {
+		done(err, user!);
+	});
+});
+passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
+    User.findOne({ email: email.toLowerCase() }, async function(err, user: any)  {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(undefined, false, { message: `Email ${email} not found.` });
+        }
+
+        let salt = Buffer.from(user.login.salt, "hex");
+        let passwordHashed = await pbkdf2Async(password, salt, 500000, 128, "sha256");
+        if (!user || user.login.hash !== passwordHashed.toString("hex")) {
+            return done(undefined, false, { message: "Invalid email or password." });
+
+        }
+        return done(undefined, user);
+        
+    });
+  }));
 
 }
 let updateUser = async function(args) {

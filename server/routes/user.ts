@@ -3,8 +3,7 @@ import * as express from "express";
 import {
 	pbkdf2Async,
 	mongoose,
-	/*authenticateWithReject,
-	authenticateWithRedirect,*/
+
     postParser,
     loggedInErr
 } from "../app";
@@ -74,9 +73,17 @@ userRoutes.route("/signup").post(postParser, async (request, response) => {
 	}
 });
 
-userRoutes.route("/make_profile").post(postParser, loggedInErr, async (request, response) => {
 
 
+
+userRoutes.route("/make_profile").post(postParser, async (request, response) => {
+
+    if (!request.user) {
+        response.status(400).json({
+            "error": "User not logged in"
+        });
+        return;
+    }
     let user = await User.findOne({ email: request.user.email });
     if (user != null) {
         for (var key in request.body) {
@@ -87,7 +94,9 @@ userRoutes.route("/make_profile").post(postParser, loggedInErr, async (request, 
         try {
             await user.save();
             response.status(201).json({
-                success: true
+
+                "success": true
+
             });
         }
         catch (err) {
@@ -102,9 +111,15 @@ userRoutes.route("/make_profile").post(postParser, loggedInErr, async (request, 
 
 });
 
-userRoutes.route("/make_team").post(postParser, loggedInErr, async (request, response) => {
 
+userRoutes.route("/make_team").post(postParser, async (request, response) => {
 
+    if (!request.user) {
+        response.status(400).json({
+            "error": "User not logged in"
+        });
+        return;
+    }
     let team = new Team({creator: request.user.name});
     for (var key in request.body) {
         if (Object.prototype.hasOwnProperty.call(request.body,key)) {
@@ -114,7 +129,9 @@ userRoutes.route("/make_team").post(postParser, loggedInErr, async (request, res
     try {
         await team.save();
         response.status(201).json({
-            success: true
+
+            "success": true
+
         });
     }
     catch (err) {
@@ -124,7 +141,7 @@ userRoutes.route("/make_team").post(postParser, loggedInErr, async (request, res
         });
         return;
     }
-    
+
     //write to mongodb
 
 });
@@ -151,14 +168,21 @@ userRoutes.route("/email").post(postParser, async (request, response) => {
         });
     }
 
+
 });
 
 userRoutes.route("/login").post(postParser, loggedIn, passport.authenticate('local'), async (request, response) => {
     response.status(200).json({
-        success: true,
+
+        "success": true,
         "id": request.user._id
     });
 });
+
+        "success": true
+    });
+});
+
 
 userRoutes.route("/logout").all(async (request, response) => {
 	try {
