@@ -3,15 +3,16 @@ import * as express from "express";
 import {
 	pbkdf2Async,
 	mongoose,
-	/*authenticateWithReject,
-	authenticateWithRedirect,*/
-	postParser
+
+    postParser,
+    loggedInErr
 } from "../app";
 import {
 	IUser, IUserMongoose, User, ITeam, ITeamMongoose, Team
 } from "../schema";
 import * as passport from "passport";
 import { request } from "https";
+
 export let userRoutes = express.Router();
 
 function loggedIn(req, res, next) {
@@ -31,7 +32,8 @@ userRoutes.route("/signup").post(postParser, async (request, response) => {
 	email = email.trim();
 	if (!email || !password) {
 		response.status(400).json({
-			"error": "Email or password not specified"
+            "error": "Email or password not specified",
+            "success": false
 		});
 		return;
 	}
@@ -52,22 +54,27 @@ userRoutes.route("/signup").post(postParser, async (request, response) => {
 	try {
 		await user.save();
 		response.status(201).json({
-			"success": true
+			success: true
 		});
 	}
 	catch (err) {
 		if (err.code === 11000) {
 			response.status(400).json({
-				"error": "A user with that email already exists"
+                "error": "A user with that email already exists",
+                success: false
 			});
 			return;
 		}
 		console.error(err);
 		response.status(500).json({
-			"error": "An error occurred while creating user"
+            "error": "An error occurred while creating user",
+            success: false
 		});
 	}
 });
+
+
+
 
 userRoutes.route("/make_profile").post(postParser, async (request, response) => {
 
@@ -87,7 +94,9 @@ userRoutes.route("/make_profile").post(postParser, async (request, response) => 
         try {
             await user.save();
             response.status(201).json({
+
                 "success": true
+
             });
         }
         catch (err) {
@@ -101,6 +110,7 @@ userRoutes.route("/make_profile").post(postParser, async (request, response) => 
     //write to mongodb
 
 });
+
 
 userRoutes.route("/make_team").post(postParser, async (request, response) => {
 
@@ -119,7 +129,9 @@ userRoutes.route("/make_team").post(postParser, async (request, response) => {
     try {
         await team.save();
         response.status(201).json({
+
             "success": true
+
         });
     }
     catch (err) {
@@ -151,68 +163,26 @@ userRoutes.route("/email").post(postParser, async (request, response) => {
         return;
     } else {
         response.status(200).json({
-            "success": true
+            success: true,
+            "id": user._id
         });
     }
-
 
 
 });
 
 userRoutes.route("/login").post(postParser, loggedIn, passport.authenticate('local'), async (request, response) => {
     response.status(200).json({
+
+        "success": true,
+        "id": request.user._id
+    });
+});
+
         "success": true
     });
 });
-    /*
-	if (request.cookies.auth) {
-		let authKey: string = request.cookies.auth;
-		await User.update({ "auth_keys": authKey }, { $pull: { "auth_keys": authKey } }).exec();
-		response.clearCookie("auth");
-	}
 
-	let email: string = request.body.email || "";
-	let password: string = request.body.password || "";
-	email = email.trim();
-	if (!email || !password) {
-		response.status(400).json({
-			"error": "Email or password not specified"
-		});
-		return;
-	}
-
-	let user = await User.findOne({email: email});
-	let salt: Buffer;
-	if (!user) {
-		salt = new Buffer(32);
-	}
-	else {
-		salt = Buffer.from(user.login.salt, "hex");
-	}
-	// Hash the password in both cases so that requests for non-existant emails take the same amount of time as existant ones
-	let passwordHashed = await pbkdf2Async(password, salt, 500000, 128, "sha256");
-	if (!user || user.login.hash !== passwordHashed.toString("hex")) {
-		response.status(401).json({
-			"error": "Email or password incorrect"
-		});
-		return;
-	}
-	let authKey = crypto.randomBytes(32).toString("hex");
-	user.auth_keys.push(authKey);
-
-	try {
-		await user.save();
-		response.cookie("auth", authKey);
-		response.status(200).json({
-			"success": true
-		});
-	}
-	catch (err) {
-		console.error(err);
-		response.status(500).json({
-			"error": "An error occurred while logging in"
-		});
-    }*/
 
 userRoutes.route("/logout").all(async (request, response) => {
 	try {
@@ -222,7 +192,7 @@ userRoutes.route("/logout").all(async (request, response) => {
 			response.clearCookie("auth");
 		}
 		response.status(200).json({
-			"success": true
+			success: true
 		});
 	}
 	catch (err) {
