@@ -30,9 +30,6 @@ const VERSION_HASH = require("git-rev-sync").short();
 const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 
 export let app = express();
-app.use(session({
-    secret: 'something',
-    }));
 app.use(morgan("dev"));
 app.use(compression());
 app.use('*', cors());
@@ -44,6 +41,10 @@ let cookieParserInstance = cookieParser(undefined, {
 	"httpOnly": true
 } as cookieParser.CookieParseOptions);
 app.use(cookieParserInstance);
+app.use(session({
+    secret: 'something',
+    }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -102,8 +103,7 @@ export function pbkdf2Async (...params: any[]) {
 	});
 }
 export function loggedInErr(req, res, next) {
-    if (req.user) {
-        console.log('user');
+    if (req.user && req.user.email === req.body.email) {
         res.status(200).json({
             success: true
         });
@@ -161,15 +161,16 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, don
     });
   }));
 
-let getUser = async function(args) {
+let getUser = async function (args) {
     let name = args.name
     console.log(args)
     let users = await User.find(args)
     console.log(users)
-    if(!users) {
+    if (!users) {
         return null;
     }
     return users
+}
 passport.serializeUser<IUser, string>((user, done) => {
 	done(null, user._id.toString());
 });
@@ -196,7 +197,7 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, don
     });
   }));
 
-}
+
 let updateUser = async function(args) {
     let id = args.id
     console.log(args.id)
