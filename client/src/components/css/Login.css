@@ -8,5 +8,10 @@
 }
 
 .sign-up {
+	padding-top: 2%;
+}
+
+.error-message {
 	padding-top: 1%;
+	padding-bottom: 1%;
 }

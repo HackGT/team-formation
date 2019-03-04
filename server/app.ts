@@ -18,11 +18,9 @@ import * as session from "express-session"
 import * as express_graphql from "express-graphql"
 import * as cors from "cors"
 import {buildSchema} from "graphql"
-import * as passport from "passport";
-import * as passportLocal from "passport-local"
-import * as session from "express-session"
 
-const PORT = process.env.PORT || 3001;
+
+const PORT = 3001;
 const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:teamformation123@ds121599.mlab.com:21599/hackgt-team-formation";
 const UNIQUE_APP_ID = process.env.UNIQUE_APP_ID || "team-formation";
 const STATIC_ROOT = "../client";
@@ -32,8 +30,8 @@ const VERSION_HASH = require("git-rev-sync").short();
 const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 
 export let app = express();
-app.use(session({ 
-    secret: 'something', 
+app.use(session({
+    secret: 'something',
     }));
 app.use(morgan("dev"));
 app.use(compression());
@@ -116,8 +114,7 @@ export function loggedInErr(req, res, next) {
         return;
     }
 }
-export let postParser = bodyParser.urlencoded({
-	extended: false
+export let postParser = bodyParser.json({
 });
 export let uploadHandler = multer({
 	"storage": multer.diskStorage({
@@ -146,6 +143,7 @@ passport.deserializeUser<IUser, string>((id, done) => {
 	});
 });
 passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
+
     User.findOne({ email: email.toLowerCase() }, async function(err, user: any)  {
       if (err) { return done(err); }
       if (!user) {
@@ -156,10 +154,10 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, don
         let passwordHashed = await pbkdf2Async(password, salt, 500000, 128, "sha256");
         if (!user || user.login.hash !== passwordHashed.toString("hex")) {
             return done(undefined, false, { message: "Invalid email or password." });
-            
+
         }
         return done(undefined, user);
-       
+
     });
   }));
 
@@ -194,7 +192,7 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, don
 
         }
         return done(undefined, user);
-        
+
     });
   }));
 

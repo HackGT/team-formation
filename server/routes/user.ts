@@ -17,7 +17,6 @@ export let userRoutes = express.Router();
 
 function loggedIn(req, res, next) {
     if (req.user) {
-        console.log('user');
         res.status(200).json({
             "success": true
         });
@@ -179,9 +178,6 @@ userRoutes.route("/login").post(postParser, loggedIn, passport.authenticate('loc
     });
 });
 
-        "success": true
-    });
-});
 
 
 userRoutes.route("/logout").all(async (request, response) => {
