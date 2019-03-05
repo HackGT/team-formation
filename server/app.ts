@@ -17,9 +17,10 @@ import * as passportLocal from "passport-local"
 import * as session from "express-session"
 import * as express_graphql from "express-graphql"
 import * as cors from "cors"
+import * as dotenv from "dotenv"
 import {buildSchema} from "graphql"
 
-
+dotenv.config();
 const PORT = 3001;
 const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:teamformation123@ds121599.mlab.com:21599/hackgt-team-formation";
 const UNIQUE_APP_ID = process.env.UNIQUE_APP_ID || "team-formation";
@@ -41,9 +42,8 @@ let cookieParserInstance = cookieParser(undefined, {
 	"httpOnly": true
 } as cookieParser.CookieParseOptions);
 app.use(cookieParserInstance);
-app.use(session({
-    secret: 'something',
-    }));
+let session_secret = process.env['SECRET'] || 'default';
+app.use(session({secret:session_secret}));
 
 app.use(passport.initialize());
 app.use(passport.session());

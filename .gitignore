@@ -39,3 +39,5 @@ jspm_packages
 server/*.js
 *.js.map
 .vscode/
+
+.env
