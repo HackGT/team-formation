@@ -179,11 +179,6 @@ userRoutes.route("/login").post(postParser, loggedIn, passport.authenticate('loc
     });
 });
 
-        "success": true
-    });
-});
-
-
 userRoutes.route("/logout").all(async (request, response) => {
 	try {
 		if (request.cookies.auth) {

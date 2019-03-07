@@ -12,9 +12,6 @@ import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import * as multer from "multer";
 import * as morgan from "morgan";
-import * as passport from "passport";
-import * as passportLocal from "passport-local"
-import * as session from "express-session"
 import * as express_graphql from "express-graphql"
 import * as cors from "cors"
 import {buildSchema} from "graphql"
@@ -32,8 +29,8 @@ const VERSION_HASH = require("git-rev-sync").short();
 const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 
 export let app = express();
-app.use(session({ 
-    secret: 'something', 
+app.use(session({
+    secret: 'something',
     }));
 app.use(morgan("dev"));
 app.use(compression());
@@ -156,10 +153,10 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, don
         let passwordHashed = await pbkdf2Async(password, salt, 500000, 128, "sha256");
         if (!user || user.login.hash !== passwordHashed.toString("hex")) {
             return done(undefined, false, { message: "Invalid email or password." });
-            
+
         }
         return done(undefined, user);
-       
+
     });
   }));
 
@@ -194,7 +191,7 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, don
 
         }
         return done(undefined, user);
-        
+
     });
   }));
 
