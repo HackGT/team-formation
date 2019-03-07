@@ -51,17 +51,12 @@ class Login extends Component {
 		this.onFetchLogin(login_url, login_data).then(() => {
 			var login_json = this.state.data;
 			console.log(login_json);
-			// if (login_json.success === false) {
-			// 	this.setState({
-			// 		error_message: "Wrong email or password!"
-			// 	});
-			// } else
-			if (login_json.success === true){
-				this.props.onNextClick('feed');
-			} else {
+			if (login_json.success === false) {
 				this.setState({
 					error_message: "Wrong email or password!"
 				});
+			} else if (login_json.success === true){
+				this.props.onNextClick('feed');
 			}
 		});
 	};
