@@ -12,9 +12,6 @@ import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import * as multer from "multer";
 import * as morgan from "morgan";
-import * as passport from "passport";
-import * as passportLocal from "passport-local"
-import * as session from "express-session"
 import * as express_graphql from "express-graphql"
 import * as cors from "cors"
 import * as dotenv from "dotenv"
@@ -31,6 +28,12 @@ const VERSION_HASH = require("git-rev-sync").short();
 const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 
 export let app = express();
+<<<<<<< HEAD
+app.use(session({
+    secret: 'something',
+    }));
+=======
+>>>>>>> origin/front-end_integration
 app.use(morgan("dev"));
 app.use(compression());
 app.use('*', cors());
