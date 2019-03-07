@@ -12,17 +12,13 @@ import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import * as multer from "multer";
 import * as morgan from "morgan";
-import * as passport from "passport";
-import * as passportLocal from "passport-local"
-import * as session from "express-session"
 import * as express_graphql from "express-graphql"
 import * as cors from "cors"
+import * as dotenv from "dotenv"
 import {buildSchema} from "graphql"
-import * as passport from "passport";
-import * as passportLocal from "passport-local"
-import * as session from "express-session"
 
-const PORT = process.env.PORT || 3001;
+dotenv.config();
+const PORT = 3001;
 const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:teamformation123@ds121599.mlab.com:21599/hackgt-team-formation";
 const UNIQUE_APP_ID = process.env.UNIQUE_APP_ID || "team-formation";
 const STATIC_ROOT = "../client";
@@ -32,9 +28,12 @@ const VERSION_HASH = require("git-rev-sync").short();
 const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 
 export let app = express();
-app.use(session({ 
-    secret: 'something', 
+<<<<<<< HEAD
+app.use(session({
+    secret: 'something',
     }));
+=======
+>>>>>>> origin/front-end_integration
 app.use(morgan("dev"));
 app.use(compression());
 app.use('*', cors());
@@ -46,6 +45,9 @@ let cookieParserInstance = cookieParser(undefined, {
 	"httpOnly": true
 } as cookieParser.CookieParseOptions);
 app.use(cookieParserInstance);
+let session_secret = process.env['SECRET'] || 'default';
+app.use(session({secret:session_secret}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -104,8 +106,7 @@ export function pbkdf2Async (...params: any[]) {
 	});
 }
 export function loggedInErr(req, res, next) {
-    if (req.user) {
-        console.log('user');
+    if (req.user && req.user.email === req.body.email) {
         res.status(200).json({
             success: true
         });
@@ -116,8 +117,7 @@ export function loggedInErr(req, res, next) {
         return;
     }
 }
-export let postParser = bodyParser.urlencoded({
-	extended: false
+export let postParser = bodyParser.json({
 });
 export let uploadHandler = multer({
 	"storage": multer.diskStorage({
@@ -146,6 +146,7 @@ passport.deserializeUser<IUser, string>((id, done) => {
 	});
 });
 passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
+
     User.findOne({ email: email.toLowerCase() }, async function(err, user: any)  {
       if (err) { return done(err); }
       if (!user) {
@@ -156,22 +157,23 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, don
         let passwordHashed = await pbkdf2Async(password, salt, 500000, 128, "sha256");
         if (!user || user.login.hash !== passwordHashed.toString("hex")) {
             return done(undefined, false, { message: "Invalid email or password." });
-            
+
         }
         return done(undefined, user);
-       
+
     });
   }));
 
-let getUser = async function(args) {
+let getUser = async function (args) {
     let name = args.name
     console.log(args)
     let users = await User.find(args)
     console.log(users)
-    if(!users) {
+    if (!users) {
         return null;
     }
     return users
+}
 passport.serializeUser<IUser, string>((user, done) => {
 	done(null, user._id.toString());
 });
@@ -194,11 +196,11 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, don
 
         }
         return done(undefined, user);
-        
+
     });
   }));
 
-}
+
 let updateUser = async function(args) {
     let id = args.id
     console.log(args.id)
