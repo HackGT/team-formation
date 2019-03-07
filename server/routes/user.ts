@@ -16,8 +16,9 @@ import { request } from "https";
 export let userRoutes = express.Router();
 
 function loggedIn(req, res, next) {
-    if (req.user) {
-        console.log('user');
+
+    if (req.user && req.user.email === req.body.email) {
+        console.log('req.user')
         res.status(200).json({
             "success": true
         });
@@ -47,7 +48,6 @@ userRoutes.route("/signup").post(postParser, async (request, response) => {
 			hash: passwordHashed.toString("hex"),
 			salt: salt.toString("hex")
 		},
-		auth_keys: [],
 		admin: false
 	});
 
@@ -57,7 +57,8 @@ userRoutes.route("/signup").post(postParser, async (request, response) => {
 			success: true
 		});
 	}
-	catch (err) {
+    catch (err) {
+        console.log(err);
 		if (err.code === 11000) {
 			response.status(400).json({
                 "error": "A user with that email already exists",
@@ -107,7 +108,6 @@ userRoutes.route("/make_profile").post(postParser, async (request, response) => 
             return;
         }
     }
-    //write to mongodb
 
 });
 
@@ -171,21 +171,34 @@ userRoutes.route("/email").post(postParser, async (request, response) => {
 
 });
 
-userRoutes.route("/login").post(postParser, loggedIn, passport.authenticate('local'), async (request, response) => {
-    response.status(200).json({
+userRoutes.route("/login").post(postParser, loggedIn,  (req, res, next) => {
+    passport.authenticate('local', function (err, user, info) {
+        if (info) {
 
-        "success": true,
-        "id": request.user._id
-    });
+            return res.status(401)
+                .json({ error: 'Authentication failed', success: false })
+
+        } else {
+            req.logIn(user, function (err) {
+                if (err) { return next(err); }
+                return res.status(200)
+                .json({success: true})
+            });
+        }
+    })(req, res, next)
 });
 
+
+//not actually logging out
 userRoutes.route("/logout").all(async (request, response) => {
-	try {
+    try {
+        request.logout()
 		if (request.cookies.auth) {
 			let authKey: string = request.cookies.auth;
 			await User.update({ "auth_keys": authKey }, { $pull: { "auth_keys": authKey } }).exec();
 			response.clearCookie("auth");
-		}
+        }
+
 		response.status(200).json({
 			success: true
 		});

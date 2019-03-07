@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Input } from 'semantic-ui-react';
 import Headers from './components/Headers';
 import Content from './components/Content'
 // import logo from './logo.svg';
@@ -20,15 +19,6 @@ class App extends Component {
 	  </div>
     );
   }
-
-  onNextClick() {
-	  this.setState({content: 'password-input'})
-  }
-
-  /* onSubHeaderChange = (text) =>  {
-	  const newSubHeader = text;
-	  this.setState({ subHeader: newSubHeader });
-  } */
 }
 
 export default App;

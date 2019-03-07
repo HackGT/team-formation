@@ -6,7 +6,6 @@ import * as path from "path";
 import * as mongoose from "mongoose";
 import * as ajv from "ajv";
 import * as passport from "passport";
-import * as uuid from "node-uuid";
 
 // We need to find some way of integrating these static types with a config that
 // can be adapted with different questions and data in a JSON schema file

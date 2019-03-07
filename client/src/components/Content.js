@@ -10,19 +10,18 @@ class Content extends Component {
 	};
 
 	render() {
-		const cur_state = this.props.content;
 		let cur_display;
-		if (this.state.cur_state == 'login') {
+		if (this.state.cur_state === 'login') {
 			cur_display = <Login
 				onNextClick={this.onNextClick}
 				onSignUpClick={this.onSignUpClick}/>;
-		} else if (this.state.cur_state == 'signup') {
+		} else if (this.state.cur_state === 'signup') {
 			cur_display = <SignUp
 				onNextClick={this.onNextClick}/>;
-		} else if (this.state.cur_state == 'setup-profile') {
+		} else if (this.state.cur_state === 'setup-profile') {
 			cur_display = <EditProfile
 				onNextClick={this.onNextClick}/>;
-		} else if (this.state.cur_state == 'feed') {
+		} else if (this.state.cur_state === 'feed') {
 			cur_display = <Feed/>;
 		}
 		return (
