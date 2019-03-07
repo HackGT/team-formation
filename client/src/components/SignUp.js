@@ -46,8 +46,8 @@ class SignUp extends Component {
 	onNextClick = () => {
 		this.setState({
 			error_message: "Loading..."
-		})
-		var signup_url = "http://localhost3001/api/user/signup"
+		});
+		var signup_url = "http://localhost:3001/api/user/signup"
 		var signup_data = {
 			email: this.state.user_email,
 			password: this.state.user_password,
@@ -76,14 +76,11 @@ class SignUp extends Component {
 		return fetch(url, {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/x-www-form-urlencoded",
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(data),
 		})
-		.then(response => {
-			response.json()
-			console.log(response)
-		})
+		.then(response => response.json())
 		.then(response => {
 			return new Promise((resolve, reject) => {
 				var data = {
@@ -99,4 +96,4 @@ class SignUp extends Component {
 	};
 }
 
-export default SignUp
+export default SignUp;
