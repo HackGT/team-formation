@@ -47,7 +47,7 @@ class SignUp extends Component {
 		this.setState({
 			error_message: "Loading..."
 		})
-		var signup_url = "http://localhost3001/api/user/signup"
+		var signup_url = "http://localhost:3001/api/user/signup"
 		var signup_data = {
 			email: this.state.user_email,
 			password: this.state.user_password,

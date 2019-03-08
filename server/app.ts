@@ -60,34 +60,6 @@ import {
 } from "./schema";
 
 // Check for number of admin users and create default admin account if none
-const DEFAULT_EMAIL = "admin@hack.gt";
-const DEFAULT_PASSWORD = "admin";
-(async () => {
-	let users = await User.find({"admin": true});
-	if (users.length !== 0)
-		return;
-
-	let salt = crypto.randomBytes(32);
-	let passwordHashed = await pbkdf2Async(DEFAULT_PASSWORD, salt, 500000, 128, "sha256");
-
-	let defaultUser = new User({
-		email: DEFAULT_EMAIL,
-		name: "Default Admin",
-		login: {
-			hash: passwordHashed.toString("hex"),
-			salt: salt.toString("hex")
-		},
-		auth_keys: [],
-		admin: true
-	});
-	await defaultUser.save();
-	console.info(`
-Created default admin user
-	Username: ${DEFAULT_EMAIL}
-	Password: ${DEFAULT_PASSWORD}
-**Delete this user after you have used it to set up your account**
-	`);
-})();
 const LocalStrategy = passportLocal.Strategy;
 // Promise version of crypto.pbkdf2()
 export function pbkdf2Async (...params: any[]) {
@@ -217,7 +189,7 @@ let root = {
 apiRouter.use("/user", userRoutes);
 
 app.use("/api", apiRouter);
-app.use('/graphql', loggedInErr, express_graphql({
+app.use('/graphql', express_graphql({
 
     schema: buildSchema(typeDefs),
     rootValue: root,
