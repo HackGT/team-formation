@@ -4,14 +4,17 @@
 }
 
 .input {
-	padding-bottom: 0.5%;
+	padding-bottom: 1%;
 }
 
 .sign-up {
 	padding-top: 2%;
 }
 
+.next-container {
+	padding-top: 1%;
+}
+
 .error-message {
 	padding-top: 1%;
-	padding-bottom: 1%;
 }

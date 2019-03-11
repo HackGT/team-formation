@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Input } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import './css/SignUp.css';
+import Loading from './Loading';
 
 class SignUp extends Component {
 
@@ -14,13 +15,17 @@ class SignUp extends Component {
 	};
 
 	render() {
+		let cur_error;
+		if (this.state.error_message === 'loading') {
+			cur_error = <Loading/>;
+		}
 		return (
 			<div className="PasswordInput-container">
 				<div><Input placeholder='Email' onChange={ (e) => this.onEmailChange(e) } className="email-box1"/></div>
-				<div><Input placeholder='Password' onChange={ (e) => this.onPasswordChange(e) } className="password-box1"/></div>
-				<div><Input placeholder='Confirm Password' onChange={ (e) => this.onPasswordConfirmChange(e) } className="password-box2"/></div>
-				<div><h3 className="error-message">{this.state.error_message}</h3></div>
-				<Button onClick={this.onNextClick}> Next </Button>
+				<div><Input placeholder='Password' type="password" onChange={ (e) => this.onPasswordChange(e) } className="password-box1"/></div>
+				<div><Input placeholder='Confirm Password' type="password" onChange={ (e) => this.onPasswordConfirmChange(e) } className="password-box2"/></div>
+				<div>{cur_error}</div>
+				<div className="button-container"><Button onClick={this.onNextClick}> Next </Button></div>
 			</div>
 		)
 	}
@@ -45,7 +50,7 @@ class SignUp extends Component {
 
 	onNextClick = () => {
 		this.setState({
-			error_message: "Loading..."
+			error_message: "loading"
 		});
 		var signup_url = "http://localhost:3001/api/user/signup"
 		var signup_data = {

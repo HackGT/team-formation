@@ -16,6 +16,9 @@ import * as express_graphql from "express-graphql"
 import * as cors from "cors"
 import * as dotenv from "dotenv"
 import {buildSchema} from "graphql"
+import * as passport from "passport";
+import * as passportLocal from "passport-local"
+import * as session from "express-session"
 
 dotenv.config();
 const PORT = 3001;
@@ -28,12 +31,6 @@ const VERSION_HASH = require("git-rev-sync").short();
 const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 
 export let app = express();
-<<<<<<< HEAD
-app.use(session({
-    secret: 'something',
-    }));
-=======
->>>>>>> origin/front-end_integration
 app.use(morgan("dev"));
 app.use(compression());
 app.use('*', cors());
@@ -220,7 +217,7 @@ let root = {
 apiRouter.use("/user", userRoutes);
 
 app.use("/api", apiRouter);
-app.use('/graphql', loggedInErr, express_graphql({
+app.use('/graphql', express_graphql({
 
     schema: buildSchema(typeDefs),
     rootValue: root,

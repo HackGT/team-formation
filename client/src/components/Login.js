@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Input } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
+import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react';
 import './css/Login.css';
+import Loading from './Loading'
 
 class Login extends Component {
 
@@ -9,18 +11,24 @@ class Login extends Component {
 		user_email: "",
 		user_password: "",
 		user_id: "",
+		is_loading: false,
 		error_message: "",
 		data: {},
 	};
 
 	render() {
+		let cur_message;
+		if (this.state.is_loading) {
+			cur_message = <Loading/>;
+		}
 		return (
 			<div className="Login-container">
 				<div><Input placeholder={'Email'} onChange={ (e) => this.onEmailChange(e) } className="input"/></div>
-				<div><Input placeholder={'Password'} onChange={ (e) => this.onPasswordChange(e) } className="input"/></div>
-				<div><h3 className="error-message">{this.state.error_message}</h3></div>
+				<div><Input type="password" placeholder={'Password'} onChange={ (e) => this.onPasswordChange(e) } className="input"/></div>
+				<div>{cur_message}</div>
+				<div>{this.state.error_message}</div>
 				<div>
-					<div><Button onClick={this.onNextClick}> Next </Button></div>
+					<div className="next-container"><Button onClick={this.onNextClick}> Next </Button></div>
 					<div className="sign-up"><Button onClick={this.onSignUpClick}> Sign Up </Button></div>
 				</div>
 			</div>
@@ -40,8 +48,9 @@ class Login extends Component {
 	};
 
 	onNextClick = () => {
+
 		this.setState({
-			error_message: "Loading...",
+			is_loading: true
 		});
 		var login_url = "http://localhost:3001/api/user/login";
 		var login_data = {
@@ -54,8 +63,11 @@ class Login extends Component {
 			if (login_json.success === false) {
 				this.setState({
 					error_message: "Wrong email or password!"
-				});
+				})
 			} else if (login_json.success === true){
+				this.setState({
+					is_loading: true
+				})
 				this.props.onNextClick('feed');
 			}
 		});
