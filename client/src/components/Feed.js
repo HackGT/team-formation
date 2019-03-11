@@ -1,102 +1,46 @@
 import React, { Component } from 'react';
 import { Button, Card, Image } from 'semantic-ui-react';
+import UserCard from './UserCard'
 import { Icon } from 'semantic-ui-react';
+import { graphql, QueryRenderer } from 'react-relay';
+import PropTypes from 'prop-types';
+// import graphql from 'babel-plugin-relay/macro';
 import './css/Feed.css';
+import environment from './Environment'
+const {
+  Environment,
+  Network,
+  RecordSource,
+  Store,
+} = require('relay-runtime');
+const getUsersQuery = graphql`
+    query FeedQuery($email: String!) {
+        user(email:$email) {
+            email
+            name
+            school
 
+        }
+    }
+`
 class Feed extends Component {
 	render() {
+        console.log("hello")
 		return (
-			<div className="Feed-container">
-				<Card>
-				  <Card.Content className="content">
-					<Image floated='right' size='mini' src='https://react.semantic-ui.com/images/avatar/large/steve.jpg' />
-					<Card.Header>Steve Sanders</Card.Header>
-					<Card.Meta>New User</Card.Meta>
-					<Card.Description>
-					  Steve wants to add you to the group <strong>best friends</strong>
-					</Card.Description>
-				  </Card.Content>
-				  <Card.Content className="content" extra>
-				  <Button basic color='green' className="button">
-					Learn More
-				  </Button>
-				  </Card.Content>
-				</Card>
-				<Card>
-				  <Card.Content>
-					<Image floated='right' size='mini' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
-					<Card.Header>Molly Thomas</Card.Header>
-					<Card.Meta>New User</Card.Meta>
-					<Card.Description>
-					  Molly wants to add you to the group <strong>musicians</strong>
-					</Card.Description>
-				  </Card.Content>
-				  <Card.Content extra>
-				  <Button basic color='green' className="button">
-					Learn More
-				  </Button>
-				  </Card.Content>
-				</Card>
-				<Card>
-				  <Card.Content>
-					<Image floated='right' size='mini' src='https://react.semantic-ui.com/images/avatar/large/jenny.jpg' />
-					<Card.Header>Jenny Lawrence</Card.Header>
-					<Card.Meta>New User</Card.Meta>
-					<Card.Description>Jenny requested permission to view your contact details</Card.Description>
-				  </Card.Content>
-				  <Card.Content extra>
-				  <Button basic color='green' className="button">
-					Learn More
-				  </Button>
-				  </Card.Content>
-				</Card>
-				<Card>
-				  <Card.Content>
-					<Image floated='right' size='mini' src='https://react.semantic-ui.com/images/avatar/large/steve.jpg' />
-					<Card.Header>Steve Sanders</Card.Header>
-					<Card.Meta>New User</Card.Meta>
-					<Card.Description>
-					  Steve wants to add you to the group <strong>best friends</strong>
-					</Card.Description>
-				  </Card.Content>
-				  <Card.Content extra>
-				  <Button basic color='green' className="button">
-					Learn More
-				  </Button>
-				  </Card.Content>
-				</Card>
-				<Card>
-				  <Card.Content>
-					<Image floated='right' size='mini' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
-					<Card.Header>Molly Thomas</Card.Header>
-					<Card.Meta>New User</Card.Meta>
-					<Card.Description>
-					  Molly wants to add you to the group <strong>musicians</strong>
-					</Card.Description>
-				  </Card.Content>
-				  <Card.Content extra>
-				  <Button basic color='green' className="button">
-					Learn More
-				  </Button>
-				  </Card.Content>
-				</Card>
-				<Card>
-				  <Card.Content>
-					<Image floated='right' size='mini' src='https://react.semantic-ui.com/images/avatar/large/jenny.jpg' />
-					<Card.Header>Jenny Lawrence</Card.Header>
-					<Card.Meta>New User</Card.Meta>
-					<Card.Description>Jenny requested permission to view your contact details</Card.Description>
-				  </Card.Content>
-				  <Card.Content extra>
-				  <Button basic color='green' className="button">
-					Learn More
-				  </Button>
-				  </Card.Content>
-				</Card>
-
-			</div>
-		);
-	};
+            <QueryRenderer
+                environment={environment}
+                query={getUsersQuery}
+                render={({error,props}) => {
+                    return "hello"
+                    // let cards = []
+                    // for(let i = 0;i<1;i++) {
+                    //     cards.push(<UserCard name={this.props.user.name} email={this.props.user.email}/>);
+                    // }
+                    // return (<div className="Feed-container">{cards}</div>);
+                }}
+            />
+        );
+	}
 }
 
 export default Feed

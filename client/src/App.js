@@ -1,3 +1,4 @@
+import { graphql, QueryRenderer } from 'react-relay';
 import React, { Component } from 'react';
 import Headers from './components/Headers';
 import Content from './components/Content'
