@@ -1,5 +1,8 @@
-import { graphql, QueryRenderer } from 'react-relay';
 import React, { Component } from 'react';
+import {
+  QueryRenderer,
+  graphql
+} from 'react-relay';
 import Headers from './components/Headers';
 import Content from './components/Content'
 // import logo from './logo.svg';

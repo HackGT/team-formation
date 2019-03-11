@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Button, Card, Image } from 'semantic-ui-react';
 import UserCard from './UserCard'
 import { Icon } from 'semantic-ui-react';
-import { graphql, QueryRenderer } from 'react-relay';
+import { graphql,  QueryRenderer } from 'react-relay';
 import PropTypes from 'prop-types';
-// import graphql from 'babel-plugin-relay/macro';
 import './css/Feed.css';
 import environment from './Environment'
 const {
@@ -31,6 +30,7 @@ class Feed extends Component {
                 environment={environment}
                 query={getUsersQuery}
                 render={({error,props}) => {
+                    console.log("error" + " " + error + " " + props);
                     return "hello"
                     // let cards = []
                     // for(let i = 0;i<1;i++) {

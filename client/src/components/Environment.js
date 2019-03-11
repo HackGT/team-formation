@@ -1,21 +1,26 @@
-import {
+const {
   Environment,
   Network,
   RecordSource,
   Store,
-} from 'relay-runtime';
+} = require('relay-runtime');
 
+// Define a function that fetches the results of an operation (query/mutation/etc)
+// and returns its results as a Promise:
 function fetchQuery(
   operation,
   variables,
+  cacheConfig,
+  uploadables,
 ) {
   return fetch('http://localhost:3001/graphql', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-    },
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, // Add authentication and other headers here
     body: JSON.stringify({
-      query: operation.text,
+      query: operation.text, // GraphQL text from input
       variables,
     }),
   }).then(response => {
@@ -23,9 +28,13 @@ function fetchQuery(
   });
 }
 
-const environment = new Environment({
-  network: Network.create(fetchQuery),
-  store: new Store(new RecordSource()),
-});
+// Create a network layer from the fetch function
+const network = Network.create(fetchQuery);
 
-export default environment;
+const source = new RecordSource();
+const store = new Store(source);
+
+export default new Environment({
+  network,
+  store,
+});
