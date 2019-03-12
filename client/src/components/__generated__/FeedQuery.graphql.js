@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash a1f887a2da065ebae5b40a21b9032796
+ * @relayHash 376250f42b3349773fc365bcef2268a7
  */
 
 /* eslint-disable */
@@ -17,6 +17,7 @@ export type FeedQueryResponse = {|
     +email: ?string,
     +name: ?string,
     +school: ?string,
+    +grad_year: ?string,
   |}>
 |};
 export type FeedQuery = {|
@@ -34,6 +35,7 @@ query FeedQuery(
     email
     name
     school
+    grad_year
     id
   }
 }
@@ -76,6 +78,13 @@ v4 = {
   "name": "school",
   "args": null,
   "storageKey": null
+},
+v5 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "grad_year",
+  "args": null,
+  "storageKey": null
 };
 return {
   "kind": "Request",
@@ -97,7 +106,8 @@ return {
         "selections": [
           (v2/*: any*/),
           (v3/*: any*/),
-          (v4/*: any*/)
+          (v4/*: any*/),
+          (v5/*: any*/)
         ]
       }
     ]
@@ -119,6 +129,7 @@ return {
           (v2/*: any*/),
           (v3/*: any*/),
           (v4/*: any*/),
+          (v5/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -134,11 +145,11 @@ return {
     "operationKind": "query",
     "name": "FeedQuery",
     "id": null,
-    "text": "query FeedQuery(\n  $school: String\n) {\n  user(school: $school) {\n    email\n    name\n    school\n    id\n  }\n}\n",
+    "text": "query FeedQuery(\n  $school: String\n) {\n  user(school: $school) {\n    email\n    name\n    school\n    grad_year\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'e7cfed7e90da3fe534a7d414b2b78e0f';
+(node/*: any*/).hash = 'b672f1a543bb84b11d48da1b4dcdc67f';
 module.exports = node;

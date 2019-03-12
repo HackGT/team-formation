@@ -1,0 +1,22 @@
+.UserCard-container {
+	padding-top: 2%;
+}
+
+.button {
+	text-align: center;
+	padding-left: 20%;
+}
+
+.content {
+	text-align: left;
+}
+
+.card-description {
+	padding-bottom: 3%;
+}
+
+.card-container {
+	display: flex;
+	justify-content: center;
+	padding-bottom: 2%;
+}

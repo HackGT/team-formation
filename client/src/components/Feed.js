@@ -30,6 +30,7 @@ const getUsersQuery = graphql`
             email
             name
             school
+			grad_year
         }
     }
 `
@@ -47,10 +48,10 @@ class Feed extends Component {
                     if (error) {
                        return <div>{error.message}</div>;
                     } else if (props) {
-                        console.log("ard" + error + " " + props)
+                        console.log("ard" + error + " " + props.user[1].grad_year)
                         let cards = []
                         for(let i = 0;i<props.user.length;i++) {
-                            cards.push(<UserCard name={props.user[i].name} email={props.user[i].email}/>);
+                            cards.push(<UserCard name={props.user[i].name} grad_year={props.user[i].grad_year} school={props.user[i].school}/>);
                         }
                         return (<div className="Feed-container">{cards}</div>);
                     }

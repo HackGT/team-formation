@@ -50,10 +50,7 @@ class SignUp extends Component {
 
 	onNextClick = () => {
 		this.setState({
-
-      
-      
-      error_message: "Loading..."
+      		error_message: "loading"
 		})
 
 		var signup_url = "http://localhost:3001/api/user/signup"
