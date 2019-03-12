@@ -13,16 +13,16 @@ const {
   RecordSource,
   Store,
 } = require('relay-runtime');
-const getUsersQuery = graphql`
-    query FeedQuery($name: String, $email: String, $grad_year: String, $school: String) {
-        user(email:$email, name:$name, grad_year:$grad_year, school:$school) {
-            email
-            name
-            school
-
-        }
-    }
-`
+// const getUsersQuery = graphql`
+//     query FeedQuery($name: String, $email: String, $grad_year: String, $school: String) {
+//         user(email:$email, name:$name, grad_year:$grad_year, school:$school) {
+//             email
+//             name
+//             school
+//
+//         }
+//     }
+// `
 const getUsersQuery = graphql`
     query FeedQuery($school: String) {
         user(school:$school) {
