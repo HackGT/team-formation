@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Button, Card, Image } from 'semantic-ui-react';
 import UserCard from './UserCard'
 import { Icon } from 'semantic-ui-react';
-import { graphql,  QueryRenderer } from 'react-relay';
+import {QueryRenderer } from 'react-relay';
+import {graphql} from 'babel-plugin-relay/macro';
 import PropTypes from 'prop-types';
 import './css/Feed.css';
 import environment from './Environment'
@@ -13,8 +14,8 @@ const {
   Store,
 } = require('relay-runtime');
 const getUsersQuery = graphql`
-    query FeedQuery($email: String!) {
-        user(email:$email) {
+    query FeedQuery($name: String, $email: String, $grad_year: String, $school: String) {
+        user(email:$email, name:$name, grad_year:$grad_year, school:$school) {
             email
             name
             school
@@ -29,14 +30,22 @@ class Feed extends Component {
             <QueryRenderer
                 environment={environment}
                 query={getUsersQuery}
+                variables={{
+                    school: "abc123",
+                }}
                 render={({error,props}) => {
-                    console.log("error" + " " + error + " " + props);
-                    return "hello"
-                    // let cards = []
-                    // for(let i = 0;i<1;i++) {
-                    //     cards.push(<UserCard name={this.props.user.name} email={this.props.user.email}/>);
-                    // }
-                    // return (<div className="Feed-container">{cards}</div>);
+                    if (error) {
+                       return <div>{error.message}</div>;
+                    } else if (props) {
+                        console.log("ard" + error + " " + props)
+                        let cards = []
+                        for(let i = 0;i<props.user.length;i++) {
+                            cards.push(<UserCard name={props.user[i].name} email={props.user[i].email}/>);
+                        }
+                        return (<div className="Feed-container">{cards}</div>);
+                    }
+                    return <div>Loading</div>;
+
                 }}
             />
         );
