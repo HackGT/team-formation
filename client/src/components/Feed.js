@@ -23,6 +23,16 @@ const getUsersQuery = graphql`
         }
     }
 `
+const getUsersQuery = graphql`
+    query FeedQuery($school: String) {
+        user(school:$school) {
+            email
+            name
+            school
+
+        }
+    }
+`
 class Feed extends Component {
 	render() {
         console.log("hello")
