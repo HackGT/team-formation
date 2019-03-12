@@ -29,7 +29,6 @@ const getUsersQuery = graphql`
             email
             name
             school
-
         }
     }
 `

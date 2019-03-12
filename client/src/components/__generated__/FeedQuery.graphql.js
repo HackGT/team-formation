@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash bfc469676c8e28d1ec0305796e040b92
+ * @relayHash a1f887a2da065ebae5b40a21b9032796
  */
 
 /* eslint-disable */
@@ -10,10 +10,7 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type FeedQueryVariables = {|
-  name?: ?string,
-  email?: ?string,
-  grad_year?: ?string,
-  school?: ?string,
+  school?: ?string
 |};
 export type FeedQueryResponse = {|
   +user: $ReadOnlyArray<{|
@@ -31,12 +28,9 @@ export type FeedQuery = {|
 
 /*
 query FeedQuery(
-  $name: String
-  $email: String
-  $grad_year: String
   $school: String
 ) {
-  user(email: $email, name: $name, grad_year: $grad_year, school: $school) {
+  user(school: $school) {
     email
     name
     school
@@ -49,48 +43,12 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "name",
-    "type": "String",
-    "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
-    "name": "email",
-    "type": "String",
-    "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
-    "name": "grad_year",
-    "type": "String",
-    "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
     "name": "school",
     "type": "String",
     "defaultValue": null
   }
 ],
 v1 = [
-  {
-    "kind": "Variable",
-    "name": "email",
-    "variableName": "email",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
-    "name": "grad_year",
-    "variableName": "grad_year",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
-    "name": "name",
-    "variableName": "name",
-    "type": "String"
-  },
   {
     "kind": "Variable",
     "name": "school",
@@ -176,11 +134,11 @@ return {
     "operationKind": "query",
     "name": "FeedQuery",
     "id": null,
-    "text": "query FeedQuery(\n  $name: String\n  $email: String\n  $grad_year: String\n  $school: String\n) {\n  user(email: $email, name: $name, grad_year: $grad_year, school: $school) {\n    email\n    name\n    school\n    id\n  }\n}\n",
+    "text": "query FeedQuery(\n  $school: String\n) {\n  user(school: $school) {\n    email\n    name\n    school\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'f401bf374d67de0b8906bc16745d6627';
+(node/*: any*/).hash = 'e7cfed7e90da3fe534a7d414b2b78e0f';
 module.exports = node;
