@@ -174,10 +174,10 @@ userRoutes.route("/email").post(postParser, async (request, response) => {
 userRoutes.route("/login").post(postParser, loggedIn,  (req, res, next) => {
     passport.authenticate('local', function (err, user, info) {
         if (info) {
-
+            
             return res.status(401)
                 .json({ error: 'Authentication failed', success: false })
-
+            
         } else {
             req.logIn(user, function (err) {
                 if (err) { return next(err); }
@@ -198,7 +198,7 @@ userRoutes.route("/logout").all(async (request, response) => {
 			await User.update({ "auth_keys": authKey }, { $pull: { "auth_keys": authKey } }).exec();
 			response.clearCookie("auth");
         }
-
+        
 		response.status(200).json({
 			success: true
 		});

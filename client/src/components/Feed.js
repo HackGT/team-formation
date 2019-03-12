@@ -1,128 +1,66 @@
 import React, { Component } from 'react';
 import { Button, Card, Image } from 'semantic-ui-react';
+import UserCard from './UserCard'
 import { Icon } from 'semantic-ui-react';
+import {QueryRenderer } from 'react-relay';
+import {graphql} from 'babel-plugin-relay/macro';
+import PropTypes from 'prop-types';
 import { Divider } from 'semantic-ui-react';
 import './css/Feed.css';
-
+import environment from './Environment'
+const {
+  Environment,
+  Network,
+  RecordSource,
+  Store,
+} = require('relay-runtime');
+// const getUsersQuery = graphql`
+//     query FeedQuery($name: String, $email: String, $grad_year: String, $school: String) {
+//         user(email:$email, name:$name, grad_year:$grad_year, school:$school) {
+//             email
+//             name
+//             school
+//
+//         }
+//     }
+// `
+const getUsersQuery = graphql`
+    query FeedQuery($school: String) {
+        user(school:$school) {
+            email
+            name
+            school
+        }
+    }
+`
 class Feed extends Component {
 	render() {
+        console.log("hello")
 		return (
-			<div className="Feed-container">
-				<div className="card-container"><Card className="card1">
-				  <Card.Content className="content">
-					<Card.Header>Rahul Rajan</Card.Header>
-					<Card.Meta>Georgia Tech</Card.Meta>
-					<Card.Meta>1st year</Card.Meta>
-					<div class="ui divider"></div>
-					<Card.Description className="card-description">
-					  <strong> skills: </strong> databases, graphql, relay
-					</Card.Description>
-					<Card.Description className="card-description">
-					  <strong> interests: </strong> mobile development, AR, VR
-					</Card.Description>
-					<Card.Description className="card-description">
-					  <strong> experience: </strong> participated in 3 hackathons, won one
-					</Card.Description>
-				  </Card.Content>
-				  <Card.Content extra>
-					 <div className='ui two buttons'>
-						<Button basic color='grey' href="https://www.linkedin.com/in/rahulrajanus/" target="_blank">
-						  website
-						</Button>
-						<Button basic color='teal'>
-						  reach out
-						</Button>
-					  </div>
-				  </Card.Content>
-				</Card></div>
+            <QueryRenderer
+                environment={environment}
+                query={getUsersQuery}
+                variables={{
+                    school: "abc123",
+                }}
+                render={({error,props}) => {
+                    if (error) {
+                       return <div>{error.message}</div>;
+                    } else if (props) {
+                        console.log("ard" + error + " " + props)
+                        let cards = []
+                        for(let i = 0;i<props.user.length;i++) {
+                            cards.push(<UserCard name={props.user[i].name} email={props.user[i].email}/>);
+                        }
+                        return (<div className="Feed-container">{cards}</div>);
+                    }
+                    return <div>Loading</div>;
 
-				<div className="card-container"><Card className="card1">
-				  <Card.Content className="content">
-					<Card.Header> Abhinav Kumar </Card.Header>
-					<Card.Meta>Georgia Tech</Card.Meta>
-					<Card.Meta>1st year</Card.Meta>
-					<div class="ui divider"></div>
-					<Card.Description className="card-description">
-					  <strong> skills: </strong> databases, graphql, relay
-					</Card.Description>
-					<Card.Description className="card-description">
-					  <strong> interests: </strong> mobile development, AR, VR
-					</Card.Description>
-					<Card.Description className="card-description">
-					  <strong> experience: </strong> participated in 3 hackathons, won one
-					</Card.Description>
-				  </Card.Content>
-				  <Card.Content extra>
-					  <div className='ui two buttons'>
-						<Button basic color='grey' href="https://www.linkedin.com/in/rahulrajanus/" target="_blank">
-						  website
-						</Button>
-						<Button basic color='teal'>
-						  reach out
-						</Button>
-					  </div>
-				  </Card.Content>
-				</Card></div>
 
-				<div className="card-container"><Card className="card1">
-				  <Card.Content className="content">
-					<Card.Header> Meha Agrawal </Card.Header>
-					<Card.Meta>Georgia Tech</Card.Meta>
-					<Card.Meta>1st year</Card.Meta>
-					<div class="ui divider"></div>
-					<Card.Description className="card-description">
-					  <strong> skills: </strong> databases, graphql, relay
-					</Card.Description>
-					<Card.Description className="card-description">
-					  <strong> interests: </strong> mobile development, AR, VR
-					</Card.Description>
-					<Card.Description className="card-description">
-					  <strong> experience: </strong> participated in 3 hackathons, won one
-					</Card.Description>
-				  </Card.Content>
-				  <Card.Content extra>
-					  <div className='ui two buttons'>
-						<Button basic color='grey' href="https://www.linkedin.com/in/rahulrajanus/" target="_blank">
-						  website
-						</Button>
-						<Button basic color='teal'>
-						  reach out
-						</Button>
-					  </div>
-				  </Card.Content>
-				</Card></div>
-
-				<div className="card-container"><Card className="card1">
-				  <Card.Content className="content">
-					<Card.Header>Rahul Rajan</Card.Header>
-					<Card.Meta>Georgia Tech</Card.Meta>
-					<Card.Meta>1st year</Card.Meta>
-					<div class="ui divider"></div>
-					<Card.Description className="card-description">
-					  <strong> skills: </strong> databases, graphql, relay
-					</Card.Description>
-					<Card.Description className="card-description">
-					  <strong> interests: </strong> mobile development, AR, VR
-					</Card.Description>
-					<Card.Description className="card-description">
-					  <strong> experience: </strong> participated in 3 hackathons, won one
-					</Card.Description>
-				  </Card.Content>
-				  <Card.Content extra>
-					  <div className='ui two buttons'>
-						<Button basic color='grey' href="https://www.linkedin.com/in/rahulrajanus/" target="_blank">
-						  website
-						</Button>
-						<Button basic color='teal'>
-						  reach out
-						</Button>
-					  </div>
-				  </Card.Content>
-				</Card></div>
-
-			</div>
-		);
-	};
+                }}
+            />
+        );
+	}
 }
 
 export default Feed

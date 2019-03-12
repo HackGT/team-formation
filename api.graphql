@@ -4,7 +4,7 @@ schema {
 }
 
 type Query {
-    user(name: ID, email: String, grad_year: String, school: String): [User!]!
+    user(name: String, email: String, grad_year: String, school: String): [User!]!
     users(pagination_token: ID, n: Int!, filter: UserFilter): [User!]!
     search_user_simple(search: String!, use_regex: Boolean = false, offset: Int!, n: Int!, filter: UserFilter): [User!]!
 }
