@@ -28,6 +28,8 @@
     "passport-local": "^1.0.0",
     "react-scripts": "^2.1.8",
     "relay": "^0.8.0-1",
+    "react-dom": "^16.8.4",
+    "react-relay": "^3.0.0",
     "semantic-ui": "^2.4.2",
     "semantic-ui-react": "^0.84.0",
     "serve-static": "^1.11.1",

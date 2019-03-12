@@ -1,6 +1,5 @@
 .Feed-container {
 	padding-top: 2%;
-	padding-left: 38%;
 }
 
 .button {
@@ -9,5 +8,15 @@
 }
 
 .content {
-	text-align: center;
+	text-align: left;
+}
+
+.card-description {
+	padding-bottom: 3%;
+}
+
+.card-container {
+	display: flex;
+	justify-content: center;	
+	padding-bottom: 2%;
 }

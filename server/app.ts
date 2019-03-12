@@ -19,6 +19,9 @@ import * as express_graphql from "express-graphql"
 import * as cors from "cors"
 import * as dotenv from "dotenv"
 import {buildSchema} from "graphql"
+import * as passport from "passport";
+import * as passportLocal from "passport-local"
+import * as session from "express-session"
 
 dotenv.config();
 const PORT = 3001;

@@ -5,6 +5,7 @@ import { Icon } from 'semantic-ui-react';
 import {QueryRenderer } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import PropTypes from 'prop-types';
+import { Divider } from 'semantic-ui-react';
 import './css/Feed.css';
 import environment from './Environment'
 const {
@@ -54,6 +55,7 @@ class Feed extends Component {
                         return (<div className="Feed-container">{cards}</div>);
                     }
                     return <div>Loading</div>;
+
 
                 }}
             />
