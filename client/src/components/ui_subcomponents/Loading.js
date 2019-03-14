@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Loader } from 'semantic-ui-react'
-import './css/Loading.css';
+import '../css/Loading.css';
 
 class Loading extends Component {
 	render() {

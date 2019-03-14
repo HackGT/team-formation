@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Input } from 'semantic-ui-react';
+import { Input, Form, Checkbox } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react';
 import './css/Login.css';
-import Loading from './Loading'
+import Loading from './ui_subcomponents/Loading'
 
 class Login extends Component {
 
@@ -23,14 +23,17 @@ class Login extends Component {
 		}
 		return (
 			<div className="Login-container">
-				<div><Input placeholder={'Email'} onChange={ (e) => this.onEmailChange(e) } className="input"/></div>
-				<div><Input type="password" placeholder={'Password'} onChange={ (e) => this.onPasswordChange(e) } className="input"/></div>
-				<div>{cur_message}</div>
-				<div>{this.state.error_message}</div>
-				<div>
-					<div className="next-container"><Button onClick={this.onNextClick}> Next </Button></div>
-					<div className="sign-up"><Button onClick={this.onSignUpClick}> Sign Up </Button></div>
-				</div>
+				<Form>
+					<Form.Field className = "input-box">
+						<label>First Name</label>
+						<input placeholder='First Name' />
+					</Form.Field>
+					<Form.Field className = "input-box">
+						<label>Last Name</label>
+						<input placeholder='Last Name' />
+					</Form.Field>
+				</Form>
+				<Button type='submit'>Submit</Button>
 			</div>
 		);
 	}

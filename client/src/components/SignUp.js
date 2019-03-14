@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Input } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import './css/SignUp.css';
-import Loading from './Loading';
+import Loading from './ui_subcomponents/Loading';
 
 class SignUp extends Component {
 
