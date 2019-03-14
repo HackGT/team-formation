@@ -87,7 +87,7 @@ export function loggedInErr(req, res, next) {
         return;
     }
 }
-export let postParser = bodyParser.json({
+export let postParser = bodyParser.urlencoded({extended: false
 });
 export let uploadHandler = multer({
 	"storage": multer.diskStorage({

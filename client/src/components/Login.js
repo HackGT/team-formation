@@ -23,17 +23,17 @@ class Login extends Component {
 		}
 		return (
 			<div className="Login-container">
-				<Form>
+				<Form method="POST" action="/user/login">
 					<Form.Field className = "input-box">
-						<label>First Name</label>
-						<input placeholder='First Name' />
+						<label>Username</label>
+						<input placeholder='Username' />
 					</Form.Field>
 					<Form.Field className = "input-box">
-						<label>Last Name</label>
-						<input placeholder='Last Name' />
+						<label>Password</label>
+						<input placeholder='Password' />
 					</Form.Field>
+					<div className="login-button"><Button type='submit'>Submit</Button></div>
 				</Form>
-				<Button type='submit'>Submit</Button>
 			</div>
 		);
 	}
