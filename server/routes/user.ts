@@ -171,7 +171,8 @@ userRoutes.route("/email").post(postParser, async (request, response) => {
 
 });
 
-userRoutes.route("/login").post(postParser, loggedIn,  (req, res, next) => {
+userRoutes.route("/login").post(postParser, loggedIn, (req, res, next) => {
+    console.log(req.body);
     passport.authenticate('local', function (err, user, info) {
         if (info) {
             

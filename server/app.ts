@@ -53,7 +53,7 @@ app.use(passport.session());
 
 import * as mongoose from "mongoose";
 (<any>mongoose).Promise = global.Promise;
-mongoose.connect(MONGO_URL);
+mongoose.connect(String(MONGO_URL));
 export {mongoose}; // For future unit testing and dependent routes; see https://github.com/HackGT/Ultimate-Checkin/blob/master/test/api.ts#L11
 
 import {
@@ -87,8 +87,9 @@ export function loggedInErr(req, res, next) {
         return;
     }
 }
-export let postParser = bodyParser.urlencoded({extended: false
+export let postParser = bodyParser.urlencoded({extended: true
 });
+
 export let uploadHandler = multer({
 	"storage": multer.diskStorage({
 		destination: function (req, file, cb) {

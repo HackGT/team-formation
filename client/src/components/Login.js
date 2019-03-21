@@ -23,14 +23,14 @@ class Login extends Component {
 		}
 		return (
 			<div className="Login-container">
-				<Form method="POST" action="/user/login">
+				<Form method="POST" action="http://localhost:3001/api/user/login">
 					<Form.Field className = "input-box">
-						<label>Username</label>
-						<input placeholder='Username' />
+						<label>email</label>
+						<input  name = 'email' placeholder='email' />
 					</Form.Field>
 					<Form.Field className = "input-box">
-						<label>Password</label>
-						<input placeholder='Password' />
+						<label>password</label>
+						<input name = 'password' placeholder='password' />
 					</Form.Field>
 					<div className="login-button"><Button type='submit'>Submit</Button></div>
 				</Form>
