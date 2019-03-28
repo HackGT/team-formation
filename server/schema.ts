@@ -29,9 +29,9 @@ export interface IUser extends RootDocument {
     school?: string;
     grad_year?: string;
     skills?: string[];
-    interests?: string[];
     beginner?: boolean;
-    description?: string;
+    experience?: string;
+    contact?: string;
     image?: string;
 }
 
@@ -95,12 +95,12 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
     token: String,
     grad_year: String,
     skills: [String],
-    interests: [String],
     beginner: {
         type: Boolean,
         required: false
     },
-    description: String,
+    experience: String,
+    contact: String,
     image: String,
     auth_keys: [String],
     admin: Boolean

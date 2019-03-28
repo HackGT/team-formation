@@ -14,12 +14,4 @@ class Headers extends Component {
 	}
 }
 
-
-/* const Headers= () => (
-  <div>
-    <Header as='h1'>HackGT</Header>
-    <Header as='h2'>Team Formation</Header>
-  </div>
-) */
-
 export default Headers

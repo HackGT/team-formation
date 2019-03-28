@@ -38,6 +38,7 @@ app.use(session({
     resave: true
 }));
 
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -68,7 +69,14 @@ passport.deserializeUser<IUser, string>((id, done) => {
 
 let getUser = async function (args) {
     let name = args.name
-    let users = await User.find(args)
+    console.log(args)
+    let users;
+    if(args.name == "" || args.name == null) {
+        users = await User.find({})
+    } else {
+        users = await User.find(args)
+    }
+    console.log(users)
     if (!users) {
         return null;
     }

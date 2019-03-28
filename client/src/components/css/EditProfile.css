@@ -4,13 +4,10 @@
 
 .page-title {
 	padding-top: 2%;
+	text-align: center;
 }
 
-.input-box {
-	padding-top: 0.5%;
-}
-
-.input-box-1 {
-	padding-top: 0.5%;
-	padding-bottom: 0.5%;
+.form {
+	display: flex;
+	justify-content: center;
 }
