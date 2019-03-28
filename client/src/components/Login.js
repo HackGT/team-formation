@@ -11,15 +11,15 @@ class Login extends Component {
 		user_email: "",
 		user_password: "",
 		user_id: "",
-		is_loading: false,
+		loading: false,
 		error_message: "",
 		data: {},
 	};
 
 	render() {
-		let cur_message;
-		if (this.state.is_loading) {
-			cur_message = <Loading/>;
+		let is_loading;
+		if (this.state.loading) {
+			is_loading = <Loading/>;
 		}
 		return (
 			<div className="Login-container">
@@ -38,6 +38,8 @@ class Login extends Component {
 
 
 				</Form>
+				<div>{this.state.error_message}</div>
+				<div>{is_loading}</div>
                 <div className="login-button">
                     <Button type="submit" onClick={this.onSignUpClick}>Sign Up</Button>
                 </div>
@@ -65,7 +67,8 @@ class Login extends Component {
 	onNextClick = () => {
 
 		this.setState({
-			is_loading: true
+			loading: true,
+			error_message: ""
 		});
 		var login_url = "http://localhost:3001/api/user/login";
 		var login_data = {
@@ -77,7 +80,8 @@ class Login extends Component {
 			console.log(login_json);
 			if (login_json.success === false) {
 				this.setState({
-					error_message: "Wrong email or password!"
+					error_message: "Wrong email or password!",
+					loading: false
 				})
 			} else if (login_json.success === true){
 				this.setState({
