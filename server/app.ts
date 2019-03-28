@@ -121,7 +121,7 @@ passport.deserializeUser<IUser, string>((id, done) => {
 
 
 let getUser = async function (args) {
-    let name = args.name
+    let name = args.first_name
     console.log(args)
     let users;
     if(args.name == "") {

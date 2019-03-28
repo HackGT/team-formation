@@ -12,25 +12,22 @@ import * as passport from "passport";
 export interface IUser {
     _id: mongoose.Types.ObjectId;
 	email: string;
-	name: string;
-
+	first_name: string;
+    last_name: string;
 	login: {
 		hash: string;
 		salt: string;
 	};
 	auth_keys: string[];
-
     admin?: boolean;
     secondary_email?: string;
     school?: string;
     grad_year?: string;
     skills?: string[];
-    interests?: string[];
     beginner?: boolean;
-    description?: string;
+    experience?: string;
+    contact?: string;
     image?: string;
-
-
 }
 export interface ITeam {
     _id: mongoose.Types.ObjectId;
@@ -40,7 +37,7 @@ export interface ITeam {
     members: string[];
     interests?: string[];
     description?: string;
- 
+
 }
 
 export type IUserMongoose = IUser & mongoose.Document;
@@ -75,7 +72,11 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
 		unique: true
 	},
     secondary_email: String,
-    name: {
+    first_name: {
+        type: String,
+        required: false
+    },
+    last_name: {
         type: String,
         required: false
     },
@@ -85,12 +86,12 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
     },
     grad_year: String,
     skills: [String],
-    interests: [String],
     beginner: {
         type: Boolean,
         required: false
     },
-    description: String,
+    experience: String,
+    contact: String,
     image: String,
 	login: {
 		hash: {
@@ -103,7 +104,6 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
 		}
 	},
 	auth_keys: [String],
-
 	admin: Boolean
 },{
   usePushEach: true

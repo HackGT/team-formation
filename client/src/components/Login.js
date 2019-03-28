@@ -74,7 +74,6 @@ class Login extends Component {
 		};
 		this.onFetchLogin(login_url, login_data).then(() => {
 			var login_json = this.state.data;
-			console.log(login_json);
 			if (login_json.success === false) {
 				this.setState({
 					error_message: "Wrong email or password!"
@@ -107,7 +106,6 @@ class Login extends Component {
         for (const pair of form_data) {
             data_encoded.append(pair[0], pair[1]);
         }
-        console.log()
 		return fetch(url, {
 			method: "POST",
 			headers: {

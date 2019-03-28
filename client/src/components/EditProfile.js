@@ -8,7 +8,20 @@ import './css/EditProfile.css'
 import {commitMutation } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 
-
+const mutation = graphql`
+mutation UpdateUser($id: ID!, $first_name: String, $last_name: String, $email: String, $grad_year: String, $school: String, $secondary_email: String, $contact: String, $interests: String[]) {
+  update_user(id: $id, first_name: $first_name, last_name: $last_name, email: $email, grad_year: $grad_year, school: $school, secondary_email: $secondary_email, contact: $contact, interests: $interests) {
+    first_name
+    last_name
+    email
+    grad_year
+    school
+    secondary_email
+    contact
+    interests
+  }
+}
+`;
 class EditProfile extends Component {
 	render() {
 		return (
@@ -32,6 +45,7 @@ class EditProfile extends Component {
 	};
 
 	onNextClick = () => {
+
 		this.props.onNextClick('feed');
 	}
 }
