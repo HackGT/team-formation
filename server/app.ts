@@ -26,7 +26,6 @@ const STATIC_ROOT = "../client";
 const VERSION_NUMBER = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json"), "utf8")).version;
 const VERSION_HASH = require("git-rev-sync").short();
 const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
-
 export let app = express();
 app.use(morgan("dev"));
 app.use(compression());
@@ -109,7 +108,7 @@ passport.serializeUser<IUser, string>((user, done) => {
 	done(null, user.uuid);
 });
 passport.deserializeUser<IUser, string>((id, done) => {
-    User.findById(id, (err, user) => {
+    User.findOne({ uuid: id }, (err, user) => {
 		done(err, user!);
 	});
 });

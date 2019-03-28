@@ -2,12 +2,12 @@
 import { URL } from "url";
 import * as passport from "passport";
 import { Strategy as OAuthStrategy } from "passport-oauth2";
+import * as dotenv from "dotenv"
 
 // TODO import { trackEvent } from "../middleware";
 import { createNew, IUser, User } from "../schema";
 import { Request, Response, NextFunction } from "express";
-import { mongoose } from "../schema"
-
+dotenv.config()
 type PassportDone = (err: Error | null, user?: IUser | false, errMessage?: { message: string }) => void;
 type PassportProfileDone = (err: Error | null, profile?: IProfile) => void;
 interface IStrategyOptions {
@@ -36,8 +36,8 @@ export class GroundTruthStrategy extends OAuthStrategy {
 	public readonly url: string;
 
 	public static get defaultUserProperties() {
-		return {
-
+        return {
+            
 		};
 	}
 
@@ -78,26 +78,20 @@ export class GroundTruthStrategy extends OAuthStrategy {
 		});
 	}
 
-	protected static async passportCallback(request: Request, accessToken: string, refreshToken: string, profile: IProfile, done: PassportDone) {
+	protected static async passportCallback(request: Request,  accessToken: string, refreshToken: string, profile: IProfile, done: PassportDone) {
 		let user = await User.findOne({ uuid: profile.uuid });
 		if (!user) {
 			user = createNew<IUser>(User, {
 				...GroundTruthStrategy.defaultUserProperties,
 				...profile
-            });
-            if (user) {
-                await user.save();
-		        done(null, user);
-            }
-            
+			});
 		}
 		else {
             user.token = accessToken;
-            await user.save();
-		    done(null, user);
+            user.admin = false;
 		}
-
-		
+		await user.save();
+		done(null, user);
 	}
 }
 function getExternalPort(request: Request): number {

@@ -187,12 +187,13 @@ userRoutes.route("/login/callback").get((request, response, next) => {
     }
 
 	passport.authenticate("oauth2", {
-		failureRedirect: "/login",
-        successReturnToOrRedirect: "/success",
+		failureRedirect: "/api/user/login",
+        successReturnToOrRedirect: "/api/user/success",
         callbackURL
     } as AuthenticateOptions)(request, response, next); 
 });
 userRoutes.route("/success").get((request, response, next) => {
+    console.log(request);
     return response.status(200).json({ "success": true });
 })
 
@@ -200,7 +201,7 @@ userRoutes.route("/success").get((request, response, next) => {
 //not actually logging out
 userRoutes.route("/logout").all((request, response) => {
     let user = request.user as IUser | undefined;
-    const gturl = process.env.groundTruthurl || 'login.hack.gt'
+    const gturl = process.env.groundTruthurl || 'https://login.hack.gt'
 	if (user) {
 		let groundTruthURL = new URL(gturl);
 		let requester = groundTruthURL.protocol === "http:" ? http : https;
