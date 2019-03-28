@@ -1,4 +1,4 @@
-.Feed-container {
+.UserCard-container {
 	padding-top: 2%;
 }
 
@@ -19,8 +19,4 @@
 	display: flex;
 	justify-content: center;
 	padding-bottom: 2%;
-}
-
-.menu {
-	text-align: center;
 }

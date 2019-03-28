@@ -8,6 +8,7 @@ import Feed from './Feed'
 class Content extends Component {
 	state = {
 		cur_state: 'login',
+        user_id: ''
 	};
 
 	render() {
@@ -18,10 +19,12 @@ class Content extends Component {
 				onSignUpClick={this.onSignUpClick}/>;
 		} else if (this.state.cur_state === 'signup') {
 			cur_display = <SignUp
-				onNextClick={this.onNextClick}/>;
+				onNextClick={this.onNextClick}
+                onFeedChange={this.onProfileChange}/>;
 		} else if (this.state.cur_state === 'setup-profile') {
 			cur_display = <EditProfile
-				onNextClick={this.onNextClick}/>;
+				onNextClick={this.onNextClick} user_id={this.state.user_id}
+                />;
 		} else if (this.state.cur_state === 'feed') {
 			cur_display = <Feed/>;
 		}
@@ -35,6 +38,9 @@ class Content extends Component {
 	onNextClick = (next_action) => {
 		this.setState({cur_state: next_action});
 	};
+    onProfileChange = (id) => {
+        this.setState({cur_state: 'setup-profile', user_id: id});
+    };
 
 	onSignUpClick = () => {
 		this.setState({cur_state: 'signup'})

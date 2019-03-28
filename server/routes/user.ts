@@ -15,6 +15,7 @@ userRoutes.route("/login/callback").get((request, response, next) => {
     
 	if (request.query.error === "access_denied") {
 		response.redirect("/login");
+
         return;
     }
 
@@ -53,5 +54,4 @@ userRoutes.route("/logout").all(async (request, response) => {
     }
     else {
         response.redirect("/api/user/login");
-    }
 });
