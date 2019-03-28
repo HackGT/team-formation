@@ -7,6 +7,14 @@ import YearDropdown from './ui_subcomponents/YearDropdown';
 import './css/EditProfile.css'
 import {commitMutation } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
+import environment from './Environment'
+
+const {
+  Environment,
+  Network,
+  RecordSource,
+  Store,
+} = require('relay-runtime');
 
 const mutation = graphql`
 mutation UpdateUser($id: ID!, $first_name: String, $last_name: String, $email: String, $grad_year: String, $school: String, $secondary_email: String, $contact: String, $interests: String[]) {
@@ -22,6 +30,7 @@ mutation UpdateUser($id: ID!, $first_name: String, $last_name: String, $email: S
   }
 }
 `;
+
 class EditProfile extends Component {
 	render() {
 		return (
@@ -45,7 +54,15 @@ class EditProfile extends Component {
 	};
 
 	onNextClick = () => {
-
+        commitMutation(
+            environment,
+            {
+                mutation,
+                variables: {
+                    
+                }
+            }
+        )
 		this.props.onNextClick('feed');
 	}
 }
