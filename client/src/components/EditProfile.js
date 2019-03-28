@@ -8,8 +8,6 @@ import './css/EditProfile.css'
 import {commitMutation } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 
-`
-`
 
 class EditProfile extends Component {
 	render() {
