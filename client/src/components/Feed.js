@@ -9,6 +9,7 @@ import './css/Feed.css';
 import environment from './Environment'
 import SearchField from 'react-search-field';
 import FeedCards from './FeedCards'
+import SideMenu from './SideMenu'
 
 const {
   Environment,
@@ -42,16 +43,20 @@ class Feed extends Component {
             <div>
             <br/>
             <div class="card-container">
-
-                <SearchField
-                    placeholder='Search item' onSearchClick={this.onSearchClick}
-                />
             </div>
+			<div class="menu">
+				<SideMenu onSearchClick={this.onSearchClick} className="search"/>
+			</div>
                 <FeedCards first_name={this.state.first_name} />
             </div>
 
         );
 	}
+
+	onSearch = (search_string) => {
+		this.setState({name:search_string});
+	}
+
     onSearchClick = (search_string) => {
         console.log("STATE CHANGE" + " " + search_string)
         this.setState({name:search_string});
