@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 6b41fb33166453828d017303ccd7ab9d
+ * @relayHash 9ff1e1001d02887c3b7b31414ce76332
  */
 
 /* eslint-disable */
@@ -10,14 +10,12 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type FeedCardsQueryVariables = {|
-  first_name?: ?string,
-  last_name?: ?string,
+  name?: ?string
 |};
 export type FeedCardsQueryResponse = {|
   +user: $ReadOnlyArray<{|
     +email: ?string,
-    +first_name: ?string,
-    +last_name: ?string,
+    +name: ?string,
     +school: ?string,
     +grad_year: ?string,
   |}>
@@ -31,13 +29,11 @@ export type FeedCardsQuery = {|
 
 /*
 query FeedCardsQuery(
-  $first_name: String
-  $last_name: String
+  $name: String
 ) {
-  user(first_name: $first_name, last_name: $last_name) {
+  user(name: $name) {
     email
-    first_name
-    last_name
+    name
     school
     grad_year
     id
@@ -49,13 +45,7 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "first_name",
-    "type": "String",
-    "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
-    "name": "last_name",
+    "name": "name",
     "type": "String",
     "defaultValue": null
   }
@@ -63,14 +53,8 @@ var v0 = [
 v1 = [
   {
     "kind": "Variable",
-    "name": "first_name",
-    "variableName": "first_name",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
-    "name": "last_name",
-    "variableName": "last_name",
+    "name": "name",
+    "variableName": "name",
     "type": "String"
   }
 ],
@@ -84,25 +68,18 @@ v2 = {
 v3 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "first_name",
+  "name": "name",
   "args": null,
   "storageKey": null
 },
 v4 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "last_name",
-  "args": null,
-  "storageKey": null
-},
-v5 = {
-  "kind": "ScalarField",
-  "alias": null,
   "name": "school",
   "args": null,
   "storageKey": null
 },
-v6 = {
+v5 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "grad_year",
@@ -130,8 +107,7 @@ return {
           (v2/*: any*/),
           (v3/*: any*/),
           (v4/*: any*/),
-          (v5/*: any*/),
-          (v6/*: any*/)
+          (v5/*: any*/)
         ]
       }
     ]
@@ -154,7 +130,6 @@ return {
           (v3/*: any*/),
           (v4/*: any*/),
           (v5/*: any*/),
-          (v6/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -170,11 +145,11 @@ return {
     "operationKind": "query",
     "name": "FeedCardsQuery",
     "id": null,
-    "text": "query FeedCardsQuery(\n  $first_name: String\n  $last_name: String\n) {\n  user(first_name: $first_name, last_name: $last_name) {\n    email\n    first_name\n    last_name\n    school\n    grad_year\n    id\n  }\n}\n",
+    "text": "query FeedCardsQuery(\n  $name: String\n) {\n  user(name: $name) {\n    email\n    name\n    school\n    grad_year\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '6f39f981a98b6ae2b45db236adb0cc8e';
+(node/*: any*/).hash = '086d3f47003d2f68b6c667b7b9321fab';
 module.exports = node;

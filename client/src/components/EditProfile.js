@@ -17,14 +17,14 @@ const {
 } = require('relay-runtime');
 
 const mutation = graphql`
-mutation EditProfileMutation($id: ID!, $first_name: String, $last_name: String, $email: String, $grad_year: String, $school: String, $secondary_email: String, $contact: String, $skills: [String]) {
-  update_user(id: $id, first_name: $first_name, last_name: $last_name, email: $email, grad_year: $grad_year, school: $school, secondary_email: $secondary_email, contact: $contact, skills: $skills) {
-    first_name
-    last_name
+mutation EditProfileMutation($id: ID!, $name: String, $grad_year: String, $school: String, $secondary_email: String, $contact: String, $skills: [String]) {
+  update_user(id: $id, name: $name, grad_year: $grad_year, school: $school, secondary_email: $secondary_email, contact: $contact, skills: $skills) {
+    name
     email
     grad_year
     school
     secondary_email
+    skills
   }
 }
 `;
@@ -128,13 +128,14 @@ class EditProfile extends Component {
                 mutation,
                 variables: {
                     id: this.props.user_id,
-                    first_name: this.state.user_first_name,
-                    last_name: this.state.user_last_name,
-                    grad_year: this.state.user_grad_year,
-                    school: this.state.user_school,
-                    secondary_email: this.state.user_secondary_email,
-                    contact: this.state.user_contact,
-                    skills: skills
+                    query: {
+                        name: this.state.user_first_name + " " + this.state.user_last_name,
+                        grad_year: this.state.user_grad_year,
+                        school: this.state.user_school,
+                        secondary_email: this.state.user_secondary_email,
+                        contact: this.state.user_contact,
+                        skills: skills
+                    }
                 }
             }
         )

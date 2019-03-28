@@ -4,13 +4,13 @@ schema {
 }
 
 type Query {
-    user(first_name: String, last_name: String, email: String, grad_year: String, school: String): [User!]!
+    user(name: String, email: String, grad_year: String, school: String): [User!]!
     users(pagination_token: ID, n: Int!, filter: UserFilter): [User!]!
     search_user_simple(search: String!, use_regex: Boolean = false, offset: Int!, n: Int!, filter: UserFilter): [User!]!
 }
 
 type Mutation {
-    update_user(id: ID, first_name: String, last_name: String email: String, grad_year: String, school: String, secondary_email: String, contact: String, skills: [String]): User!
+    update_user(id: ID, name: String email: String, grad_year: String, school: String, secondary_email: String, contact: String, skills: [String]): User!
 }
 
 input UserFilter {
@@ -24,8 +24,7 @@ input UserFilter {
 
 type User {
     id: ID
-    first_name: String
-    last_name: String
+    name: String
     email: String
     secondary_email: String
     school: String

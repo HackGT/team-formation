@@ -121,10 +121,10 @@ passport.deserializeUser<IUser, string>((id, done) => {
 
 
 let getUser = async function (args) {
-    let name = args.first_name
+    let name = args.name
     console.log(args)
     let users;
-    if(args.first_name == "") {
+    if(args.name == "" || args.name == null) {
         users = await User.find({})
     } else {
         users = await User.find(args)
@@ -171,7 +171,7 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, don
 
 let updateUser = async function(args) {
     let id = args.id
-    console.log(args.id)
+    console.log(args)
     let updated = User.findByIdAndUpdate(args.id, {"$set": args},{new: true})
     console.log("ard",updated)
     return updated

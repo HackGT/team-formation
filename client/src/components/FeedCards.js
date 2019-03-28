@@ -17,11 +17,10 @@ const {
 } = require('relay-runtime');
 
 const getUsersQuery = graphql`
-    query FeedCardsQuery($first_name: String, $last_name: String) {
-        user(first_name:$first_name, last_name:$last_name) {
+    query FeedCardsQuery($name: String) {
+        user(name:$name) {
             email
-            first_name
-            last_name
+            name
             school
 			grad_year
         }
@@ -35,8 +34,7 @@ class FeedCards extends Component {
                 environment={environment}
                 query={getUsersQuery}
                 variables={{
-                    first_name: this.props.first_name,
-                    last_name: this.props.last_name
+                    name: this.props.name,
                 }}
                 render={({error,props}) => {
                     if (error) {

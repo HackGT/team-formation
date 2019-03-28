@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 6c658b52d535d58e586fbbd77a900fde
+ * @relayHash 92a6599b90acec2d7a22ef84e2c9f88b
  */
 
 /* eslint-disable */
@@ -11,9 +11,7 @@
 import type { ConcreteRequest } from 'relay-runtime';
 export type EditProfileMutationVariables = {|
   id: string,
-  first_name?: ?string,
-  last_name?: ?string,
-  email?: ?string,
+  name?: ?string,
   grad_year?: ?string,
   school?: ?string,
   secondary_email?: ?string,
@@ -22,12 +20,12 @@ export type EditProfileMutationVariables = {|
 |};
 export type EditProfileMutationResponse = {|
   +update_user: {|
-    +first_name: ?string,
-    +last_name: ?string,
+    +name: ?string,
     +email: ?string,
     +grad_year: ?string,
     +school: ?string,
     +secondary_email: ?string,
+    +skills: ?$ReadOnlyArray<?string>,
   |}
 |};
 export type EditProfileMutation = {|
@@ -40,22 +38,20 @@ export type EditProfileMutation = {|
 /*
 mutation EditProfileMutation(
   $id: ID!
-  $first_name: String
-  $last_name: String
-  $email: String
+  $name: String
   $grad_year: String
   $school: String
   $secondary_email: String
   $contact: String
   $skills: [String]
 ) {
-  update_user(id: $id, first_name: $first_name, last_name: $last_name, email: $email, grad_year: $grad_year, school: $school, secondary_email: $secondary_email, contact: $contact, skills: $skills) {
-    first_name
-    last_name
+  update_user(id: $id, name: $name, grad_year: $grad_year, school: $school, secondary_email: $secondary_email, contact: $contact, skills: $skills) {
+    name
     email
     grad_year
     school
     secondary_email
+    skills
     id
   }
 }
@@ -71,19 +67,7 @@ var v0 = [
   },
   {
     "kind": "LocalArgument",
-    "name": "first_name",
-    "type": "String",
-    "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
-    "name": "last_name",
-    "type": "String",
-    "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
-    "name": "email",
+    "name": "name",
     "type": "String",
     "defaultValue": null
   },
@@ -127,18 +111,6 @@ v1 = [
   },
   {
     "kind": "Variable",
-    "name": "email",
-    "variableName": "email",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
-    "name": "first_name",
-    "variableName": "first_name",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
     "name": "grad_year",
     "variableName": "grad_year",
     "type": "String"
@@ -151,8 +123,8 @@ v1 = [
   },
   {
     "kind": "Variable",
-    "name": "last_name",
-    "variableName": "last_name",
+    "name": "name",
+    "variableName": "name",
     "type": "String"
   },
   {
@@ -177,42 +149,42 @@ v1 = [
 v2 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "first_name",
+  "name": "name",
   "args": null,
   "storageKey": null
 },
 v3 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "last_name",
+  "name": "email",
   "args": null,
   "storageKey": null
 },
 v4 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "email",
+  "name": "grad_year",
   "args": null,
   "storageKey": null
 },
 v5 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "grad_year",
+  "name": "school",
   "args": null,
   "storageKey": null
 },
 v6 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "school",
+  "name": "secondary_email",
   "args": null,
   "storageKey": null
 },
 v7 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "secondary_email",
+  "name": "skills",
   "args": null,
   "storageKey": null
 };
@@ -279,11 +251,11 @@ return {
     "operationKind": "mutation",
     "name": "EditProfileMutation",
     "id": null,
-    "text": "mutation EditProfileMutation(\n  $id: ID!\n  $first_name: String\n  $last_name: String\n  $email: String\n  $grad_year: String\n  $school: String\n  $secondary_email: String\n  $contact: String\n  $skills: [String]\n) {\n  update_user(id: $id, first_name: $first_name, last_name: $last_name, email: $email, grad_year: $grad_year, school: $school, secondary_email: $secondary_email, contact: $contact, skills: $skills) {\n    first_name\n    last_name\n    email\n    grad_year\n    school\n    secondary_email\n    id\n  }\n}\n",
+    "text": "mutation EditProfileMutation(\n  $id: ID!\n  $name: String\n  $grad_year: String\n  $school: String\n  $secondary_email: String\n  $contact: String\n  $skills: [String]\n) {\n  update_user(id: $id, name: $name, grad_year: $grad_year, school: $school, secondary_email: $secondary_email, contact: $contact, skills: $skills) {\n    name\n    email\n    grad_year\n    school\n    secondary_email\n    skills\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '6ff36fcf862e7fd1dddd1b4d5fdc083e';
+(node/*: any*/).hash = '200ee84a4365462963ec5d123d78f57c';
 module.exports = node;

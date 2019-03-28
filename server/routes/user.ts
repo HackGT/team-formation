@@ -76,9 +76,6 @@ userRoutes.route("/signup").post(postParser, async (request, response) => {
 	}
 });
 
-
-
-
 userRoutes.route("/make_profile").post(postParser, async (request, response) => {
 
     if (!request.user) {

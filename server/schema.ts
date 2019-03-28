@@ -12,8 +12,7 @@ import * as passport from "passport";
 export interface IUser {
     _id: mongoose.Types.ObjectId;
 	email: string;
-	first_name: string;
-    last_name: string;
+	name: string;
 	login: {
 		hash: string;
 		salt: string;
@@ -72,11 +71,7 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
 		unique: true
 	},
     secondary_email: String,
-    first_name: {
-        type: String,
-        required: false
-    },
-    last_name: {
+    name: {
         type: String,
         required: false
     },
