@@ -1,23 +1,29 @@
-// The database schema used by Mongoose
-// Exports TypeScript interfaces to be used for type checking and Mongoose models derived from these interfaces
-import * as fs from "fs";
-import * as path from "path";
-
+import * as dotenv from "dotenv"
 import * as mongoose from "mongoose";
-import * as ajv from "ajv";
-import * as passport from "passport";
 
-// We need to find some way of integrating these static types with a config that
-// can be adapted with different questions and data in a JSON schema file
-export interface IUser {
+dotenv.config()
+
+const MONGO_URL = String(process.env.MONGO_URL);
+mongoose.connect(MONGO_URL, {
+    useMongoClient: false
+}).catch(err => {
+    throw err;
+});
+export {mongoose};
+
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+interface RootDocument {
     _id: mongoose.Types.ObjectId;
-	email: string;
-	name: string;
-	login: {
-		hash: string;
-		salt: string;
-	};
-	auth_keys: string[];
+}
+export function createNew<T extends RootDocument>(model: mongoose.Model<T & mongoose.Document, {}>, doc: Omit<T, "_id">) {
+    return new model(doc);
+}
+
+export interface IUser extends RootDocument {
+    uuid: string;
+    email: string;
+    name: string;
+    token: string | null;
     admin?: boolean;
     secondary_email?: string;
     school?: string;
@@ -28,19 +34,20 @@ export interface IUser {
     contact?: string;
     image?: string;
 }
+
 export interface ITeam {
-    _id: mongoose.Types.ObjectId;
+    uuid: string;
     creator: string;
-	name: string;
-	picture?: string;
+    name: string;
+    picture?: string;
     members: string[];
     interests?: string[];
     description?: string;
-
 }
 
 export type IUserMongoose = IUser & mongoose.Document;
 export type ITeamMongoose = ITeam & mongoose.Document;
+
 export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
     creator: {
         required: true,
@@ -54,22 +61,28 @@ export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
     picture: String,
     members: {
         required: true,
-        //Change type to mongo objectid?
         type: [String],
         unique: true
     },
     interests: [String],
     description: String
-},{
-  usePushEach: true
-}));
-export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
+    },
+    {
+        usePushEach: true
+    }));
 
+export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
+    uuid: {
+        type: String,
+        required: true,
+        index: true,
+        unique: true
+    },
     email: {
-		type: String,
-		required: true,
-		unique: true
-	},
+        type: String,
+        required: true,
+        unique: true
+    },
     secondary_email: String,
     name: {
         type: String,
@@ -79,6 +92,7 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
         type: String,
         required: false
     },
+    token: String,
     grad_year: String,
     skills: [String],
     beginner: {
@@ -88,18 +102,10 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
     experience: String,
     contact: String,
     image: String,
-	login: {
-		hash: {
-			type: String,
-			required: true,
-		},
-		salt: {
-			type: String,
-			required: true,
-		}
-	},
-	auth_keys: [String],
-	admin: Boolean
-},{
-  usePushEach: true
-}));
+    auth_keys: [String],
+    admin: Boolean
+    },
+    {
+        usePushEach: true
+    }));
+

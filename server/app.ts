@@ -1,82 +1,47 @@
 import * as fs from "fs";
 import * as path from "path";
-import * as url from "url";
-import * as os from "os";
-import * as crypto from "crypto";
-import * as http from "http";
-
 import * as express from "express";
 import * as serveStatic from "serve-static";
 import * as compression from "compression";
-import * as bodyParser from "body-parser";
-import * as cookieParser from "cookie-parser";
-import * as multer from "multer";
 import * as morgan from "morgan";
 import * as passport from "passport";
-import * as passportLocal from "passport-local"
 import * as session from "express-session"
 import * as express_graphql from "express-graphql"
 import * as cors from "cors"
 import * as dotenv from "dotenv"
-import {buildSchema} from "graphql"
-
+import { buildSchema } from "graphql"
+import { GroundTruthStrategy } from "./routes/strategies"
+import { IUser, User } from "./schema";
+import { userRoutes } from "./routes/user";
 
 dotenv.config();
-const PORT = 3001;
-const MONGO_URL =  process.env.MONGO_URL;
-const UNIQUE_APP_ID = process.env.UNIQUE_APP_ID || "team-formation";
-const STATIC_ROOT = "../client";
 
+const PORT = 3001;
+const STATIC_ROOT = "../client";
+const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 const VERSION_NUMBER = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json"), "utf8")).version;
 const VERSION_HASH = require("git-rev-sync").short();
-const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 
 export let app = express();
 app.use(morgan("dev"));
 app.use(compression());
 app.use('*', cors());
 
-let cookieParserInstance = cookieParser(undefined, {
-	"path": "/",
-	"maxAge": 1000 * 60 * 60 * 24 * 30 * 6, // 6 months
-	"secure": false,
-	"httpOnly": true
-} as cookieParser.CookieParseOptions);
-app.use(cookieParserInstance);
-let session_secret = process.env['SECRET'] || 'default';
-console.log("uh" + session_secret)
-app.use(session({secret:session_secret}));
+let session_secret = process.env['SECRET'];
+if (!session_secret) {
+    throw new Error("Secret not specified")
+}
+
+app.use(session({
+    secret:session_secret,
+    saveUninitialized: false,
+    resave: true
+}));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
-
-import * as mongoose from "mongoose";
-(<any>mongoose).Promise = global.Promise;
-mongoose.connect(String(MONGO_URL));
-export {mongoose}; // For future unit testing and dependent routes; see https://github.com/HackGT/Ultimate-Checkin/blob/master/test/api.ts#L11
-
-import {
-	IUser, IUserMongoose, User, ITeam, Team
-} from "./schema";
-
-// Check for number of admin users and create default admin account if none
-const LocalStrategy = passportLocal.Strategy;
-// Promise version of crypto.pbkdf2()
-export function pbkdf2Async (...params: any[]) {
-	return new Promise<Buffer>((resolve, reject) => {
-		params.push(function (err: Error, derivedKey: Buffer) {
-			if (err) {
-				reject(err);
-				return;
-			}
-			resolve(derivedKey);
-		});
-		crypto.pbkdf2.apply(null, params);
-	});
-}
 export function loggedInErr(req, res, next) {
     if (req.user && req.user.email === req.body.email) {
         res.status(200).json({
@@ -89,36 +54,18 @@ export function loggedInErr(req, res, next) {
         return;
     }
 }
-export let postParser = bodyParser.urlencoded({extended: true
-});
 
-export let uploadHandler = multer({
-	"storage": multer.diskStorage({
-		destination: function (req, file, cb) {
-			// The OS's default temporary directory
-			// Should be changed (or moved via fs.rename()) if the files are to be persisted
-			cb(null!, os.tmpdir());
-		},
-		filename: function (req, file, cb) {
-			cb(null!, `${file.fieldname}-${Date.now()}.${path.extname(file.originalname)}`);
-		}
-	}),
-	"limits": {
-		"fileSize": 50000000, // 50 MB
-		"files": 1
-	}
-});
-
-// For API endpoints
+const gturl = String(process.env.groundTruthurl || "login.hack.gt");
+const groundTruthStrategy = new GroundTruthStrategy(gturl);
+passport.use(groundTruthStrategy);
 passport.serializeUser<IUser, string>((user, done) => {
-	done(null, user._id.toString());
+    done(null, user.uuid);
 });
 passport.deserializeUser<IUser, string>((id, done) => {
-    User.findById(id, (err, user) => {
-		done(err, user!);
-	});
+    User.findOne({ uuid: id }, (err, user) => {
+        done(err, user!);
+    });
 });
-
 
 let getUser = async function (args) {
     let name = args.name
@@ -135,50 +82,14 @@ let getUser = async function (args) {
     }
     return users
 }
-passport.serializeUser<IUser, string>((user, done) => {
-	done(null, user._id.toString());
-});
-passport.deserializeUser<IUser, string>((id, done) => {
-    User.findById(id, (err, user) => {
-		done(err, user!);
-	});
-});
-passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
-    console.log("i am here")
-    User.findOne({ email: email.toLowerCase() }, async function(err, user: any)  {
-        console.log(err)
-      if (err) { return done(err); }
-      if (!user) {
-          console.log("email not found")
-        return done(undefined, false, { message: `Email ${email} not found.` });
-        }
-
-        let salt = Buffer.from(user.login.salt, "hex");
-        let passwordHashed = await pbkdf2Async(password, salt, 500000, 128, "sha256");
-        if (!user || user.login.hash !== passwordHashed.toString("hex")) {
-            console.log('invalid email or password')
-            return done(undefined, false, { message: "Invalid email or password." });
-
-        }
-        console.log(user)
-
-        return done(undefined, user);
-
-
-    });
-  }));
-
 
 let updateUser = async function(args) {
     let id = args.id
-    console.log(args)
     let updated = User.findByIdAndUpdate(args.id, {"$set": args},{new: true})
-    console.log("ard",updated)
     return updated
 }
 let apiRouter = express.Router();
-// API routes go here
-import {userRoutes} from "./routes/user";
+
 let root = {
     user: getUser,
     update_user: updateUser
@@ -188,20 +99,19 @@ let root = {
 apiRouter.use("/user", userRoutes);
 
 app.use("/api", apiRouter);
-app.use('/graphql', express_graphql({
 
+app.use('/graphql', express_graphql({
     schema: buildSchema(typeDefs),
     rootValue: root,
     graphiql: true
 }));
 
 app.route("/").get((request, response) => {
-	response.send("Rendered handlebars template here");
+    response.redirect("/api/user/login");
 });
 
-app.use("/node_modules", serveStatic(path.resolve(__dirname, "../node_modules")));
 app.use("/", serveStatic(path.resolve(__dirname, STATIC_ROOT)));
 
 app.listen(PORT, () => {
-	console.log(`Registration system v${VERSION_NUMBER} @ ${VERSION_HASH} started on port ${PORT}`);
+    console.log(`Team Formation system v${VERSION_NUMBER} @ ${VERSION_HASH} started on port ${PORT}`);
 });
