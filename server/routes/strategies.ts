@@ -3,7 +3,7 @@ import { URL } from "url";
 import * as passport from "passport";
 import { Strategy as OAuthStrategy } from "passport-oauth2";
 import * as dotenv from "dotenv"
-
+import * as requests from "request"
 // TODO import { trackEvent } from "../middleware";
 import { createNew, IUser, User } from "../schema";
 import { Request, Response, NextFunction } from "express";
@@ -80,18 +80,43 @@ export class GroundTruthStrategy extends OAuthStrategy {
 
 	protected static async passportCallback(request: Request,  accessToken: string, refreshToken: string, profile: IProfile, done: PassportDone) {
 		let user = await User.findOne({ uuid: profile.uuid });
-		if (!user) {
-			user = createNew<IUser>(User, {
-				...GroundTruthStrategy.defaultUserProperties,
-				...profile
-			});
-		}
-		else {
+        if (!user) {
+            var confirmed = false;
+            let options = { method: 'GET',
+                url: 'https://registration.horizons.hack.gt/graphql',
+                qs: {
+                    query: '{search_user(search:"abhinavk99@gmail.com", offset:0, n:1){users{confirmed}}}'
+                },
+                headers: 
+                {
+                    Authorization: 'Bearer ' + process.env.graphqlAuth
+                }
+            };
+            requests(options, (err, res, body) => {
+                if (err) { return console.log(err); }
+                confirmed = JSON.parse(body).data.search_user.users[0].confirmed
+            });
+            //Manually set confirmed true for testing
+            confirmed = true;
+            if (confirmed) {
+                user = createNew<IUser>(User, {
+                    ...GroundTruthStrategy.defaultUserProperties,
+                    ...profile
+                });
+            }
+			
+		} else {
             user.token = accessToken;
             user.admin = false;
-		}
-		await user.save();
-		done(null, user);
+        }
+        if (user) {
+            await user.save();
+            done(null, user);
+        } else {
+            done(null, undefined);
+        }
+		
+		
 	}
 }
 function getExternalPort(request: Request): number {

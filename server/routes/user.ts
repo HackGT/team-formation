@@ -2,6 +2,8 @@ import * as crypto from "crypto";
 import * as express from "express";
 import * as http from "http";
 import * as https from "https";
+import * as requests from "request"
+
 import {
 	pbkdf2Async,
 
@@ -187,37 +189,38 @@ userRoutes.route("/login/callback").get((request, response, next) => {
     }
 
 	passport.authenticate("oauth2", {
-		failureRedirect: "/api/user/login",
+		failureRedirect: "/api/user/failure",
         successReturnToOrRedirect: "/api/user/success",
         callbackURL
     } as AuthenticateOptions)(request, response, next); 
 });
 userRoutes.route("/success").get((request, response, next) => {
-    console.log(request);
     return response.status(200).json({ "success": true });
+})
+userRoutes.route("/failure").get((request, response, next) => {
+    return response.status(400).json({ "success": false });
 })
 
 
-//not actually logging out
-userRoutes.route("/logout").all((request, response) => {
+userRoutes.route("/logout").all(async (request, response) => {
     let user = request.user as IUser | undefined;
     const gturl = process.env.groundTruthurl || 'https://login.hack.gt'
-	if (user) {
-		let groundTruthURL = new URL(gturl);
-		let requester = groundTruthURL.protocol === "http:" ? http : https;
-        requester.request({
-            hostname: gturl,
-            path: "/api/user/logout",
-			method: "POST",
-			headers: {
-				"Authorization": `Bearer ${user.token}`
-			}
-		}).end();
-
-		request.logout();
-	}
-	if (request.session) {
-		request.session.loginAction = "render";
-	}
-	response.redirect("/login");
+    if (user) {
+        let options = {
+            method: 'POST',
+            url: gturl + '/api/user/logout',
+            headers:
+            {
+                Authorization: `Bearer ${user.token}`
+            }
+        };
+        await requests(options, (err, res, body) => {
+            if (err) { return console.log(err); }
+            request.logout();
+            response.redirect("/api/user/login");
+        });
+    }
+    else {
+        response.redirect("/api/user/login");
+    }
 });
