@@ -8,6 +8,7 @@ import Feed from './Feed'
 class Content extends Component {
 	state = {
 		cur_state: 'login',
+        user_id: ''
 	};
 
 	render() {
@@ -22,7 +23,7 @@ class Content extends Component {
                 onFeedChange={this.onProfileChange}/>;
 		} else if (this.state.cur_state === 'setup-profile') {
 			cur_display = <EditProfile
-				onNextClick={this.onNextClick}
+				onNextClick={this.onNextClick} user_id={this.state.user_id}
                 />;
 		} else if (this.state.cur_state === 'feed') {
 			cur_display = <Feed/>;

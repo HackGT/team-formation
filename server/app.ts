@@ -23,7 +23,7 @@ import {buildSchema} from "graphql"
 
 dotenv.config();
 const PORT = 3001;
-const MONGO_URL =  "admin2:teamformation123@ds121599.mlab.com:21599/hackgt-team-formation";
+const MONGO_URL =  process.env.MONGO_URL;
 const UNIQUE_APP_ID = process.env.UNIQUE_APP_ID || "team-formation";
 const STATIC_ROOT = "../client";
 
@@ -124,7 +124,7 @@ let getUser = async function (args) {
     let name = args.first_name
     console.log(args)
     let users;
-    if(args.name == "") {
+    if(args.first_name == "") {
         users = await User.find({})
     } else {
         users = await User.find(args)

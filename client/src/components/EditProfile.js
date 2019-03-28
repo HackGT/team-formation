@@ -17,16 +17,14 @@ const {
 } = require('relay-runtime');
 
 const mutation = graphql`
-mutation UpdateUser($id: ID!, $first_name: String, $last_name: String, $email: String, $grad_year: String, $school: String, $secondary_email: String, $contact: String, $interests: String[]) {
-  update_user(id: $id, first_name: $first_name, last_name: $last_name, email: $email, grad_year: $grad_year, school: $school, secondary_email: $secondary_email, contact: $contact, interests: $interests) {
+mutation EditProfileMutation($id: ID!, $first_name: String, $last_name: String, $email: String, $grad_year: String, $school: String, $secondary_email: String, $contact: String, $skills: [String]) {
+  update_user(id: $id, first_name: $first_name, last_name: $last_name, email: $email, grad_year: $grad_year, school: $school, secondary_email: $secondary_email, contact: $contact, skills: $skills) {
     first_name
     last_name
     email
     grad_year
     school
     secondary_email
-    contact
-    interests
   }
 }
 `;
@@ -41,6 +39,9 @@ class EditProfile extends Component {
 		user_skills_1: "",
 		user_skills_2: "",
 		user_skills_3: "",
+        user_experience: "",
+        user_secondary_email: "",
+        user_contact: ""
 	}
 
 	render() {
@@ -49,16 +50,16 @@ class EditProfile extends Component {
 				<h2 className="page-title">Your Profile</h2>
 				<div><p className="input-name">First Name:</p> <Input placeholder={'first name'} className="input-name" onChange={this.onFirstNameChange}/>
 				<p className="input-name">Last Name:</p><Input placeholder={'last name'} className="input" onChange={this.onLastNameChange}/></div>
-
+				<div><p className="input-label">Secondary Eamil:</p><Input placeholder={'test@gmail.com'} className="input-label" onChange={this.onEmailChange}/></div>
 				<div><p className="input-school">School:</p><Input placeholder={'school'} className="input-school" onChange={this.onSchoolChange}/></div>
 				<div><p className="input-label">Graduation Year:</p><Input placeholder={'graduation year'} className="input-school" onChange={this.onGradYearChange}/></div>
 
 				<div><div><p className="input-label">Skill 1:</p><Input placeholder={'skill 1'} className="input-box" onChange={this.onSkills1Change}/></div>
 				<div><p className="input-label">Skill 2:</p><Input placeholder={'skill 2'} className="input-box" onChange={this.onSkills2Change}/></div>
 				<div><p className="input-label">Skill 3:</p><Input placeholder={'skill 3'} className="input-box" onChange={this.onSkills3Change}/></div>
-				<div><p className="input-label">Experience:</p><Input placeholder={'experience'} className="input-box"/></div></div>
+				<div><p className="input-label">Experience:</p><Input placeholder={'experience'} onChange={this.onExperienceChange} className="input-box"/></div></div>
 
-				<div><p className="input-label">Method of contact (facebook, email, phone...):</p><Input placeholder={'method of contact'} className="input-box"/></div>
+				<div><p className="input-label">Method of contact (facebook, email, phone...):</p><Input placeholder={'method of contact'} className="input-box" onChange={this.onContactChange}/></div>
 				<Button onClick={this.onNextClick} className="save-button"> save </Button>
 			</div>
 		);
@@ -106,13 +107,34 @@ class EditProfile extends Component {
 		});
 	};
 
+    onExperienceChange = (e) => {
+        this.setState({
+            user_experience: e.target.value
+        });
+    };
+
+    onEmailChange = (e) => {
+        this.setState({
+            user_secondary_email: e.target.value
+        });
+    };
+
+
 	onNextClick = () => {
+        let skills = [this.state.user_skills_1, this.state.user_skills_2, this.state.user_skills_3]
         commitMutation(
             environment,
             {
                 mutation,
                 variables: {
-                    
+                    id: this.props.user_id,
+                    first_name: this.state.user_first_name,
+                    last_name: this.state.user_last_name,
+                    grad_year: this.state.user_grad_year,
+                    school: this.state.user_school,
+                    secondary_email: this.state.user_secondary_email,
+                    contact: this.state.user_contact,
+                    skills: skills
                 }
             }
         )

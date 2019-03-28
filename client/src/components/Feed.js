@@ -18,10 +18,11 @@ const {
 } = require('relay-runtime');
 
 const getUsersQuery = graphql`
-    query FeedQuery($name: String, $email: String, $grad_year: String, $school: String) {
-        user(email:$email, name:$name, grad_year:$grad_year, school:$school) {
+    query FeedQuery($first_name: String, $last_name: String, $email: String, $grad_year: String, $school: String) {
+        user(email:$email, first_name:$first_name, last_name: $last_name, grad_year:$grad_year, school:$school) {
             email
-            name
+            first_name
+            last_name
             school
 
         }
@@ -31,7 +32,7 @@ const getUsersQuery = graphql`
 class Feed extends Component {
     constructor(props){
         super(props)
-        this.state = {name: ""}
+        this.state = {first_name: "", last_name: ""}
         // this.onSearchClick.bind(this);
 
     };
@@ -46,7 +47,7 @@ class Feed extends Component {
                     placeholder='Search item' onSearchClick={this.onSearchClick}
                 />
             </div>
-                <FeedCards name={this.state.name} />
+                <FeedCards first_name={this.state.first_name} />
             </div>
 
         );

@@ -20,7 +20,8 @@ const getUsersQuery = graphql`
     query FeedCardsQuery($first_name: String, $last_name: String) {
         user(first_name:$first_name, last_name:$last_name) {
             email
-            name
+            first_name
+            last_name
             school
 			grad_year
         }
@@ -43,7 +44,7 @@ class FeedCards extends Component {
                     } else if (props) {
                         let cards = []
                         for(let i = 0;i<props.user.length;i++) {
-                            cards.push(<UserCard name={props.user[i].name} grad_year={props.user[i].grad_year} school={props.user[i].school}/>);
+                            cards.push(<UserCard name={props.user[i].first_name} grad_year={props.user[i].grad_year} school={props.user[i].school}/>);
                         }
                         return (<div className="Feed-container">{cards}</div>);
                     } else {
