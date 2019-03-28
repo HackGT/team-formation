@@ -1,9 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
-import * as url from "url";
 import * as os from "os";
 import * as crypto from "crypto";
-import * as http from "http";
 
 import * as express from "express";
 import * as serveStatic from "serve-static";
@@ -13,17 +11,15 @@ import * as cookieParser from "cookie-parser";
 import * as multer from "multer";
 import * as morgan from "morgan";
 import * as passport from "passport";
-import * as passportLocal from "passport-local"
 import * as session from "express-session"
 import * as express_graphql from "express-graphql"
 import * as cors from "cors"
 import * as dotenv from "dotenv"
 import {buildSchema} from "graphql"
-
-
+import {GroundTruthStrategy} from "./routes/strategies"
+import flash = require("connect-flash");
 dotenv.config();
 const PORT = 3001;
-const MONGO_URL = process.env.MONGO_URL || "mongodb://admin:teamformation123@ds121599.mlab.com:21599/hackgt-team-formation";
 const UNIQUE_APP_ID = process.env.UNIQUE_APP_ID || "team-formation";
 const STATIC_ROOT = "../client";
 
@@ -35,7 +31,7 @@ export let app = express();
 app.use(morgan("dev"));
 app.use(compression());
 app.use('*', cors());
-
+app.use(flash())
 let cookieParserInstance = cookieParser(undefined, {
 	"path": "/",
 	"maxAge": 1000 * 60 * 60 * 24 * 30 * 6, // 6 months
@@ -44,24 +40,23 @@ let cookieParserInstance = cookieParser(undefined, {
 } as cookieParser.CookieParseOptions);
 app.use(cookieParserInstance);
 let session_secret = process.env['SECRET'] || 'default';
-app.use(session({secret:session_secret}));
+app.use(session({
+    secret:session_secret,
+    saveUninitialized: false,
+    resave: true
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 
-
-import * as mongoose from "mongoose";
-(<any>mongoose).Promise = global.Promise;
-mongoose.connect(MONGO_URL);
-export {mongoose}; // For future unit testing and dependent routes; see https://github.com/HackGT/Ultimate-Checkin/blob/master/test/api.ts#L11
+ // For future unit testing and dependent routes; see https://github.com/HackGT/Ultimate-Checkin/blob/master/test/api.ts#L11
 
 import {
 	IUser, IUserMongoose, User, ITeam, Team
 } from "./schema";
 
 // Check for number of admin users and create default admin account if none
-const LocalStrategy = passportLocal.Strategy;
 // Promise version of crypto.pbkdf2()
 export function pbkdf2Async (...params: any[]) {
 	return new Promise<Buffer>((resolve, reject) => {
@@ -87,7 +82,7 @@ export function loggedInErr(req, res, next) {
         return;
     }
 }
-export let postParser = bodyParser.json({
+export let postParser = bodyParser.urlencoded({extended:false
 });
 export let uploadHandler = multer({
 	"storage": multer.diskStorage({
@@ -105,34 +100,19 @@ export let uploadHandler = multer({
 		"files": 1
 	}
 });
+const gturl = String(process.env.groundTruthurl || "login.hack.gt");
 
+const groundTruthStrategy = new GroundTruthStrategy(gturl);
+passport.use(groundTruthStrategy);
 // For API endpoints
 passport.serializeUser<IUser, string>((user, done) => {
-	done(null, user._id.toString());
+	done(null, user.uuid);
 });
 passport.deserializeUser<IUser, string>((id, done) => {
     User.findById(id, (err, user) => {
 		done(err, user!);
 	});
 });
-passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
-
-    User.findOne({ email: email.toLowerCase() }, async function(err, user: any)  {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(undefined, false, { message: `Email ${email} not found.` });
-        }
-
-        let salt = Buffer.from(user.login.salt, "hex");
-        let passwordHashed = await pbkdf2Async(password, salt, 500000, 128, "sha256");
-        if (!user || user.login.hash !== passwordHashed.toString("hex")) {
-            return done(undefined, false, { message: "Invalid email or password." });
-
-        }
-        return done(undefined, user);
-
-    });
-  }));
 
 let getUser = async function (args) {
     let name = args.name
@@ -144,32 +124,6 @@ let getUser = async function (args) {
     }
     return users
 }
-passport.serializeUser<IUser, string>((user, done) => {
-	done(null, user._id.toString());
-});
-passport.deserializeUser<IUser, string>((id, done) => {
-    User.findById(id, (err, user) => {
-		done(err, user!);
-	});
-});
-passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
-    User.findOne({ email: email.toLowerCase() }, async function(err, user: any)  {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(undefined, false, { message: `Email ${email} not found.` });
-        }
-
-        let salt = Buffer.from(user.login.salt, "hex");
-        let passwordHashed = await pbkdf2Async(password, salt, 500000, 128, "sha256");
-        if (!user || user.login.hash !== passwordHashed.toString("hex")) {
-            return done(undefined, false, { message: "Invalid email or password." });
-
-        }
-        return done(undefined, user);
-
-    });
-  }));
-
 
 let updateUser = async function(args) {
     let id = args.id
@@ -205,5 +159,5 @@ app.use("/node_modules", serveStatic(path.resolve(__dirname, "../node_modules"))
 app.use("/", serveStatic(path.resolve(__dirname, STATIC_ROOT)));
 
 app.listen(PORT, () => {
-	console.log(`Registration system v${VERSION_NUMBER} @ ${VERSION_HASH} started on port ${PORT}`);
+	console.log(`Team Formation system v${VERSION_NUMBER} @ ${VERSION_HASH} started on port ${PORT}`);
 });

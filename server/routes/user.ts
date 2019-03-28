@@ -1,8 +1,9 @@
 import * as crypto from "crypto";
 import * as express from "express";
+import * as http from "http";
+import * as https from "https";
 import {
 	pbkdf2Async,
-	mongoose,
 
     postParser,
     loggedInErr
@@ -12,7 +13,8 @@ import {
 } from "../schema";
 import * as passport from "passport";
 import { request } from "https";
-
+import {createLink, AuthenticateOptions} from "./strategies"
+import { RequestHandler } from "_debugger";
 export let userRoutes = express.Router();
 
 function loggedIn(req, res, next) {
@@ -142,7 +144,6 @@ userRoutes.route("/make_team").post(postParser, async (request, response) => {
         return;
     }
 
-    //write to mongodb
 
 });
 
@@ -164,49 +165,58 @@ userRoutes.route("/email").post(postParser, async (request, response) => {
     } else {
         response.status(200).json({
             success: true,
-            "id": user._id
+            "id": user.uuid
         });
     }
 
 
 });
 
-userRoutes.route("/login").post(postParser, loggedIn,  (req, res, next) => {
-    passport.authenticate('local', function (err, user, info) {
-        if (info) {
-            
-            return res.status(401)
-                .json({ error: 'Authentication failed', success: false })
-            
-        } else {
-            req.logIn(user, function (err) {
-                if (err) { return next(err); }
-                return res.status(200)
-                .json({success: true})
-            });
-        }
-    })(req, res, next)
+userRoutes.route("/login").get((request, response, next) => {
+    let callbackURL = createLink(request, "api/user/login/callback");
+
+    passport.authenticate('oauth2', { callbackURL } as AuthenticateOptions)(request, response, next)
 });
+userRoutes.route("/login/callback").get((request, response, next) => {
+    let callbackURL = createLink(request, "api/user/login/callback");
+    
+	if (request.query.error === "access_denied") {
+		//request.flash("error", "Authentication request was denied");
+		response.redirect("/login");
+        return;
+    }
+
+	passport.authenticate("oauth2", {
+		failureRedirect: "/login",
+        successReturnToOrRedirect: "/success",
+        callbackURL
+    } as AuthenticateOptions)(request, response, next); 
+});
+userRoutes.route("/success").get((request, response, next) => {
+    return response.status(200).json({ "success": true });
+})
 
 
 //not actually logging out
-userRoutes.route("/logout").all(async (request, response) => {
-    try {
-        request.logout()
-		if (request.cookies.auth) {
-			let authKey: string = request.cookies.auth;
-			await User.update({ "auth_keys": authKey }, { $pull: { "auth_keys": authKey } }).exec();
-			response.clearCookie("auth");
-        }
-        
-		response.status(200).json({
-			success: true
-		});
+userRoutes.route("/logout").all((request, response) => {
+    let user = request.user as IUser | undefined;
+    const gturl = process.env.groundTruthurl || 'login.hack.gt'
+	if (user) {
+		let groundTruthURL = new URL(gturl);
+		let requester = groundTruthURL.protocol === "http:" ? http : https;
+        requester.request({
+            hostname: gturl,
+            path: "/api/user/logout",
+			method: "POST",
+			headers: {
+				"Authorization": `Bearer ${user.token}`
+			}
+		}).end();
+
+		request.logout();
 	}
-	catch (err) {
-		console.error(err);
-		response.status(500).json({
-			"error": "An error occurred while signing out"
-		});
+	if (request.session) {
+		request.session.loginAction = "render";
 	}
+	response.redirect("/login");
 });

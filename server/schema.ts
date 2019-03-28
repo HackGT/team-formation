@@ -1,24 +1,24 @@
 // The database schema used by Mongoose
 // Exports TypeScript interfaces to be used for type checking and Mongoose models derived from these interfaces
-import * as fs from "fs";
-import * as path from "path";
+
 
 import * as mongoose from "mongoose";
-import * as ajv from "ajv";
-import * as passport from "passport";
+const MONGO_URL = String(process.env.MONGO_URL);
 
+mongoose.connect(MONGO_URL, {
+    useMongoClient: false
+}).catch(err => {
+	throw err;
+});
+export {mongoose};
 // We need to find some way of integrating these static types with a config that
 // can be adapted with different questions and data in a JSON schema file
 export interface IUser {
-    _id: mongoose.Types.ObjectId;
+    uuid: string;
 	email: string;
-	name: string;
+    name: string;
+    token: string | null;
 
-	login: {
-		hash: string;
-		salt: string;
-	};
-	auth_keys: string[];
 
     admin?: boolean;
     secondary_email?: string;
@@ -33,7 +33,7 @@ export interface IUser {
 
 }
 export interface ITeam {
-    _id: mongoose.Types.ObjectId;
+    uuid: string;
     creator: string;
 	name: string;
 	picture?: string;
@@ -68,7 +68,12 @@ export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
   usePushEach: true
 }));
 export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
-
+    uuid: {
+		type: String,
+		required: true,
+		index: true,
+		unique: true
+	},
     email: {
 		type: String,
 		required: true,
@@ -83,6 +88,7 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
         type: String,
         required: false
     },
+    token: String,
     grad_year: String,
     skills: [String],
     interests: [String],
@@ -107,4 +113,10 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
 	admin: Boolean
 },{
   usePushEach: true
-}));
+    }));
+interface RootDocument {
+	uuid: string;
+}
+export function createNew<T extends RootDocument>(model: mongoose.Model<T & mongoose.Document, {}>, doc: T) {
+	return new model(doc);
+}
