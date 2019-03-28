@@ -1,24 +1,27 @@
-
 import { URL } from "url";
 import * as passport from "passport";
 import { Strategy as OAuthStrategy } from "passport-oauth2";
 import * as dotenv from "dotenv"
 import * as requests from "request"
-// TODO import { trackEvent } from "../middleware";
+import { Request } from "express";
 import { createNew, IUser, User } from "../schema";
-import { Request, Response, NextFunction } from "express";
+
 dotenv.config()
+
 type PassportDone = (err: Error | null, user?: IUser | false, errMessage?: { message: string }) => void;
 type PassportProfileDone = (err: Error | null, profile?: IProfile) => void;
+
 interface IStrategyOptions {
 	passReqToCallback: true; // Forced to true for our usecase
 }
+
 interface IOAuthStrategyOptions extends IStrategyOptions {
 	authorizationURL: string;
 	tokenURL: string;
 	clientID: string;
 	clientSecret: string;
 }
+
 interface IProfile {
 	uuid: string;
 	name: string;
@@ -26,21 +29,13 @@ interface IProfile {
 	token: string;
 }
 
-// Because the passport typedefs don't include this for some reason
-// Defined: https://github.com/jaredhanson/passport-oauth2/blob/9ddff909a992c3428781b7b2957ce1a97a924367/lib/strategy.js#L135
 export type AuthenticateOptions = passport.AuthenticateOptions & {
 	callbackURL: string;
 };
 
 export class GroundTruthStrategy extends OAuthStrategy {
-	public readonly url: string;
-
-	public static get defaultUserProperties() {
-        return {
-            
-		};
-	}
-
+    public readonly url: string;
+    
 	constructor(url: string) {
         const secret = (process.env.groundTruthSecret);
         const id = (process.env.groundTruthid);
@@ -54,7 +49,6 @@ export class GroundTruthStrategy extends OAuthStrategy {
 			clientSecret: secret,
 			passReqToCallback: true
         };
-
 		super(options, GroundTruthStrategy.passportCallback);
 		this.url = url;
 	}
@@ -79,46 +73,46 @@ export class GroundTruthStrategy extends OAuthStrategy {
 	}
 
 	protected static async passportCallback(request: Request,  accessToken: string, refreshToken: string, profile: IProfile, done: PassportDone) {
-		let user = await User.findOne({ uuid: profile.uuid });
+        let user = await User.findOne({ uuid: profile.uuid });
+        let graphqlUrl = process.env.graphqlUrl || 'https://registration.hack.gt/graphql'
+
         if (!user) {
             var confirmed = false;
             let options = { method: 'GET',
-                url: 'https://registration.horizons.hack.gt/graphql',
+                url: graphqlUrl,
                 qs: {
-                    query: '{search_user(search:"abhinavk99@gmail.com", offset:0, n:1){users{confirmed}}}'
+                    query: '{search_user(search:"' + profile.email + '", offset:0, n:1){users{confirmed}}}'
                 },
                 headers: 
                 {
                     Authorization: 'Bearer ' + process.env.graphqlAuth
                 }
             };
+
             requests(options, (err, res, body) => {
                 if (err) { return console.log(err); }
                 confirmed = JSON.parse(body).data.search_user.users[0].confirmed
             });
-            //Manually set confirmed true for testing
-            confirmed = true;
+            
             if (confirmed) {
                 user = createNew<IUser>(User, {
-                    ...GroundTruthStrategy.defaultUserProperties,
                     ...profile
                 });
             }
-			
 		} else {
             user.token = accessToken;
             user.admin = false;
         }
+
         if (user) {
             await user.save();
             done(null, user);
         } else {
             done(null, undefined);
         }
-		
-		
 	}
 }
+
 function getExternalPort(request: Request): number {
 	function defaultPort(): number {
 		// Default ports for HTTP and HTTPS
@@ -140,6 +134,7 @@ function getExternalPort(request: Request): number {
 		return defaultPort();
 	}
 }
+
 export function createLink(request: Request, link: string): string {
 	if (link[0] === "/") {
 		link = link.substring(1);
