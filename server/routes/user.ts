@@ -7,19 +7,19 @@ export let userRoutes = express.Router();
 
 userRoutes.route("/login").get((request, response, next) => {
     let callbackURL = createLink(request, "api/user/login/callback");
-    passport.authenticate('oauth2', { callbackURL } as AuthenticateOptions)(request, response, next)
+    passport.authenticate('oauth2', { callbackURL } as AuthenticateOptions)(request, response, next);
 });
 
 userRoutes.route("/login/callback").get((request, response, next) => {
     let callbackURL = createLink(request, "api/user/login/callback");
     
-	if (request.query.error === "access_denied") {
-		response.redirect("/login");
+    if (request.query.error === "access_denied") {
+        response.redirect("/login");
         return;
     }
 
-	passport.authenticate("oauth2", {
-		failureRedirect: "/api/user/failure",
+    passport.authenticate("oauth2", {
+        failureRedirect: "/api/user/failure",
         successReturnToOrRedirect: "/api/user/success",
         callbackURL
     } as AuthenticateOptions)(request, response, next); 

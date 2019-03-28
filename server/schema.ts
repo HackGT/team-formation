@@ -7,7 +7,7 @@ const MONGO_URL = String(process.env.MONGO_URL);
 mongoose.connect(MONGO_URL, {
     useMongoClient: false
 }).catch(err => {
-	throw err;
+    throw err;
 });
 export {mongoose};
 
@@ -16,12 +16,12 @@ interface RootDocument {
     _id: mongoose.Types.ObjectId;
 }
 export function createNew<T extends RootDocument>(model: mongoose.Model<T & mongoose.Document, {}>, doc: Omit<T, "_id">) {
-	return new model(doc);
+    return new model(doc);
 }
 
 export interface IUser extends RootDocument {
     uuid: string;
-	email: string;
+    email: string;
     name: string;
     token: string | null;
     admin?: boolean;
@@ -38,8 +38,8 @@ export interface IUser extends RootDocument {
 export interface ITeam {
     uuid: string;
     creator: string;
-	name: string;
-	picture?: string;
+    name: string;
+    picture?: string;
     members: string[];
     interests?: string[];
     description?: string;
@@ -61,28 +61,28 @@ export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
     picture: String,
     members: {
         required: true,
-        //Change type to mongo objectid?
         type: [String],
         unique: true
     },
     interests: [String],
     description: String
-},{
-  usePushEach: true
+    },
+    {
+        usePushEach: true
     }));
 
 export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
     uuid: {
-		type: String,
-		required: true,
-		index: true,
-		unique: true
-	},
+        type: String,
+        required: true,
+        index: true,
+        unique: true
+    },
     email: {
-		type: String,
-		required: true,
-		unique: true
-	},
+        type: String,
+        required: true,
+        unique: true
+    },
     secondary_email: String,
     name: {
         type: String,
@@ -102,9 +102,10 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
     },
     description: String,
     image: String,
-	auth_keys: [String],
-	admin: Boolean
-},{
-  usePushEach: true
+    auth_keys: [String],
+    admin: Boolean
+    },
+    {
+        usePushEach: true
     }));
 
