@@ -11,20 +11,22 @@ class SignUp extends Component {
 		user_password: "",
 		user_password_confirm: "",
 		error_message: "",
+		loading: false,
 		data: {},
 	};
 
 	render() {
-		let cur_error;
-		if (this.state.error_message === 'loading') {
-			cur_error = <Loading/>;
+		let is_loading;
+		if (this.state.loading) {
+			is_loading = <Loading/>;
 		}
 		return (
 			<div className="PasswordInput-container">
 				<div><Input placeholder='Email' onChange={ (e) => this.onEmailChange(e) } className="email-box1"/></div>
 				<div><Input placeholder='Password' type="password" onChange={ (e) => this.onPasswordChange(e) } className="password-box1"/></div>
 				<div><Input placeholder='Confirm Password' type="password" onChange={ (e) => this.onPasswordConfirmChange(e) } className="password-box2"/></div>
-				<div>{cur_error}</div>
+				<div>{this.state.error_message}</div>
+				<div>{is_loading}</div>
 				<div className="button-container"><Button onClick={this.onNextClick}> Next </Button></div>
 			</div>
 		)
@@ -50,7 +52,7 @@ class SignUp extends Component {
 
 	onNextClick = () => {
 		this.setState({
-      		error_message: "loading"
+      		loading: true
 		})
 
 		var signup_url = "http://localhost:3001/api/user/signup"
@@ -65,15 +67,17 @@ class SignUp extends Component {
 				var signup_json = this.state.data;
 				if (signup_json.success === false) {
 					this.setState({
-						error_message: "Invalid Email or Password"
+						error_message: "Invalid Email or Password",
+						loading: false
 					});
 				} else if (signup_json.success === true) {
-					this.props.onProfileChange(signup_json.id);
+					this.props.onFeedChange(signup_json.id);
 				}
 			});
 		} else {
 			this.setState({
-				error_message: "Passwords do not match!"
+				error_message: "Passwords do not match!",
+				loading: false
 			});
 		}
 	};
