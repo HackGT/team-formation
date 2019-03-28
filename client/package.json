@@ -44,6 +44,7 @@
     "react-dom": "^16.8.4",
     "react-relay": "^3.0.0",
     "react-scripts": "^2.1.8",
+    "react-search-field": "^1.0.0",
     "relay-compiler": "^3.0.0",
     "relay-runtime": "^3.0.0",
     "resolve": "1.8.1",

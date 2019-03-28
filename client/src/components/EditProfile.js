@@ -5,6 +5,11 @@ import { Form } from 'semantic-ui-react';
 import Loading from './ui_subcomponents/Loading';
 import YearDropdown from './ui_subcomponents/YearDropdown';
 import './css/EditProfile.css'
+import {commitMutation } from 'react-relay';
+import {graphql} from 'babel-plugin-relay/macro';
+
+`
+`
 
 class EditProfile extends Component {
 	render() {
@@ -26,7 +31,6 @@ class EditProfile extends Component {
 				<Button onClick={this.onNextClick} className="save-button"> save </Button>
 			</div>
 		);
-
 	};
 
 	onNextClick = () => {

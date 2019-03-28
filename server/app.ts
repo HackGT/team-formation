@@ -23,7 +23,7 @@ import {buildSchema} from "graphql"
 
 dotenv.config();
 const PORT = 3001;
-const MONGO_URL = process.env.MONGO_URL;
+const MONGO_URL =  "admin2:teamformation123@ds121599.mlab.com:21599/hackgt-team-formation";
 const UNIQUE_APP_ID = process.env.UNIQUE_APP_ID || "team-formation";
 const STATIC_ROOT = "../client";
 
@@ -44,10 +44,12 @@ let cookieParserInstance = cookieParser(undefined, {
 } as cookieParser.CookieParseOptions);
 app.use(cookieParserInstance);
 let session_secret = process.env['SECRET'] || 'default';
+console.log("uh" + session_secret)
 app.use(session({secret:session_secret}));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 
 
@@ -116,24 +118,7 @@ passport.deserializeUser<IUser, string>((id, done) => {
 		done(err, user!);
 	});
 });
-passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
 
-    User.findOne({ email: email.toLowerCase() }, async function(err, user: any)  {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(undefined, false, { message: `Email ${email} not found.` });
-        }
-
-        let salt = Buffer.from(user.login.salt, "hex");
-        let passwordHashed = await pbkdf2Async(password, salt, 500000, 128, "sha256");
-        if (!user || user.login.hash !== passwordHashed.toString("hex")) {
-            return done(undefined, false, { message: "Invalid email or password." });
-
-        }
-        return done(undefined, user);
-
-    });
-  }));
 
 let getUser = async function (args) {
     let name = args.name
@@ -154,19 +139,26 @@ passport.deserializeUser<IUser, string>((id, done) => {
 	});
 });
 passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
+    console.log("i am here")
     User.findOne({ email: email.toLowerCase() }, async function(err, user: any)  {
+        console.log(err)
       if (err) { return done(err); }
       if (!user) {
+          console.log("email not found")
         return done(undefined, false, { message: `Email ${email} not found.` });
         }
 
         let salt = Buffer.from(user.login.salt, "hex");
         let passwordHashed = await pbkdf2Async(password, salt, 500000, 128, "sha256");
         if (!user || user.login.hash !== passwordHashed.toString("hex")) {
+            console.log('invalid email or password')
             return done(undefined, false, { message: "Invalid email or password." });
 
         }
+        console.log(user)
+
         return done(undefined, user);
+
 
     });
   }));

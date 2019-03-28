@@ -23,21 +23,33 @@ class Login extends Component {
 		}
 		return (
 			<div className="Login-container">
-				<Form method="POST" action="http://localhost:3001/api/user/login">
+				<Form method="POST"  onSubmit={this.onSubmitClick}>
 					<Form.Field className = "input-box">
 						<label>email</label>
-						<input  name = 'email' placeholder='email' />
+						<input name = 'email' placeholder='email' value={this.state.email} onChange={this.onEmailChange}/>
 					</Form.Field>
 					<Form.Field className = "input-box">
 						<label>password</label>
-						<input name = 'password' placeholder='password' />
+						<input name = 'password' type='password' placeholder='password' value={this.state.password} onChange={this.onPasswordChange}/>
 					</Form.Field>
-					<div className="login-button"><Button type='submit'>Submit</Button></div>
+					<div className="login-button">
+                        <Button type="submit">Submit</Button>
+                    </div>
+
+
 				</Form>
+                <div className="login-button">
+                    <Button type="submit" onClick={this.onSignUpClick}>Sign Up</Button>
+                </div>
 			</div>
+
 		);
 	}
+    onSubmitClick = (e) => {
+        e.preventDefault();
+        this.onNextClick('feed');
 
+    }
 	onEmailChange = (e) => {
 		this.setState({
 			user_email: e.target.value
@@ -85,12 +97,23 @@ class Login extends Component {
 	}
 
 	onFetchLogin = (url, data) => {
+        console.log("okok" + data.email)
+        var form_data = new FormData();
+
+        for ( var key in data ) {
+            form_data.append(key, data[key]);
+        }
+        const data_encoded = new URLSearchParams();
+        for (const pair of form_data) {
+            data_encoded.append(pair[0], pair[1]);
+        }
+        console.log()
 		return fetch(url, {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json",
+				"Content-Type": "application/x-www-form-urlencoded",
 			},
-			body: JSON.stringify(data),
+			body: data_encoded,
 		})
 		.then(response => response.json())
 		.then(response => {

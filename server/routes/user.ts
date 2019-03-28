@@ -12,6 +12,7 @@ import {
 } from "../schema";
 import * as passport from "passport";
 import { request } from "https";
+import * as passportLocal from "passport-local"
 
 export let userRoutes = express.Router();
 
@@ -50,11 +51,12 @@ userRoutes.route("/signup").post(postParser, async (request, response) => {
 		},
 		admin: false
 	});
-
+    console.log(user.id)
 	try {
 		await user.save();
 		response.status(201).json({
-			success: true
+			success: true,
+            id: user.id
 		});
 	}
     catch (err) {
@@ -172,13 +174,14 @@ userRoutes.route("/email").post(postParser, async (request, response) => {
 });
 
 userRoutes.route("/login").post(postParser, loggedIn, (req, res, next) => {
-    console.log(req.body);
+    console.log("ard" + " " + req.body.email);
     passport.authenticate('local', function (err, user, info) {
-        if (info) {
-            
+        console.log("ok" + " " + req.user)
+        if (!user) {
+
             return res.status(401)
                 .json({ error: 'Authentication failed', success: false })
-            
+
         } else {
             req.logIn(user, function (err) {
                 if (err) { return next(err); }
@@ -199,7 +202,7 @@ userRoutes.route("/logout").all(async (request, response) => {
 			await User.update({ "auth_keys": authKey }, { $pull: { "auth_keys": authKey } }).exec();
 			response.clearCookie("auth");
         }
-        
+
 		response.status(200).json({
 			success: true
 		});

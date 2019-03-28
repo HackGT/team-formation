@@ -68,7 +68,7 @@ class SignUp extends Component {
 						error_message: "Invalid Email or Password"
 					});
 				} else if (signup_json.success === true) {
-					this.props.onNextClick('setup-profile');
+					this.props.onProfileChange(signup_json.id);
 				}
 			});
 		} else {
@@ -79,12 +79,21 @@ class SignUp extends Component {
 	};
 
 	onFetchSignUp = (url, data) => {
+        var form_data = new FormData();
+
+        for ( var key in data ) {
+            form_data.append(key, data[key]);
+        }
+        const data_encoded = new URLSearchParams();
+        for (const pair of form_data) {
+            data_encoded.append(pair[0], pair[1]);
+        }
 		return fetch(url, {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json",
+				"Content-Type": "application/x-www-form-urlencoded",
 			},
-			body: JSON.stringify(data),
+			body: data_encoded,
 		})
 		.then(response => response.json())
 		.then(response => {

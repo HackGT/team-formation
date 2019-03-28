@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash bfc469676c8e28d1ec0305796e040b92
+ * @relayHash 9ff1e1001d02887c3b7b31414ce76332
  */
 
 /* eslint-disable */
@@ -9,37 +9,33 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type FeedQueryVariables = {|
-  name?: ?string,
-  email?: ?string,
-  grad_year?: ?string,
-  school?: ?string,
+export type FeedCardsQueryVariables = {|
+  name?: ?string
 |};
-export type FeedQueryResponse = {|
+export type FeedCardsQueryResponse = {|
   +user: $ReadOnlyArray<{|
     +email: ?string,
     +name: ?string,
     +school: ?string,
+    +grad_year: ?string,
   |}>
 |};
-export type FeedQuery = {|
-  variables: FeedQueryVariables,
-  response: FeedQueryResponse,
+export type FeedCardsQuery = {|
+  variables: FeedCardsQueryVariables,
+  response: FeedCardsQueryResponse,
 |};
 */
 
 
 /*
-query FeedQuery(
+query FeedCardsQuery(
   $name: String
-  $email: String
-  $grad_year: String
-  $school: String
 ) {
-  user(email: $email, name: $name, grad_year: $grad_year, school: $school) {
+  user(name: $name) {
     email
     name
     school
+    grad_year
     id
   }
 }
@@ -52,49 +48,13 @@ var v0 = [
     "name": "name",
     "type": "String",
     "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
-    "name": "email",
-    "type": "String",
-    "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
-    "name": "grad_year",
-    "type": "String",
-    "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
-    "name": "school",
-    "type": "String",
-    "defaultValue": null
   }
 ],
 v1 = [
   {
     "kind": "Variable",
-    "name": "email",
-    "variableName": "email",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
-    "name": "grad_year",
-    "variableName": "grad_year",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
     "name": "name",
     "variableName": "name",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
-    "name": "school",
-    "variableName": "school",
     "type": "String"
   }
 ],
@@ -118,12 +78,19 @@ v4 = {
   "name": "school",
   "args": null,
   "storageKey": null
+},
+v5 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "grad_year",
+  "args": null,
+  "storageKey": null
 };
 return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "FeedQuery",
+    "name": "FeedCardsQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -139,14 +106,15 @@ return {
         "selections": [
           (v2/*: any*/),
           (v3/*: any*/),
-          (v4/*: any*/)
+          (v4/*: any*/),
+          (v5/*: any*/)
         ]
       }
     ]
   },
   "operation": {
     "kind": "Operation",
-    "name": "FeedQuery",
+    "name": "FeedCardsQuery",
     "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
@@ -161,6 +129,7 @@ return {
           (v2/*: any*/),
           (v3/*: any*/),
           (v4/*: any*/),
+          (v5/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -174,13 +143,13 @@ return {
   },
   "params": {
     "operationKind": "query",
-    "name": "FeedQuery",
+    "name": "FeedCardsQuery",
     "id": null,
-    "text": "query FeedQuery(\n  $name: String\n  $email: String\n  $grad_year: String\n  $school: String\n) {\n  user(email: $email, name: $name, grad_year: $grad_year, school: $school) {\n    email\n    name\n    school\n    id\n  }\n}\n",
+    "text": "query FeedCardsQuery(\n  $name: String\n) {\n  user(name: $name) {\n    email\n    name\n    school\n    grad_year\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'f401bf374d67de0b8906bc16745d6627';
+(node/*: any*/).hash = '086d3f47003d2f68b6c667b7b9321fab';
 module.exports = node;

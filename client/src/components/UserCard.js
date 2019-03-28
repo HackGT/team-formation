@@ -34,7 +34,8 @@ class UserCard extends Component {
 							</Button>
 						  </div>
 					  </Card.Content>
-				</Card> </div>
+				</Card>
+            </div>
 			</div>
 		);
 	};
