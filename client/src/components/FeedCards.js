@@ -42,7 +42,7 @@ class FeedCards extends Component {
                     } else if (props) {
                         let cards = []
                         for(let i = 0;i<props.user.length;i++) {
-                            cards.push(<UserCard name={props.user[i].name} grad_year={props.user[i].grad_year} school={props.user[i].school}/>);
+                            cards.push(<UserCard name={props.user[i].first_name} grad_year={props.user[i].grad_year} school={props.user[i].school}/>);
                         }
                         return (<div className="Feed-container">{cards}</div>);
                     } else {
