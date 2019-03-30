@@ -7,11 +7,13 @@ export let userRoutes = express.Router();
 
 userRoutes.route("/login").get((request, response, next) => {
     const callbackURL = createLink(request, "api/user/login/callback");
+
     passport.authenticate('oauth2', { callbackURL } as AuthenticateOptions)(request, response, next);
 });
 
 userRoutes.route("/login/callback").get((request, response, next) => {
     const callbackURL = createLink(request, "api/user/login/callback");
+
     
     if (request.query.error === "access_denied") {
         response.redirect("/login");
@@ -38,6 +40,7 @@ userRoutes.route("/logout").all(async (request, response) => {
     const gturl = process.env.groundTruthurl || 'https://login.hack.gt'
     if (user) {
         const options = {
+
             method: 'POST',
             url: gturl + '/api/user/logout',
             headers:

@@ -81,11 +81,13 @@ let getUser = async function (args) {
 }
 
 let updateUser = async function(args) {
+
     return User.findByIdAndUpdate(args.id, { "$set": args }, { new: true });
 }
 let apiRouter = express.Router();
 
 const root = {
+
     user: getUser,
     update_user: updateUser
 
