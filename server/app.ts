@@ -22,14 +22,14 @@ const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf
 const VERSION_NUMBER = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json"), "utf8")).version;
 const VERSION_HASH = require("git-rev-sync").short();
 
-export let app = express();
+export const app = express();
 app.use(morgan("dev"));
 app.use(compression());
 app.use('*', cors());
 
-let session_secret = process.env['SECRET'];
+const session_secret = process.env['SECRET'];
 if (!session_secret) {
-    throw new Error("Secret not specified")
+    throw new Error("Secret not specified");
 }
 
 app.use(session({
@@ -47,7 +47,7 @@ export function loggedInErr(req, res, next) {
         res.status(200).json({
             success: true
         });
-        next()
+        next();
     }
     else {
         res.status(401).json({ "error": "User not logged in", success: false });
@@ -68,29 +68,24 @@ passport.deserializeUser<IUser, string>((id, done) => {
 });
 
 let getUser = async function (args) {
-    let name = args.name
-    console.log(args)
     let users;
     if(args.name == "" || args.name == null) {
-        users = await User.find({})
+        users = await User.find({});
     } else {
-        users = await User.find(args)
+        users = await User.find(args);
     }
-    console.log(users)
     if (!users) {
         return null;
     }
-    return users
+    return users;
 }
 
 let updateUser = async function(args) {
-    let id = args.id
-    let updated = User.findByIdAndUpdate(args.id, {"$set": args},{new: true})
-    return updated
+    return User.findByIdAndUpdate(args.id, { "$set": args }, { new: true });
 }
 let apiRouter = express.Router();
 
-let root = {
+const root = {
     user: getUser,
     update_user: updateUser
 
