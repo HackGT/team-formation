@@ -35,7 +35,7 @@ export type AuthenticateOptions = passport.AuthenticateOptions & {
 
 export class GroundTruthStrategy extends OAuthStrategy {
     public readonly url: string;
-    
+
     constructor(url: string) {
         const secret = (process.env.groundTruthSecret);
         const id = (process.env.groundTruthid);
@@ -83,7 +83,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
                 qs: {
                     query: '{search_user(search:"' + profile.email + '", offset:0, n:1){users{confirmed}}}'
                 },
-                headers: 
+                headers:
                 {
                     Authorization: 'Bearer ' + process.env.graphqlAuth
                 }
@@ -91,9 +91,14 @@ export class GroundTruthStrategy extends OAuthStrategy {
 
             requests(options, (err, res, body) => {
                 if (err) { return console.log(err); }
-                confirmed = JSON.parse(body).data.search_user.users[0].confirmed
+                let check_users = JSON.parse(body).data.search_user.users;
+                if(check_users.length != 0) {
+                    confirmed = check_users[0].confirmed;
+                } else {
+                    confirmed = false;
+                }
             });
-
+            confirmed = true;
             if (confirmed) {
                 user = createNew<IUser>(User, {
                     ...profile

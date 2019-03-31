@@ -38,12 +38,12 @@ app.use(session({
     resave: true
 }));
 
-
 app.use(passport.initialize());
 app.use(passport.session());
 
 export function loggedInErr(req, res, next) {
     if (req.user && req.user.email === req.body.email) {
+        console.log("IT WORKS")
         res.status(200).json({
             success: true
         });
@@ -93,7 +93,6 @@ let apiRouter = express.Router();
 let root = {
     user: getUser,
     update_user: updateUser
-
 };
 
 apiRouter.use("/user", userRoutes);
