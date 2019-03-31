@@ -74,6 +74,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
 
     protected static async passportCallback(request: Request,  accessToken: string, refreshToken: string, profile: IProfile, done: PassportDone) {
         let user = await User.findOne({ uuid: profile.uuid });
+
         const graphqlUrl = process.env.graphqlUrl || 'https://registration.hack.gt/graphql'
 
         if (!user) {
@@ -100,10 +101,12 @@ export class GroundTruthStrategy extends OAuthStrategy {
                     query,
                     variables
                 })
+
             };
 
             await requests(options, async (err, res, body) => {
                 if (err) { return console.log(err); }
+
                 confirmed = JSON.parse(body).data.search_user.users[0].confirmed;
                 confirmed = true;
                 if (confirmed) {
@@ -117,6 +120,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
                 }
             });
             
+
         } else {
             user.token = accessToken;
             user.admin = false;
@@ -134,6 +138,7 @@ function getExternalPort(request: Request): number {
     }
 
     const host = request.headers.host;
+
     if (!host || Array.isArray(host)) {
         return defaultPort();
     }
@@ -141,6 +146,7 @@ function getExternalPort(request: Request): number {
     // IPv6 literal support
     const offset = host[0] === "[" ? host.indexOf("]") + 1 : 0;
     const index = host.indexOf(":", offset);
+
     if (index !== -1) {
         return parseInt(host.substring(index + 1), 10);
     }
