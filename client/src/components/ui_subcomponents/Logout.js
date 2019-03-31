@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
+import '../css/Logout.css';
 
 class Logout extends Component {
 	render() {

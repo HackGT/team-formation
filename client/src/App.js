@@ -21,7 +21,6 @@ class App extends Component {
     return (
 
 	  <div className="App-container">
-      <a href={process.env.REACT_APP_SERVER_URL + '/api/user/logout'}> Log Out </a>
 		  <Headers subHeader={this.state.subHeader}/>
 		  <Content/>
 	  </div>
