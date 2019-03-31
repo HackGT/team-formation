@@ -10,6 +10,7 @@ import environment from './Environment'
 import SearchField from 'react-search-field';
 import FeedCards from './FeedCards'
 import SideMenu from './SideMenu'
+import Logout from './ui_subcomponents/Logout'
 
 const {
   Environment,
@@ -40,6 +41,9 @@ class Feed extends Component {
         console.log("hello")
 		return (
             <div>
+                <div className="logout-button">
+                    <Logout/>
+                </div>
             <br/>
             <div className="card-container">
             </div>

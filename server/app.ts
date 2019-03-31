@@ -90,13 +90,7 @@ let getUser = async function (args) {
 }
 
 let updateUser = async function(args) {
-<<<<<<< HEAD
-    console.log(args);
     return User.findOneAndUpdate({'uuid':args.uuid}, { "$set": args }, { new: true });
-=======
-
-    return User.findByIdAndUpdate(args.id, { "$set": args }, { new: true });
->>>>>>> 6ad5083b5759fe22d7b82069fa98d5cf84521f35
 }
 let apiRouter = express.Router();
 
