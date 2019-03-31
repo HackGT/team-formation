@@ -25,8 +25,17 @@ const VERSION_HASH = require("git-rev-sync").short();
 export const app = express();
 app.use(morgan("dev"));
 app.use(compression());
-app.use('*', cors());
-
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+    if ('OPTIONS' == req.method) {
+         res.send(200);
+     } else {
+         next();
+     }
+});
 const session_secret = process.env['SECRET'];
 if (!session_secret) {
     throw new Error("Secret not specified");
@@ -81,7 +90,8 @@ let getUser = async function (args) {
 }
 
 let updateUser = async function(args) {
-    return User.findByIdAndUpdate(args.id, { "$set": args }, { new: true });
+    console.log(args);
+    return User.findOneAndUpdate({'uuid':args.uuid}, { "$set": args }, { new: true });
 }
 let apiRouter = express.Router();
 

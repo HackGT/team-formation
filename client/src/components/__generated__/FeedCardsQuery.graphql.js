@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9ff1e1001d02887c3b7b31414ce76332
+ * @relayHash e32a3711da65f07a033e2155c30d752a
  */
 
 /* eslint-disable */
@@ -36,7 +36,6 @@ query FeedCardsQuery(
     name
     school
     grad_year
-    id
   }
 }
 */
@@ -52,40 +51,52 @@ var v0 = [
 ],
 v1 = [
   {
-    "kind": "Variable",
-    "name": "name",
-    "variableName": "name",
-    "type": "String"
+    "kind": "LinkedField",
+    "alias": null,
+    "name": "user",
+    "storageKey": null,
+    "args": [
+      {
+        "kind": "Variable",
+        "name": "name",
+        "variableName": "name",
+        "type": "String"
+      }
+    ],
+    "concreteType": "User",
+    "plural": true,
+    "selections": [
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "email",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "name",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "school",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "grad_year",
+        "args": null,
+        "storageKey": null
+      }
+    ]
   }
-],
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "email",
-  "args": null,
-  "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-},
-v4 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "school",
-  "args": null,
-  "storageKey": null
-},
-v5 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "grad_year",
-  "args": null,
-  "storageKey": null
-};
+];
 return {
   "kind": "Request",
   "fragment": {
@@ -94,58 +105,19 @@ return {
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "user",
-        "storageKey": null,
-        "args": (v1/*: any*/),
-        "concreteType": "User",
-        "plural": true,
-        "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          (v5/*: any*/)
-        ]
-      }
-    ]
+    "selections": (v1/*: any*/)
   },
   "operation": {
     "kind": "Operation",
     "name": "FeedCardsQuery",
     "argumentDefinitions": (v0/*: any*/),
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "user",
-        "storageKey": null,
-        "args": (v1/*: any*/),
-        "concreteType": "User",
-        "plural": true,
-        "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          (v5/*: any*/),
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          }
-        ]
-      }
-    ]
+    "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "query",
     "name": "FeedCardsQuery",
     "id": null,
-    "text": "query FeedCardsQuery(\n  $name: String\n) {\n  user(name: $name) {\n    email\n    name\n    school\n    grad_year\n    id\n  }\n}\n",
+    "text": "query FeedCardsQuery(\n  $name: String\n) {\n  user(name: $name) {\n    email\n    name\n    school\n    grad_year\n  }\n}\n",
     "metadata": {}
   }
 };

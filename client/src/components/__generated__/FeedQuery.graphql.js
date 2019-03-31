@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash bfc469676c8e28d1ec0305796e040b92
+ * @relayHash af974c75f44c55d6ba726971b4e2b97b
  */
 
 /* eslint-disable */
@@ -40,7 +40,6 @@ query FeedQuery(
     email
     name
     school
-    id
   }
 }
 */
@@ -74,51 +73,63 @@ var v0 = [
 ],
 v1 = [
   {
-    "kind": "Variable",
-    "name": "email",
-    "variableName": "email",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
-    "name": "grad_year",
-    "variableName": "grad_year",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
-    "name": "name",
-    "variableName": "name",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
-    "name": "school",
-    "variableName": "school",
-    "type": "String"
+    "kind": "LinkedField",
+    "alias": null,
+    "name": "user",
+    "storageKey": null,
+    "args": [
+      {
+        "kind": "Variable",
+        "name": "email",
+        "variableName": "email",
+        "type": "String"
+      },
+      {
+        "kind": "Variable",
+        "name": "grad_year",
+        "variableName": "grad_year",
+        "type": "String"
+      },
+      {
+        "kind": "Variable",
+        "name": "name",
+        "variableName": "name",
+        "type": "String"
+      },
+      {
+        "kind": "Variable",
+        "name": "school",
+        "variableName": "school",
+        "type": "String"
+      }
+    ],
+    "concreteType": "User",
+    "plural": true,
+    "selections": [
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "email",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "name",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "school",
+        "args": null,
+        "storageKey": null
+      }
+    ]
   }
-],
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "email",
-  "args": null,
-  "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-},
-v4 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "school",
-  "args": null,
-  "storageKey": null
-};
+];
 return {
   "kind": "Request",
   "fragment": {
@@ -127,56 +138,19 @@ return {
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "user",
-        "storageKey": null,
-        "args": (v1/*: any*/),
-        "concreteType": "User",
-        "plural": true,
-        "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/)
-        ]
-      }
-    ]
+    "selections": (v1/*: any*/)
   },
   "operation": {
     "kind": "Operation",
     "name": "FeedQuery",
     "argumentDefinitions": (v0/*: any*/),
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "user",
-        "storageKey": null,
-        "args": (v1/*: any*/),
-        "concreteType": "User",
-        "plural": true,
-        "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          }
-        ]
-      }
-    ]
+    "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "query",
     "name": "FeedQuery",
     "id": null,
-    "text": "query FeedQuery(\n  $name: String\n  $email: String\n  $grad_year: String\n  $school: String\n) {\n  user(email: $email, name: $name, grad_year: $grad_year, school: $school) {\n    email\n    name\n    school\n    id\n  }\n}\n",
+    "text": "query FeedQuery(\n  $name: String\n  $email: String\n  $grad_year: String\n  $school: String\n) {\n  user(email: $email, name: $name, grad_year: $grad_year, school: $school) {\n    email\n    name\n    school\n  }\n}\n",
     "metadata": {}
   }
 };

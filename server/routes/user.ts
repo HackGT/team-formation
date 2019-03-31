@@ -20,19 +20,22 @@ userRoutes.route("/login/callback").get((request, response, next) => {
 
     passport.authenticate("oauth2", {
         failureRedirect: "/api/user/failure",
-        successReturnToOrRedirect: "/api/user/success",
+        successReturnToOrRedirect: "http://localhost:3000",
         callbackURL
     } as AuthenticateOptions)(request, response, next); 
 });
 
-userRoutes.route("/success").get((request, response, next) => {
-    return response.status(200).json({ "success": true });
-})
-
 userRoutes.route("/failure").get((request, response, next) => {
-    return response.status(400).json({ "success": false });
+    response.redirect("http://localhost:3000");
 })
 
+userRoutes.route("/check").get((request, response, next) => {
+    if (request.user) {
+        return response.status(200).json(request.user);
+    } else {
+        return response.status(200).json({"success": false});
+    }
+})
 userRoutes.route("/logout").all(async (request, response) => {
     const user = request.user as IUser | undefined;
     const gturl = process.env.groundTruthurl || 'https://login.hack.gt'
@@ -48,10 +51,10 @@ userRoutes.route("/logout").all(async (request, response) => {
         await requests(options, (err, res, body) => {
             if (err) { return console.log(err); }
             request.logout();
-            response.redirect("/api/user/login");
+            response.redirect("http://localhost:3000");
         });
     }
     else {
-        response.redirect("/api/user/login");
+        response.redirect("http://localhost:3000");
     }
 });

@@ -102,27 +102,28 @@ export class GroundTruthStrategy extends OAuthStrategy {
                 })
             };
 
-            requests(options, (err, res, body) => {
+            await requests(options, async (err, res, body) => {
                 if (err) { return console.log(err); }
                 confirmed = JSON.parse(body).data.search_user.users[0].confirmed;
+                confirmed = true;
                 if (confirmed) {
                     user = createNew<IUser>(User, {
                         ...profile
                     });
+                    await user.save();
+                    done(null, user);
+                } else {
+                    done(null, undefined);
                 }
             });
             
         } else {
             user.token = accessToken;
             user.admin = false;
-        }
-
-        if (user) {
             await user.save();
             done(null, user);
-        } else {
-            done(null, undefined);
         }
+
     }
 }
 

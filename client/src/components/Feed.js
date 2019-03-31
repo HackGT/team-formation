@@ -41,9 +41,9 @@ class Feed extends Component {
 		return (
             <div>
             <br/>
-            <div class="card-container">
+            <div className="card-container">
             </div>
-			<div class="menu">
+			<div className="menu">
 				<SideMenu onSearchClick={this.onSearchClick} className="search"/>
 			</div>
                 <FeedCards name={this.state.name} />
