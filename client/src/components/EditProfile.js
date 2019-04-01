@@ -17,8 +17,8 @@ const {
 } = require('relay-runtime');
 
 const mutation = graphql`
-mutation EditProfileMutation($uuid: String, $name: String, $grad_year: String, $school: String, $secondary_email: String, $contact: String, $skills: [String]) {
-  update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school, secondary_email: $secondary_email, contact: $contact, skills: $skills) {
+mutation EditProfileMutation($id: ID!, $name: String, $grad_year: String, $school: String, $secondary_email: String, $contact: String, $skills: [String]) {
+  update_user(id: $id, name: $name, grad_year: $grad_year, school: $school, secondary_email: $secondary_email, contact: $contact, skills: $skills) {
     name
     email
     grad_year
@@ -127,13 +127,15 @@ class EditProfile extends Component {
             {
                 mutation,
                 variables: {
-                    uuid: this.props.user_id,
-                    name: this.state.user_first_name + " " + this.state.user_last_name,
-                    grad_year: this.state.user_grad_year,
-                    school: this.state.user_school,
-                    secondary_email: this.state.user_secondary_email,
-                    contact: this.state.user_contact,
-                    skills: skills
+                    id: this.props.user_id,
+                    query: {
+                        name: this.state.user_first_name + " " + this.state.user_last_name,
+                        grad_year: this.state.user_grad_year,
+                        school: this.state.user_school,
+                        secondary_email: this.state.user_secondary_email,
+                        contact: this.state.user_contact,
+                        skills: skills
+                    }
                 }
             }
         )

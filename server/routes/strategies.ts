@@ -74,62 +74,47 @@ export class GroundTruthStrategy extends OAuthStrategy {
 
     protected static async passportCallback(request: Request,  accessToken: string, refreshToken: string, profile: IProfile, done: PassportDone) {
         let user = await User.findOne({ uuid: profile.uuid });
-
-        const graphqlUrl = process.env.graphqlUrl || 'https://registration.hack.gt/graphql'
+        let graphqlUrl = process.env.graphqlUrl || 'https://registration.hack.gt/graphql'
 
         if (!user) {
             let confirmed = false;
-            const query = `
-            query($search: String!) {
-                search_user(search: $search, offset: 0, n: 1) {
-                    users {
-                        confirmed
-                    }
-                }
-            }`;
-            const variables = {
-                search: profile.email
-            };
-            const options = { method: 'POST',
+            const options = { method: 'GET',
                 url: graphqlUrl,
-                headers: 
-                {
-                    Authorization: 'Bearer ' + process.env.graphqlAuth,
-                    'Content-Type': "application/json"
+                qs: {
+                    query: '{search_user(search:"' + profile.email + '", offset:0, n:1){users{confirmed}}}'
                 },
-                body: JSON.stringify({
-                    query,
-                    variables
-                })
-
+                headers:
+                {
+                    Authorization: 'Bearer ' + process.env.graphqlAuth
+                }
             };
 
-            await requests(options, async (err, res, body) => {
+            requests(options, (err, res, body) => {
                 if (err) { return console.log(err); }
-                if (JSON.parse(body).data.search_user.users.length) > 0) {
-                    confirmed = JSON.parse(body).data.search_user.users[0].confirmed;
-                }
-                
-                //confirmed = true;
-                if (confirmed) {
-                    user = createNew<IUser>(User, {
-                        ...profile
-                    });
-                    await user.save();
-                    done(null, user);
+                let check_users = JSON.parse(body).data.search_user.users;
+                if(check_users.length != 0) {
+                    confirmed = check_users[0].confirmed;
                 } else {
-                    done(null, undefined);
+                    confirmed = false;
                 }
             });
-            
-
+            confirmed = true;
+            if (confirmed) {
+                user = createNew<IUser>(User, {
+                    ...profile
+                });
+            }
         } else {
             user.token = accessToken;
             user.admin = false;
-            await user.save();
-            done(null, user);
         }
 
+        if (user) {
+            await user.save();
+            done(null, user);
+        } else {
+            done(null, undefined);
+        }
     }
 }
 
@@ -139,16 +124,14 @@ function getExternalPort(request: Request): number {
         return request.protocol === "http" ? 80 : 443;
     }
 
-    const host = request.headers.host;
-
+    let host = request.headers.host;
     if (!host || Array.isArray(host)) {
         return defaultPort();
     }
 
     // IPv6 literal support
-    const offset = host[0] === "[" ? host.indexOf("]") + 1 : 0;
-    const index = host.indexOf(":", offset);
-
+    let offset = host[0] === "[" ? host.indexOf("]") + 1 : 0;
+    let index = host.indexOf(":", offset);
     if (index !== -1) {
         return parseInt(host.substring(index + 1), 10);
     }
