@@ -16,12 +16,11 @@ class Content extends Component {
 		if (this.state.cur_state === 'login') {
 			cur_display = <Login
 				onNextClick={this.onNextClick}
-                onSignUpClick={this.onSignUpClick}
-                onFeedChange={this.onProfileChange}/>;
+				onSignUpClick={this.onSignUpClick}/>;
 		} else if (this.state.cur_state === 'signup') {
 			cur_display = <SignUp
-				onNextClick={this.onNextClick}/>;
-                
+				onNextClick={this.onNextClick}
+                onFeedChange={this.onProfileChange}/>;
 		} else if (this.state.cur_state === 'setup-profile') {
 			cur_display = <EditProfile
 				onNextClick={this.onNextClick} user_id={this.state.user_id}

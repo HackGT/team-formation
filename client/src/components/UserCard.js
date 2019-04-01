@@ -13,9 +13,9 @@ class UserCard extends Component {
 						<Card.Header>{this.props.name}</Card.Header>
 						<Card.Meta>{this.props.school}</Card.Meta>
 						<Card.Meta>graduation year: {this.props.grad_year}</Card.Meta>
-						<div className="ui divider"></div>
+						<div class="ui divider"></div>
 						<Card.Description className="card-description">
-						  <strong> skills: </strong> {this.props.skills}
+						  <strong> skills: </strong> databases, graphql, relay
 						</Card.Description>
 						<Card.Description className="card-description">
 						  <strong> interests: </strong> mobile development, AR, VR
@@ -24,7 +24,16 @@ class UserCard extends Component {
 						  <strong> experience: </strong> participated in 3 hackathons, won one
 						</Card.Description>
 					  </Card.Content>
-
+					  <Card.Content extra>
+						 <div className='ui two buttons'>
+							<Button basic color='grey' href="https://www.linkedin.com/in/rahulrajanus/" target="_blank">
+							  website
+							</Button>
+							<Button basic color='teal'>
+							  reach out
+							</Button>
+						  </div>
+					  </Card.Content>
 				</Card>
             </div>
 			</div>

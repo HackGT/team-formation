@@ -10,7 +10,7 @@ type Query {
 }
 
 type Mutation {
-    update_user(uuid: String, name: String email: String, grad_year: String, school: String, secondary_email: String, contact: String, skills: [String]): User!
+    update_user(id: ID, name: String email: String, grad_year: String, school: String, secondary_email: String, contact: String, skills: [String]): User!
 }
 
 input UserFilter {
@@ -23,7 +23,7 @@ input UserFilter {
 }
 
 type User {
-    uuid: String
+    id: ID
     name: String
     email: String
     secondary_email: String

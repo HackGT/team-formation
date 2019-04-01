@@ -22,23 +22,14 @@ const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf
 const VERSION_NUMBER = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json"), "utf8")).version;
 const VERSION_HASH = require("git-rev-sync").short();
 
-export const app = express();
+export let app = express();
 app.use(morgan("dev"));
 app.use(compression());
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
-    if ('OPTIONS' == req.method) {
-         res.send(200);
-     } else {
-         next();
-     }
-});
-const session_secret = process.env['SECRET'];
+app.use('*', cors());
+
+let session_secret = process.env['SECRET'];
 if (!session_secret) {
-    throw new Error("Secret not specified");
+    throw new Error("Secret not specified")
 }
 
 app.use(session({
@@ -56,7 +47,7 @@ export function loggedInErr(req, res, next) {
         res.status(200).json({
             success: true
         });
-        next();
+        next()
     }
     else {
         res.status(401).json({ "error": "User not logged in", success: false });
@@ -77,25 +68,29 @@ passport.deserializeUser<IUser, string>((id, done) => {
 });
 
 let getUser = async function (args) {
+    let name = args.name
+    console.log(args)
     let users;
     if(args.name == "" || args.name == null) {
-        users = await User.find({});
+        users = await User.find({})
     } else {
-        users = await User.find(args);
+        users = await User.find(args)
     }
+    console.log(users)
     if (!users) {
         return null;
     }
-    return users;
+    return users
 }
 
 let updateUser = async function(args) {
-    return User.findOneAndUpdate({'uuid':args.uuid}, { "$set": args }, { new: true });
+    let id = args.id
+    let updated = User.findByIdAndUpdate(args.id, {"$set": args},{new: true})
+    return updated
 }
 let apiRouter = express.Router();
 
-const root = {
-
+let root = {
     user: getUser,
     update_user: updateUser
 };
