@@ -13,7 +13,7 @@ function fetchQuery(
   cacheConfig,
   uploadables,
 ) {
-  console.log("HELLO")
+  console.log(variables);
   return fetch('http://localhost:3001/graphql', {
     method: 'POST',
     headers: {
