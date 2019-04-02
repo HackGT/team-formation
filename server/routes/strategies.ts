@@ -92,7 +92,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
             };
             const options = { method: 'POST',
                 url: graphqlUrl,
-                headers: 
+                headers:
                 {
                     Authorization: 'Bearer ' + process.env.graphqlAuth,
                     'Content-Type': "application/json"
@@ -106,10 +106,10 @@ export class GroundTruthStrategy extends OAuthStrategy {
 
             await requests(options, async (err, res, body) => {
                 if (err) { return console.log(err); }
-                if (JSON.parse(body).data.search_user.users.length) > 0) {
+                if (JSON.parse(body).data.search_user.users.length > 0) {
                     confirmed = JSON.parse(body).data.search_user.users[0].confirmed;
                 }
-                
+
                 //confirmed = true;
                 if (confirmed) {
                     user = createNew<IUser>(User, {
@@ -121,7 +121,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
                     done(null, undefined);
                 }
             });
-            
+
 
         } else {
             user.token = accessToken;

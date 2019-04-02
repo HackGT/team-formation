@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-
+import { Button } from 'semantic-ui-react';
 import './css/Login.css';
 import Loading from './ui_subcomponents/Loading'
-
 class Login extends Component {
 
 	state = {
@@ -18,14 +17,14 @@ class Login extends Component {
                 this.setState({
                     is_loading: true,
                 })
-                
+
                 if (!login_json.school) {
                     this.props.onFeedChange(login_json.uuid);
                     this.props.onNextClick('setup-profile');
                 } else {
                     this.props.onNextClick('feed');
                 }
-				
+
             } else if (!login_json.confirmed) {
 				this.setState({
 					error_message: "You are not confirmed for this event. Please confirm your attendance before registering",
@@ -43,11 +42,11 @@ class Login extends Component {
         return (
             <div className="Login-container">
                 <h3> Confirming attendance for Horizons is necessary to use the platform. Login will not work without participant's confirming their attendance </h3>
-                <a href = {process.env.REACT_APP_SERVER_URL}> login </a>
+				<Button href = {process.env.REACT_APP_SERVER_URL}> Login </Button>
             </div>
             )
     }
-    
+
     onSubmitClick = (e) => {
         e.preventDefault();
         this.onNextClick('feed');
@@ -55,16 +54,13 @@ class Login extends Component {
     }
 
     onFetchLogin = () => {
+		console.log(process.env.REACT_APP_SERVER_URL);
         return fetch(process.env.REACT_APP_SERVER_URL + '/api/user/check', {
             method: "GET",
             credentials: "include"
         })
         .then(response => {
-            try {
-                return response.json()
-            } catch {
-                return {uuid: ""}
-            }
+			return response.json();
         })
             .then(response => {
             return new Promise((resolve, reject) => {
