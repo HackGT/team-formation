@@ -4,8 +4,9 @@ import { Icon } from 'semantic-ui-react';
 import './css/UserCard.css';
 
 class UserCard extends Component {
-	render() {
-		return (
+    render() {
+        console.log(this.props);
+        return (
 			<div className="UserCard-container">
 				<div className="card-container">
 					<Card className="card1">
@@ -15,13 +16,10 @@ class UserCard extends Component {
 						<Card.Meta>graduation year: {this.props.grad_year}</Card.Meta>
 						<div className="ui divider"></div>
 						<Card.Description className="card-description">
-						  <strong> skills: </strong> {this.props.skills}
+						  <strong> skills: </strong>{this.props.skills.join(", ")}
 						</Card.Description>
 						<Card.Description className="card-description">
-						  <strong> interests: </strong> mobile development, AR, VR
-						</Card.Description>
-						<Card.Description className="card-description">
-						  <strong> experience: </strong> participated in 3 hackathons, won one
+						  <strong> experience: </strong>{this.props.experience}
 						</Card.Description>
 					  </Card.Content>
 

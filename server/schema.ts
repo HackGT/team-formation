@@ -25,7 +25,6 @@ export interface IUser extends RootDocument {
     name: string;
     token: string | null;
     admin?: boolean;
-    secondary_email?: string;
     school?: string;
     grad_year?: string;
     skills?: string[];
@@ -83,7 +82,6 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
         required: true,
         unique: true
     },
-    secondary_email: String,
     name: {
         type: String,
         required: false
@@ -100,10 +98,10 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
         required: false
     },
     experience: String,
-    contact: String,
     image: String,
     auth_keys: [String],
-    admin: Boolean
+    admin: Boolean,
+    contact: String
     },
     {
         usePushEach: true

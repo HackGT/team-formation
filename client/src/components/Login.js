@@ -18,22 +18,14 @@ class Login extends Component {
                 this.setState({
                     is_loading: true,
                 })
-                
                 if (!login_json.school) {
-                    this.props.onFeedChange(login_json.uuid);
+                    this.props.onFeedChange(login_json.uuid, login_json.name);
                     this.props.onNextClick('setup-profile');
                 } else {
                     this.props.onNextClick('feed');
                 }
-				
-            } else if (!login_json.confirmed) {
-				this.setState({
-					error_message: "You are not confirmed for this event. Please confirm your attendance before registering",
-					loading: false
-				})
             }
 		});
-
     }
     render() {
         let is_loading;
@@ -47,24 +39,14 @@ class Login extends Component {
             </div>
             )
     }
-    
-    onSubmitClick = (e) => {
-        e.preventDefault();
-        this.onNextClick('feed');
-
-    }
 
     onFetchLogin = () => {
         return fetch(process.env.REACT_APP_SERVER_URL + '/api/user/check', {
             method: "GET",
             credentials: "include"
         })
-        .then(response => {
-            try {
-                return response.json()
-            } catch {
-                return {uuid: ""}
-            }
+            .then(response => {
+            return response.json();
         })
             .then(response => {
             return new Promise((resolve, reject) => {

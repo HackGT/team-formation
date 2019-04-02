@@ -8,7 +8,7 @@ import './css/EditProfile.css'
 import {commitMutation } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import environment from './Environment'
-
+import ValidatorForm, {TextValidator} from 'react-form-validator-core';
 const {
   Environment,
   Network,
@@ -17,14 +17,15 @@ const {
 } = require('relay-runtime');
 
 const mutation = graphql`
-mutation EditProfileMutation($uuid: String, $name: String, $grad_year: String, $school: String, $secondary_email: String, $contact: String, $skills: [String]) {
-  update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school, secondary_email: $secondary_email, contact: $contact, skills: $skills) {
+mutation EditProfileMutation($uuid: String, $name: String, $grad_year: String, $school: String, $skills: [String], $experience: String, $contact: String) {
+  update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school,  skills: $skills, experience: $experience, contact: $contact) {
     name
     email
     grad_year
     school
-    secondary_email
     skills
+    experience
+    contact
   }
 }
 `;
@@ -63,8 +64,7 @@ class EditProfile extends Component {
 				<Button onClick={this.onNextClick} className="save-button"> save </Button>
 			</div>
 		);
-	};
-
+    };
 	onFirstNameChange = (e) => {
 		this.setState({
 			user_first_name: e.target.value
@@ -131,9 +131,9 @@ class EditProfile extends Component {
                     name: this.state.user_first_name + " " + this.state.user_last_name,
                     grad_year: this.state.user_grad_year,
                     school: this.state.user_school,
-                    secondary_email: this.state.user_secondary_email,
                     contact: this.state.user_contact,
-                    skills: skills
+                    skills: skills,
+                    experience: this.state.experience,
                 }
             }
         )

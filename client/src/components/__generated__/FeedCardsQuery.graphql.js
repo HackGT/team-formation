@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash e32a3711da65f07a033e2155c30d752a
+ * @relayHash 47d09f268c562b0087b2d24ae3bd8450
  */
 
 /* eslint-disable */
@@ -18,6 +18,8 @@ export type FeedCardsQueryResponse = {|
     +name: ?string,
     +school: ?string,
     +grad_year: ?string,
+    +skills: ?$ReadOnlyArray<?string>,
+    +experience: ?string,
   |}>
 |};
 export type FeedCardsQuery = {|
@@ -36,6 +38,8 @@ query FeedCardsQuery(
     name
     school
     grad_year
+    skills
+    experience
   }
 }
 */
@@ -93,6 +97,20 @@ v1 = [
         "name": "grad_year",
         "args": null,
         "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "skills",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "experience",
+        "args": null,
+        "storageKey": null
       }
     ]
   }
@@ -117,11 +135,11 @@ return {
     "operationKind": "query",
     "name": "FeedCardsQuery",
     "id": null,
-    "text": "query FeedCardsQuery(\n  $name: String\n) {\n  user(name: $name) {\n    email\n    name\n    school\n    grad_year\n  }\n}\n",
+    "text": "query FeedCardsQuery(\n  $name: String\n) {\n  user(name: $name) {\n    email\n    name\n    school\n    grad_year\n    skills\n    experience\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '086d3f47003d2f68b6c667b7b9321fab';
+(node/*: any*/).hash = '8f58d233c5887c266b034531d9f2b7a6';
 module.exports = node;

@@ -38,7 +38,6 @@ class Feed extends Component {
 
     };
 	render() {
-        console.log("hello")
 		return (
             <div>
                 <div className="logout-button">
@@ -61,7 +60,6 @@ class Feed extends Component {
 	}
 
     onSearchClick = (search_string) => {
-        console.log("STATE CHANGE" + " " + search_string)
         this.setState({name:search_string});
 
     }

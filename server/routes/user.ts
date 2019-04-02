@@ -7,13 +7,13 @@ export let userRoutes = express.Router();
 
 userRoutes.route("/login").get((request, response, next) => {
     const callbackURL = createLink(request, "api/user/login/callback");
-
+    console.log(request.user);
     passport.authenticate('oauth2', { callbackURL } as AuthenticateOptions)(request, response, next);
 });
 
 userRoutes.route("/login/callback").get((request, response, next) => {
     const callbackURL = createLink(request, "api/user/login/callback");
-
+    console.log(request.user);
     
     if (request.query.error === "access_denied") {
         response.redirect("/login");
@@ -21,23 +21,20 @@ userRoutes.route("/login/callback").get((request, response, next) => {
     }
 
     passport.authenticate("oauth2", {
-        failureRedirect: "/api/user/failure",
+        failureRedirect: "http://localhost:3000",
         successReturnToOrRedirect: "http://localhost:3000",
         callbackURL
     } as AuthenticateOptions)(request, response, next); 
 });
 
-userRoutes.route("/failure").get((request, response, next) => {
-    response.redirect("http://localhost:3000");
-})
-
 userRoutes.route("/check").get((request, response, next) => {
     if (request.user) {
         return response.status(200).json(request.user);
     } else {
-        return response.status(200).json({"success": false});
+        return response.status(400).json({"success": false});
     }
 })
+
 userRoutes.route("/logout").all(async (request, response) => {
     const user = request.user as IUser | undefined;
     const gturl = process.env.groundTruthurl || 'https://login.hack.gt'
@@ -51,9 +48,10 @@ userRoutes.route("/logout").all(async (request, response) => {
                 Authorization: `Bearer ${user.token}`
             }
         };
-        await requests(options, (err, res, body) => {
+        await requests(options, async (err, res, body) => {
             if (err) { return console.log(err); }
-            request.logout();
+            console.log(body);
+            await request.logout();
             response.redirect("http://localhost:3000");
         });
     }

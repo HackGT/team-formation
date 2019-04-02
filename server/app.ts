@@ -52,7 +52,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 export function loggedInErr(req, res, next) {
-    if (req.user && req.user.email === req.body.email) {
+    if (req.user) {
         res.status(200).json({
             success: true
         });
@@ -81,24 +81,26 @@ let getUser = async function (args) {
     if(args.name == "" || args.name == null) {
         users = await User.find({});
     } else {
-        users = await User.find(args);
+        
+        users = await User.find({name: {$regex: '.+'+args.name+'.+', $options: 'i'}});
     }
     if (!users) {
         return null;
     }
+    console.log(users);
+    users.sort(function(a, b){return a.name.indexOf(args.name) - b.name.indexOf(args.name)});
     return users;
 }
 
 let updateUser = async function(args) {
     return User.findOneAndUpdate({'uuid':args.uuid}, { "$set": args }, { new: true });
 }
+
 let apiRouter = express.Router();
 
 const root = {
-
     user: getUser,
     update_user: updateUser
-
 };
 
 apiRouter.use("/user", userRoutes);
@@ -114,7 +116,6 @@ app.use('/graphql', express_graphql({
 app.route("/").get((request, response) => {
     response.redirect("/api/user/login");
 });
-
 app.use("/", serveStatic(path.resolve(__dirname, STATIC_ROOT)));
 
 app.listen(PORT, () => {

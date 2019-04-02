@@ -1,7 +1,6 @@
 import { graphql, QueryRenderer } from 'react-relay';
 import React, { Component } from 'react';
 import Login from './Login';
-import SignUp from './SignUp';
 import EditProfile from './EditProfile';
 import Feed from './Feed'
 
@@ -18,10 +17,6 @@ class Content extends Component {
 				onNextClick={this.onNextClick}
                 onSignUpClick={this.onSignUpClick}
                 onFeedChange={this.onProfileChange}/>;
-		} else if (this.state.cur_state === 'signup') {
-			cur_display = <SignUp
-				onNextClick={this.onNextClick}/>;
-                
 		} else if (this.state.cur_state === 'setup-profile') {
 			cur_display = <EditProfile
 				onNextClick={this.onNextClick} user_id={this.state.user_id}
@@ -39,13 +34,9 @@ class Content extends Component {
 	onNextClick = (next_action) => {
 		this.setState({cur_state: next_action});
 	};
-    onProfileChange = (id) => {
-        this.setState({cur_state: 'setup-profile', user_id: id});
+    onProfileChange = (id, name) => {
+        this.setState({cur_state: 'setup-profile', user_id: id, name: name});
     };
-
-	onSignUpClick = () => {
-		this.setState({cur_state: 'signup'})
-	}
 }
 
 
