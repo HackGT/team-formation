@@ -35,7 +35,7 @@ export type AuthenticateOptions = passport.AuthenticateOptions & {
 
 export class GroundTruthStrategy extends OAuthStrategy {
     public readonly url: string;
-    
+
     constructor(url: string) {
         const secret = (process.env.groundTruthSecret);
         const id = (process.env.groundTruthid);
@@ -92,7 +92,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
             };
             const options = { method: 'POST',
                 url: graphqlUrl,
-                headers: 
+                headers:
                 {
                     Authorization: 'Bearer ' + process.env.graphqlAuth,
                     'Content-Type': "application/json"
@@ -120,7 +120,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
                     done(null, undefined);
                 }
             });
-            
+
 
         } else {
             user.token = accessToken;

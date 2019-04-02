@@ -22,10 +22,12 @@ const {
 const getUsersQuery = graphql`
     query FeedQuery($name: String, $email: String, $grad_year: String, $school: String) {
         user(email:$email, name:$name, grad_year:$grad_year, school:$school) {
-            email
             name
             school
-
+			grad_year
+			contact
+			skills
+			experience
         }
     }
 `

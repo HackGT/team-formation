@@ -13,7 +13,7 @@ class UserCard extends Component {
 					  <Card.Content className="content">
 						<Card.Header>{this.props.name}</Card.Header>
 						<Card.Meta>{this.props.school}</Card.Meta>
-						<Card.Meta>graduation year: {this.props.grad_year}</Card.Meta>
+						<Card.Meta>Graduation Year: {this.props.grad_year}</Card.Meta>
 						<div className="ui divider"></div>
 						<Card.Description className="card-description">
 						  <strong> skills: </strong>{this.props.skills.join(", ")}

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-
+import { Button } from 'semantic-ui-react';
 import './css/Login.css';
 import Loading from './ui_subcomponents/Loading'
-
 class Login extends Component {
 
 	state = {
@@ -35,18 +34,19 @@ class Login extends Component {
         return (
             <div className="Login-container">
                 <h3> Confirming attendance for Horizons is necessary to use the platform. Login will not work without participant's confirming their attendance </h3>
-                <a href = {process.env.REACT_APP_SERVER_URL}> login </a>
+				<Button href = {process.env.REACT_APP_SERVER_URL}> Login </Button>
             </div>
             )
     }
 
     onFetchLogin = () => {
+		console.log(process.env.REACT_APP_SERVER_URL);
         return fetch(process.env.REACT_APP_SERVER_URL + '/api/user/check', {
             method: "GET",
             credentials: "include"
         })
-            .then(response => {
-            return response.json();
+        .then(response => {
+			return response.json();
         })
             .then(response => {
             return new Promise((resolve, reject) => {

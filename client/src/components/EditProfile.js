@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import { Input } from 'semantic-ui-react';
-import { Button } from 'semantic-ui-react';
+import { Button, Divider, TextArea, Message } from 'semantic-ui-react';
 import { Form } from 'semantic-ui-react';
 import Loading from './ui_subcomponents/Loading';
 import YearDropdown from './ui_subcomponents/YearDropdown';
+import ContactDropdown from './ui_subcomponents/ContactDropdown';
 import './css/EditProfile.css'
 import {commitMutation } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
@@ -20,7 +21,6 @@ const mutation = graphql`
 mutation EditProfileMutation($uuid: String, $name: String, $grad_year: String, $school: String, $skills: [String], $experience: String, $contact: String) {
   update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school,  skills: $skills, experience: $experience, contact: $contact) {
     name
-    email
     grad_year
     school
     skills
@@ -32,36 +32,72 @@ mutation EditProfileMutation($uuid: String, $name: String, $grad_year: String, $
 
 class EditProfile extends Component {
 
-	state = {
-		user_first_name: "",
-		user_last_name: "",
-		user_school: "",
-		user_grad_year: "",
-		user_skills_1: "",
-		user_skills_2: "",
-		user_skills_3: "",
-        user_experience: "",
-        user_secondary_email: "",
-        user_contact: ""
+	constructor() {
+		super();
+		this.state = {
+			user_first_name: "",
+			user_last_name: "",
+			user_school: "",
+			user_grad_year: "",
+			user_skills_1: "",
+			user_skills_2: "",
+			user_skills_3: "",
+	        user_experience: "",
+	        user_secondary_email: "",
+	        user_contact: "",
+			user_contact_info: "",
+			cur_error_message: ""
+		};
 	}
 
 	render() {
+		let contact_method;
+		if (this.state.user_contact === 'phone number') {
+			contact_method = <Form.Input label='Phone Number:' placeholder='(###) ###-####' width={5} onChange={this.onContactInfoChange} required/>
+		} else if (this.state.user_contact === 'email') {
+			contact_method = <Form.Input label='Email:' placeholder='example@email.com' width={5} onChange={this.onContactInfoChange} required/>
+		} else if (this.state.user_contact === "social media") {
+			contact_method = <Form.Input label='Social Media URL:' placeholder='Social Media URL' width={5} onChange={this.onContactInfoChange} required/>
+		} else {
+			contact_method = ""
+		}
 		return (
-			<div className="EditProfile-container">
-				<h2 className="page-title">Your Profile</h2>
-				<div><p className="input-name">First Name:</p> <Input placeholder={'first name'} className="input-name" onChange={this.onFirstNameChange}/>
-				<p className="input-name">Last Name:</p><Input placeholder={'last name'} className="input" onChange={this.onLastNameChange}/></div>
-				<div><p className="input-label">Secondary Eamil:</p><Input placeholder={'test@gmail.com'} className="input-label" onChange={this.onEmailChange}/></div>
-				<div><p className="input-school">School:</p><Input placeholder={'school'} className="input-school" onChange={this.onSchoolChange}/></div>
-				<div><p className="input-label">Graduation Year:</p><Input placeholder={'graduation year'} className="input-school" onChange={this.onGradYearChange}/></div>
 
-				<div><div><p className="input-label">Skill 1:</p><Input placeholder={'skill 1'} className="input-box" onChange={this.onSkills1Change}/></div>
-				<div><p className="input-label">Skill 2:</p><Input placeholder={'skill 2'} className="input-box" onChange={this.onSkills2Change}/></div>
-				<div><p className="input-label">Skill 3:</p><Input placeholder={'skill 3'} className="input-box" onChange={this.onSkills3Change}/></div>
-				<div><p className="input-label">Experience:</p><Input placeholder={'experience'} onChange={this.onExperienceChange} className="input-box"/></div></div>
-
-				<div><p className="input-label">Method of contact (facebook, email, phone...):</p><Input placeholder={'method of contact'} className="input-box" onChange={this.onContactChange}/></div>
-				<Button onClick={this.onNextClick} className="save-button"> save </Button>
+			<div>
+			<div className="Form-container">
+				<Form >
+					<Form.Group>
+					  <Form.Input label='Name' placeholder='Name' width={5} onChange={this.onFirstNameChange} required/>
+					</Form.Group>
+					<Form.Group>
+					  <Form.Input label='School' placeholder='School' width={5} onChange={this.onSchoolChange} required/>
+					  <Form.Input label='Graduation Year' placeholder='Graduation Year' width={3} onChange={this.onGradYearChange} required/>
+					</Form.Group>
+					<Divider />
+					<Form.Group>
+					  <Form.Input label='Skill 1:' placeholder='Skill 1' width={5} onChange={this.onSkills1Change}/>
+					  <Form.Input label='Skill 2:' placeholder='Skill 2' width={5} onChange={this.onSkills2Change}/>
+					  <Form.Input label='Skill 3:' placeholder='Skill 3' width={5} onChange={this.onSkills3Change}/>
+					</Form.Group>
+					<Form.Group>
+					  <Form.Field control={TextArea} label='About me:' placeholder='Tell us more about your experiences and interests...' width={15} onChange={this.onExperienceChange}/>
+					</Form.Group>
+					<Divider />
+					<Form.Group>
+					  <ContactDropdown contact={this.changeContact}/>
+					</Form.Group>
+					<Form.Group>
+					  {contact_method}
+					</Form.Group>
+					<Divider />
+					<Form.Group>
+					  <Button onClick={this.onNextClick} className="save-button"> save </Button>
+					</Form.Group>
+					<Form.Group>
+					  {this.state.error_message}
+					</Form.Group>
+				</Form>
+			</div>
 			</div>
 		);
     };
@@ -113,12 +149,17 @@ class EditProfile extends Component {
         });
     };
 
-    onEmailChange = (e) => {
-        this.setState({
-            user_secondary_email: e.target.value
-        });
-    };
+	onContactInfoChange = (e) => {
+		this.setState({
+			user_contact_info: e.target.value
+		});
+	};
 
+	changeContact = (new_contact) => {
+		this.setState({
+			user_contact: new_contact
+		})
+	};
 
 	onNextClick = () => {
         let skills = [this.state.user_skills_1, this.state.user_skills_2, this.state.user_skills_3]
@@ -132,13 +173,19 @@ class EditProfile extends Component {
                     grad_year: this.state.user_grad_year,
                     school: this.state.user_school,
                     contact: this.state.user_contact,
-                    skills: skills,
-                    experience: this.state.experience,
+                    skills: [this.state.user_skills_1, this.state.user_skills_2, this.state.user_skills_3],
+					experience: this.state.user_experience,
                 }
             }
         )
 		this.props.onNextClick('feed');
 	}
 }
+
+const styles = {
+		form: {
+			width: '100%'
+		}
+};
 
 export default EditProfile

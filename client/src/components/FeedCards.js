@@ -19,12 +19,12 @@ const {
 const getUsersQuery = graphql`
     query FeedCardsQuery($name: String) {
         user(name:$name) {
-            email
             name
             school
-            grad_year
-            skills
-            experience
+			grad_year
+			contact
+			skills
+			experience
         }
     }
 `
