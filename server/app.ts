@@ -80,7 +80,6 @@ let getUser = async function (args) {
     if(args.name == "" || args.name == null) {
         users = await User.find({});
     } else {
-        
         users = await User.find({name: {$regex: '.*'+args.name+'.*', $options: 'i'}});
     }
     if (!users) {
@@ -94,11 +93,16 @@ let updateUser = async function(args) {
     return User.findOneAndUpdate({'uuid':args.uuid}, { "$set": args }, { new: true });
 }
 
+let getUserProfile = async function (args) {
+    return User.findOne({uuid: args.uuid});
+}
+
 let apiRouter = express.Router();
 
 const root = {
     user: getUser,
-    update_user: updateUser
+    update_user: updateUser,
+    user_profile: getUserProfile
 };
 
 apiRouter.use("/user", userRoutes);

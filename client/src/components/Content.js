@@ -40,8 +40,8 @@ class Content extends Component {
 		);
 	}
 
-	onNextClick = (next_action) => {
-		this.setState({cur_state: next_action});
+	onNextClick = (next_action, id) => {
+		this.setState({cur_state: next_action, user_id: id});
 	};
     onProfileChange = (id, name, email) => {
         this.setState({cur_state: 'setup-profile', user_id: id, name: name, email: email});

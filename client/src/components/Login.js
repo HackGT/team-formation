@@ -21,7 +21,7 @@ class Login extends Component {
                     this.props.onFeedChange(login_json.uuid, login_json.name, login_json.email);
                     this.props.onNextClick('setup-profile');
                 } else {
-                    this.props.onNextClick('feed');
+                    this.props.onNextClick('feed', login_json.uuid);
                 }
             }
 		});

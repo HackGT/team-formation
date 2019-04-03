@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 49fad18b3b4f93fcf0a7bae5bd226784
+ * @relayHash 2dd85fc8aa8c56ebbcd98ea9fcafc2ec
  */
 
 /* eslint-disable */
@@ -9,37 +9,31 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type FeedQueryVariables = {|
-  name?: ?string,
-  email?: ?string,
-  grad_year?: ?string,
-  school?: ?string,
+export type EditProfileQueryVariables = {|
+  uuid?: ?string
 |};
-export type FeedQueryResponse = {|
-  +user: $ReadOnlyArray<{|
+export type EditProfileQueryResponse = {|
+  +user_profile: {|
     +name: ?string,
     +school: ?string,
     +grad_year: ?string,
     +contact: ?string,
     +skills: ?$ReadOnlyArray<?string>,
     +experience: ?string,
-  |}>
+  |}
 |};
-export type FeedQuery = {|
-  variables: FeedQueryVariables,
-  response: FeedQueryResponse,
+export type EditProfileQuery = {|
+  variables: EditProfileQueryVariables,
+  response: EditProfileQueryResponse,
 |};
 */
 
 
 /*
-query FeedQuery(
-  $name: String
-  $email: String
-  $grad_year: String
-  $school: String
+query EditProfileQuery(
+  $uuid: String
 ) {
-  user(email: $email, name: $name, grad_year: $grad_year, school: $school) {
+  user_profile(uuid: $uuid) {
     name
     school
     grad_year
@@ -54,25 +48,7 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "name",
-    "type": "String",
-    "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
-    "name": "email",
-    "type": "String",
-    "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
-    "name": "grad_year",
-    "type": "String",
-    "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
-    "name": "school",
+    "name": "uuid",
     "type": "String",
     "defaultValue": null
   }
@@ -81,36 +57,18 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "user",
+    "name": "user_profile",
     "storageKey": null,
     "args": [
       {
         "kind": "Variable",
-        "name": "email",
-        "variableName": "email",
-        "type": "String"
-      },
-      {
-        "kind": "Variable",
-        "name": "grad_year",
-        "variableName": "grad_year",
-        "type": "String"
-      },
-      {
-        "kind": "Variable",
-        "name": "name",
-        "variableName": "name",
-        "type": "String"
-      },
-      {
-        "kind": "Variable",
-        "name": "school",
-        "variableName": "school",
+        "name": "uuid",
+        "variableName": "uuid",
         "type": "String"
       }
     ],
     "concreteType": "User",
-    "plural": true,
+    "plural": false,
     "selections": [
       {
         "kind": "ScalarField",
@@ -161,7 +119,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "FeedQuery",
+    "name": "EditProfileQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -169,19 +127,19 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "FeedQuery",
+    "name": "EditProfileQuery",
     "argumentDefinitions": (v0/*: any*/),
     "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "query",
-    "name": "FeedQuery",
+    "name": "EditProfileQuery",
     "id": null,
-    "text": "query FeedQuery(\n  $name: String\n  $email: String\n  $grad_year: String\n  $school: String\n) {\n  user(email: $email, name: $name, grad_year: $grad_year, school: $school) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n  }\n}\n",
+    "text": "query EditProfileQuery(\n  $uuid: String\n) {\n  user_profile(uuid: $uuid) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '2b439ff4365562e976ff0dca9b9978e2';
+(node/*: any*/).hash = 'fea4abf35bf49f56ad159db12ce276dc';
 module.exports = node;

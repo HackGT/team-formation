@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 13eb09035a4dec5d41f44569824288c1
+ * @relayHash 46a3a6fd60ab70c3d2fec94d3492f950
  */
 
 /* eslint-disable */
@@ -21,7 +21,6 @@ export type EditProfileMutationVariables = {|
 export type EditProfileMutationResponse = {|
   +update_user: {|
     +name: ?string,
-    +email: ?string,
     +grad_year: ?string,
     +school: ?string,
     +skills: ?$ReadOnlyArray<?string>,
@@ -48,7 +47,6 @@ mutation EditProfileMutation(
 ) {
   update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact) {
     name
-    email
     grad_year
     school
     skills
@@ -166,13 +164,6 @@ v1 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "email",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
         "name": "grad_year",
         "args": null,
         "storageKey": null
@@ -228,11 +219,11 @@ return {
     "operationKind": "mutation",
     "name": "EditProfileMutation",
     "id": null,
-    "text": "mutation EditProfileMutation(\n  $uuid: String\n  $name: String\n  $grad_year: String\n  $school: String\n  $skills: [String]\n  $experience: String\n  $contact: String\n) {\n  update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact) {\n    name\n    email\n    grad_year\n    school\n    skills\n    experience\n    contact\n  }\n}\n",
+    "text": "mutation EditProfileMutation(\n  $uuid: String\n  $name: String\n  $grad_year: String\n  $school: String\n  $skills: [String]\n  $experience: String\n  $contact: String\n) {\n  update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact) {\n    name\n    grad_year\n    school\n    skills\n    experience\n    contact\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '247d46187999d19e61f5c2ea4ec7c9fe';
+(node/*: any*/).hash = 'b5c1afc23f32cb13a2f5e6eb887fe2f3';
 module.exports = node;
