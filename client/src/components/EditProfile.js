@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Input } from 'semantic-ui-react';
 import { Button, Divider, TextArea, Message } from 'semantic-ui-react';
 import { Form } from 'semantic-ui-react';
+import {QueryRenderer } from 'react-relay';
 import Loading from './ui_subcomponents/Loading';
 import YearDropdown from './ui_subcomponents/YearDropdown';
 import ContactDropdown from './ui_subcomponents/ContactDropdown';
@@ -29,10 +30,22 @@ mutation EditProfileMutation($uuid: String, $name: String, $grad_year: String, $
 }
 `;
 
+const getUsersProfile = graphql`
+query EditProfileQuery($uuid: String) {
+    user_profile(uuid:$uuid) {
+        name
+        school
+        grad_year
+        contact
+        skills
+        experience
+    }
+}
+`
 class EditProfile extends Component {
 
 	constructor() {
-		super();
+        super();
 		this.state = {
 			user_first_name: "",
 			user_last_name: "",
@@ -45,60 +58,71 @@ class EditProfile extends Component {
 	        user_secondary_email: "",
 	        user_contact: "",
 			user_contact_info: "",
-			cur_error_message: ""
+            cur_error_message: "",
 		};
 	}
 
 	render() {
-		console.log(this.props);
+
 		let contact_method;
 		if (this.state.user_contact === 'phone number') {
 			contact_method = <Form.Input label='Phone Number:' placeholder='(###) ###-####' width={5} onChange={this.onContactInfoChange} required/>
 		} else if (this.state.user_contact === 'email') {
-			contact_method = <Form.Input label='Email:' placeholder='example@email.com' defaultValue={this.props.email} width={5} onChange={this.onContactInfoChange} required/>
+			contact_method = <Form.Input label='Email:' placeholder='example@email.com' width={5} onChange={this.onContactInfoChange} required/>
 		} else if (this.state.user_contact === "social media") {
 			contact_method = <Form.Input label='Social Media URL:' placeholder='Social Media URL' width={5} onChange={this.onContactInfoChange} required/>
 		} else {
 			contact_method = ""
         }
 		return (
-			<div className="Form-container">
-				<Form >
-					<Form.Group>
-						<Form.Input label='Name' placeholder='Name' defaultValue= {this.props.name} width={5} onChange={this.onFirstNameChange} required/>
-					</Form.Group>
-					<Form.Group>
-						<Form.Input label='School' placeholder='School' width={5} onChange={this.onSchoolChange} required/>
-						<Form.Input label='Graduation Year' placeholder='Graduation Year' width={3} onChange={this.onGradYearChange} required/>
-					</Form.Group>
-					<Divider />
-
-					<Form.Group>
-						<Form.Input label='Skill 1:' placeholder='Skill 1' width={5} onChange={this.onSkills1Change}/>
-						<Form.Input label='Skill 2:' placeholder='Skill 2' width={5} onChange={this.onSkills2Change}/>
-						<Form.Input label='Skill 3:' placeholder='Skill 3' width={5} onChange={this.onSkills3Change}/>
-					</Form.Group>
-					<Form.Group>
-						<Form.Field control={TextArea} label='About me:' placeholder='Tell us more about your experiences and interests...' width={15} onChange={this.onExperienceChange}/>
-					</Form.Group>
-					<Divider />
-
-					<Form.Group>
-						<ContactDropdown contact={this.changeContact}/>
-					</Form.Group>
-					<Form.Group>
-						{contact_method}
-					</Form.Group>
-					<Divider />
-
-					<Form.Group>
-						<Button onClick={this.onNextClick} className="save-button"> save </Button>
-					</Form.Group>
-					<Form.Group>
-						{this.state.error_message}
-					</Form.Group>
-				</Form>
-			</div>
+            <QueryRenderer
+                environment={environment}
+                query={getUsersProfile}
+                variables={{
+                    uuid: this.props.user_id,
+                }}
+                render={({error,props}) => {
+                    if (error) {
+                        return <div>{error.message}</div>;
+                    } else if (props) {
+                        console.log(props)
+                    return (
+                    <div className="Form-container">
+                        <Form >
+                            <Form.Group>
+                            <Form.Input label='Name' placeholder='Name' defaultValue= {props.name} width={5} onChange={this.onFirstNameChange} required/>
+                            </Form.Group>
+                            <Form.Group>
+                            <Form.Input label='School' placeholder='School' defaultValue={props.school} width={5} onChange={this.onSchoolChange} required/>
+                            <Form.Input label='Graduation Year' placeholder='Graduation Year' defaultValue={props.grad_year} width={3} onChange={this.onGradYearChange} required/>
+                            </Form.Group>
+                            <Divider />
+                            <Form.Group>
+                            <Form.Input label='Skill 1:' placeholder='Skill 1' defaultValue={""} width={5} onChange={this.onSkills1Change}/>
+                            <Form.Input label='Skill 2:' placeholder='Skill 2' defaultValue={""} width={5} onChange={this.onSkills2Change}/>
+                            <Form.Input label='Skill 3:' placeholder='Skill 3' defaultValue={""} width={5} onChange={this.onSkills3Change}/>
+                            </Form.Group>
+                            <Form.Group>
+                            <Form.Field control={TextArea} label='About me:' placeholder='Tell us more about your experiences and interests...' defaultValue={props.experience} width={15} onChange={this.onExperienceChange}/>
+                            </Form.Group>
+                            <Divider />
+                            <Form.Group>
+                            <ContactDropdown contact={this.changeContact}/>
+                            </Form.Group>
+                            <Form.Group>
+                            {contact_method}
+                            </Form.Group>
+                            <Divider />
+                            <Form.Group>
+                            <Button onClick={this.onNextClick} className="save-button"> save </Button>
+                            </Form.Group>
+                            <Form.Group>
+                            {this.state.error_message}
+                            </Form.Group>
+                        </Form>
+                    </div>)}
+                }}
+            />
 		);
     };
 	onFirstNameChange = (e) => {
