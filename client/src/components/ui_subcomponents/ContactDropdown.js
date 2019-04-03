@@ -31,7 +31,8 @@ class YearDropdown extends Component {
 					placeholder="Method of contact"
 					selection
 					options={contactOptions}
-					onChange={this.onHandleChange}
+                    onChange={this.onHandleChange}
+                    defaultValue={this.props.contact_method}
 				/>
 			</div>
 		);

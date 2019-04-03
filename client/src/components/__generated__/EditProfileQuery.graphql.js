@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2dd85fc8aa8c56ebbcd98ea9fcafc2ec
+ * @relayHash 70193064581d8680c3ae5d8570cc3b5b
  */
 
 /* eslint-disable */
@@ -20,6 +20,7 @@ export type EditProfileQueryResponse = {|
     +contact: ?string,
     +skills: ?$ReadOnlyArray<?string>,
     +experience: ?string,
+    +contact_method: ?string,
   |}
 |};
 export type EditProfileQuery = {|
@@ -40,6 +41,7 @@ query EditProfileQuery(
     contact
     skills
     experience
+    contact_method
   }
 }
 */
@@ -111,6 +113,13 @@ v1 = [
         "name": "experience",
         "args": null,
         "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "contact_method",
+        "args": null,
+        "storageKey": null
       }
     ]
   }
@@ -135,11 +144,11 @@ return {
     "operationKind": "query",
     "name": "EditProfileQuery",
     "id": null,
-    "text": "query EditProfileQuery(\n  $uuid: String\n) {\n  user_profile(uuid: $uuid) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n  }\n}\n",
+    "text": "query EditProfileQuery(\n  $uuid: String\n) {\n  user_profile(uuid: $uuid) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    contact_method\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'fea4abf35bf49f56ad159db12ce276dc';
+(node/*: any*/).hash = '1b020bfbb839ed877c30cd115bb9a596';
 module.exports = node;

@@ -94,6 +94,7 @@ let updateUser = async function(args) {
 }
 
 let getUserProfile = async function (args) {
+    console.log(args);
     return User.findOne({uuid: args.uuid});
 }
 

@@ -32,6 +32,7 @@ export interface IUser extends RootDocument {
     experience?: string;
     contact?: string;
     image?: string;
+    contact_method?: string;
 }
 
 export interface ITeam {
@@ -101,7 +102,8 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
     image: String,
     auth_keys: [String],
     admin: Boolean,
-    contact: String
+    contact: String,
+    contact_method: String
     },
     {
         usePushEach: true

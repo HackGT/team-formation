@@ -15,7 +15,7 @@ class Login extends Component {
             var login_json = this.state.data;
             if (login_json.uuid) {
                 if (!login_json.school) {
-                    this.props.onFeedChange(login_json.uuid, login_json.name, login_json.email);
+                    //this.props.onFeedChange(login_json.uuid);
                     this.props.onNextClick('setup-profile', login_json.uuid);
                 } else {
                     this.props.onNextClick('feed', login_json.uuid);

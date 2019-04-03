@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 46a3a6fd60ab70c3d2fec94d3492f950
+ * @relayHash c77308ae3ee6f3d9a39e73bd69684088
  */
 
 /* eslint-disable */
@@ -17,6 +17,7 @@ export type EditProfileMutationVariables = {|
   skills?: ?$ReadOnlyArray<?string>,
   experience?: ?string,
   contact?: ?string,
+  contact_method?: ?string,
 |};
 export type EditProfileMutationResponse = {|
   +update_user: {|
@@ -44,8 +45,9 @@ mutation EditProfileMutation(
   $skills: [String]
   $experience: String
   $contact: String
+  $contact_method: String
 ) {
-  update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact) {
+  update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {
     name
     grad_year
     school
@@ -99,6 +101,12 @@ var v0 = [
     "name": "contact",
     "type": "String",
     "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "contact_method",
+    "type": "String",
+    "defaultValue": null
   }
 ],
 v1 = [
@@ -112,6 +120,12 @@ v1 = [
         "kind": "Variable",
         "name": "contact",
         "variableName": "contact",
+        "type": "String"
+      },
+      {
+        "kind": "Variable",
+        "name": "contact_method",
+        "variableName": "contact_method",
         "type": "String"
       },
       {
@@ -219,11 +233,11 @@ return {
     "operationKind": "mutation",
     "name": "EditProfileMutation",
     "id": null,
-    "text": "mutation EditProfileMutation(\n  $uuid: String\n  $name: String\n  $grad_year: String\n  $school: String\n  $skills: [String]\n  $experience: String\n  $contact: String\n) {\n  update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact) {\n    name\n    grad_year\n    school\n    skills\n    experience\n    contact\n  }\n}\n",
+    "text": "mutation EditProfileMutation(\n  $uuid: String\n  $name: String\n  $grad_year: String\n  $school: String\n  $skills: [String]\n  $experience: String\n  $contact: String\n  $contact_method: String\n) {\n  update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {\n    name\n    grad_year\n    school\n    skills\n    experience\n    contact\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'b5c1afc23f32cb13a2f5e6eb887fe2f3';
+(node/*: any*/).hash = '10d33ffc6ac92388df51e030ac058a64';
 module.exports = node;

@@ -12,7 +12,7 @@ type Query {
 }
 
 type Mutation {
-    update_user(uuid: String, name: String email: String, grad_year: String, school: String, contact: String, skills: [String], experience: String): User!
+    update_user(uuid: String, name: String email: String, grad_year: String, school: String, contact: String, skills: [String], experience: String, contact_method: String): User!
 }
 
 input UserFilter {
@@ -34,4 +34,5 @@ type User {
     skills: [String]
     experience: String
     contact: String
+    contact_method: String
 }
