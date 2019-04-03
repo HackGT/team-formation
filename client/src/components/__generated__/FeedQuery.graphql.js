@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash af974c75f44c55d6ba726971b4e2b97b
+ * @relayHash 49fad18b3b4f93fcf0a7bae5bd226784
  */
 
 /* eslint-disable */
@@ -17,9 +17,12 @@ export type FeedQueryVariables = {|
 |};
 export type FeedQueryResponse = {|
   +user: $ReadOnlyArray<{|
-    +email: ?string,
     +name: ?string,
     +school: ?string,
+    +grad_year: ?string,
+    +contact: ?string,
+    +skills: ?$ReadOnlyArray<?string>,
+    +experience: ?string,
   |}>
 |};
 export type FeedQuery = {|
@@ -37,9 +40,12 @@ query FeedQuery(
   $school: String
 ) {
   user(email: $email, name: $name, grad_year: $grad_year, school: $school) {
-    email
     name
     school
+    grad_year
+    contact
+    skills
+    experience
   }
 }
 */
@@ -109,13 +115,6 @@ v1 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "email",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
         "name": "name",
         "args": null,
         "storageKey": null
@@ -124,6 +123,34 @@ v1 = [
         "kind": "ScalarField",
         "alias": null,
         "name": "school",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "grad_year",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "contact",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "skills",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "experience",
         "args": null,
         "storageKey": null
       }
@@ -150,11 +177,11 @@ return {
     "operationKind": "query",
     "name": "FeedQuery",
     "id": null,
-    "text": "query FeedQuery(\n  $name: String\n  $email: String\n  $grad_year: String\n  $school: String\n) {\n  user(email: $email, name: $name, grad_year: $grad_year, school: $school) {\n    email\n    name\n    school\n  }\n}\n",
+    "text": "query FeedQuery(\n  $name: String\n  $email: String\n  $grad_year: String\n  $school: String\n) {\n  user(email: $email, name: $name, grad_year: $grad_year, school: $school) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'f401bf374d67de0b8906bc16745d6627';
+(node/*: any*/).hash = '2b439ff4365562e976ff0dca9b9978e2';
 module.exports = node;

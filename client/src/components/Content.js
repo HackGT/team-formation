@@ -9,10 +9,13 @@ import HeaderEditProfile from './ui_subcomponents/HeaderEditProfile'
 import './css/Content.css';
 
 class Content extends Component {
-	state = {
-		cur_state: 'login',
-        user_id: ''
-	};
+	constructor() {
+		super()
+		this.state = {
+			cur_state: 'login',
+			user_id: ''
+		};
+	}
 
 	render() {
 		let cur_display;
@@ -21,12 +24,14 @@ class Content extends Component {
 			cur_header = <HeaderLogin/>
 			cur_display = <Login
 				onNextClick={this.onNextClick}
-                onSignUpClick={this.onSignUpClick}
                 onFeedChange={this.onProfileChange}/>;
 		} else if (this.state.cur_state === 'setup-profile') {
 			cur_header = <HeaderEditProfile/>
 			cur_display = <EditProfile
-				onNextClick={this.onNextClick} user_id={this.state.user_id} name={this.state.name} email={this.state.email}
+				onNextClick={this.onNextClick}
+				user_id={this.state.user_id}
+				name={this.state.name}
+				email={this.state.email}
                 />;
 		} else if (this.state.cur_state === 'feed') {
 			cur_header = <HeaderFeed onEditClick={this.onEditClick}/>
@@ -40,17 +45,22 @@ class Content extends Component {
 		);
 	}
 
-	onNextClick = (next_action) => {
-		this.setState({cur_state: next_action});
-	};
-    onProfileChange = (id, name, email) => {
-        this.setState({cur_state: 'setup-profile', user_id: id, name: name, email: email});
-    };
 	onEditClick = () => {
 		this.setState({
 			cur_state: 'setup-profile'
 		})
 	}
+
+	onNextClick = (next_action, uuid) => {
+		this.setState({
+			cur_state: next_action,
+			user_id: uuid
+		});
+	};
+
+    onProfileChange = (id, name, email) => {
+        this.setState({cur_state: 'setup-profile', user_id: id, name: name, email: email});
+    };
 }
 
 

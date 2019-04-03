@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 47d09f268c562b0087b2d24ae3bd8450
+ * @relayHash 02430334956a7c7104863998d268e8cf
  */
 
 /* eslint-disable */
@@ -14,10 +14,10 @@ export type FeedCardsQueryVariables = {|
 |};
 export type FeedCardsQueryResponse = {|
   +user: $ReadOnlyArray<{|
-    +email: ?string,
     +name: ?string,
     +school: ?string,
     +grad_year: ?string,
+    +contact: ?string,
     +skills: ?$ReadOnlyArray<?string>,
     +experience: ?string,
   |}>
@@ -34,10 +34,10 @@ query FeedCardsQuery(
   $name: String
 ) {
   user(name: $name) {
-    email
     name
     school
     grad_year
+    contact
     skills
     experience
   }
@@ -73,13 +73,6 @@ v1 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "email",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
         "name": "name",
         "args": null,
         "storageKey": null
@@ -95,6 +88,13 @@ v1 = [
         "kind": "ScalarField",
         "alias": null,
         "name": "grad_year",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "contact",
         "args": null,
         "storageKey": null
       },
@@ -135,11 +135,11 @@ return {
     "operationKind": "query",
     "name": "FeedCardsQuery",
     "id": null,
-    "text": "query FeedCardsQuery(\n  $name: String\n) {\n  user(name: $name) {\n    email\n    name\n    school\n    grad_year\n    skills\n    experience\n  }\n}\n",
+    "text": "query FeedCardsQuery(\n  $name: String\n) {\n  user(name: $name) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '8f58d233c5887c266b034531d9f2b7a6';
+(node/*: any*/).hash = '3fccab9ed03bed1ede41409aa2e81b39';
 module.exports = node;

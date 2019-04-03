@@ -5,6 +5,7 @@ import './css/UserCard.css';
 
 class UserCard extends Component {
     render() {
+		console.log(this.props.contact)
         return (
 			<div className="UserCard-container">
 				<div className="card-container">

@@ -1,38 +1,29 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import './css/Login.css';
-import Loading from './ui_subcomponents/Loading'
 class Login extends Component {
 
     constructor(props) {
         super(props);
 		this.state = {
 			user_id: "",
-			loading: false,
 			data: {},
 		};
 
         this.onFetchLogin().then(() => {
             var login_json = this.state.data;
             if (login_json.uuid) {
-                this.setState({
-                    is_loading: true,
-                })
                 if (!login_json.school) {
                     this.props.onFeedChange(login_json.uuid, login_json.name, login_json.email);
-                    this.props.onNextClick('setup-profile');
+                    this.props.onNextClick('setup-profile', login_json.uuid);
                 } else {
-                    this.props.onNextClick('feed');
+                    this.props.onNextClick('feed', login_json.uuid);
                 }
             }
 		});
     }
 
     render() {
-        let is_loading;
-		if (this.state.loading) {
-			is_loading = <Loading/>;
-		}
         return (
             <div className="Login-container">
                 <h3> Confirming attendance for Horizons is necessary to use the platform. Login will not work without participant's confirming their attendance </h3>

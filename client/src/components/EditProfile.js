@@ -50,6 +50,7 @@ class EditProfile extends Component {
 	}
 
 	render() {
+		console.log(this.props);
 		let contact_method;
 		if (this.state.user_contact === 'phone number') {
 			contact_method = <Form.Input label='Phone Number:' placeholder='(###) ###-####' width={5} onChange={this.onContactInfoChange} required/>
@@ -64,34 +65,37 @@ class EditProfile extends Component {
 			<div className="Form-container">
 				<Form >
 					<Form.Group>
-					  <Form.Input label='Name' placeholder='Name' defaultValue= {this.props.name} width={5} onChange={this.onFirstNameChange} required/>
+						<Form.Input label='Name' placeholder='Name' defaultValue= {this.props.name} width={5} onChange={this.onFirstNameChange} required/>
 					</Form.Group>
 					<Form.Group>
-					  <Form.Input label='School' placeholder='School' width={5} onChange={this.onSchoolChange} required/>
-					  <Form.Input label='Graduation Year' placeholder='Graduation Year' width={3} onChange={this.onGradYearChange} required/>
-					</Form.Group>
-					<Divider />
-					<Form.Group>
-					  <Form.Input label='Skill 1:' placeholder='Skill 1' width={5} onChange={this.onSkills1Change}/>
-					  <Form.Input label='Skill 2:' placeholder='Skill 2' width={5} onChange={this.onSkills2Change}/>
-					  <Form.Input label='Skill 3:' placeholder='Skill 3' width={5} onChange={this.onSkills3Change}/>
-					</Form.Group>
-					<Form.Group>
-					  <Form.Field control={TextArea} label='About me:' placeholder='Tell us more about your experiences and interests...' width={15} onChange={this.onExperienceChange}/>
+						<Form.Input label='School' placeholder='School' width={5} onChange={this.onSchoolChange} required/>
+						<Form.Input label='Graduation Year' placeholder='Graduation Year' width={3} onChange={this.onGradYearChange} required/>
 					</Form.Group>
 					<Divider />
+
 					<Form.Group>
-					  <ContactDropdown contact={this.changeContact}/>
+						<Form.Input label='Skill 1:' placeholder='Skill 1' width={5} onChange={this.onSkills1Change}/>
+						<Form.Input label='Skill 2:' placeholder='Skill 2' width={5} onChange={this.onSkills2Change}/>
+						<Form.Input label='Skill 3:' placeholder='Skill 3' width={5} onChange={this.onSkills3Change}/>
 					</Form.Group>
 					<Form.Group>
-					  {contact_method}
+						<Form.Field control={TextArea} label='About me:' placeholder='Tell us more about your experiences and interests...' width={15} onChange={this.onExperienceChange}/>
 					</Form.Group>
 					<Divider />
+
 					<Form.Group>
-					  <Button onClick={this.onNextClick} className="save-button"> save </Button>
+						<ContactDropdown contact={this.changeContact}/>
 					</Form.Group>
 					<Form.Group>
-					  {this.state.error_message}
+						{contact_method}
+					</Form.Group>
+					<Divider />
+
+					<Form.Group>
+						<Button onClick={this.onNextClick} className="save-button"> save </Button>
+					</Form.Group>
+					<Form.Group>
+						{this.state.error_message}
 					</Form.Group>
 				</Form>
 			</div>
