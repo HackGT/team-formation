@@ -4,13 +4,14 @@ import './css/Login.css';
 import Loading from './ui_subcomponents/Loading'
 class Login extends Component {
 
-	state = {
-		user_id: "",
-		loading: false,
-		data: {},
-	};
     constructor(props) {
         super(props);
+		this.state = {
+			user_id: "",
+			loading: false,
+			data: {},
+		};
+
         this.onFetchLogin().then(() => {
             var login_json = this.state.data;
             if (login_json.uuid) {
@@ -26,6 +27,7 @@ class Login extends Component {
             }
 		});
     }
+
     render() {
         let is_loading;
 		if (this.state.loading) {
@@ -36,7 +38,7 @@ class Login extends Component {
                 <h3> Confirming attendance for Horizons is necessary to use the platform. Login will not work without participant's confirming their attendance </h3>
 				<Button href = {process.env.REACT_APP_SERVER_URL}> Login </Button>
             </div>
-            )
+		)
     }
 
     onFetchLogin = () => {

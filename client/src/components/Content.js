@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import Login from './Login';
 import EditProfile from './EditProfile';
 import Feed from './Feed'
-import HeaderLogin from './HeaderLogin'
-import HeaderFeed from './HeaderFeed'
-import HeaderEditProfile from './HeaderEditProfile'
+import HeaderLogin from './ui_subcomponents/HeaderLogin'
+import HeaderFeed from './ui_subcomponents/HeaderFeed'
+import HeaderEditProfile from './ui_subcomponents/HeaderEditProfile'
 import './css/Content.css';
 
 class Content extends Component {

@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { Dropdown, Icon, Input, Menu, Button } from 'semantic-ui-react'
 
 class SideMenu extends Component {
-	state = {
-		search_string: ""
+	constructor() {
+		super();
+		this.state = {
+			search_string: ""
+		}
 	}
 
 	render() {
