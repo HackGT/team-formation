@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import { Input } from 'semantic-ui-react';
-import { Button, Divider, TextArea, Message } from 'semantic-ui-react';
-import { Form } from 'semantic-ui-react';
+import { Button, Divider, TextArea, Message, Form } from 'semantic-ui-react';
 import {QueryRenderer } from 'react-relay';
-import Loading from './ui_subcomponents/Loading';
-import YearDropdown from './ui_subcomponents/YearDropdown';
 import ContactDropdown from './ui_subcomponents/ContactDropdown';
 import './css/EditProfile.css'
 import {commitMutation } from 'react-relay';
@@ -90,34 +87,37 @@ class EditProfile extends Component {
                     <div className="Form-container">
                         <Form >
                             <Form.Group>
-                            <Form.Input label='Name' placeholder='Name' defaultValue= {props.name} width={5} onChange={this.onFirstNameChange} required/>
+                            	<Form.Input label='Name' placeholder='Name' defaultValue= {props.name} width={5} onChange={this.onFirstNameChange} required/>
                             </Form.Group>
                             <Form.Group>
-                            <Form.Input label='School' placeholder='School' defaultValue={props.school} width={5} onChange={this.onSchoolChange} required/>
-                            <Form.Input label='Graduation Year' placeholder='Graduation Year' defaultValue={props.grad_year} width={3} onChange={this.onGradYearChange} required/>
-                            </Form.Group>
-                            <Divider />
-                            <Form.Group>
-                            <Form.Input label='Skill 1:' placeholder='Skill 1' defaultValue={""} width={5} onChange={this.onSkills1Change}/>
-                            <Form.Input label='Skill 2:' placeholder='Skill 2' defaultValue={""} width={5} onChange={this.onSkills2Change}/>
-                            <Form.Input label='Skill 3:' placeholder='Skill 3' defaultValue={""} width={5} onChange={this.onSkills3Change}/>
-                            </Form.Group>
-                            <Form.Group>
-                            <Form.Field control={TextArea} label='About me:' placeholder='Tell us more about your experiences and interests...' defaultValue={props.experience} width={15} onChange={this.onExperienceChange}/>
+                            	<Form.Input label='School' placeholder='School' defaultValue={props.school} width={5} onChange={this.onSchoolChange} required/>
+                            	<Form.Input label='Graduation Year' placeholder='Graduation Year' defaultValue={props.grad_year} width={3} onChange={this.onGradYearChange} required/>
                             </Form.Group>
                             <Divider />
+
                             <Form.Group>
-                            <ContactDropdown contact={this.changeContact}/>
+                            	<Form.Input label='Skill 1:' placeholder='Skill 1' defaultValue={""} width={5} onChange={this.onSkills1Change}/>
+                            	<Form.Input label='Skill 2:' placeholder='Skill 2' defaultValue={""} width={5} onChange={this.onSkills2Change}/>
+                            	<Form.Input label='Skill 3:' placeholder='Skill 3' defaultValue={""} width={5} onChange={this.onSkills3Change}/>
                             </Form.Group>
                             <Form.Group>
-                            {contact_method}
+                            	<Form.Field control={TextArea} label='About me:' placeholder='Tell us more about your experiences and interests...' defaultValue={props.experience} width={15} onChange={this.onExperienceChange}/>
                             </Form.Group>
                             <Divider />
+
                             <Form.Group>
-                            <Button onClick={this.onNextClick} className="save-button"> save </Button>
+                            	<ContactDropdown contact={this.changeContact}/>
                             </Form.Group>
                             <Form.Group>
-                            {this.state.error_message}
+                            	{contact_method}
+                            </Form.Group>
+                            <Divider />
+
+                            <Form.Group>
+                            	<Button onClick={this.onNextClick} className="save-button"> save </Button>
+                            </Form.Group>
+                            <Form.Group>
+                            	{this.state.error_message}
                             </Form.Group>
                         </Form>
                     </div>)}

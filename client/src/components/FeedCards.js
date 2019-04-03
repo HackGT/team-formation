@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Card, Image } from 'semantic-ui-react';
+import { Button, Card, Image, Icon, Divider } from 'semantic-ui-react';
 import UserCard from './UserCard'
-import { Icon, Divider } from 'semantic-ui-react';
 import {QueryRenderer } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import PropTypes from 'prop-types';
@@ -31,7 +30,7 @@ const getUsersQuery = graphql`
 
 class FeedCards extends Component {
     render() {
-        
+
         return (
             <QueryRenderer
                 environment={environment}

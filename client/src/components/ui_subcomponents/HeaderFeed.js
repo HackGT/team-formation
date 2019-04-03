@@ -12,13 +12,14 @@ class Headers extends Component {
 				<div className="logout-button">
 					<Menu>
 						<Menu.Item>
-						  <Button className="edit-button" onClick={this.props.onEditClick}> Edit Profile </Button>
+							<Button className="edit-button" onClick={this.props.onEditClick}> Edit Profile </Button>
 						</Menu.Item>
 						<Menu.Item>
-						  <Button  href={process.env.REACT_APP_SERVER_URL + '/api/user/logout'} className="logout-button"> Logout </Button>
+							<Button  href={process.env.REACT_APP_SERVER_URL + '/api/user/logout'} className="logout-button"> Logout </Button>
 						</Menu.Item>
 					</Menu>
 				</div>
+				
 				<div className="headers">
 					<h1>HackGT</h1>
 					<h2>Team Formation</h2>

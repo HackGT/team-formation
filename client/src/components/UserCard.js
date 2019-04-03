@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Image, Popup } from 'semantic-ui-react';
-import { Icon } from 'semantic-ui-react';
+import { Button, Card, Image, Popup, Icon } from 'semantic-ui-react';
 import './css/UserCard.css';
 
 class UserCard extends Component {
