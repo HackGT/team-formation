@@ -161,30 +161,36 @@ class EditProfile extends Component {
 	};
 
 	onNextClick = () => {
-        let skills = [this.state.user_skills_1, this.state.user_skills_2, this.state.user_skills_3]
-        commitMutation(
-            environment,
-            {
-                mutation,
-                variables: {
-                    uuid: this.props.user_id,
-                    name: this.state.user_first_name + " " + this.state.user_last_name,
-                    grad_year: this.state.user_grad_year,
-                    school: this.state.user_school,
-                    contact: this.state.user_contact,
-                    skills: [this.state.user_skills_1, this.state.user_skills_2, this.state.user_skills_3],
-					experience: this.state.user_experience,
-                }
-            }
-        )
-		this.props.onNextClick('feed');
+		let cur_error
+		if (this.state.name === "" || this.state.school === "" || this.state.grad_year === "" || this.state.contact === "" ) {
+			cur_error = <Message
+		      error
+		      header='Some required fields left empty'
+		      content='Make sure to fill in all starred fields'
+		    />;
+			this.setState({
+				error_message: cur_error
+			})
+		} else {
+	        let skills = [this.state.user_skills_1, this.state.user_skills_2, this.state.user_skills_3]
+	        commitMutation(
+	            environment,
+	            {
+	                mutation,
+	                variables: {
+	                    uuid: this.props.user_id,
+	                    name: this.state.user_first_name + " " + this.state.user_last_name,
+	                    grad_year: this.state.user_grad_year,
+	                    school: this.state.user_school,
+	                    contact: this.state.user_contact,
+	                    skills: skills	,
+						experience: this.state.user_experience,
+	                }
+	            }
+	        )
+			this.props.onNextClick('feed');
+		}
 	}
 }
-
-const styles = {
-		form: {
-			width: '100%'
-		}
-};
 
 export default EditProfile
