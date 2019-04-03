@@ -54,19 +54,17 @@ class EditProfile extends Component {
 		if (this.state.user_contact === 'phone number') {
 			contact_method = <Form.Input label='Phone Number:' placeholder='(###) ###-####' width={5} onChange={this.onContactInfoChange} required/>
 		} else if (this.state.user_contact === 'email') {
-			contact_method = <Form.Input label='Email:' placeholder='example@email.com' width={5} onChange={this.onContactInfoChange} required/>
+			contact_method = <Form.Input label='Email:' placeholder='example@email.com' defaultValue={this.props.email} width={5} onChange={this.onContactInfoChange} required/>
 		} else if (this.state.user_contact === "social media") {
 			contact_method = <Form.Input label='Social Media URL:' placeholder='Social Media URL' width={5} onChange={this.onContactInfoChange} required/>
 		} else {
 			contact_method = ""
-		}
+        }
 		return (
-
-			<div>
 			<div className="Form-container">
 				<Form >
 					<Form.Group>
-					  <Form.Input label='Name' placeholder='Name' width={5} onChange={this.onFirstNameChange} required/>
+					  <Form.Input label='Name' placeholder='Name' defaultValue= {this.props.name} width={5} onChange={this.onFirstNameChange} required/>
 					</Form.Group>
 					<Form.Group>
 					  <Form.Input label='School' placeholder='School' width={5} onChange={this.onSchoolChange} required/>
@@ -96,7 +94,6 @@ class EditProfile extends Component {
 					  {this.state.error_message}
 					</Form.Group>
 				</Form>
-			</div>
 			</div>
 		);
     };

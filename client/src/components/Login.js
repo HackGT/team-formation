@@ -18,7 +18,7 @@ class Login extends Component {
                     is_loading: true,
                 })
                 if (!login_json.school) {
-                    this.props.onFeedChange(login_json.uuid, login_json.name);
+                    this.props.onFeedChange(login_json.uuid, login_json.name, login_json.email);
                     this.props.onNextClick('setup-profile');
                 } else {
                     this.props.onNextClick('feed');
@@ -40,7 +40,6 @@ class Login extends Component {
     }
 
     onFetchLogin = () => {
-		console.log(process.env.REACT_APP_SERVER_URL);
         return fetch(process.env.REACT_APP_SERVER_URL + '/api/user/check', {
             method: "GET",
             credentials: "include"

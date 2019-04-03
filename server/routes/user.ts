@@ -7,14 +7,12 @@ export let userRoutes = express.Router();
 
 userRoutes.route("/login").get((request, response, next) => {
     const callbackURL = createLink(request, "api/user/login/callback");
-    console.log(request.user);
     passport.authenticate('oauth2', { callbackURL } as AuthenticateOptions)(request, response, next);
 });
 
 userRoutes.route("/login/callback").get((request, response, next) => {
     const callbackURL = createLink(request, "api/user/login/callback");
-    console.log(request.user);
-    
+
     if (request.query.error === "access_denied") {
         response.redirect("/login");
         return;
@@ -50,7 +48,6 @@ userRoutes.route("/logout").all(async (request, response) => {
         };
         await requests(options, async (err, res, body) => {
             if (err) { return console.log(err); }
-            console.log(body);
             await request.logout();
             response.redirect("http://localhost:3000");
         });

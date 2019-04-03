@@ -26,7 +26,7 @@ class Content extends Component {
 		} else if (this.state.cur_state === 'setup-profile') {
 			cur_header = <HeaderEditProfile/>
 			cur_display = <EditProfile
-				onNextClick={this.onNextClick} user_id={this.state.user_id}
+				onNextClick={this.onNextClick} user_id={this.state.user_id} name={this.state.name} email={this.state.email}
                 />;
 		} else if (this.state.cur_state === 'feed') {
 			cur_header = <HeaderFeed onEditClick={this.onEditClick}/>
@@ -43,8 +43,8 @@ class Content extends Component {
 	onNextClick = (next_action) => {
 		this.setState({cur_state: next_action});
 	};
-    onProfileChange = (id, name) => {
-        this.setState({cur_state: 'setup-profile', user_id: id, name: name});
+    onProfileChange = (id, name, email) => {
+        this.setState({cur_state: 'setup-profile', user_id: id, name: name, email: email});
     };
 	onEditClick = () => {
 		this.setState({
