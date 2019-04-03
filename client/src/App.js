@@ -12,16 +12,10 @@ import './App.css';
 
 class App extends Component {
 
-	state = {
-		subHeader: 'Team Formation',
-		content: 'login'
-	};
-
   render() {
     return (
 
 	  <div className="App-container">
-		  <Headers subHeader={this.state.subHeader}/>
 		  <Content/>
 	  </div>
     );

@@ -42,9 +42,6 @@ class Feed extends Component {
 	render() {
 		return (
             <div>
-                <div className="logout-button">
-                    <Logout/>
-                </div>
             <br/>
             <div className="card-container">
             </div>

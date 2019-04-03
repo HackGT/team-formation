@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Image } from 'semantic-ui-react';
+import { Button, Card, Image, Popup } from 'semantic-ui-react';
 import { Icon } from 'semantic-ui-react';
 import './css/UserCard.css';
 
@@ -20,6 +20,15 @@ class UserCard extends Component {
 						<Card.Description className="card-description">
 						  <strong> experience: </strong>{this.props.experience}
 						</Card.Description>
+						<div className="ui divider"></div>
+						<div className='contact-button'>
+						  <Popup
+					        trigger={<Button basic color='teal' content='Reach Out' />}
+					        content={this.props.contact}
+					        on='click'
+					        hideOnScroll
+						  />
+				        </div>
 					  </Card.Content>
 
 				</Card>

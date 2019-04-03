@@ -9,7 +9,6 @@ import './css/EditProfile.css'
 import {commitMutation } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import environment from './Environment'
-import ValidatorForm, {TextValidator} from 'react-form-validator-core';
 const {
   Environment,
   Network,
