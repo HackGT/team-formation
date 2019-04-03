@@ -81,13 +81,12 @@ let getUser = async function (args) {
         users = await User.find({});
     } else {
         
-        users = await User.find({name: {$regex: '.+'+args.name+'.+', $options: 'i'}});
+        users = await User.find({name: {$regex: '.*'+args.name+'.*', $options: 'i'}});
     }
     if (!users) {
         return null;
     }
-    console.log(users);
-    users.sort(function(a, b){return a.name.indexOf(args.name) - b.name.indexOf(args.name)});
+    users.sort(function(a, b){return a.name.toLowerCase().indexOf(args.name.toLowerCase()) - b.name.toLowerCase().indexOf(args.name.toLowerCase())});
     return users;
 }
 
