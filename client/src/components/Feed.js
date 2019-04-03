@@ -5,7 +5,6 @@ import { Icon, Divider } from 'semantic-ui-react';
 import {QueryRenderer } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import PropTypes from 'prop-types';
-import './css/Feed.css';
 import environment from './Environment'
 import SearchField from 'react-search-field';
 import FeedCards from './FeedCards'
@@ -35,21 +34,20 @@ const getUsersQuery = graphql`
 class Feed extends Component {
     constructor(props){
         super(props)
-        this.state = {name: ""}
+        this.state = {
+			name: ""
+		}
         // this.onSearchClick.bind(this);
 
     };
 	render() {
 		return (
-            <div>
-            <br/>
-            <div className="card-container">
-            </div>
-			<div className="menu">
-				<SideMenu onSearchClick={this.onSearchClick} className="search"/>
+			<div className="Feed-container">
+				<div className="menu">
+					<SideMenu onSearchClick={this.onSearchClick} className="search"/>
+				</div>
+			    <FeedCards name={this.state.name} />
 			</div>
-                <FeedCards name={this.state.name} />
-            </div>
 
         );
 	}

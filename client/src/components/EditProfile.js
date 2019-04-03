@@ -207,8 +207,8 @@ class EditProfile extends Component {
 	                    name: this.state.user_first_name + " " + this.state.user_last_name,
 	                    grad_year: this.state.user_grad_year,
 	                    school: this.state.user_school,
-	                    contact: this.state.user_contact,
-	                    skills: skills	,
+	                    contact: this.state.user_contact_info,
+	                    skills: skills,
 						experience: this.state.user_experience,
 	                }
 	            }
