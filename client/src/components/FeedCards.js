@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Button, Card, Image, Icon, Divider } from 'semantic-ui-react';
-import UserCard from './UserCard'
+import UserCard from './UserCard';
 import {QueryRenderer } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import PropTypes from 'prop-types';
 import './css/Feed.css';
-import environment from './Environment'
+import environment from './Environment';
 import SearchField from 'react-search-field';
 
 const {
@@ -26,7 +26,7 @@ const getUsersQuery = graphql`
 			experience
         }
     }
-`
+`;
 
 class FeedCards extends Component {
     render() {
@@ -53,8 +53,7 @@ class FeedCards extends Component {
                 }}
             />
         );
-    }
+    };
+};
 
-}
-
-export default FeedCards
+export default FeedCards;

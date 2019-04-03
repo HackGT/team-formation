@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import './css/Login.css';
-class Login extends Component {
 
+
+class Login extends Component {
     constructor(props) {
         super(props);
 		this.state = {
@@ -21,7 +22,7 @@ class Login extends Component {
                 }
             }
 		});
-    }
+    };
 
     render() {
         return (
@@ -29,8 +30,8 @@ class Login extends Component {
                 <h3> Confirming attendance for Horizons is necessary to use the platform. Login will not work without participant's confirming their attendance </h3>
 				<Button href = {process.env.REACT_APP_SERVER_URL}> Login </Button>
             </div>
-		)
-    }
+		);
+    };
 
     onFetchLogin = () => {
         return fetch(process.env.REACT_APP_SERVER_URL + '/api/user/check', {
@@ -47,8 +48,8 @@ class Login extends Component {
                 });
             });
         });
-    }
-}
+    };
+};
 
 
 export default Login;

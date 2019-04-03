@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Button, Card, Image, Icon, Divider } from 'semantic-ui-react';
-import UserCard from './UserCard'
+import UserCard from './UserCard';
 import {QueryRenderer } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import PropTypes from 'prop-types';
-import environment from './Environment'
+import environment from './Environment';
 import SearchField from 'react-search-field';
-import FeedCards from './FeedCards'
-import SideMenu from './SideMenu'
-import Logout from './ui_subcomponents/Logout'
+import FeedCards from './FeedCards';
+import SideMenu from './SideMenu';
+import Logout from './ui_subcomponents/Logout';
 
 const {
   Environment,
@@ -28,16 +28,14 @@ const getUsersQuery = graphql`
 			experience
         }
     }
-`
+`;
 
 class Feed extends Component {
     constructor(props){
         super(props)
         this.state = {
 			name: ""
-		}
-        // this.onSearchClick.bind(this);
-
+		};
     };
 	render() {
 		return (
@@ -49,17 +47,15 @@ class Feed extends Component {
 			</div>
 
         );
-	}
+	};
 
 	onSearch = (search_string) => {
 		this.setState({name:search_string});
-	}
+	};
 
     onSearchClick = (search_string) => {
         this.setState({name:search_string});
+    };
+};
 
-    }
-
-}
-
-export default Feed
+export default Feed;

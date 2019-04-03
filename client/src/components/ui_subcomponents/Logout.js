@@ -9,7 +9,7 @@ class Logout extends Component {
 			    <Button  href={process.env.REACT_APP_SERVER_URL + '/api/user/logout'} className="logout-button"> Logout </Button>
             </div>
 		);
-    }
-}
+    };
+};
 
-export default Logout
+export default Logout;

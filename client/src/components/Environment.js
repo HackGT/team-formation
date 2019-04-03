@@ -26,7 +26,7 @@ function fetchQuery(
   }).then(response => {
     return response.json();
   });
-}
+};
 
 // Create a network layer from the fetch function
 const network = Network.create(fetchQuery);

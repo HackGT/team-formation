@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../css/Headers.css'
+import '../css/Headers.css';
 import { Button, Menu } from 'semantic-ui-react';
 
 class Headers extends Component {
@@ -16,4 +16,4 @@ class Headers extends Component {
 	}
 }
 
-export default Headers
+export default Headers;

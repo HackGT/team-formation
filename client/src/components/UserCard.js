@@ -4,7 +4,6 @@ import './css/UserCard.css';
 
 class UserCard extends Component {
     render() {
-		console.log(this.props.contact)
         return (
 			<div className="UserCard-container">
 				<div className="card-container">
@@ -38,6 +37,6 @@ class UserCard extends Component {
 			</div>
 		);
 	};
-}
+};
 
-export default UserCard
+export default UserCard;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown, Input } from 'semantic-ui-react'
+import { Dropdown, Input } from 'semantic-ui-react';
 
 const contactOptions = [
 	{
@@ -14,15 +14,15 @@ const contactOptions = [
 		text: "social media",
 		value: "social media"
 	}
-]
+];
 class YearDropdown extends Component {
 
 	constructor() {
 		super();
 		this.state = {
 			contact_method: ""
-		}
-	}
+		};
+	};
 
 	render() {
 		return(
@@ -35,14 +35,14 @@ class YearDropdown extends Component {
 				/>
 			</div>
 		);
-	}
+	};
 
 	onHandleChange = (e, d) => {
 		this.setState({
 			contact_method: d.value
-		})
-		this.props.contact(d.value)
-	}
-}
+		});
+		this.props.contact(d.value);
+	};
+};
 
-export default YearDropdown
+export default YearDropdown;

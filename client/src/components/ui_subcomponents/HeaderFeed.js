@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../css/Headers.css'
-import Logout from './Logout'
+import '../css/Headers.css';
+import Logout from './Logout';
 import { Button, Menu } from 'semantic-ui-react';
 
 class Headers extends Component {
@@ -19,14 +19,14 @@ class Headers extends Component {
 						</Menu.Item>
 					</Menu>
 				</div>
-				
+
 				<div className="headers">
 					<h1>HackGT</h1>
 					<h2>Team Formation</h2>
 				</div>
 			</div>
 		);
-	}
-}
+	};
+};
 
-export default Headers
+export default Headers;

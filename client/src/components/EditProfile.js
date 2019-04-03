@@ -3,10 +3,10 @@ import { Input } from 'semantic-ui-react';
 import { Button, Divider, TextArea, Message, Form } from 'semantic-ui-react';
 import {QueryRenderer } from 'react-relay';
 import ContactDropdown from './ui_subcomponents/ContactDropdown';
-import './css/EditProfile.css'
+import './css/EditProfile.css';
 import {commitMutation } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
-import environment from './Environment'
+import environment from './Environment';
 const {
   Environment,
   Network,
@@ -38,7 +38,7 @@ query EditProfileQuery($uuid: String) {
         experience
     }
 }
-`
+`;
 class EditProfile extends Component {
 
 	constructor() {
@@ -57,7 +57,7 @@ class EditProfile extends Component {
 			user_contact_info: "",
             cur_error_message: "",
 		};
-	}
+	};
 
 	render() {
 
@@ -186,7 +186,7 @@ class EditProfile extends Component {
 	};
 
 	onNextClick = () => {
-		let cur_error
+		let cur_error;
 		if (this.state.name === "" || this.state.school === "" || this.state.grad_year === "" || this.state.contact === "" ) {
 			cur_error = <Message
 		      error
@@ -195,7 +195,7 @@ class EditProfile extends Component {
 		    />;
 			this.setState({
 				error_message: cur_error
-			})
+			});
 		} else {
 	        let skills = [this.state.user_skills_1, this.state.user_skills_2, this.state.user_skills_3]
 	        commitMutation(
@@ -212,10 +212,10 @@ class EditProfile extends Component {
 						experience: this.state.user_experience,
 	                }
 	            }
-	        )
+	        );
 			this.props.onNextClick('feed');
 		}
-	}
-}
+	};
+};
 
-export default EditProfile
+export default EditProfile;
