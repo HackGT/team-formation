@@ -82,7 +82,7 @@ class EditProfile extends Component {
                     if (error) {
                         return <div>{error.message}</div>;
                     } else if (props) {
-                        console.log(props)
+                        props = props.user_info;
                     return (
                     <div className="Form-container">
                         <Form >
