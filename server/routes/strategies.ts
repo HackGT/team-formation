@@ -109,7 +109,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
                 if (JSON.parse(body).data.search_user.users.length > 0) {
                     confirmed = JSON.parse(body).data.search_user.users[0].confirmed;
                 }
-                confirmed = true;
+                // confirmed = true;
                 if (confirmed) {
                     user = createNew<IUser>(User, {
                         ...profile

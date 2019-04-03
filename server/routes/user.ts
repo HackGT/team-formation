@@ -19,10 +19,10 @@ userRoutes.route("/login/callback").get((request, response, next) => {
     }
 
     passport.authenticate("oauth2", {
-        failureRedirect: "http://localhost:3000",
-        successReturnToOrRedirect: "http://localhost:3000",
+        failureRedirect: "/",
+        successReturnToOrRedirect: "/",
         callbackURL
-    } as AuthenticateOptions)(request, response, next); 
+    } as AuthenticateOptions)(request, response, next);
 });
 
 userRoutes.route("/check").get((request, response, next) => {
@@ -49,10 +49,10 @@ userRoutes.route("/logout").all(async (request, response) => {
         await requests(options, async (err, res, body) => {
             if (err) { return console.log(err); }
             await request.logout();
-            response.redirect("http://localhost:3000");
+            response.redirect("/api/user/login");
         });
     }
     else {
-        response.redirect("http://localhost:3000");
+        response.redirect("/api/user/login");
     }
 });

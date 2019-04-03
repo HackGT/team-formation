@@ -10,7 +10,7 @@ class Headers extends Component {
 				<div className="logout-button">
 					<Menu>
 						<Menu.Item>
-							<Button  href={process.env.REACT_APP_SERVER_URL + '/api/user/logout'} className="logout-button"> Logout </Button>
+							<Button  href={'/api/user/logout'} className="logout-button"> Logout </Button>
 						</Menu.Item>
 					</Menu>
 				</div>

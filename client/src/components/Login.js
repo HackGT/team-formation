@@ -27,14 +27,14 @@ class Login extends Component {
     render() {
         return (
             <div className="Login-container">
-                <h3> Confirming attendance for Horizons is necessary to use the platform. Login will not work without participant's confirming their attendance </h3>
-				<Button href = {process.env.REACT_APP_SERVER_URL}> Login </Button>
+				<Button href = {"/api/user/login"}> Login </Button>
+                <h3 id="login-message"> Participants must be confirmed for the Horizons event to access Team Formation</h3>
             </div>
 		);
     };
 
     onFetchLogin = () => {
-        return fetch(process.env.REACT_APP_SERVER_URL + '/api/user/check', {
+        return fetch('/api/user/check', {
             method: "GET",
             credentials: "include"
         })

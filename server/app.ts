@@ -17,7 +17,6 @@ import { userRoutes } from "./routes/user";
 dotenv.config();
 
 const PORT = 3001;
-const STATIC_ROOT = "../client";
 const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 const VERSION_NUMBER = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json"), "utf8")).version;
 const VERSION_HASH = require("git-rev-sync").short();
@@ -25,22 +24,12 @@ const VERSION_HASH = require("git-rev-sync").short();
 export const app = express();
 app.use(morgan("dev"));
 app.use(compression());
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
-    if ('OPTIONS' == req.method) {
-         res.send(200);
-     } else {
-         next();
-     }
-});
+app.use(cors());
 const session_secret = process.env['SECRET'];
 if (!session_secret) {
     throw new Error("Secret not specified");
 }
-
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(session({
     secret:session_secret,
     saveUninitialized: false,
@@ -116,10 +105,9 @@ app.use('/graphql', express_graphql({
     graphiql: true
 }));
 
-app.route("/").get((request, response) => {
-    response.redirect("/api/user/login");
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-app.use("/", serveStatic(path.resolve(__dirname, STATIC_ROOT)));
 
 app.listen(PORT, () => {
     console.log(`Team Formation system v${VERSION_NUMBER} @ ${VERSION_HASH} started on port ${PORT}`);
