@@ -7,28 +7,28 @@ class Feed extends Component {
     constructor(props){
         super(props)
         this.state = {
-            name: ""
+            skill: ""
 		};
     };
-    
+
 	render() {
 		return (
 			<div className="Feed-container">
 				<div className="menu">
 					<SideMenu onSearchClick={this.onSearchClick} className="search"/>
 				</div>
-			    <FeedCards name={this.state.name} />
+			    <FeedCards skill={this.state.skill} />
 			</div>
 
         );
 	};
 
 	onSearch = (search_string) => {
-		this.setState({name:search_string});
+		this.setState({skill:search_string});
 	};
 
     onSearchClick = (search_string) => {
-        this.setState({name:search_string});
+        this.setState({skill:search_string});
     };
 };
 

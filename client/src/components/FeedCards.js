@@ -25,7 +25,7 @@ class FeedCards extends Component {
                 environment={environment}
                 query={getUsersQuery}
                 variables={{
-                    name: this.props.name,
+                    skill: this.props.skill,
                 }}
                 render={({error,props}) => {
                     if (error) {

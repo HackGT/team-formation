@@ -75,8 +75,9 @@ let getUser = async function (args) {
     if(args.name == "" || args.name == null) {
         users = await User.find({});
     } else {
-        users = await User.find({name: {$regex: '.*'+args.name+'.*', $options: 'i'}});
+        users = await User.find({skills: "$elemMatch": {{"$regex": '.*'+args.skill+'.*', $options: 'i'}}});
     }
+    
     if (!users) {
         return null;
     }
