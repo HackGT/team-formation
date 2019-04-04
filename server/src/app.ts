@@ -21,6 +21,14 @@ const VERSION_NUMBER = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../pa
 //const VERSION_HASH = require("git-rev-sync").short();
 
 export let app = express();
+
+if (process.env.ISPRODUCTION === 'true') {
+	app.enable("trust proxy");
+}
+else {
+	console.warn("OAuth callback(s) running in development mode");
+}
+
 app.use(morgan("dev"));
 app.use(compression());
 app.use(cors());

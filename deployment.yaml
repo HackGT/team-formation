@@ -14,3 +14,4 @@ env:
   GROUNDTRUTHID: cec00fc9eac8de72a915372237a3591c7d13702957711377474afec1fc41a084
   GROUNDTRUTHURL: https://login.hack.gt
   GRAPHQLURL: https://registration.horizons.hack.gt/graphql
+  ISPRODUCTION: true
