@@ -186,7 +186,7 @@ class EditProfile extends Component {
 				error_message: cur_error
 			});
 		} else {
-            
+
             let skills = [this.state.skills_1, this.state.skills_2, this.state.skills_3]
 	        commitMutation(
 	            environment,

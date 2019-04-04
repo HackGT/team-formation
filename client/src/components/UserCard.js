@@ -4,6 +4,37 @@ import './css/UserCard.css';
 
 class UserCard extends Component {
     render() {
+		let contact;
+		let cur_contact = this.props.contact;
+		if (this.props.contact === null) {
+			contact = <Popup
+			trigger={<Button basic color='teal' content='Reach Out' />}
+			content="no contact available"
+			on='click'
+			hideOnScroll
+			/>
+		} else if ((this.props.contact).includes("@")) {
+			contact = <Popup
+			trigger={<Button basic color='teal' content='Reach Out' />}
+			content=<a href={`mailto:${this.props.contact}`}>{this.props.contact}</a>
+			on='click'
+			hideOnScroll
+			/>
+		} else if ((this.props.contact).includes(".")) {
+			contact = <Popup
+			trigger={<Button basic color='teal' content='Reach Out' />}
+			content=<a href={this.props.contact} target="_blank">{this.props.contact}</a>
+			on='click'
+			hideOnScroll
+			/>
+		} else {
+			contact = <Popup
+			trigger={<Button basic color='teal' content='Reach Out' />}
+			content={this.props.contact}
+			on='click'
+			hideOnScroll
+			/>
+		}
         return (
 			<div className="UserCard-container">
 				<div className="card-container">
@@ -24,12 +55,7 @@ class UserCard extends Component {
 							<div className="ui divider"></div>
 
 							<div className='contact-button'>
-								<Popup
-								trigger={<Button basic color='teal' content='Reach Out' />}
-								content={this.props.contact}
-								on='click'
-								hideOnScroll
-								/>
+								<p>{contact}</p>
 							</div>
 						</Card.Content>
 					</Card>
