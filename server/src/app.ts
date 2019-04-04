@@ -1,14 +1,13 @@
-import * as fs from "fs";
-import * as path from "path";
-import * as express from "express";
-import * as serveStatic from "serve-static";
-import * as compression from "compression";
-import * as morgan from "morgan";
-import * as passport from "passport";
-import * as session from "express-session"
-import * as express_graphql from "express-graphql"
-import * as cors from "cors"
-import * as dotenv from "dotenv"
+import fs from "fs";
+import path from "path";
+import express from "express";
+import compression from "compression";
+import morgan from "morgan";
+import passport from "passport";
+import session from "express-session"
+import express_graphql from "express-graphql"
+import cors from "cors"
+import dotenv from "dotenv"
 import { buildSchema } from "graphql"
 import { GroundTruthStrategy } from "./routes/strategies"
 import { IUser, User } from "./schema";
@@ -17,11 +16,11 @@ import { userRoutes } from "./routes/user";
 dotenv.config();
 
 const PORT = 3001;
-const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
+const typeDefs = fs.readFileSync(path.resolve(__dirname, "../../api.graphql"), "utf8");
 const VERSION_NUMBER = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json"), "utf8")).version;
 const VERSION_HASH = require("git-rev-sync").short();
 
-export const app = express();
+export let app = express();
 app.use(morgan("dev"));
 app.use(compression());
 app.use(cors());
@@ -29,7 +28,6 @@ const session_secret = process.env['SECRET'];
 if (!session_secret) {
     throw new Error("Secret not specified");
 }
-app.use(express.static(path.join(__dirname, 'build')));
 app.use(session({
     secret:session_secret,
     saveUninitialized: false,
@@ -52,7 +50,7 @@ export function loggedInErr(req, res, next) {
     }
 }
 
-const gturl = String(process.env.groundTruthurl || "login.hack.gt");
+const gturl = String(process.env.GROUNDTRUTHURL || "login.hack.gt");
 const groundTruthStrategy = new GroundTruthStrategy(gturl);
 passport.use(groundTruthStrategy);
 passport.serializeUser<IUser, string>((user, done) => {
@@ -83,7 +81,6 @@ let updateUser = async function(args) {
 }
 
 let getUserProfile = async function (args) {
-    console.log(args);
     return User.findOne({uuid: args.uuid});
 }
 
@@ -105,8 +102,9 @@ app.use('/graphql', express_graphql({
     graphiql: true
 }));
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.use(express.static(path.join(__dirname, "../../client/build")));
+app.get("*", (request, response) => {
+    response.sendFile(path.join(__dirname, "../../client/build", "index.html"));
 });
 
 app.listen(PORT, () => {

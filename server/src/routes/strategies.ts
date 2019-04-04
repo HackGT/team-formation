@@ -1,8 +1,8 @@
 import { URL } from "url";
-import * as passport from "passport";
+import passport from "passport";
 import { Strategy as OAuthStrategy } from "passport-oauth2";
-import * as dotenv from "dotenv"
-import * as requests from "request"
+import dotenv from "dotenv"
+import request from "request"
 import { Request } from "express";
 import { createNew, IUser, User } from "../schema";
 
@@ -37,8 +37,8 @@ export class GroundTruthStrategy extends OAuthStrategy {
     public readonly url: string;
 
     constructor(url: string) {
-        const secret = (process.env.groundTruthSecret);
-        const id = (process.env.groundTruthid);
+        const secret = (process.env.GROUNDTRUTHSECRET);
+        const id = (process.env.GROUNDTRUTHID);
         if (!secret || !id) {
             throw new Error(`Client ID or secret not configured in environment variables for Ground Truth`);
         }
@@ -72,10 +72,10 @@ export class GroundTruthStrategy extends OAuthStrategy {
         });
     }
 
-    protected static async passportCallback(request: Request,  accessToken: string, refreshToken: string, profile: IProfile, done: PassportDone) {
+    protected static async passportCallback(req: Request,  accessToken: string, refreshToken: string, profile: IProfile, done: PassportDone) {
         let user = await User.findOne({ uuid: profile.uuid });
 
-        const graphqlUrl = process.env.graphqlUrl || 'https://registration.hack.gt/graphql'
+        const GRAPHQLURL = process.env.GRAPHQLURL || 'https://registration.hack.gt/graphql'
 
         if (!user) {
             let confirmed = false;
@@ -91,10 +91,10 @@ export class GroundTruthStrategy extends OAuthStrategy {
                 search: profile.email
             };
             const options = { method: 'POST',
-                url: graphqlUrl,
+                url: GRAPHQLURL,
                 headers:
                 {
-                    Authorization: 'Bearer ' + process.env.graphqlAuth,
+                    Authorization: 'Bearer ' + process.env.GRAPHQLAUTH,
                     'Content-Type': "application/json"
                 },
                 body: JSON.stringify({
@@ -104,7 +104,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
 
             };
 
-            await requests(options, async (err, res, body) => {
+            await request(options, async (err, res, body) => {
                 if (err) { return console.log(err); }
                 if (JSON.parse(body).data.search_user.users.length > 0) {
                     confirmed = JSON.parse(body).data.search_user.users[0].confirmed;
@@ -132,13 +132,13 @@ export class GroundTruthStrategy extends OAuthStrategy {
     }
 }
 
-function getExternalPort(request: Request): number {
+function getExternalPort(req: Request): number {
     function defaultPort(): number {
         // Default ports for HTTP and HTTPS
-        return request.protocol === "http" ? 80 : 443;
+        return req.protocol === "http" ? 80 : 443;
     }
 
-    const host = request.headers.host;
+    const host = req.headers.host;
 
     if (!host || Array.isArray(host)) {
         return defaultPort();
@@ -156,14 +156,14 @@ function getExternalPort(request: Request): number {
     }
 }
 
-export function createLink(request: Request, link: string): string {
+export function createLink(req: Request, link: string): string {
     if (link[0] === "/") {
         link = link.substring(1);
     }
-    if ((request.secure && getExternalPort(request) === 443) || (!request.secure && getExternalPort(request) === 80)) {
-        return `http${request.secure ? "s" : ""}://${request.hostname}/${link}`;
+    if ((req.secure && getExternalPort(req) === 443) || (!req.secure && getExternalPort(req) === 80)) {
+        return `http${req.secure ? "s" : ""}://${req.hostname}/${link}`;
     }
     else {
-        return `http${request.secure ? "s" : ""}://${request.hostname}:${getExternalPort(request)}/${link}`;
+        return `http${req.secure ? "s" : ""}://${req.hostname}:${getExternalPort(req)}/${link}`;
     }
 }

@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import '../css/Headers.css';
-import Logout from './Logout';
 import { Button, Menu } from 'semantic-ui-react';
 
 class Headers extends Component {
-
-
 	render() {
 		return (
 			<div className="Header-container">

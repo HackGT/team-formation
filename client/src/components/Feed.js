@@ -1,42 +1,16 @@
 import React, { Component } from 'react';
-import { Button, Card, Image, Icon, Divider } from 'semantic-ui-react';
-import UserCard from './UserCard';
-import {QueryRenderer } from 'react-relay';
-import {graphql} from 'babel-plugin-relay/macro';
-import PropTypes from 'prop-types';
-import environment from './Environment';
-import SearchField from 'react-search-field';
 import FeedCards from './FeedCards';
 import SideMenu from './SideMenu';
-import Logout from './ui_subcomponents/Logout';
-
-const {
-  Environment,
-  Network,
-  RecordSource,
-  Store,
-} = require('relay-runtime');
-
-const getUsersQuery = graphql`
-    query FeedQuery($name: String, $email: String, $grad_year: String, $school: String) {
-        user(email:$email, name:$name, grad_year:$grad_year, school:$school) {
-            name
-            school
-			grad_year
-			contact
-			skills
-			experience
-        }
-    }
-`;
 
 class Feed extends Component {
+
     constructor(props){
         super(props)
         this.state = {
             name: ""
 		};
     };
+    
 	render() {
 		return (
 			<div className="Feed-container">

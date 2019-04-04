@@ -1,4 +1,3 @@
-import { graphql, QueryRenderer } from 'react-relay';
 import React, { Component } from 'react';
 import Login from './Login';
 import EditProfile from './EditProfile';
@@ -18,7 +17,6 @@ class Content extends Component {
 	};
 
 	render() {
-        console.log(this.state);
 		let cur_display;
 		let cur_header;
 		if (this.state.cur_state === 'login') {
@@ -56,10 +54,6 @@ class Content extends Component {
 			user_id: id
 		});
 	};
-
-    /*onProfileChange = (id) => {
-        this.setState({cur_state: 'setup-profile', user_id: id});
-    };*/
 };
 
 

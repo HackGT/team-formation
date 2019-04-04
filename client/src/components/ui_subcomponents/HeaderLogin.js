@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import '../css/Headers.css';
-import { Button, Menu } from 'semantic-ui-react';
 
 class Headers extends Component {
-
 	render() {
 		return (
 			<div className="Header-container">
@@ -13,7 +11,7 @@ class Headers extends Component {
 				</div>
 			</div>
 		);
-	}
+    };
 }
 
 export default Headers;

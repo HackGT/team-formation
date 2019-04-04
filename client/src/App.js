@@ -9,7 +9,7 @@ class App extends Component {
 		  <Content/>
 	  </div>
     );
-  }
-}
+  };
+};
 
 export default App;

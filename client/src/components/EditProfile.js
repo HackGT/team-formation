@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Input } from 'semantic-ui-react';
 import { Button, Divider, TextArea, Message, Form } from 'semantic-ui-react';
 import {QueryRenderer } from 'react-relay';
 import ContactDropdown from './ui_subcomponents/ContactDropdown';
@@ -7,12 +6,6 @@ import './css/EditProfile.css';
 import {commitMutation } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import environment from './Environment';
-const {
-  Environment,
-  Network,
-  RecordSource,
-  Store,
-} = require('relay-runtime');
 
 const mutation = graphql`
 mutation EditProfileMutation($uuid: String, $name: String, $grad_year: String, $school: String, $skills: [String], $experience: String, $contact: String, $contact_method: String) {
@@ -133,7 +126,6 @@ class EditProfile extends Component {
 		});
 	};
 
-
 	onSchoolChange = (e) => {
 		this.setState({
 			school: e.target.value
@@ -183,10 +175,8 @@ class EditProfile extends Component {
 	};
 
 	onNextClick = () => {
-        console.log(this.state);
 		let cur_error;
 		if (this.state.name === "" || this.state.school === "" || this.state.grad_year === "" || this.state.contact_method === "" ) {
-            console.log('what');
 			cur_error = <Message
 		      error
 		      header='Some required fields left empty'

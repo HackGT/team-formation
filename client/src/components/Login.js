@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import './css/Login.css';
 
-
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -50,6 +49,5 @@ class Login extends Component {
         });
     };
 };
-
 
 export default Login;
