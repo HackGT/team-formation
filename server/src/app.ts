@@ -15,8 +15,8 @@ import { userRoutes } from "./routes/user";
 
 dotenv.config();
 
-const PORT = 3001;
-const typeDefs = fs.readFileSync(path.resolve(__dirname, "../../api.graphql"), "utf8");
+const PORT = 3000;
+const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 const VERSION_NUMBER = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json"), "utf8")).version;
 const VERSION_HASH = require("git-rev-sync").short();
 
