@@ -18,7 +18,7 @@ dotenv.config();
 const PORT = 3000;
 const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
 const VERSION_NUMBER = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json"), "utf8")).version;
-const VERSION_HASH = require("git-rev-sync").short();
+//const VERSION_HASH = require("git-rev-sync").short();
 
 export let app = express();
 app.use(morgan("dev"));
@@ -108,5 +108,5 @@ app.get("*", (request, response) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Team Formation system v${VERSION_NUMBER} @ ${VERSION_HASH} started on port ${PORT}`);
+    console.log(`Team Formation system v${VERSION_NUMBER} started on port ${PORT}`);
 });
