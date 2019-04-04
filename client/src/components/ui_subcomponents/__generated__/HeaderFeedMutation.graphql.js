@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8fd938b98b9f22061433e8fb8fcae559
+ * @relayHash 067540ff21778b3fa9a709d0a1f222b7
  */
 
 /* eslint-disable */
@@ -9,41 +9,39 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type FeedCardsQueryVariables = {|
-  name?: ?string
+export type HeaderFeedMutationVariables = {|
+  uuid?: ?string
 |};
-export type FeedCardsQueryResponse = {|
-  +user: $ReadOnlyArray<{|
+export type HeaderFeedMutationResponse = {|
+  +toggle_visibility: {|
     +name: ?string,
-    +school: ?string,
     +grad_year: ?string,
-    +contact: ?string,
+    +school: ?string,
     +skills: ?$ReadOnlyArray<?string>,
     +experience: ?string,
+    +contact: ?string,
     +visible: ?number,
-    +uuid: ?string,
-  |}>
+  |}
 |};
-export type FeedCardsQuery = {|
-  variables: FeedCardsQueryVariables,
-  response: FeedCardsQueryResponse,
+export type HeaderFeedMutation = {|
+  variables: HeaderFeedMutationVariables,
+  response: HeaderFeedMutationResponse,
 |};
 */
 
 
 /*
-query FeedCardsQuery(
-  $name: String
+mutation HeaderFeedMutation(
+  $uuid: String
 ) {
-  user(name: $name) {
+  toggle_visibility(uuid: $uuid) {
     name
-    school
     grad_year
-    contact
+    school
     skills
     experience
+    contact
     visible
-    uuid
     id
   }
 }
@@ -53,7 +51,7 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "name",
+    "name": "uuid",
     "type": "String",
     "defaultValue": null
   }
@@ -61,8 +59,8 @@ var v0 = [
 v1 = [
   {
     "kind": "Variable",
-    "name": "name",
-    "variableName": "name",
+    "name": "uuid",
+    "variableName": "uuid",
     "type": "String"
   }
 ],
@@ -76,35 +74,35 @@ v2 = {
 v3 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "school",
+  "name": "grad_year",
   "args": null,
   "storageKey": null
 },
 v4 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "grad_year",
+  "name": "school",
   "args": null,
   "storageKey": null
 },
 v5 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "contact",
+  "name": "skills",
   "args": null,
   "storageKey": null
 },
 v6 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "skills",
+  "name": "experience",
   "args": null,
   "storageKey": null
 },
 v7 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "experience",
+  "name": "contact",
   "args": null,
   "storageKey": null
 },
@@ -114,31 +112,24 @@ v8 = {
   "name": "visible",
   "args": null,
   "storageKey": null
-},
-v9 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "uuid",
-  "args": null,
-  "storageKey": null
 };
 return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "FeedCardsQuery",
-    "type": "Query",
+    "name": "HeaderFeedMutation",
+    "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "user",
+        "name": "toggle_visibility",
         "storageKey": null,
         "args": (v1/*: any*/),
         "concreteType": "User",
-        "plural": true,
+        "plural": false,
         "selections": [
           (v2/*: any*/),
           (v3/*: any*/),
@@ -146,25 +137,24 @@ return {
           (v5/*: any*/),
           (v6/*: any*/),
           (v7/*: any*/),
-          (v8/*: any*/),
-          (v9/*: any*/)
+          (v8/*: any*/)
         ]
       }
     ]
   },
   "operation": {
     "kind": "Operation",
-    "name": "FeedCardsQuery",
+    "name": "HeaderFeedMutation",
     "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "user",
+        "name": "toggle_visibility",
         "storageKey": null,
         "args": (v1/*: any*/),
         "concreteType": "User",
-        "plural": true,
+        "plural": false,
         "selections": [
           (v2/*: any*/),
           (v3/*: any*/),
@@ -173,7 +163,6 @@ return {
           (v6/*: any*/),
           (v7/*: any*/),
           (v8/*: any*/),
-          (v9/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -186,14 +175,14 @@ return {
     ]
   },
   "params": {
-    "operationKind": "query",
-    "name": "FeedCardsQuery",
+    "operationKind": "mutation",
+    "name": "HeaderFeedMutation",
     "id": null,
-    "text": "query FeedCardsQuery(\n  $name: String\n) {\n  user(name: $name) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
+    "text": "mutation HeaderFeedMutation(\n  $uuid: String\n) {\n  toggle_visibility(uuid: $uuid) {\n    name\n    grad_year\n    school\n    skills\n    experience\n    contact\n    visible\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '619cdfd5e2a64268dadfdd6e05bee5c2';
+(node/*: any*/).hash = 'e0485d290c1d78df52272b0656244fc1';
 module.exports = node;

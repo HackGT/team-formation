@@ -55,11 +55,11 @@ class EditProfile extends Component {
 
 		let contact_form;
 		if (this.state.contact_method === 'phone number') {
-			contact_form = <Form.Input label='Phone Number:' placeholder='(###) ###-####' defaultValue={this.state.contact} width={5} onChange={this.onContactMethodChange} required/>
+			contact_form = <Form.Input label='Phone Number:' placeholder='(###) ###-####' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} required/>
 		} else if (this.state.contact_method === 'email') {
-			contact_form = <Form.Input label='Email:' placeholder='example@email.com' defaultValue={this.state.contact} width={5} onChange={this.onContactMethodChange} required/>
+			contact_form = <Form.Input label='Email:' placeholder='example@email.com' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} required/>
 		} else if (this.state.contact_method === "social media") {
-			contact_form = <Form.Input label='Social Media URL:' placeholder='Social Media URL' defaultValue={this.state.contact} width={5} onChange={this.onContactMethodChange} required/>
+			contact_form = <Form.Input label='Social Media URL:' placeholder='Social Media URL' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} required/>
 		} else {
 			contact_form = ""
         }
@@ -70,7 +70,7 @@ class EditProfile extends Component {
                 variables={{
                     uuid: this.props.user_id,
                 }}
-                render={({error,props}) => {
+                render={({ error, props }) => {
                     if (error) {
                         return <div>{error.message}</div>;
                     } else if (props) {
@@ -101,7 +101,7 @@ class EditProfile extends Component {
                             <Divider />
 
                             <Form.Group>
-                            	<ContactDropdown contact={this.changeContact} contact_method={props.contact_method}/>
+                            	<ContactDropdown contact={this.changeContactMethod} contact_method={props.contact_method}/>
                             </Form.Group>
                             <Form.Group>
                             	{contact_form}
@@ -162,13 +162,13 @@ class EditProfile extends Component {
         });
     };
 
-	onContactMethodChange = (e) => {
+	onContactChange = (e) => {
 		this.setState({
 			contact: e.target.value
 		});
 	};
 
-	changeContact = (new_contact) => {
+	changeContactMethod = (new_contact) => {
 		this.setState({
 			contact_method: new_contact
 		})

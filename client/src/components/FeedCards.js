@@ -13,7 +13,9 @@ const getUsersQuery = graphql`
 			grad_year
 			contact
 			skills
-			experience
+            experience
+            visible
+            uuid
         }
     }
 `;
@@ -32,10 +34,12 @@ class FeedCards extends Component {
                        return <div>{error.message}</div>;
                     } else if (props) {
                         let cards = []
-                        for(let i = 0;i<props.user.length;i++) {
-                            cards.push(<UserCard name={props.user[i].name} grad_year={props.user[i].grad_year} school={props.user[i].school} contact={props.user[i].contact} skills={props.user[i].skills.filter(function (el) {
-                                return Boolean(el);
-                            })} experience={props.user[i].experience}/>);
+                        for (let i = 0; i < props.user.length; i++) {
+                            if (props.user[i].visible && props.user[i].uuid !== this.props.user_id) {
+                                cards.push(<UserCard name={props.user[i].name} grad_year={props.user[i].grad_year} school={props.user[i].school} contact={props.user[i].contact} skills={props.user[i].skills.filter(function (el) {
+                                    return Boolean(el);
+                                })} experience={props.user[i].experience} />);
+                            }
                         }
                         return (<div className="Feed-container">{cards}</div>);
                     }

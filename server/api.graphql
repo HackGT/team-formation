@@ -4,27 +4,17 @@ schema {
 }
 
 type Query {
-    user(name: String, email: String, grad_year: String, school: String): [User!]!
-    users(pagination_token: ID, n: Int!, filter: UserFilter): [User!]!
-    search_user_simple(search: String!, use_regex: Boolean = false, offset: Int!, n: Int!, filter: UserFilter): [User!]!
+    user(name: String, email: String, grad_year: String, school: String, visible: Int): [User!]!
     user_profile(uuid: String): User!
-
 }
 
 type Mutation {
+    toggle_visibility(uuid: String): User!
     update_user(uuid: String, name: String email: String, grad_year: String, school: String, contact: String, skills: [String], experience: String, contact_method: String): User!
 }
 
-input UserFilter {
-    name: String
-    school: String
-    grad_year: String
-    skills: String
-    interests: String
-    beginner: Boolean
-}
-
 type User {
+    id: ID
     uuid: String
     name: String
     email: String
@@ -35,4 +25,5 @@ type User {
     experience: String
     contact: String
     contact_method: String
+    visible: Int
 }

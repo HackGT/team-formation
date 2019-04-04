@@ -92,12 +92,17 @@ let getUserProfile = async function (args) {
     return User.findOne({uuid: args.uuid});
 }
 
+let toggleVisibility = async function (args) {
+    return User.findOneAndUpdate({'uuid':args.uuid}, {"$bit": {visible: {xor: 1}}}, {new:true})
+}
+
 let apiRouter = express.Router();
 
 const root = {
     user: getUser,
     update_user: updateUser,
-    user_profile: getUserProfile
+    user_profile: getUserProfile,
+    toggle_visibility: toggleVisibility
 };
 
 apiRouter.use("/user", userRoutes);
