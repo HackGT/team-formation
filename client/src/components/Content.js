@@ -12,7 +12,8 @@ class Content extends Component {
 		super()
 		this.state = {
 			cur_state: 'login',
-			user_id: ''
+            user_id: '',
+            visible: 0
 		};
 	};
 
@@ -27,12 +28,12 @@ class Content extends Component {
 		} else if (this.state.cur_state === 'setup-profile') {
 			cur_header = <HeaderEditProfile/>;
 			cur_display = <EditProfile
-				onNextClick={this.onNextClick}
+				onNextClick={this.onDoneEditClick}
 				user_id={this.state.user_id}
                 />;
-		} else if (this.state.cur_state === 'feed') {
-			cur_header = <HeaderFeed onEditClick={this.onEditClick}/>;
-			cur_display = <Feed/>;
+        } else if (this.state.cur_state === 'feed') {
+            cur_header = <HeaderFeed onEditClick={this.onEditClick} user_id={this.state.user_id} visible={this.state.visible} onNextClick={this.onNextClick} />;
+            cur_display = <Feed user_id={this.state.user_id}/>;
 		}
 		return (
 			<div className="Content-container">
@@ -48,10 +49,18 @@ class Content extends Component {
         });
 	};
 
-	onNextClick = (next_action, id) => {
+	onNextClick = (next_action, id, visible) => {
 		this.setState({
 			cur_state: next_action,
-			user_id: id
+            user_id: id,
+            visible: visible
+		});
+    };
+    
+    onDoneEditClick = (next_action, id) => {
+		this.setState({
+			cur_state: next_action,
+            user_id: id
 		});
 	};
 };

@@ -66,7 +66,7 @@
     "build": "node ./setup && react-scripts build",
     "test": "node ./setup && react-scripts test --env=jsdom",
     "start": "node ./setup &&react-scripts start",
-    "relay": "relay-compiler --src ./src --schema ../api.graphql"
+    "relay": "relay-compiler --src ./src --schema ../server/api.graphql"
   },
   "eslintConfig": {
     "extends": "react-app"

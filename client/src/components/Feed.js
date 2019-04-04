@@ -11,13 +11,13 @@ class Feed extends Component {
 		};
     };
 
-	render() {
+    render() {
 		return (
 			<div className="Feed-container">
 				<div className="menu">
 					<SideMenu onSearchClick={this.onSearchClick} className="search"/>
 				</div>
-			    <FeedCards skill={this.state.skill} />
+			    <FeedCards skill={this.state.skill} user_id={this.props.user_id} />
 			</div>
 
         );
