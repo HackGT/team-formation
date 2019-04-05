@@ -16,7 +16,7 @@ class UserCard extends Component {
 		} else if ((this.props.contact).includes("@")) {
 			contact = <Popup
 			trigger={<Button basic color='teal' content='Reach Out' />}
-			content=<a href={`mailto:${this.props.contact}`}>{this.props.contact}</a>
+			content=<a href={`mailto:${this.props.contact}`} target="_blank">{this.props.contact} </a>
 			on='click'
 			hideOnScroll
 			/>
