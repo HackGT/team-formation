@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8fd938b98b9f22061433e8fb8fcae559
+ * @relayHash 772f4f238fb1737fb16d4b4b82859e9a
  */
 
 /* eslint-disable */
@@ -10,7 +10,7 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type FeedCardsQueryVariables = {|
-  name?: ?string
+  skill?: ?string
 |};
 export type FeedCardsQueryResponse = {|
   +user: $ReadOnlyArray<{|
@@ -33,9 +33,9 @@ export type FeedCardsQuery = {|
 
 /*
 query FeedCardsQuery(
-  $name: String
+  $skill: String
 ) {
-  user(name: $name) {
+  user(skill: $skill) {
     name
     school
     grad_year
@@ -53,7 +53,7 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "name",
+    "name": "skill",
     "type": "String",
     "defaultValue": null
   }
@@ -61,8 +61,8 @@ var v0 = [
 v1 = [
   {
     "kind": "Variable",
-    "name": "name",
-    "variableName": "name",
+    "name": "skill",
+    "variableName": "skill",
     "type": "String"
   }
 ],
@@ -189,11 +189,11 @@ return {
     "operationKind": "query",
     "name": "FeedCardsQuery",
     "id": null,
-    "text": "query FeedCardsQuery(\n  $name: String\n) {\n  user(name: $name) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
+    "text": "query FeedCardsQuery(\n  $skill: String\n) {\n  user(skill: $skill) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '619cdfd5e2a64268dadfdd6e05bee5c2';
+(node/*: any*/).hash = '0da2b5b89175ec220ef8fe3e13d693c5';
 module.exports = node;

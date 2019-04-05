@@ -4,7 +4,7 @@ schema {
 }
 
 type Query {
-    user(name: String, email: String, grad_year: String, school: String, visible: Int): [User!]!
+    user(skill: String, name: String, email: String, grad_year: String, school: String, visible: Int): [User!]!
     user_profile(uuid: String): User!
 }
 

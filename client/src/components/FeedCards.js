@@ -6,8 +6,8 @@ import './css/Feed.css';
 import environment from './Environment';
 
 const getUsersQuery = graphql`
-    query FeedCardsQuery($name: String) {
-        user(name:$name) {
+    query FeedCardsQuery($skill: String) {
+        user(skill:$skill) {
             name
             school
 			grad_year

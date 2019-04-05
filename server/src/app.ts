@@ -72,16 +72,17 @@ passport.deserializeUser<IUser, string>((id, done) => {
 
 let getUser = async function (args) {
     let users;
-    if(args.name == "" || args.name == null) {
+    if(args.skill == "" || args.skill == null) {
         users = await User.find({});
     } else {
-        users = await User.find({skills: "$elemMatch": {{"$regex": '.*'+args.skill+'.*', $options: 'i'}}});
+        users = await User.find({skills: {"$elemMatch": {"$regex": '.*'+args.skill+'.*', $options: 'i'}}});
     }
-    
+
     if (!users) {
         return null;
     }
-    users.sort(function(a, b){return a.name.toLowerCase().indexOf(args.name.toLowerCase()) - b.name.toLowerCase().indexOf(args.name.toLowerCase())});
+    // console.log()
+    users.sort(function(a, b){return a.name.toLowerCase() - b.name.toLowerCase()});
     return users;
 }
 
