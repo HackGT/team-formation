@@ -75,14 +75,21 @@ let getUser = async function (args) {
     if(args.skill == "" || args.skill == null) {
         users = await User.find({});
     } else {
-        users = await User.find({skills: {"$elemMatch": {"$regex": '.*'+args.skill+'.*', $options: 'i'}}});
+        const skills = args.skill.match(/\w+/g) ;
+        let search = [] as {}[];
+        for (let i = 0; i < skills.length; i++) {
+            search.push({ skills: { "$elemMatch": { "$regex": '.*' + skills[i] + '.*', "$options": 'i' } } })
+        }
+        users = await User.find({
+            $and: search
+        });
     }
 
     if (!users) {
         return null;
     }
-    // console.log()
-    users.sort(function(a, b){return a.name.toLowerCase() - b.name.toLowerCase()});
+
+    users.sort(function (a, b) { return a.name.toLowerCase() - b.name.toLowerCase() });
     return users;
 }
 

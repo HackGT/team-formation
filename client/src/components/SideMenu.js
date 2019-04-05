@@ -12,7 +12,7 @@ class SideMenu extends Component {
 	render() {
 		return (
 			<div className="SideMenu-container">
-                <Input placeholder="Search by a skill..." onChange={this.onSearchChange} onKeyPress={this.handleKeyPress}/>
+                <Input placeholder="Search by skills" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress}/>
 				<Button icon onClick={this.onSearchClick}>
     				<Icon name='search' />
   				</Button>
