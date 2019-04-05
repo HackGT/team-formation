@@ -120,7 +120,6 @@ export class GroundTruthStrategy extends OAuthStrategy {
                 }
             });
 
-
         } else {
             user.token = accessToken;
             user.admin = false;
