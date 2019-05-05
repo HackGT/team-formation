@@ -1,4 +1,4 @@
-.EditProfile-container {
+/* .EditProfile-container {
 	text-align: center;
 }
 
@@ -10,4 +10,15 @@
 .form {
 	display: flex;
 	justify-content: center;
+} */
+
+.Form-container {
+	width: 80%;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+}
+
+.form {
+	width: 100%;
 }

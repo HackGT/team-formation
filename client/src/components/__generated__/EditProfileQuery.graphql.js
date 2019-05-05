@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 772f4f238fb1737fb16d4b4b82859e9a
+ * @relayHash 8ca18309b2ee54c3bb3d4d19afaf5d67
  */
 
 /* eslint-disable */
@@ -9,41 +9,39 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type FeedCardsQueryVariables = {|
-  skill?: ?string
+export type EditProfileQueryVariables = {|
+  uuid?: ?string
 |};
-export type FeedCardsQueryResponse = {|
-  +user: $ReadOnlyArray<{|
+export type EditProfileQueryResponse = {|
+  +user_profile: {|
     +name: ?string,
     +school: ?string,
     +grad_year: ?string,
     +contact: ?string,
     +skills: ?$ReadOnlyArray<?string>,
     +experience: ?string,
-    +visible: ?number,
-    +uuid: ?string,
-  |}>
+    +contact_method: ?string,
+  |}
 |};
-export type FeedCardsQuery = {|
-  variables: FeedCardsQueryVariables,
-  response: FeedCardsQueryResponse,
+export type EditProfileQuery = {|
+  variables: EditProfileQueryVariables,
+  response: EditProfileQueryResponse,
 |};
 */
 
 
 /*
-query FeedCardsQuery(
-  $skill: String
+query EditProfileQuery(
+  $uuid: String
 ) {
-  user(skill: $skill) {
+  user_profile(uuid: $uuid) {
     name
     school
     grad_year
     contact
     skills
     experience
-    visible
-    uuid
+    contact_method
     id
   }
 }
@@ -53,7 +51,7 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "skill",
+    "name": "uuid",
     "type": "String",
     "defaultValue": null
   }
@@ -61,8 +59,8 @@ var v0 = [
 v1 = [
   {
     "kind": "Variable",
-    "name": "skill",
-    "variableName": "skill",
+    "name": "uuid",
+    "variableName": "uuid",
     "type": "String"
   }
 ],
@@ -111,14 +109,7 @@ v7 = {
 v8 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "visible",
-  "args": null,
-  "storageKey": null
-},
-v9 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "uuid",
+  "name": "contact_method",
   "args": null,
   "storageKey": null
 };
@@ -126,7 +117,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "FeedCardsQuery",
+    "name": "EditProfileQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -134,11 +125,11 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "user",
+        "name": "user_profile",
         "storageKey": null,
         "args": (v1/*: any*/),
         "concreteType": "User",
-        "plural": true,
+        "plural": false,
         "selections": [
           (v2/*: any*/),
           (v3/*: any*/),
@@ -146,25 +137,24 @@ return {
           (v5/*: any*/),
           (v6/*: any*/),
           (v7/*: any*/),
-          (v8/*: any*/),
-          (v9/*: any*/)
+          (v8/*: any*/)
         ]
       }
     ]
   },
   "operation": {
     "kind": "Operation",
-    "name": "FeedCardsQuery",
+    "name": "EditProfileQuery",
     "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "user",
+        "name": "user_profile",
         "storageKey": null,
         "args": (v1/*: any*/),
         "concreteType": "User",
-        "plural": true,
+        "plural": false,
         "selections": [
           (v2/*: any*/),
           (v3/*: any*/),
@@ -173,7 +163,6 @@ return {
           (v6/*: any*/),
           (v7/*: any*/),
           (v8/*: any*/),
-          (v9/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -187,13 +176,13 @@ return {
   },
   "params": {
     "operationKind": "query",
-    "name": "FeedCardsQuery",
+    "name": "EditProfileQuery",
     "id": null,
-    "text": "query FeedCardsQuery(\n  $skill: String\n) {\n  user(skill: $skill) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
+    "text": "query EditProfileQuery(\n  $uuid: String\n) {\n  user_profile(uuid: $uuid) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    contact_method\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '0da2b5b89175ec220ef8fe3e13d693c5';
+(node/*: any*/).hash = '1b020bfbb839ed877c30cd115bb9a596';
 module.exports = node;

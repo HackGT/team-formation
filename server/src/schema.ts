@@ -1,5 +1,5 @@
-import * as dotenv from "dotenv"
-import * as mongoose from "mongoose";
+import dotenv from "dotenv"
+import mongoose from "mongoose";
 
 dotenv.config()
 
@@ -25,7 +25,6 @@ export interface IUser extends RootDocument {
     name: string;
     token: string | null;
     admin?: boolean;
-    secondary_email?: string;
     school?: string;
     grad_year?: string;
     skills?: string[];
@@ -33,6 +32,8 @@ export interface IUser extends RootDocument {
     experience?: string;
     contact?: string;
     image?: string;
+    contact_method?: string;
+    visible?: number;
 }
 
 export interface ITeam {
@@ -83,7 +84,6 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
         required: true,
         unique: true
     },
-    secondary_email: String,
     name: {
         type: String,
         required: false
@@ -100,10 +100,12 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
         required: false
     },
     experience: String,
-    contact: String,
     image: String,
     auth_keys: [String],
-    admin: Boolean
+    admin: Boolean,
+    contact: String,
+    contact_method: String,
+    visible: Number
     },
     {
         usePushEach: true

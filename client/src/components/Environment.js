@@ -13,8 +13,7 @@ function fetchQuery(
   cacheConfig,
   uploadables,
 ) {
-  console.log("HELLO")
-  return fetch('http://localhost:3001/graphql', {
+  return fetch('/graphql', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -27,7 +26,7 @@ function fetchQuery(
   }).then(response => {
     return response.json();
   });
-}
+};
 
 // Create a network layer from the fetch function
 const network = Network.create(fetchQuery);

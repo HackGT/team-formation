@@ -1,146 +1,212 @@
 import React, {Component} from 'react';
-import { Input } from 'semantic-ui-react';
-import { Button } from 'semantic-ui-react';
-import { Form } from 'semantic-ui-react';
-import Loading from './ui_subcomponents/Loading';
-import YearDropdown from './ui_subcomponents/YearDropdown';
-import './css/EditProfile.css'
+import { Button, Divider, TextArea, Message, Form } from 'semantic-ui-react';
+import {QueryRenderer } from 'react-relay';
+import ContactDropdown from './ui_subcomponents/ContactDropdown';
+import './css/EditProfile.css';
 import {commitMutation } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
-import environment from './Environment'
-
-const {
-  Environment,
-  Network,
-  RecordSource,
-  Store,
-} = require('relay-runtime');
+import environment from './Environment';
 
 const mutation = graphql`
-mutation EditProfileMutation($id: ID!, $name: String, $grad_year: String, $school: String, $secondary_email: String, $contact: String, $skills: [String]) {
-  update_user(id: $id, name: $name, grad_year: $grad_year, school: $school, secondary_email: $secondary_email, contact: $contact, skills: $skills) {
+mutation EditProfileMutation($uuid: String, $name: String, $grad_year: String, $school: String, $skills: [String], $experience: String, $contact: String, $contact_method: String) {
+  update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school,  skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {
     name
-    email
     grad_year
     school
-    secondary_email
     skills
+    experience
+    contact
   }
 }
 `;
 
+const getUsersProfile = graphql`
+query EditProfileQuery($uuid: String) {
+    user_profile(uuid:$uuid) {
+        name
+        school
+        grad_year
+        contact
+        skills
+        experience
+        contact_method
+    }
+}
+`;
 class EditProfile extends Component {
 
-	state = {
-		user_first_name: "",
-		user_last_name: "",
-		user_school: "",
-		user_grad_year: "",
-		user_skills_1: "",
-		user_skills_2: "",
-		user_skills_3: "",
-        user_experience: "",
-        user_secondary_email: "",
-        user_contact: ""
-	}
+	constructor() {
+        super();
+		this.state = {
+			name: "",
+			school: "",
+			grad_year: "",
+			skills_1: "",
+			skills_2: "",
+			skills_3: "",
+	        experience: "",
+	        contact_method: "",
+			contact: "",
+            cur_error_message: "",
+		};
+	};
 
 	render() {
+
+		let contact_form;
+		if (this.state.contact_method === 'phone number') {
+			contact_form = <Form.Input label='Phone Number:' placeholder='(###) ###-####' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} required/>
+		} else if (this.state.contact_method === 'email') {
+			contact_form = <Form.Input label='Email:' placeholder='example@email.com' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} required/>
+		} else if (this.state.contact_method === "social media") {
+			contact_form = <Form.Input label='Social Media URL:' placeholder='Social Media URL' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} required/>
+		} else {
+			contact_form = ""
+        }
 		return (
-			<div className="EditProfile-container">
-				<h2 className="page-title">Your Profile</h2>
-				<div><p className="input-name">First Name:</p> <Input placeholder={'first name'} className="input-name" onChange={this.onFirstNameChange}/>
-				<p className="input-name">Last Name:</p><Input placeholder={'last name'} className="input" onChange={this.onLastNameChange}/></div>
-				<div><p className="input-label">Secondary Eamil:</p><Input placeholder={'test@gmail.com'} className="input-label" onChange={this.onEmailChange}/></div>
-				<div><p className="input-school">School:</p><Input placeholder={'school'} className="input-school" onChange={this.onSchoolChange}/></div>
-				<div><p className="input-label">Graduation Year:</p><Input placeholder={'graduation year'} className="input-school" onChange={this.onGradYearChange}/></div>
+            <QueryRenderer
+                environment={environment}
+                query={getUsersProfile}
+                variables={{
+                    uuid: this.props.user_id,
+                }}
+                render={({ error, props }) => {
+                    if (error) {
+                        return <div>{error.message}</div>;
+                    } else if (props) {
+                        props = props.user_profile;
+                        if (!this.state.name && props.name) {
+                            this.setState({...props, skills_1: props.skills[0], skills_2: props.skills[1], skills_3: props.skills[2]})
+                        }
+                    return (
+                    <div className="Form-container">
+                        <Form >
+                            <Form.Group>
+                            	<Form.Input label='Name' placeholder='Name' defaultValue= {props.name} width={5} onChange={this.onNameChange} required/>
+                            </Form.Group>
+                            <Form.Group>
+                            	<Form.Input label='School' placeholder='School' defaultValue={props.school} width={5} onChange={this.onSchoolChange} required/>
+                            	<Form.Input label='Graduation Year' placeholder='Graduation Year' defaultValue={props.grad_year} width={3} onChange={this.onGradYearChange} required/>
+                            </Form.Group>
+                            <Divider />
 
-				<div><div><p className="input-label">Skill 1:</p><Input placeholder={'skill 1'} className="input-box" onChange={this.onSkills1Change}/></div>
-				<div><p className="input-label">Skill 2:</p><Input placeholder={'skill 2'} className="input-box" onChange={this.onSkills2Change}/></div>
-				<div><p className="input-label">Skill 3:</p><Input placeholder={'skill 3'} className="input-box" onChange={this.onSkills3Change}/></div>
-				<div><p className="input-label">Experience:</p><Input placeholder={'experience'} onChange={this.onExperienceChange} className="input-box"/></div></div>
+                            <Form.Group>
+                            	<Form.Input label='Skill 1:' placeholder='Skill 1' defaultValue={props.skills[0]} width={5} onChange={this.onSkills1Change}/>
+                            	<Form.Input label='Skill 2:' placeholder='Skill 2' defaultValue={props.skills[1]} width={5} onChange={this.onSkills2Change}/>
+                            	<Form.Input label='Skill 3:' placeholder='Skill 3' defaultValue={props.skills[2]} width={5} onChange={this.onSkills3Change}/>
+                            </Form.Group>
+                            <Form.Group>
+                            	<Form.Field control={TextArea} label='About me:' placeholder='Tell us more about your experiences and interests...' defaultValue={props.experience} width={15} onChange={this.onExperienceChange}/>
+                            </Form.Group>
+                            <Divider />
 
-				<div><p className="input-label">Method of contact (facebook, email, phone...):</p><Input placeholder={'method of contact'} className="input-box" onChange={this.onContactChange}/></div>
-				<Button onClick={this.onNextClick} className="save-button"> save </Button>
-			</div>
+                            <Form.Group>
+                            	<ContactDropdown contact={this.changeContactMethod} contact_method={props.contact_method}/>
+                            </Form.Group>
+                            <Form.Group>
+                            	{contact_form}
+                            </Form.Group>
+                            <Divider />
+
+                            <Form.Group>
+                            	<Button onClick={this.onNextClick} className="save-button"> save </Button>
+                            </Form.Group>
+                            <Form.Group>
+                            	{this.state.error_message}
+                            </Form.Group>
+                        </Form>
+                    </div>)}
+                }}
+            />
 		);
-	};
-
-	onFirstNameChange = (e) => {
+    };
+	onNameChange = (e) => {
 		this.setState({
-			user_first_name: e.target.value
-		});
-	};
-
-	onLastNameChange = (e) => {
-		this.setState({
-			user_last_name: e.target.value
+			name: e.target.value
 		});
 	};
 
 	onSchoolChange = (e) => {
 		this.setState({
-			user_school: e.target.value
+			school: e.target.value
 		});
 	};
 
 	onGradYearChange = (e) => {
 		this.setState({
-			user_grad_year: e.target.value
+			grad_year: e.target.value
 		});
 	};
 
 	onSkills1Change = (e) => {
 		this.setState({
-			user_skills_1: e.target.value
+			skills_1: e.target.value
 		});
 	};
 
 	onSkills2Change = (e) => {
 		this.setState({
-			user_skills_2: e.target.value
+			skills_2: e.target.value
 		});
 	};
 
 	onSkills3Change = (e) => {
 		this.setState({
-			user_skills_3: e.target.value
+			skills_3: e.target.value
 		});
 	};
 
     onExperienceChange = (e) => {
         this.setState({
-            user_experience: e.target.value
+            experience: e.target.value
         });
     };
 
-    onEmailChange = (e) => {
-        this.setState({
-            user_secondary_email: e.target.value
-        });
-    };
+	onContactChange = (e) => {
+		this.setState({
+			contact: e.target.value
+		});
+	};
 
+	changeContactMethod = (new_contact) => {
+		this.setState({
+			contact_method: new_contact
+		})
+	};
 
 	onNextClick = () => {
-        let skills = [this.state.user_skills_1, this.state.user_skills_2, this.state.user_skills_3]
-        commitMutation(
-            environment,
-            {
-                mutation,
-                variables: {
-                    id: this.props.user_id,
-                    query: {
-                        name: this.state.user_first_name + " " + this.state.user_last_name,
-                        grad_year: this.state.user_grad_year,
-                        school: this.state.user_school,
-                        secondary_email: this.state.user_secondary_email,
-                        contact: this.state.user_contact,
-                        skills: skills
-                    }
-                }
-            }
-        )
-		this.props.onNextClick('feed');
-	}
-}
+		let cur_error;
+		if (this.state.name === "" || this.state.school === "" || this.state.grad_year === "" || this.state.contact_method === "" ) {
+			cur_error = <Message
+		      error
+		      header='Some required fields left empty'
+		      content='Make sure to fill in all starred fields'
+		    />;
+			this.setState({
+				error_message: cur_error
+			});
+		} else {
 
-export default EditProfile
+            let skills = [this.state.skills_1, this.state.skills_2, this.state.skills_3]
+	        commitMutation(
+	            environment,
+	            {
+	                mutation,
+	                variables: {
+	                    uuid: this.props.user_id,
+	                    name: this.state.name,
+	                    grad_year: this.state.grad_year,
+	                    school: this.state.school,
+	                    contact: this.state.contact,
+	                    skills: skills,
+                        experience: this.state.experience,
+                        contact_method: this.state.contact_method
+	                }
+	            }
+	        );
+			this.props.onNextClick('feed', this.props.user_id);
+		}
+	};
+};
+
+export default EditProfile;

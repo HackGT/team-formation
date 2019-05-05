@@ -1,6 +1,6 @@
 {
-  "name": "client",
-  "version": "0.1.0",
+  "name": "team-formation-client",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@babel/core": "7.1.6",
@@ -40,9 +40,11 @@
     "postcss-safe-parser": "4.0.1",
     "react": "^16.7.0",
     "react-app-polyfill": "^0.2.0",
+    "react-cookie": "^3.1.1",
     "react-dev-utils": "^7.0.1",
     "react-dom": "^16.8.4",
     "react-relay": "^3.0.0",
+    "react-router": "^5.0.0",
     "react-scripts": "^2.1.8",
     "react-search-field": "^1.0.0",
     "relay-compiler": "^3.0.0",
@@ -64,7 +66,7 @@
     "build": "node ./setup && react-scripts build",
     "test": "node ./setup && react-scripts test --env=jsdom",
     "start": "node ./setup &&react-scripts start",
-    "relay": "relay-compiler --src ./src --schema ../api.graphql"
+    "relay": "relay-compiler --src ./src --schema ../server/api.graphql"
   },
   "eslintConfig": {
     "extends": "react-app"
