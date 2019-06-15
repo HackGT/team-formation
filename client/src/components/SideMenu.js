@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Icon, Input, Button } from 'semantic-ui-react';
-
+import {Fuse} from 'fuse.js'
 class SideMenu extends Component {
 	constructor() {
 		super();
