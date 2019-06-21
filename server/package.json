@@ -27,7 +27,7 @@
         "gulp-copy": "^4.0.1",
         "gulp-tslint": "^8.1.4",
         "gulp-typescript": "^5.0.1",
-        "handlebars": "^4.1.0",
+        "handlebars": "^4.1.2",
         "material-components-web": "^0.2.0",
         "mongoose": "^4.7.6",
         "morgan": "^1.8.0",
