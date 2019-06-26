@@ -159,8 +159,6 @@ class EditProfile extends Component {
 	};
 
     onSkillsChange = (e, {value}) => {
-        console.log(value)
-        console.log(e)
         this.setState({
             skills: value
         })

@@ -10,6 +10,7 @@
     "build": "gulp build"
   },
   "dependencies": {
+    "bad-words": "^3.0.2",
     "gulp": "^4.0.0",
     "gulp-install": "^1.1.0",
     "gulp-shell": "^0.7.0",
