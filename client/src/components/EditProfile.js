@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import { Button, Divider, TextArea, Message, Form } from 'semantic-ui-react';
+import { Button, Divider, Dropdown, TextArea, Message, Form } from 'semantic-ui-react';
 import {QueryRenderer } from 'react-relay';
 import ContactDropdown from './ui_subcomponents/ContactDropdown';
 import './css/EditProfile.css';
 import {commitMutation } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import environment from './Environment';
-
+import tags from '../constants/tags'
+import Filter from 'bad-words'
 const mutation = graphql`
 mutation EditProfileMutation($uuid: String, $name: String, $grad_year: String, $school: String, $skills: [String], $experience: String, $contact: String, $contact_method: String) {
   update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school,  skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {
@@ -33,6 +34,9 @@ query EditProfileQuery($uuid: String) {
     }
 }
 `;
+
+
+
 class EditProfile extends Component {
 
 	constructor() {
@@ -41,14 +45,14 @@ class EditProfile extends Component {
 			name: "",
 			school: "",
 			grad_year: "",
-			skills_1: "",
-			skills_2: "",
-			skills_3: "",
+            skills: [],
 	        experience: "",
 	        contact_method: "",
 			contact: "",
             cur_error_message: "",
 		};
+        this.profanityFilter = new Filter();
+
 	};
 
 	render() {
@@ -76,7 +80,7 @@ class EditProfile extends Component {
                     } else if (props) {
                         props = props.user_profile;
                         if (!this.state.name && props.name) {
-                            this.setState({...props, skills_1: props.skills[0], skills_2: props.skills[1], skills_3: props.skills[2]})
+                            this.setState({...props})
                         }
                     return (
                     <div className="Form-container">
@@ -91,9 +95,13 @@ class EditProfile extends Component {
                             <Divider />
 
                             <Form.Group>
-                            	<Form.Input label='Skill 1:' placeholder='Skill 1' defaultValue={props.skills[0]} width={5} onChange={this.onSkills1Change}/>
-                            	<Form.Input label='Skill 2:' placeholder='Skill 2' defaultValue={props.skills[1]} width={5} onChange={this.onSkills2Change}/>
-                            	<Form.Input label='Skill 3:' placeholder='Skill 3' defaultValue={props.skills[2]} width={5} onChange={this.onSkills3Change}/>
+                                <Dropdown placeholder='Skills'
+                                          onChange={this.onSkillsChange}
+                                          fluid
+                                          multiple
+                                          selection
+                                          search
+                                          options={tags}/>
                             </Form.Group>
                             <Form.Group>
                             	<Form.Field control={TextArea} label='About me:' placeholder='Tell us more about your experiences and interests...' defaultValue={props.experience} width={15} onChange={this.onExperienceChange}/>
@@ -112,7 +120,7 @@ class EditProfile extends Component {
                             	<Button onClick={this.onNextClick} className="save-button"> save </Button>
                             </Form.Group>
                             <Form.Group>
-                            	{this.state.error_message}
+                                {this.state.cur_error_message}
                             </Form.Group>
                         </Form>
                     </div>)}
@@ -138,24 +146,6 @@ class EditProfile extends Component {
 		});
 	};
 
-	onSkills1Change = (e) => {
-		this.setState({
-			skills_1: e.target.value
-		});
-	};
-
-	onSkills2Change = (e) => {
-		this.setState({
-			skills_2: e.target.value
-		});
-	};
-
-	onSkills3Change = (e) => {
-		this.setState({
-			skills_3: e.target.value
-		});
-	};
-
     onExperienceChange = (e) => {
         this.setState({
             experience: e.target.value
@@ -168,12 +158,26 @@ class EditProfile extends Component {
 		});
 	};
 
+    onSkillsChange = (e, {value}) => {
+        console.log(value)
+        console.log(e)
+        this.setState({
+            skills: value
+        })
+    }
+
 	changeContactMethod = (new_contact) => {
 		this.setState({
 			contact_method: new_contact
 		})
 	};
 
+    checkProfanity = () => {
+        return Object.keys(this.state).some((key) => {
+            return typeof(this.state[key]) == typeof("string") &&
+                   this.profanityFilter.isProfane(this.state[key])
+        })
+    }
 	onNextClick = () => {
 		let cur_error;
 		if (this.state.name === "" || this.state.school === "" || this.state.grad_year === "" || this.state.contact_method === "" ) {
@@ -183,11 +187,22 @@ class EditProfile extends Component {
 		      content='Make sure to fill in all starred fields'
 		    />;
 			this.setState({
-				error_message: cur_error
+				cur_error_message: cur_error
 			});
-		} else {
 
-            let skills = [this.state.skills_1, this.state.skills_2, this.state.skills_3]
+		} else if(this.checkProfanity()){
+            cur_error =
+            <Message>
+              <Message.Header>Your profile contains profanity</Message.Header>
+              <p>
+                Please review your profile for profane language and try again
+              </p>
+            </Message>
+			this.setState({
+				cur_error_message: cur_error
+			});
+        }
+        else {
 	        commitMutation(
 	            environment,
 	            {
@@ -198,7 +213,7 @@ class EditProfile extends Component {
 	                    grad_year: this.state.grad_year,
 	                    school: this.state.school,
 	                    contact: this.state.contact,
-	                    skills: skills,
+	                    skills: this.state.skills,
                         experience: this.state.experience,
                         contact_method: this.state.contact_method
 	                }
