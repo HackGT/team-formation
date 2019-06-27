@@ -33,14 +33,12 @@ class FeedCards extends Component {
                     if (error) {
                        return <div>{error.message}</div>;
                     } else if (props) {
-                        let cards = []
-                        for (let i = 0; i < props.user.length; i++) {
-                            if (props.user[i].visible && props.user[i].uuid !== this.props.user_id) {
-                                cards.push(<UserCard name={props.user[i].name} grad_year={props.user[i].grad_year} school={props.user[i].school} contact={props.user[i].contact} skills={props.user[i].skills.filter(function (el) {
-                                    return Boolean(el);
-                                })} experience={props.user[i].experience} />);
-                            }
-                        }
+                        console.log(props)
+                        let cards = props.user.map(user => {
+                            return <UserCard name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function (el) {
+                                return Boolean(el);
+                            })} experience={user.experience} />
+                        })
                         return (<div className="Feed-container">{cards}</div>);
                     }
                 }}
