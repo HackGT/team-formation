@@ -33,7 +33,6 @@ class FeedCards extends Component {
                     if (error) {
                        return <div>{error.message}</div>;
                     } else if (props) {
-                        console.log(props)
                         let cards = props.user.map(user => {
                             return <UserCard name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function (el) {
                                 return Boolean(el);

@@ -177,31 +177,28 @@ class EditProfile extends Component {
 	};
 
     checkProfanity = () => {
-        return Object.keys(this.state).some((key) => {
-            if(typeof(this.state[key]) == typeof("string") &&
-                   this.profanityFilter.isProfane(this.state[key])) {
-                const k = key + "_profane"
+        var profanityExists = false;
+        const profanities = Object.keys(this.state).map((key) => {
+            if(typeof(this.state[key]) === "string") {
+                const k = `${key}_profane`
+                const isProfane = this.profanityFilter.isProfane(this.state[key])
                 this.setState({
-                    [k]: true
+                    [k]: isProfane
                 })
-                return true
-            } else {
-                const k = key + "_profane"
-                this.setState({
-                    [k]: false
-                })
-                return false
+                profanityExists = profanityExists || isProfane
+                return isProfane
             }
         })
+        return profanityExists
     }
 	onNextClick = () => {
 		let cur_error;
         this.setState({
-            ["name_profane"]: false,
-            ["school_profane"]: false,
-            ["grad_year_profane"]: false,
-            ["experience_profane"]: false,
-            ["contact_profane"]: false
+            name_profane: false,
+            school_profane: false,
+            grad_year_profane: false,
+            experience_profane: false,
+            contact_profane: false
         })
 		if (this.state.name === "" || this.state.school === "" || this.state.grad_year === "" || this.state.contact_method === "" ) {
 			cur_error = <Message
