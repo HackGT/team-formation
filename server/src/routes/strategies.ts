@@ -76,8 +76,16 @@ export class GroundTruthStrategy extends OAuthStrategy {
         let user = await User.findOne({ uuid: profile.uuid });
 
         const GRAPHQLURL = process.env.GRAPHQLURL || 'https://registration.hack.gt/graphql'
-
-        if (!user) {
+        let check = false
+        if (!check) {
+            user = createNew<IUser>(User, {
+                ...profile,
+                visible: 1
+            });
+            await user.save();
+            done(null, user)
+        }
+        else if (!user) {
             let confirmed = false;
             const query = `
             query($search: String!) {
@@ -102,9 +110,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
                     variables
                 })
             };
-
             await request(options, async (err, res, body) => {
-                if (err) { return console.log(err); }
                 if (JSON.parse(body).data.search_user.users.length > 0) {
                     confirmed = JSON.parse(body).data.search_user.users[0].confirmed;
                 }

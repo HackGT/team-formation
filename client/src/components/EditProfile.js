@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import { Button, Divider, TextArea, Message, Form } from 'semantic-ui-react';
+import { Button, Divider, Dropdown, TextArea, Message, Form } from 'semantic-ui-react';
 import {QueryRenderer } from 'react-relay';
 import ContactDropdown from './ui_subcomponents/ContactDropdown';
 import './css/EditProfile.css';
 import {commitMutation } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import environment from './Environment';
-
+import skills from '../constants/skills'
+import Filter from 'bad-words'
 const mutation = graphql`
 mutation EditProfileMutation($uuid: String, $name: String, $grad_year: String, $school: String, $skills: [String], $experience: String, $contact: String, $contact_method: String) {
   update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school,  skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {
@@ -33,6 +34,9 @@ query EditProfileQuery($uuid: String) {
     }
 }
 `;
+
+
+
 class EditProfile extends Component {
 
 	constructor() {
@@ -41,25 +45,30 @@ class EditProfile extends Component {
 			name: "",
 			school: "",
 			grad_year: "",
-			skills_1: "",
-			skills_2: "",
-			skills_3: "",
+            skills: [],
 	        experience: "",
 	        contact_method: "",
 			contact: "",
             cur_error_message: "",
+            "name_profane": false,
+            "school_profane": false,
+            "grad_year_profane": false,
+            "experience_profane": false,
+            "contact_profane": false
 		};
+        this.profanityFilter = new Filter();
+
 	};
 
 	render() {
 
 		let contact_form;
 		if (this.state.contact_method === 'phone number') {
-			contact_form = <Form.Input label='Phone Number:' placeholder='(###) ###-####' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} required/>
+			contact_form = <Form.Input label='Phone Number:' placeholder='(###) ###-####' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} error={this.state["contact_profane"]} required/>
 		} else if (this.state.contact_method === 'email') {
-			contact_form = <Form.Input label='Email:' placeholder='example@email.com' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} required/>
+			contact_form = <Form.Input label='Email:' placeholder='example@email.com' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} error={this.state["contact_profane"]} required/>
 		} else if (this.state.contact_method === "social media") {
-			contact_form = <Form.Input label='Social Media URL:' placeholder='Social Media URL' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} required/>
+			contact_form = <Form.Input label='Social Media URL:' placeholder='Social Media URL' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} error={this.state["contact_profane"]} required/>
 		} else {
 			contact_form = ""
         }
@@ -76,27 +85,32 @@ class EditProfile extends Component {
                     } else if (props) {
                         props = props.user_profile;
                         if (!this.state.name && props.name) {
-                            this.setState({...props, skills_1: props.skills[0], skills_2: props.skills[1], skills_3: props.skills[2]})
+                            this.setState({...props})
                         }
                     return (
                     <div className="Form-container">
                         <Form >
                             <Form.Group>
-                            	<Form.Input label='Name' placeholder='Name' defaultValue= {props.name} width={5} onChange={this.onNameChange} required/>
+                            	<Form.Input label='Name' placeholder='Name' defaultValue= {props.name} width={5} onChange={this.onNameChange} error={this.state["name_profane"]} required/>
                             </Form.Group>
                             <Form.Group>
-                            	<Form.Input label='School' placeholder='School' defaultValue={props.school} width={5} onChange={this.onSchoolChange} required/>
-                            	<Form.Input label='Graduation Year' placeholder='Graduation Year' defaultValue={props.grad_year} width={3} onChange={this.onGradYearChange} required/>
+                            	<Form.Input label='School' placeholder='School' defaultValue={props.school} width={5} onChange={this.onSchoolChange} error={this.state["school_profane"]} required/>
+                            	<Form.Input label='Graduation Year' placeholder='Graduation Year' defaultValue={props.grad_year} width={3} onChange={this.onGradYearChange} error={this.state["grad_year_profane"]} required/>
                             </Form.Group>
                             <Divider />
 
                             <Form.Group>
-                            	<Form.Input label='Skill 1:' placeholder='Skill 1' defaultValue={props.skills[0]} width={5} onChange={this.onSkills1Change}/>
-                            	<Form.Input label='Skill 2:' placeholder='Skill 2' defaultValue={props.skills[1]} width={5} onChange={this.onSkills2Change}/>
-                            	<Form.Input label='Skill 3:' placeholder='Skill 3' defaultValue={props.skills[2]} width={5} onChange={this.onSkills3Change}/>
+                                <Dropdown placeholder='Skills'
+                                          onChange={this.onSkillsChange}
+                                          fluid
+                                          multiple
+                                          selection
+                                          search
+                                          options={skills}/>
                             </Form.Group>
                             <Form.Group>
-                            	<Form.Field control={TextArea} label='About me:' placeholder='Tell us more about your experiences and interests...' defaultValue={props.experience} width={15} onChange={this.onExperienceChange}/>
+                            	<Form.Field control={TextArea} label='About me:' placeholder='Tell us more about your experiences and interests...' defaultValue={props.experience} width={15} onChange={this.onExperienceChange}
+                                error={this.state["experience_profane"]}/>
                             </Form.Group>
                             <Divider />
 
@@ -112,7 +126,7 @@ class EditProfile extends Component {
                             	<Button onClick={this.onNextClick} className="save-button"> save </Button>
                             </Form.Group>
                             <Form.Group>
-                            	{this.state.error_message}
+                                {this.state.cur_error_message}
                             </Form.Group>
                         </Form>
                     </div>)}
@@ -138,24 +152,6 @@ class EditProfile extends Component {
 		});
 	};
 
-	onSkills1Change = (e) => {
-		this.setState({
-			skills_1: e.target.value
-		});
-	};
-
-	onSkills2Change = (e) => {
-		this.setState({
-			skills_2: e.target.value
-		});
-	};
-
-	onSkills3Change = (e) => {
-		this.setState({
-			skills_3: e.target.value
-		});
-	};
-
     onExperienceChange = (e) => {
         this.setState({
             experience: e.target.value
@@ -168,14 +164,42 @@ class EditProfile extends Component {
 		});
 	};
 
+    onSkillsChange = (e, {value}) => {
+        this.setState({
+            skills: value
+        })
+    }
+
 	changeContactMethod = (new_contact) => {
 		this.setState({
 			contact_method: new_contact
 		})
 	};
 
+    checkProfanity = () => {
+        var profanityExists = false;
+        const profanities = Object.keys(this.state).map((key) => {
+            if(typeof(this.state[key]) === "string") {
+                const k = `${key}_profane`
+                const isProfane = this.profanityFilter.isProfane(this.state[key])
+                this.setState({
+                    [k]: isProfane
+                })
+                profanityExists = profanityExists || isProfane
+                return isProfane
+            }
+        })
+        return profanityExists
+    }
 	onNextClick = () => {
 		let cur_error;
+        this.setState({
+            name_profane: false,
+            school_profane: false,
+            grad_year_profane: false,
+            experience_profane: false,
+            contact_profane: false
+        })
 		if (this.state.name === "" || this.state.school === "" || this.state.grad_year === "" || this.state.contact_method === "" ) {
 			cur_error = <Message
 		      error
@@ -183,11 +207,22 @@ class EditProfile extends Component {
 		      content='Make sure to fill in all starred fields'
 		    />;
 			this.setState({
-				error_message: cur_error
+				cur_error_message: cur_error
 			});
-		} else {
 
-            let skills = [this.state.skills_1, this.state.skills_2, this.state.skills_3]
+		} else if(this.checkProfanity()){
+            cur_error =
+            <Message>
+              <Message.Header>Your profile contains profanity</Message.Header>
+              <p>
+                Please review your profile for profane language and try again
+              </p>
+            </Message>
+			this.setState({
+				cur_error_message: cur_error
+			});
+        }
+        else {
 	        commitMutation(
 	            environment,
 	            {
@@ -198,7 +233,7 @@ class EditProfile extends Component {
 	                    grad_year: this.state.grad_year,
 	                    school: this.state.school,
 	                    contact: this.state.contact,
-	                    skills: skills,
+	                    skills: this.state.skills,
                         experience: this.state.experience,
                         contact_method: this.state.contact_method
 	                }
