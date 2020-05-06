@@ -84,7 +84,6 @@ let getUser = async function (args) {
             $and: search
         });
     }
-
     if (!users) {
         return null;
     }
