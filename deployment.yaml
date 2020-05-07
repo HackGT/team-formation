@@ -1,8 +1,8 @@
 git:
-    branch: master
+  branch: master
 
 wants:
-    mongo: true
+  mongo: true
 
 secrets:
   - SECRET
