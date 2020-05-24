@@ -105,10 +105,11 @@ export class GroundTruthStrategy extends OAuthStrategy {
 
             await request(options, async (err, res, body) => {
                 if (err) { return console.log(err); }
-                if (JSON.parse(body).data.search_user.users.length > 0) {
-                    confirmed = JSON.parse(body).data.search_user.users[0].confirmed;
-                }
-                if (confirmed || !process.env.ISPRODUCTION) {
+                // if (JSON.parse(body).data.search_user.users.length > 0) {
+                //     confirmed = JSON.parse(body).data.search_user.users[0].confirmed;
+                // }
+                confirmed = true;
+                if (!process.env.ISPRODUCTION || confirmed) {
                     console.log("here")
                     user = createNew<IUser>(User, {
                         ...profile,

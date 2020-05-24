@@ -1,7 +1,16 @@
 .Feed-container {
 	padding-top: 2%;
+	width: 60%;
+	margin: 0 auto;
 }
 
+.Cards-container {
+	padding-top: 2%;
+	margin: 0 auto;
+}
+.center-group {
+	margin: 0 auto;
+}
 .button {
 	text-align: center;
 	padding-left: 20%;

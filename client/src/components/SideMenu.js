@@ -12,10 +12,7 @@ class SideMenu extends Component {
 	render() {
 		return (
 			<div className="SideMenu-container">
-                <Input placeholder="Search by skills" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress}/>
-				<Button icon onClick={this.onSearchClick}>
-    				<Icon name='search' />
-  				</Button>
+                <Input placeholder="Search by skills" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} size='massive' icon='search' />
 			</div>
 		);
     };
@@ -30,6 +27,9 @@ class SideMenu extends Component {
 		this.setState({
 			search_string: e.target.value
 		});
+		if(e.target.value.length > 0) {
+			this.props.onSearchClick(this.state.search_string);
+		}
 	};
 
 	onSearchClick = (e) => {

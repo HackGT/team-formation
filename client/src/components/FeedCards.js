@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import UserCard from './UserCard';
+import { Grid, Row, Card } from 'semantic-ui-react';
+
 import { QueryRenderer } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 import './css/Feed.css';
@@ -23,27 +25,33 @@ const getUsersQuery = graphql`
 class FeedCards extends Component {
     render() {
         return (
-            <QueryRenderer
-                environment={environment}
-                query={getUsersQuery}
-                variables={{
-                    skill: this.props.skill,
-                }}
-                render={({error,props}) => {
-                    if (error) {
-                       return <div>{error.message}</div>;
-                    } else if (props) {
-                        let cards = props.user.map(user => {
-                            return <UserCard name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function (el) {
-                                return Boolean(el);
-                            })} experience={user.experience} />
-                        })
-                        return (<div className="Feed-container">{cards}</div>);
-                    }
-                }}
-            />
+            <div className='Cards-container'>
+                <QueryRenderer
+                    environment={environment}
+                    query={getUsersQuery}
+                    variables={{
+                        skill: this.props.skill,
+                    }}
+                    render={({error,props}) => {
+                        if (error) {
+                           return <div>{error.message}</div>;
+                        } else if (props) {
+                            let cards = props.user.map(user => {
+                                return <UserCard name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function (el) {
+                                    return Boolean(el);
+                                })} experience={user.experience} />
+                            })
+
+                            return (<Card.Group centered itemsPerRow={4} className='center-group'>{cards}</Card.Group>);
+                        }
+                    }}
+                />
+            </div>
+
         );
+
     };
+
 };
 
 export default FeedCards;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FeedCards from './FeedCards';
 import SideMenu from './SideMenu';
+import './css/Feed.css';
 
 class Feed extends Component {
 
