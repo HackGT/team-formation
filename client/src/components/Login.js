@@ -32,28 +32,30 @@ class Login extends Component {
             <div class="limiter">
                 <div class="container-login100">
                     <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-                        <span class="login100-form-title p-b-49">
-                            HackGT
-				        </span>
+                        <form class="login100-form validate-form" action="/api/user/login">
+                            <span class="login100-form-title p-b-49">
+                                HackGT
+                            </span>
 
-                        <span class="login100-form-title2 p-b-49">
-                            Team Formation
-				        </span>
+                            <span class="login100-form-title2 p-b-49">
+                                Team Formation
+                            </span>
 
-                        <div class="container-login100-form-btn">
-                            <div class="wrap-login100-form-btn">
-                                <div class="login100-form-bgbtn"></div>
-                                <button class="login100-form-btn">
-                                    Login with HackGT
-						        </button>
+                            <div class="container-login100-form-btn">
+                                <div class="wrap-login100-form-btn">
+                                    <div class="login100-form-bgbtn"></div>
+                                    <button class="login100-form-btn" type="submit">
+                                        Login with HackGT
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="txt1 text-center p-t-54 p-b-20">
-                            <span>
-                                This portal is only available to participants who have registered for HackGT!
-					        </span>
-                        </div>
+                            <div class="txt1 text-center p-t-54 p-b-20">
+                                <span>
+                                    This portal is only available to participants who have registered for HackGT!
+                                </span>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
