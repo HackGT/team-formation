@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import './css/Login.css';
+import './login-css/main.css';
+import './login-css/util.css';
 
 class Login extends Component {
     constructor(props) {
@@ -24,9 +26,39 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="Login-container">
-				<Button href = {"/api/user/login"}> Login </Button>
-                <h3 id="login-message"> Participants must be confirmed for the Horizons event to access Team Formation</h3>
+            // <div className="Login-container">
+			// 	<Button href = {"/api/user/login"}> Login </Button>
+            //     <h3 id="login-message"> Participants must be confirmed for the Horizons event to access Team Formation</h3>
+            // </div>
+            <div class="limiter">
+                <div class="container-login100" style="background: rgb(85,196,235); background: linear-gradient(0deg, rgba(85,196,235,1) 0%, rgba(135,91,163,1) 100%);">
+                    <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+                        <form class="login100-form validate-form">
+                            <span class="login100-form-title p-b-49">
+                                HackGT
+					</span>
+
+                            <span class="login100-form-title2 p-b-49">
+                                Team Formation
+					</span>
+
+                            <div class="container-login100-form-btn">
+                                <div class="wrap-login100-form-btn">
+                                    <div class="login100-form-bgbtn"></div>
+                                    <button class="login100-form-btn">
+                                        Login with HackGT
+							</button>
+                                </div>
+                            </div>
+
+                            <div class="txt1 text-center p-t-54 p-b-20">
+                                <span>
+                                    This portal is only available to participants who have registered for HackGT!
+						</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
 		);
     };
