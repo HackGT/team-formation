@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
-import './css/Login.css';
-import './login-css/main.css';
-import './login-css/util.css';
+import './css/login-css/main.css';
+import './css/login-css/util.css';
 
 class Login extends Component {
     constructor(props) {
@@ -31,7 +30,7 @@ class Login extends Component {
             //     <h3 id="login-message"> Participants must be confirmed for the Horizons event to access Team Formation</h3>
             // </div>
             <div class="limiter">
-                <div class="container-login100" style="background: rgb(85,196,235); background: linear-gradient(0deg, rgba(85,196,235,1) 0%, rgba(135,91,163,1) 100%);">
+                <div class="container-login100">
                     <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
                         <span class="login100-form-title p-b-49">
                             HackGT
