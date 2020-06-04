@@ -6,7 +6,8 @@ import './css/EditProfile.css';
 import {commitMutation } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import environment from './Environment';
-import skills from '../constants/skills'
+import skills from '../constants/skills';
+import years from '../constants/years';
 import Filter from 'bad-words'
 const mutation = graphql`
 mutation EditProfileMutation($uuid: String, $name: String, $grad_year: String, $school: String, $skills: [String], $experience: String, $contact: String, $contact_method: String) {
@@ -42,6 +43,9 @@ class EditProfile extends Component {
 	constructor() {
         super();
 		this.state = {
+            first_name: "",
+            last_name: "",
+            year: "",
 			name: "",
 			school: "",
 			grad_year: "",
@@ -88,52 +92,104 @@ class EditProfile extends Component {
                             this.setState({...props})
                         }
                     return (
-                    <div className="Form-container">
-                        <Form >
-                            <Form.Group>
-                            	<Form.Input label='Name' placeholder='Name' defaultValue= {props.name} width={5} onChange={this.onNameChange} error={this.state["name_profane"]} required/>
-                            </Form.Group>
-                            <Form.Group>
-                            	<Form.Input label='School' placeholder='School' defaultValue={props.school} width={5} onChange={this.onSchoolChange} error={this.state["school_profane"]} required/>
-                            	<Form.Input label='Graduation Year' placeholder='Graduation Year' defaultValue={props.grad_year} width={3} onChange={this.onGradYearChange} error={this.state["grad_year_profane"]} required/>
-                            </Form.Group>
-                            <Divider />
+                        <>
+                            <div className="form-container">
+                                <Form>
+                                    <Form.Group>
+                                        <Form.Input className="input-container" label='First Name' placeholder='First Name' defaultValue= {props.name} onChange={this.onNameChange} error={this.state["name_profane"]} required/>
+                                        <Form.Input className="input-container" label='Last Name' placeholder='Last Name' defaultValue= {props.name} onChange={this.onNameChange} error={this.state["name_profane"]} required/>
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.Input className="input-container" label='School' placeholder='School' defaultValue={props.school} onChange={this.onSchoolChange} error={this.state["school_profane"]} required/>
+                                            <Form.Select
+                                                className="input-container"
+                                                required
+                                                label='Year in School'
+                                                onChange={this.onYearChange}
+                                                options={years}
+                                                placeholder='Year in School'
+                                            />
+                                    </Form.Group>
+                                    <Divider/>
+                                    <Form.Group>
+                                        <Form.Select
+                                                className="input-container-large"
+                                                label="Skills"
+                                                placeholder='Skills'
+                                                onChange={this.onSkillsChange}
+                                                fluid
+                                                multiple
+                                                selection
+                                                search
+                                                options={skills}/>
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.TextArea
+                                            className="input-container-large"
+                                            label='Bio'
+                                            placeholder='Introduce yourself!' 
+                                            defaultValue={props.experience} 
+                                            onChange={this.onExperienceChange}
+                                            error={this.state["experience_profane"]}/>
+                                    </Form.Group>
+                                    <div className="button-container">
+                                        <Form.Group className="save-button-container">
+                                            <Button onClick={this.onCancelClick} className="save-button"> cancel </Button>
+                                        </Form.Group>
+                                        <Form.Group>
+                                            <Button onClick={this.onNextClick} className="save-button"> save </Button>
+                                        </Form.Group>
+                                        <Form.Group>
+                                            {this.state.cur_error_message}
+                                        </Form.Group>
+                                    </div>
+                                </Form>
+                            </div>
 
-                            <Form.Group>
-                                <Dropdown placeholder='Skills'
-                                          onChange={this.onSkillsChange}
-                                          fluid
-                                          multiple
-                                          selection
-                                          search
-                                          options={skills}/>
-                            </Form.Group>
-                            <Form.Group>
-                            	<Form.Field control={TextArea} label='About me:' placeholder='Tell us more about your experiences and interests...' defaultValue={props.experience} width={15} onChange={this.onExperienceChange}
-                                error={this.state["experience_profane"]}/>
-                            </Form.Group>
-                            <Divider />
 
-                            <Form.Group>
-                            	<ContactDropdown contact={this.changeContactMethod} contact_method={props.contact_method}/>
-                            </Form.Group>
-                            <Form.Group>
-                            	{contact_form}
-                            </Form.Group>
-                            <Divider />
 
-                            <Form.Group>
-                            	<Button onClick={this.onNextClick} className="save-button"> save </Button>
-                            </Form.Group>
-                            <Form.Group>
-                                {this.state.cur_error_message}
-                            </Form.Group>
-                        </Form>
-                    </div>)}
+                            <div>
+                            <Form>
+                                <Form.Group>
+                                    <Form.Input label='Name' placeholder='Name' defaultValue= {props.name} width={5} onChange={this.onNameChange} error={this.state["name_profane"]} required/>
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Input label='Graduation Year' placeholder='Graduation Year' defaultValue={props.grad_year} width={3} onChange={this.onGradYearChange} error={this.state["grad_year_profane"]} required/>
+                                </Form.Group>
+                                <Form.Group>
+                                    <ContactDropdown contact={this.changeContactMethod} contact_method={props.contact_method}/>
+                                </Form.Group>
+                                <Form.Group>
+                                    {contact_form}
+                                </Form.Group>
+
+                                <Form.Group>
+                                    <Button onClick={this.onNextClick} className="save-button"> save </Button>
+                                </Form.Group>
+                                <Form.Group>
+                                    {this.state.cur_error_message}
+                                </Form.Group>
+                            </Form>
+                            </div>
+                        </>
+                    )}
                 }}
             />
 		);
     };
+
+    onFirstNameChange = (e) => {
+        this.setState({
+            first_name: e.target.value
+        });
+    }
+
+    onLastNameChange = (e) => {
+        this.setState({
+            last_name: e.target.value
+        });
+    }
+
 	onNameChange = (e) => {
 		this.setState({
 			name: e.target.value
@@ -162,7 +218,13 @@ class EditProfile extends Component {
 		this.setState({
 			contact: e.target.value
 		});
-	};
+    };
+    
+    onYearChange = (e, {value}) => {
+        this.setState({
+            year: value
+        })
+    }
 
     onSkillsChange = (e, {value}) => {
         this.setState({
@@ -191,6 +253,11 @@ class EditProfile extends Component {
         })
         return profanityExists
     }
+
+    onCancelClick = () => {
+        this.props.onNextClick('feed', this.props.user_id);
+    }
+
 	onNextClick = () => {
 		let cur_error;
         this.setState({
