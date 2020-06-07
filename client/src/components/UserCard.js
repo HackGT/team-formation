@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Popup } from 'semantic-ui-react';
+import { Button, Card, Popup, Container, Label } from 'semantic-ui-react';
 import './css/UserCard.css';
 
 class UserCard extends Component {
@@ -8,33 +8,41 @@ class UserCard extends Component {
 		let cur_contact = this.props.contact;
 		if (this.props.contact === null) {
 			contact = <Popup
-			trigger={<Button basic color='teal' content='Reach Out' />}
+			trigger={<Button basic color='purple' content='Reach Out' />}
 			content="no contact available"
 			on='click'
 			hideOnScroll
 			/>
 		} else if ((this.props.contact).includes("@")) {
 			contact = <Popup
-			trigger={<Button basic color='teal' content='Reach Out' />}
+			trigger={<Button basic color='purple' content='Reach Out' />}
 			content=<a href={`mailto:${this.props.contact}`} target="_blank">{this.props.contact} </a>
 			on='click'
 			hideOnScroll
 			/>
 		} else if ((this.props.contact).includes(".")) {
 			contact = <Popup
-			trigger={<Button basic color='teal' content='Reach Out' />}
+			trigger={<Button basic color='purple' content='Reach Out' />}
 			content=<a href={this.props.contact} target="_blank">{this.props.contact}</a>
 			on='click'
 			hideOnScroll
 			/>
 		} else {
 			contact = <Popup
-			trigger={<Button basic color='teal' content='Reach Out' />}
+			trigger={<Button basic color='purple' content='Reach Out' />}
 			content={this.props.contact}
 			on='click'
 			hideOnScroll
 			/>
 		}
+		var colors = [
+			'violet',
+			'yellow',
+			'orange'
+		]
+		var count = 0;
+		var skill;
+		var viewskill;
         return (
 
 					<Card className="card1">
@@ -45,10 +53,14 @@ class UserCard extends Component {
 							<div className="ui divider"></div>
 
 							<Card.Description className="card-description">
-								<strong> Skills: </strong>{this.props.skills.join(", ")}
+							{viewskill = this.props.skills.map((skill) => 
+      							<Label size='mini' color={colors[(count++)%3]}>
+        							{skill}
+     							 </Label>
+     						)}
 							</Card.Description>
 							<Card.Description className="card-description">
-								<strong> About Them: </strong>{this.props.experience}
+								<Container style={{overflow: 'auto', maxHeight: 42 }}><strong> About Them: </strong>{this.props.experience}</Container>
 							</Card.Description>
 						</Card.Content>
                         <Card.Content extra>
@@ -62,3 +74,4 @@ class UserCard extends Component {
 };
 
 export default UserCard;
+
