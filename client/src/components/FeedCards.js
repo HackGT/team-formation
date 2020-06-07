@@ -12,9 +12,9 @@ const getUsersQuery = graphql`
         user(skill:$skill) {
             name
             school
-			grad_year
-			contact
-			skills
+            grad_year
+            contact
+            skills
             experience
             visible
             uuid
