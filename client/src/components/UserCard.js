@@ -36,27 +36,27 @@ class UserCard extends Component {
 			/>
 		}
         return (
-
-					<Card className="card1">
-						<Card.Content className="content">
-							<Card.Header>{this.props.name}</Card.Header>
-							<Card.Meta>{this.props.school}</Card.Meta>
-							<Card.Meta>Graduation Year: {this.props.grad_year}</Card.Meta>
-							<div className="ui divider"></div>
-
-							<Card.Description className="card-description">
-								<strong> Skills: </strong>{this.props.skills.join(", ")}
-							</Card.Description>
-							<Card.Description className="card-description">
-								<strong> About Them: </strong>{this.props.experience}
-							</Card.Description>
-						</Card.Content>
-                        <Card.Content extra>
-                            <div className='contact-button'>
-                                <p>{contact}</p>
-                            </div>
-                        </Card.Content>
-					</Card>
+				<Card className="card1">
+					<Card.Content className="content">
+						<Card.Header>{this.props.name}</Card.Header>
+						<Card.Meta>{this.props.school}</Card.Meta>
+						<Card.Meta>
+                            Graduation Year: {this.props.grad_year}
+                        </Card.Meta>
+						<div className="ui divider"></div>
+						<Card.Description className="card-description">
+							<strong> Skills: </strong>{this.props.skills.join(", ")}
+						</Card.Description>
+						<Card.Description className="card-description">
+							<strong> About Them: </strong>{this.props.experience}
+						</Card.Description>
+					</Card.Content>
+                    <Card.Content extra>
+                        <div className='contact-button'>
+                            <p>{contact}</p>
+                        </div>
+                    </Card.Content>
+				</Card>
 		);
 	};
 };

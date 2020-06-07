@@ -41,6 +41,7 @@ class FeedCards extends Component {
                                     return Boolean(el);
                                 })} experience={user.experience} />
                             })
+                            // [UserCard(saachi), UserCard(aakash)]
 
                             return (<Card.Group centered itemsPerRow={4} className='center-group'>{cards}</Card.Group>);
                         }
