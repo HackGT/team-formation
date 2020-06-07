@@ -1,0 +1,27 @@
+#search {
+    margin: 1em 0;
+}
+
+.input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+    font-family: Raleway;
+    font-size: 18px;
+    height: 50px;
+    /* left: 50%; */
+    padding: 10px 0px;
+    /* top: 50%; */
+    width: 200px;
+}
+.input:focus {
+    outline: none;
+    border-bottom: 1px solid black;
+}
+input::-webkit-input-placeholder {
+    color: #aaa;
+}
+input:focus::-webkit-input-placeholder {
+    color: black;
+}
