@@ -21,10 +21,6 @@ const mutation = graphql`
 `;
 
 class Headers extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { open: true };
-  }
 
   render() {
     let toggle_text;
