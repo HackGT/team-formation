@@ -3,7 +3,7 @@ import { Button, Header, Image, Modal } from 'semantic-ui-react'
 
 class Modal1 extends Component {
     state = {
-        open = false,
+        open: false,
     }
 
   render() {
