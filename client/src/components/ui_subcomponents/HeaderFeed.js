@@ -33,10 +33,7 @@ class Headers extends Component {
         <div className="logout-button">
           <Menu>
             <Menu.Item>
-              <Button
-                className="edit-button"
-                onClick={this.props.onEditClick}
-              >
+              <Button className="edit-button" onClick={this.props.onEditClick}>
                 {" "}
                 Edit Profile{" "}
               </Button>
@@ -48,10 +45,7 @@ class Headers extends Component {
               </Button>
             </Menu.Item>
             <Menu.Item>
-              <Button
-                onClick={this.onToggleClick}
-                className="toggle-button"
-              >
+              <Button onClick={this.onToggleClick} className="toggle-button">
                 {" "}
                 {toggle_text}{" "}
               </Button>
@@ -105,10 +99,10 @@ class Headers extends Component {
                           }}
                         >
                           Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore
-                          et dolore magna aliqua. Ut enim ad minim veniam,
-                          quis nostrud exercitation ullamco laboris nisi ut
-                          aliquip ex ea commodo consequat.
+                          elit, sed do eiusmod tempor incididunt ut labore et
+                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                          nostrud exercitation ullamco laboris nisi ut aliquip
+                          ex ea commodo consequat.
                         </p>
                         <p
                           style={{
@@ -125,10 +119,10 @@ class Headers extends Component {
                           }}
                         >
                           Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore
-                          et dolore magna aliqua. Ut enim ad minim veniam,
-                          quis nostrud exercitation ullamco laboris nisi ut
-                          aliquip ex ea commodo consequat.
+                          elit, sed do eiusmod tempor incididunt ut labore et
+                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                          nostrud exercitation ullamco laboris nisi ut aliquip
+                          ex ea commodo consequat.
                         </p>
 
                         <div
@@ -188,7 +182,7 @@ class Headers extends Component {
               <Modal
                 trigger={<Button>Modal 2</Button>}
                 style={{
-                  padding: 10,
+                  paddingTop: 10,
                   backgroundColor: "#c4c4c4",
                 }}
                 closeIcon
@@ -207,7 +201,7 @@ class Headers extends Component {
                       <p
                         style={{
                           textAlign: "center",
-                          fontSize: 36,
+                          fontSize: 40,
                         }}
                       >
                         Request Join Team 23?
@@ -217,11 +211,35 @@ class Headers extends Component {
                           marginTop: 60,
                           border: "1px solid #000",
                           borderRadius: 7,
-                          paddingBottom: 50,
+                          paddingTop: 15,
+                          paddingLeft: 20,
+                          paddingBottom: 100,
+                          marginRight: 220,
+                          marginLeft: 220,
                         }}
                       >
                         Write a message...
                       </p>
+                      <div
+                        style={{
+                          float: "right",
+                          marginTop: 40,
+                          paddingBottom: 20,
+                        }}
+                      >
+                        <svg
+                          width="21"
+                          height="18"
+                          viewBox="0 0 21 18"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0.00999999 18L21 9L0.00999999 0L0 7L15 9L0 11L0.00999999 18Z"
+                            fill="#646464"
+                          />
+                        </svg>
+                      </div>
                     </div>
                   </Modal.Description>
                 </Modal.Content>
