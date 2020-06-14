@@ -41,6 +41,18 @@ class Headers extends Component {
                         <Menu.Item>
                             <Button onClick={this.onToggleClick} className="toggle-button"> {toggle_text} </Button>
                         </Menu.Item>
+                        <Menu.Item>
+							<Button className="modal-button-1" onClick={this.props.modal1}> Modal 1 </Button>
+                        </Menu.Item>
+                        <Menu.Item>
+							<Button className="modal-button-2"> Modal 2 </Button>
+                        </Menu.Item>
+                        <Menu.Item>
+							<Button className="modal-button-3"> Modal 3 </Button>
+                        </Menu.Item>
+                        <Menu.Item>
+							<Button className="modal-button-4"> Modal 4 </Button>
+                        </Menu.Item>
 					</Menu>
 				</div>
 
@@ -62,7 +74,8 @@ class Headers extends Component {
             }
         );
         this.props.onNextClick('feed', this.props.user_id, !this.props.visible);
-	};
+    };
+
 };
 
 export default Headers;
