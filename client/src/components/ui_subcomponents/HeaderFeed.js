@@ -21,7 +21,6 @@ const mutation = graphql`
 `;
 
 class Headers extends Component {
-
   render() {
     let toggle_text;
     if (this.props.visible) {
@@ -34,7 +33,10 @@ class Headers extends Component {
         <div className="logout-button">
           <Menu>
             <Menu.Item>
-              <Button className="edit-button" onClick={this.props.onEditClick}>
+              <Button
+                className="edit-button"
+                onClick={this.props.onEditClick}
+              >
                 {" "}
                 Edit Profile{" "}
               </Button>
@@ -46,7 +48,10 @@ class Headers extends Component {
               </Button>
             </Menu.Item>
             <Menu.Item>
-              <Button onClick={this.onToggleClick} className="toggle-button">
+              <Button
+                onClick={this.onToggleClick}
+                className="toggle-button"
+              >
                 {" "}
                 {toggle_text}{" "}
               </Button>
@@ -74,99 +79,149 @@ class Headers extends Component {
                       <p
                         style={{
                           textAlign: "center",
-                          fontSize: 36,
+                          fontSize: 40,
                         }}
                       >
                         Team 23 wants you to join their team!
                       </p>
+                      <div
+                        style={{
+                          marginRight: 80,
+                          marginLeft: 80,
+                        }}
+                      >
+                        <p
+                          style={{
+                            marginTop: 60,
+                          }}
+                        >
+                          Team 23's request message:
+                        </p>
+                        <p
+                          style={{
+                            border: "1px solid #000",
+                            borderRadius: 7,
+                            padding: 20,
+                          }}
+                        >
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit, sed do eiusmod tempor incididunt ut labore
+                          et dolore magna aliqua. Ut enim ad minim veniam,
+                          quis nostrud exercitation ullamco laboris nisi ut
+                          aliquip ex ea commodo consequat.
+                        </p>
+                        <p
+                          style={{
+                            marginTop: 30,
+                          }}
+                        >
+                          Team 23's project idea:
+                        </p>
+                        <p
+                          style={{
+                            border: "1px solid #000",
+                            borderRadius: 7,
+                            padding: 20,
+                          }}
+                        >
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit, sed do eiusmod tempor incididunt ut labore
+                          et dolore magna aliqua. Ut enim ad minim veniam,
+                          quis nostrud exercitation ullamco laboris nisi ut
+                          aliquip ex ea commodo consequat.
+                        </p>
+
+                        <div
+                          class="flex-container1"
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            marginTop: 35,
+                          }}
+                        >
+                          <div
+                            style={{
+                              border: "1px solid #000",
+                              borderRadius: 20,
+                              padding: 10,
+                            }}
+                          >
+                            View more about Team 23
+                          </div>
+                        </div>
+                        <div
+                          class="flex-container"
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            marginTop: 20,
+                          }}
+                        >
+                          <div
+                            style={{
+                              border: "1px solid #000",
+                              borderRadius: 20,
+                              padding: 10,
+                              margin: 10,
+                            }}
+                          >
+                            Accept
+                          </div>
+                          <div
+                            style={{
+                              border: "1px solid #000",
+                              borderRadius: 20,
+                              padding: 10,
+                              margin: 10,
+                            }}
+                          >
+                            Deny
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Modal.Description>
+                </Modal.Content>
+              </Modal>
+            </Menu.Item>
+            <Menu.Item>
+              <Modal
+                trigger={<Button>Modal 2</Button>}
+                style={{
+                  padding: 10,
+                  backgroundColor: "#c4c4c4",
+                }}
+                closeIcon
+              >
+                <Modal.Content
+                  style={{
+                    backgroundColor: "#c4c4c4",
+                  }}
+                >
+                  <Modal.Description>
+                    <div
+                      style={{
+                        backgroundColor: "#c4c4c4",
+                      }}
+                    >
+                      <p
+                        style={{
+                          textAlign: "center",
+                          fontSize: 36,
+                        }}
+                      >
+                        Request Join Team 23?
+                      </p>
                       <p
                         style={{
                           marginTop: 60,
-                        }}
-                      >
-                        Team 23's request message:
-                      </p>
-                      <p
-                        style={{
                           border: "1px solid #000",
                           borderRadius: 7,
-                          padding: 20,
+                          paddingBottom: 50,
                         }}
                       >
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
+                        Write a message...
                       </p>
-                      <p
-                        style={{
-                          marginTop: 30,
-                        }}
-                      >
-                        Team 23's project idea:
-                      </p>
-                      <p
-                        style={{
-                          border: "1px solid #000",
-                          borderRadius: 7,
-                          padding: 20,
-                        }}
-                      >
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
-                      </p>
-
-                      <div
-                        class="flex-container1"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          marginTop: 35,
-                        }}
-                      >
-                        <div
-                          style={{
-                            border: "1px solid #000",
-                            borderRadius: 10,
-                            padding: 10,
-                          }}
-                        >
-                          View more about Team 23
-                        </div>
-                      </div>
-                      <div
-                        class="flex-container"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          marginTop: 20,
-                        }}
-                      >
-                        <div
-                          style={{
-                            border: "1px solid #000",
-                            borderRadius: 10,
-                            padding: 10,
-                            margin: 10,
-                          }}
-                        >
-                          Accept
-                        </div>
-                        <div
-                          style={{
-                            border: "1px solid #000",
-                            borderRadius: 10,
-                            padding: 10,
-                            margin: 10,
-                          }}
-                        >
-                          Deny
-                        </div>
-                      </div>
                     </div>
                   </Modal.Description>
                 </Modal.Content>
