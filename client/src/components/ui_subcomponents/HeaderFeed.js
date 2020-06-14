@@ -42,7 +42,7 @@ class Headers extends Component {
                             <Button onClick={this.onToggleClick} className="toggle-button"> {toggle_text} </Button>
                         </Menu.Item>
                         <Menu.Item>
-							<Button className="modal-button-1" onClick={this.props.modal1}> Modal 1 </Button>
+							<Button className="modal-button-1" onClick={this.setState({open: true})} > Modal 1 </Button>
                         </Menu.Item>
                         <Menu.Item>
 							<Button className="modal-button-2"> Modal 2 </Button>
