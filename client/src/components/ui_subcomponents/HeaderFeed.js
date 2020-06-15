@@ -33,7 +33,10 @@ class Headers extends Component {
         <div className="logout-button">
           <Menu>
             <Menu.Item>
-              <Button className="edit-button" onClick={this.props.onEditClick}>
+              <Button
+                className="edit-button"
+                onClick={this.props.onEditClick}
+              >
                 {" "}
                 Edit Profile{" "}
               </Button>
@@ -45,7 +48,10 @@ class Headers extends Component {
               </Button>
             </Menu.Item>
             <Menu.Item>
-              <Button onClick={this.onToggleClick} className="toggle-button">
+              <Button
+                onClick={this.onToggleClick}
+                className="toggle-button"
+              >
                 {" "}
                 {toggle_text}{" "}
               </Button>
@@ -99,10 +105,10 @@ class Headers extends Component {
                           }}
                         >
                           Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
-                          nostrud exercitation ullamco laboris nisi ut aliquip
-                          ex ea commodo consequat.
+                          elit, sed do eiusmod tempor incididunt ut labore
+                          et dolore magna aliqua. Ut enim ad minim veniam,
+                          quis nostrud exercitation ullamco laboris nisi ut
+                          aliquip ex ea commodo consequat.
                         </p>
                         <p
                           style={{
@@ -119,10 +125,10 @@ class Headers extends Component {
                           }}
                         >
                           Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
-                          nostrud exercitation ullamco laboris nisi ut aliquip
-                          ex ea commodo consequat.
+                          elit, sed do eiusmod tempor incididunt ut labore
+                          et dolore magna aliqua. Ut enim ad minim veniam,
+                          quis nostrud exercitation ullamco laboris nisi ut
+                          aliquip ex ea commodo consequat.
                         </p>
 
                         <div
@@ -239,6 +245,168 @@ class Headers extends Component {
                             fill="#646464"
                           />
                         </svg>
+                      </div>
+                    </div>
+                  </Modal.Description>
+                </Modal.Content>
+              </Modal>
+            </Menu.Item>
+            <Menu.Item>
+              <Modal
+                trigger={<Button>Modal 3</Button>}
+                style={{
+                  padding: 10,
+                  backgroundColor: "#c4c4c4",
+                }}
+                closeIcon
+              >
+                <Modal.Content
+                  style={{
+                    backgroundColor: "#c4c4c4",
+                  }}
+                >
+                  <Modal.Description>
+                    <div
+                      style={{
+                        backgroundColor: "#c4c4c4",
+                      }}
+                    >
+                      <p
+                        style={{
+                          textAlign: "center",
+                          fontSize: 40,
+                        }}
+                      >
+                        Meha A. wants to team up with you!
+                      </p>
+                      <div
+                        class="row"
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                        }}
+                      >
+                        <div
+                          class="column"
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: 350,
+                          }}
+                        >
+                          <div
+                            class="column1"
+                            style={{
+                              border: "1px solid #000",
+                              borderRadius: 7,
+                              margin: 25,
+                            }}
+                          >
+                            <p
+                              style={{
+                                textAlign: "center",
+                                marginTop: 40,
+                                fontSize: 30,
+                              }}
+                            >
+                              Meha A.
+                            </p>
+                            <p
+                              style={{
+                                textAlign: "left",
+                                marginTop: 50,
+                                fontSize: 17,
+                                marginLeft: 30,
+                                marginRight: 30,
+                                paddingBottom: 40,
+                              }}
+                            >
+                              Lorem ipsum dolor sit amet, consectetur
+                              adipiscing elit, sed do eiusmod tempor
+                              incididunt ut labore et dolore magna aliqua.
+                            </p>
+                          </div>
+                        </div>
+                        <div
+                          class="column"
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            flex: 1,
+                          }}
+                        >
+                          <div
+                            class="column2"
+                            style={{
+                              margin: 25,
+                            }}
+                          >
+                            <p>Meha's Request Message:</p>
+                            <p
+                              style={{
+                                border: "1px solid #000",
+                                borderRadius: 7,
+                                padding: 20,
+                              }}
+                            >
+                              Lorem ipsum dolor sit amet, consectetur
+                              adipiscing elit, sed do eiusmod tempor
+                              incididunt ut labore et dolore magna aliqua.
+                              Ut enim ad minim veniam, quis nostrud
+                              exercitation ullamco laboris nisi ut aliquip
+                              ex ea commodo consequat.
+                            </p>
+                            <p
+                              style={{
+                                marginTop: 30,
+                              }}
+                            >
+                              Meha's Project Idea:
+                            </p>
+                            <p
+                              style={{
+                                border: "1px solid #000",
+                                borderRadius: 7,
+                                padding: 20,
+                              }}
+                            >
+                              Lorem ipsum dolor sit amet, consectetur
+                              adipiscing elit, sed do eiusmod tempor
+                              incididunt ut labore et dolore magna aliqua.
+                              Ut enim ad minim veniam, quis nostrud
+                              exercitation ullamco laboris nisi ut aliquip
+                              ex ea commodo consequat.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="flex-container"
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <div
+                          style={{
+                            border: "1px solid #000",
+                            borderRadius: 20,
+                            padding: 10,
+                            margin: 10,
+                          }}
+                        >
+                          Accept
+                        </div>
+                        <div
+                          style={{
+                            border: "1px solid #000",
+                            borderRadius: 20,
+                            padding: 10,
+                            margin: 10,
+                          }}
+                        >
+                          Deny
+                        </div>
                       </div>
                     </div>
                   </Modal.Description>
