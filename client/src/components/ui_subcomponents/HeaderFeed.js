@@ -150,7 +150,7 @@ class Headers extends Component {
                           </div>
                         </div>
                         <div
-                          class="flex-container"
+                          class="flex-container2"
                           style={{
                             display: "flex",
                             justifyContent: "center",
@@ -407,6 +407,159 @@ class Headers extends Component {
                         >
                           Deny
                         </div>
+                      </div>
+                    </div>
+                  </Modal.Description>
+                </Modal.Content>
+              </Modal>
+            </Menu.Item>
+            <Menu.Item>
+              <Modal
+                trigger={<Button>Modal 4</Button>}
+                style={{
+                  padding: 10,
+                  backgroundColor: "#c4c4c4",
+                }}
+                closeIcon
+              >
+                <Modal.Content
+                  style={{
+                    backgroundColor: "#c4c4c4",
+                  }}
+                >
+                  <Modal.Description>
+                    <div
+                      style={{
+                        backgroundColor: "#c4c4c4",
+                      }}
+                    >
+                      <p
+                        style={{
+                          textAlign: "center",
+                          fontSize: 40,
+                        }}
+                      >
+                        Team Up with Aakash?
+                      </p>
+                      <div
+                        class="row"
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                        }}
+                      >
+                        <div
+                          class="column"
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: 350,
+                          }}
+                        >
+                          <div
+                            class="column1"
+                            style={{
+                              border: "1px solid #000",
+                              borderRadius: 7,
+                              margin: 25,
+                            }}
+                          >
+                            <p
+                              style={{
+                                textAlign: "center",
+                                marginTop: 40,
+                                fontSize: 30,
+                              }}
+                            >
+                              Aakash G.
+                            </p>
+                            <p
+                              style={{
+                                textAlign: "left",
+                                marginTop: 50,
+                                fontSize: 17,
+                                marginLeft: 30,
+                                marginRight: 30,
+                                paddingBottom: 50,
+                              }}
+                            >
+                              Lorem ipsum dolor sit amet, consectetur
+                              adipiscing elit, sed do eiusmod tempor
+                              incididunt ut labore et dolore magna aliqua.
+                            </p>
+                            <p
+                              style={{
+                                textAlign: "center",
+                                border: "1px solid #000",
+                                borderRadius: 7,
+                                padding: 10,
+                                marginLeft: 30,
+                                marginRight: 30,
+                                marginBottom: 30,
+                              }}
+                            >
+                              Team Up!
+                            </p>
+                          </div>
+                        </div>
+                        <div
+                          class="column"
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            flex: 1,
+                          }}
+                        >
+                          <div
+                            class="column2"
+                            style={{
+                              margin: 25,
+                            }}
+                          >
+                            <p
+                              style={{
+                                border: "1px solid #000",
+                                borderRadius: 7,
+                                paddingBottom: 110,
+                                paddingLeft: 15,
+                                paddingTop: 15,
+                              }}
+                            >
+                              Introduce yourself...
+                            </p>
+
+                            <p
+                              style={{
+                                border: "1px solid #000",
+                                borderRadius: 7,
+                                paddingBottom: 110,
+                                paddingLeft: 15,
+                                paddingTop: 15,
+                                marginTop: 50,
+                              }}
+                            >
+                              Describe your project idea...
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          float: "right",
+                        }}
+                      >
+                        <svg
+                          width="21"
+                          height="18"
+                          viewBox="0 0 21 18"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0.00999999 18L21 9L0.00999999 0L0 7L15 9L0 11L0.00999999 18Z"
+                            fill="#646464"
+                          />
+                        </svg>
                       </div>
                     </div>
                   </Modal.Description>
