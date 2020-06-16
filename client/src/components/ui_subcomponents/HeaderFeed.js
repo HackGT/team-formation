@@ -22,6 +22,25 @@ const mutation = graphql`
 
 class Headers extends Component {
   render() {
+    const teamInfo = {
+      teamName: "Team 23",
+      teamRequestMessage:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      teamProjectIdea:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    };
+    const user1Info = {
+      user1CardName: "Meha A.",
+      user1FirstName: "Meha",
+      user1CardInfo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      user1RequestMessage: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      user1ProjectIdea: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    };
+    const user2Info = {
+      user2Name: "Aakash",
+      user2CardInfo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      user2CardName: "Aakash G.",
+    };
     let toggle_text;
     if (this.props.visible) {
       toggle_text = "Make Profile Invisible to Other Users";
@@ -82,7 +101,7 @@ class Headers extends Component {
                           fontSize: 40,
                         }}
                       >
-                        Team 23 wants you to join their team!
+                        {teamInfo.teamName} wants you to join their team!
                       </p>
                       <div
                         style={{
@@ -95,7 +114,7 @@ class Headers extends Component {
                             marginTop: 60,
                           }}
                         >
-                          Team 23's request message:
+                          {teamInfo.teamName}'s request message:
                         </p>
                         <p
                           style={{
@@ -104,18 +123,14 @@ class Headers extends Component {
                             padding: 20,
                           }}
                         >
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore
-                          et dolore magna aliqua. Ut enim ad minim veniam,
-                          quis nostrud exercitation ullamco laboris nisi ut
-                          aliquip ex ea commodo consequat.
+                          {teamInfo.teamRequestMessage}
                         </p>
                         <p
                           style={{
                             marginTop: 30,
                           }}
                         >
-                          Team 23's project idea:
+                          {teamInfo.teamName}'s project idea:
                         </p>
                         <p
                           style={{
@@ -124,11 +139,7 @@ class Headers extends Component {
                             padding: 20,
                           }}
                         >
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore
-                          et dolore magna aliqua. Ut enim ad minim veniam,
-                          quis nostrud exercitation ullamco laboris nisi ut
-                          aliquip ex ea commodo consequat.
+                          {teamInfo.teamProjectIdea}
                         </p>
 
                         <div
@@ -146,7 +157,7 @@ class Headers extends Component {
                               padding: 10,
                             }}
                           >
-                            View more about Team 23
+                            View more about {teamInfo.teamName}
                           </div>
                         </div>
                         <div
@@ -210,7 +221,7 @@ class Headers extends Component {
                           fontSize: 40,
                         }}
                       >
-                        Request Join Team 23?
+                        Request Join {teamInfo.teamName}?
                       </p>
                       <p
                         style={{
@@ -277,7 +288,7 @@ class Headers extends Component {
                           fontSize: 40,
                         }}
                       >
-                        Meha A. wants to team up with you!
+                        {user1Info.user1CardName} wants to team up with you!
                       </p>
                       <div
                         class="row"
@@ -309,7 +320,7 @@ class Headers extends Component {
                                 fontSize: 30,
                               }}
                             >
-                              Meha A.
+                              {user1Info.user1CardName}
                             </p>
                             <p
                               style={{
@@ -321,9 +332,7 @@ class Headers extends Component {
                                 paddingBottom: 40,
                               }}
                             >
-                              Lorem ipsum dolor sit amet, consectetur
-                              adipiscing elit, sed do eiusmod tempor
-                              incididunt ut labore et dolore magna aliqua.
+                              {user1Info.user1CardInfo}
                             </p>
                           </div>
                         </div>
@@ -341,7 +350,9 @@ class Headers extends Component {
                               margin: 25,
                             }}
                           >
-                            <p>Meha's Request Message:</p>
+                            <p>
+                              {user1Info.user1FirstName}'s Request Message:
+                            </p>
                             <p
                               style={{
                                 border: "1px solid #000",
@@ -349,19 +360,14 @@ class Headers extends Component {
                                 padding: 20,
                               }}
                             >
-                              Lorem ipsum dolor sit amet, consectetur
-                              adipiscing elit, sed do eiusmod tempor
-                              incididunt ut labore et dolore magna aliqua.
-                              Ut enim ad minim veniam, quis nostrud
-                              exercitation ullamco laboris nisi ut aliquip
-                              ex ea commodo consequat.
+                              {user1Info.user1RequestMessage}
                             </p>
                             <p
                               style={{
                                 marginTop: 30,
                               }}
                             >
-                              Meha's Project Idea:
+                              {user1Info.user1FirstName}'s Project Idea:
                             </p>
                             <p
                               style={{
@@ -370,12 +376,7 @@ class Headers extends Component {
                                 padding: 20,
                               }}
                             >
-                              Lorem ipsum dolor sit amet, consectetur
-                              adipiscing elit, sed do eiusmod tempor
-                              incididunt ut labore et dolore magna aliqua.
-                              Ut enim ad minim veniam, quis nostrud
-                              exercitation ullamco laboris nisi ut aliquip
-                              ex ea commodo consequat.
+                              {user1Info.user1ProjectIdea}
                             </p>
                           </div>
                         </div>
@@ -439,7 +440,7 @@ class Headers extends Component {
                           fontSize: 40,
                         }}
                       >
-                        Team Up with Aakash?
+                        Team Up with {user2Info.user2Name}?
                       </p>
                       <div
                         class="row"
@@ -471,7 +472,7 @@ class Headers extends Component {
                                 fontSize: 30,
                               }}
                             >
-                              Aakash G.
+                              {user2Info.user2CardName}
                             </p>
                             <p
                               style={{
@@ -483,9 +484,7 @@ class Headers extends Component {
                                 paddingBottom: 50,
                               }}
                             >
-                              Lorem ipsum dolor sit amet, consectetur
-                              adipiscing elit, sed do eiusmod tempor
-                              incididunt ut labore et dolore magna aliqua.
+                              {user2Info.user2CardInfo}
                             </p>
                             <p
                               style={{
