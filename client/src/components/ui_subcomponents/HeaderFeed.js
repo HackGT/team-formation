@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../css/Headers.css";
+import "../css/Modal.css";
 import { Button, Menu } from "semantic-ui-react";
 import { Header, Image, Modal } from "semantic-ui-react";
 import { commitMutation } from "react-relay";
@@ -32,13 +33,17 @@ class Headers extends Component {
     const user1Info = {
       user1CardName: "Meha A.",
       user1FirstName: "Meha",
-      user1CardInfo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      user1RequestMessage: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      user1ProjectIdea: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      user1CardInfo:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      user1RequestMessage:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      user1ProjectIdea:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     };
     const user2Info = {
       user2Name: "Aakash",
-      user2CardInfo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      user2CardInfo:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       user2CardName: "Aakash G.",
     };
     let toggle_text;
@@ -52,10 +57,7 @@ class Headers extends Component {
         <div className="logout-button">
           <Menu>
             <Menu.Item>
-              <Button
-                className="edit-button"
-                onClick={this.props.onEditClick}
-              >
+              <Button className="edit-button" onClick={this.props.onEditClick}>
                 {" "}
                 Edit Profile{" "}
               </Button>
@@ -67,10 +69,7 @@ class Headers extends Component {
               </Button>
             </Menu.Item>
             <Menu.Item>
-              <Button
-                onClick={this.onToggleClick}
-                className="toggle-button"
-              >
+              <Button onClick={this.onToggleClick} className="toggle-button">
                 {" "}
                 {toggle_text}{" "}
               </Button>
@@ -150,14 +149,17 @@ class Headers extends Component {
                             marginTop: 35,
                           }}
                         >
-                          <div
-                            style={{
-                              border: "1px solid #000",
-                              borderRadius: 20,
-                              padding: 10,
-                            }}
-                          >
-                            View more about {teamInfo.teamName}
+                          <div>
+                            <button
+                              class="ui black basic button"
+                              style={{
+                                borderRadius: 20,
+                                fontSize: 15,
+                                padding: 12,
+                              }}
+                            >
+                              View more about {teamInfo.teamName}
+                            </button>
                           </div>
                         </div>
                         <div
@@ -170,23 +172,31 @@ class Headers extends Component {
                         >
                           <div
                             style={{
-                              border: "1px solid #000",
-                              borderRadius: 20,
-                              padding: 10,
                               margin: 10,
                             }}
                           >
-                            Accept
+                            <button
+                              class="ui black basic button"
+                              style={{
+                                borderRadius: 20,
+                              }}
+                            >
+                              Accept
+                            </button>
                           </div>
                           <div
                             style={{
-                              border: "1px solid #000",
-                              borderRadius: 20,
-                              padding: 10,
                               margin: 10,
                             }}
                           >
-                            Deny
+                            <button
+                              class="ui black basic button"
+                              style={{
+                                borderRadius: 20,
+                              }}
+                            >
+                              Deny
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -223,20 +233,21 @@ class Headers extends Component {
                       >
                         Request Join {teamInfo.teamName}?
                       </p>
-                      <p
+                      <textarea
+                        rows="7"
+                        cols="63"
+                        placeholder="Write a message..."
                         style={{
-                          marginTop: 60,
-                          border: "1px solid #000",
+                          marginTop: 35,
+                          backgroundColor: "#c4c4c4",
                           borderRadius: 7,
+                          border: "1px solid #000",
                           paddingTop: 15,
                           paddingLeft: 20,
-                          paddingBottom: 100,
                           marginRight: 220,
                           marginLeft: 220,
                         }}
-                      >
-                        Write a message...
-                      </p>
+                      />
                       <div
                         style={{
                           float: "right",
@@ -350,9 +361,7 @@ class Headers extends Component {
                               margin: 25,
                             }}
                           >
-                            <p>
-                              {user1Info.user1FirstName}'s Request Message:
-                            </p>
+                            <p>{user1Info.user1FirstName}'s Request Message:</p>
                             <p
                               style={{
                                 border: "1px solid #000",
@@ -390,23 +399,31 @@ class Headers extends Component {
                       >
                         <div
                           style={{
-                            border: "1px solid #000",
-                            borderRadius: 20,
-                            padding: 10,
                             margin: 10,
                           }}
                         >
-                          Accept
+                          <button
+                            class="ui black basic button"
+                            style={{
+                              borderRadius: 20,
+                            }}
+                          >
+                            Accept
+                          </button>
                         </div>
                         <div
                           style={{
-                            border: "1px solid #000",
-                            borderRadius: 20,
-                            padding: 10,
                             margin: 10,
                           }}
                         >
-                          Deny
+                          <button
+                            class="ui black basic button"
+                            style={{
+                              borderRadius: 20,
+                            }}
+                          >
+                            Deny
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -486,19 +503,25 @@ class Headers extends Component {
                             >
                               {user2Info.user2CardInfo}
                             </p>
-                            <p
+                            <div
                               style={{
-                                textAlign: "center",
-                                border: "1px solid #000",
-                                borderRadius: 7,
-                                padding: 10,
-                                marginLeft: 30,
-                                marginRight: 30,
-                                marginBottom: 30,
+                                display: "flex",
+                                justifyContent: "center",
                               }}
                             >
-                              Team Up!
-                            </p>
+                              <button
+                                class="ui black basic button"
+                                style={{
+                                  float: "center",
+                                  padding: 15,
+                                  width: 230,
+                                  borderRadius: 7,
+                                  marginBottom: 30,
+                                }}
+                              >
+                                Team Up!
+                              </button>
+                            </div>
                           </div>
                         </div>
                         <div
@@ -515,30 +538,32 @@ class Headers extends Component {
                               margin: 25,
                             }}
                           >
-                            <p
+                            <textarea
+                              rows="8"
+                              cols="68"
+                              placeholder="Introduce yourself..."
                               style={{
-                                border: "1px solid #000",
+                                backgroundColor: "#c4c4c4",
                                 borderRadius: 7,
-                                paddingBottom: 110,
+                                border: "1px solid #000",
                                 paddingLeft: 15,
                                 paddingTop: 15,
                               }}
-                            >
-                              Introduce yourself...
-                            </p>
+                            />
 
-                            <p
+                            <textarea
+                              rows="8"
+                              cols="68"
+                              placeholder="Describe your project idea..."
                               style={{
-                                border: "1px solid #000",
+                                marginTop: 50,
+                                backgroundColor: "#c4c4c4",
                                 borderRadius: 7,
-                                paddingBottom: 110,
+                                border: "1px solid #000",
                                 paddingLeft: 15,
                                 paddingTop: 15,
-                                marginTop: 50,
                               }}
-                            >
-                              Describe your project idea...
-                            </p>
+                            />
                           </div>
                         </div>
                       </div>

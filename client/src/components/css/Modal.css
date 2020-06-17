@@ -1,0 +1,12 @@
+textarea::placeholder {
+  color: #000;
+}
+
+.background {
+  background-color: "#c4c4c4";
+}
+
+.header {
+  text-align: "center";
+  font-size: 40;
+}
