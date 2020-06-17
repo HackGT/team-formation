@@ -22,12 +22,13 @@ const mutation = graphql`
 `;
 
 class Headers extends Component {
-  // state = {
-  //   showModal1: false,
-  //   showModal2: false,
-  //   showModal3: false,
-  //   showModal4: false,
-  // };
+
+  state = {
+    showModal1: false,
+    showModal2: false,
+    showModal3: false,
+    showModal4: false,
+  };
 
   render() {
     const teamInfo = {
@@ -64,7 +65,10 @@ class Headers extends Component {
         <div className="logout-button">
           <Menu>
             <Menu.Item>
-              <Button className="edit-button" onClick={this.props.onEditClick}>
+              <Button
+                className="edit-button"
+                onClick={this.props.onEditClick}
+              >
                 {" "}
                 Edit Profile{" "}
               </Button>
@@ -76,19 +80,32 @@ class Headers extends Component {
               </Button>
             </Menu.Item>
             <Menu.Item>
-              <Button onClick={this.onToggleClick} className="toggle-button">
+              <Button
+                onClick={this.onToggleClick}
+                className="toggle-button"
+              >
                 {" "}
                 {toggle_text}{" "}
               </Button>
             </Menu.Item>
             <Menu.Item>
               <Modal
-                trigger={<Button>Modal 1</Button>}
+                trigger={
+                  <Button
+                    onClick={() => this.setState({ showModal1: true })}
+                  >
+                    Modal 1
+                  </Button>
+                }
                 style={{
                   padding: 10,
                   backgroundColor: "#c4c4c4",
                 }}
                 closeIcon
+                open={this.state.showModal1}
+                onClose={() => {
+                  this.setState({ showModal1: false });
+                }}
               >
                 <Modal.Content
                   style={{
@@ -124,6 +141,9 @@ class Headers extends Component {
                                 fontSize: 15,
                                 padding: 12,
                               }}
+                              onClick={() =>
+                                this.setState({ showModal1: false })
+                              }
                             >
                               View more about {teamInfo.teamName}
                             </Button>
@@ -137,6 +157,9 @@ class Headers extends Component {
                               style={{
                                 borderRadius: 20,
                               }}
+                              onClick={() =>
+                                this.setState({ showModal1: false })
+                              }
                             >
                               Accept
                             </Button>
@@ -148,6 +171,9 @@ class Headers extends Component {
                               style={{
                                 borderRadius: 20,
                               }}
+                              onClick={() =>
+                                this.setState({ showModal1: false })
+                              }
                             >
                               Deny
                             </Button>
@@ -161,12 +187,22 @@ class Headers extends Component {
             </Menu.Item>
             <Menu.Item>
               <Modal
-                trigger={<Button>Modal 2</Button>}
+                trigger={
+                  <Button
+                    onClick={() => this.setState({ showModal2: true })}
+                  >
+                    Modal 2
+                  </Button>
+                }
                 style={{
                   paddingTop: 10,
                   backgroundColor: "#c4c4c4",
                 }}
                 closeIcon
+                open={this.state.showModal2}
+                onClose={() => {
+                  this.setState({ showModal2: false });
+                }}
               >
                 <Modal.Content
                   style={{
@@ -175,7 +211,9 @@ class Headers extends Component {
                 >
                   <Modal.Description>
                     <div class="background">
-                      <p class="header">Request Join {teamInfo.teamName}?</p>
+                      <p class="header">
+                        Request Join {teamInfo.teamName}?
+                      </p>
                       <textarea
                         id="writeAMessage"
                         rows="7"
@@ -191,6 +229,9 @@ class Headers extends Component {
                               marginTop: 20,
                               borderRadius: 20,
                             }}
+                            onClick={() =>
+                              this.setState({ showModal2: false })
+                            }
                           >
                             Submit
                           </Button>
@@ -203,12 +244,22 @@ class Headers extends Component {
             </Menu.Item>
             <Menu.Item>
               <Modal
-                trigger={<Button>Modal 3</Button>}
+                trigger={
+                  <Button
+                    onClick={() => this.setState({ showModal3: true })}
+                  >
+                    Modal 3
+                  </Button>
+                }
                 style={{
                   padding: 10,
                   backgroundColor: "#c4c4c4",
                 }}
                 closeIcon
+                open={this.state.showModal3}
+                onClose={() => {
+                  this.setState({ showModal3: false });
+                }}
               >
                 <Modal.Content
                   style={{
@@ -231,12 +282,16 @@ class Headers extends Component {
                             >
                               {user1Info.user1CardName}
                             </p>
-                            <p class="cardInfo">{user1Info.user1CardInfo}</p>
+                            <p class="cardInfo">
+                              {user1Info.user1CardInfo}
+                            </p>
                           </div>
                         </div>
                         <div class="modal3Column2">
                           <div class="modal3Column3">
-                            <p>{user1Info.user1FirstName}'s Request Message:</p>
+                            <p>
+                              {user1Info.user1FirstName}'s Request Message:
+                            </p>
                             <p class="user1RequestMessage">
                               {user1Info.user1RequestMessage}
                             </p>
@@ -257,6 +312,9 @@ class Headers extends Component {
                             style={{
                               borderRadius: 20,
                             }}
+                            onClick={() =>
+                              this.setState({ showModal3: false })
+                            }
                           >
                             Accept
                           </Button>
@@ -268,6 +326,9 @@ class Headers extends Component {
                             style={{
                               borderRadius: 20,
                             }}
+                            onClick={() =>
+                              this.setState({ showModal3: false })
+                            }
                           >
                             Deny
                           </Button>
@@ -280,12 +341,22 @@ class Headers extends Component {
             </Menu.Item>
             <Menu.Item>
               <Modal
-                trigger={<Button>Modal 4</Button>}
+                trigger={
+                  <Button
+                    onClick={() => this.setState({ showModal4: true })}
+                  >
+                    Modal4
+                  </Button>
+                }
                 style={{
                   padding: 10,
                   backgroundColor: "#c4c4c4",
                 }}
                 closeIcon
+                open={this.state.showModal4}
+                onClose={() => {
+                  this.setState({ showModal4: false });
+                }}
               >
                 <Modal.Content
                   style={{
@@ -294,7 +365,9 @@ class Headers extends Component {
                 >
                   <Modal.Description>
                     <div class="background">
-                      <p class="header">Team Up with {user2Info.user2Name}?</p>
+                      <p class="header">
+                        Team Up with {user2Info.user2Name}?
+                      </p>
                       <div class="row">
                         <div class="modal4-column">
                           <div class="modal4-column1">
@@ -320,6 +393,9 @@ class Headers extends Component {
                                   borderRadius: 7,
                                   marginBottom: 30,
                                 }}
+                                onClick={() =>
+                                  this.setState({ showModal4: false })
+                                }
                               >
                                 Team Up!
                               </Button>
@@ -341,6 +417,7 @@ class Headers extends Component {
                               cols="68"
                               placeholder="Describe your project idea..."
                             />
+
                             <Button
                               basic
                               color="black"
@@ -348,9 +425,9 @@ class Headers extends Component {
                                 borderRadius: 20,
                                 marginTop: 20,
                               }}
-                              // onClick={this.setState({
-                              //   showModal4: false,
-                              // })}
+                              onClick={() =>
+                                this.setState({ showModal4: false })
+                              }
                             >
                               Submit
                             </Button>
