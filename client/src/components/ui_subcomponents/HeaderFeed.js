@@ -89,66 +89,25 @@ class Headers extends Component {
                   }}
                 >
                   <Modal.Description>
-                    <div
-                      style={{
-                        backgroundColor: "#c4c4c4",
-                      }}
-                    >
-                      <p
-                        style={{
-                          textAlign: "center",
-                          fontSize: 40,
-                        }}
-                      >
+                    <div class="background">
+                      <p class="header">
                         {teamInfo.teamName} wants you to join their team!
                       </p>
-                      <div
-                        style={{
-                          marginRight: 80,
-                          marginLeft: 80,
-                        }}
-                      >
-                        <p
-                          style={{
-                            marginTop: 60,
-                          }}
-                        >
+                      <div class="modal1Margins">
+                        <p class="requestMessage">
                           {teamInfo.teamName}'s request message:
                         </p>
-                        <p
-                          style={{
-                            border: "1px solid #000",
-                            borderRadius: 7,
-                            padding: 20,
-                          }}
-                        >
+                        <p class="requestMessageBody">
                           {teamInfo.teamRequestMessage}
                         </p>
-                        <p
-                          style={{
-                            marginTop: 30,
-                          }}
-                        >
+                        <p class="projectIdea">
                           {teamInfo.teamName}'s project idea:
                         </p>
-                        <p
-                          style={{
-                            border: "1px solid #000",
-                            borderRadius: 7,
-                            padding: 20,
-                          }}
-                        >
+                        <p class="projectIdeaBody">
                           {teamInfo.teamProjectIdea}
                         </p>
 
-                        <div
-                          class="flex-container1"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            marginTop: 35,
-                          }}
-                        >
+                        <div class="flex-container1">
                           <div>
                             <button
                               class="ui black basic button"
@@ -162,19 +121,8 @@ class Headers extends Component {
                             </button>
                           </div>
                         </div>
-                        <div
-                          class="flex-container2"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            marginTop: 20,
-                          }}
-                        >
-                          <div
-                            style={{
-                              margin: 10,
-                            }}
-                          >
+                        <div class="flex-container2">
+                          <div class="buttonMargin">
                             <button
                               class="ui black basic button"
                               style={{
@@ -184,11 +132,7 @@ class Headers extends Component {
                               Accept
                             </button>
                           </div>
-                          <div
-                            style={{
-                              margin: 10,
-                            }}
-                          >
+                          <div class="buttonMargin">
                             <button
                               class="ui black basic button"
                               style={{
@@ -220,41 +164,15 @@ class Headers extends Component {
                   }}
                 >
                   <Modal.Description>
-                    <div
-                      style={{
-                        backgroundColor: "#c4c4c4",
-                      }}
-                    >
-                      <p
-                        style={{
-                          textAlign: "center",
-                          fontSize: 40,
-                        }}
-                      >
-                        Request Join {teamInfo.teamName}?
-                      </p>
+                    <div class="background">
+                      <p class="header">Request Join {teamInfo.teamName}?</p>
                       <textarea
+                        id="writeAMessage"
                         rows="7"
                         cols="63"
                         placeholder="Write a message..."
-                        style={{
-                          marginTop: 35,
-                          backgroundColor: "#c4c4c4",
-                          borderRadius: 7,
-                          border: "1px solid #000",
-                          paddingTop: 15,
-                          paddingLeft: 20,
-                          marginRight: 220,
-                          marginLeft: 220,
-                        }}
                       />
-                      <div
-                        style={{
-                          float: "right",
-                          marginTop: 40,
-                          paddingBottom: 20,
-                        }}
-                      >
+                      <div class="send">
                         <svg
                           width="21"
                           height="18"
@@ -288,120 +206,41 @@ class Headers extends Component {
                   }}
                 >
                   <Modal.Description>
-                    <div
-                      style={{
-                        backgroundColor: "#c4c4c4",
-                      }}
-                    >
-                      <p
-                        style={{
-                          textAlign: "center",
-                          fontSize: 40,
-                        }}
-                      >
+                    <div class="background">
+                      <p class="header">
                         {user1Info.user1CardName} wants to team up with you!
                       </p>
-                      <div
-                        class="row"
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                        }}
-                      >
-                        <div
-                          class="column"
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            width: 350,
-                          }}
-                        >
-                          <div
-                            class="column1"
-                            style={{
-                              border: "1px solid #000",
-                              borderRadius: 7,
-                              margin: 25,
-                            }}
-                          >
+                      <div class="row">
+                        <div class="modal3Column">
+                          <div class="modal3Column1">
                             <p
+                              class="cardName"
                               style={{
-                                textAlign: "center",
                                 marginTop: 40,
-                                fontSize: 30,
                               }}
                             >
                               {user1Info.user1CardName}
                             </p>
-                            <p
-                              style={{
-                                textAlign: "left",
-                                marginTop: 50,
-                                fontSize: 17,
-                                marginLeft: 30,
-                                marginRight: 30,
-                                paddingBottom: 40,
-                              }}
-                            >
-                              {user1Info.user1CardInfo}
-                            </p>
+                            <p class="cardInfo">{user1Info.user1CardInfo}</p>
                           </div>
                         </div>
-                        <div
-                          class="column"
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            flex: 1,
-                          }}
-                        >
-                          <div
-                            class="column2"
-                            style={{
-                              margin: 25,
-                            }}
-                          >
+                        <div class="modal3Column2">
+                          <div class="modal3Column3">
                             <p>{user1Info.user1FirstName}'s Request Message:</p>
-                            <p
-                              style={{
-                                border: "1px solid #000",
-                                borderRadius: 7,
-                                padding: 20,
-                              }}
-                            >
+                            <p class="user1RequestMessage">
                               {user1Info.user1RequestMessage}
                             </p>
-                            <p
-                              style={{
-                                marginTop: 30,
-                              }}
-                            >
+                            <p class="user1FirstName">
                               {user1Info.user1FirstName}'s Project Idea:
                             </p>
-                            <p
-                              style={{
-                                border: "1px solid #000",
-                                borderRadius: 7,
-                                padding: 20,
-                              }}
-                            >
+                            <p class="user1ProjectIdea">
                               {user1Info.user1ProjectIdea}
                             </p>
                           </div>
                         </div>
                       </div>
-                      <div
-                        class="flex-container"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <div
-                          style={{
-                            margin: 10,
-                          }}
-                        >
+                      <div class="flex-container-modal3">
+                        <div class="modal3Button">
                           <button
                             class="ui black basic button"
                             style={{
@@ -411,11 +250,7 @@ class Headers extends Component {
                             Accept
                           </button>
                         </div>
-                        <div
-                          style={{
-                            margin: 10,
-                          }}
-                        >
+                        <div class="modal3Button">
                           <button
                             class="ui black basic button"
                             style={{
@@ -446,69 +281,23 @@ class Headers extends Component {
                   }}
                 >
                   <Modal.Description>
-                    <div
-                      style={{
-                        backgroundColor: "#c4c4c4",
-                      }}
-                    >
-                      <p
-                        style={{
-                          textAlign: "center",
-                          fontSize: 40,
-                        }}
-                      >
-                        Team Up with {user2Info.user2Name}?
-                      </p>
-                      <div
-                        class="row"
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                        }}
-                      >
-                        <div
-                          class="column"
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            width: 350,
-                          }}
-                        >
-                          <div
-                            class="column1"
-                            style={{
-                              border: "1px solid #000",
-                              borderRadius: 7,
-                              margin: 25,
-                            }}
-                          >
+                    <div class="background">
+                      <p class="header">Team Up with {user2Info.user2Name}?</p>
+                      <div class="row">
+                        <div class="modal4-column">
+                          <div class="modal4-column1">
                             <p
+                              class="user2CardName"
                               style={{
-                                textAlign: "center",
                                 marginTop: 40,
-                                fontSize: 30,
                               }}
                             >
                               {user2Info.user2CardName}
                             </p>
-                            <p
-                              style={{
-                                textAlign: "left",
-                                marginTop: 50,
-                                fontSize: 17,
-                                marginLeft: 30,
-                                marginRight: 30,
-                                paddingBottom: 50,
-                              }}
-                            >
+                            <p class="user2CardInfo">
                               {user2Info.user2CardInfo}
                             </p>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            >
+                            <div class="flex-container-modal3">
                               <button
                                 class="ui black basic button"
                                 style={{
@@ -524,54 +313,25 @@ class Headers extends Component {
                             </div>
                           </div>
                         </div>
-                        <div
-                          class="column"
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            flex: 1,
-                          }}
-                        >
-                          <div
-                            class="column2"
-                            style={{
-                              margin: 25,
-                            }}
-                          >
+                        <div class="modal3Column2">
+                          <div class="modal4-column2">
                             <textarea
+                              id="introduceYourself"
                               rows="8"
                               cols="68"
                               placeholder="Introduce yourself..."
-                              style={{
-                                backgroundColor: "#c4c4c4",
-                                borderRadius: 7,
-                                border: "1px solid #000",
-                                paddingLeft: 15,
-                                paddingTop: 15,
-                              }}
                             />
 
                             <textarea
+                              id="describeProject"
                               rows="8"
                               cols="68"
                               placeholder="Describe your project idea..."
-                              style={{
-                                marginTop: 50,
-                                backgroundColor: "#c4c4c4",
-                                borderRadius: 7,
-                                border: "1px solid #000",
-                                paddingLeft: 15,
-                                paddingTop: 15,
-                              }}
                             />
                           </div>
                         </div>
                       </div>
-                      <div
-                        style={{
-                          float: "right",
-                        }}
-                      >
+                      <div class="modal4send">
                         <svg
                           width="21"
                           height="18"
