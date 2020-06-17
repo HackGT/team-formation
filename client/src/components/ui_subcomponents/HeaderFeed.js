@@ -51,13 +51,11 @@ class Headers extends Component {
                                         <Dropdown item icon='bell' direction='left' closeOnChange={false}>
                                               <Dropdown.Menu>
                                                 <Dropdown.Item icon='edit' text='Edit Profile' onClick={this.props.onEditClick}/>
-                                                <Dropdown.Item icon='edit' text='Edit Profile' onClick={this.props.onEditClick}/>
                                                 <Dropdown.Item icon='globe' text={toggle_text} onClick={this.onToggleClick}/>
                                               </Dropdown.Menu>
                                         </Dropdown>
                                         <Dropdown item icon='user' direction='left' closeOnChange={false}>
                                           <Dropdown.Menu>
-                                            <Dropdown.Item icon='edit' text='Edit Profile' onClick={this.props.onEditClick}/>
                                             <Dropdown.Item icon='edit' text='Edit Profile' onClick={this.props.onEditClick}/>
                                             <Dropdown.Item icon='globe' text={toggle_text} onClick={this.onToggleClick}/>
                                           </Dropdown.Menu>

@@ -60,7 +60,7 @@ class UserCard extends Component {
 							{viewskill}
 							</Card.Description>
 							<Card.Description className="card-description">
-								<Container style={{overflow: 'auto', maxHeight: 100, minHeight: 60 }}><strong> About Them: </strong>{this.props.experience}</Container>
+								<Container style={{overflow: 'auto', maxHeight: 100, minHeight: 100 }}><strong> About Them: </strong>{this.props.experience}</Container>
 							</Card.Description>
 						</Card.Content>
                         <Card.Content extra>
