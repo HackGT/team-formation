@@ -22,6 +22,13 @@ const mutation = graphql`
 `;
 
 class Headers extends Component {
+  // state = {
+  //   showModal1: false,
+  //   showModal2: false,
+  //   showModal3: false,
+  //   showModal4: false,
+  // };
+
   render() {
     const teamInfo = {
       teamName: "Team 23",
@@ -109,8 +116,9 @@ class Headers extends Component {
 
                         <div class="flex-container1">
                           <div>
-                            <button
-                              class="ui black basic button"
+                            <Button
+                              basic
+                              color="black"
                               style={{
                                 borderRadius: 20,
                                 fontSize: 15,
@@ -118,29 +126,31 @@ class Headers extends Component {
                               }}
                             >
                               View more about {teamInfo.teamName}
-                            </button>
+                            </Button>
                           </div>
                         </div>
                         <div class="flex-container2">
                           <div class="buttonMargin">
-                            <button
-                              class="ui black basic button"
+                            <Button
+                              basic
+                              color="black"
                               style={{
                                 borderRadius: 20,
                               }}
                             >
                               Accept
-                            </button>
+                            </Button>
                           </div>
                           <div class="buttonMargin">
-                            <button
-                              class="ui black basic button"
+                            <Button
+                              basic
+                              color="black"
                               style={{
                                 borderRadius: 20,
                               }}
                             >
                               Deny
-                            </button>
+                            </Button>
                           </div>
                         </div>
                       </div>
@@ -172,19 +182,19 @@ class Headers extends Component {
                         cols="63"
                         placeholder="Write a message..."
                       />
-                      <div class="send">
-                        <svg
-                          width="21"
-                          height="18"
-                          viewBox="0 0 21 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M0.00999999 18L21 9L0.00999999 0L0 7L15 9L0 11L0.00999999 18Z"
-                            fill="#646464"
-                          />
-                        </svg>
+                      <div class="flex-container-modal3">
+                        <div>
+                          <Button
+                            basic
+                            color="black"
+                            style={{
+                              marginTop: 20,
+                              borderRadius: 20,
+                            }}
+                          >
+                            Submit
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   </Modal.Description>
@@ -241,24 +251,26 @@ class Headers extends Component {
                       </div>
                       <div class="flex-container-modal3">
                         <div class="modal3Button">
-                          <button
-                            class="ui black basic button"
+                          <Button
+                            basic
+                            color="black"
                             style={{
                               borderRadius: 20,
                             }}
                           >
                             Accept
-                          </button>
+                          </Button>
                         </div>
                         <div class="modal3Button">
-                          <button
-                            class="ui black basic button"
+                          <Button
+                            basic
+                            color="black"
                             style={{
                               borderRadius: 20,
                             }}
                           >
                             Deny
-                          </button>
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -298,8 +310,9 @@ class Headers extends Component {
                               {user2Info.user2CardInfo}
                             </p>
                             <div class="flex-container-modal3">
-                              <button
-                                class="ui black basic button"
+                              <Button
+                                basic
+                                color="black"
                                 style={{
                                   float: "center",
                                   padding: 15,
@@ -309,7 +322,7 @@ class Headers extends Component {
                                 }}
                               >
                                 Team Up!
-                              </button>
+                              </Button>
                             </div>
                           </div>
                         </div>
@@ -328,22 +341,21 @@ class Headers extends Component {
                               cols="68"
                               placeholder="Describe your project idea..."
                             />
+                            <Button
+                              basic
+                              color="black"
+                              style={{
+                                borderRadius: 20,
+                                marginTop: 20,
+                              }}
+                              // onClick={this.setState({
+                              //   showModal4: false,
+                              // })}
+                            >
+                              Submit
+                            </Button>
                           </div>
                         </div>
-                      </div>
-                      <div class="modal4send">
-                        <svg
-                          width="21"
-                          height="18"
-                          viewBox="0 0 21 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M0.00999999 18L21 9L0.00999999 0L0 7L15 9L0 11L0.00999999 18Z"
-                            fill="#646464"
-                          />
-                        </svg>
                       </div>
                     </div>
                   </Modal.Description>

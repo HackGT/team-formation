@@ -69,12 +69,6 @@ textarea::placeholder {
   margin-left: 220px;
 }
 
-.send {
-  float: right;
-  margin-top: 40px;
-  padding-bottom: 20px;
-}
-
 .row {
   display: flex;
   flex-direction: row;
@@ -186,8 +180,4 @@ textarea::placeholder {
   border: 1px solid #000;
   padding-left: 15px;
   padding-top: 15px;
-}
-
-.modal4send {
-  float: right;
 }
