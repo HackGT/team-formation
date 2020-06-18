@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FeedCards from './FeedCards';
+import Members from './Members';
 import SideMenu from './SideMenu';
 import InputTagCollection from './InputTagCollection'
 import './css/Feed.css';
@@ -31,6 +32,9 @@ class Feed extends Component {
     render() {
 		return (
 			<div>
+				<div className="member-cards">
+						<Members skill={this.state.searchTerm} user_id={this.props.user_id} />
+				</div>
 				<div className="user-input">
 					<InputTagCollection
 						tags={this.state.passingTags}
