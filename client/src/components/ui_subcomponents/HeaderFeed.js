@@ -22,7 +22,6 @@ const mutation = graphql`
 `;
 
 class Headers extends Component {
-
   state = {
     showModal1: false,
     showModal2: false,
@@ -65,10 +64,7 @@ class Headers extends Component {
         <div className="logout-button">
           <Menu>
             <Menu.Item>
-              <Button
-                className="edit-button"
-                onClick={this.props.onEditClick}
-              >
+              <Button className="edit-button" onClick={this.props.onEditClick}>
                 {" "}
                 Edit Profile{" "}
               </Button>
@@ -80,10 +76,7 @@ class Headers extends Component {
               </Button>
             </Menu.Item>
             <Menu.Item>
-              <Button
-                onClick={this.onToggleClick}
-                className="toggle-button"
-              >
+              <Button onClick={this.onToggleClick} className="toggle-button">
                 {" "}
                 {toggle_text}{" "}
               </Button>
@@ -91,9 +84,7 @@ class Headers extends Component {
             <Menu.Item>
               <Modal
                 trigger={
-                  <Button
-                    onClick={() => this.setState({ showModal1: true })}
-                  >
+                  <Button onClick={() => this.setState({ showModal1: true })}>
                     Modal 1
                   </Button>
                 }
@@ -188,9 +179,7 @@ class Headers extends Component {
             <Menu.Item>
               <Modal
                 trigger={
-                  <Button
-                    onClick={() => this.setState({ showModal2: true })}
-                  >
+                  <Button onClick={() => this.setState({ showModal2: true })}>
                     Modal 2
                   </Button>
                 }
@@ -211,9 +200,7 @@ class Headers extends Component {
                 >
                   <Modal.Description>
                     <div class="background">
-                      <p class="header">
-                        Request Join {teamInfo.teamName}?
-                      </p>
+                      <p class="header">Request Join {teamInfo.teamName}?</p>
                       <textarea
                         id="writeAMessage"
                         rows="7"
@@ -229,9 +216,7 @@ class Headers extends Component {
                               marginTop: 20,
                               borderRadius: 20,
                             }}
-                            onClick={() =>
-                              this.setState({ showModal2: false })
-                            }
+                            onClick={() => this.setState({ showModal2: false })}
                           >
                             Submit
                           </Button>
@@ -245,9 +230,7 @@ class Headers extends Component {
             <Menu.Item>
               <Modal
                 trigger={
-                  <Button
-                    onClick={() => this.setState({ showModal3: true })}
-                  >
+                  <Button onClick={() => this.setState({ showModal3: true })}>
                     Modal 3
                   </Button>
                 }
@@ -282,16 +265,12 @@ class Headers extends Component {
                             >
                               {user1Info.user1CardName}
                             </p>
-                            <p class="cardInfo">
-                              {user1Info.user1CardInfo}
-                            </p>
+                            <p class="cardInfo">{user1Info.user1CardInfo}</p>
                           </div>
                         </div>
                         <div class="modal3Column2">
                           <div class="modal3Column3">
-                            <p>
-                              {user1Info.user1FirstName}'s Request Message:
-                            </p>
+                            <p>{user1Info.user1FirstName}'s Request Message:</p>
                             <p class="user1RequestMessage">
                               {user1Info.user1RequestMessage}
                             </p>
@@ -312,9 +291,7 @@ class Headers extends Component {
                             style={{
                               borderRadius: 20,
                             }}
-                            onClick={() =>
-                              this.setState({ showModal3: false })
-                            }
+                            onClick={() => this.setState({ showModal3: false })}
                           >
                             Accept
                           </Button>
@@ -326,9 +303,7 @@ class Headers extends Component {
                             style={{
                               borderRadius: 20,
                             }}
-                            onClick={() =>
-                              this.setState({ showModal3: false })
-                            }
+                            onClick={() => this.setState({ showModal3: false })}
                           >
                             Deny
                           </Button>
@@ -342,10 +317,8 @@ class Headers extends Component {
             <Menu.Item>
               <Modal
                 trigger={
-                  <Button
-                    onClick={() => this.setState({ showModal4: true })}
-                  >
-                    Modal4
+                  <Button onClick={() => this.setState({ showModal4: true })}>
+                    Modal 4
                   </Button>
                 }
                 style={{
@@ -365,9 +338,7 @@ class Headers extends Component {
                 >
                   <Modal.Description>
                     <div class="background">
-                      <p class="header">
-                        Team Up with {user2Info.user2Name}?
-                      </p>
+                      <p class="header">Team Up with {user2Info.user2Name}?</p>
                       <div class="row">
                         <div class="modal4-column">
                           <div class="modal4-column1">
@@ -382,24 +353,6 @@ class Headers extends Component {
                             <p class="user2CardInfo">
                               {user2Info.user2CardInfo}
                             </p>
-                            <div class="flex-container-modal3">
-                              <Button
-                                basic
-                                color="black"
-                                style={{
-                                  float: "center",
-                                  padding: 15,
-                                  width: 230,
-                                  borderRadius: 7,
-                                  marginBottom: 30,
-                                }}
-                                onClick={() =>
-                                  this.setState({ showModal4: false })
-                                }
-                              >
-                                Team Up!
-                              </Button>
-                            </div>
                           </div>
                         </div>
                         <div class="modal3Column2">
