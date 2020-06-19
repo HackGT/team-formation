@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FeedCards from './FeedCards';
+import FeedTeamCards from './FeedTeamCards';
 import SideMenu from './SideMenu';
 import './css/Feed.css';
 
@@ -16,9 +16,9 @@ class Feed extends Component {
 		return (
 			<div className="Feed-container">
 				<div className="menu">
-					<SideMenu onSearchClick={this.onSearchClick} className="search"/>
+					{/* <SideMenu onSearchClick={this.onSearchClick} className="search"/> */}
 				</div>
-			    <FeedCards skill={this.state.skill} user_id={this.props.user_id} />
+			    <FeedTeamCards skill={this.state.skill} user_id={this.props.user_id} />
 			</div>
 
         );
