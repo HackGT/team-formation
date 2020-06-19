@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import UserCard from "../UserCard"
+import UserCard from "../UserCard";
 import "../css/Headers.css";
 import "../css/Modal.css";
 import { Button, Menu } from "semantic-ui-react";
@@ -40,19 +40,27 @@ class Headers extends Component {
     };
     const user1Info = {
       user1CardName: "Meha A.",
-      user1FirstName: "Meha",
       user1CardInfo:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       user1RequestMessage:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       user1ProjectIdea:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      user1School: "Georgia Tech",
+      user1GradYear: "2020",
+      user1Skills: ["React", "Node.js", "HTML"],
+      user1Contact: "1234567890",
+      user1FirstName: "Meha",
     };
     const user2Info = {
-      user2Name: "Aakash",
+      user2CardName: "Aakash G.",
       user2CardInfo:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      user2CardName: "Aakash G.",
+      user2School: "Georgia Tech",
+      user2GradYear: "2021",
+      user2Skills: ["React", "GraphQL", "CSS"],
+      user2Contact: "1234567890",
+      user2Name: "Aakash",
     };
     let toggle_text;
     if (this.props.visible) {
@@ -274,23 +282,14 @@ class Headers extends Component {
                       <div class="row">
                         <div class="modal3Column">
                           <div class="modal3Column1">
-                            <p
-                              class="cardName"
-                              style={{
-                                marginTop: 40,
-                              }}
-                            >
-                              {user1Info.user1CardName}
-                            </p>
                             <UserCard
-                              name="Rashmi"
-                              school="Georgia Tech"
-                              grad_year="2021"
-                              experience= "asdfsdGS"
+                              name={user1Info.user1CardName}
+                              school={user1Info.user1School}
+                              grad_year={user1Info.user1GradYear}
+                              experience={user1Info.user1CardInfo}
+                              skills={user1Info.user1Skills}
+                              contact={user1Info.user1Contact}
                             />
-                            {/* <p class="cardInfo">
-                              {user1Info.user1CardInfo}
-                            </p> */}
                           </div>
                         </div>
                         <div class="modal3Column2">
@@ -377,17 +376,14 @@ class Headers extends Component {
                       <div class="row">
                         <div class="modal4-column">
                           <div class="modal4-column1">
-                            <p
-                              class="user2CardName"
-                              style={{
-                                marginTop: 40,
-                              }}
-                            >
-                              {user2Info.user2CardName}
-                            </p>
-                            <p class="user2CardInfo">
-                              {user2Info.user2CardInfo}
-                            </p>
+                            <UserCard
+                              name={user2Info.user2CardName}
+                              school={user2Info.user2School}
+                              grad_year={user2Info.user2GradYear}
+                              experience={user2Info.user2CardInfo}
+                              skills={user2Info.user2Skills}
+                              contact={user2Info.user2Contact}
+                            />
                           </div>
                         </div>
                         <div class="modal3Column2">

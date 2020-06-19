@@ -77,12 +77,9 @@ textarea::placeholder {
 .modal3Column {
   display: flex;
   flex-direction: column;
-  width: 350px;
 }
 
 .modal3Column1 {
-  border: 1px solid #000;
-  border-radius: 7px;
   margin: 25px;
 }
 
@@ -138,27 +135,10 @@ textarea::placeholder {
 .modal4-column {
   display: flex;
   flex-direction: column;
-  width: 350px;
 }
 
 .modal4-column1 {
-  border: 1px solid #000;
-  border-radius: 7px;
   margin: 25px;
-}
-
-.user2CardName {
-  text-align: center;
-  font-size: 30px;
-}
-
-.user2CardInfo {
-  text-align: left;
-  margin-top: 50px;
-  font-size: 17px;
-  margin-left: 30px;
-  margin-right: 30px;
-  padding-bottom: 50px;
 }
 
 .modal4-column2 {
