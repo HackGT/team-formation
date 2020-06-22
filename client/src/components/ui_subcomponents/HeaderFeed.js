@@ -5,6 +5,7 @@ import { commitMutation } from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import environment from '../Environment';
 import { QueryRenderer } from 'react-relay';
+import NotificationCard from '../NotificationCard';
 
 const mutation = graphql`
 mutation HeaderFeedMutation($uuid: String) {
@@ -41,17 +42,31 @@ class Headers extends Component {
                     if (error) {
                        return <div>{error.message}</div>;
                     } else if (props) {
-                        console.log(props)
                         return (
                             <div className="Header-container">
                                 <div className="logout-button">
-                                    <Menu borderless floated={'right'} size={'massive'}>
+                                    <Menu borderless size={'massive'}>
+                                        <Menu.Item>
+                                            <b>HackGT Team Formation</b>
+                                        </Menu.Item>
+
+
+                                    <Menu.Menu borderless position='right' size={'massive'}>
                                         <Menu.Item name={props.user_profile.name}/>
                                         <Menu.Item icon='sign out' link={true} href={'/api/user/logout'}/>
-                                        <Dropdown item icon='bell' direction='left' closeOnChange={false}>
-                                              <Dropdown.Menu>
-                                                <Dropdown.Item icon='edit' text='Edit Profile' onClick={this.props.onEditClick}/>
-                                                <Dropdown.Item icon='globe' text={toggle_text} onClick={this.onToggleClick}/>
+                                        <Dropdown item icon='bell' direction='left' closeOnChange={false} >
+                                              <Dropdown.Menu className="notification-pane">
+                                                <NotificationCard message='test message'/>
+                                                <NotificationCard message='test message2'/>
+                                                <NotificationCard message='test message3'/>
+                                                <NotificationCard message='test message4'/>
+                                                <NotificationCard message='test message4'/>
+                                                <NotificationCard message='test message4'/>
+                                                <NotificationCard message='test message4'/>
+                                                <NotificationCard message='test message4'/>
+                                                <NotificationCard message='test message4'/>
+                                                <NotificationCard message='test message4'/>
+                                                <NotificationCard message='test message4'/>
                                               </Dropdown.Menu>
                                         </Dropdown>
                                         <Dropdown item icon='user' direction='left' closeOnChange={false}>
@@ -60,13 +75,11 @@ class Headers extends Component {
                                             <Dropdown.Item icon='globe' text={toggle_text} onClick={this.onToggleClick}/>
                                           </Dropdown.Menu>
                                         </Dropdown>
+                                    </Menu.Menu>
                                     </Menu>
                                 </div>
 
-                                <div className="headers">
-                                    <h1>HackGT</h1>
-                                    <h2>Team Formation</h2>
-                                </div>
+
                             </div>
                         )
                     }

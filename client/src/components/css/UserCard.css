@@ -25,3 +25,13 @@
 .contact-button {
 	width: 100%;
 }
+
+body .ui.card, body .ui.cards>.card{
+	box-shadow: 0 0 15px 0 #e4e4e4;
+    border-radius: 7%;
+    transition: transform .2s;
+}
+
+body .ui.card:hover {
+	transform: scale(1.05);
+}
