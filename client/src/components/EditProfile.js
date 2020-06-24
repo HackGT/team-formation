@@ -92,7 +92,6 @@ class EditProfile extends Component {
                             this.setState({...props})
                         }
                     return (
-                        <>
                             <div className="form-container">
                                 <Form>
                                     <Form.Group>
@@ -127,8 +126,8 @@ class EditProfile extends Component {
                                         <Form.TextArea
                                             className="input-container-large"
                                             label='Bio'
-                                            placeholder='Introduce yourself!' 
-                                            defaultValue={props.experience} 
+                                            placeholder='Introduce yourself!'
+                                            defaultValue={props.experience}
                                             onChange={this.onExperienceChange}
                                             error={this.state["experience_profane"]}/>
                                     </Form.Group>
@@ -148,30 +147,7 @@ class EditProfile extends Component {
 
 
 
-                            <div>
-                            <Form>
-                                <Form.Group>
-                                    <Form.Input label='Name' placeholder='Name' defaultValue= {props.name} width={5} onChange={this.onNameChange} error={this.state["name_profane"]} required/>
-                                </Form.Group>
-                                <Form.Group>
-                                    <Form.Input label='Graduation Year' placeholder='Graduation Year' defaultValue={props.grad_year} width={3} onChange={this.onGradYearChange} error={this.state["grad_year_profane"]} required/>
-                                </Form.Group>
-                                <Form.Group>
-                                    <ContactDropdown contact={this.changeContactMethod} contact_method={props.contact_method}/>
-                                </Form.Group>
-                                <Form.Group>
-                                    {contact_form}
-                                </Form.Group>
 
-                                <Form.Group>
-                                    <Button onClick={this.onNextClick} className="save-button"> save </Button>
-                                </Form.Group>
-                                <Form.Group>
-                                    {this.state.cur_error_message}
-                                </Form.Group>
-                            </Form>
-                            </div>
-                        </>
                     )}
                 }}
             />
@@ -219,7 +195,7 @@ class EditProfile extends Component {
 			contact: e.target.value
 		});
     };
-    
+
     onYearChange = (e, {value}) => {
         this.setState({
             year: value
