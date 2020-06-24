@@ -26,7 +26,7 @@ class Content extends Component {
 				onNextClick={this.onNextClick}
                 onFeedChange={this.onProfileChange}/>;
 		} else if (this.state.cur_state === 'setup-profile') {
-			cur_header = <HeaderEditProfile/>;
+			cur_header = <HeaderFeed onEditClick={this.onEditClick} user_id={this.state.user_id} visible={this.state.visible} onNextClick={this.onNextClick} />;
 			cur_display = <EditProfile
 				onNextClick={this.onDoneEditClick}
 				user_id={this.state.user_id}
@@ -56,7 +56,7 @@ class Content extends Component {
             visible: visible
 		});
     };
-    
+
     onDoneEditClick = (next_action, id) => {
 		this.setState({
 			cur_state: next_action,
