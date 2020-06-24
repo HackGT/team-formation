@@ -42,7 +42,11 @@ class UserCard extends Component {
 		]
 		var count = 0;
 		var skill;
-		var viewskill;
+        var viewskill = this.props.skills.map((skill) =>
+            <Label size='mini' color={colors[(count++)%3]}>
+                {skill}
+             </Label>
+        )
         return (
 
 					<Card className="card1">
@@ -53,14 +57,10 @@ class UserCard extends Component {
 							<div className="ui divider"></div>
 
 							<Card.Description className="card-description">
-							{viewskill = this.props.skills.map((skill) => 
-      							<Label size='mini' color={colors[(count++)%3]}>
-        							{skill}
-     							 </Label>
-     						)}
+							{viewskill}
 							</Card.Description>
 							<Card.Description className="card-description">
-								<Container style={{overflow: 'auto', maxHeight: 42 }}><strong> About Them: </strong>{this.props.experience}</Container>
+								<Container style={{overflow: 'auto', maxHeight: 100, minHeight: 100 }}><strong> About Them: </strong>{this.props.experience}</Container>
 							</Card.Description>
 						</Card.Content>
                         <Card.Content extra>
@@ -74,4 +74,3 @@ class UserCard extends Component {
 };
 
 export default UserCard;
-

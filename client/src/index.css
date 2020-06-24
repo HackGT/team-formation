@@ -10,13 +10,13 @@ body {
 }
 
 body .ui.card, body .ui.cards>.card{
-  box-shadow: 0 0 15px 0 #e4e4e4;
+  /* box-shadow: 0 0 15px 0 #e4e4e4;
   border-radius: 7%;
-  transition: transform .2s;
+  transition: transform .2s; */
 }
 
 body .ui.card:hover {
-  transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  /* transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */ 
 }
 
 
@@ -24,4 +24,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
