@@ -1,39 +1,10 @@
 import React, { Component } from 'react';
 // import {Fuse} from 'fuse.js'
 import { Dropdown, Input } from 'semantic-ui-react'
-import Search from './Search'
 import './css/SideMenu.css'
+import skills from '../constants/skills'
+import schools from '../constants/schools'
 
-// export default class SideMenu extends Component {
-	
-
-// 	state = {
-// 		searchTerm: ""
-// 	}
-	
-// 	render() {
-// 	// const { } = this.state
-// 		return (
-// 			<div>
-// 			<Search
-// 				searchTerm={this.props.searchTerm}
-// 				searchListener={this.props.searchListener}
-// 				searchSubmitListener={this.props.searchSubmitListener}
-// 			/>
-// 			<Dropdown item text='Skills'>
-// 				<Dropdown.Menu>
-// 				<Dropdown.Item text='React' value='react' onClick={(e,data) => this.props.allFilterClickListener(data.value, "skills")}/>
-// 				<Dropdown.Item text='Angular' value='angular' onClick={(e,data) => this.props.allFilterClickListener(data.value, "skills")}/>
-// 				<Dropdown.Item text='GraphQL' value='graphql' onClick={(e,data) => this.props.allFilterClickListener(data.value, "skills")}/>
-// 				<Dropdown.Item text='NodeJS' value='nodejs' onClick={(e,data) => this.props.allFilterClickListener(data.value, "skills")}/>
-// 				<Dropdown.Item text='HTML' value='html' onClick={(e,data) => {
-// 					this.props.allFilterClickListener(data.value, "skills")}}/>
-// 				</Dropdown.Menu>
-// 			</Dropdown>
-// 			</div>
-// 		)
-// 	}
-// }
 
 class SideMenu extends Component {
 	constructor() {
@@ -43,46 +14,51 @@ class SideMenu extends Component {
 		};
 	};
 
-	doOnClick = (e, {value}) => {
-		this.props.allFilterClickListener(value, "skills")
-	}
-
 	render() {
-		const skillOptions = [
-			{key:'react', text:'React', value:'react', onClick: (e,{value}) => this.props.allFilterClickListener(value, "skills")},
-			{key:'angular', text:'Angular', value:'angular', onClick: (e,{value}) => this.props.allFilterClickListener(value, "skills")},
-			{key:'graphql', text:'GraphQL', value:'graphql', onClick: (e,{value}) => this.props.allFilterClickListener(value, "skills")},
-			{key:'nodejs', text:'NodeJS', value:'nodejs', onClick: (e,{value}) => this.props.allFilterClickListener(value, "skills")},
-			{key:'html', text:'HTML', value:'html', onClick: (e,{value}) => this.props.allFilterClickListener(value, "skills")}
-			// {key:'reacta', text:'React1', value:'reacta'},
-			// {key:'angular1jbgh', text:'Angular1', value:'angularhjbh'},
-			// {key:'graphqlhb', text:'GraphQLbjh', value:'graphqljb'},
-			// {key:'nodejsbb', text:'NodeJS1', value:'nodejsbhy'},
-			// {key:'htmlbh', text:'HTML1', value:'htmlgb'},
-			// {key:'reacth', text:'React2', value:'reactuj'},
-			// {key:'angularbh', text:'Angular2', value:'angulardf'},
-			// {key:'graphqlsd', text:'GraphQL2', value:'graphqldf'},
-			// {key:'nodejshg', text:'NodeJS2', value:'nodejsgbb'},
-			// {key:'htmlk', text:'HTML2', value:'htmlhhnn'},
-			// {key:'reactjn', text:'React', value:'reacthnn'},
-			// {key:'angularyh', text:'Angular', value:'angularhhn'},
-			// {key:'graphqlfv', text:'GraphQL', value:'graphqlkj'},
-			// {key:'nodejsk', text:'NodeJS', value:'nodejsik'},
-			// {key:'htmlol', text:'HTML', value:'htmlgb'},
-			// {key:'reactgb', text:'React', value:'reacthhnn'},
-			// {key:'angularvb', text:'Angular', value:'angularhn'},
-			// {key:'graphqlbgb', text:'GraphQL', value:'graphqljk'},
-			// {key:'nodejsgb', text:'NodeJS', value:'nodejsk'},
-			// {key:'htmldc', text:'HTML', value:'htmlln'}
-		]
+		const skillOptions = []
+		for (const skill in skills) {
+			const name = skills[skill].value;
+			skillOptions.push(
+				{key:name, text:name, value:name, onClick: (e,{value}) => this.props.allFilterClickListener(value, "skills")}
+			);
+		}
+
+		const years = ['First', 'Second','Third','Fourth', 'Fifth'];
+		const yearOptions = []
+		for (const year of years) {
+			yearOptions.push(
+				{key:year, text:year, value:year, onClick: (e,{value}) => this.props.allFilterClickListener(value, "years")}
+			);
+		}
+
+		const schoolOptions = []
+		for (const school in schools) {
+			const name = schools[school].value;
+			schoolOptions.push(
+				{key:name, text:name, value:name, onClick: (e,{value}) => this.props.allFilterClickListener(value, "schools")}
+			);
+		}
+		  
 		return (
 			<div className="SideMenu-container">
-				<Input placeholder="Search by skills" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} icon='search' size='huge'/>
+				<Input
+					icon={{ name: 'search', circular: true, link: true }}
+					placeholder='Search by anything'
+					onChange={this.onSearchChange} 
+					onKeyPress={this.handleKeyPress}
+					size='small'
+					focus
+				/>
+				{/* <Input placeholder="Search by skills" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} icon='search' size='huge'/> */}
 				<h3 className="h3">Skills</h3>
-				<Dropdown id="dropdown" item text='Select' search selection options={skillOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
+				<Dropdown id="dropdown" item text='Select Skills' search selection options={skillOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
+				<h3 className="h3">Years</h3>
+				<Dropdown item text='Select Years' search selection options={yearOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
+				<h3 className="h3">Schools</h3>
+				<Dropdown item text='Select Schools' search selection options={schoolOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
 			</div>
 		);
-    };
+	};
 
     handleKeyPress = (event) => {
         if (event.key === 'Enter') {

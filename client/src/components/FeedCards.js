@@ -24,13 +24,14 @@ const getUsersQuery = graphql`
 
 class FeedCards extends Component {
     render() {
+        let skill = this.props.skill.join(',');
         return (
             <div className='Cards-container'>
                 <QueryRenderer
                     environment={environment}
                     query={getUsersQuery}
                     variables={{
-                        skill: this.props.skill,
+                        skill: skill,
                     }}
                     render={({error,props}) => {
                         if (error) {

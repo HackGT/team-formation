@@ -4,29 +4,14 @@ import Members from './Members';
 import SideMenu from './SideMenu';
 import InputTagCollection from './InputTagCollection'
 import './css/Feed.css';
+import TeamInformation from './TeamInformation'
 
 class Feed extends Component {
 	state = {
 		searchTerm: "",
-		passingTags: {
-			search: {
-			  inputTerm: ""
-			},
-			skills: {
-				react: false,
-				angular: false,
-				graphql: false,
-				nodejs: false,
-				html: false
-			},
-			year: {
-				first: false,
-				second: false,
-				third: false,
-				fourth: false,
-				fifth: false
-			}
-		}
+		skills: [],
+		years: [],
+		schools: []
 	}
 	
     render() {
@@ -37,8 +22,9 @@ class Feed extends Component {
 				</div>
 				<div className="user-input">
 					<InputTagCollection
-						tags={this.state.passingTags}
-						cancelSearchTag={this.cancelSearchTag}
+						skills={this.state.skills}
+						years={this.state.years}
+						schools={this.state.schools}
 						allFilterClickListener={this.allFilterClickListener}
 					/>
 				</div>
@@ -50,46 +36,29 @@ class Feed extends Component {
 						/>
 					</div>
 					<div className="feed-cards">
-						<FeedCards  skill={this.state.searchTerm} user_id={this.props.user_id} />
+						<FeedCards skill={this.state.skills} user_id={this.props.user_id} />
 					</div>
 				</div>
 			</div>
         );
 	};
 
-	cancelSearchTag = () => {
-		this.setState({
-		  passingTags: {
-			...this.state.passingTags,
-			search: { inputTerm: "" }
-		  }
-		});
-	  };
-
 	allFilterClickListener = (name, filterProp) => {
-		this.setState(prevState => ({
-		  passingTags: {
-			...prevState.passingTags,
-			[filterProp]: {
-			  ...prevState.passingTags[filterProp],
-			  [name]: !prevState.passingTags[filterProp][name]
-			}
-		  }
-		}));
+		let index = this.state[filterProp].indexOf(name)
+		if (index > -1) {
+			this.state[filterProp].splice(index, 1)
+			this.setState({
+				[filterProp]: this.state[filterProp]
+			});
+		} else {
+			this.setState({
+				[filterProp]: [...this.state[filterProp], name]
+			})
+		}
 	};
 
 	searchListener = e => {
 		this.setState({ searchTerm: e.target.value });
-	};
-
-	searchSubmitListener = e => {
-		e.preventDefault();
-		this.setState({
-			passingTags: {
-			...this.state.passingTags,
-			search: { inputTerm: this.state.searchTerm }
-			}
-		});
 	};
 
     onSearchClick = (search_string) => {
