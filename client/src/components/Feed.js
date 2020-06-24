@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FeedTeamCards from './FeedTeamCards';
 import FeedCards from './FeedCards';
 import Members from './Members';
 import SideMenu from './SideMenu';
