@@ -12,9 +12,9 @@ const getUsersQuery = graphql`
         user(skill:$skill) {
             name
             school
-			grad_year
-			contact
-			skills
+            grad_year
+            contact
+            skills
             experience
             visible
             uuid
@@ -24,13 +24,14 @@ const getUsersQuery = graphql`
 
 class FeedCards extends Component {
     render() {
+        let skill = this.props.skill.join(',');
         return (
             <div className='Cards-container'>
                 <QueryRenderer
                     environment={environment}
                     query={getUsersQuery}
                     variables={{
-                        skill: this.props.skill,
+                        skill: skill,
                     }}
                     render={({error,props}) => {
                         if (error) {
@@ -41,7 +42,6 @@ class FeedCards extends Component {
                                     return Boolean(el);
                                 })} experience={user.experience} />
                             })
-
                             return (<Card.Group centered itemsPerRow={4} className='center-group'>{cards}</Card.Group>);
                         }
                     }}
