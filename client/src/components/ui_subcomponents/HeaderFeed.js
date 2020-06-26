@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TeamRequest from "./TeamRequest";
+import JoinTeam from "./JoinTeam";
 import "../css/Headers.css";
 import "../css/Modal.css";
 import { Button, Menu, Dropdown, Modal } from "semantic-ui-react";
@@ -38,6 +39,18 @@ class Headers extends Component {
 
   closeModal1 = () => {
     this.setState({ showModal1: false });
+  };
+
+  closeModal2 = () => {
+    this.setState({ showModal2: false });
+  };
+
+  closeModal3 = () => {
+    this.setState({ showModal3: false });
+  };
+
+  closeModal4 = () => {
+    this.setState({ showModal4: false });
   };
 
   render() {
@@ -117,66 +130,20 @@ class Headers extends Component {
                       </Button>
                     </Menu.Item>
                     <Menu.Item>
-                      <Modal
-                        trigger={
-                          <Button
-                            onClick={() =>
-                              this.setState({ showModal2: true })
-                            }
-                          >
-                            {" "}
-                            Modal 2{" "}
-                          </Button>
+                      <JoinTeam
+                        teamName={teamInfo.teamName}
+                        showModal={this.state.showModal2}
+                        closeModal={this.closeModal2}
+                      />
+                    </Menu.Item>
+                    <Menu.Item>
+                      <Button
+                        onClick={() =>
+                          this.setState({ showModal2: true })
                         }
-                        style={{
-                          paddingTop: 10,
-                          backgroundColor: "#c4c4c4",
-                        }}
-                        closeIcon
-                        open={this.state.showModal2}
-                        onClose={() => {
-                          this.setState({ showModal2: false });
-                        }}
                       >
-                        <Modal.Content
-                          style={{
-                            backgroundColor: "#c4c4c4",
-                          }}
-                        >
-                          <Modal.Description>
-                            <div class="background">
-                              <p class="header">
-                                Request Join {teamInfo.teamName}?
-                              </p>
-                              <textarea
-                                id="writeAMessage"
-                                rows="7"
-                                cols="63"
-                                placeholder="Write a message..."
-                              />
-                              <div class="flex-container-modal3">
-                                <div>
-                                  <Button
-                                    basic="basic"
-                                    color="black"
-                                    style={{
-                                      marginTop: 20,
-                                      borderRadius: 20,
-                                    }}
-                                    onClick={() =>
-                                      this.setState({
-                                        showModal2: false,
-                                      })
-                                    }
-                                  >
-                                    Submit
-                                  </Button>
-                                </div>
-                              </div>
-                            </div>
-                          </Modal.Description>
-                        </Modal.Content>
-                      </Modal>
+                        Modal 2
+                      </Button>
                     </Menu.Item>
                     <Menu.Item>
                       <Modal

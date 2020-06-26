@@ -6,11 +6,6 @@ class TeamRequest extends Component {
   render() {
     return (
       <Modal
-        // trigger={
-        //   <Button onClick={() => this.setState({ showModal: true })}>
-        //     Modal 1
-        //   </Button>
-        // }
         style={{
           padding: 10,
           backgroundColor: "#c4c4c4",
@@ -38,9 +33,7 @@ class TeamRequest extends Component {
                 <p class="requestMessageBody">
                   {this.props.teamRequestMessage}
                 </p>
-                <p class="projectIdea">
-                  {this.props.teamName}'s project idea:
-                </p>
+                <p class="projectIdea">{this.props.teamName}'s project idea:</p>
                 <p class="projectIdeaBody">{this.props.teamProjectIdea}</p>
 
                 <div class="flex-container1">
