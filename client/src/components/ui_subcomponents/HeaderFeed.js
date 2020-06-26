@@ -10,6 +10,7 @@ import environment from "../Environment";
 import { QueryRenderer } from "react-relay";
 import NotificationCard from "../NotificationCard";
 import UserCard from "../UserCard";
+import IndividualRequest from "./IndividualRequest";
 
 const mutation = graphql`
   mutation HeaderFeedMutation($uuid: String) {
@@ -113,18 +114,14 @@ class Headers extends Component {
                       <TeamRequest
                         teamName={teamInfo.teamName}
                         teamProjectIdea={teamInfo.teamProjectIdea}
-                        teamRequestMessage={
-                          teamInfo.teamRequestMessage
-                        }
+                        teamRequestMessage={teamInfo.teamRequestMessage}
                         showModal={this.state.showModal1}
                         closeModal={this.closeModal1}
                       />
                     </Menu.Item>
                     <Menu.Item>
                       <Button
-                        onClick={() =>
-                          this.setState({ showModal1: true })
-                        }
+                        onClick={() => this.setState({ showModal1: true })}
                       >
                         Modal 1
                       </Button>
@@ -138,132 +135,38 @@ class Headers extends Component {
                     </Menu.Item>
                     <Menu.Item>
                       <Button
-                        onClick={() =>
-                          this.setState({ showModal2: true })
-                        }
+                        onClick={() => this.setState({ showModal2: true })}
                       >
                         Modal 2
+                      </Button>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <IndividualRequest
+                        user1CardName={user1Info.user1CardName}
+                        user1School={user1Info.user1School}
+                        user1GradYear={user1Info.user1GradYear}
+                        user1CardInfo={user1Info.user1CardInfo}
+                        user1Skills={user1Info.user1Skills}
+                        user1Contact={user1Info.user1Contact}
+                        user1FirstName={user1Info.user1FirstName}
+                        user1RequestMessage={user1Info.user1RequestMessage}
+                        user1ProjectIdea={user1Info.user1ProjectIdea}
+                        showModal={this.state.showModal3}
+                        closeModal={this.closeModal3}
+                      />
+                    </Menu.Item>
+                    <Menu.Item>
+                      <Button
+                        onClick={() => this.setState({ showModal3: true })}
+                      >
+                        Modal 3
                       </Button>
                     </Menu.Item>
                     <Menu.Item>
                       <Modal
                         trigger={
                           <Button
-                            onClick={() =>
-                              this.setState({ showModal3: true })
-                            }
-                          >
-                            {" "}
-                            Modal 3{" "}
-                          </Button>
-                        }
-                        style={{
-                          padding: 10,
-                          backgroundColor: "#c4c4c4",
-                        }}
-                        closeIcon
-                        open={this.state.showModal3}
-                        onClose={() => {
-                          this.setState({ showModal3: false });
-                        }}
-                      >
-                        <Modal.Content
-                          style={{
-                            backgroundColor: "#c4c4c4",
-                          }}
-                        >
-                          <Modal.Description>
-                            <div class="background">
-                              <p class="header">
-                                {user1Info.user1CardName} wants to
-                                team up with you!
-                              </p>
-                              <div class="row">
-                                <div class="modal3Column">
-                                  <div class="modal3Column1">
-                                    <UserCard
-                                      name={user1Info.user1CardName}
-                                      school={user1Info.user1School}
-                                      grad_year={
-                                        user1Info.user1GradYear
-                                      }
-                                      experience={
-                                        user1Info.user1CardInfo
-                                      }
-                                      skills={user1Info.user1Skills}
-                                      contact={
-                                        user1Info.user1Contact
-                                      }
-                                    />
-                                  </div>
-                                </div>
-                                <div class="modal3Column2">
-                                  <div class="modal3Column3">
-                                    <p>
-                                      {user1Info.user1FirstName}'s
-                                      Request Message:
-                                    </p>
-                                    <p class="user1RequestMessage">
-                                      {
-                                        user1Info.user1RequestMessage
-                                      }
-                                    </p>
-                                    <p class="user1FirstName">
-                                      {user1Info.user1FirstName}'s
-                                      Project Idea:
-                                    </p>
-                                    <p class="user1ProjectIdea">
-                                      {user1Info.user1ProjectIdea}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="flex-container-modal3">
-                                <div class="modal3Button">
-                                  <Button
-                                    basic="basic"
-                                    color="black"
-                                    style={{
-                                      borderRadius: 20,
-                                    }}
-                                    onClick={() =>
-                                      this.setState({
-                                        showModal3: false,
-                                      })
-                                    }
-                                  >
-                                    Accept
-                                  </Button>
-                                </div>
-                                <div class="modal3Button">
-                                  <Button
-                                    basic="basic"
-                                    color="black"
-                                    style={{
-                                      borderRadius: 20,
-                                    }}
-                                    onClick={() =>
-                                      this.setState({
-                                        showModal3: false,
-                                      })
-                                    }
-                                  >
-                                    Deny
-                                  </Button>
-                                </div>
-                              </div>
-                            </div>
-                          </Modal.Description>
-                        </Modal.Content>
-                      </Modal>
-                    </Menu.Item>
-                    <Menu.Item>
-                      <Modal
-                        trigger={
-                          <Button
-                            onClick={() =>
-                              this.setState({ showModal4: true })
-                            }
+                            onClick={() => this.setState({ showModal4: true })}
                           >
                             {" "}
                             Modal 4{" "}
@@ -295,16 +198,10 @@ class Headers extends Component {
                                     <UserCard
                                       name={user2Info.user2CardName}
                                       school={user2Info.user2School}
-                                      grad_year={
-                                        user2Info.user2GradYear
-                                      }
-                                      experience={
-                                        user2Info.user2CardInfo
-                                      }
+                                      grad_year={user2Info.user2GradYear}
+                                      experience={user2Info.user2CardInfo}
                                       skills={user2Info.user2Skills}
-                                      contact={
-                                        user2Info.user2Contact
-                                      }
+                                      contact={user2Info.user2Contact}
                                     />
                                   </div>
                                 </div>
