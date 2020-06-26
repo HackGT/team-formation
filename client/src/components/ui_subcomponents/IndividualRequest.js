@@ -7,12 +7,6 @@ class IndividualRequest extends Component {
   render() {
     return (
       <Modal
-        // trigger={
-        //   <Button onClick={() => this.setState({ showModal3: true })}>
-        //     {" "}
-        //     Modal 3{" "}
-        //   </Button>
-        // }
         style={{
           padding: 10,
           backgroundColor: "#c4c4c4",

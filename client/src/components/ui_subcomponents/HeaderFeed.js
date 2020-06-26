@@ -3,14 +3,14 @@ import TeamRequest from "./TeamRequest";
 import JoinTeam from "./JoinTeam";
 import "../css/Headers.css";
 import "../css/Modal.css";
-import { Button, Menu, Dropdown, Modal } from "semantic-ui-react";
+import { Button, Menu, Dropdown } from "semantic-ui-react";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
 import { QueryRenderer } from "react-relay";
 import NotificationCard from "../NotificationCard";
-import UserCard from "../UserCard";
 import IndividualRequest from "./IndividualRequest";
+import JoinIndividual from "./JoinIndividual";
 
 const mutation = graphql`
   mutation HeaderFeedMutation($uuid: String) {
@@ -114,14 +114,18 @@ class Headers extends Component {
                       <TeamRequest
                         teamName={teamInfo.teamName}
                         teamProjectIdea={teamInfo.teamProjectIdea}
-                        teamRequestMessage={teamInfo.teamRequestMessage}
+                        teamRequestMessage={
+                          teamInfo.teamRequestMessage
+                        }
                         showModal={this.state.showModal1}
                         closeModal={this.closeModal1}
                       />
                     </Menu.Item>
                     <Menu.Item>
                       <Button
-                        onClick={() => this.setState({ showModal1: true })}
+                        onClick={() =>
+                          this.setState({ showModal1: true })
+                        }
                       >
                         Modal 1
                       </Button>
@@ -135,7 +139,9 @@ class Headers extends Component {
                     </Menu.Item>
                     <Menu.Item>
                       <Button
-                        onClick={() => this.setState({ showModal2: true })}
+                        onClick={() =>
+                          this.setState({ showModal2: true })
+                        }
                       >
                         Modal 2
                       </Button>
@@ -149,100 +155,46 @@ class Headers extends Component {
                         user1Skills={user1Info.user1Skills}
                         user1Contact={user1Info.user1Contact}
                         user1FirstName={user1Info.user1FirstName}
-                        user1RequestMessage={user1Info.user1RequestMessage}
-                        user1ProjectIdea={user1Info.user1ProjectIdea}
+                        user1RequestMessage={
+                          user1Info.user1RequestMessage
+                        }
+                        user1ProjectIdea={
+                          user1Info.user1ProjectIdea
+                        }
                         showModal={this.state.showModal3}
                         closeModal={this.closeModal3}
                       />
                     </Menu.Item>
                     <Menu.Item>
                       <Button
-                        onClick={() => this.setState({ showModal3: true })}
+                        onClick={() =>
+                          this.setState({ showModal3: true })
+                        }
                       >
                         Modal 3
                       </Button>
                     </Menu.Item>
                     <Menu.Item>
-                      <Modal
-                        trigger={
-                          <Button
-                            onClick={() => this.setState({ showModal4: true })}
-                          >
-                            {" "}
-                            Modal 4{" "}
-                          </Button>
+                      <JoinIndividual
+                        user2Name={user2Info.user2Name}
+                        user2CardName={user2Info.user2CardName}
+                        user2School={user2Info.user2School}
+                        user2GradYear={user2Info.user2GradYear}
+                        user2CardInfo={user2Info.user2CardInfo}
+                        user2Skills={user2Info.user2Skills}
+                        user2Contact={user2Info.user2Contact}
+                        showModal={this.state.showModal4}
+                        closeModal={this.closeModal4}
+                      />
+                    </Menu.Item>
+                    <Menu.Item>
+                      <Button
+                        onClick={() =>
+                          this.setState({ showModal4: true })
                         }
-                        style={{
-                          padding: 10,
-                          backgroundColor: "#c4c4c4",
-                        }}
-                        closeIcon
-                        open={this.state.showModal4}
-                        onClose={() => {
-                          this.setState({ showModal4: false });
-                        }}
                       >
-                        <Modal.Content
-                          style={{
-                            backgroundColor: "#c4c4c4",
-                          }}
-                        >
-                          <Modal.Description>
-                            <div class="background">
-                              <p class="header">
-                                Team Up with {user2Info.user2Name}?
-                              </p>
-                              <div class="row">
-                                <div class="modal4-column">
-                                  <div class="modal4-column1">
-                                    <UserCard
-                                      name={user2Info.user2CardName}
-                                      school={user2Info.user2School}
-                                      grad_year={user2Info.user2GradYear}
-                                      experience={user2Info.user2CardInfo}
-                                      skills={user2Info.user2Skills}
-                                      contact={user2Info.user2Contact}
-                                    />
-                                  </div>
-                                </div>
-                                <div class="modal3Column2">
-                                  <div class="modal4-column2">
-                                    <textarea
-                                      id="introduceYourself"
-                                      rows="8"
-                                      cols="68"
-                                      placeholder="Introduce yourself..."
-                                    />
-
-                                    <textarea
-                                      id="describeProject"
-                                      rows="8"
-                                      cols="68"
-                                      placeholder="Describe your project idea..."
-                                    />
-
-                                    <Button
-                                      basic="basic"
-                                      color="black"
-                                      style={{
-                                        borderRadius: 20,
-                                        marginTop: 20,
-                                      }}
-                                      onClick={() =>
-                                        this.setState({
-                                          showModal4: false,
-                                        })
-                                      }
-                                    >
-                                      Submit
-                                    </Button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Modal.Description>
-                        </Modal.Content>
-                      </Modal>
+                        Modal 4
+                      </Button>
                     </Menu.Item>
                     <Menu.Menu
                       borderless="borderless"
