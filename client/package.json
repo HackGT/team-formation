@@ -54,6 +54,7 @@
     "sass-loader": "7.1.0",
     "semantic-ui-react": "^0.88.2",
     "style-loader": "0.23.0",
+    "svg": "^0.1.0",
     "terser-webpack-plugin": "1.1.0",
     "url-loader": "1.1.1",
     "watchman": "^1.0.0",
