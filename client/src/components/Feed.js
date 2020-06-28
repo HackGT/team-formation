@@ -35,6 +35,12 @@ class Feed extends Component {
 						<FeedCards skill={this.state.skills} user_id={this.props.user_id} />
 					</div>
 				</div>
+				<div className='team-info'>
+					<TeamInformation TeamInformation editable={true}/>
+				</div>
+				<div className='team-info'>
+					<TeamInformation editable={false} teamBio="This is our team bio!" projectIdea="This is our project idea!"/>
+				</div>
 			</div>
         );
 	};
