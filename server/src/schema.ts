@@ -34,6 +34,7 @@ export interface IUser extends RootDocument {
     image?: string;
     contact_method?: string;
     visible?: number;
+    team?: ITeam;
 }
 
 export interface ITeam {
@@ -41,19 +42,16 @@ export interface ITeam {
     creator: string;
     name: string;
     picture?: string;
-    members: string[];
+    members: IUser[];
     interests?: string[];
     description?: string;
+    public: boolean;
 }
 
 export type IUserMongoose = IUser & mongoose.Document;
 export type ITeamMongoose = ITeam & mongoose.Document;
 
 export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
-    creator: {
-        required: true,
-        type: String
-    },
     name: {
         required: true,
         type: String,
@@ -62,52 +60,59 @@ export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
     picture: String,
     members: {
         required: true,
-        type: [String],
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }],
         unique: true
     },
     interests: [String],
-    description: String
+    description: String,
+    public: Boolean
     },
     {
         usePushEach: true
     }));
 
 export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
-    uuid: {
-        type: String,
-        required: true,
-        index: true,
-        unique: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    name: {
-        type: String,
-        required: false
-    },
-    school: {
-        type: String,
-        required: false
-    },
-    token: String,
-    grad_year: String,
-    skills: [String],
-    beginner: {
-        type: Boolean,
-        required: false
-    },
-    experience: String,
-    image: String,
-    auth_keys: [String],
-    admin: Boolean,
-    contact: String,
-    contact_method: String,
-    visible: Number
+        uuid: {
+            type: String,
+            required: true,
+            index: true,
+            unique: true
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        name: {
+            type: String,
+            required: false
+        },
+        school: {
+            type: String,
+            required: false
+        },
+        token: String,
+        grad_year: String,
+        skills: [String],
+        beginner: {
+            type: Boolean,
+            required: false
+        },
+        experience: String,
+        image: String,
+        auth_keys: [String],
+        admin: Boolean,
+        contact: String,
+        contact_method: String,
+        visible: Number,
+        team: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Team"
+        }
     },
     {
         usePushEach: true
     }));
-
