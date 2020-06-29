@@ -10,7 +10,7 @@ import cors from "cors"
 import dotenv from "dotenv"
 import { buildSchema } from "graphql"
 import { GroundTruthStrategy } from "./routes/strategies"
-import { IUser, User } from "./schema";
+import { IUser, User, Team} from "./schema";
 import { userRoutes } from "./routes/user";
 
 dotenv.config();
@@ -69,7 +69,11 @@ passport.deserializeUser<IUser, string>((id, done) => {
         done(err, user!);
     });
 });
-
+let getTeams = async function(args) {
+	return await Team.find({
+		"public": true
+	})
+}
 let getUser = async function (args) {
     let users;
     if(args.skill == "" || args.skill == null) {
@@ -98,8 +102,27 @@ let updateUser = async function(args) {
 }
 
 let getUserProfile = async function (args) {
-    return User.findOne({uuid: args.uuid});
+    return await User.findOne({uuid: args.uuid}).populate('team');
 }
+
+let addUserToTeam = async function(args) {
+
+	User.findByIdAndUpdate(args.user_id, {
+		"$set": {
+			"team": args.team_id
+		}
+	})
+	return await Team.findByIdAndUpdate(args.team_id, {
+		"$push": {
+			"members": args.user_id
+		}
+	})
+}
+
+
+// let createTeam = async function(args) {
+//
+// }
 
 let toggleVisibility = async function (args) {
     return User.findOneAndUpdate({'uuid':args.uuid}, {"$bit": {visible: {xor: 1}}}, {new:true})
@@ -111,7 +134,9 @@ const root = {
     user: getUser,
     update_user: updateUser,
     user_profile: getUserProfile,
-    toggle_visibility: toggleVisibility
+    toggle_visibility: toggleVisibility,
+	add_user_to_team: addUserToTeam,
+	get_teams: getTeams
 };
 
 apiRouter.use("/user", userRoutes);

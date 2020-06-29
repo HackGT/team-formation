@@ -1,0 +1,12 @@
+.member-cards-container {
+  padding: 30px;
+  border-style: solid;
+  border-radius: 30px;
+  margin: 20px
+}
+
+.add-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

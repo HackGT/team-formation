@@ -6,3 +6,19 @@
 	text-align: center;
 	background-color: #fffafa;
 }
+
+.notification-pane {
+	min-width: 500% !important;
+}
+
+.ui.popup.fitted {
+  padding: 0px;
+}
+.ui.popup.fitted > .ui.menu {
+  border: none;
+}
+.ui.menu.scrolling {
+  max-height: 5%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
