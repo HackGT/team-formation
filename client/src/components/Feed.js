@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import FeedTeamCards from './FeedTeamCards';
 import FeedCards from './FeedCards';
-import Members from './Members';
 import SideMenu from './SideMenu';
+import { Button, Grid } from 'semantic-ui-react';
+import { setState } from 'semantic-ui-react';
+import Members from './Members';
 import InputTagCollection from './InputTagCollection'
 import './css/Feed.css';
 import TeamInformation from './TeamInformation'
-import { Button } from 'semantic-ui-react'
 
 class Feed extends Component {
 	state = {
@@ -19,6 +20,7 @@ class Feed extends Component {
 	}
 	
     render() {
+		var cards = this.state.teams ? <FeedTeamCards skill={this.state.skills} user_id={this.props.user_id} /> : <FeedCards skill={this.state.skills} user_id={this.props.user_id} />
 		return (
 			<div>
 				<div className="member-cards">
@@ -26,9 +28,9 @@ class Feed extends Component {
 				</div>
 				<div className="switch-feed">
 					<Button.Group>
-						<Button onClick={this.feedTypeListener} basic={!this.state.individuals} color='purple'>Individuals</Button>
+						<Button onClick={this.feedTypeListener} basic={!this.state.individuals} color='blue'>Individuals</Button>
 						<Button.Or />
-						<Button onClick={this.feedTypeListener} basic={!this.state.teams} color='purple'>Teams</Button>
+						<Button onClick={this.feedTypeListener} basic={!this.state.teams} color='blue'>Teams</Button>
 					</Button.Group>
 				</div>
 				<div className="Feed-container">
@@ -53,7 +55,7 @@ class Feed extends Component {
 							</div> 
 						: null}
 						<div className="feed-cards">
-							<FeedCards skill={this.state.skills} user_id={this.props.user_id} />
+							{cards}
 						</div>
 					</div>
 				</div>
@@ -87,6 +89,7 @@ class Feed extends Component {
 
     onSearchClick = (search_string) => {
         this.setState({searchTerm:search_string});
+
 	};
 	
 	feedTypeListener = (e, data) => {
