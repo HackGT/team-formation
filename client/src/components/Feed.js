@@ -14,13 +14,14 @@ class Feed extends Component {
 		years: [],
 		schools: []
 	}
-	
+
     render() {
 		return (
 			<div>
-				<div className="member-cards">
-						<Members skill={this.state.searchTerm} user_id={this.props.user_id} />
-				</div>
+				{// <div className="member-cards">
+				// 		<Members skill={this.state.searchTerm} user_id={this.props.user_id} />
+				// </div>
+				}
 				<div className="user-input">
 					<InputTagCollection
 						skills={this.state.skills}
@@ -31,7 +32,7 @@ class Feed extends Component {
 				</div>
 				<div className="Feed-container">
 					<div className="menu">
-						<SideMenu className="Side-menu" 
+						<SideMenu className="Side-menu"
 							allFilterClickListener={this.allFilterClickListener}
 							onSearchClick={this.onSearchClick}
 						/>

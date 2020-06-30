@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import { Button, Card, Popup, Container, Label } from 'semantic-ui-react';
+import JoinIndividual from './ui_subcomponents/JoinIndividual'
 import './css/UserCard.css';
 
 class UserCard extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            showModal: false
+        }
+    }
+    closeModal = () => {
+      console.log("close individual")
+      this.setState({ showModal: false });
+    };
     render() {
 		let contact;
 		let cur_contact = this.props.contact;
@@ -48,8 +59,7 @@ class UserCard extends Component {
              </Label>
         )
         return (
-
-					<Card className="card1">
+					<Card>
 						<Card.Content className="content">
 							<Card.Header>{this.props.name}</Card.Header>
 							<Card.Meta>{this.props.school}</Card.Meta>
@@ -65,7 +75,9 @@ class UserCard extends Component {
 						</Card.Content>
                         <Card.Content extra>
                             <div className='contact-button'>
-                                <p>{contact}</p>
+                                {contact}
+                                <Button basic color='purple' content='Team Up' onClick={() => this.setState({showModal: true})} />
+                                <JoinIndividual {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
                             </div>
                         </Card.Content>
 					</Card>

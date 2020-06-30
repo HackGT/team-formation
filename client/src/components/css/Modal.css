@@ -3,7 +3,7 @@ textarea::placeholder {
 }
 
 .background {
-  background-color: #c4c4c4;
+  /* background-color: #c4c4c4; */
 }
 
 .header {
@@ -60,7 +60,7 @@ textarea::placeholder {
 
 #writeAMessage {
   margin-top: 35px;
-  background-color: #c4c4c4;
+  /* background-color: #c4c4c4; */
   border-radius: 7px;
   border: 1px solid #000;
   padding-top: 15px;
@@ -146,7 +146,7 @@ textarea::placeholder {
 }
 
 #introduceYourself {
-  background-color: #c4c4c4;
+  /* background-color: #c4c4c4; */
   border-radius: 7px;
   border: 1px solid #000;
   padding-left: 15px;
@@ -155,7 +155,7 @@ textarea::placeholder {
 
 #describeProject {
   margin-top: 50px;
-  background-color: #c4c4c4;
+  /* background-color: #c4c4c4; */
   border-radius: 7px;
   border: 1px solid #000;
   padding-left: 15px;

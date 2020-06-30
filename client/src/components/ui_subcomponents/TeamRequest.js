@@ -8,7 +8,6 @@ class TeamRequest extends Component {
       <Modal
         style={{
           padding: 10,
-          backgroundColor: "#c4c4c4",
         }}
         closeIcon
         open={this.props.showModal}
@@ -16,11 +15,7 @@ class TeamRequest extends Component {
           this.props.closeModal();
         }}
       >
-        <Modal.Content
-          style={{
-            backgroundColor: "#c4c4c4",
-          }}
-        >
+        <Modal.Content>
           <Modal.Description>
             <div class="background">
               <p class="header">
