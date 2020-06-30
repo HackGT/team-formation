@@ -46,7 +46,7 @@ class SideMenu extends Component {
 					placeholder='Search by anything'
 					onChange={this.onSearchChange}
 					onKeyPress={this.handleKeyPress}
-					size='large'
+					size='small'
 					focus
 				/>
 				{/* <Input placeholder="Search by skills" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} icon='search' size='huge'/> */}

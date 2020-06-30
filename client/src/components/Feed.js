@@ -21,9 +21,10 @@ class Feed extends Component {
     render() {
 		return (
 			<div>
-				<div className="member-cards">
-						<Members skill={this.state.searchTerm} user_id={this.props.user_id} />
-				</div>
+				{// <div className="member-cards">
+				// 		<Members skill={this.state.searchTerm} user_id={this.props.user_id} />
+				// </div>
+				}
 				<div className="switch-feed">
 					<Button.Group>
 						<Button onClick={this.feedTypeListener} basic={!this.state.individuals} color='purple'>Individuals</Button>
