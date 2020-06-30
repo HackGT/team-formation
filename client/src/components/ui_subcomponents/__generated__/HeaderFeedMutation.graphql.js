@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 067540ff21778b3fa9a709d0a1f222b7
+ * @relayHash adff5bb6c024730963ed53f8632956d4
  */
 
 /* eslint-disable */
@@ -14,13 +14,7 @@ export type HeaderFeedMutationVariables = {|
 |};
 export type HeaderFeedMutationResponse = {|
   +toggle_visibility: {|
-    +name: ?string,
-    +grad_year: ?string,
-    +school: ?string,
-    +skills: ?$ReadOnlyArray<?string>,
-    +experience: ?string,
-    +contact: ?string,
-    +visible: ?number,
+    +name: ?string
   |}
 |};
 export type HeaderFeedMutation = {|
@@ -36,12 +30,6 @@ mutation HeaderFeedMutation(
 ) {
   toggle_visibility(uuid: $uuid) {
     name
-    grad_year
-    school
-    skills
-    experience
-    contact
-    visible
     id
   }
 }
@@ -70,48 +58,6 @@ v2 = {
   "name": "name",
   "args": null,
   "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "grad_year",
-  "args": null,
-  "storageKey": null
-},
-v4 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "school",
-  "args": null,
-  "storageKey": null
-},
-v5 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "skills",
-  "args": null,
-  "storageKey": null
-},
-v6 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "experience",
-  "args": null,
-  "storageKey": null
-},
-v7 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "contact",
-  "args": null,
-  "storageKey": null
-},
-v8 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "visible",
-  "args": null,
-  "storageKey": null
 };
 return {
   "kind": "Request",
@@ -131,13 +77,7 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          (v5/*: any*/),
-          (v6/*: any*/),
-          (v7/*: any*/),
-          (v8/*: any*/)
+          (v2/*: any*/)
         ]
       }
     ]
@@ -157,12 +97,6 @@ return {
         "plural": false,
         "selections": [
           (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          (v5/*: any*/),
-          (v6/*: any*/),
-          (v7/*: any*/),
-          (v8/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -178,11 +112,11 @@ return {
     "operationKind": "mutation",
     "name": "HeaderFeedMutation",
     "id": null,
-    "text": "mutation HeaderFeedMutation(\n  $uuid: String\n) {\n  toggle_visibility(uuid: $uuid) {\n    name\n    grad_year\n    school\n    skills\n    experience\n    contact\n    visible\n    id\n  }\n}\n",
+    "text": "mutation HeaderFeedMutation(\n  $uuid: String\n) {\n  toggle_visibility(uuid: $uuid) {\n    name\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'e0485d290c1d78df52272b0656244fc1';
+(node/*: any*/).hash = '9f033dc9cde9962c95984917ae17dc8d';
 module.exports = node;

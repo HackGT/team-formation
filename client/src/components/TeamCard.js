@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Card, Popup, Container, Label } from 'semantic-ui-react';
-import './css/TeamCard.css';
+import './css/UserCard.css';
 
 class TeamCard extends Component {
     render() {
@@ -40,4 +40,3 @@ class TeamCard extends Component {
 };
 
 export default TeamCard;
-

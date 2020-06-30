@@ -1,12 +1,16 @@
 .Feed-container {
 	padding-top: 2%;
-	width: 60%;
 	margin: 0 auto;
+	width: 90%;
+	display:flex;
+	flex-direction:row;
 }
 
 .Cards-container {
-	padding-top: 2%;
+	/* padding-top: 2%; */
 	margin: 0 auto;
+	padding-left: 3%;
+	justify-content: left;
 }
 .center-group {
 	margin: 0 auto;
@@ -31,5 +35,18 @@
 }
 
 .menu {
-	text-align: center;
+	text-align: left;
+}
+
+.user-input {
+	margin: 2%;
+	flex-direction: column;
+}
+#dropdown-menu {
+	margin: 2%;
+	flex-direction: column;
+}
+
+.Side-menu {
+	text-align: left;
 }

@@ -1,0 +1,26 @@
+.notification {
+    width: 90% !important;
+    margin: 5% !important;
+}
+
+.notification-buttonGroup {
+    position: absolute;
+    right: 5%;
+    top: 0%;
+    bottom: 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    position: relative !important;
+}
+
+.notification {
+	border-radius: 0% !important;
+	transition: auto;
+}
+.notification:hover {
+	transform: scale(1.00) !important;
+}

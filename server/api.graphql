@@ -6,13 +6,23 @@ schema {
 type Query {
     user(skill: String, name: String, email: String, grad_year: String, school: String, visible: Int): [User!]!
     user_profile(uuid: String): User!
+    get_teams(name: String, picture: String, team_id: String, interests: [String], description: String, public: Boolean): [Team!]!
 }
 
 type Mutation {
     toggle_visibility(uuid: String): User!
     update_user(uuid: String, name: String email: String, grad_year: String, school: String, contact: String, skills: [String], experience: String, contact_method: String): User!
+    add_user_to_team(user_id: String, team_id: String): Team
 }
 
+type Team {
+    name: String
+    picture: String
+    members: [User]
+    interests: [String]
+    description: String
+    public: Boolean
+}
 type User {
     id: ID
     uuid: String
@@ -26,4 +36,5 @@ type User {
     contact: String
     contact_method: String
     visible: Int
+    team: Team
 }
