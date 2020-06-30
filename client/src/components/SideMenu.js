@@ -55,7 +55,7 @@ class SideMenu extends Component {
 				<h3 className="h3">Years</h3>
 				<Dropdown item text='Select Years' search selection options={yearOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
 				<h3 className="h3">Schools</h3>
-				<Dropdown item text='Select Schools' search selection options={schoolOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
+				<Dropdown item text='Select Schools' search selection options={schoolOptions} fullTextSearch="true" scrolling closeOnChange='false' upward='false'/>
 			</div>
 		);
 	};
