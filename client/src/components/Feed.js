@@ -24,9 +24,9 @@ class Feed extends Component {
 			<Grid>
 				<Grid.Column textAlign="center">
 					<Button.Group>
-						<Button id="user" onClick={() => this.setState({displayTeams: false, individuals: true, teams: false})} basic={!this.state.individuals} color='purple'>Individuals</Button>
+						<Button id="user" onClick={() => this.setState({displayTeams: false, individuals: true, teams: false})} basic={!this.state.individuals} color='blue'>Individuals</Button>
 						<Button.Or />
-						<Button id="team" onClick={() => this.setState({displayTeams: true, individuals: false, teams: true})} basic={!this.state.teams} color='purple'>Team</Button>
+						<Button id="team" onClick={() => this.setState({displayTeams: true, individuals: false, teams: true})} basic={!this.state.teams} color='blue'>Team</Button>
 					</Button.Group>
 				</Grid.Column>
 			</Grid>

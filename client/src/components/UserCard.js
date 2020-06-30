@@ -8,28 +8,28 @@ class UserCard extends Component {
 		let cur_contact = this.props.contact;
 		if (this.props.contact === null) {
 			contact = <Popup
-			trigger={<Button basic color='purple' content='Reach Out' />}
+			trigger={<Button basic color='blue' content='Reach Out' />}
 			content="no contact available"
 			on='click'
 			hideOnScroll
 			/>
 		} else if ((this.props.contact).includes("@")) {
 			contact = <Popup
-			trigger={<Button basic color='purple' content='Reach Out' />}
+			trigger={<Button basic color='blue' content='Reach Out' />}
 			content=<a href={`mailto:${this.props.contact}`} target="_blank">{this.props.contact} </a>
 			on='click'
 			hideOnScroll
 			/>
 		} else if ((this.props.contact).includes(".")) {
 			contact = <Popup
-			trigger={<Button basic color='purple' content='Reach Out' />}
+			trigger={<Button basic color='blue' content='Reach Out' />}
 			content=<a href={this.props.contact} target="_blank">{this.props.contact}</a>
 			on='click'
 			hideOnScroll
 			/>
 		} else {
 			contact = <Popup
-			trigger={<Button basic color='purple' content='Reach Out' />}
+			trigger={<Button basic color='blue' content='Reach Out' />}
 			content={this.props.contact}
 			on='click'
 			hideOnScroll
@@ -45,7 +45,7 @@ class UserCard extends Component {
 		var viewskill;
         return (
 
-					<Card className="card1">
+					<Card className="card1" color='blue'>
 						<Card.Content className="content">
 							<Card.Header>{this.props.name}</Card.Header>
 							<Card.Meta>{this.props.school}</Card.Meta>
