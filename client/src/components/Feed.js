@@ -18,14 +18,15 @@ class Feed extends Component {
 		individuals: true,
 		teams: false
 	}
-	
+
     render() {
 		var cards = this.state.teams ? <FeedTeamCards skill={this.state.skills} user_id={this.props.user_id} /> : <FeedCards skill={this.state.skills} user_id={this.props.user_id} />
 		return (
 			<div>
-				<div className="member-cards">
-						<Members skill={this.state.searchTerm} user_id={this.props.user_id} />
-				</div>
+				{// <div className="member-cards">
+				// 		<Members skill={this.state.searchTerm} user_id={this.props.user_id} />
+				// </div>
+				}
 				<div className="switch-feed">
 					<Button.Group>
 						<Button onClick={this.feedTypeListener} basic={!this.state.individuals} color='blue'>Individuals</Button>
@@ -35,13 +36,13 @@ class Feed extends Component {
 				</div>
 				<div className="Feed-container">
 					<div className="menu">
-						<SideMenu className="Side-menu" 
+						<SideMenu className="Side-menu"
 							allFilterClickListener={this.allFilterClickListener}
 							onSearchClick={this.onSearchClick}
 						/>
 					</div>
 					<div>
-						{this.state.skills.length || this.state.years.length || this.state.schools.length ? 
+						{this.state.skills.length || this.state.years.length || this.state.schools.length ?
 							<div className="user-input">
 								<div className="filters-applied">
 									<text>Filters Applied</text>
@@ -52,7 +53,7 @@ class Feed extends Component {
 									schools={this.state.schools}
 									allFilterClickListener={this.allFilterClickListener}
 								/>
-							</div> 
+							</div>
 						: null}
 						<div className="feed-cards">
 							{cards}
@@ -91,7 +92,7 @@ class Feed extends Component {
         this.setState({searchTerm:search_string});
 
 	};
-	
+
 	feedTypeListener = (e, data) => {
 		if (data.children === "Individuals") {
 			this.setState({

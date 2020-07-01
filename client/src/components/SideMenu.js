@@ -38,13 +38,13 @@ class SideMenu extends Component {
 				{key:name, text:name, value:name, onClick: (e,{value}) => this.props.allFilterClickListener(value, "schools")}
 			);
 		}
-		  
+
 		return (
 			<div className="SideMenu-container">
 				<Input
 					icon={{ name: 'search', circular: true, link: true }}
 					placeholder='Search by anything'
-					onChange={this.onSearchChange} 
+					onChange={this.onSearchChange}
 					onKeyPress={this.handleKeyPress}
 					size='small'
 					focus

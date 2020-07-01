@@ -37,6 +37,14 @@ export interface IUser extends RootDocument {
     team?: ITeam;
 }
 
+export interface INotification extends RootDocument {
+    message: string;
+    notificationType: string;
+    sender: IUser | ITeam;
+    receiver: IUser | ITeam;
+    accepted: boolean;
+}
+
 export interface ITeam {
     uuid: string;
     creator: string;
@@ -50,7 +58,29 @@ export interface ITeam {
 
 export type IUserMongoose = IUser & mongoose.Document;
 export type ITeamMongoose = ITeam & mongoose.Document;
-
+export const Notification = mongoose.model<INotification>("Notification", new mongoose.Schema({
+    message: String,
+    senderType: {
+        type: String,
+        required: true,
+        enum: ['Team', 'User']
+    },
+    receiverType: {
+        type: String,
+        required: true,
+        enum: ['Team', 'User']
+    },
+    sender: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        refPath: 'senderType'
+    },
+    receiver: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        refPath: 'receiverType'
+    }
+}))
 export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
     name: {
         required: true,
