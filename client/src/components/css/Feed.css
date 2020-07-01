@@ -64,6 +64,31 @@
 	padding-bottom: 1%;
 }
 
+/* .filter-tags {
+	margin-bottom: 1%;
+} */
+
+/* * {
+	margin: 1%;
+} */
+
 .ui.buttons .button {
 	width: 110px;
+}
+
+.team-info {
+	padding: 3%;
+}
+
+.team-info-container {
+	padding-top: 2%;
+	margin: 0 auto;
+	width: 90%;
+	display:flex;
+	flex-direction:row;
+}
+
+.team-card-container {
+	flex: 1;
+    padding-right: 2%;
 }

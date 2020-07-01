@@ -41,21 +41,13 @@ class SideMenu extends Component {
 		  
 		return (
 			<div className="SideMenu-container">
-				<Input
-					icon={{ name: 'search', circular: true, link: true }}
-					placeholder='Search by anything'
-					onChange={this.onSearchChange} 
-					onKeyPress={this.handleKeyPress}
-					size='small'
-					focus
-				/>
-				{/* <Input placeholder="Search by skills" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} icon='search' size='huge'/> */}
-				<h3 className="h3">Skills</h3>
+				<Input placeholder="Search by skills" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} icon={{ name: 'search', circular: true}} size='small'/>
+				<h3 className="h3">SKILLS</h3>
 				<Dropdown id="dropdown" item text='Select Skills' search selection options={skillOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
-				<h3 className="h3">Years</h3>
+				<h3 className="h3">YEARS</h3>
 				<Dropdown item text='Select Years' search selection options={yearOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
-				<h3 className="h3">Schools</h3>
-				<Dropdown item text='Select Schools' search selection options={schoolOptions} fullTextSearch="true" scrolling closeOnChange='false' upward='false'/>
+				<h3 className="h3">SCHOOLS</h3>
+				<Dropdown item text='Select Schools' search selection options={schoolOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
 			</div>
 		);
 	};

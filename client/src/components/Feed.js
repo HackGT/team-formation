@@ -44,12 +44,14 @@ class Feed extends Component {
 								<div className="filters-applied">
 									<text>Filters Applied</text>
 								</div>
-								<InputTagCollection
-									skills={this.state.skills}
-									years={this.state.years}
-									schools={this.state.schools}
-									allFilterClickListener={this.allFilterClickListener}
-								/>
+								<div className='filter-tags'>
+									<InputTagCollection
+										skills={this.state.skills}
+										years={this.state.years}
+										schools={this.state.schools}
+										allFilterClickListener={this.allFilterClickListener}
+									/>
+								</div>
 							</div> 
 						: null}
 						<div className="feed-cards">
@@ -57,10 +59,8 @@ class Feed extends Component {
 						</div>
 					</div>
 				</div>
-				<div className='team-info'>
+				<div className="team-info-container">
 					<TeamInformation TeamInformation editable={true}/>
-				</div>
-				<div className='team-info'>
 					<TeamInformation editable={false} teamBio="This is our team bio!" projectIdea="This is our project idea!"/>
 				</div>
 			</div>
