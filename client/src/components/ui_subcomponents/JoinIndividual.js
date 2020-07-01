@@ -29,12 +29,12 @@ class JoinIndividual extends Component {
                 <div class="modal4-column">
                   <div class="modal4-column1">
                     <UserCard
-                      name={this.props.user2CardName}
-                      school={this.props.user2School}
-                      grad_year={this.props.user2GradYear}
-                      experience={this.props.user2CardInfo}
-                      skills={this.props.user2Skills}
-                      contact={this.props.user2Contact}
+                        name={this.props.name}
+                        school={this.props.school}
+                        grad_year={this.props.grad_year}
+                        experience={this.props.experience}
+                        skills={this.props.skills}
+                        contact={this.props.contact}
                     />
                   </div>
                 </div>

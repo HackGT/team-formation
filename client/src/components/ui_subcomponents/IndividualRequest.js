@@ -9,7 +9,6 @@ class IndividualRequest extends Component {
       <Modal
         style={{
           padding: 10,
-          backgroundColor: "#c4c4c4",
         }}
         closeIcon
         open={this.props.showModal}
@@ -18,39 +17,36 @@ class IndividualRequest extends Component {
         }}
       >
         <Modal.Content
-          style={{
-            backgroundColor: "#c4c4c4",
-          }}
         >
           <Modal.Description>
             <div class="background">
               <p class="header">
-                {this.props.user1CardName} wants to team up with you!
+                {this.props.name} wants to team up with you!
               </p>
               <div class="row">
                 <div class="modal3Column">
                   <div class="modal3Column1">
                     <UserCard
-                      name={this.props.user1CardName}
-                      school={this.props.user1School}
-                      grad_year={this.props.user1GradYear}
-                      experience={this.props.user1CardInfo}
-                      skills={this.props.user1Skills}
-                      contact={this.props.user1Contact}
+                      name={this.props.name}
+                      school={this.props.school}
+                      grad_year={this.props.grad_year}
+                      experience={this.props.experience}
+                      skills={this.props.skills}
+                      contact={this.props.contact}
                     />
                   </div>
                 </div>
                 <div class="modal3Column2">
                   <div class="modal3Column3">
-                    <p>{this.props.user1FirstName}'s Request Message:</p>
+                    <p>{this.props.name}'s Request Message:</p>
                     <p class="user1RequestMessage">
-                      {this.props.user1RequestMessage}
+                      {this.props.userRequestMessage}
                     </p>
                     <p class="user1FirstName">
-                      {this.props.user1FirstName}'s Project Idea:
+                      {this.props.name}'s Project Idea:
                     </p>
                     <p class="user1ProjectIdea">
-                      {this.props.user1ProjectIdea}
+                      {this.props.userProjectIdea}
                     </p>
                   </div>
                 </div>
