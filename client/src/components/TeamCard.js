@@ -38,8 +38,7 @@ class TeamCard extends Component {
 		);
 	};
 	onJoinTeamClick = () => {
-		console.log("testing");
-		this.props.onTeamPageClick();
+		this.props.onTeamPageClick("some team_id");
 	}
 };
 
