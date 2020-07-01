@@ -92,3 +92,11 @@
 	flex: 1;
     padding-right: 2%;
 }
+
+.ui.centered.cards {
+    justify-content: left;
+}
+
+.ui.card > .content, .ui.cards > .card > .content {
+	padding-bottom: 0%;
+}
