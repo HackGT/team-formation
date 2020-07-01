@@ -20,7 +20,7 @@ class Feed extends Component {
 	}
 
     render() {
-		var cards = this.state.teams ? <FeedTeamCards skill={this.state.skills} user_id={this.props.user_id} /> : <FeedCards skill={this.state.skills} user_id={this.props.user_id} />
+		var cards = this.state.teams ? <FeedTeamCards onTeamPageClick={this.props.onTeamPageClick} skill={this.state.skills} user_id={this.props.user_id} /> : <FeedCards skill={this.state.skills} user_id={this.props.user_id} />
 		return (
 			<div>
 				{// <div className="member-cards">
