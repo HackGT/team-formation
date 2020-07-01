@@ -66,7 +66,6 @@ class UserCard extends Component {
 							<Card.Meta>{this.props.school}</Card.Meta>
 							<Card.Meta>Graduation Year: {this.props.grad_year}</Card.Meta>
 							<div className="ui divider"></div>
-
 							<Card.Description className="card-description">
 							{viewskill}
 							</Card.Description>
