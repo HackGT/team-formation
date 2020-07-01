@@ -4,6 +4,7 @@ import EditProfile from './EditProfile';
 import Feed from './Feed';
 import HeaderLogin from './ui_subcomponents/HeaderLogin';
 import HeaderFeed from './ui_subcomponents/HeaderFeed';
+import TeamPage from './TeamPage';
 import HeaderEditProfile from './ui_subcomponents/HeaderEditProfile';
 import './css/Content.css';
 
@@ -31,9 +32,12 @@ class Content extends Component {
 				onNextClick={this.onDoneEditClick}
 				user_id={this.state.user_id}
                 />;
-        } else if (this.state.cur_state === 'feed') {
-            cur_header = <HeaderFeed onEditClick={this.onEditClick} user_id={this.state.user_id} visible={this.state.visible} onNextClick={this.onNextClick} />;
-            cur_display = <Feed user_id={this.state.user_id}/>;
+		} else if (this.state.cur_state === 'feed') {
+				cur_header = <HeaderFeed onEditClick={this.onEditClick} user_id={this.state.user_id} visible={this.state.visible} onNextClick={this.onNextClick} />;
+				cur_display = <Feed user_id={this.state.user_id} onTeamPageClick={this.onTeamPageClick} />;
+		} else if (this.state.cur_state == 'team-page') {
+				cur_header = <HeaderFeed onEditClick={this.onEditClick} user_id={this.state.user_id} visible={this.state.visible} onNextClick={this.onNextClick} />;
+				cur_display = <TeamPage />;
 		}
 		return (
 			<div className="Content-container">
@@ -48,6 +52,12 @@ class Content extends Component {
 			cur_state: 'setup-profile'
         });
 	};
+
+	onTeamPageClick = () => {
+		this.setState({
+			cur_state: 'team-page'
+		});
+	}
 
 	onNextClick = (next_action, id, visible) => {
 		this.setState({

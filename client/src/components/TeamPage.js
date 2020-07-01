@@ -10,3 +10,5 @@ class TeamPage extends Component {
   }
 
 }
+
+export default TeamPage;

@@ -31,12 +31,16 @@ class TeamCard extends Component {
 						</Card.Content>
 						<Card.Content extra>
 							<div className='contact-button'>
-								<p>{contact}</p>
+								<Button basic onClick={this.onJoinTeamClick} color='blue' content='Join Team!' />
 							</div>
 						</Card.Content>
 					</Card>
 		);
 	};
+	onJoinTeamClick = () => {
+		console.log("testing");
+		this.props.onTeamPageClick();
+	}
 };
 
 export default TeamCard;
