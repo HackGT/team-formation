@@ -45,7 +45,7 @@ export interface INotification extends RootDocument {
     accepted: boolean;
 }
 
-export interface ITeam {
+export interface ITeam extends RootDocument{
     uuid: string;
     creator: string;
     name: string;
@@ -58,7 +58,8 @@ export interface ITeam {
 
 export type IUserMongoose = IUser & mongoose.Document;
 export type ITeamMongoose = ITeam & mongoose.Document;
-export const Notification = mongoose.model<INotification>("Notification", new mongoose.Schema({
+export type INotificationMongoose = INotification & mongoose.Document;
+export const Notification = mongoose.model<INotificationMongoose>("Notification", new mongoose.Schema({
     message: String,
     senderType: {
         type: String,
