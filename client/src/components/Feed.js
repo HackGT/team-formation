@@ -41,7 +41,6 @@ class Feed extends Component {
 							onSearchClick={this.onSearchClick}
 						/>
 					</div>
-					<div>
 						{this.state.skills.length || this.state.years.length || this.state.schools.length ?
 							<div className="user-input">
 								<div className="filters-applied">
@@ -55,17 +54,15 @@ class Feed extends Component {
 								/>
 							</div>
 						: null}
-						<div className="feed-cards">
-							{cards}
-						</div>
-					</div>
+						{cards}
 				</div>
-				<div className='team-info'>
-					<TeamInformation TeamInformation editable={true}/>
-				</div>
-				<div className='team-info'>
-					<TeamInformation editable={false} teamBio="This is our team bio!" projectIdea="This is our project idea!"/>
-				</div>
+				{// <div className='team-info'>
+				// 	<TeamInformation TeamInformation editable={true}/>
+				// </div>
+				// <div className='team-info'>
+				// 	<TeamInformation editable={false} teamBio="This is our team bio!" projectIdea="This is our project idea!"/>
+				// </div>
+			}
 			</div>
         );
 	};
