@@ -8,8 +8,8 @@ import './css/Feed.css';
 import environment from './Environment';
 
 const getUsersQuery = graphql`
-    query FeedCardsQuery($skill: String) {
-        user(skill:$skill) {
+    query FeedCardsQuery($skill: String, $grad_year: String) {
+        user(skill:$skill, grad_year:$grad_year) {
             name
             school
             grad_year
@@ -25,6 +25,7 @@ const getUsersQuery = graphql`
 class FeedCards extends Component {
     render() {
         let skill = this.props.skill.join(',');
+        let grad_year = this.props.skill.join(',');
         return (
             <div className='Cards-container'>
                 <QueryRenderer
@@ -32,6 +33,7 @@ class FeedCards extends Component {
                     query={getUsersQuery}
                     variables={{
                         skill: skill,
+                        grad_year: grad_year
                     }}
                     render={({error,props}) => {
                         if (error) {

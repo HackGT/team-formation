@@ -15,6 +15,23 @@
 .center-group {
 	margin: 0 auto;
 }
+
+.ui.buttons .button:first-child {
+	border: solid;
+    border-width: thin;
+	border-color: #f2da80;
+}
+
+.ui.buttons .button {
+    border: solid;
+    border-width: thin;
+	border-color: #f2da80;
+}
+
+.ui.button.feed-toggle {
+	background-color: #f2da80;
+}
+
 .button {
 	text-align: center;
 	padding-left: 20%;

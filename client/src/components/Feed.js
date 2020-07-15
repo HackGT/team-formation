@@ -20,7 +20,7 @@ class Feed extends Component {
 	}
 
     render() {
-		var cards = this.state.teams ? <FeedTeamCards onTeamPageClick={this.props.onTeamPageClick} skill={this.state.skills} user_id={this.props.user_id} /> : <FeedCards skill={this.state.skills} user_id={this.props.user_id} />
+		var cards = this.state.teams ? <FeedTeamCards onTeamPageClick={this.props.onTeamPageClick} skill={this.state.skills} user_id={this.props.user_id} /> : <FeedCards skill={this.state.skills} grad_year={this.state.years} user_id={this.props.user_id} />
 		return (
 			<div>
 				{// <div className="member-cards">
@@ -29,9 +29,9 @@ class Feed extends Component {
 				}
 				<div className="switch-feed">
 					<Button.Group>
-						<Button onClick={this.feedTypeListener} basic={!this.state.individuals} color='blue'>Individuals</Button>
+						<Button className='feed-toggle' onClick={this.feedTypeListener} basic={!this.state.individuals}>Individuals</Button>
 						<Button.Or />
-						<Button onClick={this.feedTypeListener} basic={!this.state.teams} color='blue'>Teams</Button>
+						<Button className='feed-toggle' onClick={this.feedTypeListener} basic={!this.state.teams}>Teams</Button>
 					</Button.Group>
 				</div>
 				<div className="Feed-container">
@@ -61,10 +61,6 @@ class Feed extends Component {
 							{cards}
 						</div>
 					</div>
-				</div>
-				<div className="team-info-container">
-					<TeamInformation TeamInformation editable={true}/>
-					<TeamInformation editable={false} teamBio="This is our team bio!" projectIdea="This is our project idea!"/>
 				</div>
 			</div>
         );

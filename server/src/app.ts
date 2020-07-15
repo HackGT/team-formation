@@ -76,16 +76,26 @@ let getTeams = async function(args) {
 }
 let getUser = async function (args) {
     let users;
-    if(args.skill == "" || args.skill == null) {
+    if((args.skill == "" || args.skill == null) && (args.grad_year == "" || args.grad_year == null)) {
         users = await User.find({});
     } else {
-        const skills = args.skill.match(/\w+/g) ;
-        let search = [] as {}[];
+        const skills = args.skill.match(/\w+/g);
+        const grad_years = args.grad_year.match(/\w+/g);
+        let skillSearch = [] as {}[];
+        let yearSearch = [] as {}[];
         for (let i = 0; i < skills.length; i++) {
-            search.push({ skills: { "$elemMatch": { "$regex": '.*' + skills[i] + '.*', "$options": 'i' } } })
+            skillSearch.push({ skills: { "$elemMatch": { "$regex": '.*' + skills[i] + '.*', "$options": 'i' } } })
         }
+        for (let i = 0; i < grad_years.length; i++) {
+            yearSearch.push({ grad_years: { "$elemMatch": { "$regex": '.*' + grad_years[i] + '.*', "$options": 'i' } } })
+        }
+        console.log('blah');
+        console.log(JSON.stringify(yearSearch));
         users = await User.find({
-            $and: search
+            $and: [ 
+                skillSearch, 
+                {$or: yearSearch}
+            ]
         });
     }
 

@@ -1,7 +1,7 @@
 .h3 {
     text-align: center;
     font-size: 0.9em;
-    color: rgb(71, 71, 71);
+    color: #f2da80;
     font-weight: 900;
     padding-top: 15%;
     padding-bottom: 2%;
@@ -11,4 +11,13 @@
 .ui.small.input {
     font-size: 1em;
     width: 98%;
+}
+
+.ui.search.dropdown > input.search { 
+	left: 0px;
+	background: #f3f0fa;
+}
+
+input {
+	background-color: #f3f0fa;
 }

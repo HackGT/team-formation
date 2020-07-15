@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 20fa88a46d529ffa3914e4ed3397831b
+ * @relayHash 0479c65cc4e5fa295ea332a04f6a8b11
  */
 
 /* eslint-disable */
@@ -9,11 +9,10 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type FeedCardsQueryVariables = {|
-  skill?: ?string,
-  grad_year?: ?string,
+export type MembersQueryVariables = {|
+  skill?: ?string
 |};
-export type FeedCardsQueryResponse = {|
+export type MembersQueryResponse = {|
   +user: $ReadOnlyArray<{|
     +name: ?string,
     +school: ?string,
@@ -25,19 +24,18 @@ export type FeedCardsQueryResponse = {|
     +uuid: ?string,
   |}>
 |};
-export type FeedCardsQuery = {|
-  variables: FeedCardsQueryVariables,
-  response: FeedCardsQueryResponse,
+export type MembersQuery = {|
+  variables: MembersQueryVariables,
+  response: MembersQueryResponse,
 |};
 */
 
 
 /*
-query FeedCardsQuery(
+query MembersQuery(
   $skill: String
-  $grad_year: String
 ) {
-  user(skill: $skill, grad_year: $grad_year) {
+  user(skill: $skill) {
     name
     school
     grad_year
@@ -58,21 +56,9 @@ var v0 = [
     "name": "skill",
     "type": "String",
     "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
-    "name": "grad_year",
-    "type": "String",
-    "defaultValue": null
   }
 ],
 v1 = [
-  {
-    "kind": "Variable",
-    "name": "grad_year",
-    "variableName": "grad_year",
-    "type": "String"
-  },
   {
     "kind": "Variable",
     "name": "skill",
@@ -140,7 +126,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "FeedCardsQuery",
+    "name": "MembersQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -168,7 +154,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "FeedCardsQuery",
+    "name": "MembersQuery",
     "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
@@ -201,13 +187,13 @@ return {
   },
   "params": {
     "operationKind": "query",
-    "name": "FeedCardsQuery",
+    "name": "MembersQuery",
     "id": null,
-    "text": "query FeedCardsQuery(\n  $skill: String\n  $grad_year: String\n) {\n  user(skill: $skill, grad_year: $grad_year) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
+    "text": "query MembersQuery(\n  $skill: String\n) {\n  user(skill: $skill) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'a6808c9a808165e633cdb7de9f37b866';
+(node/*: any*/).hash = 'c0aebea934b48ee830170ee2c9e28410';
 module.exports = node;
