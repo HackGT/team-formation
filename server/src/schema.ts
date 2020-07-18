@@ -19,6 +19,13 @@ export function createNew<T extends RootDocument>(model: mongoose.Model<T & mong
     return new model(doc);
 }
 
+export enum NotificationType {
+    USER_JOIN_TEAM,
+    TEAM_REQUEST_USER,
+    USER_JOIN_USER,
+    USER_REQUEST_USER
+}
+
 export interface IUser extends RootDocument {
     uuid: string;
     email: string;
@@ -39,10 +46,13 @@ export interface IUser extends RootDocument {
 
 export interface INotification extends RootDocument {
     message: string;
+    bio: string;
+    idea: string;
     notificationType: string;
     sender: IUser | ITeam;
     receiver: IUser | ITeam;
-    accepted: boolean;
+    resolved: boolean;
+
 }
 
 export interface ITeam extends RootDocument{
@@ -59,8 +69,11 @@ export interface ITeam extends RootDocument{
 export type IUserMongoose = IUser & mongoose.Document;
 export type ITeamMongoose = ITeam & mongoose.Document;
 export type INotificationMongoose = INotification & mongoose.Document;
+
 export const Notification = mongoose.model<INotificationMongoose>("Notification", new mongoose.Schema({
     message: String,
+    bio: String,
+    idea: String,
     senderType: {
         type: String,
         required: true,
@@ -80,8 +93,10 @@ export const Notification = mongoose.model<INotificationMongoose>("Notification"
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         refPath: 'receiverType'
-    }
-}))
+    },
+    resolved: Boolean
+}));
+
 export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
     name: {
         required: true,
@@ -99,6 +114,12 @@ export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
     },
     interests: [String],
     description: String,
+    notifications: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Notification"
+        }]
+    },
     public: Boolean
     },
     {
@@ -139,6 +160,12 @@ export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
         contact: String,
         contact_method: String,
         visible: Number,
+        notifications: {
+            type: [{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Notification"
+            }]
+        },
         team: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Team"
