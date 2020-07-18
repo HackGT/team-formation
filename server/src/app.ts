@@ -10,7 +10,7 @@ import cors from "cors"
 import dotenv from "dotenv"
 import { buildSchema } from "graphql"
 import { GroundTruthStrategy } from "./routes/strategies"
-import { IUser, User, Team} from "./schema";
+import { IUser, User, Notification, Team} from "./schema";
 import { userRoutes } from "./routes/user";
 
 dotenv.config();
@@ -72,7 +72,7 @@ passport.deserializeUser<IUser, string>((id, done) => {
 let getTeams = async function(args) {
 	return await Team.find({
 		"public": true
-	})
+	}).populate('members')
 }
 let getUser = async function (args) {
     let users;
@@ -97,16 +97,19 @@ let getUser = async function (args) {
     return users;
 }
 
-let updateUser = async function(args) {
-    return User.findOneAndUpdate({'uuid':args.uuid}, { "$set": args }, { new: true });
+let updateUser = async function(args, req) {
+	console.log(req.user)
+    return User.findByIdAndUpdate(req.user._id, { "$set": args }, { new: true });
 }
 
-let getUserProfile = async function (args) {
-    return await User.findOne({uuid: args.uuid}).populate('team');
+let getUserProfile = async function (args, req) {
+    return await User.findById(req.user._id).populate('team');
 }
 
-let addUserToTeam = async function(args) {
-
+let addUserToTeam = async function(args, req) {
+	if(!req.user) {
+		throw new Error('User is not logged in')
+	}
 	User.findByIdAndUpdate(args.user_id, {
 		"$set": {
 			"team": args.team_id
@@ -114,11 +117,168 @@ let addUserToTeam = async function(args) {
 	})
 	return await Team.findByIdAndUpdate(args.team_id, {
 		"$push": {
-			"members": args.user_id
+			"members": req.user._id
 		}
 	})
 }
 
+let joinUsersInTeam = async function(args, req) {
+	if(!req.user) {
+		throw new Error('User not logged in')
+	}
+	let user1 = await User.findById(req.user._id)
+	let user2 = await User.findById(args.user2)
+	console.log(user1 + " " + user2)
+	if(user1 && user2)  {
+		if(user1.team) {
+			throw new Error("User1 already on a team!");
+		}
+		if(user2.team) {
+			throw new Error("User2 already on team");
+		}
+		var team = new Team({
+			name: "Team " + user1._id + '' + user2._id,
+			members: [user1, user2],
+			public: true
+		})
+		return await team.save(function (err, team) {
+		    if (err) {
+				console.log(err)
+			}
+			if(!user1) {
+				throw new Error("User1 not defined")
+			}
+			if(!user2) {
+				throw new Error("User2 not defined")
+			}
+			user1.team = team
+			user2.team = team
+			user1.save(function (err) {
+				console.log(err)
+				throw new Error(err)
+			})
+			user2.save(function (err) {
+				console.log(err)
+				throw new Error(err)
+			})
+	  	});
+	} else {
+		throw new Error('User not defined')
+	}
+}
+
+let makeUserRequest = async function(args, req) {
+	if(!req.user) {
+		throw new Error('User not loggeed in')
+	}
+	let notification
+	let receiver_id = args.user_id
+	let receiver = await User.findById(receiver_id)
+	if(!receiver) {
+		throw new Error("Receiver user not found")
+	}
+	if(receiver.team) {
+		throw new Error("Requested user already on team")
+	}
+	if(!req.user.team) {
+		notification = await new Notification({
+			bio: args.bio,
+			idea: args.idea,
+			senderType: 'User',
+			receiverType: 'User',
+			sender: req.user._id,
+			receiver: receiver_id,
+			resolved: false
+		});
+
+	} else {
+		let team = await Team.findById(req.user.team)
+		if(!team) {
+			throw new Error("Team not found")
+		}
+		notification = await new Notification({
+			bio: args.bio,
+			idea: args.idea,
+			senderType: 'Team',
+			receiverType: 'User',
+			sender: team._id,
+			receiver: receiver_id,
+			resolved: false
+		});
+	}
+
+
+	return await notification.save((err, notif) => {
+		if(err) {
+			throw new Error("Error creating notification: " + notif)
+		}
+		User.findByIdAndUpdate(receiver_id, {
+			"$push": {
+				"notifications": notif
+			}
+		})
+	})
+}
+
+let makeTeamRequest = async function(args, req) {
+	if(!req.user) {
+		throw new Error('User not logged in')
+	}
+	let user = await User.findById(req.user._id)
+	let team_id = args.team_id
+	if(!user) {
+		throw new Error("User not found!")
+	}
+	if(user.team) {
+		throw new Error("You are already on a team!")
+	}
+	let notification = await new Notification({
+		bio: args.bio,
+		idea: args.idea,
+		senderType: 'User',
+		receiverType: 'Team',
+		sender: user,
+		receiver: team_id,
+		resolved: false
+	})
+
+	return await notification.save((err, notif) => {
+		if(err) {
+			throw new Error("Error creating notification: " + notif)
+		}
+		Team.findByIdAndUpdate(team_id, {
+			"$push": {
+				"notifications": notif
+			}
+		})
+	});
+}
+
+let getUserNotifications = async function(args, req) {
+	if(!req.user) {
+		throw new Error('User not logged in')
+	}
+	return await Notification.find({
+		receiverType: 'User',
+		receiver: req.user._id,
+		resolved: false
+	})
+}
+
+let getTeamNotifications = async function(args, req) {
+	if(!req.user) {
+		throw new Error('User not logged in')
+	}
+	if(!req.user.team) {
+		throw new Error('User not on a team')
+	}
+	return await Notification.find({
+		receiverType: 'Team',
+		receiver: req.user.team,
+		resolved: false
+	})
+
+}
 
 // let createTeam = async function(args) {
 //
@@ -136,7 +296,12 @@ const root = {
     user_profile: getUserProfile,
     toggle_visibility: toggleVisibility,
 	add_user_to_team: addUserToTeam,
-	get_teams: getTeams
+	get_teams: getTeams,
+	join_users_in_team: joinUsersInTeam,
+	make_team_request: makeTeamRequest,
+	notifications: getUserNotifications,
+	make_user_request: makeUserRequest,
+	team_notifications: getTeamNotifications
 };
 
 apiRouter.use("/user", userRoutes);
