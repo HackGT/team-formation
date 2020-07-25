@@ -1,14 +1,33 @@
+@font-face {
+  font-family: Chango-Regular;
+  src: url("./fonts/chango/Chango-Regular.ttf");
+}
+
+@font-face {
+  font-family: Lekton-Regular;
+  src: url("./fonts/lekton/Lekton-Regular.ttf");
+}
+
+@font-face {
+  font-family: Lekton-Bold;
+  src: url("./fonts/lekton/Lekton-Bold.ttf");
+}
+
 textarea::placeholder {
-  color: #000;
+  color: #867a96;
 }
 
 .background {
   /* background-color: #c4c4c4; */
 }
 
-.header {
+.modalHeader {
   text-align: center;
+  color: #f1d180;
+  font-family: Chango-Regular;
   font-size: 40px;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: #7a6e4e;
 }
 
 .modal1Margins {
@@ -86,6 +105,7 @@ textarea::placeholder {
 .modal3Column2 {
   display: flex;
   flex-direction: column;
+  text-align: center;
   flex: 1;
 }
 
@@ -139,25 +159,54 @@ textarea::placeholder {
 
 .modal4-column1 {
   margin: 25px;
+  margin-top: 0px;
 }
 
 .modal4-column2 {
-  margin: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+  display: inline-block;
 }
 
 #introduceYourself {
-  /* background-color: #c4c4c4; */
-  border-radius: 7px;
-  border: 1px solid #000;
+  border: 2px solid #867a96;
   padding-left: 15px;
   padding-top: 15px;
+  background: #f3eefa;
+  color: #867a96;
+  width: 100%;
+  resize: none;
+  font-family: Lekton-Bold;
+  font-size: 17px;
 }
 
 #describeProject {
-  margin-top: 50px;
-  /* background-color: #c4c4c4; */
-  border-radius: 7px;
-  border: 1px solid #000;
+  border: 2px solid #867a96;
   padding-left: 15px;
   padding-top: 15px;
+  background: #f3eefa;
+  color: #867a96;
+  width: 100%;
+  resize: none;
+  font-family: Lekton-Bold;
+  font-size: 17px;
+}
+
+.rectangle {
+  background: #c3bbcd;
+  border: 2px solid #867a96;
+  box-sizing: border-box;
+  width: 100%;
+  height: 25px;
+  border-bottom: none;
+}
+
+.rectangle2 {
+  background: #c3bbcd;
+  border: 2px solid #867a96;
+  box-sizing: border-box;
+  width: 100%;
+  height: 25px;
+  border-bottom: none;
+  margin-top: 10px;
 }
