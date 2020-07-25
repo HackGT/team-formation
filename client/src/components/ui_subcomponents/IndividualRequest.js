@@ -9,6 +9,7 @@ class IndividualRequest extends Component {
       <Modal
         style={{
           padding: 10,
+          backgroundColor: "#8fb6b3",
         }}
         closeIcon
         open={this.props.showModal}
@@ -17,11 +18,14 @@ class IndividualRequest extends Component {
         }}
       >
         <Modal.Content
+          style={{
+            backgroundColor: "#8fb6b3",
+          }}
         >
           <Modal.Description>
             <div class="background">
-              <p class="header">
-                {this.props.name} wants to team up with you!
+              <p class="modalHeader">
+                {this.props.name} Wants to Team Up With You!
               </p>
               <div class="row">
                 <div class="modal3Column">
@@ -38,26 +42,27 @@ class IndividualRequest extends Component {
                 </div>
                 <div class="modal3Column2">
                   <div class="modal3Column3">
-                    <p>{this.props.name}'s Request Message:</p>
+                    <p class="user1RequestMessageName">
+                      {this.props.name}'s Request Message:
+                    </p>
                     <p class="user1RequestMessage">
                       {this.props.userRequestMessage}
                     </p>
                     <p class="user1FirstName">
                       {this.props.name}'s Project Idea:
                     </p>
-                    <p class="user1ProjectIdea">
-                      {this.props.userProjectIdea}
-                    </p>
+                    <p class="user1ProjectIdea">{this.props.userProjectIdea}</p>
                   </div>
                 </div>
               </div>
               <div class="flex-container-modal3">
                 <div class="modal3Button">
                   <Button
-                    basic="basic"
-                    color="black"
                     style={{
-                      borderRadius: 20,
+                      border: "2px solid #F1D180",
+                      color: "#F1D180",
+                      background: "#8FB6B3",
+                      fontFamily: "Lekton-Bold",
                     }}
                     onClick={() => {
                       this.props.closeModal();
@@ -68,10 +73,11 @@ class IndividualRequest extends Component {
                 </div>
                 <div class="modal3Button">
                   <Button
-                    basic="basic"
-                    color="black"
                     style={{
-                      borderRadius: 20,
+                      border: "2px solid #F1D180",
+                      color: "#F1D180",
+                      background: "#8FB6B3",
+                      fontFamily: "Lekton-Bold",
                     }}
                     onClick={() => {
                       this.props.closeModal();

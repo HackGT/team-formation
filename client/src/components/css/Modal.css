@@ -111,7 +111,9 @@ textarea::placeholder {
 }
 
 .modal3Column1 {
-  margin: 25px;
+  margin-right: 25px;
+  margin-left: 25px;
+  margin-bottom: 25px;
 }
 
 .modal3Column2 {
@@ -122,7 +124,9 @@ textarea::placeholder {
 }
 
 .modal3Column3 {
-  margin: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 25px;
 }
 
 .cardName {
@@ -140,19 +144,28 @@ textarea::placeholder {
 }
 
 .user1RequestMessage {
-  border: 1px solid #000;
-  border-radius: 7px;
+  border: 2px solid #867a96;
   padding: 20px;
+  color: #867a96;
+  background: #f3eefa;
+  font-family: Lekton-Bold;
+  font-size: 17px;
 }
 
 .user1FirstName {
   margin-top: 30px;
+  color: #867a96;
+  font-family: Lekton-Bold;
+  font-size: 17px;
 }
 
 .user1ProjectIdea {
-  border: 1px solid #000;
-  border-radius: 7px;
+  border: 2px solid #867a96;
   padding: 20px;
+  color: #867a96;
+  background: #f3eefa;
+  font-family: Lekton-Bold;
+  font-size: 17px;
 }
 
 .flex-container-modal3 {
@@ -221,4 +234,10 @@ textarea::placeholder {
   height: 25px;
   border-bottom: none;
   margin-top: 10px;
+}
+
+.user1RequestMessageName {
+  color: #867a96;
+  font-family: Lekton-Bold;
+  font-size: 17px;
 }

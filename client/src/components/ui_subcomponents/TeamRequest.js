@@ -6,10 +6,6 @@ class TeamRequest extends Component {
   render() {
     return (
       <Modal
-        // style={{
-        //   backgroundColor: "#8fb6b3",
-        //   padding: 10,
-        // }}
         closeIcon
         open={this.props.showModal}
         onClose={() => {
@@ -24,7 +20,7 @@ class TeamRequest extends Component {
           <Modal.Description>
             <div class="background">
               <p class="modalHeader">
-                {this.props.teamName} wants you to join their team!
+                {this.props.teamName} Wants You to Join Their Team!
               </p>
               <div class="modal1Margins">
                 <p class="requestMessage">
