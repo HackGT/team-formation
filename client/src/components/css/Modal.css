@@ -18,7 +18,7 @@ textarea::placeholder {
 }
 
 .background {
-  /* background-color: #c4c4c4; */
+  background-color: #8fb6b3;
 }
 
 .modalHeader {
@@ -37,22 +37,34 @@ textarea::placeholder {
 
 .requestMessage {
   margin-top: 60px;
+  color: #867a96;
+  font-family: Lekton-Bold;
+  font-size: 17px;
 }
 
 .requestMessageBody {
-  border: 1px solid #000;
-  border-radius: 7px;
+  border: 2px solid #867a96;
   padding: 20px;
+  color: #867a96;
+  background: #f3eefa;
+  font-family: Lekton-Bold;
+  font-size: 17px;
 }
 
 .projectIdea {
   margin-top: 30px;
+  color: #867a96;
+  font-family: Lekton-Bold;
+  font-size: 17px;
 }
 
 .projectIdeaBody {
-  border: 1px solid #000;
-  border-radius: 7px;
+  border: 2px solid #867a96;
   padding: 20px;
+  color: #867a96;
+  background: #f3eefa;
+  font-family: Lekton-Bold;
+  font-size: 17px;
 }
 
 .flex-container1 {
