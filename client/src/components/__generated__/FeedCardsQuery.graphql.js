@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 20fa88a46d529ffa3914e4ed3397831b
+ * @relayHash bc2f9016243d1d68fd17405a2785384f
  */
 
 /* eslint-disable */
@@ -12,6 +12,8 @@ import type { ConcreteRequest } from 'relay-runtime';
 export type FeedCardsQueryVariables = {|
   skill?: ?string,
   grad_year?: ?string,
+  school?: ?string,
+  search?: ?string,
 |};
 export type FeedCardsQueryResponse = {|
   +user: $ReadOnlyArray<{|
@@ -36,8 +38,10 @@ export type FeedCardsQuery = {|
 query FeedCardsQuery(
   $skill: String
   $grad_year: String
+  $school: String
+  $search: String
 ) {
-  user(skill: $skill, grad_year: $grad_year) {
+  user(skill: $skill, grad_year: $grad_year, school: $school, search: $search) {
     name
     school
     grad_year
@@ -64,6 +68,18 @@ var v0 = [
     "name": "grad_year",
     "type": "String",
     "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "school",
+    "type": "String",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "search",
+    "type": "String",
+    "defaultValue": null
   }
 ],
 v1 = [
@@ -71,6 +87,18 @@ v1 = [
     "kind": "Variable",
     "name": "grad_year",
     "variableName": "grad_year",
+    "type": "String"
+  },
+  {
+    "kind": "Variable",
+    "name": "school",
+    "variableName": "school",
+    "type": "String"
+  },
+  {
+    "kind": "Variable",
+    "name": "search",
+    "variableName": "search",
     "type": "String"
   },
   {
@@ -203,11 +231,11 @@ return {
     "operationKind": "query",
     "name": "FeedCardsQuery",
     "id": null,
-    "text": "query FeedCardsQuery(\n  $skill: String\n  $grad_year: String\n) {\n  user(skill: $skill, grad_year: $grad_year) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
+    "text": "query FeedCardsQuery(\n  $skill: String\n  $grad_year: String\n  $school: String\n  $search: String\n) {\n  user(skill: $skill, grad_year: $grad_year, school: $school, search: $search) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'a6808c9a808165e633cdb7de9f37b866';
+(node/*: any*/).hash = '27ba7f7c3c6877816888b78515825db5';
 module.exports = node;

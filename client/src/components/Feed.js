@@ -20,7 +20,7 @@ class Feed extends Component {
 	}
 
     render() {
-		var cards = this.state.teams ? <FeedTeamCards onTeamPageClick={this.props.onTeamPageClick} skill={this.state.skills} user_id={this.props.user_id} /> : <FeedCards skill={this.state.skills} grad_year={this.state.years} user_id={this.props.user_id} />
+		var cards = this.state.teams ? <FeedTeamCards onTeamPageClick={this.props.onTeamPageClick} skill={this.state.skills} user_id={this.props.user_id} /> : <FeedCards search={this.state.searchTerm} skill={this.state.skills} grad_year={this.state.years} school={this.state.schools} user_id={this.props.user_id} />
 		return (
 			<div>
 				{// <div className="member-cards">
@@ -86,7 +86,6 @@ class Feed extends Component {
 
     onSearchClick = (search_string) => {
         this.setState({searchTerm:search_string});
-
 	};
 
 	feedTypeListener = (e, data) => {

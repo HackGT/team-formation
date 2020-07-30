@@ -1,23 +1,83 @@
 .h3 {
     text-align: center;
-    font-size: 0.9em;
+    font-family: monospace;
+    font-size: 1.1em;
     color: #f2da80;
     font-weight: 900;
     padding-top: 15%;
     padding-bottom: 2%;
+    padding-right: 10%;
     margin: 0;
+}
+
+input {
+    font-size: 94%;
+}
+
+.ui.input {
+    width: 90%;
+}
+
+.ui.icon.input>input {
+    font-family: monospace;
+}
+
+.ui.icon.input>i.icon {
+    color: #423469;
+}
+
+.ui.search.dropdown {
+    border: 1px solid #423469 !important;
+}
+
+.ui.dropdown .menu {
+    background: #f3f0fa;
+}
+
+.ui.dropdown>.dropdown.icon:before {
+    color: #423469;
+}
+
+.ui.search.dropdown>.text {
+    font-family: monospace;
+    color: #423469;
+}
+
+.ui.input.focus>input, .ui.input>input:focus {
+    background: #f3f0fa;
+}
+
+.ui.selection.dropdown {
+    background: #f3f0fa;
+    border-radius: .5rem;
+}
+
+.ui.selection.active.dropdown:hover .menu {
+    border-color: #423469;
+}
+
+.ui.selection.active.dropdown .menu {
+    border-color: #423469;
 }
 
 .ui.small.input {
     font-size: 1em;
-    width: 98%;
 }
 
-.ui.search.dropdown > input.search { 
+.ui.search.dropdown>input.search { 
 	left: 0px;
 	background: #f3f0fa;
 }
 
-input {
-	background-color: #f3f0fa;
+.ui.input>input {
+    background: #f3f0fa;
+    border: 1px solid #423469 !important;
+    border-radius: .5rem;
+    max-width: 102%;
+    height: 38px;
+}
+
+.ui.selection.active.dropdown:hover .menu {
+    border-color: #423469;
+    background: #f3f0fa;
 }
