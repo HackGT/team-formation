@@ -50,6 +50,8 @@ export interface INotification extends RootDocument {
     idea: string;
     notificationType: string;
     sender: IUser | ITeam;
+    senderType: string;
+    receiverType: string;
     receiver: IUser | ITeam;
     resolved: boolean;
 

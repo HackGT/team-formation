@@ -10,8 +10,11 @@ enum NotificationType {
     USER_REQUEST_USER
 }
 
+union Source = User | Team
+
 type Query {
     user(skill: String, name: String, email: String, grad_year: String, school: String, visible: Int): [User!]!
+    query_user(user_id: String): User!
     user_profile(uuid: String): User!
     get_teams(name: String, picture: String, team_id: String, interests: [String], description: String, public: Boolean): [Team!]!
     notifications(receiver_type: NotificationType, receiver_id: String): [Notification!]!
@@ -37,6 +40,7 @@ type Team {
     notifications: [Notification!]!
     public: Boolean
 }
+
 type User {
     id: ID
     uuid: String
@@ -58,7 +62,8 @@ type Notification {
     message: String
     bio: String
     idea: String
-    sender: ID
+    sender: Source
+    senderType: String
     receiver: ID
     resolved: Boolean
 }

@@ -5,10 +5,11 @@ import compression from "compression";
 import morgan from "morgan";
 import passport from "passport";
 import session from "express-session"
-import express_graphql from "express-graphql"
+// import express_graphql from "express-graphql"
 import cors from "cors"
 import dotenv from "dotenv"
-import { buildSchema } from "graphql"
+const { ApolloServer, gql } = require('apollo-server-express');
+// import { buildSchema } from "graphql"
 import { GroundTruthStrategy } from "./routes/strategies"
 import { IUser, User, Notification, Team} from "./schema";
 import { userRoutes } from "./routes/user";
@@ -16,7 +17,7 @@ import { userRoutes } from "./routes/user";
 dotenv.config();
 
 const PORT = 3000;
-const typeDefs = fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8");
+const typeDefs = gql`${fs.readFileSync(path.resolve(__dirname, "../api.graphql"), "utf8")}`;
 const VERSION_NUMBER = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json"), "utf8")).version;
 //const VERSION_HASH = require("git-rev-sync").short();
 
@@ -69,12 +70,26 @@ passport.deserializeUser<IUser, string>((id, done) => {
         done(err, user!);
     });
 });
-let getTeams = async function(args) {
+let getTeams = async function(parent, args, context, info) {
 	return await Team.find({
 		"public": true
 	}).populate('members')
 }
-let getUser = async function (args) {
+let queryUser = async function(parent, args, context, info) {
+	if(!context._id) {
+		throw new Error("User is not logged in")
+	}
+	let user = await User.findById(args.user_id)
+	console.log(user)
+	if(!user) {
+		throw new Error("User not found")
+	}
+	return user
+}
+let getUser = async function (parent, args, context, info, req) {
+	console.log("asdf")
+	console.log(context)
+	console.log("asdf")
     let users;
     if(args.skill == "" || args.skill == null) {
         users = await User.find({});
@@ -97,17 +112,17 @@ let getUser = async function (args) {
     return users;
 }
 
-let updateUser = async function(args, req) {
-	console.log(req.user)
-    return User.findByIdAndUpdate(req.user._id, { "$set": args }, { new: true });
+let updateUser = async function(parent, args, context, info, req) {
+	console.log(context._id)
+    return User.findByIdAndUpdate(context._id, { "$set": args }, { new: true });
 }
 
-let getUserProfile = async function (args, req) {
-    return await User.findById(req.user._id).populate('team');
+let getUserProfile = async function (parent, args, context, info, req) {
+    return await User.findById(context._id).populate('team');
 }
 
-let addUserToTeam = async function(args, req) {
-	if(!req.user) {
+let addUserToTeam = async function(parent, args, context, info, req) {
+	if(!context._id) {
 		throw new Error('User is not logged in')
 	}
 	User.findByIdAndUpdate(args.user_id, {
@@ -117,16 +132,16 @@ let addUserToTeam = async function(args, req) {
 	})
 	return await Team.findByIdAndUpdate(args.team_id, {
 		"$push": {
-			"members": req.user._id
+			"members": context._id
 		}
 	})
 }
 
-let joinUsersInTeam = async function(args, req) {
-	if(!req.user) {
+let joinUsersInTeam = async function(parent, args, context, info, req) {
+	if(!context._id) {
 		throw new Error('User not logged in')
 	}
-	let user1 = await User.findById(req.user._id)
+	let user1 = await User.findById(context._id)
 	let user2 = await User.findById(args.user2)
 	console.log(user1 + " " + user2)
 	if(user1 && user2)  {
@@ -167,8 +182,8 @@ let joinUsersInTeam = async function(args, req) {
 	}
 }
 
-let makeUserRequest = async function(args, req) {
-	if(!req.user) {
+let makeUserRequest = async function(parent, args, context, info, req) {
+	if(!context._id) {
 		throw new Error('User not loggeed in')
 	}
 	let notification
@@ -180,19 +195,19 @@ let makeUserRequest = async function(args, req) {
 	if(receiver.team) {
 		throw new Error("Requested user already on team")
 	}
-	if(!req.user.team) {
+	if(!context.team) {
 		notification = await new Notification({
 			bio: args.bio,
 			idea: args.idea,
 			senderType: 'User',
 			receiverType: 'User',
-			sender: req.user._id,
+			sender: context._id,
 			receiver: receiver_id,
 			resolved: false
 		});
 
 	} else {
-		let team = await Team.findById(req.user.team)
+		let team = await Team.findById(context.team)
 		if(!team) {
 			throw new Error("Team not found")
 		}
@@ -201,7 +216,7 @@ let makeUserRequest = async function(args, req) {
 			idea: args.idea,
 			senderType: 'Team',
 			receiverType: 'User',
-			sender: team._id,
+			sender: team,
 			receiver: receiver_id,
 			resolved: false
 		});
@@ -220,11 +235,11 @@ let makeUserRequest = async function(args, req) {
 	})
 }
 
-let makeTeamRequest = async function(args, req) {
-	if(!req.user) {
+let makeTeamRequest = async function(parent, args, context, info, req) {
+	if(!context._id) {
 		throw new Error('User not logged in')
 	}
-	let user = await User.findById(req.user._id)
+	let user = await User.findById(context._id)
 	let team_id = args.team_id
 	if(!user) {
 		throw new Error("User not found!")
@@ -254,27 +269,27 @@ let makeTeamRequest = async function(args, req) {
 	});
 }
 
-let getUserNotifications = async function(args, req) {
-	if(!req.user) {
+let getUserNotifications = async function(parent, args, context, info, req) {
+	if(!context._id) {
 		throw new Error('User not logged in')
 	}
 	return await Notification.find({
 		receiverType: 'User',
-		receiver: req.user._id,
+		receiver: context._id,
 		resolved: false
-	})
+	}).populate('sender')
 }
 
-let getTeamNotifications = async function(args, req) {
-	if(!req.user) {
+let getTeamNotifications = async function(parent, args, context, info, req) {
+	if(!context._id) {
 		throw new Error('User not logged in')
 	}
-	if(!req.user.team) {
+	if(!context.team) {
 		throw new Error('User not on a team')
 	}
 	return await Notification.find({
 		receiverType: 'Team',
-		receiver: req.user.team,
+		receiver: context.team,
 		resolved: false
 	})
 
@@ -284,35 +299,64 @@ let getTeamNotifications = async function(args, req) {
 //
 // }
 
-let toggleVisibility = async function (args) {
+let toggleVisibility = async function (parent, args, context, info, req) {
     return User.findOneAndUpdate({'uuid':args.uuid}, {"$bit": {visible: {xor: 1}}}, {new:true})
 }
 
 let apiRouter = express.Router();
 
-const root = {
-    user: getUser,
-    update_user: updateUser,
-    user_profile: getUserProfile,
-    toggle_visibility: toggleVisibility,
-	add_user_to_team: addUserToTeam,
-	get_teams: getTeams,
-	join_users_in_team: joinUsersInTeam,
-	make_team_request: makeTeamRequest,
-	notifications: getUserNotifications,
-	make_user_request: makeUserRequest,
-	team_notifications: getTeamNotifications
+const resolvers = {
+	Source: {
+		__resolveType(obj, context, info){
+			console.log("OBJ")
+			console.log(obj)
+			console.log(context)
+			console.log(info)
+			if(context.team) {
+				console.log("team chosen")
+				return 'Team'
+			}
+			if(context._id){
+				return 'User'
+			}
+			return null;
+		}
+	},
+	Query: {
+		user: getUser,
+	    user_profile: getUserProfile,
+		get_teams: getTeams,
+		notifications: getUserNotifications,
+		team_notifications: getTeamNotifications,
+		query_user: queryUser
+	},
+	Mutation: {
+		toggle_visibility: toggleVisibility,
+		update_user: updateUser,
+		add_user_to_team: addUserToTeam,
+		join_users_in_team: joinUsersInTeam,
+		make_team_request: makeTeamRequest,
+		make_user_request: makeUserRequest
+	}
 };
 
 apiRouter.use("/user", userRoutes);
 
 app.use("/api", apiRouter);
 
-app.use('/graphql', express_graphql({
-    schema: buildSchema(typeDefs),
-    rootValue: root,
-    graphiql: true
-}));
+const server = new ApolloServer({ typeDefs, resolvers, context: ({req}) => {
+	return req.user
+},playground: {
+  settings: {
+    'editor.theme': 'dark',
+	'request.credentials': 'include'
+  },
+} });
+server.applyMiddleware({ app });
+// app.use('/graphql', bodyParser.json(), graphqlExpress({ schema } as GraphQLServerOptions));
+//
+// app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+
 
 app.use(express.static(path.join(__dirname, "../../client/build")));
 app.get("*", (request, response) => {

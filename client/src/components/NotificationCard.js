@@ -29,7 +29,7 @@ class NotificationCard extends Component {
                             console.log('hello')
                             console.log(event)
                             console.log(data)
-                            this.props.type == 'individual' ?
+                            this.props.type == 'User' ?
                             this.setState({showIndividualModal: true}) : this.setState({showTeamModal: true})
                         }}>
     					<Card.Content className="content">
@@ -44,13 +44,14 @@ class NotificationCard extends Component {
     					</Card.Content>
     				</Card>
                     {
-                        this.props.type == 'individual' ?
+                        this.props.type == 'User' ?
                             <IndividualRequest
                                 requestMessage={this.props.request}
                                 userProjectIdea={this.props.idea}
                                 {...this.props.meta}
                                 showModal={this.state.showIndividualModal}
                                 closeModal={this.closeIndividualModal}
+                                sender={this.props.sender}
                             />:
                             <TeamRequest
                                 teamRequestMessage={this.props.request}
@@ -58,6 +59,7 @@ class NotificationCard extends Component {
                                 {...this.props.meta}
                                 showModal={this.state.showTeamModal}
                                 closeModal={this.closeTeamModal}
+                                sender={this.props.sender}
                             />
                     }
                 </div>

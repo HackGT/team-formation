@@ -4,6 +4,7 @@ import "../css/Modal.css";
 
 class TeamRequest extends Component {
   render() {
+    const sender = this.props.sender
     return (
       <Modal
         style={{
@@ -19,16 +20,16 @@ class TeamRequest extends Component {
           <Modal.Description>
             <div class="background">
               <p class="header">
-                {this.props.teamName} wants you to join their team!
+                {sender.name} wants you to join their team!
               </p>
               <div class="modal1Margins">
                 <p class="requestMessage">
-                  {this.props.teamName}'s request message:
+                  {sender.name}'s request message:
                 </p>
                 <p class="requestMessageBody">
                   {this.props.teamRequestMessage}
                 </p>
-                <p class="projectIdea">{this.props.teamName}'s project idea:</p>
+                <p class="projectIdea">{sender.name}'s project idea:</p>
                 <p class="projectIdeaBody">{this.props.teamProjectIdea}</p>
 
                 <div class="flex-container1">
@@ -45,7 +46,7 @@ class TeamRequest extends Component {
                         this.props.closeModal();
                       }}
                     >
-                      View more about {this.props.teamName}
+                      View more about {sender.name}
                     </Button>
                   </div>
                 </div>
