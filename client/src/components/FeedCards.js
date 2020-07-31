@@ -18,6 +18,7 @@ const getUsersQuery = graphql`
             experience
             visible
             uuid
+            id
         }
     }
 `;
@@ -38,9 +39,10 @@ class FeedCards extends Component {
                            return <div>{error.message}</div>;
                         } else if (props) {
                             let cards = props.user.map(user => {
+                                console.log("Stuff: " + user.id);
                                 return <UserCard name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function (el) {
                                     return Boolean(el);
-                                })} experience={user.experience} />
+                                })} experience={user.experience} id={user.id} />
                             })
                             return (<Card.Group centered itemsPerRow={4} className='center-group'>{cards}</Card.Group>);
                         }
