@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import './css/login-css/main.css';
 import './css/login-css/util.css';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams,
+    Redirect
+} from "react-router-dom";
 
 class Login extends Component {
     constructor(props) {
@@ -13,12 +21,20 @@ class Login extends Component {
 
         this.onFetchLogin().then(() => {
             var login_json = this.state.data;
+            console.log(login_json)
             if (login_json.uuid) {
+                console.log("here1")
                 if (!login_json.school) {
-                    this.props.onNextClick('setup-profile', login_json.uuid, login_json.visible);
+                    console.log("here3")
+                    this.props.onNextClick(login_json.uuid, login_json.visible);
+                    return <Redirect to="/edit-profile" />
                 } else {
-                    this.props.onNextClick('feed', login_json.uuid, login_json.visible);
+                    console.log("here4")
+                    // this.props.onNextClick(login_json.uuid, login_json.visible);
+                    return <Redirect to="/feed/" />
                 }
+            } else {
+                console.log("here")
             }
 		});
     };
@@ -63,6 +79,7 @@ class Login extends Component {
     };
 
     onFetchLogin = () => {
+        console.log("here2")
         return fetch('/api/user/check', {
             method: "GET",
             credentials: "include"

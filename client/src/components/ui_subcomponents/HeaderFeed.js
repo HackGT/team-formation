@@ -1,4 +1,11 @@
 import React, { Component } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 import TeamRequest from "./TeamRequest";
 import JoinTeam from "./JoinTeam";
 import "../css/Headers.css";
@@ -90,59 +97,61 @@ class Headers extends Component {
             return <div>{error.message}</div>;
           } else if (props) {
             return (
-              <div className="Header-container">
-                <div className="logout-button">
-                  <Menu borderless="borderless" size={"massive"}>
-                    <Menu.Item>
-                      <b>HackGT Team Formation</b>
-                    </Menu.Item>
-                    <Menu.Menu
-                      borderless="borderless"
-                      position="right"
-                      size={"massive"}
-                    >
-                      <Menu.Item name={props.user_profile.name} />
-                      <Menu.Item
-                        icon="sign out"
-                        link={true}
-                        href={"/api/user/logout"}
-                      />
-                      <Dropdown
-                        item="item"
-                        icon="bell"
-                        direction="left"
-                        closeOnChange={false}
+                <div className="Header-container">
+                  <div className="logout-button">
+                    <Menu borderless="borderless" size={"massive"}>
+                      <Menu.Item>
+                        <b>HackGT Team Formation</b>
+                      </Menu.Item>
+                      <Menu.Menu
+                        borderless="borderless"
+                        position="right"
+                        size={"massive"}
                       >
-                        <Dropdown.Menu className="notification-pane">
-                          <NotificationGroup
-                            user={this.props.user_id}
-                            onTeamPageClick={this.props.onTeamPageClick}
-                          />
-                        </Dropdown.Menu>
-                      </Dropdown>
-                      <Dropdown
-                        item="item"
-                        icon="user"
-                        direction="left"
-                        closeOnChange={false}
-                      >
-                        <Dropdown.Menu>
-                          <Dropdown.Item
-                            icon="edit"
-                            text="Edit Profile"
-                            onClick={this.props.onEditClick}
-                          />
-                          <Dropdown.Item
-                            icon="globe"
-                            text={toggle_text}
-                            onClick={this.onToggleClick}
-                          />
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </Menu.Menu>
-                  </Menu>
+                        <Menu.Item name={props.user_profile.name} />
+                        <Menu.Item
+                          icon="sign out"
+                          link={true}
+                          href={"/api/user/logout"}
+                        />
+                        <Dropdown
+                          item="item"
+                          icon="bell"
+                          direction="left"
+                          closeOnChange={false}
+                        >
+                          <Dropdown.Menu className="notification-pane">
+                            <NotificationGroup
+                              user={this.props.user_id}
+                              onTeamPageClick={this.props.onTeamPageClick}
+                            />
+                          </Dropdown.Menu>
+                        </Dropdown>
+                        <Dropdown
+                          item="item"
+                          icon="user"
+                          direction="left"
+                          closeOnChange={false}
+                        >
+                          <Dropdown.Menu>
+                            <Link to="/edit-profile">
+                              <Dropdown.Item
+                                icon="edit"
+                                text="Edit Profile"
+                                onClick={this.props.onEditClick}
+                              />
+                            </Link>
+                            <Dropdown.Item
+                              icon="globe"
+                              text={toggle_text}
+                              onClick={this.onToggleClick}
+                            />
+                          </Dropdown.Menu>
+                        </Dropdown>
+                      </Menu.Menu>
+                    </Menu>
+                  </div>
                 </div>
-              </div>
             );
           }
         }}

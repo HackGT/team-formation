@@ -1,4 +1,11 @@
 import React, { Component } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 import Login from "./Login";
 import EditProfile from "./EditProfile";
 import Feed from "./Feed";
@@ -19,69 +26,55 @@ class Content extends Component {
   }
 
   render() {
-    let cur_display;
-    let cur_header;
-    if (this.state.cur_state === "login") {
-      cur_header = <HeaderLogin />;
-      cur_display = (
-        <Login
-          onNextClick={this.onNextClick}
-          onFeedChange={this.onProfileChange}
-        />
-      );
-    } else if (this.state.cur_state === "setup-profile") {
-      cur_header = (
-        <HeaderFeed
-          onEditClick={this.onEditClick}
-          user_id={this.state.user_id}
-          visible={this.state.visible}
-          onNextClick={this.onNextClick}
-          onTeamPageClick={this.onTeamPageClick}
-        />
-      );
-      cur_display = (
-        <EditProfile
-          onNextClick={this.onDoneEditClick}
-          user_id={this.state.user_id}
-        />
-      );
-    } else if (this.state.cur_state === "feed") {
-      cur_header = (
-        <HeaderFeed
-          onEditClick={this.onEditClick}
-          user_id={this.state.user_id}
-          visible={this.state.visible}
-          onNextClick={this.onNextClick}
-          onTeamPageClick={this.onTeamPageClick}
-        />
-      );
-      cur_display = (
-        <Feed
-          user_id={this.state.user_id}
-          onTeamPageClick={this.onTeamPageClick}
-        />
-      );
-    } else if (this.state.cur_state === "team-page") {
-      cur_header = (
-        <HeaderFeed
-          onEditClick={this.onEditClick}
-          user_id={this.state.user_id}
-          visible={this.state.visible}
-          onNextClick={this.onNextClick}
-          onTeamPageClick={this.onTeamPageClick}
-        />
-      );
-      cur_display = (
-        <TeamPage user_id={this.state.user_id} team_id={this.state.team_id} />
-      );
-    }
     return (
-      <div className="Content-container">
-        <div> {cur_header} </div>
-        <div>{cur_display}</div>
-      </div>
+			<Router>
+				<div className="Content-container">
+					<Login
+						onNextClick={this.onNextClick}
+						onFeedChange={this.onProfileChange}
+					/>
+					<Switch>
+						<Route path="/edit-profile">
+							<HeaderFeed
+								onEditClick={this.onEditClick}
+								user_id={this.state.user_id}
+								visible={this.state.visible}
+								onNextClick={this.onNextClick}
+								onTeamPageClick={this.onTeamPageClick}
+							/>
+							<EditProfile
+								onNextClick={this.onDoneEditClick}
+								user_id={this.state.user_id}
+							/>
+						</Route>
+						<Route path="/feed">
+							<HeaderFeed
+								onEditClick={this.onEditClick}
+								user_id={this.state.user_id}
+								visible={this.state.visible}
+								onNextClick={this.onNextClick}
+								onTeamPageClick={this.onTeamPageClick}
+							/>
+							<Feed
+								user_id={this.state.user_id}
+								onTeamPageClick={this.onTeamPageClick}
+							/>
+						</Route>
+						<Route path="/some-team-id">
+							<HeaderFeed
+								onEditClick={this.onEditClick}
+								user_id={this.state.user_id}
+								visible={this.state.visible}
+								onNextClick={this.onNextClick}
+								onTeamPageClick={this.onTeamPageClick}
+							/>
+							<TeamPage user_id={this.state.user_id} team_id={this.state.team_id} />
+						</Route>
+					</Switch>
+				</div>
+			</Router>
     );
-  }
+	}
 
   onEditClick = () => {
     this.setState({
@@ -96,9 +89,8 @@ class Content extends Component {
     });
   };
 
-  onNextClick = (next_action, id, visible) => {
+  onNextClick = (id, visible) => {
     this.setState({
-      cur_state: next_action,
       user_id: id,
       visible: visible,
     });
