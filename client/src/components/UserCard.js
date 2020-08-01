@@ -65,6 +65,7 @@ class UserCard extends Component {
 							<Card.Header>{this.props.name}</Card.Header>
 							<Card.Meta>{this.props.school}</Card.Meta>
 							<Card.Meta>Graduation Year: {this.props.grad_year}</Card.Meta>
+							{/* <Card.Meta>ID: {this.props.id}</Card.Meta> */}
 							<div className="ui divider"></div>
 							<Card.Description className="card-description">
 							{viewskill}
@@ -76,7 +77,7 @@ class UserCard extends Component {
                         <Card.Content extra>
                             <div className='contact-button'>
                                 {contact}
-                                <Button basic color='purple' content='Team Up' onClick={() => this.setState({showModal: true})} />
+                                <Button basic color='9448bc' content='Team Up' onClick={() => this.setState({showModal: true})} />
                                 <JoinIndividual {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
                             </div>
                         </Card.Content>
