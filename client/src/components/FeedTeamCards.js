@@ -17,6 +17,7 @@ const getTeamsQuery = graphql`
             members {
                 name
             }
+            id
         }
     }
 `;
@@ -47,9 +48,7 @@ class FeedTeamCards extends Component {
                         } else if (props) {
                             let cards = props.get_teams.map(user => {
                                 if(user.public == true) {
-                                    return <TeamCard name={user.name}
-                                        onTeamPageClick={this.props.onTeamPageClick}
-                                         interests={user.interests} description={user.description} />
+                                    return <TeamCard name={user.name} interests={user.interests} description={user.description} id={user.id} />
                                 }
                             })
                             return (<Card.Group centered itemsPerRow={4} className='center-group'>{cards}</Card.Group>);

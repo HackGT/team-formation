@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 819b27eeaec3e41751ed53bb34cfdaad
+ * @relayHash e73a0266dcc5c96326de9950110f546a
  */
 
 /* eslint-disable */
@@ -19,6 +19,7 @@ export type FeedTeamCardsQueryResponse = {|
     +members: ?$ReadOnlyArray<?{|
       +name: ?string
     |}>,
+    +id: ?string,
   |}>
 |};
 export type FeedTeamCardsQuery = {|
@@ -113,7 +114,8 @@ return {
             "selections": [
               (v0/*: any*/)
             ]
-          }
+          },
+          (v4/*: any*/)
         ]
       }
     ]
@@ -164,5 +166,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '6f691c329d1f12b122f8a4ed65385322';
+(node/*: any*/).hash = 'f2bcf3c0e5197f03babfb6e88ff5c266';
 module.exports = node;

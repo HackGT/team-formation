@@ -2,6 +2,21 @@ import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 import "../css/Modal.css";
 import UserCard from "../UserCard";
+import {commitMutation } from 'react-relay';
+import {graphql} from 'babel-plugin-relay/macro';
+import environment from '../Environment';
+
+const mutation = graphql`
+mutation JoinIndividualMutation($user_id: String, $bio: String, $idea: String) {
+  make_user_request(user_id: $user_id, bio: $bio, idea: $idea) {
+    id
+    message
+    bio
+    idea
+    resolved
+  }
+}
+`;
 
 class JoinIndividual extends Component {
   render() {
@@ -24,7 +39,7 @@ class JoinIndividual extends Component {
         >
           <Modal.Description>
             <div class="background">
-              <p class="header">Team Up with {this.props.user2Name}?</p>
+              <p class="header">Team Up with {this.props.name}?</p>
               <div class="row">
                 <div class="modal4-column">
                   <div class="modal4-column1">
@@ -45,6 +60,7 @@ class JoinIndividual extends Component {
                       rows="8"
                       cols="68"
                       placeholder="Introduce yourself..."
+                      onChange={this.onBioChange}
                     />
 
                     <textarea
@@ -52,8 +68,9 @@ class JoinIndividual extends Component {
                       rows="8"
                       cols="68"
                       placeholder="Describe your project idea..."
+                      onChange={this.onIdeaChange}
                     />
-                
+
                     <Button
                       basic="basic"
                       color="black"
@@ -63,6 +80,17 @@ class JoinIndividual extends Component {
                       }}
                       onClick={() => {
                         this.props.closeModal();
+                        commitMutation(
+                          environment,
+                          {
+                            mutation,
+                            variables: {
+                              user_id: this.props.id,
+                              bio: this.state.bio,
+                              idea: this.state.idea
+                            }
+                          }
+                        )
                       }}
                     >
                       Submit
@@ -75,6 +103,17 @@ class JoinIndividual extends Component {
         </Modal.Content>
       </Modal>
     );
+  }
+  onBioChange = (e) => {
+    this.setState({
+      bio: e.target.value
+    });
+  }
+
+  onIdeaChange = (e) => {
+    this.setState({
+      idea: e.target.value
+    });
   }
 }
 
