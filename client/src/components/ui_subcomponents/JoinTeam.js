@@ -1,6 +1,20 @@
 import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 import "../css/Modal.css";
+import TeamCard from "../TeamCard";
+import {commitMutation } from 'react-relay';
+import {graphql} from 'babel-plugin-relay/macro';
+import environment from '../Environment';
+
+const mutation = graphql`
+mutation JoinTeamMutation($team_id: String, $bio: String, $idea: String) {
+  make_team_request(team_id: $team_id, bio: $bio, idea: $idea) {
+    id
+    idea
+    bio
+  }
+}
+`;
 
 class JoinTeam extends Component {
   render() {
@@ -29,6 +43,7 @@ class JoinTeam extends Component {
                 rows="7"
                 cols="63"
                 placeholder="Write a message..."
+                onChange={this.onBioChange}
               />
               <div class="flex-container-modal3">
                 <div>
@@ -41,6 +56,16 @@ class JoinTeam extends Component {
                     }}
                     onClick={() => {
                       this.props.closeModal();
+                      commitMutation(
+                        environment,
+                        {
+                          mutation,
+                          variables: {
+                            team_id: this.props.id,
+                            bio: this.state.bio, 
+                          }
+                        }
+                      )
                     }}
                   >
                     Submit
@@ -52,6 +77,11 @@ class JoinTeam extends Component {
         </Modal.Content>
       </Modal>
     );
+  }
+  onBioChange = (e) => {
+    this.setState({
+      bio: e.target.value
+    });
   }
 }
 
