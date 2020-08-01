@@ -114,7 +114,10 @@ class Headers extends Component {
                         closeOnChange={false}
                       >
                         <Dropdown.Menu className="notification-pane">
-                          <NotificationGroup user={this.props.user_id}/>
+                          <NotificationGroup
+                            user={this.props.user_id}
+                            onTeamPageClick={this.props.onTeamPageClick}
+                          />
                         </Dropdown.Menu>
                       </Dropdown>
                       <Dropdown

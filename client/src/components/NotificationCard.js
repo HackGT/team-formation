@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import { Button, Card, Popup, Container, Label, Icon } from 'semantic-ui-react';
-import './css/NotificationCard.css';
-import IndividualRequest from './ui_subcomponents/IndividualRequest'
-import TeamRequest from './ui_subcomponents/TeamRequest'
+import React, { Component } from "react";
+import { Button, Card, Popup, Container, Label, Icon } from "semantic-ui-react";
+import "./css/NotificationCard.css";
+import IndividualRequest from "./ui_subcomponents/IndividualRequest";
+import TeamRequest from "./ui_subcomponents/TeamRequest";
 
 class NotificationCard extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        showTeamModal: false,
-        showIndividualModal: false,
-      };
-    }
-    closeIndividualModal = () => {
-      console.log("close individual")
-      this.setState({ showIndividualModal: false });
+  constructor(props) {
+    super(props);
+    this.state = {
+      showTeamModal: false,
+      showIndividualModal: false,
     };
+    }
     closeTeamModal = () => {
       console.log("close team")
       this.setState({ showTeamModal: false });
+    };
+    closeIndividualModal = () => {
+      console.log("close individual");
+      this.setState({ showIndividualModal: false });
     };
 
     render() {
@@ -63,9 +63,9 @@ class NotificationCard extends Component {
                             />
                     }
                 </div>
+            )
+  }
 
-		);
-	};
-};
+}
 
 export default NotificationCard;

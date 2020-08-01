@@ -60,7 +60,6 @@ class NotificationGroup extends Component {
                         )
                     }
                 }
-
                 }
                 />
 

@@ -53,7 +53,7 @@ class JoinIndividual extends Component {
                       cols="68"
                       placeholder="Describe your project idea..."
                     />
-
+                
                     <Button
                       basic="basic"
                       color="black"

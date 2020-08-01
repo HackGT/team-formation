@@ -23,7 +23,7 @@ const getTeamsQuery = graphql`
 
 class FeedTeamCards extends Component {
     render() {
-    //     var data = [{name: "Team 23", about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "}, {name: "Team 28", about: "Coding in React. Attended 12 different hackathons in the past 3 years."}, {name: "The Awesome Team", about: "Just started CS around 3 hours ago!"}, 
+    //     var data = [{name: "Team 23", about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "}, {name: "Team 28", about: "Coding in React. Attended 12 different hackathons in the past 3 years."}, {name: "The Awesome Team", about: "Just started CS around 3 hours ago!"},
     // {name: "The IE Majors", about: "Just hear to talk to some companies."}, {name: "Team 21", about: "Working on a project relating to augmented reality, and a system to identify dangerous situations."}]
     //     let cards = data.map(team => {
     //         return <TeamCard name={team.name} about={team.about}/>
@@ -47,7 +47,9 @@ class FeedTeamCards extends Component {
                         } else if (props) {
                             let cards = props.get_teams.map(user => {
                                 if(user.public == true) {
-                                    return <TeamCard name={user.name} interests={user.interests} description={user.description} />
+                                    return <TeamCard name={user.name}
+                                        onTeamPageClick={this.props.onTeamPageClick}
+                                         interests={user.interests} description={user.description} />
                                 }
                             })
                             return (<Card.Group centered itemsPerRow={4} className='center-group'>{cards}</Card.Group>);

@@ -42,9 +42,7 @@ class TeamRequest extends Component {
                         fontSize: 15,
                         padding: 12,
                       }}
-                      onClick={() => {
-                        this.props.closeModal();
-                      }}
+                      onClick={this.onViewTeamClick}
                     >
                       View more about {sender.name}
                     </Button>
@@ -87,6 +85,10 @@ class TeamRequest extends Component {
       </Modal>
     );
   }
+  onViewTeamClick = () => {
+    this.props.onTeamPageClick("some team_id");
+    this.props.closeModal();
+  };
 }
 
 export default TeamRequest;
