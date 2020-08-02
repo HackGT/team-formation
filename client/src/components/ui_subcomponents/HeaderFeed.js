@@ -11,6 +11,7 @@ import { QueryRenderer } from "react-relay";
 import NotificationGroup from "../NotificationGroup";
 import IndividualRequest from "./IndividualRequest";
 import JoinIndividual from "./JoinIndividual";
+import { Input } from "semantic-ui-react";
 
 const mutation = graphql`
   mutation HeaderFeedMutation($uuid: String) {
@@ -90,55 +91,62 @@ class Headers extends Component {
             return <div>{error.message}</div>;
           } else if (props) {
             return (
-              <div className="Header-container">
-                <div className="logout-button">
-                  <Menu borderless="borderless" size={"massive"}>
-                    <Menu.Item>
-                      <b>HackGT Team Formation</b>
-                    </Menu.Item>
-                    <Menu.Menu
-                      borderless="borderless"
-                      position="right"
-                      size={"massive"}
+              <div className="logout-button">
+                <Menu secondary borderless="borderless" size={"massive"}>
+                  <Menu.Menu position="right">
+                    <Menu.Item
+                      name={props.user_profile.name}
+                      style={{
+                        fontFamily: "Quicksand-Bold",
+                        fontSize: 20,
+                        color: "white",
+                      }}
+                    />
+                    <Menu.Item
+                      icon="sign out"
+                      style={{
+                        color: "white",
+                      }}
+                      link={true}
+                      href={"/api/user/logout"}
+                    />
+                    <Dropdown
+                      item="item"
+                      style={{
+                        color: "white",
+                      }}
+                      icon="bell"
+                      direction="left"
+                      closeOnChange={false}
                     >
-                      <Menu.Item name={props.user_profile.name} />
-                      <Menu.Item
-                        icon="sign out"
-                        link={true}
-                        href={"/api/user/logout"}
-                      />
-                      <Dropdown
-                        item="item"
-                        icon="bell"
-                        direction="left"
-                        closeOnChange={false}
-                      >
-                        <Dropdown.Menu className="notification-pane">
-                          <NotificationGroup user={this.props.user_id}/>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                      <Dropdown
-                        item="item"
-                        icon="user"
-                        direction="left"
-                        closeOnChange={false}
-                      >
-                        <Dropdown.Menu>
-                          <Dropdown.Item
-                            icon="edit"
-                            text="Edit Profile"
-                            onClick={this.props.onEditClick}
-                          />
-                          <Dropdown.Item
-                            icon="globe"
-                            text={toggle_text}
-                            onClick={this.onToggleClick}
-                          />
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </Menu.Menu>
-                  </Menu>
-                </div>
+                      <Dropdown.Menu className="notification-pane">
+                        <NotificationGroup user={this.props.user_id} />
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    <Dropdown
+                      item="item"
+                      icon="user"
+                      style={{
+                        color: "white",
+                      }}
+                      direction="left"
+                      closeOnChange={false}
+                    >
+                      <Dropdown.Menu>
+                        <Dropdown.Item
+                          icon="edit"
+                          text="Edit Profile"
+                          onClick={this.props.onEditClick}
+                        />
+                        <Dropdown.Item
+                          icon="globe"
+                          text={toggle_text}
+                          onClick={this.onToggleClick}
+                        />
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </Menu.Menu>
+                </Menu>
               </div>
             );
           }

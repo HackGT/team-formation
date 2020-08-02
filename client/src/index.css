@@ -6,10 +6,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fffcf6;
+  background: linear-gradient(180deg, #656cae 0%, rgba(255, 255, 255, 0) 100%),
+    #8bb2c2;
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
-body .ui.card, body .ui.cards>.card{
+body .ui.card,
+body .ui.cards > .card {
   /* box-shadow: 0 0 15px 0 #e4e4e4;
   border-radius: 7%;
   transition: transform .2s; */
@@ -18,7 +24,6 @@ body .ui.card, body .ui.cards>.card{
 body .ui.card:hover {
   /* transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
-
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
