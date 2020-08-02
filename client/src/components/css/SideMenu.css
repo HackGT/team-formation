@@ -20,6 +20,32 @@
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
 
-.moveimage {
-  transform: translate(-40px, 10px);
+.ui.input.focus > input {
+  border-color: transparent;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 12px;
+  width: 200px;
+  font-size: 15px;
+}
+
+.ui.icon.input > i.icon:after,
+.ui.icon.input > i.icon:before {
+  color: white;
+}
+
+.ui.input > input,
+.ui.input > input::selection {
+  color: white !important;
+  font-family: Quicksand-Bold;
+}
+
+.ui.input > input::placeholder {
+  color: white !important;
+  font-family: Quicksand-Bold;
+}
+
+.moveImage {
+  position: absolute;
+  margin-top: 3%;
+  right: 80%;
 }

@@ -4,6 +4,7 @@ import { Dropdown, Input } from "semantic-ui-react";
 import "./css/SideMenu.css";
 import skills from "../constants/skills";
 import schools from "../constants/schools";
+import SideMenuPicture from "./css/assets/SideMenuPicture.svg";
 
 class SideMenu extends Component {
   constructor() {
@@ -120,6 +121,7 @@ class SideMenu extends Component {
             borderRadius: 12,
           }}
         />
+        <img class="moveImage" src={SideMenuPicture} alt="React Logo" />
       </div>
     );
   }
