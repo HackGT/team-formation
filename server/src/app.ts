@@ -121,65 +121,138 @@ let getUserProfile = async function (parent, args, context, info, req) {
     return await User.findById(context._id).populate('team');
 }
 
-let addUserToTeam = async function(parent, args, context, info, req) {
-	if(!context._id) {
-		throw new Error('User is not logged in')
-	}
-	User.findByIdAndUpdate(args.user_id, {
-		"$set": {
-			"team": args.team_id
-		}
-	})
-	return await Team.findByIdAndUpdate(args.team_id, {
-		"$push": {
-			"members": context._id
-		}
-	})
-}
-
-let joinUsersInTeam = async function(parent, args, context, info, req) {
+let acceptTeamRequest = async function(parent, args, context, info, req) {
 	if(!context._id) {
 		throw new Error('User not logged in')
 	}
-	let user1 = await User.findById(context._id)
-	let user2 = await User.findById(args.user2)
-	console.log(user1 + " " + user2)
-	if(user1 && user2)  {
-		if(user1.team) {
-			throw new Error("User1 already on a team!");
-		}
-		if(user2.team) {
-			throw new Error("User2 already on team");
-		}
-		var team = new Team({
-			name: "Team " + user1._id + '' + user2._id,
-			members: [user1, user2],
-			public: true
-		})
-		return await team.save(function (err, team) {
-		    if (err) {
-				console.log(err)
-			}
-			if(!user1) {
-				throw new Error("User1 not defined")
-			}
-			if(!user2) {
-				throw new Error("User2 not defined")
-			}
-			user1.team = team
-			user2.team = team
-			user1.save(function (err) {
-				console.log(err)
-				throw new Error(err)
-			})
-			user2.save(function (err) {
-				console.log(err)
-				throw new Error(err)
-			})
-	  	});
-	} else {
-		throw new Error('User not defined')
+	let user = await User.findById(context._id).populate('team')
+	if(!user) {
+		throw new Error('User not found')
 	}
+	if(!user.team) {
+		throw new Error('User not on team')
+	}
+	if(user.team.members.length >= 4) {
+		throw new Error('Team is full')
+	}
+	let notification = await Notification.findById(args.notification_id).populate('sender')
+	if(!notification) {
+		throw new Error('Notification does not exist')
+	}
+	if(notification.senderType == 'Team') {
+		throw new Error('Cannot accept request from a team')
+	}
+	if(notification.senderType == 'User') {
+		if(user.team != notification.receiver) {
+			throw new Error('Team does not own notification')
+		}
+		let requestUser = await User.findById(notification.sender._id);
+		if(!requestUser) {
+			throw new Error('Notificaton sender not found')
+		}
+		if(requestUser.team) {
+			throw new Error('Sender already on team')
+		}
+
+		let updatedTeam = await Team.findByIdAndUpdate(user.team, {
+			'members': {
+				'$push': {
+					requestUser
+				}
+			}
+		})
+		await User.findByIdAndUpdate(notification.sender._id, {
+			'team': updatedTeam
+		})
+	}
+	throw new Error('Notification invalid')
+}
+let acceptUserRequest = async function(parent, args, context, info, req) {
+	if(!context._id) {
+		throw new Error('User not logged in')
+	}
+	let user = await User.findById(context._id)
+	if(!user) {
+		throw new Error('User not found')
+	}
+
+	let notification = await Notification.findById(args.notification_id).populate('sender')
+	if(!notification) {
+		throw new Error('Notification not found')
+	}
+	if(notification.receiver != user._id) {
+		throw new Error('Notification not valid')
+	}
+	await Notification.findByIdAndUpdate(args.notification._id, {
+		'resolved': true
+	})
+	if(notification.senderType == 'Team') {
+		if(user.team) {
+			throw new Error('User already on team')
+		}
+		if(!notification.sender) {
+			throw new Error('Team no longer exists')
+		}
+
+		if(notification.sender.members.length >= 4) {
+			throw new Error('Team is full')
+		}
+		let team = await Team.findByIdAndUpdate(notification.sender._id, {
+			'members': {
+				'$push': {
+					user
+				}
+			}
+		})
+		await User.findByIdAndUpdate(context._id, {
+			'team': notification.sender._id
+		})
+		return team
+
+	} else if(notification.senderType == 'User') {
+		let user1 = await User.findById(context._id)
+		let user2 = await User.findById(notification.sender)
+		console.log(user1 + " " + user2)
+		if(user1 && user2)  {
+			if(user1.team) {
+				throw new Error("User already on a team!");
+			}
+			if(user2.team) {
+				throw new Error("Requesting user already on team");
+			}
+			var team = new Team({
+				name: "Team " + user1._id + '' + user2._id,
+				members: [user1, user2],
+				public: true
+			})
+			return await team.save(function (err, team) {
+			    if (err) {
+					console.log(err)
+				}
+				if(!user1) {
+					throw new Error("User1 not defined")
+				}
+				if(!user2) {
+					throw new Error("User2 not defined")
+				}
+				user1.team = team
+				user2.team = team
+				user1.save(function (err) {
+					console.log(err)
+					throw new Error(err)
+				})
+				user2.save(function (err) {
+					console.log(err)
+					throw new Error(err)
+				})
+		  	});
+		} else {
+			throw new Error('User not defined')
+		}
+
+	}
+	throw new Error('Notification invalid')
+
 }
 
 let makeUserRequest = async function(parent, args, context, info, req) {
@@ -333,8 +406,8 @@ const resolvers = {
 	Mutation: {
 		toggle_visibility: toggleVisibility,
 		update_user: updateUser,
-		add_user_to_team: addUserToTeam,
-		join_users_in_team: joinUsersInTeam,
+		accept_user_request: acceptUserRequest,
+		accept_team_request: acceptTeamRequest,
 		make_team_request: makeTeamRequest,
 		make_user_request: makeUserRequest
 	}

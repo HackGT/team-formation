@@ -36,7 +36,6 @@ class FeedTeamCards extends Component {
 
     //     );
         return (
-            <div className='Cards-container'>
                 <QueryRenderer
                     environment={environment}
                     query={getTeamsQuery}
@@ -51,11 +50,15 @@ class FeedTeamCards extends Component {
                                     return <TeamCard name={user.name} interests={user.interests} description={user.description} id={user.id} />
                                 }
                             })
-                            return (<Card.Group centered itemsPerRow={4} className='center-group'>{cards}</Card.Group>);
+                            return (
+                                <div className='Cards-container'>
+
+                                    <Card.Group centered itemsPerRow={4} className='center-group'>{cards}</Card.Group>
+                                </div>
+                            );
                         }
                     }}
                 />
-            </div>
 
         );
     };

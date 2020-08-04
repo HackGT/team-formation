@@ -49,10 +49,10 @@ export interface INotification extends RootDocument {
     bio: string;
     idea: string;
     notificationType: string;
-    sender: IUser | ITeam;
+    sender: IUser & ITeam;
     senderType: string;
     receiverType: string;
-    receiver: IUser | ITeam;
+    receiver: IUser & ITeam;
     resolved: boolean;
 
 }

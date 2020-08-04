@@ -27,7 +27,6 @@ class FeedCards extends Component {
     render() {
         let skill = this.props.skill.join(',');
         return (
-            <div className='Cards-container'>
                 <QueryRenderer
                     environment={environment}
                     query={getUsersQuery}
@@ -44,11 +43,14 @@ class FeedCards extends Component {
                                     return Boolean(el);
                                 })} experience={user.experience} id={user.id} />
                             })
-                            return (<Card.Group centered itemsPerRow={4} className='center-group'>{cards}</Card.Group>);
+                            return (
+                                <div className='Cards-container'>
+                                    <Card.Group centered itemsPerRow={4} className='center-group'>{cards}</Card.Group>
+                                </div>
+                            );
                         }
                     }}
                 />
-            </div>
 
         );
 
