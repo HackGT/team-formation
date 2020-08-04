@@ -9,7 +9,7 @@ class JoinIndividual extends Component {
       <Modal
         style={{
           padding: 10,
-          backgroundColor: "#c4c4c4",
+          backgroundColor: "#8FB6B3",
         }}
         closeIcon
         open={this.props.showModal}
@@ -19,47 +19,51 @@ class JoinIndividual extends Component {
       >
         <Modal.Content
           style={{
-            backgroundColor: "#c4c4c4",
+            backgroundColor: "#8FB6B3",
           }}
         >
           <Modal.Description>
             <div class="background">
-              <p class="header">Team Up with {this.props.user2Name}?</p>
+              <p class="modalHeader">Team Up With {this.props.user2Name}</p>
               <div class="row">
                 <div class="modal4-column">
                   <div class="modal4-column1">
                     <UserCard
-                        name={this.props.name}
-                        school={this.props.school}
-                        grad_year={this.props.grad_year}
-                        experience={this.props.experience}
-                        skills={this.props.skills}
-                        contact={this.props.contact}
+                      name={this.props.name}
+                      school={this.props.school}
+                      grad_year={this.props.grad_year}
+                      experience={this.props.experience}
+                      skills={this.props.skills}
+                      contact={this.props.contact}
                     />
                   </div>
                 </div>
                 <div class="modal3Column2">
                   <div class="modal4-column2">
+                    <div className="rectangle" />
                     <textarea
                       id="introduceYourself"
                       rows="8"
                       cols="68"
-                      placeholder="Introduce yourself..."
+                      placeholder="Introduce Yourself:"
                     />
 
+                    <div className="rectangle2" />
                     <textarea
                       id="describeProject"
                       rows="8"
                       cols="68"
-                      placeholder="Describe your project idea..."
+                      placeholder="Describe Your Project Idea:"
                     />
 
                     <Button
-                      basic="basic"
-                      color="black"
                       style={{
-                        borderRadius: 20,
                         marginTop: 20,
+                        border: "2px solid #F1D180",
+                        color: "#F1D180",
+                        background: "#8FB6B3",
+                        fontFamily: "Lekton-Bold",
+                        fontSize: 15,
                       }}
                       onClick={() => {
                         this.props.closeModal();

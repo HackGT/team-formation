@@ -15,21 +15,17 @@ class Feed extends Component {
 		skills: [],
 		years: [],
 		schools: [],
-		individuals: true,
 		teams: false
 	}
 
     render() {
-		var cards = this.state.teams ? <FeedTeamCards onTeamPageClick={this.props.onTeamPageClick} skill={this.state.skills} user_id={this.props.user_id} /> : <FeedCards search={this.state.searchTerm} skill={this.state.skills} grad_year={this.state.years} school={this.state.schools} user_id={this.props.user_id} />
+		var cards = this.state.teams ? <FeedTeamCards search={this.state.searchTerm} onTeamPageClick={this.props.onTeamPageClick} skill={this.state.skills} user_id={this.props.user_id} /> : 
+			<FeedCards search={this.state.searchTerm} skill={this.state.skills} grad_year={this.state.years} school={this.state.schools} user_id={this.props.user_id} />
 		return (
 			<div>
-				{// <div className="member-cards">
-				// 		<Members skill={this.state.searchTerm} user_id={this.props.user_id} />
-				// </div>
-				}
 				<div className="switch-feed">
 					<Button.Group>
-						<Button className='feed-toggle' onClick={this.feedTypeListener} basic={!this.state.individuals}>Individuals</Button>
+						<Button className='feed-toggle' onClick={this.feedTypeListener} basic={this.state.teams}>Individuals</Button>
 						<Button.Or />
 						<Button className='feed-toggle' onClick={this.feedTypeListener} basic={!this.state.teams}>Teams</Button>
 					</Button.Group>
@@ -39,6 +35,7 @@ class Feed extends Component {
 						<SideMenu className="Side-menu"
 							allFilterClickListener={this.allFilterClickListener}
 							onSearchClick={this.onSearchClick}
+							onTeamPage={this.state.teams}
 						/>
 					</div>
 					<div>
@@ -91,14 +88,20 @@ class Feed extends Component {
 	feedTypeListener = (e, data) => {
 		if (data.children === "Individuals") {
 			this.setState({
-				individuals: true,
-				teams: false
+				teams: false,
+				searchTerm: "",
+				skills: [],
+				years: [],
+				schools: []
 			});
 		}
 		else if (data.children === "Teams") {
 			this.setState({
-				individuals: false,
-				teams: true
+				teams: true,
+				searchTerm: "",
+				skills: [],
+				years: [],
+				schools: []
 			});
 		}
 	};

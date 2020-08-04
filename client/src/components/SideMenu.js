@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import {Fuse} from 'fuse.js'
-import { Dropdown, Input } from 'semantic-ui-react'
+import { Dropdown, Input, Icon } from 'semantic-ui-react'
 import './css/SideMenu.css'
 import skills from '../constants/skills'
 import schools from '../constants/schools'
@@ -40,9 +40,18 @@ class SideMenu extends Component {
 			);
 		}
 
+		if (this.props.onTeamPage) {
+			return (
+				<div className="SideMenu-container">
+					<Input placeholder="Search by Anything" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} icon={<Icon name='search' circular='true' link onClick={this.onSearchClick}/>} size='small' focus/>
+					<h3 className="h3">SEEKING SKILLS</h3>
+					<Dropdown id="dropdown" item text='Select Skills' search selection options={skillOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
+				</div>
+			);
+		}
 		return (
 			<div className="SideMenu-container">
-				<Input placeholder="Search by Anything" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} icon={{ name: 'search'}} size='small' focus/>
+				<Input placeholder="Search by Anything" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} icon={<Icon name='search' circular='true' link onClick={this.onSearchClick}/>} size='small' focus/>
 				<h3 className="h3">SKILLS</h3>
 				<Dropdown id="dropdown" item text='Select Skills' search selection options={skillOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
 				<h3 className="h3">YEARS</h3>
@@ -63,9 +72,7 @@ class SideMenu extends Component {
 		this.setState({
 			search_string: e.target.value
 		});
-		// if(e.target.value.length > 0) {
-			this.props.onSearchClick(e.target.value);
-		// }
+		// this.props.onSearchClick(e.target.value);
 	};
 
 	onSearchClick = (e) => {
