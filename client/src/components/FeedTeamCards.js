@@ -17,6 +17,7 @@ const getTeamsQuery = graphql`
             members {
                 name
             }
+            id
         }
     }
 `;
