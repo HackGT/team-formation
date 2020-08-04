@@ -70,23 +70,217 @@ passport.deserializeUser<IUser, string>((id, done) => {
     });
 });
 let getTeams = async function(args) {
-	return await Team.find({
-		"public": true
-	}).populate('members')
+    console.log('getting teams..')
+    let teams;
+    let search;
+    let interests;
+    let interestSearch = [] as {}[];
+
+    if (args.search) {
+        search = '\"' + args.search.split(' ').join('\" \"') + '\"';
+    }
+
+    if (args.interests) {
+        interests = args.interests.match(/\w+/g);
+        for (let i = 0; i < interests.length; i++) {
+            interestSearch.push({ interests: { "$elemMatch": { "$regex": '.*' + interests[i] + '.*', "$options": 'i' } } })
+        }
+    }
+
+    if (search && interests) {
+        console.log('search and interest filters applied')
+        teams = await Team.find({
+            $and: [
+                { "public": true },
+                { $text: { $search: search } },
+                { $and: interestSearch }
+            ]
+        }).populate('members');
+    } else if (search) {
+        console.log(`searching for ${search}..`)
+        teams = await Team.find({
+            $and: [
+                { "public": true },
+                { $text: { $search: search } }
+            ]
+        }).populate('members');
+    } else if (interests) {
+        console.log(`interest filter(s) applied: ${interestSearch}`);
+        teams = await Team.find({
+            $and: [
+                { "public": true },
+                { $and: interestSearch }
+            ]
+        }).populate('members');
+    } else {
+        console.log('no filter applied');
+        teams = await Team.find({
+            "public": true
+        }).populate('members')
+    }
+    
+    if (!teams) {
+        return null;
+    }
+
+    teams.sort(function (a, b) { return a.name.toLowerCase() - b.name.toLowerCase() });
+    return teams;
 }
 let getUser = async function (args) {
+    console.log('getting users..')
     let users;
-    if(args.skill == "" || args.skill == null) {
-        users = await User.find({});
-    } else {
-        const skills = args.skill.match(/\w+/g) ;
-        let search = [] as {}[];
+    let search;
+    let skills;
+    let grad_years;
+    let schools;
+    let skillSearch = [] as {}[];
+    let yearSearch = [] as {}[];
+    let schoolSearch = [] as {}[];
+
+    if (args.search) {
+        search = '\"' + args.search.split(' ').join('\" \"') + '\"';
+    }
+    if (args.skill) {
+        skills = args.skill.match(/\w+/g);
         for (let i = 0; i < skills.length; i++) {
-            search.push({ skills: { "$elemMatch": { "$regex": '.*' + skills[i] + '.*', "$options": 'i' } } })
+            skillSearch.push({ skills: { "$elemMatch": { "$regex": '.*' + skills[i] + '.*', "$options": 'i' } } })
         }
+    }
+    if (args.grad_year) {
+        grad_years = args.grad_year.match(/\w+/g);
+        for (let i = 0; i < grad_years.length; i++) {
+            yearSearch.push({ grad_year: grad_years[i] });
+        }
+    }
+    if (args.school) {
+        console.log(args.school);
+        schools = args.school.split(',');
+        console.log(schools);
+        for (let i = 0; i < schools.length; i++) {
+            schoolSearch.push({ school: schools[i] });
+        }
+        console.log(JSON.stringify(schoolSearch));
+    }
+
+    if (search && skills && grad_years && schools) {
+        console.log('all filters applied...');
         users = await User.find({
-            $and: search
+            $and: [
+                { $text: { $search: search } },
+                { $and: skillSearch },
+                { $or: yearSearch },
+                { $or: schoolSearch }
+            ]
         });
+    } else if (search && skills && grad_years) {
+        console.log('search, skills, and grad year filters applied...');
+        users = await User.find({
+            $and: [
+                { $text: { $search: search } },
+                { $and: skillSearch },
+                { $or: yearSearch }
+            ]
+        });
+    } else if (search && skills && schools) {
+        console.log('search, skills, and schools filters applied...');
+        users = await User.find({
+            $and: [
+                { $text: { $search: search } },
+                { $and: skillSearch },
+                { $or: schoolSearch }
+            ]
+        });
+    } else if (search && grad_years && schools) {
+        console.log('searc, grad year, and schools filters applied...');
+        users = await User.find({
+            $and: [
+                { $text: { $search: search } },
+                { $or: yearSearch },
+                { $or: schoolSearch }
+            ]
+        });
+    } else if (skills && grad_years && schools) {
+        console.log('skills, grad year, and schools filter applied...');
+        users = await User.find({
+            $and: [
+                { $and: skillSearch },
+                { $or: yearSearch },
+                { $or: schoolSearch }
+            ]
+        });
+    } else if (search && skills) {
+        console.log('search and skills filters applied...');
+        users = await User.find({
+            $and: [
+                { $text: { $search: search } },
+                { $and: skillSearch }
+            ]
+        });
+    } else if (search && grad_years) {
+        console.log('search and grad year filters applied...');
+        users = await User.find({
+            $and: [
+                { $text: { $search: search } },
+                { $or: yearSearch }
+            ]
+        });
+    } else if (search && schools) {
+        console.log('search and schools filters applied...');
+        users = await User.find({
+            $and: [
+                { $text: { $search: search } },
+                { $or: schoolSearch }
+            ]
+        });
+    } else if (skills && grad_years) {
+        console.log('skill and year filters applied');
+        users = await User.find({
+            $and: [
+                { $and: skillSearch },
+                { $or: yearSearch }
+            ]
+        });
+    } else if (skills && schools) {
+        console.log('only skill and school filters applied');
+        users = await User.find({
+            $and: [
+                { $and: skillSearch },
+                { $or: schoolSearch }
+            ]
+        });
+    } else if (grad_years && schools) {
+        console.log('only year and school filters applied');
+        users = await User.find({
+            $and: [
+                { $or: yearSearch },
+                { $or: schoolSearch }
+            ]
+        });
+    } else if (search) {
+        console.log(`searching for ${search}..`);
+        users = await User.find(
+             { $text: { $search: search } }
+        )
+        console.log(users);
+    } else if (skills) {
+        console.log('only skill filter(s) applied');
+        users = await User.find({
+            $and: skillSearch
+        });
+    } else if (grad_years) {
+        console.log('only year filter(s) applied');
+        users = await User.find({
+            $or: yearSearch
+        });
+    } else if (schools) {
+        console.log('only school filter(s) applied');
+        users = await User.find({
+            $or: schoolSearch
+        });
+        console.log(users);
+    } else {
+        console.log('no filters applied');
+        users = await User.find({});
     }
 
     if (!users) {

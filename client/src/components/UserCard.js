@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
-import { Button, Card, Popup, Container, Label } from 'semantic-ui-react';
-import JoinIndividual from './ui_subcomponents/JoinIndividual'
-import './css/UserCard.css';
+import React, { Component } from "react";
+import { Button, Card, Popup, Container, Label } from "semantic-ui-react";
+import JoinIndividual from "./ui_subcomponents/JoinIndividual";
+import "./css/UserCard.css";
 
 class UserCard extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            showModal: false
-        }
-    }
-    closeModal = () => {
-      console.log("close individual")
-      this.setState({ showModal: false });
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false,
     };
+  }
     render() {
 		let contact;
 		let cur_contact = this.props.contact;
