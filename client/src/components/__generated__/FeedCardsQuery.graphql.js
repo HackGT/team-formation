@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash bc2f9016243d1d68fd17405a2785384f
+ * @relayHash dc00d0ea5fd20e406a1af9c179f9f288
  */
 
 /* eslint-disable */
@@ -25,6 +25,7 @@ export type FeedCardsQueryResponse = {|
     +experience: ?string,
     +visible: ?number,
     +uuid: ?string,
+    +id: ?string,
   |}>
 |};
 export type FeedCardsQuery = {|
@@ -84,86 +85,105 @@ var v0 = [
 ],
 v1 = [
   {
-    "kind": "Variable",
-    "name": "grad_year",
-    "variableName": "grad_year",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
-    "name": "school",
-    "variableName": "school",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
-    "name": "search",
-    "variableName": "search",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
-    "name": "skill",
-    "variableName": "skill",
-    "type": "String"
+    "kind": "LinkedField",
+    "alias": null,
+    "name": "user",
+    "storageKey": null,
+    "args": [
+      {
+        "kind": "Variable",
+        "name": "grad_year",
+        "variableName": "grad_year",
+        "type": "String"
+      },
+      {
+        "kind": "Variable",
+        "name": "school",
+        "variableName": "school",
+        "type": "String"
+      },
+      {
+        "kind": "Variable",
+        "name": "search",
+        "variableName": "search",
+        "type": "String"
+      },
+      {
+        "kind": "Variable",
+        "name": "skill",
+        "variableName": "skill",
+        "type": "String"
+      }
+    ],
+    "concreteType": "User",
+    "plural": true,
+    "selections": [
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "name",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "school",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "grad_year",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "contact",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "skills",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "experience",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "visible",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "uuid",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "id",
+        "args": null,
+        "storageKey": null
+      }
+    ]
   }
-],
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "school",
-  "args": null,
-  "storageKey": null
-},
-v4 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "grad_year",
-  "args": null,
-  "storageKey": null
-},
-v5 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "contact",
-  "args": null,
-  "storageKey": null
-},
-v6 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "skills",
-  "args": null,
-  "storageKey": null
-},
-v7 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "experience",
-  "args": null,
-  "storageKey": null
-},
-v8 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "visible",
-  "args": null,
-  "storageKey": null
-},
-v9 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "uuid",
-  "args": null,
-  "storageKey": null
-};
+];
 return {
   "kind": "Request",
   "fragment": {
@@ -172,60 +192,13 @@ return {
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "user",
-        "storageKey": null,
-        "args": (v1/*: any*/),
-        "concreteType": "User",
-        "plural": true,
-        "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          (v5/*: any*/),
-          (v6/*: any*/),
-          (v7/*: any*/),
-          (v8/*: any*/),
-          (v9/*: any*/)
-        ]
-      }
-    ]
+    "selections": (v1/*: any*/)
   },
   "operation": {
     "kind": "Operation",
     "name": "FeedCardsQuery",
     "argumentDefinitions": (v0/*: any*/),
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "user",
-        "storageKey": null,
-        "args": (v1/*: any*/),
-        "concreteType": "User",
-        "plural": true,
-        "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          (v5/*: any*/),
-          (v6/*: any*/),
-          (v7/*: any*/),
-          (v8/*: any*/),
-          (v9/*: any*/),
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          }
-        ]
-      }
-    ]
+    "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "query",
@@ -237,5 +210,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '27ba7f7c3c6877816888b78515825db5';
+(node/*: any*/).hash = '5cb2a548cce1abe352dc47ec01910641';
 module.exports = node;

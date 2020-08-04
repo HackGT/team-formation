@@ -9,6 +9,7 @@ class UserCard extends Component {
     this.state = {
       showModal: false,
     };
+  }
     render() {
 		let contact;
 		let cur_contact = this.props.contact;
