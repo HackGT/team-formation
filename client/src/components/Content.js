@@ -17,6 +17,8 @@ import TeamPage from "./TeamPage";
 import "./css/Content.css";
 
 const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest}) => {
+  console.log("log",loggedIn)
+  console.log(path)
   return (
     <Route
       path={path}
@@ -47,29 +49,30 @@ class Content extends Component {
       cur_state: "login",
       user_id: "",
       team_id: "",
-			visible: 0,
-			data: {},
-			loggedIn: false,
-		};
-		this.handleLogin();
+	  visible: 0,
+	  data: {},
+	  loggedIn: true,
 	};
+	// this.handleLogin();
+	};
+
+    async componentDidMount() {
+        await this.handleLogin();
+    }
 
 		handleLogin = () => {
 			const { state = {} } = this.props.location;
 			const { prevLocation } = state;
-				
+
 			this.onFetchLogin().then(() => {
 				var login_json = this.state.data;
 				console.log(login_json)
 				if (login_json.uuid) {
 					console.log("has a uuid")
 					this.setState(
-						{ 
-							loggedIn: true 
-						},
-						() => {
-							this.props.history.push("/feed");
-						},
+						{
+							loggedIn: true
+						}
 					)
 						// if (!login_json.school) {
 						// 		// this.props.onNextClick(login_json.uuid, login_json.visible);
@@ -83,17 +86,14 @@ class Content extends Component {
 					// this.setState({ redirect: "login" });
 					console.log("doesn't have uuid")
 					this.setState(
-						{ 
-							loggedIn: false 
-						},
-						() => {
-							this.props.history.push("/login");
-						},
+						{
+							loggedIn: false
+						}
 					)
 				}
 			});
 		};
-		
+
 		// this.onFetchLogin().then(() => {
 		// 	var login_json = this.state.data;
 		// 	console.log(login_json)
@@ -117,7 +117,7 @@ class Content extends Component {
 
   render() {
 
-		const { state = {} } = this.props.location;
+	const { state = {} } = this.props.location;
     const { error } = state;
 
 		// const { redirect } = this.state;
@@ -135,18 +135,18 @@ class Content extends Component {
 		// 	return <Redirect to="/login/" />;
 
 		// }
-				
+    console.log(this.state.loggedIn)
     return (
 				<div className="Content-container">
 					<Switch>
-						<Route exact path={["/login"]}>
+						<Route exact path="/login">
 							<Login
 								onNextClick={this.onNextClick}
 								onFeedChange={this.onProfileChange}
 							/>
 						</Route>
-						<ProtectedRoute exact path="/feed" component={Feed}/>
-						<ProtectedRoute exact path="/edit-profile" component={EditProfile}/>
+						<ProtectedRoute loggedIn={this.state.loggedIn} exact path={["/","/feed"]} component={Feed}/>
+						<ProtectedRoute loggedIn={this.state.loggedIn} exact path="/edit-profile" component={EditProfile}/>
 					</Switch>
 						{/* <Route path="/edit-profile">
 							<HeaderFeed
@@ -197,6 +197,8 @@ class Content extends Component {
 			return response.json();
 	    })
 	        .then(response => {
+                console.log(response)
+
 	        return new Promise((resolve, reject) => {
 	            this.setState({data: response, user_id: response.uuid}, function() {
 	                resolve();

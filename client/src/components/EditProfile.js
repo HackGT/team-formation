@@ -31,8 +31,8 @@ mutation EditProfileMutation($uuid: String, $name: String, $grad_year: String, $
 `;
 
 const getUsersProfile = graphql`
-query EditProfileQuery($uuid: String) {
-    user_profile(uuid:$uuid) {
+query EditProfileQuery() {
+    user_profile() {
         name
         school
         grad_year

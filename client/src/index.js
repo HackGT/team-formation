@@ -10,7 +10,7 @@ import * as serviceWorker from './serviceWorker';
 const routes = (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={Content} />
+      <Route path="/" component={Content} />
     </Switch>
   </BrowserRouter>
 );
