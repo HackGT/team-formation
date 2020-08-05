@@ -1,4 +1,12 @@
 import React, {Component} from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams,
+    Redirect
+} from "react-router-dom";
 import { Button, Divider, Dropdown, TextArea, Message, Form } from 'semantic-ui-react';
 import {QueryRenderer } from 'react-relay';
 import ContactDropdown from './ui_subcomponents/ContactDropdown';
@@ -133,10 +141,14 @@ class EditProfile extends Component {
                                     </Form.Group>
                                     <div className="button-container">
                                         <Form.Group className="save-button-container">
-                                            <Button onClick={this.onCancelClick} className="save-button"> cancel </Button>
+                                            <Link to="/feed">
+                                                <Button onClick={this.onCancelClick} className="save-button"> cancel </Button>
+                                            </Link>
                                         </Form.Group>
                                         <Form.Group>
-                                            <Button onClick={this.onNextClick} className="save-button"> save </Button>
+                                            <Link to="/feed">
+                                                <Button onClick={this.onNextClick} className="save-button"> save </Button>
+                                            </Link>
                                         </Form.Group>
                                         <Form.Group>
                                             {this.state.cur_error_message}

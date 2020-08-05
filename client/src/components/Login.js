@@ -16,30 +16,39 @@ class Login extends Component {
         super(props);
 		this.state = {
 			user_id: "",
-			data: {},
+            data: {},
+            redirect: "",
 		};
 
-        this.onFetchLogin().then(() => {
-            var login_json = this.state.data;
-            console.log(login_json)
-            if (login_json.uuid) {
-                console.log("here1")
-                if (!login_json.school) {
-                    console.log("here3")
-                    this.props.onNextClick(login_json.uuid, login_json.visible);
-                    return <Redirect to="/edit-profile" />
-                } else {
-                    console.log("here4")
-                    // this.props.onNextClick(login_json.uuid, login_json.visible);
-                    return <Redirect to="/feed/" />
-                }
-            } else {
-                console.log("here")
-            }
-		});
+        // this.onFetchLogin().then(() => {
+        //     var login_json = this.state.data;
+        //     console.log(login_json)
+        //     if (login_json.uuid) {
+        //         if (!login_json.school) {
+        //             console.log("edit profile")
+        //             // this.props.onNextClick(login_json.uuid, login_json.visible);
+        //             this.setState({ redirect: "edit-profile" });
+        //             // return <Redirect to="/edit-profile" />
+        //         } else {
+        //             console.log("feed")
+        //             // this.props.onNextClick(login_json.uuid, login_json.visible);
+        //             this.setState({ redirect: "feed" })
+        //             // return <Redirect to="/feed/" />
+        //         }
+        //     }
+		// });
     };
 
     render() {
+        // const { redirect } = this.state;
+        // console.log("redirect: ", redirect)
+        // if (redirect ==  "feed") {
+        //     console.log("redirect to feed");
+        //     return <Redirect to="/feed/" />;
+        // } else if (redirect == "edit-profile") {
+        //     console.log("redirect to edit profile");
+        //     return <Redirect to="/edit-profile/" />
+        // }
         return (
             // <div className="Login-container">
 			// 	<Button href = {"/api/user/login"}> Login </Button>
@@ -78,23 +87,22 @@ class Login extends Component {
 		);
     };
 
-    onFetchLogin = () => {
-        console.log("here2")
-        return fetch('/api/user/check', {
-            method: "GET",
-            credentials: "include"
-        })
-        .then(response => {
-			return response.json();
-        })
-            .then(response => {
-            return new Promise((resolve, reject) => {
-                this.setState({data: response, user_id: response.uuid}, function() {
-                    resolve();
-                });
-            });
-        });
-    };
+    // onFetchLogin = () => {
+    //     return fetch('/api/user/check', {
+    //         method: "GET",
+    //         credentials: "include"
+    //     })
+    //     .then(response => {
+	// 		return response.json();
+    //     })
+    //         .then(response => {
+    //         return new Promise((resolve, reject) => {
+    //             this.setState({data: response, user_id: response.uuid}, function() {
+    //                 resolve();
+    //             });
+    //         });
+    //     });
+    // };
 };
 
 export default Login;

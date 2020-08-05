@@ -4,37 +4,151 @@ import {
   Switch,
   Route,
   Link,
-  useParams
+	useParams,
+	Redirect
 } from "react-router-dom";
 import Login from "./Login";
 import EditProfile from "./EditProfile";
 import Feed from "./Feed";
+import PrivateRoute from "./PrivateRoute";
 import HeaderLogin from "./ui_subcomponents/HeaderLogin";
 import HeaderFeed from "./ui_subcomponents/HeaderFeed";
 import TeamPage from "./TeamPage";
 import "./css/Content.css";
 
+const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest}) => {
+  return (
+    <Route
+      path={path}
+      {...rest}
+      render={(props) => {
+        return loggedIn ? (
+          <Comp {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: {
+                prevLocation: path,
+                error: "You need to login first!",
+              },
+            }}
+          />
+        );
+      }}
+    />
+  );
+}
+
 class Content extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       cur_state: "login",
       user_id: "",
       team_id: "",
-      visible: 0,
-    };
-  }
+			visible: 0,
+			data: {},
+			loggedIn: false,
+		};
+		this.handleLogin();
+	};
+
+		handleLogin = () => {
+			const { state = {} } = this.props.location;
+			const { prevLocation } = state;
+				
+			this.onFetchLogin().then(() => {
+				var login_json = this.state.data;
+				console.log(login_json)
+				if (login_json.uuid) {
+					console.log("has a uuid")
+					this.setState(
+						{ 
+							loggedIn: true 
+						},
+						() => {
+							this.props.history.push("/feed");
+						},
+					)
+						// if (!login_json.school) {
+						// 		// this.props.onNextClick(login_json.uuid, login_json.visible);
+						// 		this.setState({ redirect: "edit-profile" });
+						// } else {
+						// 		// this.props.onNextClick(login_json.uuid, login_json.visible);
+						// 		this.setState({ redirect: "feed" })
+						// }
+				} else {
+					// console.log("go to login");
+					// this.setState({ redirect: "login" });
+					console.log("doesn't have uuid")
+					this.setState(
+						{ 
+							loggedIn: false 
+						},
+						() => {
+							this.props.history.push("/login");
+						},
+					)
+				}
+			});
+		};
+		
+		// this.onFetchLogin().then(() => {
+		// 	var login_json = this.state.data;
+		// 	console.log(login_json)
+		// 	if (login_json.uuid) {
+		// 		console.log("has a uuid")
+		// 		this.setState({ authed: true })
+		// 			// if (!login_json.school) {
+		// 			// 		// this.props.onNextClick(login_json.uuid, login_json.visible);
+		// 			// 		this.setState({ redirect: "edit-profile" });
+		// 			// } else {
+		// 			// 		// this.props.onNextClick(login_json.uuid, login_json.visible);
+		// 			// 		this.setState({ redirect: "feed" })
+		// 			// }
+		// 	} else {
+		// 		// console.log("go to login");
+		// 		// this.setState({ redirect: "login" });
+		// 		console.log("doesn't have uuid")
+		// 		this.setState({ authed: false })
+		// 	}
+		// });
 
   render() {
+
+		const { state = {} } = this.props.location;
+    const { error } = state;
+
+		// const { redirect } = this.state;
+
+		// if (redirect == "feed") {
+		// 	// console.log("redirect true")
+		// 	this.setState({ redirect: "" })
+		// 	return <Redirect to="/feed/" />;
+		// } else if (redirect == "edit-profile") {
+		// 	this.setState({ redirect: "" })
+		// 	return <Redirect to="/edit-profile/" />;
+		// } else if (redirect == "login") {
+		// 	console.log("redirect to login")
+		// 	this.setState({ redirect: "" })
+		// 	return <Redirect to="/login/" />;
+
+		// }
+				
     return (
-			<Router>
 				<div className="Content-container">
-					<Login
-						onNextClick={this.onNextClick}
-						onFeedChange={this.onProfileChange}
-					/>
 					<Switch>
-						<Route path="/edit-profile">
+						<Route exact path={["/login"]}>
+							<Login
+								onNextClick={this.onNextClick}
+								onFeedChange={this.onProfileChange}
+							/>
+						</Route>
+						<ProtectedRoute exact path="/feed" component={Feed}/>
+						<ProtectedRoute exact path="/edit-profile" component={EditProfile}/>
+					</Switch>
+						{/* <Route path="/edit-profile">
 							<HeaderFeed
 								onEditClick={this.onEditClick}
 								user_id={this.state.user_id}
@@ -47,7 +161,7 @@ class Content extends Component {
 								user_id={this.state.user_id}
 							/>
 						</Route>
-						<Route path="/feed">
+						<Route path={["/feed"]} >
 							<HeaderFeed
 								onEditClick={this.onEditClick}
 								user_id={this.state.user_id}
@@ -69,12 +183,27 @@ class Content extends Component {
 								onTeamPageClick={this.onTeamPageClick}
 							/>
 							<TeamPage user_id={this.state.user_id} team_id={this.state.team_id} />
-						</Route>
-					</Switch>
+						</Route> */}
 				</div>
-			</Router>
     );
 	}
+
+	onFetchLogin = () => {
+	    return fetch('/api/user/check', {
+	        method: "GET",
+	        credentials: "include"
+	    })
+	    .then(response => {
+			return response.json();
+	    })
+	        .then(response => {
+	        return new Promise((resolve, reject) => {
+	            this.setState({data: response, user_id: response.uuid}, function() {
+	                resolve();
+	            });
+	        });
+	    });
+	};
 
   onEditClick = () => {
     this.setState({
