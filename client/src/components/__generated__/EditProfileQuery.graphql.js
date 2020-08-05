@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8ca18309b2ee54c3bb3d4d19afaf5d67
+ * @relayHash 8aa0ad4e5582b4be52b9249970ec97f5
  */
 
 /* eslint-disable */
@@ -9,9 +9,7 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type EditProfileQueryVariables = {|
-  uuid?: ?string
-|};
+export type EditProfileQueryVariables = {||};
 export type EditProfileQueryResponse = {|
   +user_profile: {|
     +name: ?string,
@@ -31,10 +29,8 @@ export type EditProfileQuery = {|
 
 
 /*
-query EditProfileQuery(
-  $uuid: String
-) {
-  user_profile(uuid: $uuid) {
+query EditProfileQuery {
+  user_profile {
     name
     school
     grad_year
@@ -48,65 +44,49 @@ query EditProfileQuery(
 */
 
 const node/*: ConcreteRequest*/ = (function(){
-var v0 = [
-  {
-    "kind": "LocalArgument",
-    "name": "uuid",
-    "type": "String",
-    "defaultValue": null
-  }
-],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "uuid",
-    "variableName": "uuid",
-    "type": "String"
-  }
-],
-v2 = {
+var v0 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "name",
   "args": null,
   "storageKey": null
 },
-v3 = {
+v1 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "school",
   "args": null,
   "storageKey": null
 },
-v4 = {
+v2 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "grad_year",
   "args": null,
   "storageKey": null
 },
-v5 = {
+v3 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "contact",
   "args": null,
   "storageKey": null
 },
-v6 = {
+v4 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "skills",
   "args": null,
   "storageKey": null
 },
-v7 = {
+v5 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "experience",
   "args": null,
   "storageKey": null
 },
-v8 = {
+v6 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "contact_method",
@@ -120,24 +100,24 @@ return {
     "name": "EditProfileQuery",
     "type": "Query",
     "metadata": null,
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [],
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
         "name": "user_profile",
         "storageKey": null,
-        "args": (v1/*: any*/),
+        "args": null,
         "concreteType": "User",
         "plural": false,
         "selections": [
+          (v0/*: any*/),
+          (v1/*: any*/),
           (v2/*: any*/),
           (v3/*: any*/),
           (v4/*: any*/),
           (v5/*: any*/),
-          (v6/*: any*/),
-          (v7/*: any*/),
-          (v8/*: any*/)
+          (v6/*: any*/)
         ]
       }
     ]
@@ -145,24 +125,24 @@ return {
   "operation": {
     "kind": "Operation",
     "name": "EditProfileQuery",
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [],
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
         "name": "user_profile",
         "storageKey": null,
-        "args": (v1/*: any*/),
+        "args": null,
         "concreteType": "User",
         "plural": false,
         "selections": [
+          (v0/*: any*/),
+          (v1/*: any*/),
           (v2/*: any*/),
           (v3/*: any*/),
           (v4/*: any*/),
           (v5/*: any*/),
           (v6/*: any*/),
-          (v7/*: any*/),
-          (v8/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -178,11 +158,11 @@ return {
     "operationKind": "query",
     "name": "EditProfileQuery",
     "id": null,
-    "text": "query EditProfileQuery(\n  $uuid: String\n) {\n  user_profile(uuid: $uuid) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    contact_method\n    id\n  }\n}\n",
+    "text": "query EditProfileQuery {\n  user_profile {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    contact_method\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '1b020bfbb839ed877c30cd115bb9a596';
+(node/*: any*/).hash = '2a9d18e5e692aa55aef6ede6b7068c0d';
 module.exports = node;

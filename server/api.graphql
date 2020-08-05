@@ -15,15 +15,15 @@ union Source = User | Team
 type Query {
     users(search: String, skill: String, name: String, email: String, grad_year: String, school: String, visible: Int): [User!]!
     user(user_id: String): User!
-    user_profile(uuid: String): User!
+    user_profile: User!
     get_teams(search: String, name: String, picture: String, team_id: String, interests: String, description: String, public: Boolean): [Team!]!
     notifications(receiver_type: NotificationType, receiver_id: String): [Notification!]!
     team_notifications: [Notification!]!
 }
 
 type Mutation {
-    toggle_visibility(uuid: String): User!
-    update_user(uuid: String, name: String email: String, grad_year: String, school: String, contact: String, skills: [String], experience: String, contact_method: String): User!
+    toggle_visibility: User!
+    update_user(name: String email: String, grad_year: String, school: String, contact: String, skills: [String], experience: String, contact_method: String): User!
     accept_team_request(notification_id: String): Team
     accept_user_request(notification_id: String): Team
     join_users_in_team(user1: String, user2: String): Team

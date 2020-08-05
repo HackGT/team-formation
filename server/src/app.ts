@@ -568,7 +568,7 @@ let getTeamNotifications = async function(parent, args, context, info, req) {
 // }
 
 let toggleVisibility = async function (parent, args, context, info, req) {
-    return User.findOneAndUpdate({'uuid':args.uuid}, {"$bit": {visible: {xor: 1}}}, {new:true})
+    return User.findByIdAndUpdate(context._id, {"$bit": {visible: {xor: 1}}}, {new:true})
 }
 
 let apiRouter = express.Router();

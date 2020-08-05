@@ -71,10 +71,7 @@ export interface ITeam extends RootDocument{
 export type IUserMongoose = IUser & mongoose.Document;
 export type ITeamMongoose = ITeam & mongoose.Document;
 export type INotificationMongoose = INotification & mongoose.Document;
-<<<<<<< HEAD
-=======
 
->>>>>>> notification-endpoints
 export const Notification = mongoose.model<INotificationMongoose>("Notification", new mongoose.Schema({
     message: String,
     bio: String,
