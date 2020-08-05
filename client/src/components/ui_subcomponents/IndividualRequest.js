@@ -8,7 +8,7 @@ import UserCard from "../UserCard";
 
 const getUserQuery = graphql`
     query IndividualRequestQuery($user_id: String) {
-        query_user(user_id:$user_id) {
+        user(user_id:$user_id) {
             name
             school
             grad_year
@@ -50,6 +50,7 @@ class IndividualRequest extends Component {
                         <Modal
                           style={{
                             padding: 10,
+                            backgroundColor: "#8fb6b3",
                           }}
                           closeIcon
                           open={this.props.showModal}
@@ -58,47 +59,51 @@ class IndividualRequest extends Component {
                           }}
                         >
                           <Modal.Content
+                            style={{
+                              backgroundColor: "#8fb6b3",
+                            }}
                           >
                             <Modal.Description>
                               <div class="background">
-                                <p class="header">
-                                  {sender.name} wants to team up with you!
+                                <p class="modalHeader">
+                                  {props.user.name} Wants to Team Up With You!
                                 </p>
                                 <div class="row">
                                   <div class="modal3Column">
                                     <div class="modal3Column1">
                                       <UserCard
-                                        name={props.query_user.name}
-                                        school={props.query_user.school}
-                                        grad_year={props.query_user.grad_year}
-                                        experience={props.query_user.experience}
-                                        skills={props.query_user.skills}
-                                        contact={props.query_user.contact}
+                                        name={props.user.name}
+                                        school={props.user.school}
+                                        grad_year={props.user.grad_year}
+                                        experience={props.user.experience}
+                                        skills={props.user.skills}
+                                        contact={props.user.contact}
                                       />
                                     </div>
                                   </div>
                                   <div class="modal3Column2">
                                     <div class="modal3Column3">
-                                      <p>{sender.name}'s Request Message:</p>
+                                      <p class="user1RequestMessageName">
+                                        {props.user.name}'s Request Message:
+                                      </p>
                                       <p class="user1RequestMessage">
-                                        {this.props.requestMessage}
+                                        {this.props.userRequestMessage}
                                       </p>
                                       <p class="user1FirstName">
-                                        {sender.name}'s Project Idea:
+                                        {props.user.name}'s Project Idea:
                                       </p>
-                                      <p class="user1ProjectIdea">
-                                        {this.props.userProjectIdea}
-                                      </p>
+                                      <p class="user1ProjectIdea">{this.props.userProjectIdea}</p>
                                     </div>
                                   </div>
                                 </div>
                                 <div class="flex-container-modal3">
                                   <div class="modal3Button">
                                     <Button
-                                      basic="basic"
-                                      color="black"
                                       style={{
-                                        borderRadius: 20,
+                                        border: "2px solid #F1D180",
+                                        color: "#F1D180",
+                                        background: "#8FB6B3",
+                                        fontFamily: "Lekton-Bold",
                                       }}
                                       onClick={() => {
                                         commitMutation(
@@ -106,11 +111,10 @@ class IndividualRequest extends Component {
                                             {
                                                 mutation: acceptRequestMutation,
                                                 variables: {
-                                                    user_id: this.props.sender_id
+                                                    user_id: this.props.sender.id
                                                 }
                                             }
                                         )
-                                        console.log("done!")
                                         this.props.closeModal();
                                       }}
                                     >
@@ -119,10 +123,11 @@ class IndividualRequest extends Component {
                                   </div>
                                   <div class="modal3Button">
                                     <Button
-                                      basic="basic"
-                                      color="black"
                                       style={{
-                                        borderRadius: 20,
+                                        border: "2px solid #F1D180",
+                                        color: "#F1D180",
+                                        background: "#8FB6B3",
+                                        fontFamily: "Lekton-Bold",
                                       }}
                                       onClick={() => {
                                         this.props.closeModal();
@@ -140,7 +145,6 @@ class IndividualRequest extends Component {
                 }
             }}
         />
-
     );
   }
 }

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 606ce6698655d1d7e58ea65f8de1e4cd
+ * @relayHash d340aa6ea6fc277cd9a27babd9fbd7de
  */
 
 /* eslint-disable */
@@ -13,7 +13,7 @@ export type IndividualRequestQueryVariables = {|
   user_id?: ?string
 |};
 export type IndividualRequestQueryResponse = {|
-  +query_user: {|
+  +user: {|
     +name: ?string,
     +school: ?string,
     +grad_year: ?string,
@@ -35,7 +35,7 @@ export type IndividualRequestQuery = {|
 query IndividualRequestQuery(
   $user_id: String
 ) {
-  query_user(user_id: $user_id) {
+  user(user_id: $user_id) {
     name
     school
     grad_year
@@ -134,7 +134,7 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "query_user",
+        "name": "user",
         "storageKey": null,
         "args": (v1/*: any*/),
         "concreteType": "User",
@@ -160,7 +160,7 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "query_user",
+        "name": "user",
         "storageKey": null,
         "args": (v1/*: any*/),
         "concreteType": "User",
@@ -189,11 +189,11 @@ return {
     "operationKind": "query",
     "name": "IndividualRequestQuery",
     "id": null,
-    "text": "query IndividualRequestQuery(\n  $user_id: String\n) {\n  query_user(user_id: $user_id) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
+    "text": "query IndividualRequestQuery(\n  $user_id: String\n) {\n  user(user_id: $user_id) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '433b43f6e48ef5135dd9b251757ddb91';
+(node/*: any*/).hash = '3be0f6a55fe2fb37c14ce12a6f9b4103';
 module.exports = node;

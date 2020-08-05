@@ -113,7 +113,7 @@ class Headers extends Component {
                         direction="left"
                         closeOnChange={false}
                       >
-                        <Dropdown.Menu className="notification-pane">
+                        <Dropdown.Menu className="notification-pane compact" style={{maxWidth: 300}}>
                           <NotificationGroup
                             user={this.props.user_id}
                             onTeamPageClick={this.props.onTeamPageClick}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Popup, Container, Label, Icon } from 'semantic-ui-react';
+import { Button, Card, Popup, Container, Label, Icon, Segment } from 'semantic-ui-react';
 import NotificationCard from './NotificationCard';
 import './css/NotificationCard.css';
 import { QueryRenderer } from 'react-relay';
@@ -54,9 +54,10 @@ class NotificationGroup extends Component {
                                                         />
                         })
                         return (
-                            <div>
+                            <Segment style={{overflow: 'auto', maxHeight: 400}}>
                 				{notificationCards}
-                            </div>
+                            </Segment>
+
                         )
                     }
                 }

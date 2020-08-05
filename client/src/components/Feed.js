@@ -10,91 +10,58 @@ import "./css/Feed.css";
 import TeamInformation from "./TeamInformation";
 
 class Feed extends Component {
-  state = {
-    searchTerm: "",
-    skills: [],
-    years: [],
-    schools: [],
-    individuals: true,
-    teams: false,
-  };
+	state = {
+		searchTerm: "",
+		skills: [],
+		years: [],
+		schools: [],
+		teams: false
+	}
 
-  render() {
-    var cards = this.state.teams ? (
-      <FeedTeamCards
-        onTeamPageClick={this.props.onTeamPageClick}
-        skill={this.state.skills}
-        user_id={this.props.user_id}
-      />
-    ) : (
-      <FeedCards skill={this.state.skills} user_id={this.props.user_id} />
-    );
-    return (
-      <div>
-        {
-          // <div className="member-cards">
-          // 		<Members skill={this.state.searchTerm} user_id={this.props.user_id} />
-          // </div>
-        }
-        <div className="switch-feed">
-          <Button.Group>
-            <Button
-              onClick={this.feedTypeListener}
-              basic={!this.state.individuals}
-              color="blue"
-            >
-              Individuals
-            </Button>
-            <Button.Or />
-            <Button
-              onClick={this.feedTypeListener}
-              basic={!this.state.teams}
-              color="blue"
-            >
-              Teams
-            </Button>
-          </Button.Group>
-        </div>
-        <div className="Feed-container">
-          <div className="menu">
-            <SideMenu
-              className="Side-menu"
-              allFilterClickListener={this.allFilterClickListener}
-              onSearchClick={this.onSearchClick}
-            />
-          </div>
-          <div>
-            {this.state.skills.length ||
-            this.state.years.length ||
-            this.state.schools.length ? (
-              <div className="user-input">
-                <div className="filters-applied">
-                  <text>Filters Applied</text>
-                </div>
-                <InputTagCollection
-                  skills={this.state.skills}
-                  years={this.state.years}
-                  schools={this.state.schools}
-                  allFilterClickListener={this.allFilterClickListener}
-                />
-              </div>
-            ) : null}
-            <div className="feed-cards">{cards}</div>
-          </div>
-        </div>
-        <div className="team-info">
-          <TeamInformation TeamInformation editable={true} />
-        </div>
-        <div className="team-info">
-          <TeamInformation
-            editable={false}
-            teamBio="This is our team bio!"
-            projectIdea="This is our project idea!"
-          />
-        </div>
-      </div>
-    );
-  }
+    render() {
+		var cards = this.state.teams ? <FeedTeamCards search={this.state.searchTerm} onTeamPageClick={this.props.onTeamPageClick} skill={this.state.skills} user_id={this.props.user_id} /> :
+			<FeedCards search={this.state.searchTerm} skill={this.state.skills} grad_year={this.state.years} school={this.state.schools} user_id={this.props.user_id} />
+		return (
+			<div>
+				<div className="switch-feed">
+					<Button.Group>
+						<Button className='feed-toggle' onClick={this.feedTypeListener} basic={this.state.teams}>Individuals</Button>
+						<Button.Or />
+						<Button className='feed-toggle' onClick={this.feedTypeListener} basic={!this.state.teams}>Teams</Button>
+					</Button.Group>
+				</div>
+				<div className="Feed-container">
+					<div className="menu">
+						<SideMenu className="Side-menu"
+							allFilterClickListener={this.allFilterClickListener}
+							onSearchClick={this.onSearchClick}
+							onTeamPage={this.state.teams}
+						/>
+					</div>
+					<div>
+						{this.state.skills.length || this.state.years.length || this.state.schools.length ?
+							<div className="user-input">
+								<div className="filters-applied">
+									<text>Filters Applied</text>
+								</div>
+								<div className='filter-tags'>
+									<InputTagCollection
+										skills={this.state.skills}
+										years={this.state.years}
+										schools={this.state.schools}
+										allFilterClickListener={this.allFilterClickListener}
+									/>
+								</div>
+							</div>
+						: null}
+						<div className="feed-cards">
+							{cards}
+						</div>
+					</div>
+				</div>
+			</div>
+        );
+	};
 
   allFilterClickListener = (name, filterProp) => {
     let index = this.state[filterProp].indexOf(name);
@@ -114,23 +81,30 @@ class Feed extends Component {
     this.setState({ searchTerm: e.target.value });
   };
 
-  onSearchClick = (search_string) => {
-    this.setState({ searchTerm: search_string });
-  };
+    onSearchClick = (search_string) => {
+        this.setState({searchTerm:search_string});
+	};
 
-  feedTypeListener = (e, data) => {
-    if (data.children === "Individuals") {
-      this.setState({
-        individuals: true,
-        teams: false,
-      });
-    } else if (data.children === "Teams") {
-      this.setState({
-        individuals: false,
-        teams: true,
-      });
-    }
-  };
-}
+	feedTypeListener = (e, data) => {
+		if (data.children === "Individuals") {
+			this.setState({
+				teams: false,
+				searchTerm: "",
+				skills: [],
+				years: [],
+				schools: []
+			});
+		}
+		else if (data.children === "Teams") {
+			this.setState({
+				teams: true,
+				searchTerm: "",
+				skills: [],
+				years: [],
+				schools: []
+			});
+		}
+	};
+};
 
 export default Feed;

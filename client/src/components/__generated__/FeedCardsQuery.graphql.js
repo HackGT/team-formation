@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 39f322b4d195d7eac8a10d5d916b0dcc
+ * @relayHash ae4bd7bef6514aa6d90ceb336834ec7d
  */
 
 /* eslint-disable */
@@ -10,10 +10,13 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type FeedCardsQueryVariables = {|
-  skill?: ?string
+  skill?: ?string,
+  grad_year?: ?string,
+  school?: ?string,
+  search?: ?string,
 |};
 export type FeedCardsQueryResponse = {|
-  +user: $ReadOnlyArray<{|
+  +users: $ReadOnlyArray<{|
     +name: ?string,
     +school: ?string,
     +grad_year: ?string,
@@ -35,8 +38,11 @@ export type FeedCardsQuery = {|
 /*
 query FeedCardsQuery(
   $skill: String
+  $grad_year: String
+  $school: String
+  $search: String
 ) {
-  user(skill: $skill) {
+  users(skill: $skill, grad_year: $grad_year, school: $school, search: $search) {
     name
     school
     grad_year
@@ -57,15 +63,51 @@ var v0 = [
     "name": "skill",
     "type": "String",
     "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "grad_year",
+    "type": "String",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "school",
+    "type": "String",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "search",
+    "type": "String",
+    "defaultValue": null
   }
 ],
 v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "user",
+    "name": "users",
     "storageKey": null,
     "args": [
+      {
+        "kind": "Variable",
+        "name": "grad_year",
+        "variableName": "grad_year",
+        "type": "String"
+      },
+      {
+        "kind": "Variable",
+        "name": "school",
+        "variableName": "school",
+        "type": "String"
+      },
+      {
+        "kind": "Variable",
+        "name": "search",
+        "variableName": "search",
+        "type": "String"
+      },
       {
         "kind": "Variable",
         "name": "skill",
@@ -162,11 +204,11 @@ return {
     "operationKind": "query",
     "name": "FeedCardsQuery",
     "id": null,
-    "text": "query FeedCardsQuery(\n  $skill: String\n) {\n  user(skill: $skill) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
+    "text": "query FeedCardsQuery(\n  $skill: String\n  $grad_year: String\n  $school: String\n  $search: String\n) {\n  users(skill: $skill, grad_year: $grad_year, school: $school, search: $search) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '707586bf74fb9d107b20c7140da48dcd';
+(node/*: any*/).hash = 'f92f21f91193c45020dda4a481b127c5';
 module.exports = node;

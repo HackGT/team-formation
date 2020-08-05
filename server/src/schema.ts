@@ -99,7 +99,7 @@ export const Notification = mongoose.model<INotificationMongoose>("Notification"
     resolved: Boolean
 }));
 
-export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
+const TeamSchema = new mongoose.Schema({
     name: {
         required: true,
         type: String,
@@ -126,53 +126,64 @@ export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
     },
     {
         usePushEach: true
-    }));
+    }
+);
 
-export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
-        uuid: {
-            type: String,
-            required: true,
-            index: true,
-            unique: true
-        },
-        email: {
-            type: String,
-            required: true,
-            unique: true
-        },
-        name: {
-            type: String,
-            required: false
-        },
-        school: {
-            type: String,
-            required: false
-        },
-        token: String,
-        grad_year: String,
-        skills: [String],
-        beginner: {
-            type: Boolean,
-            required: false
-        },
-        experience: String,
-        image: String,
-        auth_keys: [String],
-        admin: Boolean,
-        contact: String,
-        contact_method: String,
-        visible: Number,
-        notifications: {
-            type: [{
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Notification"
-            }]
-        },
-        team: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Team"
-        }
+TeamSchema.index({
+    name: 'text',
+    members: 'text',
+    interests: 'text',
+    description: 'text'
+})
+
+export const Team = mongoose.model<ITeamMongoose>("Team", TeamSchema);
+
+const UserSchema = new mongoose.Schema({
+    uuid: {
+        type: String,
+        required: true,
+        index: true,
+        unique: true
     },
-    {
-        usePushEach: true
-    }));
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    name: {
+        type: String,
+        required: false
+    },
+    school: {
+        type: String,
+        required: false
+    },
+    token: String,
+    grad_year: String,
+    skills: [String],
+    beginner: {
+        type: Boolean,
+        required: false
+    },
+    experience: String,
+    image: String,
+    auth_keys: [String],
+    admin: Boolean,
+    contact: String,
+    contact_method: String,
+    visible: Number,
+    team: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Team"
+    }
+});
+
+UserSchema.index({
+  name: 'text',
+  school: 'text',
+  grad_year: 'text',
+  skills: 'text',
+  experience: 'text'
+});
+
+export const User = mongoose.model<IUserMongoose>("User", UserSchema);

@@ -11,7 +11,7 @@ import environment from './Environment';
 // edit this query to pull on the team members
 const getUsersQuery = graphql`
     query MembersQuery($skill: String) {
-        user(skill:$skill) {
+        users(skill:$skill) {
             name
             school
             grad_year
