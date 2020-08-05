@@ -108,49 +108,34 @@ class Headers extends Component {
                         position="right"
                         size={"massive"}
                       >
-                        <Menu.Item name={props.user_profile.name} />
-                        <Menu.Item
-                          icon="sign out"
-                          link={true}
-                          href={"/api/user/logout"}
-                        />
-                        <Dropdown
-                          item="item"
-                          icon="bell"
-                          direction="left"
-                          closeOnChange={false}
-                        >
-                          <Dropdown.Menu className="notification-pane">
-                            <NotificationGroup
-                              user={this.props.user_id}
-                              onTeamPageClick={this.props.onTeamPageClick}
-                            />
-                          </Dropdown.Menu>
-                        </Dropdown>
-                        <Dropdown
-                          item="item"
-                          icon="user"
-                          direction="left"
-                          closeOnChange={false}
-                        >
-                          <Dropdown.Menu>
-                            <Link to="/edit-profile">
-                              <Dropdown.Item
-                                icon="edit"
-                                text="Edit Profile"
-                                onClick={this.props.onEditClick}
-                              />
-                            </Link>
-                            <Dropdown.Item
-                              icon="globe"
-                              text={toggle_text}
-                              onClick={this.onToggleClick}
-                            />
-                          </Dropdown.Menu>
-                        </Dropdown>
-                      </Menu.Menu>
-                    </Menu>
-                  </div>
+                        <Dropdown.Menu className="notification-pane compact" style={{maxWidth: 300}}>
+                          <NotificationGroup
+                            user={this.props.user_id}
+                            onTeamPageClick={this.props.onTeamPageClick}
+                          />
+                        </Dropdown.Menu>
+                      </Dropdown>
+                      <Dropdown
+                        item="item"
+                        icon="user"
+                        direction="left"
+                        closeOnChange={false}
+                      >
+                        <Dropdown.Menu>
+                          <Dropdown.Item
+                            icon="edit"
+                            text="Edit Profile"
+                            onClick={this.props.onEditClick}
+                          />
+                          <Dropdown.Item
+                            icon="globe"
+                            text={toggle_text}
+                            onClick={this.onToggleClick}
+                          />
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </Menu.Menu>
+                  </Menu>
                 </div>
             );
           }

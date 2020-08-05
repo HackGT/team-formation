@@ -3,26 +3,45 @@ schema {
     mutation: Mutation
 }
 
+enum NotificationType {
+    USER_JOIN_TEAM
+    TEAM_REQUEST_USER
+    USER_JOIN_USER
+    USER_REQUEST_USER
+}
+
+union Source = User | Team
+
 type Query {
-    user(skill: String, name: String, email: String, grad_year: String, school: String, visible: Int): [User!]!
-    user_profile(): User!
-    get_teams(name: String, picture: String, team_id: String, interests: [String], description: String, public: Boolean): [Team!]!
+    users(search: String, skill: String, name: String, email: String, grad_year: String, school: String, visible: Int): [User!]!
+    user(user_id: String): User!
+    user_profile(uuid: String): User!
+    get_teams(search: String, name: String, picture: String, team_id: String, interests: String, description: String, public: Boolean): [Team!]!
+    notifications(receiver_type: NotificationType, receiver_id: String): [Notification!]!
+    team_notifications: [Notification!]!
 }
 
 type Mutation {
     toggle_visibility(uuid: String): User!
     update_user(uuid: String, name: String email: String, grad_year: String, school: String, contact: String, skills: [String], experience: String, contact_method: String): User!
-    add_user_to_team(user_id: String, team_id: String): Team
+    accept_team_request(notification_id: String): Team
+    accept_user_request(notification_id: String): Team
+    join_users_in_team(user1: String, user2: String): Team
+    make_team_request(team_id: String, user_id: String, bio: String, idea: String): Notification
+    make_user_request(user_id: String, bio: String, idea: String): Notification
 }
 
 type Team {
+    id: ID
     name: String
     picture: String
     members: [User]
     interests: [String]
     description: String
+    notifications: [Notification!]!
     public: Boolean
 }
+
 type User {
     id: ID
     uuid: String
@@ -37,4 +56,15 @@ type User {
     contact_method: String
     visible: Int
     team: Team
+}
+
+type Notification {
+    id: ID
+    message: String
+    bio: String
+    idea: String
+    sender: Source
+    senderType: String
+    receiver: ID
+    resolved: Boolean
 }

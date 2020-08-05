@@ -33,6 +33,7 @@
     "html-webpack-plugin": "4.0.0-alpha.2",
     "identity-obj-proxy": "3.0.0",
     "mini-css-extract-plugin": "0.4.3",
+    "npm-watch": "^0.6.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.1.0",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -67,9 +68,18 @@
   },
   "scripts": {
     "build": "node ./setup && react-scripts build",
+    "watch": "npm-watch",
     "test": "node ./setup && react-scripts test --env=jsdom",
     "start": "node ./setup &&react-scripts start",
     "relay": "relay-compiler --src ./src --schema ../server/api.graphql"
+  },
+  "watch": {
+    "build": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "js,jsx"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"

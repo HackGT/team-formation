@@ -19,6 +19,13 @@ export function createNew<T extends RootDocument>(model: mongoose.Model<T & mong
     return new model(doc);
 }
 
+export enum NotificationType {
+    USER_JOIN_TEAM,
+    TEAM_REQUEST_USER,
+    USER_JOIN_USER,
+    USER_REQUEST_USER
+}
+
 export interface IUser extends RootDocument {
     uuid: string;
     email: string;
@@ -39,13 +46,18 @@ export interface IUser extends RootDocument {
 
 export interface INotification extends RootDocument {
     message: string;
+    bio: string;
+    idea: string;
     notificationType: string;
-    sender: IUser | ITeam;
-    receiver: IUser | ITeam;
-    accepted: boolean;
+    sender: IUser & ITeam;
+    senderType: string;
+    receiverType: string;
+    receiver: IUser & ITeam;
+    resolved: boolean;
+
 }
 
-export interface ITeam {
+export interface ITeam extends RootDocument{
     uuid: string;
     creator: string;
     name: string;
@@ -59,8 +71,14 @@ export interface ITeam {
 export type IUserMongoose = IUser & mongoose.Document;
 export type ITeamMongoose = ITeam & mongoose.Document;
 export type INotificationMongoose = INotification & mongoose.Document;
+<<<<<<< HEAD
+=======
+
+>>>>>>> notification-endpoints
 export const Notification = mongoose.model<INotificationMongoose>("Notification", new mongoose.Schema({
     message: String,
+    bio: String,
+    idea: String,
     senderType: {
         type: String,
         required: true,
@@ -80,9 +98,11 @@ export const Notification = mongoose.model<INotificationMongoose>("Notification"
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         refPath: 'receiverType'
-    }
-}))
-export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
+    },
+    resolved: Boolean
+}));
+
+const TeamSchema = new mongoose.Schema({
     name: {
         required: true,
         type: String,
@@ -99,51 +119,74 @@ export const Team = mongoose.model<ITeamMongoose>("Team", new mongoose.Schema({
     },
     interests: [String],
     description: String,
+    notifications: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Notification"
+        }]
+    },
     public: Boolean
     },
     {
         usePushEach: true
-    }));
+    }
+);
 
-export const User = mongoose.model<IUserMongoose>("User", new mongoose.Schema({
-        uuid: {
-            type: String,
-            required: true,
-            index: true,
-            unique: true
-        },
-        email: {
-            type: String,
-            required: true,
-            unique: true
-        },
-        name: {
-            type: String,
-            required: false
-        },
-        school: {
-            type: String,
-            required: false
-        },
-        token: String,
-        grad_year: String,
-        skills: [String],
-        beginner: {
-            type: Boolean,
-            required: false
-        },
-        experience: String,
-        image: String,
-        auth_keys: [String],
-        admin: Boolean,
-        contact: String,
-        contact_method: String,
-        visible: Number,
-        team: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Team"
-        }
+TeamSchema.index({
+    name: 'text',
+    members: 'text',
+    interests: 'text',
+    description: 'text'
+})
+
+export const Team = mongoose.model<ITeamMongoose>("Team", TeamSchema);
+
+const UserSchema = new mongoose.Schema({
+    uuid: {
+        type: String,
+        required: true,
+        index: true,
+        unique: true
     },
-    {
-        usePushEach: true
-    }));
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    name: {
+        type: String,
+        required: false
+    },
+    school: {
+        type: String,
+        required: false
+    },
+    token: String,
+    grad_year: String,
+    skills: [String],
+    beginner: {
+        type: Boolean,
+        required: false
+    },
+    experience: String,
+    image: String,
+    auth_keys: [String],
+    admin: Boolean,
+    contact: String,
+    contact_method: String,
+    visible: Number,
+    team: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Team"
+    }
+});
+
+UserSchema.index({
+  name: 'text',
+  school: 'text',
+  grad_year: 'text',
+  skills: 'text',
+  experience: 'text'
+});
+
+export const User = mongoose.model<IUserMongoose>("User", UserSchema);

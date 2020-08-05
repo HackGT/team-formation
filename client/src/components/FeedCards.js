@@ -8,8 +8,8 @@ import './css/Feed.css';
 import environment from './Environment';
 
 const getUsersQuery = graphql`
-    query FeedCardsQuery($skill: String) {
-        user(skill:$skill) {
+    query FeedCardsQuery($skill: String, $grad_year: String, $school: String, $search: String) {
+        users(skill:$skill, grad_year:$grad_year, school:$school, search:$search) {
             name
             school
             grad_year
@@ -18,35 +18,46 @@ const getUsersQuery = graphql`
             experience
             visible
             uuid
+            id
         }
     }
 `;
 
 class FeedCards extends Component {
     render() {
+        let search = this.props.search;
         let skill = this.props.skill.join(',');
+        console.log(`skills: ${this.props.skill}`);
+        let grad_year = this.props.grad_year.join(',');
+        let school = this.props.school.join(',');
         return (
-            <div className='Cards-container'>
                 <QueryRenderer
                     environment={environment}
                     query={getUsersQuery}
                     variables={{
+                        search: search,
                         skill: skill,
+                        grad_year: grad_year,
+                        school: school
                     }}
                     render={({error,props}) => {
                         if (error) {
                            return <div>{error.message}</div>;
                         } else if (props) {
-                            let cards = props.user.map(user => {
+                            let cards = props.users.map(user => {
+                                console.log("Stuff: " + user.id);
                                 return <UserCard name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function (el) {
                                     return Boolean(el);
-                                })} experience={user.experience} />
+                                })} experience={user.experience} id={user.id} />
                             })
-                            return (<Card.Group centered itemsPerRow={4} className='center-group'>{cards}</Card.Group>);
+                            return (
+                                <div className='Cards-container'>
+                                    <Card.Group centered itemsPerRow={4} className='center-group'>{cards}</Card.Group>
+                                </div>
+                            );
                         }
                     }}
                 />
-            </div>
 
         );
 

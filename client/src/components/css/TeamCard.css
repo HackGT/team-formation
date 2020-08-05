@@ -25,3 +25,8 @@
 .contact-button {
 	width: 100%;
 }
+
+.ui.card,
+.ui.cards>.card {
+  background-color: #ded5eb;
+}

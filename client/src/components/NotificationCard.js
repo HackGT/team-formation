@@ -11,60 +11,61 @@ class NotificationCard extends Component {
       showTeamModal: false,
       showIndividualModal: false,
     };
-  }
-  closeIndividualModal = () => {
-    console.log("close individual");
-    this.setState({ showIndividualModal: false });
-  };
-  closeTeamModal = () => {
-    console.log("close team");
-    this.setState({ showTeamModal: false });
-  };
+    }
+    closeTeamModal = () => {
+      console.log("close team")
+      this.setState({ showTeamModal: false });
+    };
+    closeIndividualModal = () => {
+      console.log("close individual");
+      this.setState({ showIndividualModal: false });
+    };
 
-  render() {
-    console.log("render", this.state);
-    return (
-      <div>
-        <Card
-          className="notification"
-          onClick={(event, data) => {
-            console.log("hello");
-            console.log(event);
-            console.log(data);
-            this.props.type == "individual"
-              ? this.setState({ showIndividualModal: true })
-              : this.setState({ showTeamModal: true });
-          }}
-        >
-          <Card.Content className="content">
-            {this.props.message}
-            <div className="notification-buttonGroup">
-              <Button inverted color="green" icon="check" />
-              <Button inverted color="red" icon="close" />
-            </div>
-          </Card.Content>
-        </Card>
-        {this.props.type == "individual" ? (
-          <IndividualRequest
-            requestMessage={this.props.request}
-            userProjectIdea={this.props.idea}
-            {...this.props.meta}
-            showModal={this.state.showIndividualModal}
-            closeModal={this.closeIndividualModal}
-          />
-        ) : (
-          <TeamRequest
-            onTeamPageClick={this.props.onTeamPageClick}
-            teamRequestMessage={this.props.request}
-            teamProjectIdea={this.props.idea}
-            {...this.props.meta}
-            showModal={this.state.showTeamModal}
-            closeModal={this.closeTeamModal}
-          />
-        )}
-      </div>
-    );
+    render() {
+        console.log("render", this.state)
+        return (
+                <div>
+    				<Card className="notification" onClick={(event, data) => {
+                            console.log('hello')
+                            console.log(event)
+                            console.log(data)
+                            this.props.type == 'User' ?
+                            this.setState({showIndividualModal: true}) : this.setState({showTeamModal: true})
+                        }}>
+    					<Card.Content className="content">
+                            {this.props.message}
+                            <div className='notification-buttonGroup'>
+                                <Button inverted color='green' icon='check'>
+                                </Button>
+                                <Button inverted color='red' icon='close'>
+                                </Button>
+
+                            </div>
+    					</Card.Content>
+    				</Card>
+                    {
+                        this.props.type == 'User' ?
+                            <IndividualRequest
+                                requestMessage={this.props.request}
+                                userProjectIdea={this.props.idea}
+                                {...this.props.meta}
+                                showModal={this.state.showIndividualModal}
+                                closeModal={this.closeIndividualModal}
+                                sender={this.props.sender}
+                            />:
+                            <TeamRequest
+                                teamRequestMessage={this.props.request}
+                                teamProjectIdea={this.props.idea}
+                                {...this.props.meta}
+                                showModal={this.state.showTeamModal}
+                                closeModal={this.closeTeamModal}
+                                sender={this.props.sender}
+                            />
+                    }
+                </div>
+            )
   }
+
 }
 
 export default NotificationCard;
