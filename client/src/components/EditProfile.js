@@ -1,4 +1,12 @@
 import React, {Component} from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams,
+    Redirect
+} from "react-router-dom";
 import { Button, Divider, Dropdown, TextArea, Message, Form } from 'semantic-ui-react';
 import {QueryRenderer } from 'react-relay';
 import ContactDropdown from './ui_subcomponents/ContactDropdown';
@@ -10,8 +18,8 @@ import skills from '../constants/skills';
 import years from '../constants/years';
 import Filter from 'bad-words'
 const mutation = graphql`
-mutation EditProfileMutation($uuid: String, $name: String, $grad_year: String, $school: String, $skills: [String], $experience: String, $contact: String, $contact_method: String) {
-  update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school,  skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {
+mutation EditProfileMutation($name: String, $grad_year: String, $school: String, $skills: [String], $experience: String, $contact: String, $contact_method: String) {
+  update_user(name: $name, grad_year: $grad_year, school: $school,  skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {
     name
     grad_year
     school
@@ -23,8 +31,8 @@ mutation EditProfileMutation($uuid: String, $name: String, $grad_year: String, $
 `;
 
 const getUsersProfile = graphql`
-query EditProfileQuery($uuid: String) {
-    user_profile(uuid:$uuid) {
+query EditProfileQuery {
+    user_profile {
         name
         school
         grad_year
@@ -81,7 +89,6 @@ class EditProfile extends Component {
                 environment={environment}
                 query={getUsersProfile}
                 variables={{
-                    uuid: this.props.user_id,
                 }}
                 render={({ error, props }) => {
                     if (error) {
@@ -133,10 +140,14 @@ class EditProfile extends Component {
                                     </Form.Group>
                                     <div className="button-container">
                                         <Form.Group className="save-button-container">
-                                            <Button onClick={this.onCancelClick} className="save-button"> cancel </Button>
+                                            <Link to="/feed">
+                                                <Button onClick={this.onCancelClick} className="save-button"> cancel </Button>
+                                            </Link>
                                         </Form.Group>
                                         <Form.Group>
-                                            <Button onClick={this.onNextClick} className="save-button"> save </Button>
+                                            <Link to="/feed">
+                                                <Button onClick={this.onNextClick} className="save-button"> save </Button>
+                                            </Link>
                                         </Form.Group>
                                         <Form.Group>
                                             {this.state.cur_error_message}
@@ -271,7 +282,6 @@ class EditProfile extends Component {
 	            {
 	                mutation,
 	                variables: {
-	                    uuid: this.props.user_id,
 	                    name: this.state.name,
 	                    grad_year: this.state.grad_year,
 	                    school: this.state.school,
@@ -282,7 +292,6 @@ class EditProfile extends Component {
 	                }
 	            }
 	        );
-			this.props.onNextClick('feed', this.props.user_id);
 		}
 	};
 };

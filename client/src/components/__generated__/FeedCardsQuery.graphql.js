@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash dc00d0ea5fd20e406a1af9c179f9f288
+ * @relayHash ae4bd7bef6514aa6d90ceb336834ec7d
  */
 
 /* eslint-disable */
@@ -16,7 +16,7 @@ export type FeedCardsQueryVariables = {|
   search?: ?string,
 |};
 export type FeedCardsQueryResponse = {|
-  +user: $ReadOnlyArray<{|
+  +users: $ReadOnlyArray<{|
     +name: ?string,
     +school: ?string,
     +grad_year: ?string,
@@ -42,7 +42,7 @@ query FeedCardsQuery(
   $school: String
   $search: String
 ) {
-  user(skill: $skill, grad_year: $grad_year, school: $school, search: $search) {
+  users(skill: $skill, grad_year: $grad_year, school: $school, search: $search) {
     name
     school
     grad_year
@@ -87,7 +87,7 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "user",
+    "name": "users",
     "storageKey": null,
     "args": [
       {
@@ -204,11 +204,11 @@ return {
     "operationKind": "query",
     "name": "FeedCardsQuery",
     "id": null,
-    "text": "query FeedCardsQuery(\n  $skill: String\n  $grad_year: String\n  $school: String\n  $search: String\n) {\n  user(skill: $skill, grad_year: $grad_year, school: $school, search: $search) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
+    "text": "query FeedCardsQuery(\n  $skill: String\n  $grad_year: String\n  $school: String\n  $search: String\n) {\n  users(skill: $skill, grad_year: $grad_year, school: $school, search: $search) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '5cb2a548cce1abe352dc47ec01910641';
+(node/*: any*/).hash = 'f92f21f91193c45020dda4a481b127c5';
 module.exports = node;

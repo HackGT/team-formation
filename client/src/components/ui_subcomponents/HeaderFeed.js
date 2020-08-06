@@ -1,4 +1,11 @@
 import React, { Component } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 import TeamRequest from "./TeamRequest";
 import JoinTeam from "./JoinTeam";
 import "../css/Headers.css";
@@ -13,15 +20,15 @@ import IndividualRequest from "./IndividualRequest";
 import JoinIndividual from "./JoinIndividual";
 
 const mutation = graphql`
-  mutation HeaderFeedMutation($uuid: String) {
-    toggle_visibility(uuid: $uuid) {
+  mutation HeaderFeedMutation {
+    toggle_visibility {
       name
     }
   }
 `;
 const getName = graphql`
-  query HeaderFeedNameQuery($uuid: String) {
-    user_profile(uuid: $uuid) {
+  query HeaderFeedNameQuery {
+    user_profile {
       name
     }
   }
@@ -55,23 +62,6 @@ class Headers extends Component {
   };
 
   render() {
-    const teamInfo = {
-      teamName: "Team 23",
-      teamRequestMessage:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      teamProjectIdea:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    };
-    const user2Info = {
-      user2CardName: "Aakash G.",
-      user2CardInfo:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      user2School: "Georgia Tech",
-      user2GradYear: "2021",
-      user2Skills: ["React", "GraphQL", "CSS"],
-      user2Contact: "1234567890",
-      user2Name: "Aakash",
-    };
     let toggle_text;
     if (this.props.visible) {
       toggle_text = "Make Profile Public";
@@ -83,24 +73,24 @@ class Headers extends Component {
         environment={environment}
         query={getName}
         variables={{
-          uuid: this.props.user_id,
         }}
         render={({ error, props }) => {
           if (error) {
             return <div>{error.message}</div>;
           } else if (props) {
             return (
-              <div className="Header-container">
-                <div className="logout-button">
-                  <Menu borderless="borderless" size={"massive"}>
-                    <Menu.Item>
-                      <b>HackGT Team Formation</b>
-                    </Menu.Item>
-                    <Menu.Menu
-                      borderless="borderless"
-                      position="right"
-                      size={"massive"}
-                    >
+                <div className="Header-container">
+                    <Menu borderless="borderless" size={"massive"}>
+                      <Link to="/feed">
+                          <Menu.Item>
+                            <b>HackGT Team Formation</b>
+                          </Menu.Item>
+                      </Link>
+                      <Menu.Menu
+                        borderless="borderless"
+                        position="right"
+                        size={"massive"}
+                      >
                       <Menu.Item name={props.user_profile.name} />
                       <Menu.Item
                         icon="sign out"
@@ -113,8 +103,10 @@ class Headers extends Component {
                         direction="left"
                         closeOnChange={false}
                       >
-                        <Dropdown.Menu className="notification-pane">
-                          <NotificationGroup user={this.props.user_id}/>
+                        <Dropdown.Menu className="notification-pane compact" style={{maxWidth: 300}}>
+                          <NotificationGroup
+                            onTeamPageClick={this.props.onTeamPageClick}
+                          />
                         </Dropdown.Menu>
                       </Dropdown>
                       <Dropdown
@@ -124,11 +116,12 @@ class Headers extends Component {
                         closeOnChange={false}
                       >
                         <Dropdown.Menu>
-                          <Dropdown.Item
-                            icon="edit"
-                            text="Edit Profile"
-                            onClick={this.props.onEditClick}
-                          />
+                          <Link to="/edit-profile">
+                              <Dropdown.Item
+                                icon="edit"
+                                text="Edit Profile"
+                              />
+                          </Link>
                           <Dropdown.Item
                             icon="globe"
                             text={toggle_text}
@@ -139,7 +132,6 @@ class Headers extends Component {
                     </Menu.Menu>
                   </Menu>
                 </div>
-              </div>
             );
           }
         }}
@@ -150,10 +142,9 @@ class Headers extends Component {
     commitMutation(environment, {
       mutation,
       variables: {
-        uuid: this.props.user_id,
       },
     });
-    this.props.onNextClick("feed", this.props.user_id, !this.props.visible);
+    // this.props.onNextClick("feed", this.props.user_id, !this.props.visible);
   };
 }
 

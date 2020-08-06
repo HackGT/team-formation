@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import FeedTeamCards from './FeedTeamCards';
-import FeedCards from './FeedCards';
-import SideMenu from './SideMenu';
-import { Button, Grid } from 'semantic-ui-react';
-import { setState } from 'semantic-ui-react';
-import Members from './Members';
-import InputTagCollection from './InputTagCollection'
-import './css/Feed.css';
-import TeamInformation from './TeamInformation'
+import React, { Component } from "react";
+import FeedTeamCards from "./FeedTeamCards";
+import FeedCards from "./FeedCards";
+import SideMenu from "./SideMenu";
+import { Button, Grid } from "semantic-ui-react";
+import { setState } from "semantic-ui-react";
+import Members from "./Members";
+import InputTagCollection from "./InputTagCollection";
+import "./css/Feed.css";
+import TeamInformation from "./TeamInformation";
 
 class Feed extends Component {
 	state = {
@@ -19,7 +19,7 @@ class Feed extends Component {
 	}
 
     render() {
-		var cards = this.state.teams ? <FeedTeamCards search={this.state.searchTerm} onTeamPageClick={this.props.onTeamPageClick} skill={this.state.skills} user_id={this.props.user_id} /> : 
+		var cards = this.state.teams ? <FeedTeamCards search={this.state.searchTerm} onTeamPageClick={this.props.onTeamPageClick} skill={this.state.skills} user_id={this.props.user_id} /> :
 			<FeedCards search={this.state.searchTerm} skill={this.state.skills} grad_year={this.state.years} school={this.state.schools} user_id={this.props.user_id} />
 		return (
 			<div>
@@ -52,7 +52,7 @@ class Feed extends Component {
 										allFilterClickListener={this.allFilterClickListener}
 									/>
 								</div>
-							</div> 
+							</div>
 						: null}
 						<div className="feed-cards">
 							{cards}
@@ -63,23 +63,23 @@ class Feed extends Component {
         );
 	};
 
-	allFilterClickListener = (name, filterProp) => {
-		let index = this.state[filterProp].indexOf(name)
-		if (index > -1) {
-			this.state[filterProp].splice(index, 1)
-			this.setState({
-				[filterProp]: this.state[filterProp]
-			});
-		} else {
-			this.setState({
-				[filterProp]: [...this.state[filterProp], name]
-			})
-		}
-	};
+  allFilterClickListener = (name, filterProp) => {
+    let index = this.state[filterProp].indexOf(name);
+    if (index > -1) {
+      this.state[filterProp].splice(index, 1);
+      this.setState({
+        [filterProp]: this.state[filterProp],
+      });
+    } else {
+      this.setState({
+        [filterProp]: [...this.state[filterProp], name],
+      });
+    }
+  };
 
-	searchListener = e => {
-		this.setState({ searchTerm: e.target.value });
-	};
+  searchListener = (e) => {
+    this.setState({ searchTerm: e.target.value });
+  };
 
     onSearchClick = (search_string) => {
         this.setState({searchTerm:search_string});

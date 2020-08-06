@@ -13,7 +13,6 @@ mutation JoinIndividualMutation($user_id: String, $bio: String, $idea: String) {
     message
     bio
     idea
-    sender
     resolved
   }
 }
@@ -91,7 +90,7 @@ class JoinIndividual extends Component {
                             mutation,
                             variables: {
                               user_id: this.props.id,
-                              bio: this.state.bio, 
+                              bio: this.state.bio,
                               idea: this.state.idea
                             }
                           }
@@ -114,7 +113,7 @@ class JoinIndividual extends Component {
       bio: e.target.value
     });
   }
-  
+
   onIdeaChange = (e) => {
     this.setState({
       idea: e.target.value
