@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 // import {Fuse} from 'fuse.js'
-import { Dropdown, Input } from 'semantic-ui-react'
+import { Dropdown, Input, Icon } from 'semantic-ui-react'
 import './css/SideMenu.css'
 import skills from '../constants/skills'
 import schools from '../constants/schools'
+import years from '../constants/years'
 
 
 class SideMenu extends Component {
@@ -23,11 +24,11 @@ class SideMenu extends Component {
 			);
 		}
 
-		const years = ['First', 'Second','Third','Fourth', 'Fifth'];
 		const yearOptions = []
-		for (const year of years) {
+		for (const year in years) {
+			const name = years[year].value;
 			yearOptions.push(
-				{key:year, text:year, value:year, onClick: (e,{value}) => this.props.allFilterClickListener(value, "years")}
+				{key:name, text:name, value:name, onClick: (e,{value}) => this.props.allFilterClickListener(value, "years")}
 			);
 		}
 
@@ -39,23 +40,24 @@ class SideMenu extends Component {
 			);
 		}
 
+		if (this.props.onTeamPage) {
+			return (
+				<div className="SideMenu-container">
+					<Input placeholder="Search by Anything" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} icon={<Icon name='search' circular='true' link onClick={this.onSearchClick}/>} size='small' focus/>
+					<h3 className="h3">SEEKING SKILLS</h3>
+					<Dropdown id="dropdown" item text='Select Skills' search selection options={skillOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
+				</div>
+			);
+		}
 		return (
 			<div className="SideMenu-container">
-				<Input
-					icon={{ name: 'search', circular: true, link: true }}
-					placeholder='Search by anything'
-					onChange={this.onSearchChange}
-					onKeyPress={this.handleKeyPress}
-					size='small'
-					focus
-				/>
-				{/* <Input placeholder="Search by skills" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} icon='search' size='huge'/> */}
-				<h3 className="h3">Skills</h3>
+				<Input placeholder="Search by Anything" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} icon={<Icon name='search' circular='true' link onClick={this.onSearchClick}/>} size='small' focus/>
+				<h3 className="h3">SKILLS</h3>
 				<Dropdown id="dropdown" item text='Select Skills' search selection options={skillOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
-				<h3 className="h3">Years</h3>
+				<h3 className="h3">YEARS</h3>
 				<Dropdown item text='Select Years' search selection options={yearOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
-				<h3 className="h3">Schools</h3>
-				<Dropdown item text='Select Schools' search selection options={schoolOptions} fullTextSearch="true" scrolling closeOnChange='false' upward='false'/>
+				<h3 className="h3">SCHOOLS</h3>
+				<Dropdown item text='Select Schools' search selection options={schoolOptions} fullTextSearch="true" scrolling closeOnChange='false'/>
 			</div>
 		);
 	};
@@ -70,9 +72,7 @@ class SideMenu extends Component {
 		this.setState({
 			search_string: e.target.value
 		});
-		if(e.target.value.length > 0) {
-			this.props.onSearchClick(this.state.search_string);
-		}
+		// this.props.onSearchClick(e.target.value);
 	};
 
 	onSearchClick = (e) => {

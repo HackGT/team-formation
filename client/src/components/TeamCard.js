@@ -1,8 +1,19 @@
 import React, { Component } from "react";
 import { Button, Card, Popup, Container, Label } from "semantic-ui-react";
-import "./css/UserCard.css";
+import JoinTeam from './ui_subcomponents/JoinTeam';
+import './css/TeamCard.css';
 
 class TeamCard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+        showModal: false
+    }
+  }
+  closeModal = () => {
+    console.log("close individual")
+    this.setState({ showModal: false });
+  };
   render() {
     let contact;
     contact = (
@@ -20,7 +31,7 @@ class TeamCard extends Component {
     return (
       <Card className="card1" color="blue" centered="true">
         <Card.Content className="content">
-          <Card.Header>{this.props.name}</Card.Header>
+        <Card.Header><Container style={{overflow: 'auto', maxHeight: 60, minHeight: 60 }}>{this.props.name}</Container></Card.Header>
           <div className="ui divider" />
           <Card.Description className="card-description">
             <Container style={{ overflow: "auto", maxHeight: 42 }}>
@@ -31,20 +42,23 @@ class TeamCard extends Component {
         </Card.Content>
         <Card.Content extra>
           <div className="contact-button">
+            <Button basic color='blue' content='Join Team' onClick={() => this.setState({showModal: true})} />
+              <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
             <Button
               basic
-              onClick={this.onJoinTeamClick}
+              onClick={this.onViewTeamClick}
               color="blue"
-              content="Join Team!"
+              content="View Team"
             />
           </div>
         </Card.Content>
       </Card>
     );
   }
-  onJoinTeamClick = () => {
+  onViewTeamClick = () => {
     this.props.onTeamPageClick("some team_id");
   };
 }
 
 export default TeamCard;
+

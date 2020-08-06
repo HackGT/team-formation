@@ -10,7 +10,7 @@ import environment from './Environment';
 
 // edit this query to pull on the team members
 const getUsersQuery = graphql`
-    query FeedCardsQuery($skill: String) {
+    query MembersQuery($skill: String) {
         user(skill:$skill) {
             name
             school
