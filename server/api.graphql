@@ -20,7 +20,7 @@ type Query {
     team(team_id: String): Team!
     notifications(receiver_type: NotificationType, receiver_id: String): [Notification!]!
     team_notifications: [Notification]!
-    sent_team_notifications: [Notificaton]!
+    sent_team_notifications: [Notification]!
 }
 
 type Mutation {

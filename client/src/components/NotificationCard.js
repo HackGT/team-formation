@@ -54,8 +54,13 @@ class NotificationCard extends Component {
             </Card>
             {
                 this.props.type == 'User'
-                    ? <IndividualRequest requestMessage={this.props.request} userProjectIdea={this.props.idea} {...this.props.meta} showModal={this.state.showIndividualModal} closeModal={this.closeIndividualModal} sender={this.props.sender}/>
-                    : <TeamRequest teamRequestMessage={this.props.request} teamProjectIdea={this.props.idea} {...this.props.meta} showModal={this.state.showTeamModal} closeModal={this.closeTeamModal} sender={this.props.sender}/>
+                    ? <IndividualRequest requestMessage={this.props.request} userProjectIdea={this.props.idea} {...this.props.meta} showModal={this.state.showIndividualModal} closeModal={this.closeIndividualModal} sender={this.props.sender}
+                    notification_id={this.props.notification_id}
+                    />
+                    : <TeamRequest teamRequestMessage={this.props.request} teamProjectIdea={this.props.idea} {...this.props.meta} showModal={this.state.showTeamModal} closeModal={this.closeTeamModal}
+                    sender={this.props.sender}
+                    notification_id={this.props.notification_id}
+                    />
             }
         </div>)
     }

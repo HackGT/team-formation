@@ -17,6 +17,7 @@ import environment from './Environment';
 const getNotificationsQuery = graphql `
     query NotificationGroupQuery {
         notifications {
+            id
             bio
             idea
             sender {
@@ -47,7 +48,9 @@ class NotificationGroup extends Component {
                     var user = this.props.user_id
                     var notifications = props.notifications
                     var notificationCards = notifications.map(notif => {
-                        return <NotificationCard message={notif.bio} type={notif.senderType} request={notif.bio} idea={notif.idea} meta={notif.meta} sender={notif.sender}/>
+                        return <NotificationCard message={notif.bio} type={notif.senderType} request={notif.bio} idea={notif.idea} meta={notif.meta} sender={notif.sender}
+                        notification_id={notif.id}
+                            />
                     })
                     return (<Segment style={{
                             overflow: 'auto',
