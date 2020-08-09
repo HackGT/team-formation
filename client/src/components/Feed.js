@@ -19,7 +19,7 @@ class Feed extends Component {
 	}
 
     render() {
-		var cards = this.state.teams ? <FeedTeamCards search={this.state.searchTerm} onTeamPageClick={this.props.onTeamPageClick} skill={this.state.skills} user_id={this.props.user_id} /> : 
+		var cards = this.state.teams ? <FeedTeamCards search={this.state.searchTerm} onTeamPageClick={this.props.onTeamPageClick} skill={this.state.skills} user_id={this.props.user_id} /> :
 			<FeedCards search={this.state.searchTerm} skill={this.state.skills} grad_year={this.state.years} school={this.state.schools} user_id={this.props.user_id} />
 		return (
 			<div>
@@ -52,7 +52,7 @@ class Feed extends Component {
 										allFilterClickListener={this.allFilterClickListener}
 									/>
 								</div>
-							</div> 
+							</div>
 						: null}
 						<div className="feed-cards">
 							{cards}

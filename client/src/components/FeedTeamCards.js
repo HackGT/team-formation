@@ -28,7 +28,6 @@ class FeedTeamCards extends Component {
         let interests = this.props.skill.join(',');
         console.log(`interests: ${interests}`)
         return (
-            <div className='Cards-container'>
                 <QueryRenderer
                     environment={environment}
                     query={getTeamsQuery}
@@ -48,11 +47,15 @@ class FeedTeamCards extends Component {
                                     })} description={team.description} />
                                 }
                             })
-                            return (<Card.Group centered itemsPerRow={4} className='center-group'>{cards}</Card.Group>);
+                            return (
+                                <div className='Cards-container'>
+
+                                    <Card.Group centered itemsPerRow={4} className='center-group'>{cards}</Card.Group>
+                                </div>
+                            );
                         }
                     }}
                 />
-            </div>
 
         );
     };

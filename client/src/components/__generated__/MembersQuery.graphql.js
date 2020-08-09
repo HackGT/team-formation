@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 0479c65cc4e5fa295ea332a04f6a8b11
+ * @relayHash 0b64156d249210a65a00680b3f7f3591
  */
 
 /* eslint-disable */
@@ -13,7 +13,7 @@ export type MembersQueryVariables = {|
   skill?: ?string
 |};
 export type MembersQueryResponse = {|
-  +user: $ReadOnlyArray<{|
+  +users: $ReadOnlyArray<{|
     +name: ?string,
     +school: ?string,
     +grad_year: ?string,
@@ -35,7 +35,7 @@ export type MembersQuery = {|
 query MembersQuery(
   $skill: String
 ) {
-  user(skill: $skill) {
+  users(skill: $skill) {
     name
     school
     grad_year
@@ -134,7 +134,7 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "user",
+        "name": "users",
         "storageKey": null,
         "args": (v1/*: any*/),
         "concreteType": "User",
@@ -160,7 +160,7 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "user",
+        "name": "users",
         "storageKey": null,
         "args": (v1/*: any*/),
         "concreteType": "User",
@@ -189,11 +189,11 @@ return {
     "operationKind": "query",
     "name": "MembersQuery",
     "id": null,
-    "text": "query MembersQuery(\n  $skill: String\n) {\n  user(skill: $skill) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
+    "text": "query MembersQuery(\n  $skill: String\n) {\n  users(skill: $skill) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'c0aebea934b48ee830170ee2c9e28410';
+(node/*: any*/).hash = 'ae5eaf8fe46da6678543e9038198931d';
 module.exports = node;

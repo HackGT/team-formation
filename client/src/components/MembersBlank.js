@@ -10,7 +10,7 @@ import environment from './Environment';
 
 // edit this query to pull on the team members
 const getUsersQuery = graphql`
-    query MembersQuery($skill: String) {
+    query MembersBlankQuery($skill: String) {
         users(skill:$skill) {
             name
             school
@@ -55,11 +55,11 @@ class Members extends Component {
                           }
                           for (let j = 4 - users.length; j > 0; j--) {
                             memberCards.push(
-                              <Card>
+                              <Card> 
                                 <Card.Content className="add-card">
-                                  <Button icon>
+                                  {/* <Button icon>
                                     <Icon name='plus' />
-                                  </Button>
+                                  </Button> */}
                                 </Card.Content>
                               </Card>
                             )

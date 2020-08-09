@@ -4,6 +4,7 @@ import "../css/Modal.css";
 
 class TeamRequest extends Component {
   render() {
+    const sender = this.props.sender
     return (
       <Modal
         closeIcon
@@ -44,7 +45,7 @@ class TeamRequest extends Component {
                       }}
                       onClick={this.onViewTeamClick}
                     >
-                      View more about {this.props.teamName}
+                      View more about {sender.name}
                     </Button>
                   </div>
                 </div>
