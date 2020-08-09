@@ -9,6 +9,8 @@ class IndividualRequest extends Component {
       <Modal
         style={{
           padding: 10,
+          background:
+            "linear-gradient(180deg, #656CAE 0%, rgba(255, 255, 255, 0) 100%), #8BB2C2",
         }}
         closeIcon
         open={this.props.showModal}
@@ -17,12 +19,14 @@ class IndividualRequest extends Component {
         }}
       >
         <Modal.Content
+          style={{
+            background:
+              "linear-gradient(180deg, #656CAE 0%, rgba(255, 255, 255, 0) 100%), #8BB2C2",
+          }}
         >
           <Modal.Description>
             <div class="background">
-              <p class="header">
-                {this.props.name} wants to team up with you!
-              </p>
+              <p class="header">{this.props.name} wants to team up with you!</p>
               <div class="row">
                 <div class="modal3Column">
                   <div class="modal3Column1">
@@ -38,26 +42,32 @@ class IndividualRequest extends Component {
                 </div>
                 <div class="modal3Column2">
                   <div class="modal3Column3">
-                    <p>{this.props.name}'s Request Message:</p>
+                    <p class="user1FirstName">
+                      {this.props.name}'s Request Message:
+                    </p>
                     <p class="user1RequestMessage">
                       {this.props.userRequestMessage}
                     </p>
-                    <p class="user1FirstName">
+                    <p
+                      class="user1FirstName"
+                      style={{
+                        marginTop: 30,
+                      }}
+                    >
                       {this.props.name}'s Project Idea:
                     </p>
-                    <p class="user1ProjectIdea">
-                      {this.props.userProjectIdea}
-                    </p>
+                    <p class="user1ProjectIdea">{this.props.userProjectIdea}</p>
                   </div>
                 </div>
               </div>
               <div class="flex-container-modal3">
                 <div class="modal3Button">
                   <Button
-                    basic="basic"
-                    color="black"
                     style={{
-                      borderRadius: 20,
+                      borderRadius: 12,
+                      color: "white",
+                      background: "rgba(255, 255, 255, 0.22)",
+                      fontFamily: "Quicksand-Bold",
                     }}
                     onClick={() => {
                       this.props.closeModal();
@@ -68,10 +78,11 @@ class IndividualRequest extends Component {
                 </div>
                 <div class="modal3Button">
                   <Button
-                    basic="basic"
-                    color="black"
                     style={{
-                      borderRadius: 20,
+                      borderRadius: 12,
+                      color: "white",
+                      background: "rgba(255, 255, 255, 0.22)",
+                      fontFamily: "Quicksand-Bold",
                     }}
                     onClick={() => {
                       this.props.closeModal();

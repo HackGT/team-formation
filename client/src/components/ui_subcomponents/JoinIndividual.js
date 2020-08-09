@@ -2,21 +2,25 @@ import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 import "../css/Modal.css";
 import UserCard from "../UserCard";
-import {commitMutation } from 'react-relay';
-import {graphql} from 'babel-plugin-relay/macro';
-import environment from '../Environment';
+import { commitMutation } from "react-relay";
+import { graphql } from "babel-plugin-relay/macro";
+import environment from "../Environment";
 
 const mutation = graphql`
-mutation JoinIndividualMutation($user_id: String, $bio: String, $idea: String) {
-  make_user_request(user_id: $user_id, bio: $bio, idea: $idea) {
-    id
-    message
-    bio
-    idea
-    sender
-    resolved
+  mutation JoinIndividualMutation(
+    $user_id: String
+    $bio: String
+    $idea: String
+  ) {
+    make_user_request(user_id: $user_id, bio: $bio, idea: $idea) {
+      id
+      message
+      bio
+      idea
+      sender
+      resolved
+    }
   }
-}
 `;
 
 class JoinIndividual extends Component {
@@ -25,7 +29,8 @@ class JoinIndividual extends Component {
       <Modal
         style={{
           padding: 10,
-          backgroundColor: "#c4c4c4",
+          background:
+            "linear-gradient(180deg, #656CAE 0%, rgba(255, 255, 255, 0) 100%), #8BB2C2",
         }}
         closeIcon
         open={this.props.showModal}
@@ -35,7 +40,8 @@ class JoinIndividual extends Component {
       >
         <Modal.Content
           style={{
-            backgroundColor: "#c4c4c4",
+            background:
+              "linear-gradient(180deg, #656CAE 0%, rgba(255, 255, 255, 0) 100%), #8BB2C2",
           }}
         >
           <Modal.Description>
@@ -45,12 +51,12 @@ class JoinIndividual extends Component {
                 <div class="modal4-column">
                   <div class="modal4-column1">
                     <UserCard
-                        name={this.props.name}
-                        school={this.props.school}
-                        grad_year={this.props.grad_year}
-                        experience={this.props.experience}
-                        skills={this.props.skills}
-                        contact={this.props.contact}
+                      name={this.props.name}
+                      school={this.props.school}
+                      grad_year={this.props.grad_year}
+                      experience={this.props.experience}
+                      skills={this.props.skills}
+                      contact={this.props.contact}
                     />
                   </div>
                 </div>
@@ -73,25 +79,23 @@ class JoinIndividual extends Component {
                     />
 
                     <Button
-                      basic="basic"
-                      color="black"
                       style={{
-                        borderRadius: 20,
-                        marginTop: 20,
+                        borderRadius: 12,
+                        marginTop: 25,
+                        color: "white",
+                        background: "rgba(255, 255, 255, 0.22)",
+                        fontFamily: "Quicksand-Bold",
                       }}
                       onClick={() => {
                         this.props.closeModal();
-                        commitMutation(
-                          environment,
-                          {
-                            mutation,
-                            variables: {
-                              user_id: this.props.id,
-                              bio: this.state.bio, 
-                              idea: this.state.idea
-                            }
-                          }
-                        )
+                        commitMutation(environment, {
+                          mutation,
+                          variables: {
+                            user_id: this.props.id,
+                            bio: this.state.bio,
+                            idea: this.state.idea,
+                          },
+                        });
                       }}
                     >
                       Submit
@@ -107,15 +111,15 @@ class JoinIndividual extends Component {
   }
   onBioChange = (e) => {
     this.setState({
-      bio: e.target.value
+      bio: e.target.value,
     });
-  }
-  
+  };
+
   onIdeaChange = (e) => {
     this.setState({
-      idea: e.target.value
+      idea: e.target.value,
     });
-  }
+  };
 }
 
 export default JoinIndividual;

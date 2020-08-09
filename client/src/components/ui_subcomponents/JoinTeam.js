@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 import "../css/Modal.css";
 import TeamCard from "../TeamCard";
-import {commitMutation } from 'react-relay';
-import {graphql} from 'babel-plugin-relay/macro';
-import environment from '../Environment';
+import { commitMutation } from "react-relay";
+import { graphql } from "babel-plugin-relay/macro";
+import environment from "../Environment";
 
 const mutation = graphql`
-mutation JoinTeamMutation($team_id: String, $bio: String, $idea: String) {
-  make_team_request(team_id: $team_id, bio: $bio, idea: $idea) {
-    id
-    idea
-    bio
+  mutation JoinTeamMutation($team_id: String, $bio: String, $idea: String) {
+    make_team_request(team_id: $team_id, bio: $bio, idea: $idea) {
+      id
+      idea
+      bio
+    }
   }
-}
 `;
 
 class JoinTeam extends Component {
@@ -22,7 +22,8 @@ class JoinTeam extends Component {
       <Modal
         style={{
           paddingTop: 10,
-          backgroundColor: "#c4c4c4",
+          background:
+            "linear-gradient(180deg, #656CAE 0%, rgba(255, 255, 255, 0) 100%), #8BB2C2",
         }}
         closeIcon
         open={this.props.showModal}
@@ -32,13 +33,19 @@ class JoinTeam extends Component {
       >
         <Modal.Content
           style={{
-            backgroundColor: "#c4c4c4",
+            background:
+              "linear-gradient(180deg, #656CAE 0%, rgba(255, 255, 255, 0) 100%), #8BB2C2",
           }}
         >
           <Modal.Description>
             <div class="background">
               <p class="header">Request Join {this.props.teamName}?</p>
               <textarea
+                style={{
+                  resize: "none",
+                  color: "#8895c1",
+                  fontFamily: "Quicksand-Bold",
+                }}
                 id="writeAMessage"
                 rows="7"
                 cols="63"
@@ -48,24 +55,22 @@ class JoinTeam extends Component {
               <div class="flex-container-modal3">
                 <div>
                   <Button
-                    basic="basic"
-                    color="black"
                     style={{
-                      marginTop: 20,
-                      borderRadius: 20,
+                      marginTop: 30,
+                      borderRadius: 12,
+                      color: "white",
+                      background: "rgba(255, 255, 255, 0.22)",
+                      fontFamily: "Quicksand-Bold",
                     }}
                     onClick={() => {
                       this.props.closeModal();
-                      commitMutation(
-                        environment,
-                        {
-                          mutation,
-                          variables: {
-                            team_id: this.props.id,
-                            bio: this.state.bio, 
-                          }
-                        }
-                      )
+                      commitMutation(environment, {
+                        mutation,
+                        variables: {
+                          team_id: this.props.id,
+                          bio: this.state.bio,
+                        },
+                      });
                     }}
                   >
                     Submit
@@ -80,9 +85,9 @@ class JoinTeam extends Component {
   }
   onBioChange = (e) => {
     this.setState({
-      bio: e.target.value
+      bio: e.target.value,
     });
-  }
+  };
 }
 
 export default JoinTeam;

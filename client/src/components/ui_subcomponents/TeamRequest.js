@@ -8,6 +8,8 @@ class TeamRequest extends Component {
       <Modal
         style={{
           padding: 10,
+          background:
+            "linear-gradient(180deg, #656CAE 0%, rgba(255, 255, 255, 0) 100%), #8BB2C2",
         }}
         closeIcon
         open={this.props.showModal}
@@ -15,7 +17,12 @@ class TeamRequest extends Component {
           this.props.closeModal();
         }}
       >
-        <Modal.Content>
+        <Modal.Content
+          style={{
+            background:
+              "linear-gradient(180deg, #656CAE 0%, rgba(255, 255, 255, 0) 100%), #8BB2C2",
+          }}
+        >
           <Modal.Description>
             <div class="background">
               <p class="header">
@@ -34,11 +41,11 @@ class TeamRequest extends Component {
                 <div class="flex-container1">
                   <div>
                     <Button
-                      basic
-                      color="black"
                       style={{
-                        borderRadius: 20,
-                        fontSize: 15,
+                        borderRadius: 12,
+                        color: "white",
+                        background: "rgba(255, 255, 255, 0.22)",
+                        fontFamily: "Quicksand-Bold",
                         padding: 12,
                       }}
                       onClick={() => {
@@ -52,10 +59,11 @@ class TeamRequest extends Component {
                 <div class="flex-container2">
                   <div class="buttonMargin">
                     <Button
-                      basic
-                      color="black"
                       style={{
-                        borderRadius: 20,
+                        borderRadius: 12,
+                        color: "white",
+                        background: "rgba(255, 255, 255, 0.22)",
+                        fontFamily: "Quicksand-Bold",
                       }}
                       onClick={() => {
                         this.props.closeModal();
@@ -66,10 +74,11 @@ class TeamRequest extends Component {
                   </div>
                   <div class="buttonMargin">
                     <Button
-                      basic
-                      color="black"
                       style={{
-                        borderRadius: 20,
+                        borderRadius: 12,
+                        color: "white",
+                        background: "rgba(255, 255, 255, 0.22)",
+                        fontFamily: "Quicksand-Bold",
                       }}
                       onClick={() => {
                         this.props.closeModal();

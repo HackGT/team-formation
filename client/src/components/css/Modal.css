@@ -1,5 +1,21 @@
+@font-face {
+  font-family: Lekton-Regular;
+  src: url("./fonts/lekton/Lekton-Regular.ttf");
+}
+
+@font-face {
+  font-family: Lekton-Bold;
+  src: url("./fonts/lekton/Lekton-Bold.ttf");
+}
+
+@font-face {
+  font-family: Quicksand-Bold;
+  src: url("./fonts/quicksand/Quicksand-Bold.ttf");
+}
+
 textarea::placeholder {
-  color: #000;
+  color: #8895c1;
+  font-family: Quicksand-Bold;
 }
 
 .background {
@@ -8,7 +24,9 @@ textarea::placeholder {
 
 .header {
   text-align: center;
-  font-size: 40px;
+  color: white;
+  font-size: 35px;
+  font-family: Lekton-Bold;
 }
 
 .modal1Margins {
@@ -18,22 +36,36 @@ textarea::placeholder {
 
 .requestMessage {
   margin-top: 60px;
+  color: white;
+  font-family: Quicksand-Bold;
+  font-size: 15px;
 }
 
 .requestMessageBody {
-  border: 1px solid #000;
-  border-radius: 7px;
+  border: transparent;
+  border-radius: 15px;
   padding: 20px;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  background: white;
 }
 
 .projectIdea {
   margin-top: 30px;
+  color: white;
+  font-family: Quicksand-Bold;
+  font-size: 15px;
 }
 
 .projectIdeaBody {
-  border: 1px solid #000;
-  border-radius: 7px;
+  border: transparent;
+  border-radius: 15px;
   padding: 20px;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  background: white;
 }
 
 .flex-container1 {
@@ -59,14 +91,14 @@ textarea::placeholder {
 }
 
 #writeAMessage {
-  margin-top: 35px;
-  /* background-color: #c4c4c4; */
-  border-radius: 7px;
-  border: 1px solid #000;
-  padding-top: 15px;
-  padding-left: 20px;
-  margin-right: 220px;
-  margin-left: 220px;
+  margin-top: 25px;
+  border-radius: 15px;
+  padding: 15px;
+  border-color: transparent;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .row {
@@ -84,7 +116,7 @@ textarea::placeholder {
 }
 
 .modal3Column2 {
-  display: flex;
+  display: inline-block;
   flex-direction: column;
   flex: 1;
 }
@@ -108,19 +140,29 @@ textarea::placeholder {
 }
 
 .user1RequestMessage {
-  border: 1px solid #000;
-  border-radius: 7px;
+  border: transparent;
+  border-radius: 15px;
   padding: 20px;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  background: white;
 }
 
 .user1FirstName {
-  margin-top: 30px;
+  color: white;
+  font-family: Quicksand-Bold;
+  font-size: 15px;
 }
 
 .user1ProjectIdea {
-  border: 1px solid #000;
-  border-radius: 7px;
+  border: transparent;
+  border-radius: 15px;
   padding: 20px;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  background: white;
 }
 
 .flex-container-modal3 {
@@ -143,21 +185,30 @@ textarea::placeholder {
 
 .modal4-column2 {
   margin: 25px;
+  text-align: center;
 }
 
 #introduceYourself {
-  /* background-color: #c4c4c4; */
-  border-radius: 7px;
-  border: 1px solid #000;
+  border-radius: 15px;
   padding-left: 15px;
   padding-top: 15px;
+  border-color: transparent;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  resize: none;
+  width: 100%;
 }
 
 #describeProject {
   margin-top: 50px;
-  /* background-color: #c4c4c4; */
-  border-radius: 7px;
-  border: 1px solid #000;
   padding-left: 15px;
   padding-top: 15px;
+  border-color: transparent;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  resize: none;
+  width: 100%;
 }

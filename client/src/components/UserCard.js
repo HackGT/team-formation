@@ -121,6 +121,7 @@ class UserCard extends Component {
         style={{
           boxShadow: "-20px 20px 0px -8px rgba(0, 0, 0, 0.20)",
           borderRadius: 15,
+          paddingBottom: 30,
         }}
       >
         <Card.Content className="content">
