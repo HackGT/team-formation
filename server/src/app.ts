@@ -70,6 +70,17 @@ passport.deserializeUser<IUser, string>((id, done) => {
         done(err, user!);
     });
 });
+
+let getTeam = async function(parent, args, context, info, req) {
+    if(!context._id) {
+        throw new Error("User is not logged in!")
+    }
+    let team = await Team.findById(args.team_id);
+    if(!team) {
+        throw new Error("Team not found!")
+    }
+    return team;
+}
 let getTeams = async function(parent, args, context, info, req) {
     console.log('getting teams..')
     let teams;
@@ -312,7 +323,39 @@ let updateUser = async function(parent, args, context, info, req) {
     if(!context._id) {
         throw new Error('User not logged in')
     }
-    return User.findByIdAndUpdate(context._id, { "$set": args }, { new: true });
+    return await User.findByIdAndUpdate(context._id, { "$set": args }, { new: true });
+}
+
+let updateTeam = async function(parent, args, context, info, req) {
+    console.log(context._id)
+    if(!context._id) {
+        throw new Error('User not logged in')
+    }
+    let user =  await User.findById(context._id).populate('team');
+    if(!user) {
+        throw new Error("User not found")
+    }
+    if(!user.team) {
+        throw new Error("User not on team")
+    }
+    return await Team.findByIdAndUpdate(user.team, { "$set": args }, { new: true });
+}
+
+let getSentTeamNotifications = async function(parent, args, context, info, req) {
+    if(!context._id) {
+        throw new Error("User not logged in")
+    }
+    let user = await User.findById(context._id);
+    if(!user) {
+        throw new Error("User not found")
+    }
+    if(!user.team) {
+        throw new Error("User not on teams")
+    }
+    return await Notification.find({
+        sender: user.team,
+        resolved: false
+    }).populate('receiver')
 }
 
 let getUserProfile = async function(parent, args, context, info, req) {
@@ -365,6 +408,7 @@ let acceptTeamRequest = async function(parent, args, context, info, req) {
     }
     throw new Error('Notification invalid')
 }
+
 let acceptUserRequest = async function(parent, args, context, info, req) {
     if (!context._id) {
         throw new Error('User not logged in')
@@ -595,14 +639,17 @@ const resolvers = {
 	Query: {
 		users: getUsers,
 	    user_profile: getUserProfile,
-		get_teams: getTeams,
+		teams: getTeams,
+        team: getTeam,
 		notifications: getUserNotifications,
 		team_notifications: getTeamNotifications,
+        sent_team_notifications: getSentTeamNotifications,
 		user: getUser
 	},
 	Mutation: {
 		toggle_visibility: toggleVisibility,
 		update_user: updateUser,
+        update_team: updateTeam,
 		accept_user_request: acceptUserRequest,
 		accept_team_request: acceptTeamRequest,
 		make_team_request: makeTeamRequest,
