@@ -16,17 +16,19 @@ type Query {
     users(search: String, skill: String, name: String, email: String, grad_year: String, school: String, visible: Int): [User!]!
     user(user_id: String): User!
     user_profile: User!
-    get_teams(search: String, name: String, picture: String, team_id: String, interests: String, description: String, public: Boolean): [Team!]!
+    teams(search: String, name: String, picture: String, team_id: String, interests: String, description: String, public: Boolean): [Team!]!
+    team(team_id: String): Team!
     notifications(receiver_type: NotificationType, receiver_id: String): [Notification!]!
-    team_notifications: [Notification!]!
+    team_notifications: [Notification]!
+    sent_team_notifications: [Notificaton]!
 }
 
 type Mutation {
     toggle_visibility: User!
     update_user(name: String email: String, grad_year: String, school: String, contact: String, skills: [String], experience: String, contact_method: String): User!
+    update_team(name: String, picture: String, interests: [String], description: String, public: Boolean): Team
     accept_team_request(notification_id: String): Team
     accept_user_request(notification_id: String): Team
-    join_users_in_team(user1: String, user2: String): Team
     make_team_request(team_id: String, user_id: String, bio: String, idea: String): Notification
     make_user_request(user_id: String, bio: String, idea: String): Notification
 }
