@@ -1,79 +1,71 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import UserCard from './UserCard';
-import { Card, Button, Icon } from 'semantic-ui-react';
+import {Card, Button, Icon} from 'semantic-ui-react';
 
-import { QueryRenderer } from 'react-relay';
-import { graphql } from 'babel-plugin-relay/macro';
+import {QueryRenderer} from 'react-relay';
+import {graphql} from 'babel-plugin-relay/macro';
 import './css/Members.css';
 import environment from './Environment';
 
-
 // edit this query to pull on the team members
-const getUsersQuery = graphql`
-    query MembersQuery($skill: String) {
-        users(skill:$skill) {
-            name
-            school
-            grad_year
-            contact
-            skills
-            experience
-            visible
-            uuid
+const getUsersQuery = graphql `
+    query MembersQuery {
+        user_profile {
+            team {
+                members {
+                    name
+                    school
+                    grad_year
+                    contact
+                    skills
+                    experience
+                }
+            }
         }
     }
 `;
 
 class Members extends Component {
-  render() {
-      return (
-          <div className='member-cards-container'>
-              <QueryRenderer
-                  environment={environment}
-                  query={getUsersQuery}
-                  variables={{
-                      skill: this.props.skill,
-                  }}
-                  render={({error,props}) => {
-                      if (error) {
-                         return <div>{error.message}</div>;
-                      } else if (props) {
-                          let memberCards = [];
+    render() {
+        return (<div className='member-cards-container'>
+            <QueryRenderer environment={environment} query={getUsersQuery} variables={{
+                }} render={({error, props}) => {
+                    if (error) {
+                        return <div>{error.message}</div>;
+                    } else if (props) {
+                        let memberCards = [];
 
-                          // sample users array
-                          let users = [];
-                          users.push(props.user[0]);
-                          users.push(props.user[1]);
+                        // sample users array
+                        let users = [];
+                        console.log(props.user_profile)
+                        if(props.user_profile.team) {
+                            users = props.user_profile.team.members;
+                        }
+                        // users.push(props.user[0]);
+                        // users.push(props.user[1]/);
 
-                          for (let i = 0; i < 2; i++) {
+                        for (let i = 0; i < users.length; i++) {
                             let user = users[i];
-                            memberCards.push(
-                              <UserCard name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function (el) {
-                                return Boolean(el);
-                              })} experience={user.experience} />
-                            )
-                          }
-                          for (let j = 4 - users.length; j > 0; j--) {
-                            memberCards.push(
-                              <Card>
+                            memberCards.push(<UserCard name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function(el) {
+                                    return Boolean(el);
+                                })} experience={user.experience}/>)
+                        }
+                        for (let j = 4 - users.length; j > 0; j--) {
+                            memberCards.push(<Card>
                                 <Card.Content className="add-card">
-                                  <Button icon>
-                                    <Icon name='plus' />
-                                  </Button>
+                                    <Button icon="icon">
+                                        <Icon name='plus'/>
+                                    </Button>
                                 </Card.Content>
-                              </Card>
-                            )
-                          }
+                            </Card>)
+                        }
 
-                          return (<Card.Group centered itemsPerRow={4} className='center-group'>{memberCards}</Card.Group>);
-                      }
-                  }}
-              />
-          </div>
+                        return (<Card.Group centered="centered" itemsPerRow={4} className='center-group'>{memberCards}</Card.Group>);
+                    }
+                }}/>
+        </div>);
 
-      );
-
-  };
+    };
 
 };
 
