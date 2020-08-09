@@ -132,7 +132,7 @@ let getUser = async function(parent, args, context, info, req) {
     if (!context._id) {
         throw new Error('User not logged in')
     }
-    let user = await User.findById(args.user_id)
+    let user = await User.findById(context._id)
     if (!user) {
         throw new Error('User not found')
     }
@@ -309,6 +309,9 @@ let getUsers = async function(parent, args, context, info, req) {
 
 let updateUser = async function(parent, args, context, info, req) {
     console.log(context._id)
+    if(!context._id) {
+        throw new Error('User not logged in')
+    }
     return User.findByIdAndUpdate(context._id, { "$set": args }, { new: true });
 }
 
@@ -560,7 +563,6 @@ let getTeamNotifications = async function(parent, args, context, info, req) {
         receiver: context.team,
         resolved: false
     })
-
 }
 
 // let createTeam = async function(args) {
@@ -574,38 +576,38 @@ let toggleVisibility = async function(parent, args, context, info, req) {
 let apiRouter = express.Router();
 
 const resolvers = {
-    Source: {
-        __resolveType(obj, context, info) {
-            console.log("OBJ")
-            console.log(obj)
-            console.log(context)
-            console.log(info)
-            if (context.team) {
-                console.log("team chosen")
-                return 'Team'
-            }
-            if (context._id) {
-                return 'User'
-            }
-            return null;
-        }
-    },
-    Query: {
-        users: getUsers,
-        user_profile: getUserProfile,
-        get_teams: getTeams,
-        notifications: getUserNotifications,
-        team_notifications: getTeamNotifications,
-        user: getUser
-    },
-    Mutation: {
-        toggle_visibility: toggleVisibility,
-        update_user: updateUser,
-        accept_user_request: acceptUserRequest,
-        accept_team_request: acceptTeamRequest,
-        make_team_request: makeTeamRequest,
-        make_user_request: makeUserRequest
-    }
+	Source: {
+		__resolveType(obj, context, info){
+			console.log("OBJ")
+			console.log(obj)
+			console.log(context)
+			console.log(info)
+			if(context.team) {
+				console.log("team chosen")
+				return 'Team'
+			}
+			if(context._id){
+				return 'User'
+			}
+			return null;
+		}
+	},
+	Query: {
+		users: getUsers,
+	    user_profile: getUserProfile,
+		get_teams: getTeams,
+		notifications: getUserNotifications,
+		team_notifications: getTeamNotifications,
+		user: getUser
+	},
+	Mutation: {
+		toggle_visibility: toggleVisibility,
+		update_user: updateUser,
+		accept_user_request: acceptUserRequest,
+		accept_team_request: acceptTeamRequest,
+		make_team_request: makeTeamRequest,
+		make_user_request: makeUserRequest
+	}
 };
 
 apiRouter.use("/user", userRoutes);
@@ -622,6 +624,7 @@ const server = new ApolloServer({
         },
     }
 });
+
 server.applyMiddleware({ app });
 // app.use('/graphql', bodyParser.json(), graphqlExpress({ schema } as GraphQLServerOptions));
 //

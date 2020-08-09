@@ -9,16 +9,18 @@ import environment from './Environment';
 
 // edit this query to pull on the team members
 const getUsersQuery = graphql `
-    query MembersQuery($skill: String) {
-        users(skill:$skill) {
-            name
-            school
-            grad_year
-            contact
-            skills
-            experience
-            visible
-            uuid
+    query MembersQuery {
+        user_profile {
+            team {
+                members {
+                    name
+                    school
+                    grad_year
+                    contact
+                    skills
+                    experience
+                }
+            }
         }
     }
 `;
@@ -27,7 +29,6 @@ class Members extends Component {
     render() {
         return (<div className='member-cards-container'>
             <QueryRenderer environment={environment} query={getUsersQuery} variables={{
-                    skill: this.props.skill
                 }} render={({error, props}) => {
                     if (error) {
                         return <div>{error.message}</div>;
@@ -36,10 +37,14 @@ class Members extends Component {
 
                         // sample users array
                         let users = [];
-                        users.push(props.user[0]);
-                        users.push(props.user[1]);
+                        console.log(props.user_profile)
+                        if(props.user_profile.team) {
+                            users = props.user_profile.team.members;
+                        }
+                        // users.push(props.user[0]);
+                        // users.push(props.user[1]/);
 
-                        for (let i = 0; i < 2; i++) {
+                        for (let i = 0; i < users.length; i++) {
                             let user = users[i];
                             memberCards.push(<UserCard name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function(el) {
                                     return Boolean(el);

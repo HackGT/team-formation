@@ -90,6 +90,7 @@ class Content extends Component {
                 </Route>
                 <ProtectedRoute loggedIn={this.state.loggedIn} exact="exact" path={["/", "/feed"]} visible={this.state.data.visible} header={HeaderFeed} component={Feed}/>
                 <ProtectedRoute loggedIn={this.state.loggedIn} exact="exact" path="/edit-profile" visible={this.state.data.visible} header={HeaderFeed} component={EditProfile}/>
+                <ProtectedRoute loggedIn={this.state.loggedIn} exact="exact" path="/team/:id" visible={this.state.data.visible} header={HeaderFeed} component={TeamPage}/>
             </Switch>
         </div>);
     }

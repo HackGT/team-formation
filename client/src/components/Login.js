@@ -2,14 +2,6 @@ import React, {Component} from 'react';
 import {Button} from 'semantic-ui-react';
 import './css/login-css/main.css';
 import './css/login-css/util.css';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useParams,
-    Redirect
-} from "react-router-dom";
 
 class Login extends Component {
     constructor(props) {
@@ -20,23 +12,6 @@ class Login extends Component {
             redirect: ""
         };
 
-        // this.onFetchLogin().then(() => {
-        //     var login_json = this.state.data;
-        //     console.log(login_json)
-        //     if (login_json.uuid) {
-        //         if (!login_json.school) {
-        //             console.log("edit profile")
-        //              this.props.onNextClick(login_json.uuid, login_json.visible);
-        //             this.setState({ redirect: "edit-profile" });
-        //              return <Redirect to="/edit-profile" />
-        //         } else {
-        //             console.log("feed")
-        //              this.props.onNextClick(login_json.uuid, login_json.visible);
-        //             this.setState({ redirect: "feed" })
-        //              return <Redirect to="/feed/" />
-        //         }
-        //     }
-        // });
     };
 
     render() {
@@ -86,22 +61,6 @@ class Login extends Component {
         </div>);
     };
 
-    // onFetchLogin = () => {
-    //     return fetch('/api/user/check', {
-    //         method: "GET",
-    //         credentials: "include"
-    //     })
-    //     .then(response => {
-    // 		return response.json();
-    //     })
-    //         .then(response => {
-    //         return new Promise((resolve, reject) => {
-    //             this.setState({data: response, user_id: response.uuid}, function() {
-    //                 resolve();
-    //             });
-    //         });
-    //     });
-    // };
 };
 
 export default Login;
