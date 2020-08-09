@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash adff5bb6c024730963ed53f8632956d4
+ * @relayHash 4c0850f7d8e463d8357a987f45abb273
  */
 
 /* eslint-disable */
@@ -9,9 +9,7 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type HeaderFeedMutationVariables = {|
-  uuid?: ?string
-|};
+export type HeaderFeedMutationVariables = {||};
 export type HeaderFeedMutationResponse = {|
   +toggle_visibility: {|
     +name: ?string
@@ -25,10 +23,8 @@ export type HeaderFeedMutation = {|
 
 
 /*
-mutation HeaderFeedMutation(
-  $uuid: String
-) {
-  toggle_visibility(uuid: $uuid) {
+mutation HeaderFeedMutation {
+  toggle_visibility {
     name
     id
   }
@@ -36,23 +32,7 @@ mutation HeaderFeedMutation(
 */
 
 const node/*: ConcreteRequest*/ = (function(){
-var v0 = [
-  {
-    "kind": "LocalArgument",
-    "name": "uuid",
-    "type": "String",
-    "defaultValue": null
-  }
-],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "uuid",
-    "variableName": "uuid",
-    "type": "String"
-  }
-],
-v2 = {
+var v0 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "name",
@@ -66,18 +46,18 @@ return {
     "name": "HeaderFeedMutation",
     "type": "Mutation",
     "metadata": null,
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [],
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
         "name": "toggle_visibility",
         "storageKey": null,
-        "args": (v1/*: any*/),
+        "args": null,
         "concreteType": "User",
         "plural": false,
         "selections": [
-          (v2/*: any*/)
+          (v0/*: any*/)
         ]
       }
     ]
@@ -85,18 +65,18 @@ return {
   "operation": {
     "kind": "Operation",
     "name": "HeaderFeedMutation",
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [],
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
         "name": "toggle_visibility",
         "storageKey": null,
-        "args": (v1/*: any*/),
+        "args": null,
         "concreteType": "User",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
+          (v0/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -112,11 +92,11 @@ return {
     "operationKind": "mutation",
     "name": "HeaderFeedMutation",
     "id": null,
-    "text": "mutation HeaderFeedMutation(\n  $uuid: String\n) {\n  toggle_visibility(uuid: $uuid) {\n    name\n    id\n  }\n}\n",
+    "text": "mutation HeaderFeedMutation {\n  toggle_visibility {\n    name\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '9f033dc9cde9962c95984917ae17dc8d';
+(node/*: any*/).hash = 'd68b2220786c360f6732d709278a74bd';
 module.exports = node;
