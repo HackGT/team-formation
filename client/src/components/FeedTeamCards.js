@@ -9,7 +9,7 @@ import environment from './Environment';
 
 const getTeamsQuery = graphql `
     query FeedTeamCardsQuery($interests: String, $search: String) {
-        get_teams(interests:$interests, search:$search) {
+        teams(interests:$interests, search:$search) {
             name
             interests
             description

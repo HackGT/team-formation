@@ -22,8 +22,8 @@ const getUserQuery = graphql`
 `;
 
 const acceptRequestMutation = graphql`
-    mutation IndividualRequestMutation($user_id: String) {
-        join_users_in_team(user2: $user_id) {
+    mutation IndividualRequestMutation($notification_id: String) {
+        accept_user_request(notification_id: $notification_id) {
             id
             name
         }
@@ -111,7 +111,7 @@ class IndividualRequest extends Component {
                                             {
                                                 mutation: acceptRequestMutation,
                                                 variables: {
-                                                    user_id: this.props.sender.id
+                                                    notification_id: this.props.notification_id
                                                 }
                                             }
                                         )
