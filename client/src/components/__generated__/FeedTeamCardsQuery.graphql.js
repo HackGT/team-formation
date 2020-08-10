@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash fbf9a011804afa2db797b78a765d0668
+ * @relayHash b9f6e09b25bb0cf59bc5fb4f4048f198
  */
 
 /* eslint-disable */
@@ -14,7 +14,7 @@ export type FeedTeamCardsQueryVariables = {|
   search?: ?string,
 |};
 export type FeedTeamCardsQueryResponse = {|
-  +get_teams: $ReadOnlyArray<{|
+  +teams: $ReadOnlyArray<{|
     +name: ?string,
     +interests: ?$ReadOnlyArray<?string>,
     +description: ?string,
@@ -37,7 +37,7 @@ query FeedTeamCardsQuery(
   $interests: String
   $search: String
 ) {
-  get_teams(interests: $interests, search: $search) {
+  teams(interests: $interests, search: $search) {
     name
     interests
     description
@@ -127,7 +127,7 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "get_teams",
+        "name": "teams",
         "storageKey": null,
         "args": (v1/*: any*/),
         "concreteType": "Team",
@@ -162,7 +162,7 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "get_teams",
+        "name": "teams",
         "storageKey": null,
         "args": (v1/*: any*/),
         "concreteType": "Team",
@@ -194,11 +194,11 @@ return {
     "operationKind": "query",
     "name": "FeedTeamCardsQuery",
     "id": null,
-    "text": "query FeedTeamCardsQuery(\n  $interests: String\n  $search: String\n) {\n  get_teams(interests: $interests, search: $search) {\n    name\n    interests\n    description\n    public\n    members {\n      name\n      id\n    }\n    id\n  }\n}\n",
+    "text": "query FeedTeamCardsQuery(\n  $interests: String\n  $search: String\n) {\n  teams(interests: $interests, search: $search) {\n    name\n    interests\n    description\n    public\n    members {\n      name\n      id\n    }\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '8c9ff520e37ef2f826f3fb9d74f0b7f4';
+(node/*: any*/).hash = '747ce25799ce9778b3b4df3d9f48618b';
 module.exports = node;

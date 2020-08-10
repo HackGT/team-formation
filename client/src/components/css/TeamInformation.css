@@ -9,10 +9,6 @@
     padding-bottom: 4%;
 }
 
-.team-card-container {
-    width: 40%;
-}
-
 .ui.card:after, .ui.cards:after {
     height: 40px;
 }

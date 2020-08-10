@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash d85d3e2bee2c2d73debd4896b2eacf9c
+ * @relayHash 28625187619ad35541e8d63ea79b4120
  */
 
 /* eslint-disable */
@@ -10,10 +10,10 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type IndividualRequestMutationVariables = {|
-  user_id?: ?string
+  notification_id?: ?string
 |};
 export type IndividualRequestMutationResponse = {|
-  +join_users_in_team: ?{|
+  +accept_user_request: ?{|
     +id: ?string,
     +name: ?string,
   |}
@@ -27,9 +27,9 @@ export type IndividualRequestMutation = {|
 
 /*
 mutation IndividualRequestMutation(
-  $user_id: String
+  $notification_id: String
 ) {
-  join_users_in_team(user2: $user_id) {
+  accept_user_request(notification_id: $notification_id) {
     id
     name
   }
@@ -40,7 +40,7 @@ const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
-    "name": "user_id",
+    "name": "notification_id",
     "type": "String",
     "defaultValue": null
   }
@@ -49,13 +49,13 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "join_users_in_team",
+    "name": "accept_user_request",
     "storageKey": null,
     "args": [
       {
         "kind": "Variable",
-        "name": "user2",
-        "variableName": "user_id",
+        "name": "notification_id",
+        "variableName": "notification_id",
         "type": "String"
       }
     ],
@@ -99,11 +99,11 @@ return {
     "operationKind": "mutation",
     "name": "IndividualRequestMutation",
     "id": null,
-    "text": "mutation IndividualRequestMutation(\n  $user_id: String\n) {\n  join_users_in_team(user2: $user_id) {\n    id\n    name\n  }\n}\n",
+    "text": "mutation IndividualRequestMutation(\n  $notification_id: String\n) {\n  accept_user_request(notification_id: $notification_id) {\n    id\n    name\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'cc1c48dacd802b652795954ce7e4d1b4';
+(node/*: any*/).hash = '7621351c839149eac1653d550572c24b';
 module.exports = node;

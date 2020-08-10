@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Card, Popup, Container, Label } from 'semantic-ui-react';
 import JoinTeam from './ui_subcomponents/JoinTeam';
 import './css/TeamCard.css';
+import { Link, useParams } from "react-router-dom";
 
 class TeamCard extends Component {
 	constructor(props) {
@@ -47,6 +48,13 @@ class TeamCard extends Component {
 					<div className='contact-button'>
 							<Button basic color='blue' content='Join Team' onClick={() => this.setState({showModal: true})} />
                             <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
+							<Link to="/team/:id">
+								<Button
+									basic
+									color="blue"
+									content="View Team"
+								/>
+							</Link>
 					</div>
 				</Card.Content>
 			</Card>
