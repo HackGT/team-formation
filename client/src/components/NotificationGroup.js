@@ -47,9 +47,12 @@ class NotificationGroup extends Component {
                     console.log(props.notifications)
                     var user = this.props.user_id
                     var notifications = props.notifications
+                    var colors = ["#A8C5D6", "#CCBEDF"];
+                    var count = 0;
                     var notificationCards = notifications.map(notif => {
                         return <NotificationCard message={notif.bio} type={notif.senderType} request={notif.bio} idea={notif.idea} meta={notif.meta} sender={notif.sender}
                         notification_id={notif.id}
+                        color={colors[count++ % 2]}
                             />
                     })
                     return (<Segment style={{

@@ -13,51 +13,79 @@ mutation JoinTeamMutation($team_id: String, $bio: String, $idea: String) {
     idea
     bio
   }
-}
-`;
-
+}`
 class JoinTeam extends Component {
-    render() {
-        return (<Modal style={{
-                paddingTop: 10,
-                backgroundColor: "#c4c4c4"
-            }} closeIcon="closeIcon" open={this.props.showModal} onClose={() => {
-                this.props.closeModal();
-            }}>
-            <Modal.Content style={{
-                    backgroundColor: "#c4c4c4"
-                }}>
-                <Modal.Description>
-                    <div class="background">
-                        <p class="header">Request Join {this.props.teamName}?</p>
-                        <textarea id="writeAMessage" rows="7" cols="63" placeholder="Write a message..." onChange={this.onBioChange}/>
-                        <div class="flex-container-modal3">
-                            <div>
-                                <Button basic="basic" color="black" style={{
-                                        marginTop: 20,
-                                        borderRadius: 20
-                                    }} onClick={() => {
-                                        this.props.closeModal();
-                                        commitMutation(environment, {
-                                            mutation,
-                                            variables: {
-                                                team_id: this.props.id,
-                                                bio: this.state.bio
-                                            }
-                                        })
-                                    }}>
-                                    Submit
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-                </Modal.Description>
-            </Modal.Content>
-        </Modal>);
-    }
-    onBioChange = (e) => {
-        this.setState({bio: e.target.value});
-    }
+  render() {
+    return (
+      <Modal
+        style={{
+          paddingTop: 10,
+          background:
+            "linear-gradient(180deg, #656CAE 0%, rgba(255, 255, 255, 0) 100%), #8BB2C2",
+        }}
+        closeIcon
+        open={this.props.showModal}
+        onClose={() => {
+          this.props.closeModal();
+        }}
+      >
+        <Modal.Content
+          style={{
+            background:
+              "linear-gradient(180deg, #656CAE 0%, rgba(255, 255, 255, 0) 100%), #8BB2C2",
+          }}
+        >
+          <Modal.Description>
+            <div class="background">
+              <p class="header">Request Join {this.props.teamName}?</p>
+              <textarea
+                style={{
+                  resize: "none",
+                  color: "#8895c1",
+                  fontFamily: "Quicksand-Bold",
+                }}
+                id="writeAMessage"
+                rows="7"
+                cols="63"
+                placeholder="Write a message..."
+                onChange={this.onBioChange}
+              />
+              <div class="flex-container-modal3">
+                <div>
+                  <Button
+                    style={{
+                      marginTop: 30,
+                      borderRadius: 12,
+                      color: "white",
+                      background: "rgba(255, 255, 255, 0.22)",
+                      fontFamily: "Quicksand-Bold",
+                    }}
+                    onClick={() => {
+                      this.props.closeModal();
+                      commitMutation(environment, {
+                        mutation,
+                        variables: {
+                          team_id: this.props.id,
+                          bio: this.state.bio,
+                        },
+                      });
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </Modal.Description>
+        </Modal.Content>
+      </Modal>
+    );
+  }
+  onBioChange = (e) => {
+    this.setState({
+      bio: e.target.value,
+    });
+  };
 }
 
 export default JoinTeam;

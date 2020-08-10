@@ -1,20 +1,40 @@
+@font-face {
+  font-family: Lekton-Regular;
+  src: url("./fonts/lekton/Lekton-Regular.ttf");
+}
+
+@font-face {
+  font-family: Lekton-Bold;
+  src: url("./fonts/lekton/Lekton-Bold.ttf");
+}
+
+@font-face {
+  font-family: Bavro-Regular;
+  src: url("./fonts/bavro/Bavro-Regular.ttf");
+}
+
+@font-face {
+  font-family: Quicksand-Bold;
+  src: url("./fonts/quicksand/Quicksand-Bold.ttf");
+}
+
 .Feed-container {
-	padding-top: 2%;
-	margin: 0 auto;
-	width: 90%;
-	display:flex;
-	flex-direction:row;
+  padding-top: 2%;
+  margin: 0 auto;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
 }
 
 .Cards-container {
-	/* padding-top: 2%; */
-	margin: 0 auto;
-	padding-left: 3%;
-	justify-content: left;
+  /* padding-top: 2%; */
+  margin: 0 auto;
+  padding-left: 3%;
+  justify-content: left;
 }
 
 .center-group {
-	margin: 0 auto;
+  margin: 0 auto;
 }
 
 .ui.buttons .button:first-child {
@@ -34,64 +54,71 @@
 }
 
 .button {
-	text-align: center;
-	padding-left: 20%;
+  text-align: center;
+  padding-left: 20%;
 }
 
 .content {
-	text-align: left;
+  text-align: left;
 }
 
 .card-description {
-	padding-bottom: 3%;
+  padding-bottom: 3%;
 }
 
 .card-container {
-	display: flex;
-	justify-content: center;
-	padding-bottom: 2%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2%;
 }
 
 .menu {
-	text-align: left;
+  text-align: left;
 }
 
 .user-input {
-	padding-left: 3%;
-	padding-bottom: 2%;
-	flex-direction: column;
+  padding-left: 3%;
+  padding-bottom: 2%;
+  flex-direction: column;
 }
 #dropdown-menu {
-	margin: 2%;
-	flex-direction: column;
+  margin: 2%;
+  flex-direction: column;
 }
 
 .Side-menu {
-	text-align: left;
-	padding-left: 10%;
-	padding-bottom: 10%
+  text-align: left;
+  padding-left: 10%;
+  padding-bottom: 10%;
+}
+.filters-applied {
+  padding-bottom: 1%;
+}
+
+.ui.buttons .button {
+  width: 110px;
+}
+
+.teamFormation {
+  font-family: Lekton-Bold;
+  font-size: 30px;
+  color: white;
+  float: left;
+  margin-left: 1%;
 }
 
 .switch-feed {
-	padding: 1%;
-	justify-content: center;
-	text-align: center;
+  padding: 1%;
+  text-align: center;
+  justify-content: center;
 }
 
-.filters-applied {
-	padding-bottom: 1%;
-}
-
-/* .filter-tags {
-	margin-bottom: 1%;
-} */
-
-/* * {
-	margin: 1%;
-} */
-
-.ui.buttons .button {
-	width: 110px;
+.HackGTitle {
+  color: white;
+  text-shadow: 0px 0px 8px #ffffff;
+  font-family: Bavro-Regular;
+  font-size: 25px;
+  margin-left: 2%;
 }
 
 .team-info {

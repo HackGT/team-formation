@@ -7,6 +7,11 @@ class TeamRequest extends Component {
     const sender = this.props.sender
     return (
       <Modal
+        style={{
+          padding: 10,
+          background:
+            "linear-gradient(180deg, #656CAE 0%, rgba(255, 255, 255, 0) 100%), #8BB2C2",
+        }}
         closeIcon
         open={this.props.showModal}
         onClose={() => {
@@ -15,7 +20,8 @@ class TeamRequest extends Component {
       >
         <Modal.Content
           style={{
-            backgroundColor: "#8fb6b3",
+            background:
+              "linear-gradient(180deg, #656CAE 0%, rgba(255, 255, 255, 0) 100%), #8BB2C2",
           }}
         >
           <Modal.Description>
@@ -37,11 +43,11 @@ class TeamRequest extends Component {
                   <div>
                     <Button
                       style={{
-                        border: "2px solid #F1D180",
-                        color: "#F1D180",
-                        background: "#8FB6B3",
-                        fontFamily: "Lekton-Bold",
-                        fontSize: 15,
+                        borderRadius: 12,
+                        color: "white",
+                        background: "rgba(255, 255, 255, 0.22)",
+                        fontFamily: "Quicksand-Bold",
+                        padding: 12,
                       }}
                       onClick={this.onViewTeamClick}
                     >
@@ -53,10 +59,10 @@ class TeamRequest extends Component {
                   <div class="buttonMargin">
                     <Button
                       style={{
-                        border: "2px solid #F1D180",
-                        color: "#F1D180",
-                        background: "#8FB6B3",
-                        fontFamily: "Lekton-Bold",
+                        borderRadius: 12,
+                        color: "white",
+                        background: "rgba(255, 255, 255, 0.22)",
+                        fontFamily: "Quicksand-Bold",
                       }}
                       onClick={() => {
                         this.props.closeModal();
@@ -68,10 +74,10 @@ class TeamRequest extends Component {
                   <div class="buttonMargin">
                     <Button
                       style={{
-                        border: "2px solid #F1D180",
-                        color: "#F1D180",
-                        background: "#8FB6B3",
-                        fontFamily: "Lekton-Bold",
+                        borderRadius: 12,
+                        color: "white",
+                        background: "rgba(255, 255, 255, 0.22)",
+                        fontFamily: "Quicksand-Bold",
                       }}
                       onClick={() => {
                         this.props.closeModal();

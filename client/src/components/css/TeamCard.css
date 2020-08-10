@@ -1,32 +1,50 @@
+@font-face {
+  font-family: Lekton-Regular;
+  src: url("./fonts/lekton/Lekton-Regular.ttf");
+}
+
+@font-face {
+  font-family: Lekton-Bold;
+  src: url("./fonts/lekton/Lekton-Bold.ttf");
+}
+
+@font-face {
+  font-family: Quicksand-Bold;
+  src: url("./fonts/quicksand/Quicksand-Bold.ttf");
+}
+
 .UserCard-container {
-	padding-top: 2%;
-	width: 100%
+  padding-top: 2%;
+  width: 100%;
 }
 
 .button {
-	text-align: center;
-	padding-left: 20%;
+  text-align: center;
+  padding-left: 20%;
 }
 
 .content {
-	text-align: left;
+  text-align: left;
 }
 
 .card-description {
-	padding-bottom: 3%;
+  padding-bottom: 3%;
 }
 
 .card-container {
-	display: flex;
-	justify-content: center;
-	padding-bottom: 2%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2%;
 }
 
 .contact-button {
-	width: 100%;
+  width: 100%;
 }
 
-.ui.card,
-.ui.cards>.card {
-  background-color: #ded5eb;
+body ::-webkit-scrollbar-thumb {
+  background: rgba(135, 147, 192, 0.5);
+}
+
+body ::-webkit-scrollbar-track {
+  background: rgba(153, 170, 201, 0.4);
 }

@@ -15,19 +15,18 @@ mutation JoinIndividualMutation($user_id: String, $bio: String, $idea: String) {
     idea
     resolved
   }
-}
-`;
+}`
 
 class JoinIndividual extends Component {
     render() {
         return (<Modal style={{
                 padding: 10,
-                backgroundColor: "#8FB6B3"
+                background: "linear-gradient(180deg, #656CAE 0%, rgba(255, 255, 255, 0) 100%), #8BB2C2"
             }} closeIcon="closeIcon" open={this.props.showModal} onClose={() => {
                 this.props.closeModal();
             }}>
             <Modal.Content style={{
-                    backgroundColor: "#8FB6B3"
+                    background: "linear-gradient(180deg, #656CAE 0%, rgba(255, 255, 255, 0) 100%), #8BB2C2"
                 }}>
                 <Modal.Description>
                     <div class="background">
@@ -40,19 +39,17 @@ class JoinIndividual extends Component {
                             </div>
                             <div class="modal3Column2">
                                 <div class="modal4-column2">
-                                    <div className="rectangle"/>
                                     <textarea id="introduceYourself" rows="8" cols="68" placeholder="Introduce yourself..." onChange={this.onBioChange}/>
 
                                     <div className="rectangle2"/>
                                     <textarea id="describeProject" rows="8" cols="68" placeholder="Describe your project idea..." onChange={this.onIdeaChange}/>
 
                                     <Button style={{
-                                            marginTop: 20,
-                                            border: "2px solid #F1D180",
-                                            color: "#F1D180",
-                                            background: "#8FB6B3",
-                                            fontFamily: "Lekton-Bold",
-                                            fontSize: 15
+                                            borderRadius: 12,
+                                            marginTop: 25,
+                                            color: "white",
+                                            background: "rgba(255, 255, 255, 0.22)",
+                                            fontFamily: "Quicksand-Bold"
                                         }} onClick={() => {
                                             this.props.closeModal();
                                             commitMutation(environment, {
@@ -62,7 +59,7 @@ class JoinIndividual extends Component {
                                                     bio: this.state.bio,
                                                     idea: this.state.idea
                                                 }
-                                            })
+                                            });
                                         }}>
                                         Submit
                                     </Button>
@@ -76,11 +73,11 @@ class JoinIndividual extends Component {
     }
     onBioChange = (e) => {
         this.setState({bio: e.target.value});
-    }
+    };
 
     onIdeaChange = (e) => {
         this.setState({idea: e.target.value});
-    }
+    };
 }
 
 export default JoinIndividual;

@@ -23,11 +23,35 @@ class Feed extends Component {
 			<FeedCards search={this.state.searchTerm} skill={this.state.skills} grad_year={this.state.years} school={this.state.schools} user_id={this.props.user_id} />
 		return (
 			<div>
+                <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
 				<div className="switch-feed">
-					<Button.Group>
-						<Button className='feed-toggle' onClick={this.feedTypeListener} basic={this.state.teams}>Individuals</Button>
-						<Button.Or />
-						<Button className='feed-toggle' onClick={this.feedTypeListener} basic={!this.state.teams}>Teams</Button>
+                     <span class="teamFormation">HackGT Team Formation</span>
+					<Button.Group
+                        style={{
+                          background: "rgba(255, 251, 251, 0.7)",
+                          borderRadius: 15,
+                          padding: 3,
+                        }}
+                    >
+						<Button onClick={this.feedTypeListener} basic={this.state.teams}
+                        style={{
+                          backgroundColor: "#A8C5D6",
+                          color: "white",
+                          borderRadius: 15,
+                          fontFamily: "Quicksand-Bold",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                            >Individuals</Button>
+						<Button onClick={this.feedTypeListener} basic={!this.state.teams}
+                        style={{
+                          backgroundColor: "#A8C5D6",
+                          color: "white",
+                          borderRadius: 15,
+                          fontFamily: "Quicksand-Bold",
+                        }}
+                            >Teams</Button>
 					</Button.Group>
 				</div>
 				<div className="Feed-container">
@@ -38,7 +62,6 @@ class Feed extends Component {
 							onTeamPage={this.state.teams}
 						/>
 					</div>
-					<div>
 						{this.state.skills.length || this.state.years.length || this.state.schools.length ?
 							<div className="user-input">
 								<div className="filters-applied">
@@ -57,7 +80,6 @@ class Feed extends Component {
 						<div className="feed-cards">
 							{cards}
 						</div>
-					</div>
 				</div>
 			</div>
         );

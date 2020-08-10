@@ -35,7 +35,8 @@ class NotificationCard extends Component {
     render() {
         console.log("render", this.state)
         return (<div>
-            <Card className="notification" onClick={(event, data) => {
+            <Card className="notification"
+                onClick={(event, data) => {
                     console.log('hello')
                     console.log(event)
                     console.log(data)
@@ -43,12 +44,14 @@ class NotificationCard extends Component {
                         ? this.setState({showIndividualModal: true})
                         : this.setState({showTeamModal: true})
                 }}>
-                <Card.Content className="content">
+                <Card.Content className="content" style={{
+                  backgroundColor: this.props.color,
+                  boxShadow: "rgba(0, 0, 0,0.2) 0px 4px 4px 0px",
+                }}>
                     {this.props.message}
                     <div className='notification-buttonGroup'>
-                        <Button inverted="inverted" color='green' icon='check'></Button>
-                        <Button inverted="inverted" color='red' icon='close'></Button>
-
+                        <Button inverted color="white" icon="check" />
+                        <Button inverted color="white" icon="close" />
                     </div>
                 </Card.Content>
             </Card>

@@ -1,10 +1,12 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 // import {Fuse} from 'fuse.js'
-import {Dropdown, Input, Icon} from 'semantic-ui-react'
-import './css/SideMenu.css'
-import skills from '../constants/skills'
-import schools from '../constants/schools'
-import years from '../constants/years'
+import {Dropdown, Input, Icon} from "semantic-ui-react";
+import "./css/SideMenu.css";
+import skills from "../constants/skills";
+import schools from "../constants/schools";
+import years from "../constants/years";
+
+import SideMenuPicture from "./css/assets/SideMenuPicture.svg";
 
 class SideMenu extends Component {
     constructor() {
@@ -54,7 +56,14 @@ class SideMenu extends Component {
                         this.onSearchClick
                     } />} size='small' focus="focus"/>
                 <h3 className="h3">SEEKING SKILLS</h3>
-                <Dropdown id="dropdown" item="item" text='Select Skills' search="search" selection="selection" options={skillOptions} fullTextSearch="true" scrolling="scrolling" closeOnChange='false'/>
+                <Dropdown id="dropdown" style={{
+                        background: "rgba(255, 255, 255, 0.22)",
+                        color: "white",
+                        fontFamily: "Quicksand-Bold",
+                        textAlign: "center",
+                        fontSize: 15,
+                        borderRadius: 12
+                    }} item="item" text='Select Skills' search="search" selection="selection" options={skillOptions} fullTextSearch="true" scrolling="scrolling" closeOnChange='false'/>
             </div>);
         }
         return (<div className="SideMenu-container">
@@ -62,16 +71,37 @@ class SideMenu extends Component {
                     this.onSearchClick
                 } />} size='small' focus="focus"/>
             <h3 className="h3">SKILLS</h3>
-            <Dropdown id="dropdown" item="item" text='Select Skills' search="search" selection="selection" options={skillOptions} fullTextSearch="true" scrolling="scrolling" closeOnChange='false'/>
+            <Dropdown id="dropdown" style={{
+                    background: "rgba(255, 255, 255, 0.22)",
+                    color: "white",
+                    fontFamily: "Quicksand-Bold",
+                    textAlign: "center",
+                    fontSize: 15,
+                    borderRadius: 12
+                }} item="item" text='Select Skills' search="search" selection="selection" options={skillOptions} fullTextSearch="true" scrolling="scrolling" closeOnChange='false'/>
             <h3 className="h3">YEARS</h3>
-            <Dropdown item="item" text='Select Years' search="search" selection="selection" options={yearOptions} fullTextSearch="true" scrolling="scrolling" closeOnChange='false'/>
+            <Dropdown item="item" style={{
+                    background: "rgba(255, 255, 255, 0.22)",
+                    color: "white",
+                    fontFamily: "Quicksand-Bold",
+                    textAlign: "center",
+                    fontSize: 15,
+                    borderRadius: 12
+                }} text='Select Years' search="search" selection="selection" options={yearOptions} fullTextSearch="true" scrolling="scrolling" closeOnChange='false'/>
             <h3 className="h3">SCHOOLS</h3>
-            <Dropdown item="item" text='Select Schools' search="search" selection="selection" options={schoolOptions} fullTextSearch="true" scrolling="scrolling" closeOnChange='false'/>
+            <Dropdown item="item" style={{
+                    background: "rgba(255, 255, 255, 0.22)",
+                    color: "white",
+                    fontFamily: "Quicksand-Bold",
+                    textAlign: "center",
+                    fontSize: 15,
+                    borderRadius: 12
+                }} text='Select Schools' search="search" selection="selection" options={schoolOptions} fullTextSearch="true" scrolling="scrolling" closeOnChange='false'/>
+            <img class="moveImage" src={SideMenuPicture} alt="React Logo"/>
         </div>);
     };
-
     handleKeyPress = (event) => {
-        if (event.key === 'Enter') {
+        if (event.key === "Enter") {
             this.props.onSearchClick(this.state.search_string);
         }
     };
