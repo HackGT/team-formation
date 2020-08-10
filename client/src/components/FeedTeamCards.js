@@ -37,7 +37,7 @@ class FeedTeamCards extends Component {
                     let cards = props.teams.map(team => {
                         if (team.public == true) {
                             console.log('rendering..');
-                            return <TeamCard name={team.name} interests={team.interests.filter(function(el) {
+                            return <TeamCard id={team.id} name={team.name} interests={team.interests.filter(function(el) {
                                     return Boolean(el);
                                 })} description={team.description}/>
                         }

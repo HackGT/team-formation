@@ -31,6 +31,7 @@ class TeamCard extends Component {
 		var count = 0;
 		var skill;
 		var viewskill;
+		let link = "/team/" + this.props.id;
         return (
 			<Card className="card1" basic={false} color='blue' centered='true'>
 				<Card.Content className="content">
@@ -48,7 +49,7 @@ class TeamCard extends Component {
 					<div className='contact-button'>
 							<Button basic color='blue' content='Join Team' onClick={() => this.setState({showModal: true})} />
                             <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
-							<Link to="/team/:id">
+							<Link to={link}>
 								<Button
 									basic
 									color="blue"
