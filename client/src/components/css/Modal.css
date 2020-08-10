@@ -1,4 +1,9 @@
 @font-face {
+  font-family: Chango-Regular;
+  src: url("./fonts/chango/Chango-Regular.ttf");
+}
+
+@font-face {
   font-family: Lekton-Regular;
   src: url("./fonts/lekton/Lekton-Regular.ttf");
 }
@@ -19,10 +24,10 @@ textarea::placeholder {
 }
 
 .background {
-  /* background-color: #c4c4c4; */
+  background-color: #8fb6b3;
 }
 
-.header {
+.modalHeader {
   text-align: center;
   color: white;
   font-size: 35px;
@@ -112,17 +117,22 @@ textarea::placeholder {
 }
 
 .modal3Column1 {
-  margin: 25px;
+  margin-right: 25px;
+  margin-left: 25px;
+  margin-bottom: 25px;
 }
 
 .modal3Column2 {
   display: inline-block;
   flex-direction: column;
+  text-align: center;
   flex: 1;
 }
 
 .modal3Column3 {
-  margin: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 25px;
 }
 
 .cardName {
@@ -181,6 +191,7 @@ textarea::placeholder {
 
 .modal4-column1 {
   margin: 25px;
+  margin-top: 0px;
 }
 
 .modal4-column2 {

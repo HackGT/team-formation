@@ -36,6 +36,23 @@
 .center-group {
   margin: 0 auto;
 }
+
+.ui.buttons .button:first-child {
+	border: solid;
+    border-width: thin;
+	border-color: #f2da80;
+}
+
+.ui.buttons .button {
+    border: solid;
+    border-width: thin;
+	border-color: #f2da80;
+}
+
+.ui.button.feed-toggle {
+	background-color: #f2da80;
+}
+
 .button {
   text-align: center;
   padding-left: 20%;
@@ -102,4 +119,29 @@
   font-family: Bavro-Regular;
   font-size: 25px;
   margin-left: 2%;
+}
+
+.team-info {
+	padding: 3%;
+}
+
+.team-info-container {
+	padding-top: 2%;
+	margin: 0 auto;
+	width: 90%;
+	display:flex;
+	flex-direction:row;
+}
+
+.team-card-container {
+	flex: 1;
+    padding-right: 2%;
+}
+
+.ui.centered.cards {
+    justify-content: left;
+}
+
+.ui.card > .content, .ui.cards > .card > .content {
+	padding-bottom: 0%;
 }

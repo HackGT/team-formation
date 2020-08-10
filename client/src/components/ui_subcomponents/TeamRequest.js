@@ -4,6 +4,7 @@ import "../css/Modal.css";
 
 class TeamRequest extends Component {
   render() {
+    const sender = this.props.sender
     return (
       <Modal
         style={{
@@ -25,17 +26,17 @@ class TeamRequest extends Component {
         >
           <Modal.Description>
             <div class="background">
-              <p class="header">
-                {this.props.teamName} wants you to join their team!
+              <p class="modalHeader">
+                {this.props.teamName} Wants You to Join Their Team!
               </p>
               <div class="modal1Margins">
                 <p class="requestMessage">
-                  {this.props.teamName}'s request message:
+                  {this.props.teamName}'s Request Message:
                 </p>
                 <p class="requestMessageBody">
                   {this.props.teamRequestMessage}
                 </p>
-                <p class="projectIdea">{this.props.teamName}'s project idea:</p>
+                <p class="projectIdea">{this.props.teamName}'s Project Idea:</p>
                 <p class="projectIdeaBody">{this.props.teamProjectIdea}</p>
 
                 <div class="flex-container1">
@@ -48,11 +49,9 @@ class TeamRequest extends Component {
                         fontFamily: "Quicksand-Bold",
                         padding: 12,
                       }}
-                      onClick={() => {
-                        this.props.closeModal();
-                      }}
+                      onClick={this.onViewTeamClick}
                     >
-                      View more about {this.props.teamName}
+                      View more about {sender.name}
                     </Button>
                   </div>
                 </div>
@@ -95,6 +94,10 @@ class TeamRequest extends Component {
       </Modal>
     );
   }
+  onViewTeamClick = () => {
+    this.props.onTeamPageClick("some team_id");
+    this.props.closeModal();
+  };
 }
 
 export default TeamRequest;

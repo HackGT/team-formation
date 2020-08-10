@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 0479c65cc4e5fa295ea332a04f6a8b11
+ * @relayHash 6d447e2993b792053877d4e8d9a51fb9
  */
 
 /* eslint-disable */
@@ -9,20 +9,20 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type MembersQueryVariables = {|
-  skill?: ?string
-|};
+export type MembersQueryVariables = {||};
 export type MembersQueryResponse = {|
-  +user: $ReadOnlyArray<{|
-    +name: ?string,
-    +school: ?string,
-    +grad_year: ?string,
-    +contact: ?string,
-    +skills: ?$ReadOnlyArray<?string>,
-    +experience: ?string,
-    +visible: ?number,
-    +uuid: ?string,
-  |}>
+  +user_profile: {|
+    +team: ?{|
+      +members: ?$ReadOnlyArray<?{|
+        +name: ?string,
+        +school: ?string,
+        +grad_year: ?string,
+        +contact: ?string,
+        +skills: ?$ReadOnlyArray<?string>,
+        +experience: ?string,
+      |}>
+    |}
+  |}
 |};
 export type MembersQuery = {|
   variables: MembersQueryVariables,
@@ -32,93 +32,72 @@ export type MembersQuery = {|
 
 
 /*
-query MembersQuery(
-  $skill: String
-) {
-  user(skill: $skill) {
-    name
-    school
-    grad_year
-    contact
-    skills
-    experience
-    visible
-    uuid
+query MembersQuery {
+  user_profile {
+    team {
+      members {
+        name
+        school
+        grad_year
+        contact
+        skills
+        experience
+        id
+      }
+      id
+    }
     id
   }
 }
 */
 
 const node/*: ConcreteRequest*/ = (function(){
-var v0 = [
-  {
-    "kind": "LocalArgument",
-    "name": "skill",
-    "type": "String",
-    "defaultValue": null
-  }
-],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "skill",
-    "variableName": "skill",
-    "type": "String"
-  }
-],
-v2 = {
+var v0 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "name",
   "args": null,
   "storageKey": null
 },
-v3 = {
+v1 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "school",
   "args": null,
   "storageKey": null
 },
-v4 = {
+v2 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "grad_year",
   "args": null,
   "storageKey": null
 },
-v5 = {
+v3 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "contact",
   "args": null,
   "storageKey": null
 },
-v6 = {
+v4 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "skills",
   "args": null,
   "storageKey": null
 },
-v7 = {
+v5 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "experience",
   "args": null,
   "storageKey": null
 },
-v8 = {
+v6 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "visible",
-  "args": null,
-  "storageKey": null
-},
-v9 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "uuid",
+  "name": "id",
   "args": null,
   "storageKey": null
 };
@@ -129,25 +108,45 @@ return {
     "name": "MembersQuery",
     "type": "Query",
     "metadata": null,
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [],
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "user",
+        "name": "user_profile",
         "storageKey": null,
-        "args": (v1/*: any*/),
+        "args": null,
         "concreteType": "User",
-        "plural": true,
+        "plural": false,
         "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          (v5/*: any*/),
-          (v6/*: any*/),
-          (v7/*: any*/),
-          (v8/*: any*/),
-          (v9/*: any*/)
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "team",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "Team",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "members",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "User",
+                "plural": true,
+                "selections": [
+                  (v0/*: any*/),
+                  (v1/*: any*/),
+                  (v2/*: any*/),
+                  (v3/*: any*/),
+                  (v4/*: any*/),
+                  (v5/*: any*/)
+                ]
+              }
+            ]
+          }
         ]
       }
     ]
@@ -155,32 +154,48 @@ return {
   "operation": {
     "kind": "Operation",
     "name": "MembersQuery",
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [],
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "user",
+        "name": "user_profile",
         "storageKey": null,
-        "args": (v1/*: any*/),
+        "args": null,
         "concreteType": "User",
-        "plural": true,
+        "plural": false,
         "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          (v5/*: any*/),
-          (v6/*: any*/),
-          (v7/*: any*/),
-          (v8/*: any*/),
-          (v9/*: any*/),
           {
-            "kind": "ScalarField",
+            "kind": "LinkedField",
             "alias": null,
-            "name": "id",
+            "name": "team",
+            "storageKey": null,
             "args": null,
-            "storageKey": null
-          }
+            "concreteType": "Team",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "members",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "User",
+                "plural": true,
+                "selections": [
+                  (v0/*: any*/),
+                  (v1/*: any*/),
+                  (v2/*: any*/),
+                  (v3/*: any*/),
+                  (v4/*: any*/),
+                  (v5/*: any*/),
+                  (v6/*: any*/)
+                ]
+              },
+              (v6/*: any*/)
+            ]
+          },
+          (v6/*: any*/)
         ]
       }
     ]
@@ -189,11 +204,11 @@ return {
     "operationKind": "query",
     "name": "MembersQuery",
     "id": null,
-    "text": "query MembersQuery(\n  $skill: String\n) {\n  user(skill: $skill) {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n}\n",
+    "text": "query MembersQuery {\n  user_profile {\n    team {\n      members {\n        name\n        school\n        grad_year\n        contact\n        skills\n        experience\n        id\n      }\n      id\n    }\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'c0aebea934b48ee830170ee2c9e28410';
+(node/*: any*/).hash = 'f3900c2b67de63c1f97f5c341e62ed33';
 module.exports = node;

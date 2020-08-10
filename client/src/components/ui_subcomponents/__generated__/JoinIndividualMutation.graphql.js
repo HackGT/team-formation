@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 0a064e05452b3f8465784bbafd9c0b02
+ * @relayHash 6b1b801b53f79f5046b8e65a614767a1
  */
 
 /* eslint-disable */
@@ -20,7 +20,6 @@ export type JoinIndividualMutationResponse = {|
     +message: ?string,
     +bio: ?string,
     +idea: ?string,
-    +sender: ?string,
     +resolved: ?boolean,
   |}
 |};
@@ -42,7 +41,6 @@ mutation JoinIndividualMutation(
     message
     bio
     idea
-    sender
     resolved
   }
 }
@@ -129,13 +127,6 @@ v1 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "sender",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
         "name": "resolved",
         "args": null,
         "storageKey": null
@@ -163,11 +154,11 @@ return {
     "operationKind": "mutation",
     "name": "JoinIndividualMutation",
     "id": null,
-    "text": "mutation JoinIndividualMutation(\n  $user_id: String\n  $bio: String\n  $idea: String\n) {\n  make_user_request(user_id: $user_id, bio: $bio, idea: $idea) {\n    id\n    message\n    bio\n    idea\n    sender\n    resolved\n  }\n}\n",
+    "text": "mutation JoinIndividualMutation(\n  $user_id: String\n  $bio: String\n  $idea: String\n) {\n  make_user_request(user_id: $user_id, bio: $bio, idea: $idea) {\n    id\n    message\n    bio\n    idea\n    resolved\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '578cbf4d85ded41cfc827833fe4422f7';
+(node/*: any*/).hash = 'fb36ba986ff63454e5f3714412018d3a';
 module.exports = node;

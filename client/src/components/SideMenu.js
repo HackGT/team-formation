@@ -1,149 +1,119 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 // import {Fuse} from 'fuse.js'
-import { Dropdown, Input } from "semantic-ui-react";
+import {Dropdown, Input, Icon} from "semantic-ui-react";
 import "./css/SideMenu.css";
 import skills from "../constants/skills";
 import schools from "../constants/schools";
+import years from "../constants/years";
+
 import SideMenuPicture from "./css/assets/SideMenuPicture.svg";
 
 class SideMenu extends Component {
-  constructor() {
-    super();
-    this.state = {
-      search_string: "",
+    constructor() {
+        super();
+        this.state = {
+            search_string: ""
+        };
     };
-  }
 
-  render() {
-    const skillOptions = [];
-    for (const skill in skills) {
-      const name = skills[skill].value;
-      skillOptions.push({
-        key: name,
-        text: name,
-        value: name,
-        onClick: (e, { value }) =>
-          this.props.allFilterClickListener(value, "skills"),
-      });
-    }
+    render() {
+        const skillOptions = []
+        for (const skill in skills) {
+            const name = skills[skill].value;
+            skillOptions.push({
+                key: name,
+                text: name,
+                value: name,
+                onClick: (e, {value}) => this.props.allFilterClickListener(value, "skills")
+            });
+        }
 
-    const years = ["First", "Second", "Third", "Fourth", "Fifth"];
-    const yearOptions = [];
-    for (const year of years) {
-      yearOptions.push({
-        key: year,
-        text: year,
-        value: year,
-        onClick: (e, { value }) =>
-          this.props.allFilterClickListener(value, "years"),
-      });
-    }
+        const yearOptions = []
+        for (const year in years) {
+            const name = years[year].value;
+            yearOptions.push({
+                key: name,
+                text: name,
+                value: name,
+                onClick: (e, {value}) => this.props.allFilterClickListener(value, "years")
+            });
+        }
 
-    const schoolOptions = [];
-    for (const school in schools) {
-      const name = schools[school].value;
-      schoolOptions.push({
-        key: name,
-        text: name,
-        value: name,
-        onClick: (e, { value }) =>
-          this.props.allFilterClickListener(value, "schools"),
-      });
-    }
+        const schoolOptions = []
+        for (const school in schools) {
+            const name = schools[school].value;
+            schoolOptions.push({
+                key: name,
+                text: name,
+                value: name,
+                onClick: (e, {value}) => this.props.allFilterClickListener(value, "schools")
+            });
+        }
 
-    return (
-      <div className="SideMenu-container">
-        <Input
-          icon={{ name: "search", circular: true, link: true }}
-          placeholder="Search by anything"
-          onChange={this.onSearchChange}
-          onKeyPress={this.handleKeyPress}
-          size="small"
-          focus
-        />
-        {/* <Input placeholder="Search by skills" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} icon='search' size='huge'/> */}
-        <h3 className="h3">Skills</h3>
-        <Dropdown
-          id="dropdown"
-          item
-          text="Select Skills"
-          search
-          selection
-          options={skillOptions}
-          fullTextSearch="true"
-          scrolling
-          closeOnChange="false"
-          style={{
-            background: "rgba(255, 255, 255, 0.22)",
-            color: "white",
-            fontFamily: "Quicksand-Bold",
-            textAlign: "center",
-            fontSize: 15,
-            borderRadius: 12,
-          }}
-        />
-        <h3 className="h3">Years</h3>
-        <Dropdown
-          item
-          text="Select Years"
-          search
-          selection
-          options={yearOptions}
-          fullTextSearch="true"
-          scrolling
-          closeOnChange="false"
-          style={{
-            background: "rgba(255, 255, 255, 0.22)",
-            color: "white",
-            fontFamily: "Quicksand-Bold",
-            textAlign: "center",
-            fontSize: 15,
-            borderRadius: 12,
-          }}
-        />
-        <h3 className="h3">Schools</h3>
-        <Dropdown
-          item
-          text="Select Schools"
-          search
-          selection
-          options={schoolOptions}
-          fullTextSearch="true"
-          scrolling
-          closeOnChange="false"
-          upward="false"
-          style={{
-            background: "rgba(255, 255, 255, 0.22)",
-            color: "white",
-            fontFamily: "Quicksand-Bold",
-            textAlign: "center",
-            fontSize: 15,
-            borderRadius: 12,
-          }}
-        />
-        <img class="moveImage" src={SideMenuPicture} alt="React Logo" />
-      </div>
-    );
-  }
+        if (this.props.onTeamPage) {
+            return (<div className="SideMenu-container">
+                <Input placeholder="Search by Anything" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} icon={<Icon name = 'search' circular = 'true' link onClick = {
+                        this.onSearchClick
+                    } />} size='small' focus="focus"/>
+                <h3 className="h3">SEEKING SKILLS</h3>
+                <Dropdown id="dropdown" style={{
+                        background: "rgba(255, 255, 255, 0.22)",
+                        color: "white",
+                        fontFamily: "Quicksand-Bold",
+                        textAlign: "center",
+                        fontSize: 15,
+                        borderRadius: 12
+                    }} item="item" text='Select Skills' search="search" selection="selection" options={skillOptions} fullTextSearch="true" scrolling="scrolling" closeOnChange='false'/>
+            </div>);
+        }
+        return (<div className="SideMenu-container">
+            <Input placeholder="Search by Anything" onChange={this.onSearchChange} onKeyPress={this.handleKeyPress} icon={<Icon name = 'search' circular = 'true' link onClick = {
+                    this.onSearchClick
+                } />} size='small' focus="focus"/>
+            <h3 className="h3">SKILLS</h3>
+            <Dropdown id="dropdown" style={{
+                    background: "rgba(255, 255, 255, 0.22)",
+                    color: "white",
+                    fontFamily: "Quicksand-Bold",
+                    textAlign: "center",
+                    fontSize: 15,
+                    borderRadius: 12
+                }} item="item" text='Select Skills' search="search" selection="selection" options={skillOptions} fullTextSearch="true" scrolling="scrolling" closeOnChange='false'/>
+            <h3 className="h3">YEARS</h3>
+            <Dropdown item="item" style={{
+                    background: "rgba(255, 255, 255, 0.22)",
+                    color: "white",
+                    fontFamily: "Quicksand-Bold",
+                    textAlign: "center",
+                    fontSize: 15,
+                    borderRadius: 12
+                }} text='Select Years' search="search" selection="selection" options={yearOptions} fullTextSearch="true" scrolling="scrolling" closeOnChange='false'/>
+            <h3 className="h3">SCHOOLS</h3>
+            <Dropdown item="item" style={{
+                    background: "rgba(255, 255, 255, 0.22)",
+                    color: "white",
+                    fontFamily: "Quicksand-Bold",
+                    textAlign: "center",
+                    fontSize: 15,
+                    borderRadius: 12
+                }} text='Select Schools' search="search" selection="selection" options={schoolOptions} fullTextSearch="true" scrolling="scrolling" closeOnChange='false'/>
+            <img class="moveImage" src={SideMenuPicture} alt="React Logo"/>
+        </div>);
+    };
+    handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            this.props.onSearchClick(this.state.search_string);
+        }
+    };
 
-  handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      this.props.onSearchClick(this.state.search_string);
-    }
-  };
+    onSearchChange = (e) => {
+        this.setState({search_string: e.target.value});
+        // this.props.onSearchClick(e.target.value);
+    };
 
-  onSearchChange = (e) => {
-    this.setState({
-      search_string: e.target.value,
-    });
-    if (e.target.value.length > 0) {
-      this.props.onSearchClick(this.state.search_string);
-    }
-  };
-
-  onSearchClick = (e) => {
-    this.props.onSearchClick(this.state.search_string);
-  };
+    onSearchClick = (e) => {
+        this.props.onSearchClick(this.state.search_string);
+    };
 }
 
 export default SideMenu;

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f65fabf2003f741be74fde7a8d9fffc5
+ * @relayHash cfb2c4f0f3cc9d28d1534d4a0b13474c
  */
 
 /* eslint-disable */
@@ -10,7 +10,6 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type EditProfileMutationVariables = {|
-  uuid?: ?string,
   name?: ?string,
   grad_year?: ?string,
   school?: ?string,
@@ -38,7 +37,6 @@ export type EditProfileMutation = {|
 
 /*
 mutation EditProfileMutation(
-  $uuid: String
   $name: String
   $grad_year: String
   $school: String
@@ -47,7 +45,7 @@ mutation EditProfileMutation(
   $contact: String
   $contact_method: String
 ) {
-  update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {
+  update_user(name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {
     name
     grad_year
     school
@@ -61,12 +59,6 @@ mutation EditProfileMutation(
 
 const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
-  {
-    "kind": "LocalArgument",
-    "name": "uuid",
-    "type": "String",
-    "defaultValue": null
-  },
   {
     "kind": "LocalArgument",
     "name": "name",
@@ -152,12 +144,6 @@ v1 = [
     "name": "skills",
     "variableName": "skills",
     "type": "[String]"
-  },
-  {
-    "kind": "Variable",
-    "name": "uuid",
-    "variableName": "uuid",
-    "type": "String"
   }
 ],
 v2 = {
@@ -265,11 +251,11 @@ return {
     "operationKind": "mutation",
     "name": "EditProfileMutation",
     "id": null,
-    "text": "mutation EditProfileMutation(\n  $uuid: String\n  $name: String\n  $grad_year: String\n  $school: String\n  $skills: [String]\n  $experience: String\n  $contact: String\n  $contact_method: String\n) {\n  update_user(uuid: $uuid, name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {\n    name\n    grad_year\n    school\n    skills\n    experience\n    contact\n    id\n  }\n}\n",
+    "text": "mutation EditProfileMutation(\n  $name: String\n  $grad_year: String\n  $school: String\n  $skills: [String]\n  $experience: String\n  $contact: String\n  $contact_method: String\n) {\n  update_user(name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {\n    name\n    grad_year\n    school\n    skills\n    experience\n    contact\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '10d33ffc6ac92388df51e030ac058a64';
+(node/*: any*/).hash = 'db515b4f32680aaeb3e9f3ee56eea3cd';
 module.exports = node;
