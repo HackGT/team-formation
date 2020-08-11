@@ -4,6 +4,8 @@ import TeamInformation from './TeamInformation';
 import JoinTeam from './ui_subcomponents/JoinTeam';
 import TeamNotifications from './TeamNotifications';
 import TeamRequestsSent from './TeamRequestsSent';
+import OnTeam from './OnTeam';
+import NoTeam from './NoTeam';
 import Members from './Members';
 import './css/TeamPage.css';
 import {QueryRenderer} from 'react-relay';
@@ -42,6 +44,11 @@ const getTeamQuery = graphql `
         }
         public
     }
+    user_profile {
+      team {
+          id
+      }
+  }
   }
 `;
 
@@ -67,22 +74,14 @@ class TeamPage extends Component {
           return <div>{error.message}</div>;
         } else if (props) {
           console.log(JSON.stringify(props));
+          var doc;
+          if(props.user_profile.team == null) {
+            doc = <NoTeam />;
+          } else{
+            doc = props.team_id == props.user_profile.team.id ? <OnTeam /> : <NoTeam />;
+          }
           return(
-            <div className="team-page">
-              <h1>Team {props.team.name}</h1>
-              <Button basic color='blue' content='Join Team' onClick={() => this.setState({showModal: true})} />
-                    <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
-              <div className="first-row">
-                <div className="first-col">
-                  <TeamNotifications />
-                  <TeamRequestsSent/>
-                </div>
-                <div className="second-col">
-                  <TeamInformation />
-                </div>
-              </div>
-              <Members />
-            </div>
+            doc
           );
         }
     }}/>
