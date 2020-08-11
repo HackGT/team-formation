@@ -80,6 +80,7 @@
   padding-left: 3%;
   padding-bottom: 2%;
   flex-direction: column;
+  flex: 1;
 }
 #dropdown-menu {
   margin: 2%;
@@ -93,6 +94,8 @@
 }
 .filters-applied {
   padding-bottom: 1%;
+  font-family: Quicksand-Bold;
+  color: white;
 }
 
 .ui.buttons .button {
@@ -183,4 +186,15 @@
 .ui.buttons .button:last-child {
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
+}
+
+.ui.horizontal.label {
+  color: white;
+  background: rgba(255, 255, 255, 0.22);
+  font-family: Quicksand-Bold;
+}
+
+.parent {
+  display: flex;
+  flex-direction: column;
 }

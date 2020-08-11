@@ -66,24 +66,26 @@ class Feed extends Component {
               onTeamPage={this.state.teams}
             />
           </div>
-          {this.state.skills.length ||
-          this.state.years.length ||
-          this.state.schools.length ? (
-            <div className="user-input">
-              <div className="filters-applied">
-                <text>Filters Applied</text>
+          <div className="parent">
+            {this.state.skills.length ||
+            this.state.years.length ||
+            this.state.schools.length ? (
+              <div className="user-input">
+                <div className="filters-applied">
+                  <text>Filters Applied</text>
+                </div>
+                <div className="filter-tags">
+                  <InputTagCollection
+                    skills={this.state.skills}
+                    years={this.state.years}
+                    schools={this.state.schools}
+                    allFilterClickListener={this.allFilterClickListener}
+                  />
+                </div>
               </div>
-              <div className="filter-tags">
-                <InputTagCollection
-                  skills={this.state.skills}
-                  years={this.state.years}
-                  schools={this.state.schools}
-                  allFilterClickListener={this.allFilterClickListener}
-                />
-              </div>
-            </div>
-          ) : null}
-          <div className="feed-cards">{cards}</div>
+            ) : null}
+            <div className="feed-cards">{cards}</div>
+          </div>
         </div>
       </div>
     );
