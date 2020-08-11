@@ -23,10 +23,6 @@ textarea::placeholder {
   font-family: Quicksand-Bold;
 }
 
-.background {
-  background-color: #8fb6b3;
-}
-
 .modalHeader {
   text-align: center;
   color: white;
@@ -104,6 +100,9 @@ textarea::placeholder {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  resize: none;
+  color: #8895c1;
+  font-family: Quicksand-Bold;
 }
 
 .row {
@@ -195,7 +194,8 @@ textarea::placeholder {
 }
 
 .modal4-column2 {
-  margin: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
   text-align: center;
 }
 
@@ -212,7 +212,7 @@ textarea::placeholder {
 }
 
 #describeProject {
-  margin-top: 50px;
+  margin-top: 5%;
   padding-left: 15px;
   padding-top: 15px;
   border-color: transparent;
@@ -222,4 +222,20 @@ textarea::placeholder {
   font-family: Quicksand-Bold;
   resize: none;
   width: 100%;
+}
+
+.ui.modal {
+  background: none;
+}
+
+.ui.modal > .content {
+  background: linear-gradient(180deg, #656cae 0%, rgba(255, 255, 255, 0) 100%),
+    #8bb2c2;
+}
+
+.ui.button.submit {
+  border-radius: 12px;
+  color: white;
+  background: rgba(255, 255, 255, 0.22);
+  font-family: Quicksand-Bold;
 }
