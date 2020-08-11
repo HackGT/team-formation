@@ -56,23 +56,6 @@ class Headers extends Component {
   };
 
   render() {
-    const teamInfo = {
-      teamName: "Team 23",
-      teamRequestMessage:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      teamProjectIdea:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    };
-    const user2Info = {
-      user2CardName: "Aakash G.",
-      user2CardInfo:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      user2School: "Georgia Tech",
-      user2GradYear: "2021",
-      user2Skills: ["React", "GraphQL", "CSS"],
-      user2Contact: "1234567890",
-      user2Name: "Aakash",
-    };
     let toggle_text;
     if (this.props.visible) {
       toggle_text = "Make Profile Public";
