@@ -20,17 +20,7 @@ class UserCard extends Component {
     if (this.props.contact === null) {
       contact = (
         <Popup
-          trigger={
-            <Button
-              style={{
-                color: "white",
-                background: "#A8C5D6",
-                boxShadow: "rgba(0, 0, 0,0.2) 0px 4px 4px 0px",
-                fontFamily: "Quicksand-Bold",
-              }}
-              content="Contact"
-            />
-          }
+          trigger={<Button className="contact" content="Contact" />}
           content="no contact available"
           on="click"
           hideOnScroll
@@ -39,17 +29,7 @@ class UserCard extends Component {
     } else if (this.props.contact.includes("@")) {
       contact = (
         <Popup
-          trigger={
-            <Button
-              style={{
-                color: "white",
-                background: "#A8C5D6",
-                boxShadow: "rgba(0, 0, 0,0.2) 0px 4px 4px 0px",
-                fontFamily: "Quicksand-Bold",
-              }}
-              content="Contact"
-            />
-          }
+          trigger={<Button className="contact" content="Contact" />}
           content=<a href={`mailto:${this.props.contact}`} target="_blank">
             {this.props.contact}{" "}
           </a>
@@ -60,17 +40,7 @@ class UserCard extends Component {
     } else if (this.props.contact.includes(".")) {
       contact = (
         <Popup
-          trigger={
-            <Button
-              style={{
-                color: "white",
-                background: "#A8C5D6",
-                boxShadow: "rgba(0, 0, 0,0.2) 0px 4px 4px 0px",
-                fontFamily: "Quicksand-Bold",
-              }}
-              content="Contact"
-            />
-          }
+          trigger={<Button className="contact" content="Contact" />}
           content=<a href={this.props.contact} target="_blank">
             {this.props.contact}
           </a>
@@ -81,17 +51,7 @@ class UserCard extends Component {
     } else {
       contact = (
         <Popup
-          trigger={
-            <Button
-              style={{
-                color: "white",
-                background: "#A8C5D6",
-                boxShadow: "rgba(0, 0, 0,0.2) 0px 4px 4px 0px",
-                fontFamily: "Quicksand-Bold",
-              }}
-              content="Contact"
-            />
-          }
+          trigger={<Button className="contact" content="Contact" />}
           content={this.props.contact}
           on="click"
           hideOnScroll
@@ -103,63 +63,31 @@ class UserCard extends Component {
     var viewskill = this.props.skills.map((skill) => (
       <Label
         size="mini"
+        className="labelStyle"
         style={{
-          color: "white",
           backgroundColor: colors[count++ % 2],
-          boxShadow: "rgba(0, 0, 0,0.2) 0px 4px 4px 0px",
-          fontFamily: "Quicksand-Bold",
-          fontSize: 10,
-          marginTop: 5,
         }}
       >
         {skill}
       </Label>
     ));
     return (
-      <Card
-        className="card1"
-        style={{
-          boxShadow: "-20px 20px 0px -8px rgba(0, 0, 0, 0.20)",
-          borderRadius: 15,
-          paddingBottom: 30,
-        }}
-      >
+      <Card className="card1">
         <Card.Content className="content">
-          <Card.Header
-            style={{
-              textAlign: "center",
-              paddingTop: 10,
-              color: "#8895C1",
-              fontFamily: "Quicksand-Bold",
-              fontSize: 20,
-            }}
-          >
-            {this.props.name}
-          </Card.Header>
+          <Card.Header>{this.props.name}</Card.Header>
           <Card.Meta
             style={{
-              color: "#85808A",
               paddingTop: 20,
-              paddingLeft: 15,
-              fontFamily: "Quicksand-Bold",
             }}
           >
             {this.props.school}
           </Card.Meta>
-          <Card.Meta
-            style={{
-              color: "#85808A",
-              paddingLeft: 15,
-              fontFamily: "Quicksand-Bold",
-            }}
-          >
+          <Card.Meta className="gradYear">
             Graduation Year: {this.props.grad_year}
           </Card.Meta>
           <div
             className="ui divider"
             style={{
-              border: "1px solid #C3BBCD",
-              marginTop: 5,
               marginBottom: 10,
             }}
           />
@@ -167,38 +95,16 @@ class UserCard extends Component {
             {viewskill}
           </Card.Description>
           <Card.Description className="card-description">
-            <Container
-              style={{
-                overflow: "auto",
-                maxHeight: 100,
-                color: "#867A96",
-                paddingLeft: 15,
-                paddingTop: 10,
-                paddingBottom: 5,
-                fontFamily: "Quicksand-Bold",
-              }}
-            >
+            <Container className="about">
               About Them: {this.props.experience}
             </Container>
           </Card.Description>
-          <div
-            className="ui divider"
-            style={{
-              border: "1px solid #C3BBCD",
-              marginTop: 5,
-            }}
-          />
+          <div className="ui divider" />
           <Card.Description>
             <div className="contact-button">
               {contact}
               <Button
-                style={{
-                  color: "white",
-                  background: "#CCBEDF",
-                  boxShadow: "rgba(0, 0, 0,0.2) 0px 4px 4px 0px",
-                  marginLeft: 5,
-                  fontFamily: "Quicksand-Bold",
-                }}
+                className="teamUp"
                 content="Team Up"
                 onClick={() => this.setState({ showModal: true })}
               />

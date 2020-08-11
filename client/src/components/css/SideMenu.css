@@ -49,3 +49,12 @@
   margin-top: 3%;
   right: 80%;
 }
+
+.ui.selection.dropdown {
+  background: rgba(255, 255, 255, 0.22);
+  color: white;
+  font-family: Quicksand-Bold;
+  text-align: center;
+  font-size: 15px;
+  border-radius: 12px;
+}

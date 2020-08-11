@@ -60,3 +60,63 @@ body .ui.card:hover {
   border-bottom: 2px solid #867a96;
   border-radius: 0 !important;
 }
+
+.ui.button.contact {
+  color: white;
+  background: #a8c5d6;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  font-family: Quicksand-Bold;
+}
+
+.ui.button.teamUp {
+  color: white;
+  background: #ccbedf;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  margin-left: 5px;
+  font-family: Quicksand-Bold;
+}
+
+.ui.label.labelStyle {
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  font-family: Quicksand-Bold;
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.ui.card.card1 {
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding-bottom: 30px;
+}
+
+.ui.card > .content > .header:not(.ui),
+.ui.cards > .card > .content > .header:not(.ui) {
+  text-align: center;
+  padding-top: 10px;
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  font-size: 20px;
+}
+
+.ui.divider {
+  border: 1px solid #c3bbcd !important;
+  margin-top: 5px !important;
+}
+
+.ui.card .meta,
+.ui.cards > .card .meta {
+  color: #85808a;
+  padding-left: 15px;
+  font-family: Quicksand-Bold;
+}
+
+.ui.container.about {
+  overflow: auto;
+  max-height: 100px;
+  color: #867a96;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  font-family: Quicksand-Bold;
+}

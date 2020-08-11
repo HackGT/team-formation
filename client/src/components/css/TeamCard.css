@@ -48,3 +48,44 @@ body ::-webkit-scrollbar-thumb {
 body ::-webkit-scrollbar-track {
   background: rgba(153, 170, 201, 0.4);
 }
+
+.ui.card.card1 {
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding-bottom: 30px;
+}
+
+.ui.container.name {
+  color: rgb(136, 149, 193);
+  font-family: Quicksand-Bold;
+  font-size: 20px;
+  text-align: center;
+  overflow-y: hidden;
+}
+
+.ui.divider {
+  border: 1px solid #c3bbcd !important;
+}
+
+.ui.button.joinTeam {
+  color: white;
+  background: #ccbedf;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  margin-left: 5px;
+  font-family: Quicksand-Bold;
+}
+.ui.container.seeking {
+  overflow: auto;
+  max-height: 42px;
+  color: #867a96;
+  padding-left: 15px;
+  font-family: Quicksand-Bold;
+}
+
+.ui.container.bio {
+  overflow: auto;
+  max-height: 42px;
+  color: #867a96;
+  padding-left: 15px;
+  font-family: Quicksand-Bold;
+}
