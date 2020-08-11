@@ -13,21 +13,21 @@
   src: url("./fonts/lekton/Lekton-Bold.ttf");
 }
 
-textarea::placeholder {
-  color: #867a96;
+@font-face {
+  font-family: Quicksand-Bold;
+  src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
 
-.background {
-  background-color: #8fb6b3;
+textarea::placeholder {
+  color: #8895c1;
+  font-family: Quicksand-Bold;
 }
 
 .modalHeader {
   text-align: center;
-  color: #f1d180;
-  font-family: Chango-Regular;
-  font-size: 40px;
-  -webkit-text-stroke-width: 1.5px;
-  -webkit-text-stroke-color: #7a6e4e;
+  color: white;
+  font-size: 35px;
+  font-family: Lekton-Bold;
 }
 
 .modal1Margins {
@@ -37,34 +37,36 @@ textarea::placeholder {
 
 .requestMessage {
   margin-top: 60px;
-  color: #867a96;
-  font-family: Lekton-Bold;
-  font-size: 17px;
+  color: white;
+  font-family: Quicksand-Bold;
+  font-size: 15px;
 }
 
 .requestMessageBody {
-  border: 2px solid #867a96;
+  border: transparent;
+  border-radius: 15px;
   padding: 20px;
-  color: #867a96;
-  background: #f3eefa;
-  font-family: Lekton-Bold;
-  font-size: 17px;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  background: white;
 }
 
 .projectIdea {
   margin-top: 30px;
-  color: #867a96;
-  font-family: Lekton-Bold;
-  font-size: 17px;
+  color: white;
+  font-family: Quicksand-Bold;
+  font-size: 15px;
 }
 
 .projectIdeaBody {
-  border: 2px solid #867a96;
+  border: transparent;
+  border-radius: 15px;
   padding: 20px;
-  color: #867a96;
-  background: #f3eefa;
-  font-family: Lekton-Bold;
-  font-size: 17px;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  background: white;
 }
 
 .flex-container1 {
@@ -90,14 +92,17 @@ textarea::placeholder {
 }
 
 #writeAMessage {
-  margin-top: 35px;
-  /* background-color: #c4c4c4; */
-  border-radius: 7px;
-  border: 1px solid #000;
-  padding-top: 15px;
-  padding-left: 20px;
-  margin-right: 220px;
-  margin-left: 220px;
+  margin-top: 25px;
+  border-radius: 15px;
+  padding: 15px;
+  border-color: transparent;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  resize: none;
+  color: #8895c1;
+  font-family: Quicksand-Bold;
 }
 
 .row {
@@ -117,7 +122,7 @@ textarea::placeholder {
 }
 
 .modal3Column2 {
-  display: flex;
+  display: inline-block;
   flex-direction: column;
   text-align: center;
   flex: 1;
@@ -144,28 +149,29 @@ textarea::placeholder {
 }
 
 .user1RequestMessage {
-  border: 2px solid #867a96;
+  border: transparent;
+  border-radius: 15px;
   padding: 20px;
-  color: #867a96;
-  background: #f3eefa;
-  font-family: Lekton-Bold;
-  font-size: 17px;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  background: white;
 }
 
 .user1FirstName {
-  margin-top: 30px;
-  color: #867a96;
-  font-family: Lekton-Bold;
-  font-size: 17px;
+  color: white;
+  font-family: Quicksand-Bold;
+  font-size: 15px;
 }
 
 .user1ProjectIdea {
-  border: 2px solid #867a96;
+  border: transparent;
+  border-radius: 15px;
   padding: 20px;
-  color: #867a96;
-  background: #f3eefa;
-  font-family: Lekton-Bold;
-  font-size: 17px;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  background: white;
 }
 
 .flex-container-modal3 {
@@ -190,54 +196,46 @@ textarea::placeholder {
 .modal4-column2 {
   margin-left: 25px;
   margin-right: 25px;
-  display: inline-block;
+  text-align: center;
 }
 
 #introduceYourself {
-  border: 2px solid #867a96;
+  border-radius: 15px;
   padding-left: 15px;
   padding-top: 15px;
-  background: #f3eefa;
-  color: #867a96;
-  width: 100%;
+  border-color: transparent;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
   resize: none;
-  font-family: Lekton-Bold;
-  font-size: 17px;
+  width: 100%;
 }
 
 #describeProject {
-  border: 2px solid #867a96;
+  margin-top: 5%;
   padding-left: 15px;
   padding-top: 15px;
-  background: #f3eefa;
-  color: #867a96;
-  width: 100%;
+  border-color: transparent;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  color: #8895c1;
+  font-family: Quicksand-Bold;
   resize: none;
-  font-family: Lekton-Bold;
-  font-size: 17px;
-}
-
-.rectangle {
-  background: #c3bbcd;
-  border: 2px solid #867a96;
-  box-sizing: border-box;
   width: 100%;
-  height: 25px;
-  border-bottom: none;
 }
 
-.rectangle2 {
-  background: #c3bbcd;
-  border: 2px solid #867a96;
-  box-sizing: border-box;
-  width: 100%;
-  height: 25px;
-  border-bottom: none;
-  margin-top: 10px;
+.ui.modal {
+  background: none;
 }
 
-.user1RequestMessageName {
-  color: #867a96;
-  font-family: Lekton-Bold;
-  font-size: 17px;
+.ui.modal > .content {
+  background: linear-gradient(180deg, #656cae 0%, rgba(255, 255, 255, 0) 100%),
+    #8bb2c2;
+}
+
+.ui.button.submit {
+  border-radius: 12px;
+  color: white;
+  background: rgba(255, 255, 255, 0.22);
+  font-family: Quicksand-Bold;
 }
