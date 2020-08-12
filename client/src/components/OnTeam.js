@@ -32,7 +32,7 @@ class OnTeam extends Component {
             <TeamRequestsSent/>
           </div>
           <div className="second-col">
-            <TeamInformation editable={false} teamBio={this.props.team.description} projectIdea={this.props.team.project_idea} interests={this.props.team.interests}/>
+            <TeamInformation editable={true} teamBio={this.props.team.description} projectIdea={this.props.team.project_idea} interests={this.props.team.interests}/>
           </div>
         </div>
         <Members members={this.props.team.members}/>
