@@ -21,10 +21,9 @@ class NoTeam extends Component {
     this.setState({ showModal: false });
   };
   render() {
-    this.props.editable = false;
     return (
         <div id="not-team" class="team-page">
-          <h1>Team {this.props.team_id}</h1>
+          <h1>Team {this.props.team.name}</h1>
           <Button basic color='blue' content='Ask to Join' onClick={() => this.setState({showModal: true})} />
                 <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
           <div className="first-row">
@@ -32,7 +31,7 @@ class NoTeam extends Component {
               <MembersBlank />
             </div>
             <div className="second-col">
-              <TeamInformation />
+              <TeamInformation editable={false} teamBio={this.props.team.description} projectIdea={this.props.team.project_idea} interests={this.props.team.interests}/>
             </div>
           </div>
         </div>

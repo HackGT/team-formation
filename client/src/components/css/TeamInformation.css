@@ -14,7 +14,7 @@
 }
 
 .form {
-  padding-bottom: 4%;
+  padding-bottom: 2%;
 }
 
 .ui.form textarea {
@@ -55,4 +55,16 @@
 
 .ui.form .field > .selection.dropdown {
   opacity: 1;
+}
+
+.ui.selection.dropdown {
+  text-align: left;
+}
+
+.ui.label.labelStyle {
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  font-family: Quicksand-Bold;
+  font-size: 100%;
+  margin-top: 5px;
 }

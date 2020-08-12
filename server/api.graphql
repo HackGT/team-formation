@@ -26,7 +26,7 @@ type Query {
 type Mutation {
     toggle_visibility: User!
     update_user(name: String email: String, grad_year: String, school: String, contact: String, skills: [String], experience: String, contact_method: String): User!
-    update_team(name: String, picture: String, interests: [String], description: String, public: Boolean): Team
+    update_team(name: String, picture: String, interests: [String], description: String, public: Boolean, project_idea: String): Team
     accept_team_request(notification_id: String): Team
     accept_user_request(notification_id: String): Team
     make_team_request(team_id: String, user_id: String, bio: String, idea: String): Notification
@@ -40,6 +40,7 @@ type Team {
     members: [User]
     interests: [String]
     description: String
+    project_idea: String
     notifications: [Notification!]!
     public: Boolean
 }

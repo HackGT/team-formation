@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 666cb092e2eb3a11f00813491b88bef7
+ * @relayHash 2109f5557ec6882b45e05d9a46072e0d
  */
 
 /* eslint-disable */
@@ -22,6 +22,7 @@ export type TeamPageQueryResponse = {|
     |}>,
     +interests: ?$ReadOnlyArray<?string>,
     +description: ?string,
+    +project_idea: ?string,
     +notifications: $ReadOnlyArray<{|
       +id: ?string,
       +bio: ?string,
@@ -38,7 +39,12 @@ export type TeamPageQueryResponse = {|
       +senderType: ?string,
     |}>,
     +public: ?boolean,
-  |}
+  |},
+  +user_profile: {|
+    +team: ?{|
+      +id: ?string
+    |}
+  |},
 |};
 export type TeamPageQuery = {|
   variables: TeamPageQueryVariables,
@@ -61,6 +67,7 @@ query TeamPageQuery(
     }
     interests
     description
+    project_idea
     notifications {
       id
       bio
@@ -79,6 +86,12 @@ query TeamPageQuery(
       senderType
     }
     public
+  }
+  user_profile {
+    team {
+      id
+    }
+    id
   }
 }
 */
@@ -135,11 +148,18 @@ v6 = {
   "args": null,
   "storageKey": null
 },
-v7 = [
+v7 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "project_idea",
+  "args": null,
+  "storageKey": null
+},
+v8 = [
   (v2/*: any*/),
   (v3/*: any*/)
 ],
-v8 = {
+v9 = {
   "kind": "LinkedField",
   "alias": null,
   "name": "notifications",
@@ -182,12 +202,12 @@ v8 = {
         {
           "kind": "InlineFragment",
           "type": "User",
-          "selections": (v7/*: any*/)
+          "selections": (v8/*: any*/)
         },
         {
           "kind": "InlineFragment",
           "type": "Team",
-          "selections": (v7/*: any*/)
+          "selections": (v8/*: any*/)
         }
       ]
     },
@@ -200,12 +220,24 @@ v8 = {
     }
   ]
 },
-v9 = {
+v10 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "public",
   "args": null,
   "storageKey": null
+},
+v11 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "team",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "Team",
+  "plural": false,
+  "selections": [
+    (v2/*: any*/)
+  ]
 };
 return {
   "kind": "Request",
@@ -242,8 +274,21 @@ return {
           },
           (v5/*: any*/),
           (v6/*: any*/),
-          (v8/*: any*/),
-          (v9/*: any*/)
+          (v7/*: any*/),
+          (v9/*: any*/),
+          (v10/*: any*/)
+        ]
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "user_profile",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "User",
+        "plural": false,
+        "selections": [
+          (v11/*: any*/)
         ]
       }
     ]
@@ -280,8 +325,22 @@ return {
           },
           (v5/*: any*/),
           (v6/*: any*/),
-          (v8/*: any*/),
-          (v9/*: any*/)
+          (v7/*: any*/),
+          (v9/*: any*/),
+          (v10/*: any*/)
+        ]
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "user_profile",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "User",
+        "plural": false,
+        "selections": [
+          (v11/*: any*/),
+          (v2/*: any*/)
         ]
       }
     ]
@@ -290,11 +349,11 @@ return {
     "operationKind": "query",
     "name": "TeamPageQuery",
     "id": null,
-    "text": "query TeamPageQuery(\n  $team_id: String\n) {\n  team(team_id: $team_id) {\n    id\n    name\n    picture\n    members {\n      name\n      id\n    }\n    interests\n    description\n    notifications {\n      id\n      bio\n      idea\n      sender {\n        __typename\n        ... on User {\n          id\n          name\n        }\n        ... on Team {\n          id\n          name\n        }\n      }\n      senderType\n    }\n    public\n  }\n}\n",
+    "text": "query TeamPageQuery(\n  $team_id: String\n) {\n  team(team_id: $team_id) {\n    id\n    name\n    picture\n    members {\n      name\n      id\n    }\n    interests\n    description\n    project_idea\n    notifications {\n      id\n      bio\n      idea\n      sender {\n        __typename\n        ... on User {\n          id\n          name\n        }\n        ... on Team {\n          id\n          name\n        }\n      }\n      senderType\n    }\n    public\n  }\n  user_profile {\n    team {\n      id\n    }\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'eb61252582da04ee3f6faee1f35c5318';
+(node/*: any*/).hash = '00f03bd5ca6b4119712db88c0721dc7b';
 module.exports = node;

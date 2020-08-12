@@ -24,6 +24,7 @@ const getTeamQuery = graphql `
         }
         interests
         description
+        project_idea
         notifications {
           id
           bio
@@ -48,7 +49,7 @@ const getTeamQuery = graphql `
       team {
           id
       }
-  }
+    }
   }
 `;
 
@@ -76,9 +77,9 @@ class TeamPage extends Component {
           console.log(JSON.stringify(props));
           var doc;
           if(props.user_profile.team == null) {
-            doc = <NoTeam />;
+            doc = <NoTeam team={props.team}/>;
           } else{
-            doc = props.team_id == props.user_profile.team.id ? <OnTeam /> : <NoTeam />;
+            doc = props.team_id == props.user_profile.team.id ? <OnTeam team={props.team} /> : <NoTeam team={props.team}/>;
           }
           return(
             doc

@@ -14,15 +14,15 @@ import JoinIndividual from "./JoinIndividual";
 import { Input } from "semantic-ui-react";
 
 const mutation = graphql`
-  mutation HeaderFeedMutation($uuid: String) {
-    toggle_visibility(uuid: $uuid) {
+  mutation HeaderFeedMutation {
+    toggle_visibility {
       name
     }
   }
 `;
 const getName = graphql`
-  query HeaderFeedNameQuery($uuid: String) {
-    user_profile(uuid: $uuid) {
+  query HeaderFeedNameQuery {
+    user_profile {
       name
     }
   }

@@ -65,6 +65,7 @@ export interface ITeam extends RootDocument{
     members: IUser[];
     interests?: string[];
     description?: string;
+    project_idea?: string;
     public: boolean;
 }
 
@@ -116,6 +117,7 @@ const TeamSchema = new mongoose.Schema({
     },
     interests: [String],
     description: String,
+    project_idea: String,
     notifications: {
         type: [{
             type: mongoose.Schema.Types.ObjectId,

@@ -4,8 +4,7 @@ import {
     Form,
     TextArea,
     Button,
-    Select,
-    Dropdown
+    Label
 } from 'semantic-ui-react'
 import './css/TeamInformation.css'
 import skills from '../constants/skills'
@@ -14,24 +13,35 @@ class TeamInformation extends Component {
     state = {
         teamBio: this.props.teamBio,
         projectIdea: this.props.projectIdea,
-        icon: 'unlock',
+        icon: 'lock',
         active: false,
-        currentValues: [],
+        interests: this.props.interests,
         search: '',
-        options: skills
+        interest_options: skills
     }
     render() {
+        var colors = ["#A0CCC9", "#EBABCA"];
+        var count = 0;
+        var interestLabels = this.state.interests.map((interest) => (
+        <Label
+            size="mini"
+            className="labelStyle"
+            style={{
+            backgroundColor: colors[count++ % 2],
+            }}
+        >
+            {interest}
+        </Label>
+        ));
         if (this.props.editable) {
             return (<div className="team-card-container">
                 <Card fluid="fluid">
                     <Card.Content className="card-content">
                         <Card.Header className="card-header">Team Information</Card.Header>
                         <Form className="form">
-                            <Form.Field className='input' control={TextArea} label='Team Bio' placeholder='Tell us about your team' disabled={this.state.icon === 'unlock'}/>
-                            <Form.Field className='input' control={TextArea} label='Project Idea' placeholder='Describe any ideas you have for a potential project' disabled={this.state.icon === 'unlock'}/>
-                            <Form.Dropdown disabled={this.state.icon === 'unlock'} icon={this.state.icon === 'unlock'
-                                    ? null
-                                    : 'dropdown'} label='Seeking' options={this.state.options} placeholder='Select Seeking Skills' search="search" selection="selection" fluid="fluid" multiple="multiple" allowAdditions="allowAdditions" value={this.state.currentValues} onAddItem={this.handleAddition} onChange={this.handleChange}/>
+                            <Form.Field defaultValue={this.props.teamBio} control={TextArea} className='input' label='Team Bio' placeholder='Tell us about your team' disabled={this.state.icon === 'lock'}/>
+                            <Form.Field defaultValue={this.props.projectIdea} className='input' control={TextArea} label='Project Idea' placeholder='Describe any ideas you have for a potential project' disabled={this.state.icon === 'lock'}/>
+                            <Form.Dropdown defaultValue={this.state.interests} disabled={this.state.icon === 'lock'} label='Interests' options={this.state.interest_options} placeholder='Select Interests' search="search" selection="selection" fluid="fluid" multiple="multiple" allowAdditions="allowAdditions" value={this.state.interests} onAddItem={this.handleAddition} onChange={this.handleChange}/>
                             <Button className="save-button" icon={this.state.icon} onClick={this.onLockClick}></Button>
                         </Form>
                     </Card.Content>
@@ -51,31 +61,39 @@ class TeamInformation extends Component {
                                     minHeight: 150,
                                     resize: 'none'
                                 }} disabled="disabled"/>
-                            <Form.Dropdown disabled="disabled" multiple="multiple" icon={null} label='Seeking' fluid="fluid" selection="selection" value={this.state.currentValues}/>
                         </Form>
+                        <Card.Description>
+                            Interests
+                        </Card.Description>
+                        <Card.Description>
+                            {interestLabels}
+                        </Card.Description>
                     </Card.Content>
                 </Card>
             </div>);
         }
     }
+
     onLockClick = (e) => {
         this.state.icon === 'unlock'
             ? this.setState({icon: 'lock'})
             : this.setState({icon: 'unlock'})
     }
+
     handleAddition = (e, {value}) => {
+        console.log(value);
         this.setState((prevState) => ({
-            options: [
+            interest_options: [
                 {
                     text: value,
                     value
                 },
-                ...prevState.options
+                ...prevState.interest_options
             ]
         }))
     }
 
-    handleChange = (e, {value}) => this.setState({currentValues: value})
+    handleChange = (e, {value}) => this.setState({interests: value})
 
 }
 
