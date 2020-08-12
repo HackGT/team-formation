@@ -24,7 +24,7 @@ class OnTeam extends Component {
     this.props.editable = true;
     return (
       <div id="on-team" class="team-page">
-        <h1>Team {this.props.team_id}</h1>
+        <h1>Team {this.props.name}</h1>
         <Button basic color='blue' content='Join Team' onClick={() => this.setState({showModal: true})} />
               <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
         <div className="first-row">
@@ -36,7 +36,7 @@ class OnTeam extends Component {
             <TeamInformation />
           </div>
         </div>
-        <Members />
+        <Members members={this.props.team.members}/>
       </div>
     )
   }
