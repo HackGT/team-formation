@@ -1,14 +1,9 @@
 .headers {
-	padding-top: 5%;
-}
-
-.Header-container {
-	text-align: center;
-	background-color: #fffafa;
+  padding-top: 5%;
 }
 
 .notification-pane {
-	min-width: 800% !important;
+  min-width: 800% !important;
 }
 
 .ui.popup.fitted {
@@ -21,4 +16,9 @@
   max-height: 5%;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+@font-face {
+  font-family: Quicksand-Bold;
+  src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
