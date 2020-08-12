@@ -21,6 +21,14 @@ const getTeamQuery = graphql `
         picture
         members {
           name
+          school
+          grad_year
+          contact
+          skills
+          experience
+          visible
+          uuid
+          id
         }
         interests
         description
@@ -75,11 +83,12 @@ class TeamPage extends Component {
           return <div>{error.message}</div>;
         } else if (props) {
           console.log(JSON.stringify(props));
+          console.log(props.team.members.skills);
           var doc;
           if(props.user_profile.team == null) {
             doc = <NoTeam team={props.team}/>;
           } else{
-            doc = props.team_id == props.user_profile.team.id ? <OnTeam team={props.team} /> : <NoTeam team={props.team}/>;
+            doc = props.team.id == props.user_profile.team.id ? <OnTeam team={props.team}/> : <NoTeam team={props.team} />;
           }
           return(
             doc

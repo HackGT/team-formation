@@ -28,7 +28,7 @@ class NoTeam extends Component {
                 <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
           <div className="first-row">
             <div className="first-col">
-              <MembersBlank />
+              <MembersBlank members={this.props.team.members}/>
             </div>
             <div className="second-col">
               <TeamInformation editable={false} teamBio={this.props.team.description} projectIdea={this.props.team.project_idea} interests={this.props.team.interests}/>

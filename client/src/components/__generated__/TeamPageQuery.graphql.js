@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2109f5557ec6882b45e05d9a46072e0d
+ * @relayHash 589a6aea65f32092cb8a1b2fe6bdd873
  */
 
 /* eslint-disable */
@@ -18,7 +18,15 @@ export type TeamPageQueryResponse = {|
     +name: ?string,
     +picture: ?string,
     +members: ?$ReadOnlyArray<?{|
-      +name: ?string
+      +name: ?string,
+      +school: ?string,
+      +grad_year: ?string,
+      +contact: ?string,
+      +skills: ?$ReadOnlyArray<?string>,
+      +experience: ?string,
+      +visible: ?number,
+      +uuid: ?string,
+      +id: ?string,
     |}>,
     +interests: ?$ReadOnlyArray<?string>,
     +description: ?string,
@@ -63,6 +71,13 @@ query TeamPageQuery(
     picture
     members {
       name
+      school
+      grad_year
+      contact
+      skills
+      experience
+      visible
+      uuid
       id
     }
     interests
@@ -105,129 +120,203 @@ var v0 = [
     "defaultValue": null
   }
 ],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "team_id",
-    "variableName": "team_id",
-    "type": "String"
-  }
-],
-v2 = {
+v1 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
   "args": null,
   "storageKey": null
 },
-v3 = {
+v2 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "name",
   "args": null,
   "storageKey": null
 },
-v4 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "picture",
-  "args": null,
-  "storageKey": null
-},
-v5 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "interests",
-  "args": null,
-  "storageKey": null
-},
-v6 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "description",
-  "args": null,
-  "storageKey": null
-},
-v7 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "project_idea",
-  "args": null,
-  "storageKey": null
-},
-v8 = [
-  (v2/*: any*/),
-  (v3/*: any*/)
+v3 = [
+  (v1/*: any*/),
+  (v2/*: any*/)
 ],
-v9 = {
+v4 = {
   "kind": "LinkedField",
   "alias": null,
-  "name": "notifications",
+  "name": "team",
   "storageKey": null,
-  "args": null,
-  "concreteType": "Notification",
-  "plural": true,
+  "args": [
+    {
+      "kind": "Variable",
+      "name": "team_id",
+      "variableName": "team_id",
+      "type": "String"
+    }
+  ],
+  "concreteType": "Team",
+  "plural": false,
   "selections": [
+    (v1/*: any*/),
     (v2/*: any*/),
     {
       "kind": "ScalarField",
       "alias": null,
-      "name": "bio",
-      "args": null,
-      "storageKey": null
-    },
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "idea",
+      "name": "picture",
       "args": null,
       "storageKey": null
     },
     {
       "kind": "LinkedField",
       "alias": null,
-      "name": "sender",
+      "name": "members",
       "storageKey": null,
       "args": null,
-      "concreteType": null,
-      "plural": false,
+      "concreteType": "User",
+      "plural": true,
       "selections": [
+        (v2/*: any*/),
         {
           "kind": "ScalarField",
           "alias": null,
-          "name": "__typename",
+          "name": "school",
           "args": null,
           "storageKey": null
         },
         {
-          "kind": "InlineFragment",
-          "type": "User",
-          "selections": (v8/*: any*/)
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "grad_year",
+          "args": null,
+          "storageKey": null
         },
         {
-          "kind": "InlineFragment",
-          "type": "Team",
-          "selections": (v8/*: any*/)
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "contact",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "skills",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "experience",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "visible",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "uuid",
+          "args": null,
+          "storageKey": null
+        },
+        (v1/*: any*/)
+      ]
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "interests",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "description",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "project_idea",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "LinkedField",
+      "alias": null,
+      "name": "notifications",
+      "storageKey": null,
+      "args": null,
+      "concreteType": "Notification",
+      "plural": true,
+      "selections": [
+        (v1/*: any*/),
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "bio",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "idea",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "sender",
+          "storageKey": null,
+          "args": null,
+          "concreteType": null,
+          "plural": false,
+          "selections": [
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "__typename",
+              "args": null,
+              "storageKey": null
+            },
+            {
+              "kind": "InlineFragment",
+              "type": "User",
+              "selections": (v3/*: any*/)
+            },
+            {
+              "kind": "InlineFragment",
+              "type": "Team",
+              "selections": (v3/*: any*/)
+            }
+          ]
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "senderType",
+          "args": null,
+          "storageKey": null
         }
       ]
     },
     {
       "kind": "ScalarField",
       "alias": null,
-      "name": "senderType",
+      "name": "public",
       "args": null,
       "storageKey": null
     }
   ]
 },
-v10 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "public",
-  "args": null,
-  "storageKey": null
-},
-v11 = {
+v5 = {
   "kind": "LinkedField",
   "alias": null,
   "name": "team",
@@ -236,7 +325,7 @@ v11 = {
   "concreteType": "Team",
   "plural": false,
   "selections": [
-    (v2/*: any*/)
+    (v1/*: any*/)
   ]
 };
 return {
@@ -248,37 +337,7 @@ return {
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
     "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "team",
-        "storageKey": null,
-        "args": (v1/*: any*/),
-        "concreteType": "Team",
-        "plural": false,
-        "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "members",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "User",
-            "plural": true,
-            "selections": [
-              (v3/*: any*/)
-            ]
-          },
-          (v5/*: any*/),
-          (v6/*: any*/),
-          (v7/*: any*/),
-          (v9/*: any*/),
-          (v10/*: any*/)
-        ]
-      },
+      (v4/*: any*/),
       {
         "kind": "LinkedField",
         "alias": null,
@@ -288,7 +347,7 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          (v11/*: any*/)
+          (v5/*: any*/)
         ]
       }
     ]
@@ -298,38 +357,7 @@ return {
     "name": "TeamPageQuery",
     "argumentDefinitions": (v0/*: any*/),
     "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "team",
-        "storageKey": null,
-        "args": (v1/*: any*/),
-        "concreteType": "Team",
-        "plural": false,
-        "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "members",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "User",
-            "plural": true,
-            "selections": [
-              (v3/*: any*/),
-              (v2/*: any*/)
-            ]
-          },
-          (v5/*: any*/),
-          (v6/*: any*/),
-          (v7/*: any*/),
-          (v9/*: any*/),
-          (v10/*: any*/)
-        ]
-      },
+      (v4/*: any*/),
       {
         "kind": "LinkedField",
         "alias": null,
@@ -339,8 +367,8 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          (v11/*: any*/),
-          (v2/*: any*/)
+          (v5/*: any*/),
+          (v1/*: any*/)
         ]
       }
     ]
@@ -349,11 +377,11 @@ return {
     "operationKind": "query",
     "name": "TeamPageQuery",
     "id": null,
-    "text": "query TeamPageQuery(\n  $team_id: String\n) {\n  team(team_id: $team_id) {\n    id\n    name\n    picture\n    members {\n      name\n      id\n    }\n    interests\n    description\n    project_idea\n    notifications {\n      id\n      bio\n      idea\n      sender {\n        __typename\n        ... on User {\n          id\n          name\n        }\n        ... on Team {\n          id\n          name\n        }\n      }\n      senderType\n    }\n    public\n  }\n  user_profile {\n    team {\n      id\n    }\n    id\n  }\n}\n",
+    "text": "query TeamPageQuery(\n  $team_id: String\n) {\n  team(team_id: $team_id) {\n    id\n    name\n    picture\n    members {\n      name\n      school\n      grad_year\n      contact\n      skills\n      experience\n      visible\n      uuid\n      id\n    }\n    interests\n    description\n    project_idea\n    notifications {\n      id\n      bio\n      idea\n      sender {\n        __typename\n        ... on User {\n          id\n          name\n        }\n        ... on Team {\n          id\n          name\n        }\n      }\n      senderType\n    }\n    public\n  }\n  user_profile {\n    team {\n      id\n    }\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '00f03bd5ca6b4119712db88c0721dc7b';
+(node/*: any*/).hash = 'c76bc05e62652844caedc70b2b890979';
 module.exports = node;

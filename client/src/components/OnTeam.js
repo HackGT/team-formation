@@ -35,7 +35,7 @@ class OnTeam extends Component {
             <TeamInformation editable={false} teamBio={this.props.team.description} projectIdea={this.props.team.project_idea} interests={this.props.team.interests}/>
           </div>
         </div>
-        <Members />
+        <Members members={this.props.team.members}/>
       </div>
     )
   }
