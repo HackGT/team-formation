@@ -23,7 +23,7 @@ class NoTeam extends Component {
   render() {
     return (
         <div id="not-team" class="team-page">
-          <h1>Team {this.props.team.name}</h1>
+          <h1>{this.props.team.name}</h1>
           <Button basic color='blue' content='Ask to Join' onClick={() => this.setState({showModal: true})} />
                 <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
           <div className="first-row">

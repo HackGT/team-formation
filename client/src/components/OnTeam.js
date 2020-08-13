@@ -23,16 +23,16 @@ class OnTeam extends Component {
   render() {
     return (
       <div id="on-team" class="team-page">
-        <h1>Team {this.props.team.name}</h1>
+        <h1>{this.props.team.name}</h1>
         <Button basic color='blue' content='Join Team' onClick={() => this.setState({showModal: true})} />
               <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
         <div className="first-row">
           <div className="first-col">
-            <TeamNotifications />
+            <TeamNotifications/>
             <TeamRequestsSent/>
           </div>
           <div className="second-col">
-            <TeamInformation editable={false} teamBio={this.props.team.description} projectIdea={this.props.team.project_idea} interests={this.props.team.interests}/>
+            <TeamInformation editable={true} teamBio={this.props.team.description} projectIdea={this.props.team.project_idea} interests={this.props.team.interests}/>
           </div>
         </div>
         <Members members={this.props.team.members}/>

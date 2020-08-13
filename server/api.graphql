@@ -68,6 +68,6 @@ type Notification {
     idea: String
     sender: Source
     senderType: String
-    receiver: ID
+    receiver: Source
     resolved: Boolean
 }
