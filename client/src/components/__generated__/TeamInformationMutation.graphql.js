@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 213dea344f4f64c87adfb464b1afea6f
+ * @relayHash 2a4cc3dd05b3e231c51db688389f998f
  */
 
 /* eslint-disable */
@@ -10,7 +10,6 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type TeamInformationMutationVariables = {|
-  name?: ?string,
   picture?: ?string,
   interests?: ?$ReadOnlyArray<?string>,
   description?: ?string,
@@ -18,7 +17,6 @@ export type TeamInformationMutationVariables = {|
 |};
 export type TeamInformationMutationResponse = {|
   +update_team: ?{|
-    +name: ?string,
     +picture: ?string,
     +interests: ?$ReadOnlyArray<?string>,
     +description: ?string,
@@ -34,14 +32,12 @@ export type TeamInformationMutation = {|
 
 /*
 mutation TeamInformationMutation(
-  $name: String
   $picture: String
   $interests: [String]
   $description: String
   $project_idea: String
 ) {
-  update_team(name: $name, picture: $picture, interests: $interests, description: $description, project_idea: $project_idea) {
-    name
+  update_team(picture: $picture, interests: $interests, description: $description, project_idea: $project_idea) {
     picture
     interests
     description
@@ -53,12 +49,6 @@ mutation TeamInformationMutation(
 
 const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
-  {
-    "kind": "LocalArgument",
-    "name": "name",
-    "type": "String",
-    "defaultValue": null
-  },
   {
     "kind": "LocalArgument",
     "name": "picture",
@@ -99,12 +89,6 @@ v1 = [
   },
   {
     "kind": "Variable",
-    "name": "name",
-    "variableName": "name",
-    "type": "String"
-  },
-  {
-    "kind": "Variable",
     "name": "picture",
     "variableName": "picture",
     "type": "String"
@@ -119,32 +103,25 @@ v1 = [
 v2 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "name",
+  "name": "picture",
   "args": null,
   "storageKey": null
 },
 v3 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "picture",
+  "name": "interests",
   "args": null,
   "storageKey": null
 },
 v4 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "interests",
-  "args": null,
-  "storageKey": null
-},
-v5 = {
-  "kind": "ScalarField",
-  "alias": null,
   "name": "description",
   "args": null,
   "storageKey": null
 },
-v6 = {
+v5 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "project_idea",
@@ -172,8 +149,7 @@ return {
           (v2/*: any*/),
           (v3/*: any*/),
           (v4/*: any*/),
-          (v5/*: any*/),
-          (v6/*: any*/)
+          (v5/*: any*/)
         ]
       }
     ]
@@ -196,7 +172,6 @@ return {
           (v3/*: any*/),
           (v4/*: any*/),
           (v5/*: any*/),
-          (v6/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -212,11 +187,11 @@ return {
     "operationKind": "mutation",
     "name": "TeamInformationMutation",
     "id": null,
-    "text": "mutation TeamInformationMutation(\n  $name: String\n  $picture: String\n  $interests: [String]\n  $description: String\n  $project_idea: String\n) {\n  update_team(name: $name, picture: $picture, interests: $interests, description: $description, project_idea: $project_idea) {\n    name\n    picture\n    interests\n    description\n    project_idea\n    id\n  }\n}\n",
+    "text": "mutation TeamInformationMutation(\n  $picture: String\n  $interests: [String]\n  $description: String\n  $project_idea: String\n) {\n  update_team(picture: $picture, interests: $interests, description: $description, project_idea: $project_idea) {\n    picture\n    interests\n    description\n    project_idea\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'd43234e7433133002e7dbde7e633a22f';
+(node/*: any*/).hash = '045454525221835db801612036076455';
 module.exports = node;

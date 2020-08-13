@@ -21,3 +21,17 @@
 .second-col {
   width: 50%
 }
+
+#header {
+  display: inline-block;
+  width: 300px;
+}
+
+#field {
+  width: 600px;
+  align-items: center;
+}
+
+#alert {
+  padding: 1px;
+}

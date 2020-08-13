@@ -14,9 +14,8 @@ import {graphql} from 'babel-plugin-relay/macro';
 import environment from './Environment';
 
 const mutation = graphql `
-mutation TeamInformationMutation($name: String, $picture: String, $interests: [String], $description: String, $project_idea: String) {
-  update_team(name: $name, picture: $picture, interests: $interests, description: $description, project_idea: $project_idea) {
-    name
+mutation TeamInformationMutation($picture: String, $interests: [String], $description: String, $project_idea: String) {
+  update_team(picture: $picture, interests: $interests, description: $description, project_idea: $project_idea) {
     picture
     interests
     description
