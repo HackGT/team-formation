@@ -4,7 +4,8 @@ import {
     Form,
     TextArea,
     Button,
-    Label
+    Label, 
+    Message
 } from 'semantic-ui-react'
 import './css/TeamInformation.css'
 import skills from '../constants/skills'
@@ -25,14 +26,20 @@ mutation TeamInformationMutation($name: String, $picture: String, $interests: [S
 `;
 
 class TeamInformation extends Component {
+    constructor (props) {
+        super(props)
+        this._onBlur = this._onBlur.bind(this)
+    }
+
     state = {
         teamBio: this.props.teamBio,
         projectIdea: this.props.projectIdea,
-        icon: 'lock',
         active: false,
         interests: this.props.interests,
         search: '',
-        interest_options: skills
+        interest_options: skills,
+        save_message_hidden: true,
+        save_success: false
     }
     render() {
         var colors = ["#A0CCC9", "#EBABCA"];
@@ -53,11 +60,11 @@ class TeamInformation extends Component {
                 <Card fluid="fluid">
                     <Card.Content className="card-content">
                         <Card.Header className="card-header">Team Information</Card.Header>
-                        <Form className="form">
-                            <Form.Field defaultValue={this.state.teamBio} onChange={this.onTeamBioChange} control={TextArea} className='input' label='Team Bio' placeholder='Tell us about your team' disabled={this.state.icon === 'lock'}/>
-                            <Form.Field defaultValue={this.state.projectIdea} onChange={this.onProjectIdeaChange} className='input' control={TextArea} label='Project Idea' placeholder='Describe any ideas you have for a potential project' disabled={this.state.icon === 'lock'}/>
-                            <Form.Dropdown defaultValue={this.state.interests} disabled={this.state.icon === 'lock'} label='Interests' options={this.state.interest_options} placeholder='Select Interests' search="search" selection="selection" fluid="fluid" multiple="multiple" allowAdditions="allowAdditions" value={this.state.interests} onAddItem={this.handleAddition} onChange={this.handleChange}/>
-                            <Button className="save-button" icon={this.state.icon} onClick={this.onLockClick}></Button>
+                        <Form className="form" success>
+                            <Form.Field defaultValue={this.state.teamBio} onBlur={this._onBlur} onChange={this.onTeamBioChange} control={TextArea} className='input' label='Team Bio' placeholder='Tell us about your team'/>
+                            <Form.Field defaultValue={this.state.projectIdea} onBlur={this._onBlur} onChange={this.onProjectIdeaChange} className='input' control={TextArea} label='Project Idea' placeholder='Describe any ideas you have for a potential project'/>
+                            <Form.Dropdown defaultValue={this.state.interests} onBlur={this._onBlur} label='Interests' options={this.state.interest_options} placeholder='Select Interests' search="search" selection="selection" fluid="fluid" multiple="multiple" allowAdditions="allowAdditions" value={this.state.interests} onAddItem={this.handleAddition} onChange={this.handleChange}/>
+                            <Message hidden={this.state.save_message_hidden} success={this.state.save_success} header={this.state.save_success ? "Changes Saved" : "Unsaved Changes"}/>
                         </Form>
                     </Card.Content>
                 </Card>
@@ -90,33 +97,37 @@ class TeamInformation extends Component {
     };
 
     onTeamBioChange = (e) => {
+        this.onChange();
         this.setState({teamBio: e.target.value});
     };
 
     onProjectIdeaChange = (e) => {
+        this.onChange();
         this.setState({projectIdea: e.target.value});
     };
 
-    onLockClick = (e) => {
-        if(this.state.icon == 'unlock') {
-            this.setState({icon: 'lock'})
-            console.log(this.props.teamBio);
-            console.log(this.state.teamBio);
-            commitMutation(environment, {
-                mutation,
-                variables: {
-                    interests: this.state.interests,
-                    description: this.state.teamBio,
-                    project_idea: this.state.projectIdea 
-                }
-            });
-        } else {
-            this.setState({icon: 'unlock'})
-        }
-        // this.state.icon === 'unlock'
-        //     ? this.setState({icon: 'lock'})
-        //     : this.setState({icon: 'unlock'})
-    };
+    onChange() {
+        console.log('new edits');
+        this.setState({
+            save_message_hidden: false,
+            save_success: false
+        })
+    }
+
+    _onBlur() {
+        this.setState({
+            save_message_hidden: false,
+            save_success: true
+        })
+        commitMutation(environment, {
+            mutation,
+            variables: {
+                interests: this.state.interests,
+                description: this.state.teamBio,
+                project_idea: this.state.projectIdea 
+            }
+        });
+    }
 
     handleAddition = (e, {value}) => {
         console.log(value);
@@ -131,7 +142,10 @@ class TeamInformation extends Component {
         }))
     };
 
-    handleChange = (e, {value}) => this.setState({interests: value});
+    handleChange = (e, {value}) => {
+        this.onChange();
+        this.setState({interests: value});
+    }
 
 }
 
