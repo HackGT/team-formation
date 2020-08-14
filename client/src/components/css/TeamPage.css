@@ -13,3 +13,30 @@
   align-items: center;
   margin-top: 3%;
 }
+
+.first-col {
+  width: 40%;
+}
+
+.second-col {
+  width: 50%
+}
+
+#header {
+  display: inline-block;
+  width: 300px;
+}
+
+#field {
+  width: 400px;
+  background: #656cae;
+}
+
+#alert {
+  padding: 1px;
+}
+
+.ui.input>input {
+  padding: 0;
+  background: #656cae;
+}

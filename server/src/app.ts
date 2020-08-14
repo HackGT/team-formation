@@ -75,7 +75,7 @@ let getTeam = async function(parent, args, context, info, req) {
     if(!context._id) {
         throw new Error("User is not logged in!")
     }
-    let team = await Team.findById(args.team_id);
+    let team = await Team.findById(args.team_id).populate('members');
     if(!team) {
         throw new Error("Team not found!")
     }

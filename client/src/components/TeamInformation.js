@@ -4,35 +4,66 @@ import {
     Form,
     TextArea,
     Button,
-    Select,
-    Dropdown
+    Label, 
+    Message
 } from 'semantic-ui-react'
 import './css/TeamInformation.css'
 import skills from '../constants/skills'
+import {commitMutation} from 'react-relay';
+import {graphql} from 'babel-plugin-relay/macro';
+import environment from './Environment';
+
+const mutation = graphql `
+mutation TeamInformationMutation($picture: String, $interests: [String], $description: String, $project_idea: String) {
+  update_team(picture: $picture, interests: $interests, description: $description, project_idea: $project_idea) {
+    picture
+    interests
+    description
+    project_idea
+  }
+}
+`;
 
 class TeamInformation extends Component {
+    constructor (props) {
+        super(props)
+        this._onBlur = this._onBlur.bind(this)
+    }
+
     state = {
         teamBio: this.props.teamBio,
         projectIdea: this.props.projectIdea,
-        icon: 'unlock',
         active: false,
-        currentValues: [],
+        interests: this.props.interests,
         search: '',
-        options: skills
+        interest_options: skills,
+        save_message_hidden: true,
+        save_success: false
     }
     render() {
+        var colors = ["#A0CCC9", "#EBABCA"];
+        var count = 0;
+        var interestLabels = this.state.interests.map((interest) => (
+        <Label
+            size="mini"
+            className="labelStyle"
+            style={{
+            backgroundColor: colors[count++ % 2],
+            }}
+        >
+            {interest}
+        </Label>
+        ));
         if (this.props.editable) {
             return (<div className="team-card-container">
                 <Card fluid="fluid">
                     <Card.Content className="card-content">
                         <Card.Header className="card-header">Team Information</Card.Header>
-                        <Form className="form">
-                            <Form.Field className='input' control={TextArea} label='Team Bio' placeholder='Tell us about your team' disabled={this.state.icon === 'unlock'}/>
-                            <Form.Field className='input' control={TextArea} label='Project Idea' placeholder='Describe any ideas you have for a potential project' disabled={this.state.icon === 'unlock'}/>
-                            <Form.Dropdown disabled={this.state.icon === 'unlock'} icon={this.state.icon === 'unlock'
-                                    ? null
-                                    : 'dropdown'} label='Seeking' options={this.state.options} placeholder='Select Seeking Skills' search="search" selection="selection" fluid="fluid" multiple="multiple" allowAdditions="allowAdditions" value={this.state.currentValues} onAddItem={this.handleAddition} onChange={this.handleChange}/>
-                            <Button className="save-button" icon={this.state.icon} onClick={this.onLockClick}></Button>
+                        <Form className="form" success>
+                            <Form.Field defaultValue={this.state.teamBio} onBlur={this._onBlur} onChange={this.onTeamBioChange} control={TextArea} className='input' label='Team Bio' placeholder='Tell us about your team'/>
+                            <Form.Field defaultValue={this.state.projectIdea} onBlur={this._onBlur} onChange={this.onProjectIdeaChange} className='input' control={TextArea} label='Project Idea' placeholder='Describe any ideas you have for a potential project'/>
+                            <Form.Dropdown defaultValue={this.state.interests} onBlur={this._onBlur} label='Interests' options={this.state.interest_options} placeholder='Select Interests' search="search" selection="selection" fluid="fluid" multiple="multiple" allowAdditions="allowAdditions" value={this.state.interests} onAddItem={this.handleAddition} onChange={this.handleChange}/>
+                            <Message hidden={this.state.save_message_hidden} success={this.state.save_success} header={this.state.save_success ? "Changes Saved" : "Unsaved Changes"}/>
                         </Form>
                     </Card.Content>
                 </Card>
@@ -51,31 +82,69 @@ class TeamInformation extends Component {
                                     minHeight: 150,
                                     resize: 'none'
                                 }} disabled="disabled"/>
-                            <Form.Dropdown disabled="disabled" multiple="multiple" icon={null} label='Seeking' fluid="fluid" selection="selection" value={this.state.currentValues}/>
                         </Form>
+                        <Card.Description>
+                            Interests
+                        </Card.Description>
+                        <Card.Description>
+                            {interestLabels}
+                        </Card.Description>
                     </Card.Content>
                 </Card>
             </div>);
         }
+    };
+
+    onTeamBioChange = (e) => {
+        this.onChange();
+        this.setState({teamBio: e.target.value});
+    };
+
+    onProjectIdeaChange = (e) => {
+        this.onChange();
+        this.setState({projectIdea: e.target.value});
+    };
+
+    onChange() {
+        console.log('new edits');
+        this.setState({
+            save_message_hidden: false,
+            save_success: false
+        })
     }
-    onLockClick = (e) => {
-        this.state.icon === 'unlock'
-            ? this.setState({icon: 'lock'})
-            : this.setState({icon: 'unlock'})
+
+    _onBlur() {
+        this.setState({
+            save_message_hidden: false,
+            save_success: true
+        })
+        commitMutation(environment, {
+            mutation,
+            variables: {
+                interests: this.state.interests,
+                description: this.state.teamBio,
+                project_idea: this.state.projectIdea 
+            }
+        });
     }
+
     handleAddition = (e, {value}) => {
+        console.log(value);
         this.setState((prevState) => ({
-            options: [
+            interest_options: [
                 {
                     text: value,
                     value
                 },
-                ...prevState.options
+                ...prevState.interest_options
             ]
         }))
-    }
+    };
 
-    handleChange = (e, {value}) => this.setState({currentValues: value})
+    handleChange = (e, {value}) => {
+        this.onChange();
+        this.setState({interests: value});
+    }
 
 }
 

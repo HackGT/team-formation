@@ -16,7 +16,7 @@
         "@types/mongodb": "^3.1.22",
         "@types/oauth": "^0.9.1",
         "ajv": "^4.11.2",
-        "apollo-server-express": "^2.16.0",
+        "apollo-server-express": "^2.16.1",
         "compression": "^1.6.2",
         "connect-flash": "^0.1.1",
         "cors": "^2.8.5",
