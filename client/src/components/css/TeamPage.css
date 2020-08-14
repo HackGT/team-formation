@@ -28,10 +28,15 @@
 }
 
 #field {
-  width: 600px;
-  align-items: center;
+  width: 400px;
+  background: #656cae;
 }
 
 #alert {
   padding: 1px;
+}
+
+.ui.input>input {
+  padding: 0;
+  background: #656cae;
 }

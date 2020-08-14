@@ -6,6 +6,7 @@ import {QueryRenderer} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import './css/Members.css';
 import environment from './Environment';
+import { Link } from "react-router-dom";
 
 // edit this query to pull on the team members
 const getUsersQuery = graphql `
@@ -52,9 +53,11 @@ class Members extends Component {
         for (let j = 4 - users.length; j > 0; j--) {
             memberCards.push(<Card>
                 <Card.Content className="add-card">
-                    <Button icon="icon">
-                        <Icon name='plus'/>
-                    </Button>
+                    <Link to="/feed/">
+                        <Button icon="icon">
+                            <Icon name='plus'/>
+                        </Button>
+                    </Link>
                 </Card.Content>
             </Card>)
         }

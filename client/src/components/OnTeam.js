@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {
     Card,
     Form,
-    TextArea,
     Button,
     Label,
-    Message
+    Message,
+    Input
 } from 'semantic-ui-react'
 import TeamInformation from './TeamInformation';
 import JoinTeam from './ui_subcomponents/JoinTeam';
@@ -49,8 +49,8 @@ class OnTeam extends Component {
       <div id="on-team" class="team-page">
         {/* <h1>{this.props.team.name}</h1> */}
         <h1 id="header">
-          <Form.Field id="field" defaultValue={this.state.name} onBlur={this._onBlur} onChange={this.onTeamNameChange} control={TextArea} className='input'/>
-          <Message id="alert" hidden={this.state.save_message_hidden} success={this.state.save_success} header={this.state.save_success ? "Changes Saved" : "Unsaved Changes"}/>
+          <Form.Input id="field" label="Team Name" defaultValue={this.state.name} onBlur={this._onBlur} onChange={this.onTeamNameChange} className='input'/>
+          {/* <Message id="alert" hidden={this.state.save_message_hidden} success={this.state.save_success} header={this.state.save_success ? "Changes Saved" : "Unsaved Changes"}/> */}
         </h1>
         <Button basic color='blue' content='Join Team' onClick={() => this.setState({showModal: true})} />
               <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
