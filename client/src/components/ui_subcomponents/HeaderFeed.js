@@ -76,6 +76,18 @@ class Headers extends Component {
             return (
               <div className="logout-button">
                 <Menu secondary borderless="borderless" size={"massive"}>
+                  <Menu.Menu position="left">
+                    <div className='hamburger-icon'>
+                      <Menu.Item
+                        icon="bars"
+                        style={{
+                          fontFamily: "Quicksand-Bold",
+                          fontSize: 20,
+                          color: "white",
+                        }}
+                      />
+                    </div>
+                  </Menu.Menu>
                   <Menu.Menu position="right">
                     <Menu.Item
                       name={props.user_profile.name}

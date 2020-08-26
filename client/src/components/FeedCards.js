@@ -41,12 +41,13 @@ class FeedCards extends Component {
                 } else if (props) {
                     let cards = props.users.map(user => {
                         console.log("Stuff: " + user.id);
-                        return <UserCard name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function(el) {
+                        return <UserCard className='card-individual' name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function(el) {
                                 return Boolean(el);
                             })} experience={user.experience} id={user.id}/>
                     })
-                    return (<div className='Cards-container'>
-                        <Card.Group centered="centered" itemsPerRow={4} className='center-group'>{cards}</Card.Group>
+                    return (
+                    <div className='Cards-container'>
+                        {cards}
                     </div>);
                 }
             }}/>);

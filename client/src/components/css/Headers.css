@@ -22,3 +22,9 @@
   font-family: Quicksand-Bold;
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
+
+@media (min-width: 915px) {
+  .hamburger-icon{
+    display: none;
+  }
+}

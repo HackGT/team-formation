@@ -28,13 +28,12 @@
 
 .Cards-container {
   /* padding-top: 2%; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
   margin: 0 auto;
   padding-left: 3%;
-  justify-content: left;
-}
-
-.center-group {
-  margin: 0 auto;
 }
 
 .ui.buttons .button:first-child {
