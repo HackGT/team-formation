@@ -18,13 +18,13 @@
   overflow-y: auto;
 }
 
+@media (max-width: 415px) {
+  .header-name {
+    display: none;
+  }
+}
+
 @font-face {
   font-family: Quicksand-Bold;
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
-}
-
-@media (min-width: 915px) {
-  .hamburger-icon{
-    display: none;
-  }
 }

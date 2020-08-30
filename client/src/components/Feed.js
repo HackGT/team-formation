@@ -36,29 +36,12 @@ class Feed extends Component {
       />
     );
     return (
-      <div>
-        <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
-        <div className="switch-feed">
-          <span class="teamFormation">HackGT Team Formation</span>
-          <Button.Group>
-            <Button
-              className="individuals"
-              onClick={this.feedTypeListener}
-              basic={this.state.teams}
-            >
-              Individuals
-            </Button>
-            <Button
-              onClick={this.feedTypeListener}
-              basic={!this.state.teams}
-              className="teams"
-            >
-              Teams
-            </Button>
-          </Button.Group>
-        </div>
-        <div className="Feed-container">
-          <div className="menu">
+      <div className="feed-container">
+        <div className="left-side">
+          {/* hackgt title, filter menu, and fish logo */}
+          <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
+          <p class="teamFormation">HackGT Team Formation</p>
+          <div className="side-menu">
             <SideMenu
               className="Side-menu"
               allFilterClickListener={this.allFilterClickListener}
@@ -66,24 +49,60 @@ class Feed extends Component {
               onTeamPage={this.state.teams}
             />
           </div>
-          {this.state.skills.length ||
-          this.state.years.length ||
-          this.state.schools.length ? (
-            <div className="user-input">
-              <div className="filters-applied">
-                <text>Filters Applied</text>
+        </div>
+
+
+        <div className="right-side">
+          <p class="HackGTitle-top">HACKGT7: REIMAGINE REALITY</p>
+          <p class="teamFormation-top">HackGT Team Formation</p>
+          <div className="side-menu-top">
+            <SideMenu
+              className="Side-menu"
+              allFilterClickListener={this.allFilterClickListener}
+              onSearchClick={this.onSearchClick}
+              onTeamPage={this.state.teams}
+            />
+          </div>
+          <div className="switch-feed">
+            <Button.Group>
+              <Button
+                className="individuals"
+                onClick={this.feedTypeListener}
+                basic={this.state.teams}
+              >
+                Individuals
+              </Button>
+              <Button
+                onClick={this.feedTypeListener}
+                basic={!this.state.teams}
+                className="teams"
+              >
+                Teams
+              </Button>
+            </Button.Group>
+            {this.state.skills.length ||
+            this.state.years.length ||
+            this.state.schools.length ? (
+              <div className="user-input">
+                <div className="filters-applied">
+                  <text>Filters Applied</text>
+                </div>
+                <div className="filter-tags">
+                  <InputTagCollection
+                    skills={this.state.skills}
+                    years={this.state.years}
+                    schools={this.state.schools}
+                    allFilterClickListener={this.allFilterClickListener}
+                  />
+                </div>
               </div>
-              <div className="filter-tags">
-                <InputTagCollection
-                  skills={this.state.skills}
-                  years={this.state.years}
-                  schools={this.state.schools}
-                  allFilterClickListener={this.allFilterClickListener}
-                />
-              </div>
-            </div>
-          ) : null}
-          <div className="feed-cards">{cards}</div>
+            ) : null}
+          </div>
+
+          <div className="feed-cards-container">
+            <div className="feed-cards">{cards}</div>
+          </div>
+          {/* feed and individual/teams toggle 8 */}
         </div>
       </div>
     );

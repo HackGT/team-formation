@@ -4,7 +4,7 @@
 
 #chosen-tags {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     width: 100%;
     flex-flow: wrap;
     margin-bottom: 1em;

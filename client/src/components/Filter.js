@@ -3,7 +3,7 @@ import './css/Filter.css';
 
 const Filter = props => {
     return (<div id="filter">
-        <div>
+        <div className="filter-container">
             {/* SKILLS */}
             <div id="filter-skills">
                 <label className="filter-title">SKILLS</label>
