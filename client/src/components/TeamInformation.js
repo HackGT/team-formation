@@ -46,9 +46,6 @@ class TeamInformation extends Component {
     }
 
     render() {
-        console.log(this.state.interests)
-        console.log(this.state.teamBio)
-        console.log(this.state.projectIdea);
         var colors = ["#A0CCC9", "#EBABCA"];
         var count = 0;
         var interestLabels = this.state.interests.map((interest) => (
@@ -64,7 +61,6 @@ class TeamInformation extends Component {
         ));
         if (this.props.editable) {
             if (!this.state.edit) {
-                console.log(this.state.teamBio);
                 return (
                     <div className="team-card-container">
                         <Card fluid="fluid">
