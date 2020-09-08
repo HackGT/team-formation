@@ -9,8 +9,8 @@
   padding-bottom: 4%;
 }
 
-.ui.card:after, .ui.cards:after {
-    height: 40px;
+.ui.card:after,
+.ui.cards:after {
 }
 
 .form {
@@ -19,9 +19,7 @@
 
 .ui.form textarea {
   min-height: 150px;
-  border: 3px solid;
-  border-image-source: linear-gradient(0deg, rgba(85,196,235,1) 0%, rgba(135,91,163,1) 100%);
-  border-image-slice: 1;
+  border: none;
 }
 
 .ui.form .disabled.field,
@@ -40,9 +38,7 @@
 }
 
 .ui.fluid.dropdown {
-  border: 3px solid;
-  border-image-source: linear-gradient(0deg, rgba(85,196,235,1) 0%, rgba(135,91,163,1) 100%);
-  border-image-slice: 1;
+  border: none;
 }
 
 .ui.form .field > .selection.dropdown {
@@ -63,4 +59,17 @@
 
 .ui.message .header {
   color: black;
+}
+
+.ui.form .field > label {
+  color: #85808a;
+}
+
+.ui.form textarea {
+  color: #85808A;
+}
+
+.ui.fluid.card {
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
 }
