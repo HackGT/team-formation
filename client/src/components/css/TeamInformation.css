@@ -1,9 +1,13 @@
+.header {
+  flex-direction: row;
+  display: inline-block;
+}
 .card-content {
   padding-bottom: 10%;
 }
 
 .card-header {
-  font-size: 10px;
+  font-size: 20px;
   padding-top: 4%;
   text-align: center;
   padding-bottom: 4%;
@@ -63,4 +67,10 @@
 
 .ui.message .header {
   color: black;
+}
+
+.ui[class*="right labeled"].icon.button {
+  padding-right: 4.07142857em!important;
+  padding-left: 1.5em!important;
+  float: right;
 }
