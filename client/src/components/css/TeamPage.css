@@ -33,10 +33,11 @@
 }
 
 #field {
-  width: 400px;
+  width: 100%;
   background: transparent;
   border: none;
   font-family: Lekton-Bold;
+  text-align: center;
 }
 
 #alert {
@@ -47,7 +48,6 @@
   padding: 0;
   background: #656cae;
 }
-
 
 .HackGTitle {
   color: white;
