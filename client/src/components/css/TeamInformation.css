@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Quicksand-Bold;
+  src: url("./fonts/quicksand/Quicksand-Bold.ttf");
+}
+
 .header {
   flex-direction: row;
   display: inline-block;
@@ -69,4 +74,49 @@
   padding-right: 4.07142857em !important;
   padding-left: 1.5em !important;
   float: right;
+}
+
+.ui.form .field > label {
+  color: #85808a;
+}
+
+.ui.form textarea {
+  color: #85808a;
+}
+
+.ui.fluid.card {
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
+
+.ui[class*="right labeled"].icon.button {
+  background-color: #8895c1;
+  color: white;
+}
+
+.ui.multiple.dropdown > .label:nth-child(odd) {
+  background-color: #a0ccc9;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  font-family: Quicksand-Bold;
+}
+
+.ui.multiple.dropdown > .label:nth-child(even) {
+  background-color: #ebabca;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  font-family: Quicksand-Bold;
+}
+
+.ui.card > .content,
+.ui.cards > .card > .content {
+  padding-bottom: 20px;
+}
+
+.member-cards-container {
+  transform: scale(0.8);
+}
+
+.member-cards-container {
+  margin-top: -2%;
 }
