@@ -17,6 +17,16 @@
 	background: rgba(255, 255, 255, 0.22);
 }
 
+.ui.form textarea {
+	color: white;
+	background: rgba(255, 255, 255, 0.22);
+}
+
+.ui.form textarea:focus {
+	color: white;
+	background: rgba(255, 255, 255, 0.22);
+}
+
 .input-container-large {
 	width: 440px;
 }

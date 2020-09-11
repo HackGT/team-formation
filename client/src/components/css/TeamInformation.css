@@ -17,13 +17,6 @@
   padding-bottom: 2%;
 }
 
-.ui.form textarea {
-  min-height: 150px;
-  border: 3px solid;
-  border-image-source: linear-gradient(0deg, rgba(85,196,235,1) 0%, rgba(135,91,163,1) 100%);
-  border-image-slice: 1;
-}
-
 .ui.form .disabled.field,
 .ui.form .disabled.fields .field,
 .ui.form .field :disabled {
@@ -37,12 +30,6 @@
 .ui.form .field.disabled > label,
 .ui.form .fields.disabled > label {
   opacity: 1;
-}
-
-.ui.fluid.dropdown {
-  border: 3px solid;
-  border-image-source: linear-gradient(0deg, rgba(85,196,235,1) 0%, rgba(135,91,163,1) 100%);
-  border-image-slice: 1;
 }
 
 .ui.form .field > .selection.dropdown {
