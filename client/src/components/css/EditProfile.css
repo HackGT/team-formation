@@ -9,6 +9,14 @@
 	width: 220px;
 }
 
+.ui.form input[type=text] {
+	background: rgba(255, 255, 255, 0.22);
+}
+
+.ui.form input[type=text]:focus {
+	background: rgba(255, 255, 255, 0.22);
+}
+
 .input-container-large {
 	width: 440px;
 }

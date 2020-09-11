@@ -56,8 +56,6 @@ class EditProfile extends Component {
     constructor() {
         super();
         this.state = {
-            first_name: "",
-            last_name: "",
             year: "",
             name: "",
             school: "",
@@ -94,6 +92,7 @@ class EditProfile extends Component {
                     return <div>{error.message}</div>;
                 } else if (props) {
                     props = props.user_profile;
+                    console.log(props)
                     if (!this.state.name && props.name) {
                         this.setState({
                             ...props
@@ -102,8 +101,7 @@ class EditProfile extends Component {
                     return (<div className="form-container">
                         <Form>
                             <Form.Group>
-                                <Form.Input className="input-container" label='First Name' placeholder='First Name' defaultValue={props.name} onChange={this.onNameChange} error={this.state["name_profane"]} required="required"/>
-                                <Form.Input className="input-container" label='Last Name' placeholder='Last Name' defaultValue={props.name} onChange={this.onNameChange} error={this.state["name_profane"]} required="required"/>
+                                <Form.Input className="input-container-large" label='Full Name' placeholder='Full Name' defaultValue={props.name} onChange={this.onNameChange} error={this.state["name_profane"]} required="required"/>
                             </Form.Group>
                             <Form.Group>
                                 <Form.Input className="input-container" label='School' placeholder='School' defaultValue={props.school} onChange={this.onSchoolChange} error={this.state["school_profane"]} required="required"/>
