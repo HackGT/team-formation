@@ -6,6 +6,7 @@ import {QueryRenderer} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import './css/Feed.css';
 import environment from './Environment';
+import {Redirect} from 'react-router-dom';
 
 const getUsersQuery = graphql `
     query FeedCardsQuery($skill: String, $grad_year: String, $school: String, $search: String) {
@@ -37,7 +38,8 @@ class FeedCards extends Component {
                 school: school
             }} render={({error, props}) => {
                 if (error) {
-                    return <div>{error.message}</div>;
+                    // return <div>{error.message}</div>;
+                    return <Redirect to='/login' />;
                 } else if (props) {
                     let cards = props.users.map(user => {
                         console.log("Stuff: " + user.id);

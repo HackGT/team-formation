@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Modal } from "semantic-ui-react";
+import { Button, Modal, Popup } from "semantic-ui-react";
 import "../css/Modal.css";
 import UserCard from "../UserCard";
 import { commitMutation } from "react-relay";
@@ -23,7 +23,34 @@ const mutation = graphql`
 `;
 
 class JoinIndividual extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      openPopup:false,
+      errorMessage:"",
+    };
+  }
   render() {
+    // var openPopup = false;
+    if(this.props.teamid) {
+      // var popup = 
+      // <Popup 
+      // content="User is already on a team."
+      // trigger={<}
+      // on="click"
+      // hideOnScroll
+      // ></Popup>;
+    } else {
+      // var popup = 
+      // <Popup 
+      // content="User is already on a team."
+      // trigger={id="submitButton"}
+      // on="click"
+      // hideOnScroll
+      // ></Popup>;
+    }
+    // console.log("Content: "+popup.content)
+    // console.log("STATE: "+this.state.openPopup);
     return (
       <Modal
         closeIcon="closeIcon"
@@ -66,14 +93,15 @@ class JoinIndividual extends Component {
                     placeholder="Describe your project idea..."
                     onChange={this.onIdeaChange}
                   />
-
+                  {this.state.errorMessage}
+                  <div className="popup" />
                   <Button
-                    className="submit"
+                    id="submitButton"
                     style={{
                       marginTop: 25,
                     }}
                     onClick={() => {
-                      this.props.closeModal();
+                      this.setState({ openPopup:true})
                       commitMutation(environment, {
                         mutation,
                         variables: {
@@ -81,6 +109,19 @@ class JoinIndividual extends Component {
                           bio: this.state.bio,
                           idea: this.state.idea,
                         },
+                        onCompleted: (response, errors) => {
+                          console.log("RESPONSE: ",response);
+                          console.log("ERRORS: ",errors[0].message);
+                          if(!errors) {
+                            this.props.closeModal();
+                          } else if(errors[0].message=="Requested user already on team") {
+                              // text="The user is already on a team"
+                              this.setState({ errorMessage:"The user is already on a team" });
+                          } else if(errors[0].message=="You are already on a team!") {
+                            // text="You are already on a team."
+                            this.setState({ errorMessage:"You are already on a team." });
+                          }
+                        }
                       });
                     }}
                   >

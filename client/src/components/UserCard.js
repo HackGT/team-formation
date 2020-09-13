@@ -71,6 +71,7 @@ class UserCard extends Component {
         {skill}
       </Label>
     ));
+    var text;
     return (
       <Card className="card1">
         <Card.Content className="content">
@@ -106,8 +107,16 @@ class UserCard extends Component {
               <Button
                 className="teamUp"
                 content="Team Up"
-                onClick={() => this.setState({ showModal: true })}
-              />
+                onClick={() => {
+                  if(this.props.teamid) {
+                    text="The user is already on a team";
+                  } else {
+                    this.setState({ showModal: true })
+                  }
+                  
+                }
+              }/>
+              {text}
               <JoinIndividual
                 {...this.props}
                 showModal={this.state.showModal}
