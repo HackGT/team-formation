@@ -20,10 +20,6 @@ class NotificationCard extends Component {
     console.log("close individual");
     this.setState({ showIndividualModal: false });
   };
-  closeIndividualModal = () => {
-    console.log("close individual");
-    this.setState({ showIndividualModal: false });
-  };
 
   render() {
     console.log("render", this.state);

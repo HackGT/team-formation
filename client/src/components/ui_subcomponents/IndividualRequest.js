@@ -42,6 +42,7 @@ const acceptTeamRequestMutation = graphql`
 class IndividualRequest extends Component {
   render() {
     const sender = this.props.sender;
+    console.log(sender)
     console.log(sender.id)
     return (
       <QueryRenderer

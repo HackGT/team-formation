@@ -10,8 +10,6 @@ import {
 import Login from "./Login";
 import EditProfile from "./EditProfile";
 import Feed from "./Feed";
-import PrivateRoute from "./PrivateRoute";
-import HeaderLogin from "./ui_subcomponents/HeaderLogin";
 import HeaderFeed from "./ui_subcomponents/HeaderFeed";
 import TeamPage from "./TeamPage";
 import "./css/Content.css";

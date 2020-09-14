@@ -539,7 +539,7 @@ let makeUserRequest = async function(parent, args, context, info, req) {
         throw new Error("Requested user already on team")
     }
     if (!context.team) {
-        notification = await new Notification({
+        notification = new Notification({
             bio: args.bio,
             idea: args.idea,
             senderType: 'User',
@@ -554,12 +554,12 @@ let makeUserRequest = async function(parent, args, context, info, req) {
         if (!team) {
             throw new Error("Team not found")
         }
-        notification = await new Notification({
+        notification = new Notification({
             bio: args.bio,
             idea: args.idea,
             senderType: 'Team',
             receiverType: 'User',
-            sender: team,
+            sender: team._id,
             receiver: receiver_id,
             resolved: false
         });
@@ -584,18 +584,19 @@ let makeTeamRequest = async function(parent, args, context, info, req) {
     }
     let user = await User.findById(context._id)
     let team_id = args.team_id
+    console.log("TEAEM_ID: ", team_id)
     if (!user) {
         throw new Error("User not found!")
     }
     if (user.team) {
         throw new Error("You are already on a team!")
     }
-    let notification = await new Notification({
+    let notification = new Notification({
         bio: args.bio,
         idea: args.idea,
         senderType: 'User',
         receiverType: 'Team',
-        sender: user,
+        sender: user._id,
         receiver: team_id,
         resolved: false
     })

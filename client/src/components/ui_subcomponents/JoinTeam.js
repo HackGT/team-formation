@@ -47,7 +47,7 @@ class JoinTeam extends Component {
                     commitMutation(environment, {
                       mutation,
                       variables: {
-                        team_id: this.props.id,
+                        team_id: this.props.team.id,
                         bio: this.state.bio,
                       },
                     });

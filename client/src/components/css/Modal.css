@@ -228,6 +228,7 @@ textarea::placeholder {
   background: none;
 }
 
+
 .ui.modal > .content {
   background: linear-gradient(180deg, #656cae 0%, rgba(255, 255, 255, 0) 100%),
     #8bb2c2;
