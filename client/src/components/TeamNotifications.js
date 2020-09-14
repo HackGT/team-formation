@@ -61,6 +61,7 @@ class TeamNotifications extends Component {
                                 <NotificationCard
                                 message={notif.bio}
                                 type={notif.senderType}
+                                receiver={'TEAM'}
                                 request={notif.bio}
                                 idea={notif.idea}
                                 meta={notif.meta}

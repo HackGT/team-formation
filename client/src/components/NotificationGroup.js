@@ -62,6 +62,7 @@ class NotificationGroup extends Component {
                   idea={notif.idea}
                   meta={notif.meta}
                   sender={notif.sender}
+                  receiver={'USER'}
                   notification_id={notif.id}
                   color={colors[count++ % 2]}
                 />

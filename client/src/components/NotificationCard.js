@@ -63,6 +63,7 @@ class NotificationCard extends Component {
             showModal={this.state.showIndividualModal}
             closeModal={this.closeIndividualModal}
             sender={this.props.sender}
+            receiver={this.props.receiver}
             notification_id={this.props.notification_id}
           />
         ) : (

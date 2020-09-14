@@ -5,6 +5,8 @@ import compression from "compression";
 import morgan from "morgan";
 import passport from "passport";
 import session from "express-session"
+import mongoose from "mongoose";
+
 // import express_graphql from "express-graphql"
 import cors from "cors"
 import dotenv from "dotenv"
@@ -362,6 +364,9 @@ let getUserProfile = async function(parent, args, context, info, req) {
     return await User.findById(context._id).populate('team');
 }
 
+/*
+    Accepting a user sending request to team
+ */
 let acceptTeamRequest = async function(parent, args, context, info, req) {
     if (!context._id) {
         throw new Error('User not logged in')
@@ -377,6 +382,7 @@ let acceptTeamRequest = async function(parent, args, context, info, req) {
         throw new Error('Team is full')
     }
     let notification = await Notification.findById(args.notification_id).populate('sender')
+                                               .populate('receiver')
     if (!notification) {
         throw new Error('Notification does not exist')
     }
@@ -384,9 +390,13 @@ let acceptTeamRequest = async function(parent, args, context, info, req) {
         throw new Error('Cannot accept request from a team')
     }
     if (notification.senderType == 'User') {
-        if (user.team != notification.receiver) {
+        console.log("TEAM", user.team._id.toString(), notification.receiver._id.toString())
+
+        if (user.team._id.toString() !== notification.receiver._id.toString()) {
+            console.log("TEAM2", user.team._id, notification.receiver._id)
             throw new Error('Team does not own notification')
         }
+        console.log("here1")
         let requestUser = await User.findById(notification.sender._id);
         if (!requestUser) {
             throw new Error('Notificaton sender not found')
@@ -394,19 +404,30 @@ let acceptTeamRequest = async function(parent, args, context, info, req) {
         if (requestUser.team) {
             throw new Error('Sender already on team')
         }
+        console.log("here2")
 
-        let updatedTeam = await Team.findByIdAndUpdate(user.team, {
-            'members': {
-                '$push': {
-                    requestUser
-                }
+        let requestedUserId = requestUser._id
+        console.log(requestedUserId);
+        console.log(user.team._id)
+        console.log(mongoose.Types.ObjectId.isValid(requestedUserId))
+        console.log(mongoose.Types.ObjectId.isValid(user.team._id))
+
+        let updatedTeam = await Team.findByIdAndUpdate(user.team._id, {
+            '$push': {
+                'members': requestedUserId
             }
+        },function(err, user) {
+            console.log("here")
+            console.log(err)
         })
+        console.log("here3")
+
         await User.findByIdAndUpdate(notification.sender._id, {
             'team': updatedTeam
         })
+    } else {
+        throw new Error('Notification invalid')
     }
-    throw new Error('Notification invalid')
 }
 
 let acceptUserRequest = async function(parent, args, context, info, req) {
@@ -422,7 +443,7 @@ let acceptUserRequest = async function(parent, args, context, info, req) {
     if (!notification) {
         throw new Error('Notification not found')
     }
-    if (notification.receiver != user._id) {
+    if (notification.receiver._id != user._id) {
         throw new Error('Notification not valid')
     }
     await Notification.findByIdAndUpdate(args.notification._id, {
@@ -440,10 +461,8 @@ let acceptUserRequest = async function(parent, args, context, info, req) {
             throw new Error('Team is full')
         }
         let team = await Team.findByIdAndUpdate(notification.sender._id, {
-            'members': {
-                '$push': {
-                    user
-                }
+            '$push': {
+                'members': user
             }
         })
         await User.findByIdAndUpdate(context._id, {
@@ -492,8 +511,9 @@ let acceptUserRequest = async function(parent, args, context, info, req) {
             throw new Error('User not defined')
         }
 
+    } else {
+        throw new Error('Notification invalid')
     }
-    throw new Error('Notification invalid')
 
 }
 
