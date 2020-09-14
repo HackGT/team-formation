@@ -18,10 +18,6 @@
   padding-bottom: 4%;
 }
 
-.ui.card:after,
-.ui.cards:after {
-}
-
 .form {
   padding-bottom: 2%;
 }
@@ -119,4 +115,8 @@
 
 .member-cards-container {
   margin-top: -2%;
+}
+
+.ui.form .field {
+  border-bottom: 1px solid #c3bbcd;
 }
