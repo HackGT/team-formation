@@ -30,8 +30,21 @@ class TeamCard extends Component {
 		]
 		var count = 0;
 		var skill;
-		var viewskill;
+		// var viewskill;
 		let link = "/team/" + this.props.id;
+		var colors = ["#A0CCC9", "#EBABCA"];
+		var count = 0;
+		var viewskill = this.props.interests.map((skill) => (
+		<Label
+			size="mini"
+			className="labelStyle"
+			style={{
+			backgroundColor: colors[count++ % 2],
+			}}
+		>
+			{skill}
+		</Label>
+		));
         return (
 			<Card className="card1" basic={false} color='blue' centered='true'>
 				<Card.Content className="content">
@@ -39,7 +52,7 @@ class TeamCard extends Component {
 					{/* <Card.Meta>ID: {this.props.id}</Card.Meta> */}
 					<div className="ui divider"></div>
 					<Card.Description className="card-description">
-						<Container style={{overflow: 'auto', maxHeight: 42 }}><strong>Seeking: </strong>{this.props.interests}</Container>
+						{viewskill}
 					</Card.Description>
 					<Card.Description>
 						<Container style={{overflow: 'auto', maxHeight: 42 }}><strong>Bio: </strong>{this.props.description}</Container>
