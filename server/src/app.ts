@@ -145,7 +145,7 @@ let getUser = async function(parent, args, context, info, req) {
     if (!context._id) {
         throw new Error('User not logged in')
     }
-    let user = await User.findById(context._id)
+    let user = await User.findById(args.user_id)
     if (!user) {
         throw new Error('User not found')
     }
@@ -440,13 +440,18 @@ let acceptUserRequest = async function(parent, args, context, info, req) {
     }
 
     let notification = await Notification.findById(args.notification_id).populate('sender')
+                                               .populate('receiver')
     if (!notification) {
         throw new Error('Notification not found')
     }
-    if (notification.receiver._id != user._id) {
+    console.log("ACCEPT USER REQUEST")
+    console.log(notification.receiver._id)
+    console.log(user._id)
+
+    if (notification.receiver._id.toString() != user._id.toString()) {
         throw new Error('Notification not valid')
     }
-    await Notification.findByIdAndUpdate(args.notification._id, {
+    await Notification.findByIdAndUpdate(notification._id, {
         'resolved': true
     })
     if (notification.senderType == 'Team') {
@@ -456,7 +461,6 @@ let acceptUserRequest = async function(parent, args, context, info, req) {
         if (!notification.sender) {
             throw new Error('Team no longer exists')
         }
-
         if (notification.sender.members.length >= 4) {
             throw new Error('Team is full')
         }
@@ -499,12 +503,16 @@ let acceptUserRequest = async function(parent, args, context, info, req) {
                 user1.team = team
                 user2.team = team
                 user1.save(function(err) {
-                    console.log(err)
-                    throw new Error(err)
+                    if(err) {
+                        console.log(err)
+                        throw new Error(err)
+                    }
                 })
                 user2.save(function(err) {
-                    console.log(err)
-                    throw new Error(err)
+                    if(err) {
+                        console.log(err)
+                        throw new Error(err)
+                    }
                 })
             });
         } else {
