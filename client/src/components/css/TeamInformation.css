@@ -23,7 +23,7 @@
   opacity: 1;
 }
 
-.ui.form textarea {
+.ui.form div.teaminfo-input textarea {
   color: gray;
 }
 

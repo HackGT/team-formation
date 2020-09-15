@@ -74,11 +74,11 @@ class TeamInformation extends Component {
                     <Card.Content className="card-content">
                         <Card.Header className="card-header">Team Information</Card.Header>
                         <Form className="form">
-                            <Form.Field className='input' control={TextArea} label='Team Bio' defaultValue={this.props.teamBio} style={{
+                            <Form.Field className='teaminfo-input' control={TextArea} label='Team Bio' defaultValue={this.props.teamBio} style={{
                                     minHeight: 150,
                                     resize: 'none'
                                 }} disabled="disabled"/>
-                            <Form.Field className='input' control={TextArea} label='Project Idea' defaultValue={this.props.projectIdea} style={{
+                            <Form.Field className='teaminfo-input' control={TextArea} label='Project Idea' defaultValue={this.props.projectIdea} style={{
                                     minHeight: 150,
                                     resize: 'none'
                                 }} disabled="disabled"/>
