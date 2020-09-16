@@ -35,6 +35,14 @@
 	font-family: Quicksand-Bold;
 }
 
+.ui.form div.input-container-large.field>label {
+  color: white;
+}
+
+.ui.form div.input-container-small.field>label {
+  color: white;
+}
+
 .school-and-year {
 	display: flex;
 	flex-direction: row;
@@ -61,10 +69,13 @@
 	justify-content: center;
 }
 
-.save-button {
-	width: 80px;
+.ui.button.save-button {
+	background: rgba(255, 255, 255, 0.22);
+	color: white;
+	margin-right: 15px;
+	margin-left: 15px;
 }
 
-.save-button-container {
+/* .save-button-container {
 	padding-right: 40px;
-}
+} */

@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Lekton-Bold;
+  src: url("./fonts/lekton/Lekton-Bold.ttf");
+}
+
 .first-row {
   width: 100%;
   display: flex;
@@ -19,7 +24,7 @@
 }
 
 .second-col {
-  width: 50%
+  width: 50%;
 }
 
 #header {
@@ -28,15 +33,18 @@
 }
 
 #field {
-  width: 400px;
-  background: #656cae;
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-family: Lekton-Bold;
+  text-align: center;
 }
 
 #alert {
   padding: 1px;
 }
 
-.ui.input>input {
+.ui.input > input {
   padding: 0;
   background: #656cae;
 }

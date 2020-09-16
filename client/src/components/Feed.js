@@ -38,7 +38,6 @@ class Feed extends Component {
     return (
       <div className="feed-container">
         <div className="left-side">
-          {/* hackgt title, filter menu, and fish logo */}
           <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
           <p class="teamFormation">HackGT Team Formation</p>
           <div className="side-menu">
@@ -63,8 +62,8 @@ class Feed extends Component {
               onTeamPage={this.state.teams}
             />
           </div>
-          <div className="switch-feed">
-            <Button.Group>
+          <div>
+            <Button.Group className="switch-feed">
               <Button
                 className="individuals"
                 onClick={this.feedTypeListener}
@@ -102,7 +101,6 @@ class Feed extends Component {
           <div className="feed-cards-container">
             <div className="feed-cards">{cards}</div>
           </div>
-          {/* feed and individual/teams toggle 8 */}
         </div>
       </div>
     );

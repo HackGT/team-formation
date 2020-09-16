@@ -3,7 +3,7 @@ import TeamRequest from "./TeamRequest";
 import JoinTeam from "./JoinTeam";
 import "../css/Headers.css";
 import "../css/Modal.css";
-import { Button, Menu, Dropdown } from "semantic-ui-react";
+import { Button, Menu, Dropdown, Icon, Popup } from "semantic-ui-react";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
@@ -112,7 +112,7 @@ class Headers extends Component {
                       item="item"
                       icon="user"
                       style={{
-                        color: "white",
+                        color: "white"
                       }}
                       direction="left"
                       closeOnChange={false}

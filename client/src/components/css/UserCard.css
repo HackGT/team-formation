@@ -88,7 +88,8 @@ body .ui.card:hover {
   box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   margin: 15px;
-  max-width: 270px;
+  min-width: 270px;
+  width: 270px;
 }
 
 .ui.card > .content > .header:not(.ui),

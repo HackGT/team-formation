@@ -30,9 +30,12 @@
 
 .right-side {
   width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.feed-cards-container {
+.feed-cards {
   padding-top: 2%;
   margin: 0 auto;
   width: 90%;
@@ -116,8 +119,6 @@
 
 .switch-feed {
   padding: 1%;
-  text-align: center;
-  justify-content: center;
 }
 
 .HackGTitle, .HackGTitle-top {
@@ -195,13 +196,13 @@
   border-bottom-right-radius: 15px;
 }
 
-@media (min-width: 415px) {
+@media (min-width: 590px) {
   .side-menu-top, .HackGTitle-top, .teamFormation-top {
     display: none;
   }
 }
 
-@media (max-width: 415px) {
+@media (max-width: 590px) {
   .side-menu, .HackGTitle, .teamFormation, .left-side {
     display: none;
   }

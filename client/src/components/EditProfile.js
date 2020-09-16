@@ -115,7 +115,7 @@ class EditProfile extends Component {
                                 <Form.TextArea className="input-container-large" label='Bio' placeholder='Introduce yourself!' defaultValue={props.experience} onChange={this.onExperienceChange} error={this.state["experience_profane"]}/>
                             </Form.Group>
                             <div className="button-container">
-                                <Form.Group className="save-button-container">
+                                <Form.Group>
                                     <Link to="/feed">
                                         <Button onClick={this.onCancelClick} className="save-button">
                                             Cancel
@@ -129,10 +129,10 @@ class EditProfile extends Component {
                                         </Button>
                                     </Link>
                                 </Form.Group>
-                                <Form.Group>
-                                    {this.state.cur_error_message}
-                                </Form.Group>
                             </div>
+                            <Form.Group>
+                                {this.state.cur_error_message}
+                            </Form.Group>
                         </Form>
                     </div>)
                 }
