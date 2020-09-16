@@ -4,6 +4,7 @@ import "./css/NotificationCard.css";
 import IndividualRequest from "./ui_subcomponents/IndividualRequest";
 import TeamRequest from "./ui_subcomponents/TeamRequest";
 
+
 class NotificationCard extends Component {
   constructor(props) {
     super(props);
@@ -27,31 +28,46 @@ class NotificationCard extends Component {
 
   render() {
     console.log("render", this.state);
+    let header = this.props.type == "User" ? `From: ${JSON.stringify(this.props.sender.name)}` : `To: ?`
     return (
       <div>
         <Card
           className="notification"
-          onClick={(event, data) => {
-            console.log("hello");
-            console.log(event);
-            console.log(data);
-            this.props.type == "User"
-              ? this.setState({ showIndividualModal: true })
-              : this.setState({ showTeamModal: true });
+          // onClick={(event, data) => {
+          //   console.log("hello");
+          //   console.log(event);
+          //   console.log(data);
+          //   this.props.type == "User"
+          //     ? this.setState({ showIndividualModal: true })
+          //     : this.setState({ showTeamModal: true });
+          // }}
+          style={{
+            backgroundColor: this.props.color,
+            boxShadow: "rgba(0, 0, 0,0.2) 0px 4px 4px 0px"
           }}
         >
           <Card.Content
             className="message"
-            style={{
-              backgroundColor: this.props.color,
-              boxShadow: "rgba(0, 0, 0,0.2) 0px 4px 4px 0px",
-              padding: 15,
-            }}
           >
+            {header}
+            <br/>
             {this.props.message}
             <div className="notification-buttonGroup">
-              <Button inverted color="white" icon="check" />
-              <Button inverted color="white" icon="close" />
+              {/* <Button inverted color="white" icon="check" />
+              <Button inverted color="white" icon="close" /> */}
+              <Button 
+                size='large'
+                onClick={(event, data) => {
+                  console.log("hello");
+                  console.log(event);
+                  console.log(data);
+                  this.props.type == "User"
+                    ? this.setState({ showIndividualModal: true })
+                    : this.setState({ showTeamModal: true });
+                }}
+              >
+                View
+              </Button>
             </div>
           </Card.Content>
         </Card>

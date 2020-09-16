@@ -3,7 +3,8 @@ import TeamRequest from "./TeamRequest";
 import JoinTeam from "./JoinTeam";
 import "../css/Headers.css";
 import "../css/Modal.css";
-import { Button, Menu, Dropdown, Icon, Popup } from "semantic-ui-react";
+import { Menu, Dropdown, Icon, Popup } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
@@ -24,6 +25,9 @@ const getName = graphql`
   query HeaderFeedNameQuery {
     user_profile {
       name
+      team {
+        id
+      }
     }
   }
 `;
@@ -73,6 +77,33 @@ class Headers extends Component {
           if (error) {
             return <div>{error.message}</div>;
           } else if (props) {
+            var teamIcon;
+            if (props.user_profile.team == null) {
+              teamIcon =
+                <Popup
+                  trigger={<Icon name='group' size='large' inverted link={true}/>}
+                  content='You are not on a team'
+                  position='bottom center'
+                />;
+            } else {
+              let link = "/team/" + props.user_profile.team.id;
+              teamIcon = 
+                <Popup
+                  trigger={
+                    <Link to={link}>
+                      <Icon
+                        name='group'
+                        link={true}
+                        size='large'
+                        inverted
+                      />
+                    </Link>
+                  }
+                  content='Team Profile'
+                  position='bottom center'
+                >
+                </Popup>
+            }
             return (
               <div className="logout-button">
                 <Menu secondary borderless="borderless" size={"massive"}>
@@ -83,51 +114,95 @@ class Headers extends Component {
                         fontFamily: "Quicksand-Bold",
                         fontSize: 20,
                         color: "white",
+                        paddingRight: 10
                       }}
                     />
                     <Menu.Item
-                      icon="sign out"
                       style={{
+                        size: "large",
+                        color: "white",
+                      }}
+                    >
+                      <Popup
+                        trigger={
+                          <Dropdown
+                            item="item"
+                            icon='bell'
+                            style={{
+                              size: "large",
+                              color: "white",
+                              margin: 0,
+                              padding: 0
+                            }}
+                            direction="left"
+                            closeOnChange={false}
+                          >
+                            <Dropdown.Menu className="notification-pane">
+                              <NotificationGroup user={this.props.user_id} />
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        }
+                        content='Notifications'
+                        position='bottom center'
+                      />
+                      
+                    </Menu.Item>
+                    <Menu.Item
+                      style={{
+                        size: "large",
                         color: "white",
                       }}
                       link={true}
-                      href={"/api/user/logout"}
-                    />
-                    <Dropdown
-                      item="item"
-                      style={{
-                        color: "white",
-                      }}
-                      icon="bell"
-                      direction="left"
-                      closeOnChange={false}
+                      href={"/edit-profile"}
                     >
-                      <Dropdown.Menu className="notification-pane">
-                        <NotificationGroup user={this.props.user_id} />
-                      </Dropdown.Menu>
-                    </Dropdown>
-                    <Dropdown
+                      <Popup
+                        trigger={<Icon name='user' inverted link={true}/>}
+                        content='User Profile'
+                        position='bottom center'
+                      />
+                    </Menu.Item>
+                      {/* <Dropdown
                       item="item"
                       icon="user"
                       style={{
+                        size: "large",
                         color: "white"
                       }}
                       direction="left"
                       closeOnChange={false}
+                      >
+                        <Dropdown.Menu>
+                          <Link to={"/edit-profile"}>
+                            <Dropdown.Item
+                              icon="edit"
+                              text="Edit Profile"
+                              onClick={this.props.onEditClick}
+                            />
+                          </Link>
+                        </Dropdown.Menu>
+                      </Dropdown> */}
+                    <Menu.Item
+                      style={{
+                        size: "large",
+                        color: "white",
+                      }}
                     >
-                      <Dropdown.Menu>
-                        <Dropdown.Item
-                          icon="edit"
-                          text="Edit Profile"
-                          onClick={this.props.onEditClick}
-                        />
-                        <Dropdown.Item
-                          icon="globe"
-                          text={toggle_text}
-                          onClick={this.onToggleClick}
-                        />
-                      </Dropdown.Menu>
-                    </Dropdown>
+                      {teamIcon}
+                    </Menu.Item>
+                    <Menu.Item
+                      style={{
+                        size: "large",
+                        color: "white",
+                      }}
+                      link={true}
+                      href={"/api/user/logout"}
+                    >
+                      <Popup
+                        trigger={<Icon name='sign out' inverted link={true}/>}
+                        content='Sign Out'
+                        position='bottom center'
+                      />
+                    </Menu.Item>
                   </Menu.Menu>
                 </Menu>
               </div>
@@ -137,15 +212,6 @@ class Headers extends Component {
       />
     );
   }
-  onToggleClick = () => {
-    commitMutation(environment, {
-      mutation,
-      variables: {
-        uuid: this.props.user_id,
-      },
-    });
-    this.props.onNextClick("feed", this.props.user_id, !this.props.visible);
-  };
 }
 
 export default Headers;

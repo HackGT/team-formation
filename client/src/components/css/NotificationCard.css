@@ -19,6 +19,7 @@
 }
 
 .notification-buttonGroup {
+  height: 70px;
   position: absolute;
   right: 0%;
   top: 0%;
@@ -36,7 +37,8 @@
 }
 
 .notification {
-  border-radius: 0% !important;
+  height: 70px;
+  border-radius: 1rem!important;
   transition: auto;
 }
 .notification:hover {
