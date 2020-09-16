@@ -3,6 +3,12 @@
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
 
+.team-card-container {
+  max-width: 500px;
+  min-width: 300px;
+  margin: 30px
+}
+
 .header {
   flex-direction: row;
   display: inline-block;
@@ -31,23 +37,22 @@
 .ui.form .disabled.fields .field,
 .ui.form .field :disabled {
   opacity: 1;
+  color: #85808A;
+  font-family: Quicksand-Bold;
 }
 
-.ui.form div.teaminfo-input textarea {
-  color: gray;
+.ui.form .field.disabled :disabled {
+  border: 1px solid #C3BBCD;
 }
 
 .ui.form .field.disabled > label,
 .ui.form .fields.disabled > label {
   opacity: 1;
+  color: #85808A;
 }
 
 .ui.fluid.dropdown {
   border: none;
-}
-
-.ui.form .field > .selection.dropdown {
-  opacity: 1;
 }
 
 .ui.selection.dropdown {

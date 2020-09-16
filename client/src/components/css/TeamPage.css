@@ -12,6 +12,25 @@
   align-items: flex-start;
 }
 
+.ui.button.ask-to-join {
+  font-family: Quicksand-Bold;
+  background: rgba(255, 255, 255, 0.22);
+	color: white;
+}
+
+.no-team-heading {
+  color: white;
+  font-family: Quicksand-Bold;
+}
+
+.noTeam-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .team-page {
   display: flex;
   flex-direction: column;

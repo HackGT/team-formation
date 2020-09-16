@@ -36,11 +36,13 @@
 }
 
 .ui.form div.input-container-large.field>label {
-  color: white;
+	color: white;
+	font-family: Quicksand-Bold;
 }
 
 .ui.form div.input-container-small.field>label {
-  color: white;
+	color: white;
+	font-family: Quicksand-Bold;
 }
 
 .school-and-year {
@@ -75,7 +77,3 @@
 	margin-right: 15px;
 	margin-left: 15px;
 }
-
-/* .save-button-container {
-	padding-right: 40px;
-} */

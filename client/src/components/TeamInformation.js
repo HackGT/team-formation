@@ -87,7 +87,6 @@ class TeamInformation extends Component {
                 </div>
                 <Form className="form">
                   <Form.Field
-                    className="input"
                     control={TextArea}
                     label="Team Bio"
                     value={this.state.teamBio}
@@ -98,7 +97,6 @@ class TeamInformation extends Component {
                     disabled="disabled"
                   />
                   <Form.Field
-                    className="input"
                     control={TextArea}
                     label="Project Idea"
                     value={this.state.projectIdea}
@@ -109,7 +107,7 @@ class TeamInformation extends Component {
                     disabled="disabled"
                   />
                 </Form>
-                <Card.Description>Interests</Card.Description>
+                <Card.Description className="interests">Interests</Card.Description>
                 <Card.Description>{interestLabels}</Card.Description>
               </Card.Content>
             </Card>
