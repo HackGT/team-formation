@@ -1,6 +1,20 @@
 import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
+import { QueryRenderer, commitMutation } from "react-relay";
+import { graphql } from "babel-plugin-relay/macro";
+import environment from "../Environment";
+import { Link } from "react-router-dom";
 import "../css/Modal.css";
+
+
+const acceptRequestMutation = graphql`
+  mutation TeamRequestMutation($notification_id: String) {
+    accept_user_request(notification_id: $notification_id) {
+      id
+      name
+    }
+  }
+`;
 
 class TeamRequest extends Component {
   render() {
@@ -27,11 +41,14 @@ class TeamRequest extends Component {
               <div class="flex-container1">
                 <div>
                   <Button
+                     onClick = {() => {
+                        this.props.closeModal();
+                     }}
+                     as={Link} to={'/team/' + sender.id}
                     className="submit"
                     style={{
                       padding: 12,
                     }}
-                    onClick={this.onViewTeamClick}
                   >
                     View more about {sender.name}
                   </Button>
@@ -42,7 +59,15 @@ class TeamRequest extends Component {
                   <Button
                     className="submit"
                     onClick={() => {
+                        console.log(this.props.receiver)
+                        commitMutation(environment, {
+                          mutation: acceptRequestMutation,
+                          variables: {
+                            notification_id: this.props.notification_id,
+                          },
+                        });
                       this.props.closeModal();
+                      window.location.reload();
                     }}
                   >
                     Accept
@@ -53,6 +78,7 @@ class TeamRequest extends Component {
                     className="submit"
                     onClick={() => {
                       this.props.closeModal();
+
                     }}
                   >
                     Deny

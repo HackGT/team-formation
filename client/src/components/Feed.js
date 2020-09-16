@@ -37,9 +37,9 @@ class Feed extends Component {
     );
     return (
       <div>
-        <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
+        { /*<p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>*/}
         <div className="switch-feed">
-          <span class="teamFormation">HackGT Team Formation</span>
+          {/*<span class="teamFormation">HackGT Team Formation</span>*/}
           <Button.Group>
             <Button
               className="individuals"

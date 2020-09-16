@@ -13,6 +13,7 @@ import NotificationGroup from "../NotificationGroup";
 import IndividualRequest from "./IndividualRequest";
 import JoinIndividual from "./JoinIndividual";
 import { Input } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 const mutation = graphql`
   mutation HeaderFeedMutation {
@@ -205,6 +206,10 @@ class Headers extends Component {
                     </Menu.Item>
                   </Menu.Menu>
                 </Menu>
+                <Link to="/feed">
+                    <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
+                    <span class="teamFormation">HackGT Team Formation</span>
+                </Link>
               </div>
             );
           }

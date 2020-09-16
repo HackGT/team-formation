@@ -31,6 +31,7 @@ type Mutation {
     accept_user_request(notification_id: String): Team
     make_team_request(team_id: String, user_id: String, bio: String, idea: String): Notification
     make_user_request(user_id: String, bio: String, idea: String): Notification
+    leave_team: User
 }
 
 type Team {
