@@ -54,6 +54,7 @@ class NotificationGroup extends Component {
             var colors = ["#A8C5D6", "#CCBEDF"];
             var count = 0;
             var notificationCards = notifications.map((notif) => {
+              console.log("SENDERR: ", notif.sender)
               return (
                 <NotificationCard
                   message={notif.bio}

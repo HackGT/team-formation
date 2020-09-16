@@ -343,6 +343,31 @@ let updateTeam = async function(parent, args, context, info, req) {
     return await Team.findByIdAndUpdate(user.team, { "$set": args }, { new: true });
 }
 
+let leaveTeam = async function(parent, args, context, info, req) {
+    console.log("leaveing team")
+
+    if(!context._id) {
+        throw new Error('User not logged in')
+    }
+    if(!context.team) {
+        throw new Error('User not on team')
+    }
+
+    await Team.findByIdAndUpdate(context.team, {
+        "$pull": {
+            "members": context._id
+        }
+    }, (err, team) => {
+        if(err) {
+            console.log(err)
+            throw new Error("Issue updating team")
+        }
+    })
+    return await User.findByIdAndUpdate(context._id, {
+        "team": null
+    })
+}
+
 let getSentTeamNotifications = async function(parent, args, context, info, req) {
     if(!context._id) {
         throw new Error("User not logged in")
@@ -412,7 +437,7 @@ let acceptTeamRequest = async function(parent, args, context, info, req) {
         console.log(mongoose.Types.ObjectId.isValid(requestedUserId))
         console.log(mongoose.Types.ObjectId.isValid(user.team._id))
 
-        let updatedTeam = await Team.findByIdAndUpdate(user.team._id, {
+        await Team.findByIdAndUpdate(user.team._id, {
             '$push': {
                 'members': requestedUserId
             }
@@ -423,7 +448,10 @@ let acceptTeamRequest = async function(parent, args, context, info, req) {
         console.log("here3")
 
         await User.findByIdAndUpdate(notification.sender._id, {
-            'team': updatedTeam
+            'team': user.team._id
+        })
+        await Notification.findByIdAndUpdate(notification._id, {
+            'resolved': true
         })
     } else {
         throw new Error('Notification invalid')
@@ -635,7 +663,7 @@ let getTeamNotifications = async function(parent, args, context, info, req) {
         receiverType: 'Team',
         receiver: context.team,
         resolved: false
-    })
+    }).populate('sender')
 }
 
 // let createTeam = async function(args) {
@@ -657,10 +685,10 @@ const resolvers = {
 			console.log(info)
 			if(context.team) {
 				console.log("team chosen")
-				return 'Team'
+				return 'User'
 			}
 			if(context._id){
-				return 'User'
+				return 'Team'
 			}
 			return null;
 		}
@@ -682,7 +710,8 @@ const resolvers = {
 		accept_user_request: acceptUserRequest,
 		accept_team_request: acceptTeamRequest,
 		make_team_request: makeTeamRequest,
-		make_user_request: makeUserRequest
+		make_user_request: makeUserRequest,
+        leave_team: leaveTeam
 	}
 };
 

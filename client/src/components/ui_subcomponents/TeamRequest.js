@@ -8,7 +8,7 @@ import "../css/Modal.css";
 
 
 const acceptRequestMutation = graphql`
-  mutation IndividualRequestMutation($notification_id: String) {
+  mutation TeamRequestMutation($notification_id: String) {
     accept_user_request(notification_id: $notification_id) {
       id
       name
@@ -41,6 +41,9 @@ class TeamRequest extends Component {
               <div class="flex-container1">
                 <div>
                   <Button
+                     onClick = {() => {
+                        this.props.closeModal();
+                     }}
                      as={Link} to={'/team/' + sender.id}
                     className="submit"
                     style={{
@@ -64,6 +67,7 @@ class TeamRequest extends Component {
                           },
                         });
                       this.props.closeModal();
+                      window.location.reload();
                     }}
                   >
                     Accept

@@ -118,6 +118,8 @@ class IndividualRequest extends Component {
                               },
                             });
                             this.props.closeModal();
+                            window.location.reload();
+
                           }}
                         >
                           Accept
