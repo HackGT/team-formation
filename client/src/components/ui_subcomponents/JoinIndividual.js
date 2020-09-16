@@ -53,6 +53,7 @@ class JoinIndividual extends Component {
     // console.log("STATE: "+this.state.openPopup);
     return (
       <Modal
+        id="modal"
         closeIcon="closeIcon"
         open={this.props.showModal}
         onClose={() => {
@@ -111,15 +112,18 @@ class JoinIndividual extends Component {
                         },
                         onCompleted: (response, errors) => {
                           console.log("RESPONSE: ",response);
-                          console.log("ERRORS: ",errors[0].message);
+                          console.log("ERRORS: ",errors);
                           if(!errors) {
                             this.props.closeModal();
                           } else if(errors[0].message=="Requested user already on team") {
                               // text="The user is already on a team"
+                              console.log("User is on a team");
                               this.setState({ errorMessage:"The user is already on a team" });
                           } else if(errors[0].message=="You are already on a team!") {
                             // text="You are already on a team."
                             this.setState({ errorMessage:"You are already on a team." });
+                          } else {
+                            this.setState({ errorMessage:"There is an error here, try again later." });
                           }
                         }
                       });

@@ -32,6 +32,15 @@ const acceptRequestMutation = graphql`
   }
 `;
 
+const acceptTeamRequestMutation = graphql`
+  mutation IndividualRequest2Mutation($notification_id: String) {
+    accept_team_request(notification_id: $notification_id) {
+      id
+      name
+    }
+  }
+`;
+
 class IndividualRequest extends Component {
   constructor(props) {
     super(props);
@@ -49,7 +58,8 @@ class IndividualRequest extends Component {
 
   render() {
     const sender = this.props.sender;
-
+    console.log(sender)
+    console.log(sender.id)
     return (
       <QueryRenderer
         environment={environment}
@@ -90,7 +100,7 @@ class IndividualRequest extends Component {
                       <div class="modal3Column2">
                         <div class="modal3Column3">
                           <p class="user1FirstName">
-                            {props.user.name}'s Request Message:
+                            {props.user.name + "'s"} Request Message:
                           </p>
                           <p class="user1RequestMessage">
                             {this.props.userRequestMessage}
@@ -101,7 +111,7 @@ class IndividualRequest extends Component {
                               marginTop: 30,
                             }}
                           >
-                            {props.user.name}'s Project Idea:
+                            {props.user.name + "'s'"} Project Idea:
                           </p>
                           <p class="user1ProjectIdea">
                             {this.props.userProjectIdea}
@@ -122,8 +132,11 @@ class IndividualRequest extends Component {
                         <Button
                           className="submit"
                           onClick={() => {
+                            console.log(this.props.receiver)
+                            const requestMutation =
+                            (this.props.receiver == 'TEAM') ? acceptTeamRequestMutation : acceptRequestMutation;
                             commitMutation(environment, {
-                              mutation: acceptRequestMutation,
+                              mutation: requestMutation,
                               variables: {
                                 notification_id: this.props.notification_id,
                               },

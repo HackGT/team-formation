@@ -5,6 +5,7 @@ import TeamCard from "../TeamCard";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
+import ConfirmationModal from "./ConfirmationModal";
 
 const mutation = graphql`
   mutation JoinTeamMutation($team_id: String, $bio: String, $idea: String) {
@@ -20,8 +21,17 @@ class JoinTeam extends Component {
     super(props);
     this.state = {
       errorMessage:"",
+      secondOpen:false,
     };
+
+    this.toggleSecondOpen = this.toggleSecondOpen.bind(this)
   }
+
+  toggleSecondOpen() {
+    console.log("in toggle");
+    this.setState({secondOpen: true});
+  }
+
   render() {
     return (
       <Modal
@@ -44,22 +54,30 @@ class JoinTeam extends Component {
             {this.state.errorMessage}
             <div class="flex-container-modal3">
               <div>
-                <Button
+                <ConfirmationModal 
+                    message="You have joined the team!"
+                    closeModal={() => this.setState({ secondOpen:false})}
+                    secondModal={() => this.props.closeModal()}
+                    onOpen={() => this.setState({ secondOpen:true})}
+                    showModal={this.state.secondOpen}
+                  />
+                  <Button
                   className="submit"
                   style={{
                     marginTop: 30,
                   }}
                   onClick={() => {
-                    this.props.closeModal();
+                    // this.props.closeModal();
                     commitMutation(environment, {
                       mutation,
                       variables: {
-                        team_id: this.props.id,
+                        team_id: this.props.team.id,
                         bio: this.state.bio,
                       },
                       onCompleted: (response, errors) => {
                         if(!errors) {
-                          this.props.closeModal();
+                          // this.props.closeModal();
+                          this.toggleSecondOpen();
                         } else if(errors[0].message=="You are already on a team!") {
                             this.setState({ errorMessage:"You are already on a team" });
                         } else if(errors[0].message=="Team not found") {
