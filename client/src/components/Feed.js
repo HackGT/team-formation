@@ -38,8 +38,6 @@ class Feed extends Component {
     return (
       <div className="feed-container">
         <div className="left-side">
-          <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
-          <p class="teamFormation">HackGT Team Formation</p>
           <div className="side-menu">
             <SideMenu
               className="Side-menu"
@@ -52,8 +50,6 @@ class Feed extends Component {
 
 
         <div className="right-side">
-          <p class="HackGTitle-top">HACKGT7: REIMAGINE REALITY</p>
-          <p class="teamFormation-top">HackGT Team Formation</p>
           <div className="side-menu-top">
             <SideMenu
               className="Side-menu"

@@ -137,7 +137,7 @@ class Headers extends Component {
                 </Menu>
                 <Link to="/feed">
                     <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
-                    <span class="teamFormation">HackGT Team Formation</span>
+                    <span class="teamFormation">Team Formation</span>
                 </Link>
               </div>
             );
