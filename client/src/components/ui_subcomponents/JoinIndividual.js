@@ -97,7 +97,7 @@ class JoinIndividual extends Component {
                   {this.state.errorMessage}
                   <div className="popup" />
                   <Button
-                    id="submitButton"
+                    className="submit"
                     style={{
                       marginTop: 25,
                     }}

@@ -6,7 +6,7 @@ import environment from "../Environment";
 import { setState } from "semantic-ui-react";
 import "../css/Modal.css";
 import UserCard from "../UserCard";
-import ConfirmationModal from "./ConfirmationModal";
+import ConfirmationModalRemove from "./ConfirmationModalRemove";
 
 const getUserQuery = graphql`
   query IndividualRequestQuery($user_id: String) {
@@ -121,8 +121,8 @@ class IndividualRequest extends Component {
                     </div>
                     <div class="flex-container-modal3">
                       <div class="modal3Button">
-                      <ConfirmationModal 
-                      message="You have joined the team!"
+                      <ConfirmationModalRemove 
+                      message="You have added them to the team!"
                       closeModal={() => this.setState({ secondOpen:false})}
                       secondModal={() => this.props.closeModal()}
                       onOpen={() => this.setState({ secondOpen:true})}

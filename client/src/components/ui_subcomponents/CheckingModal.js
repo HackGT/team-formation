@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 import { QueryRenderer, commitMutation } from "react-relay";
 import "../css/ConfirmationModal.css";
+import onTeam from "../OnTeam";
 import UserCard from "../UserCard";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
-import IndividualRequest from "./IndividualRequest"
+import IndividualRequest from "./IndividualRequest";
 
 // const mutation = graphql`
 //   mutation JoinIndividualMutation(
@@ -22,8 +23,15 @@ import IndividualRequest from "./IndividualRequest"
 //     }
 //   }
 // `;
+// const leaveTeamMutation = graphql`
+//   mutation CheckingModalMutation {
+//     leave_team {
+//       name
+//     }
+//   }
+// `;
 
-class ConfirmationModal extends Component {
+class CheckingModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -50,13 +58,20 @@ class ConfirmationModal extends Component {
         <Modal.Content>
           <Modal.Description>
             <p class="modalHeader">{this.props.message}</p>
-            <Button 
-            className="done"
+            <Button basic
+            className="cancel"
             onClick={() => {
                 this.props.closeModal();
                 // this.props.secondModal();
             }}
-            >Ok</Button>
+            >Cancel</Button>
+            <Button 
+            className="here"
+            onClick={() => {
+                this.props.closeModal();
+                this.props.leaveTeam();
+            }}
+            >Leave</Button>
           </Modal.Description>
         </Modal.Content>
       </Modal>
@@ -64,4 +79,4 @@ class ConfirmationModal extends Component {
   }
 }
 
-export default ConfirmationModal;
+export default CheckingModal;

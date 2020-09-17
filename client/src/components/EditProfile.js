@@ -119,7 +119,7 @@ class EditProfile extends Component {
                             <div className="button-container">
                                 <Form.Group className="save-button-container">
                                     <Link to="/feed">
-                                        <Button onClick={this.onCancelClick} className="save-button">
+                                        <Button  className="save-button">
                                             cancel
                                         </Button>
                                     </Link>

@@ -21,7 +21,6 @@ class JoinTeam extends Component {
     super(props);
     this.state = {
       errorMessage:"",
-      secondOpen:false,
     };
 
     this.toggleSecondOpen = this.toggleSecondOpen.bind(this)
@@ -29,7 +28,7 @@ class JoinTeam extends Component {
 
   toggleSecondOpen() {
     console.log("in toggle");
-    this.setState({secondOpen: true});
+    this.props.showSecond();
   }
 
   render() {
@@ -54,13 +53,13 @@ class JoinTeam extends Component {
             {this.state.errorMessage}
             <div class="flex-container-modal3">
               <div>
-                <ConfirmationModal 
-                    message="You have joined the team!"
+                {/* <ConfirmationModal 
+                    message="Your request to join the team has been sent!"
                     closeModal={() => this.setState({ secondOpen:false})}
                     secondModal={() => this.props.closeModal()}
                     onOpen={() => this.setState({ secondOpen:true})}
                     showModal={this.state.secondOpen}
-                  />
+                  /> */}
                   <Button
                   className="submit"
                   style={{
@@ -76,8 +75,8 @@ class JoinTeam extends Component {
                       },
                       onCompleted: (response, errors) => {
                         if(!errors) {
-                          // this.props.closeModal();
-                          this.toggleSecondOpen();
+                          this.props.closeModal();
+                          this.props.showSecond();
                         } else if(errors[0].message=="You are already on a team!") {
                             this.setState({ errorMessage:"You are already on a team" });
                         } else if(errors[0].message=="Team not found") {

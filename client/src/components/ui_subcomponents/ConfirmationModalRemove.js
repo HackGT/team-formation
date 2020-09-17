@@ -23,7 +23,7 @@ import IndividualRequest from "./IndividualRequest"
 //   }
 // `;
 
-class ConfirmationModal extends Component {
+class ConfirmationModalRemove extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -54,7 +54,7 @@ class ConfirmationModal extends Component {
             className="done"
             onClick={() => {
                 this.props.closeModal();
-                // this.props.secondModal();
+                this.props.secondModal();
             }}
             >Ok</Button>
           </Modal.Description>
@@ -64,4 +64,4 @@ class ConfirmationModal extends Component {
   }
 }
 
-export default ConfirmationModal;
+export default ConfirmationModalRemove;

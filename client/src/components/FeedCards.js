@@ -21,7 +21,12 @@ const getUsersQuery = graphql `
             uuid
             id
         }
-    }
+        user_profile {
+            team {
+              id
+            }
+        }
+    }   
 `;
 
 class FeedCards extends Component {
@@ -41,11 +46,15 @@ class FeedCards extends Component {
                     // return <div>{error.message}</div>;
                     return <Redirect to='/login' />;
                 } else if (props) {
+                    // if(props.user_profile.team.id == null) {
+                    //     props.user_profile.team.id = "";
+                    // }
+                    // console.log("HELLO" + props.user_profile.team.id);
                     let cards = props.users.map(user => {
-                        console.log("Stuff: " + user.id);
+                        // console.log("Stuff: " + props.user_profile.team.id);
                         return <UserCard name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function(el) {
                                 return Boolean(el);
-                            })} experience={user.experience} id={user.id}/>
+                            })} experience={user.experience} id={user.id} team={props.user_profile.team}/>
                     })
                     return (<div className='Cards-container'>
                         <Card.Group centered="centered" itemsPerRow={4} className='center-group'>{cards}</Card.Group>
