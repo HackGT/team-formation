@@ -18,6 +18,10 @@
   margin: 5% !important;
 }
 
+.ui.card.notification:hover {
+  filter: brightness(85%) !important;
+}
+
 .notification-buttonGroup {
   height: 70px;
   position: absolute;
@@ -47,4 +51,8 @@
 
 .ui.icon.button {
   border-radius: 25px;
+}
+
+.message {
+  text-align: center;
 }

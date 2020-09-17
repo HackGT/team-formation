@@ -24,47 +24,37 @@ class NotificationCard extends Component {
 
   render() {
     console.log("render", this.state);
-    let header = this.props.type == "User" ? `From: ${JSON.stringify(this.props.sender.name)}` : `To: ?`
+    let sender = this.props.sender.name
+    let receiver = this.props.receiver.name
+    if (sender) {
+      sender = this.truncate(sender)
+    }
+    if (receiver) {
+      receiver = this.truncate(receiver)
+    }
+    let notif_msg = this.props.sent_notification ? `You requested ${receiver} to team up` : `${sender} wants to team up with you`
     return (
       <div>
         <Card
           className="notification"
-          // onClick={(event, data) => {
-          //   console.log("hello");
-          //   console.log(event);
-          //   console.log(data);
-          //   this.props.type == "User"
-          //     ? this.setState({ showIndividualModal: true })
-          //     : this.setState({ showTeamModal: true });
-          // }}
+          onClick={(event, data) => {
+            console.log("hello");
+            console.log(event);
+            console.log(data);
+            this.props.type == "User"
+              ? this.setState({ showIndividualModal: true })
+              : this.setState({ showTeamModal: true });
+          }}
           style={{
             backgroundColor: this.props.color,
-            boxShadow: "rgba(0, 0, 0,0.2) 0px 4px 4px 0px"
+            boxShadow: "rgba(0, 0, 0,0.2) 0px 4px 4px 0px",
+            height: 45
           }}
         >
           <Card.Content
             className="message"
           >
-            {header}
-            <br/>
-            {this.props.message}
-            <div className="notification-buttonGroup">
-              {/* <Button inverted color="white" icon="check" />
-              <Button inverted color="white" icon="close" /> */}
-              <Button 
-                size='large'
-                onClick={(event, data) => {
-                  console.log("hello");
-                  console.log(event);
-                  console.log(data);
-                  this.props.type == "User"
-                    ? this.setState({ showIndividualModal: true })
-                    : this.setState({ showTeamModal: true });
-                }}
-              >
-                View
-              </Button>
-            </div>
+            {notif_msg}
           </Card.Content>
         </Card>
         {this.props.type == "User" ? (
@@ -92,6 +82,18 @@ class NotificationCard extends Component {
       </div>
     );
   }
+  truncate(string) {
+    if (string.length > 18) {
+      if (string.charAt(15) == ' ') {
+        string = string.substring(0,15) + '...';
+      } else {
+        string = string.substring(0,16) + '...';
+      }
+    }
+    return string;
+  }
 }
+
+
 
 export default NotificationCard;

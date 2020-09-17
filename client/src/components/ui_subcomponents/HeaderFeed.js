@@ -13,7 +13,6 @@ import NotificationGroup from "../NotificationGroup";
 import IndividualRequest from "./IndividualRequest";
 import JoinIndividual from "./JoinIndividual";
 import { Input } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 
 const mutation = graphql`
   mutation HeaderFeedMutation {
@@ -82,6 +81,7 @@ class Headers extends Component {
             if (props.user_profile.team == null) {
               teamIcon =
                 <Popup
+                  hoverable={false}
                   trigger={<Icon name='group' size='large' inverted link={true}/>}
                   content='You are not on a team'
                   position='bottom center'
