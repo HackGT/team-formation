@@ -18,6 +18,12 @@
 	color: white;
 }
 
+.ui.button.leaveTeam {
+  font-family: Quicksand-Bold;
+  background: rgba(255, 255, 255, 0.22);
+	color: white;
+}
+
 .no-team-heading {
   color: white;
   font-family: Quicksand-Bold;

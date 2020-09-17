@@ -60,11 +60,7 @@ class OnTeam extends Component {
           {/* <Message id="alert" hidden={this.state.save_message_hidden} success={this.state.save_success} header={this.state.save_success ? "Changes Saved" : "Unsaved Changes"}/> */}
         </h1>
         <Button
-          style={{
-            color: "white",
-            background: "transparent",
-            border: "1px solid white",
-          }}
+          className="leaveTeam"
           onClick={() => {
               commitMutation(environment, {
                 mutation: leaveTeamMutation

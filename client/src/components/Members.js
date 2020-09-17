@@ -61,24 +61,14 @@ class Members extends Component {
     }
     for (let j = 4 - users.length; j > 0; j--) {
       memberCards.push(
-        <Card>
-          <Card.Content className="add-card">
-            <Link to="/feed/">
-              <Button icon="icon">
-                <Icon name="plus" />
-              </Button>
-            </Link>
-          </Card.Content>
-        </Card>
+        <div className="emptyCard">
+          <Link to="/feed/">
+            <Icon name="plus"/>
+          </Link>
+        </div>
       );
     }
-
-    let cards = (
-      <Card.Group centered="centered" itemsPerRow={4} className="center-group">
-        {memberCards}
-      </Card.Group>
-    );
-    return <div className="member-cards-container">{cards}</div>;
+    return <div className="member-cards-container">{memberCards}</div>;
   }
 }
 
