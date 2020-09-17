@@ -69,14 +69,18 @@ class NotificationGroup extends Component {
                 />
               );
             });
+            var notificationMessage = notificationCards.length > 0 ? notificationCards : "No notifications right now!"
+            console.log(notificationMessage)
             return (
               <Segment
                 style={{
                   overflow: "auto",
                   maxHeight: 400,
+                  color: '#8895c1',
+                  'text-align': 'center'
                 }}
               >
-                {notificationCards}
+                {notificationMessage}
               </Segment>
             );
           }
