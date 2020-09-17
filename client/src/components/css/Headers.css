@@ -19,7 +19,19 @@
 }
 
 @media (max-width: 415px) {
-  .header-name {
+  .header-name, .desktopTitles {
+    display: none;
+  }
+
+  .innerMobileTitles {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (min-width: 416px) {
+  .mobileTitles {
     display: none;
   }
 }
