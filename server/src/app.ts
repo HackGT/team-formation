@@ -5,6 +5,8 @@ import compression from "compression";
 import morgan from "morgan";
 import passport from "passport";
 import session from "express-session"
+import mongoose from "mongoose";
+
 // import express_graphql from "express-graphql"
 import cors from "cors"
 import dotenv from "dotenv"
@@ -143,7 +145,7 @@ let getUser = async function(parent, args, context, info, req) {
     if (!context._id) {
         throw new Error('User not logged in')
     }
-    let user = await User.findById(context._id)
+    let user = await User.findById(args.user_id)
     if (!user) {
         throw new Error('User not found')
     }
@@ -341,6 +343,31 @@ let updateTeam = async function(parent, args, context, info, req) {
     return await Team.findByIdAndUpdate(user.team, { "$set": args }, { new: true });
 }
 
+let leaveTeam = async function(parent, args, context, info, req) {
+    console.log("leaveing team")
+
+    if(!context._id) {
+        throw new Error('User not logged in')
+    }
+    if(!context.team) {
+        throw new Error('User not on team')
+    }
+
+    await Team.findByIdAndUpdate(context.team, {
+        "$pull": {
+            "members": context._id
+        }
+    }, (err, team) => {
+        if(err) {
+            console.log(err)
+            throw new Error("Issue updating team")
+        }
+    })
+    return await User.findByIdAndUpdate(context._id, {
+        "team": null
+    })
+}
+
 let getSentTeamNotifications = async function(parent, args, context, info, req) {
     if(!context._id) {
         throw new Error("User not logged in")
@@ -362,6 +389,9 @@ let getUserProfile = async function(parent, args, context, info, req) {
     return await User.findById(context._id).populate('team');
 }
 
+/*
+    Accepting a user sending request to team
+ */
 let acceptTeamRequest = async function(parent, args, context, info, req) {
     if (!context._id) {
         throw new Error('User not logged in')
@@ -377,6 +407,7 @@ let acceptTeamRequest = async function(parent, args, context, info, req) {
         throw new Error('Team is full')
     }
     let notification = await Notification.findById(args.notification_id).populate('sender')
+                                               .populate('receiver')
     if (!notification) {
         throw new Error('Notification does not exist')
     }
@@ -384,9 +415,13 @@ let acceptTeamRequest = async function(parent, args, context, info, req) {
         throw new Error('Cannot accept request from a team')
     }
     if (notification.senderType == 'User') {
-        if (user.team != notification.receiver) {
+        console.log("TEAM", user.team._id.toString(), notification.receiver._id.toString())
+
+        if (user.team._id.toString() !== notification.receiver._id.toString()) {
+            console.log("TEAM2", user.team._id, notification.receiver._id)
             throw new Error('Team does not own notification')
         }
+        console.log("here1")
         let requestUser = await User.findById(notification.sender._id);
         if (!requestUser) {
             throw new Error('Notificaton sender not found')
@@ -394,19 +429,33 @@ let acceptTeamRequest = async function(parent, args, context, info, req) {
         if (requestUser.team) {
             throw new Error('Sender already on team')
         }
+        console.log("here2")
 
-        let updatedTeam = await Team.findByIdAndUpdate(user.team, {
-            'members': {
-                '$push': {
-                    requestUser
-                }
+        let requestedUserId = requestUser._id
+        console.log(requestedUserId);
+        console.log(user.team._id)
+        console.log(mongoose.Types.ObjectId.isValid(requestedUserId))
+        console.log(mongoose.Types.ObjectId.isValid(user.team._id))
+
+        await Team.findByIdAndUpdate(user.team._id, {
+            '$push': {
+                'members': requestedUserId
             }
+        },function(err, user) {
+            console.log("here")
+            console.log(err)
         })
+        console.log("here3")
+
         await User.findByIdAndUpdate(notification.sender._id, {
-            'team': updatedTeam
+            'team': user.team._id
         })
+        await Notification.findByIdAndUpdate(notification._id, {
+            'resolved': true
+        })
+    } else {
+        throw new Error('Notification invalid')
     }
-    throw new Error('Notification invalid')
 }
 
 let acceptUserRequest = async function(parent, args, context, info, req) {
@@ -419,13 +468,18 @@ let acceptUserRequest = async function(parent, args, context, info, req) {
     }
 
     let notification = await Notification.findById(args.notification_id).populate('sender')
+                                               .populate('receiver')
     if (!notification) {
         throw new Error('Notification not found')
     }
-    if (notification.receiver != user._id) {
+    console.log("ACCEPT USER REQUEST")
+    console.log(notification.receiver._id)
+    console.log(user._id)
+
+    if (notification.receiver._id.toString() != user._id.toString()) {
         throw new Error('Notification not valid')
     }
-    await Notification.findByIdAndUpdate(args.notification._id, {
+    await Notification.findByIdAndUpdate(notification._id, {
         'resolved': true
     })
     if (notification.senderType == 'Team') {
@@ -435,15 +489,12 @@ let acceptUserRequest = async function(parent, args, context, info, req) {
         if (!notification.sender) {
             throw new Error('Team no longer exists')
         }
-
         if (notification.sender.members.length >= 4) {
             throw new Error('Team is full')
         }
         let team = await Team.findByIdAndUpdate(notification.sender._id, {
-            'members': {
-                '$push': {
-                    user
-                }
+            '$push': {
+                'members': user
             }
         })
         await User.findByIdAndUpdate(context._id, {
@@ -480,20 +531,25 @@ let acceptUserRequest = async function(parent, args, context, info, req) {
                 user1.team = team
                 user2.team = team
                 user1.save(function(err) {
-                    console.log(err)
-                    throw new Error(err)
+                    if(err) {
+                        console.log(err)
+                        throw new Error(err)
+                    }
                 })
                 user2.save(function(err) {
-                    console.log(err)
-                    throw new Error(err)
+                    if(err) {
+                        console.log(err)
+                        throw new Error(err)
+                    }
                 })
             });
         } else {
             throw new Error('User not defined')
         }
 
+    } else {
+        throw new Error('Notification invalid')
     }
-    throw new Error('Notification invalid')
 
 }
 
@@ -511,7 +567,7 @@ let makeUserRequest = async function(parent, args, context, info, req) {
         throw new Error("Requested user already on team")
     }
     if (!context.team) {
-        notification = await new Notification({
+        notification = new Notification({
             bio: args.bio,
             idea: args.idea,
             senderType: 'User',
@@ -526,12 +582,12 @@ let makeUserRequest = async function(parent, args, context, info, req) {
         if (!team) {
             throw new Error("Team not found")
         }
-        notification = await new Notification({
+        notification = new Notification({
             bio: args.bio,
             idea: args.idea,
             senderType: 'Team',
             receiverType: 'User',
-            sender: team,
+            sender: team._id,
             receiver: receiver_id,
             resolved: false
         });
@@ -556,18 +612,19 @@ let makeTeamRequest = async function(parent, args, context, info, req) {
     }
     let user = await User.findById(context._id)
     let team_id = args.team_id
+    console.log("TEAEM_ID: ", team_id)
     if (!user) {
         throw new Error("User not found!")
     }
     if (user.team) {
         throw new Error("You are already on a team!")
     }
-    let notification = await new Notification({
+    let notification = new Notification({
         bio: args.bio,
         idea: args.idea,
         senderType: 'User',
         receiverType: 'Team',
-        sender: user,
+        sender: user._id,
         receiver: team_id,
         resolved: false
     })
@@ -606,7 +663,7 @@ let getTeamNotifications = async function(parent, args, context, info, req) {
         receiverType: 'Team',
         receiver: context.team,
         resolved: false
-    })
+    }).populate('sender')
 }
 
 // let createTeam = async function(args) {
@@ -628,10 +685,10 @@ const resolvers = {
 			console.log(info)
 			if(context.team) {
 				console.log("team chosen")
-				return 'Team'
+				return 'User'
 			}
 			if(context._id){
-				return 'User'
+				return 'Team'
 			}
 			return null;
 		}
@@ -653,7 +710,8 @@ const resolvers = {
 		accept_user_request: acceptUserRequest,
 		accept_team_request: acceptTeamRequest,
 		make_team_request: makeTeamRequest,
-		make_user_request: makeUserRequest
+		make_user_request: makeUserRequest,
+        leave_team: leaveTeam
 	}
 };
 

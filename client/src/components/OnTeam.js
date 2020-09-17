@@ -19,6 +19,14 @@ const mutation = graphql`
   }
 `;
 
+const leaveTeamMutation = graphql`
+  mutation OnTeamLeaveMutation {
+    leave_team {
+      name
+    }
+  }
+`;
+
 class OnTeam extends Component {
   constructor(props) {
     super(props);
@@ -57,9 +65,14 @@ class OnTeam extends Component {
             background: "transparent",
             border: "1px solid white",
           }}
-          onClick={() => this.setState({ showModal: true })}
+          onClick={() => {
+              commitMutation(environment, {
+                mutation: leaveTeamMutation
+              });
+              window.location.reload();
+          }}
         >
-          Join Team
+          Leave Team
         </Button>
         <JoinTeam
           {...this.props}

@@ -12,6 +12,7 @@ import NotificationGroup from "../NotificationGroup";
 import IndividualRequest from "./IndividualRequest";
 import JoinIndividual from "./JoinIndividual";
 import { Input } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 const mutation = graphql`
   mutation HeaderFeedMutation {
@@ -118,11 +119,13 @@ class Headers extends Component {
                       closeOnChange={false}
                     >
                       <Dropdown.Menu>
-                        <Dropdown.Item
-                          icon="edit"
-                          text="Edit Profile"
-                          onClick={this.props.onEditClick}
-                        />
+                         <Link to="/edit-profile">
+                            <Dropdown.Item
+                              icon="edit"
+                              text="Edit Profile"
+                              onClick={this.props.onEditClick}
+                            />
+                        </Link>
                         <Dropdown.Item
                           icon="globe"
                           text={toggle_text}
@@ -132,6 +135,10 @@ class Headers extends Component {
                     </Dropdown>
                   </Menu.Menu>
                 </Menu>
+                <Link to="/feed">
+                    <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
+                    <span class="teamFormation">HackGT Team Formation</span>
+                </Link>
               </div>
             );
           }

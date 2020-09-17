@@ -69,6 +69,7 @@ class TeamInformation extends Component {
         {interest}
       </Label>
     ));
+    console.log(this.state.interests)
     if (this.props.editable) {
       if (!this.state.edit) {
         console.log(this.state.teamBio);
@@ -272,10 +273,6 @@ class TeamInformation extends Component {
     this.setState({ newInterests: value });
   };
 
-  handleChange = (e, { value }) => {
-    this.onChange();
-    this.setState({ interests: value });
-  };
 }
 
 export default TeamInformation;

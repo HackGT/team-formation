@@ -36,6 +36,10 @@
   font-size: 15px;
 }
 
+.ui.input {
+    text-indent: 5px;
+}
+
 .ui.icon.input > i.icon:after,
 .ui.icon.input > i.icon:before {
   color: white;
