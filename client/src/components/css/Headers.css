@@ -18,7 +18,7 @@
   overflow-y: auto;
 }
 
-@media (max-width: 415px) {
+@media (max-width: 595px) {
   .header-name, .desktopTitles {
     display: none;
   }
@@ -30,7 +30,7 @@
   }
 }
 
-@media (min-width: 416px) {
+@media (min-width: 595px) {
   .mobileTitles {
     display: none;
   }

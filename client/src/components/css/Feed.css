@@ -190,13 +190,13 @@
   border-bottom-right-radius: 15px;
 }
 
-@media (min-width: 590px) {
+@media (min-width: 595px) {
   .side-menu-top {
     display: none;
   }
 }
 
-@media (max-width: 590px) {
+@media (max-width: 595px) {
   .left-side {
     display: none;
   }
