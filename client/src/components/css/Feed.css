@@ -37,7 +37,7 @@
 
 .feed-cards {
   padding-top: 2%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   width: 90%;
   display: flex;
   flex-direction: row;
@@ -138,10 +138,10 @@
   flex-direction: row;
 }
 
-.team-card-container {
+/* .team-card-container {
   flex: 1;
   padding-right: 2%;
-}
+} */
 
 .ui.centered.cards {
   justify-content: left;

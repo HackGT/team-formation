@@ -46,3 +46,12 @@
 .ui.icon.button {
   border-radius: 25px;
 }
+
+.notificationsCard, .requestsSent {
+  min-width: 300px;
+  margin-top: 30px;
+}
+
+/* .requestsSent {
+  min-width: 300px;
+} */

@@ -36,10 +36,6 @@ class Members extends Component {
     if (this.props.members) {
       users = this.props.members;
     }
-    // users.push(props.users[0]);
-    // users.push(props.users[1]);
-    // users.push(props.users[2]);
-    // users.push(props.users[3]);
 
     for (let i = 0; i < users.length; i++) {
       let user = users[i];

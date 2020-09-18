@@ -136,10 +136,10 @@ class Headers extends Component {
                   </Menu.Menu>
                 </Menu>
                 <div className="desktopTitles">
-                <Link to="/feed">
-                  <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
-                  <span class="teamFormation">Team Formation</span>
-                </Link>
+                  <Link to="/feed">
+                    <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
+                    <span class="teamFormation">Team Formation</span>
+                  </Link>
                 </div>
                 <div className="mobileTitles">
                   <Link to="/feed">

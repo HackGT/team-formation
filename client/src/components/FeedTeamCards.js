@@ -44,7 +44,7 @@ class FeedTeamCards extends Component {
                     })
                     return (<div className='Cards-container'>
 
-                        <Card.Group centered="centered" itemsPerRow={4} className='center-group'>{cards}</Card.Group>
+                        {cards}
                     </div>);
                 }
             }}/>);

@@ -3,10 +3,25 @@
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
 
-.team-card-container {
-  max-width: 500px;
-  min-width: 300px;
-  margin: 30px
+@media (min-width: 595px) {
+  .team-card-container {
+    max-width: 900px;
+    width: 500px;
+    min-width: 300px;
+    margin: 28px;
+  }
+}
+
+@media (max-width: 595px) {
+  .team-card-container {
+    /* max-width: 900px; */
+    /* width: 500px; */
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    min-width: 300px;
+    margin: 28px;
+  }
 }
 
 .header {
@@ -104,12 +119,4 @@
 .ui.card > .content,
 .ui.cards > .card > .content {
   padding-bottom: 20px;
-}
-
-.member-cards-container {
-  transform: scale(0.8);
-}
-
-.member-cards-container {
-  margin-top: -2%;
 }

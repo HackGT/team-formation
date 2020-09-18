@@ -93,10 +93,7 @@ class Feed extends Component {
               </div>
             ) : null}
           </div>
-
-          <div className="feed-cards-container">
-            <div className="feed-cards">{cards}</div>
-          </div>
+          <div className="feed-cards">{cards}</div>
         </div>
       </div>
     );
