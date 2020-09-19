@@ -13,7 +13,6 @@ import NotificationGroup from "../NotificationGroup";
 import IndividualRequest from "./IndividualRequest";
 import JoinIndividual from "./JoinIndividual";
 import { Input } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 
 const mutation = graphql`
   mutation HeaderFeedMutation {
