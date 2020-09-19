@@ -3,6 +3,7 @@
         "env"
     ],
     "plugins": [
-        "relay"
+        "relay",
+        "react-hot-loader/babel"
     ]
 }
