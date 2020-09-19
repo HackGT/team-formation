@@ -3,7 +3,7 @@ import TeamRequest from "./TeamRequest";
 import JoinTeam from "./JoinTeam";
 import "../css/Headers.css";
 import "../css/Modal.css";
-import { Menu, Dropdown, Icon, Popup } from "semantic-ui-react";
+import { Menu, Dropdown, Icon, Popup, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
@@ -118,6 +118,8 @@ class Headers extends Component {
                         paddingRight: 10
                       }}
                     />
+                    <Menu.Item>
+                    </Menu.Item>
                     <Menu.Item
                       style={{
                         size: "large",
@@ -141,12 +143,10 @@ class Headers extends Component {
                             <Dropdown.Menu className="notification-pane">
                               <NotificationGroup user={this.props.user_id} />
                             </Dropdown.Menu>
-                          </Dropdown>
-                        }
-                        content='Notifications'
-                        position='bottom center'
+                          </Dropdown>}
+                          content='Notifications'
+                          position='bottom center'
                       />
-                      
                     </Menu.Item>
                     <Menu.Item
                       style={{
@@ -162,26 +162,6 @@ class Headers extends Component {
                         position='bottom center'
                       />
                     </Menu.Item>
-                      {/* <Dropdown
-                      item="item"
-                      icon="user"
-                      style={{
-                        size: "large",
-                        color: "white"
-                      }}
-                      direction="left"
-                      closeOnChange={false}
-                      >
-                        <Dropdown.Menu>
-                          <Link to={"/edit-profile"}>
-                            <Dropdown.Item
-                              icon="edit"
-                              text="Edit Profile"
-                              onClick={this.props.onEditClick}
-                            />
-                          </Link>
-                        </Dropdown.Menu>
-                      </Dropdown> */}
                     <Menu.Item
                       style={{
                         size: "large",

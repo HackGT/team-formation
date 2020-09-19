@@ -18,6 +18,11 @@
   margin: 5% !important;
 }
 
+.sent-notification {
+  width: 90% !important;
+  margin: 5% !important;
+}
+
 .ui.card.notification:hover {
   filter: brightness(85%) !important;
 }
@@ -45,7 +50,18 @@
   border-radius: 1rem!important;
   transition: auto;
 }
+
+.sent-notification {
+  height: 70px;
+  border-radius: 1rem!important;
+  transition: auto;
+}
+
 .notification:hover {
+  transform: scale(1) !important;
+}
+
+.sent-notification:hover {
   transform: scale(1) !important;
 }
 

@@ -35,28 +35,44 @@ class NotificationCard extends Component {
     let notif_msg = this.props.sent_notification ? `You requested ${receiver} to team up` : `${sender} wants to team up with you`
     return (
       <div>
-        <Card
-          className="notification"
-          onClick={(event, data) => {
-            console.log("hello");
-            console.log(event);
-            console.log(data);
-            this.props.type == "User"
-              ? this.setState({ showIndividualModal: true })
-              : this.setState({ showTeamModal: true });
-          }}
-          style={{
-            backgroundColor: this.props.color,
-            boxShadow: "rgba(0, 0, 0,0.2) 0px 4px 4px 0px",
-            height: 45
-          }}
-        >
-          <Card.Content
-            className="message"
+        {sender ? 
+          <Card
+            className="notification"
+            onClick={(event, data) => {
+              console.log("hello");
+              console.log(event);
+              console.log(data);
+              this.props.type == "User"
+                ? this.setState({ showIndividualModal: true })
+                : this.setState({ showTeamModal: true });
+            }}
+            style={{
+              backgroundColor: this.props.color,
+              boxShadow: "rgba(0, 0, 0,0.2) 0px 4px 4px 0px",
+              height: 45
+            }}
           >
-            {notif_msg}
-          </Card.Content>
-        </Card>
+            <Card.Content
+              className="message"
+            >
+              {notif_msg}
+            </Card.Content>
+          </Card>
+        : <Card
+            className="sent-notification"
+            style={{
+              backgroundColor: this.props.color,
+              boxShadow: "rgba(0, 0, 0,0.2) 0px 4px 4px 0px",
+              height: 45
+            }}
+          >
+            <Card.Content
+              className="message"
+            >
+              {notif_msg}
+            </Card.Content>
+          </Card>
+        }
         {this.props.type == "User" ? (
           <IndividualRequest
             requestMessage={this.props.request}
