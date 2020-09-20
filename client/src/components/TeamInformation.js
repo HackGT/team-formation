@@ -79,7 +79,7 @@ class TeamInformation extends Component {
               <Card.Content className="card-content">
                 <div className="header">
                   <Card.Header className="card-header">
-                    Team Information TEST
+                    Team Information
                   </Card.Header>
                   <Button icon labelPosition="right" onClick={this.onEditClick}>
                     Edit
