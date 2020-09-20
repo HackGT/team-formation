@@ -100,7 +100,7 @@ class IndividualRequest extends Component {
                           {props.user.name + "'s"} Request Message:
                         </p>
                         <p class="user1RequestMessage">
-                          {this.props.userRequestMessage}
+                          {this.props.requestMessage}
                         </p>
                         <p
                           class="user1FirstName"
