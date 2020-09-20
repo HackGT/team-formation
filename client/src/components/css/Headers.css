@@ -40,3 +40,49 @@
   font-family: Quicksand-Bold;
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
+
+.ui.inverted.popup {
+  color: black
+}
+
+.content {
+  color: black
+}
+
+/* i.icon:before {
+  margin-left: 10px;
+} */
+
+
+element.style {
+  color: white;
+}
+.ui.secondary.menu .item {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: .78571429em;
+  padding-bottom: .92857143em;
+}
+
+.ui.bottom.popup:before {
+  background: rgb(168, 197, 214);
+}
+
+.ui.visible.popup {
+  background-color: rgb(168, 197, 214);
+}
+
+.ui.menu:not(.vertical) > .menu {
+  display: flex;
+  padding-right: 2%;
+}
+
+.ui.menu .ui.dropdown.item .menu .item:not(.filtered) {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.ui.visible.popup {
+  background-color: #a8c5d6;
+  border-radius: 15px;
+}

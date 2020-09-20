@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import {
-  Card,
-  Form,
-  TextArea,
-  Button,
-  Label,
-  Icon,
-  Message,
-} from "semantic-ui-react";
-import "./css/TeamInformation.css";
-import skills from "../constants/skills";
-import { commitMutation } from "react-relay";
-import { graphql } from "babel-plugin-relay/macro";
-import environment from "./Environment";
+    Card,
+    Form,
+    TextArea,
+    Button,
+    Label, 
+    Icon,
+    Message
+} from 'semantic-ui-react'
+import './css/TeamInformation.css'
+import skills from '../constants/skills'
+import {commitMutation} from 'react-relay';
+import {graphql} from 'babel-plugin-relay/macro';
+import environment from './Environment';
 
 const mutation = graphql`
   mutation TeamInformationMutation(

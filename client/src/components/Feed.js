@@ -9,6 +9,8 @@ import InputTagCollection from "./InputTagCollection";
 import "./css/Feed.css";
 import TeamInformation from "./TeamInformation";
 
+
+
 class Feed extends Component {
   state = {
     searchTerm: "",
@@ -16,6 +18,7 @@ class Feed extends Component {
     years: [],
     schools: [],
     teams: false,
+    showSecondModal: false,
   };
 
   render() {

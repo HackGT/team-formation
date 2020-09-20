@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash e04d48f593eae436dc060d87bcafd2ed
+ * @relayHash 9d5cf4599083dea272b32ba28427af22
  */
 
 /* eslint-disable */
@@ -12,7 +12,10 @@ import type { ConcreteRequest } from 'relay-runtime';
 export type HeaderFeedNameQueryVariables = {||};
 export type HeaderFeedNameQueryResponse = {|
   +user_profile: {|
-    +name: ?string
+    +name: ?string,
+    +team: ?{|
+      +id: ?string
+    |},
   |}
 |};
 export type HeaderFeedNameQuery = {|
@@ -26,6 +29,9 @@ export type HeaderFeedNameQuery = {|
 query HeaderFeedNameQuery {
   user_profile {
     name
+    team {
+      id
+    }
     id
   }
 }
@@ -38,6 +44,25 @@ var v0 = {
   "name": "name",
   "args": null,
   "storageKey": null
+},
+v1 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+},
+v2 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "team",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "Team",
+  "plural": false,
+  "selections": [
+    (v1/*: any*/)
+  ]
 };
 return {
   "kind": "Request",
@@ -57,7 +82,8 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          (v0/*: any*/)
+          (v0/*: any*/),
+          (v2/*: any*/)
         ]
       }
     ]
@@ -77,13 +103,8 @@ return {
         "plural": false,
         "selections": [
           (v0/*: any*/),
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          }
+          (v2/*: any*/),
+          (v1/*: any*/)
         ]
       }
     ]
@@ -92,11 +113,11 @@ return {
     "operationKind": "query",
     "name": "HeaderFeedNameQuery",
     "id": null,
-    "text": "query HeaderFeedNameQuery {\n  user_profile {\n    name\n    id\n  }\n}\n",
+    "text": "query HeaderFeedNameQuery {\n  user_profile {\n    name\n    team {\n      id\n    }\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '9aa262b6718b00bc15049993a54b31a8';
+(node/*: any*/).hash = '91111645af4a767c44a30881af1b9eff';
 module.exports = node;

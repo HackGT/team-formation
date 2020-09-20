@@ -59,6 +59,8 @@ class TeamRequestsSent extends Component {
                         var sentRequestCards = sent_requests.map((notif) => {
                             return (
                                 <NotificationCard
+                                sent_notification={true}
+                                receiver={notif.receiver}
                                 message={notif.bio}
                                 type={notif.senderType}
                                 request={notif.bio}
