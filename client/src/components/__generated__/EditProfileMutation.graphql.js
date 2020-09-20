@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash cfb2c4f0f3cc9d28d1534d4a0b13474c
+ * @relayHash 05d56c7a7ec23c5e1fbd49b4cc6d6e22
  */
 
 /* eslint-disable */
@@ -26,7 +26,10 @@ export type EditProfileMutationResponse = {|
     +skills: ?$ReadOnlyArray<?string>,
     +experience: ?string,
     +contact: ?string,
-  |}
+  |},
+  +toggle_visibility: {|
+    +name: ?string
+  |},
 |};
 export type EditProfileMutation = {|
   variables: EditProfileMutationVariables,
@@ -52,6 +55,10 @@ mutation EditProfileMutation(
     skills
     experience
     contact
+    id
+  }
+  toggle_visibility {
+    name
     id
   }
 }
@@ -187,6 +194,13 @@ v7 = {
   "name": "contact",
   "args": null,
   "storageKey": null
+},
+v8 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
 };
 return {
   "kind": "Request",
@@ -213,6 +227,18 @@ return {
           (v6/*: any*/),
           (v7/*: any*/)
         ]
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "toggle_visibility",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "User",
+        "plural": false,
+        "selections": [
+          (v2/*: any*/)
+        ]
       }
     ]
   },
@@ -236,13 +262,20 @@ return {
           (v5/*: any*/),
           (v6/*: any*/),
           (v7/*: any*/),
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          }
+          (v8/*: any*/)
+        ]
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "toggle_visibility",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "User",
+        "plural": false,
+        "selections": [
+          (v2/*: any*/),
+          (v8/*: any*/)
         ]
       }
     ]
@@ -251,11 +284,11 @@ return {
     "operationKind": "mutation",
     "name": "EditProfileMutation",
     "id": null,
-    "text": "mutation EditProfileMutation(\n  $name: String\n  $grad_year: String\n  $school: String\n  $skills: [String]\n  $experience: String\n  $contact: String\n  $contact_method: String\n) {\n  update_user(name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {\n    name\n    grad_year\n    school\n    skills\n    experience\n    contact\n    id\n  }\n}\n",
+    "text": "mutation EditProfileMutation(\n  $name: String\n  $grad_year: String\n  $school: String\n  $skills: [String]\n  $experience: String\n  $contact: String\n  $contact_method: String\n) {\n  update_user(name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {\n    name\n    grad_year\n    school\n    skills\n    experience\n    contact\n    id\n  }\n  toggle_visibility {\n    name\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'db515b4f32680aaeb3e9f3ee56eea3cd';
+(node/*: any*/).hash = 'e24285fc31e7dd9c0e58b3a55c0e879b';
 module.exports = node;
