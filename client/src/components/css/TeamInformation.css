@@ -10,6 +10,10 @@
     min-width: 300px;
     margin: 28px;
   }
+  div.team-card-container .ui.card > .content,
+  .ui.cards > .card > .content {
+    min-height: 543px;
+  }
 }
 
 @media (max-width: 595px) {
