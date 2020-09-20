@@ -75,7 +75,7 @@ class TeamInformation extends Component {
         console.log(this.state.teamBio);
         return (
           <div className="team-card-container">
-            <Card fluid="fluid">
+            <Card className="semanticCardContainer" fluid="fluid">
               <Card.Content className="card-content">
                 <div className="header">
                   <Card.Header className="card-header">

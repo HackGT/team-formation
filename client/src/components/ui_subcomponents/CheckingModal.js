@@ -57,21 +57,31 @@ class CheckingModal extends Component {
       >
         <Modal.Content>
           <Modal.Description>
-            <p class="modalHeader">{this.props.message}</p>
-            <Button basic
-            className="cancel"
-            onClick={() => {
-                this.props.closeModal();
-                // this.props.secondModal();
-            }}
-            >Cancel</Button>
-            <Button 
-            className="here"
-            onClick={() => {
-                this.props.closeModal();
-                this.props.leaveTeam();
-            }}
-            >Leave</Button>
+            <div className="checkingModal-column">
+              <div classNmae="checkingModal-row1">
+                <p class="modalHeader">{this.props.message}</p>
+              </div>
+              <div className="flex-container2">
+                <div class="checkingModalCancel">
+                  <Button
+                  className="cancel"
+                  onClick={() => {
+                      this.props.closeModal();
+                      // this.props.secondModal();
+                  }}
+                  >Cancel</Button>
+                </div>
+                <div class="checkingModalHere">
+                  <Button 
+                  className="here"
+                  onClick={() => {
+                      this.props.closeModal();
+                      this.props.leaveTeam();
+                  }}
+                  >Leave</Button>
+                </div>
+              </div>
+            </div>
           </Modal.Description>
         </Modal.Content>
       </Modal>

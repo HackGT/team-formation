@@ -77,3 +77,12 @@
 	margin-right: 15px;
 	margin-left: 15px;
 }
+
+.editCheckbox {
+	margin-bottom: 15px;
+}
+
+div.editCheckbox .ui.checkbox input.hidden + label {
+	color: white;
+	font-family: Quicksand-Bold;
+}

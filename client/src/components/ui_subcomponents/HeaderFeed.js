@@ -135,7 +135,7 @@ class Headers extends Component {
                             direction="left"
                             closeOnChange={false}
                           >
-                            <Dropdown.Menu className="notification-pane">
+                            <Dropdown.Menu stackable className="notification-pane">
                               <NotificationGroup user={this.props.user_id} />
                             </Dropdown.Menu>
                           </Dropdown>}

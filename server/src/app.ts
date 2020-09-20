@@ -316,7 +316,12 @@ let getUsers = async function(parent, args, context, info, req) {
         return null;
     }
 
-    users.sort(function(a, b) { return a.name.toLowerCase() - b.name.toLowerCase() });
+
+    users = users.sort(function(a, b) { return a.name.toLowerCase() - b.name.toLowerCase() }).filter(item => {
+        console.log(item)
+        console.log(context)
+        return (item.uuid != context.uuid && !item.team)
+    });
     return users;
 }
 

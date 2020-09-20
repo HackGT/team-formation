@@ -85,38 +85,34 @@ class IndividualRequest extends Component {
                       {props.user.name} Wants to Team Up With You!
                     </p>
                     <div class="row">
-                      <div class="modal3Column">
-                        <div class="modal3Column1">
-                          <UserCard
-                            name={props.user.name}
-                            school={props.user.school}
-                            grad_year={props.user.grad_year}
-                            experience={props.user.experience}
-                            skills={props.user.skills}
-                            contact={props.user.contact}
-                          />
-                        </div>
+                      <div class="modal3Column1">
+                        <UserCard
+                          name={props.user.name}
+                          school={props.user.school}
+                          grad_year={props.user.grad_year}
+                          experience={props.user.experience}
+                          skills={props.user.skills}
+                          contact={props.user.contact}
+                        />
                       </div>
                       <div class="modal3Column2">
-                        <div class="modal3Column3">
-                          <p class="user1FirstName">
-                            {props.user.name + "'s"} Request Message:
-                          </p>
-                          <p class="user1RequestMessage">
-                            {this.props.userRequestMessage}
-                          </p>
-                          <p
-                            class="user1FirstName"
-                            style={{
-                              marginTop: 30,
-                            }}
-                          >
-                            {props.user.name + "'s'"} Project Idea:
-                          </p>
-                          <p class="user1ProjectIdea">
-                            {this.props.userProjectIdea}
-                          </p>
-                        </div>
+                        <p class="user1FirstName">
+                          {props.user.name + "'s"} Request Message:
+                        </p>
+                        <p class="user1RequestMessage">
+                          {this.props.requestMessage}
+                        </p>
+                        <p
+                          class="user1FirstName"
+                          style={{
+                            marginTop: 30,
+                          }}
+                        >
+                          {props.user.name + "'s'"} Project Idea:
+                        </p>
+                        <p class="user1ProjectIdea">
+                          {this.props.userProjectIdea}
+                        </p>
                       </div>
                     </div>
                     <div class="flex-container-modal3">
