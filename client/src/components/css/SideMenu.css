@@ -1,8 +1,16 @@
 .h3 {
-  text-align: left;
+  text-align: center;
   color: white;
   font-size: 20px;
   font-family: Quicksand-Bold;
+}
+
+.SideMenu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 @font-face {
@@ -22,10 +30,15 @@
 
 .ui.input.focus > input {
   border-color: transparent;
+  padding: 10px;
   background: rgba(255, 255, 255, 0.22);
-  border-radius: 12px;
+  border-radius: .28571429rem;
   width: 200px;
   font-size: 15px;
+}
+
+.ui.input {
+    text-indent: 5px;
 }
 
 .ui.icon.input > i.icon:after,

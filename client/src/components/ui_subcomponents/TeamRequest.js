@@ -1,9 +1,32 @@
 import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
+import { QueryRenderer, commitMutation } from "react-relay";
+import { graphql } from "babel-plugin-relay/macro";
+import environment from "../Environment";
+import { Link } from "react-router-dom";
 import "../css/Modal.css";
+import ConfirmationModal from "./ConfirmationModal";
+
+
+const acceptRequestMutation = graphql`
+  mutation TeamRequestMutation($notification_id: String) {
+    accept_user_request(notification_id: $notification_id) {
+      id
+      name
+    }
+  }
+`;
 
 class TeamRequest extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      secondOpen:false,
+    };
+  }
   render() {
+
+
     const sender = this.props.sender;
     return (
       <Modal
@@ -27,11 +50,14 @@ class TeamRequest extends Component {
               <div class="flex-container1">
                 <div>
                   <Button
+                     onClick = {() => {
+                        this.props.closeModal();
+                     }}
+                     as={Link} to={'/team/' + sender.id}
                     className="submit"
                     style={{
                       padding: 12,
                     }}
-                    onClick={this.onViewTeamClick}
                   >
                     View more about {sender.name}
                   </Button>
@@ -39,10 +65,47 @@ class TeamRequest extends Component {
               </div>
               <div class="flex-container2">
                 <div class="buttonMargin">
+                  {/* <Modal
+                    id="joined-team"
+                    class="hidden"
+                    onClose={() => {
+                      this.props.closeModal();
+                    }}
+                  >
+                    <Modal.Content>
+                      <Modal.Description>
+                        <p class="modalHeader">
+                            You have joined the team!
+                        </p>
+                        <Button
+                          className="submit"
+                          onClick={() => {
+                            this.props.closeModal();
+                          }}
+                        >
+                          Ok
+                        </Button>
+                      </Modal.Description>
+                    </Modal.Content>
+                  </Modal> */}
+                  <ConfirmationModal
+                  message="You have joined the team!"
+                  onClose={() => this.setState({ secondOpen:false})}
+                  onOpen={() => this.setState({ secondOpen:true})}
+                  open={this.state.secondOpen}
+                  ></ConfirmationModal>
                   <Button
                     className="submit"
                     onClick={() => {
+                        console.log(this.props.receiver)
+                        commitMutation(environment, {
+                          mutation: acceptRequestMutation,
+                          variables: {
+                            notification_id: this.props.notification_id,
+                          },
+                        });
                       this.props.closeModal();
+                      window.location.reload();
                     }}
                   >
                     Accept
@@ -53,6 +116,7 @@ class TeamRequest extends Component {
                     className="submit"
                     onClick={() => {
                       this.props.closeModal();
+
                     }}
                   >
                     Deny
@@ -69,6 +133,11 @@ class TeamRequest extends Component {
     this.props.onTeamPageClick("some team_id");
     this.props.closeModal();
   };
+
+  // onSubmit = () => {
+  //   var obj = ("joined-team");
+  //   obj.classList.remove("hidden");
+  // };
 }
 
 export default TeamRequest;

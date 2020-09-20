@@ -89,3 +89,13 @@ body ::-webkit-scrollbar-track {
   padding-left: 15px;
   font-family: Quicksand-Bold;
 }
+
+.ui.button.newTeam {
+  color: white;
+  background: #ccbedf;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  margin-left: 5px;
+  width: 50%;
+  font-family: Quicksand-Bold;
+  margin-left: 65px;
+}

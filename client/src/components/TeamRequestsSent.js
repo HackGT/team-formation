@@ -4,6 +4,7 @@ import NotificationCard from './NotificationCard';
 import { QueryRenderer } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "./Environment";
+import "./css/NotificationCard.css";
 
 const getSentRequestsQuery = graphql`
     query TeamRequestsSentQuery {
@@ -58,6 +59,8 @@ class TeamRequestsSent extends Component {
                         var sentRequestCards = sent_requests.map((notif) => {
                             return (
                                 <NotificationCard
+                                sent_notification={true}
+                                receiver={notif.receiver}
                                 message={notif.bio}
                                 type={notif.senderType}
                                 request={notif.bio}
@@ -70,14 +73,16 @@ class TeamRequestsSent extends Component {
                             );
                         });
                         return (
-                            <Card fluid>
-                                <Card.Content className="card-content">
-                                    <Card.Header className="card-header">Requests Sent</Card.Header>
-                                    <Container style={{overflow: 'auto', maxHeight: 140, minHeight: 140 }}>
-                                        {sentRequestCards}
-                                    </Container>
-                                </Card.Content>
-                            </Card>
+                            <div className="requestsSent">
+                                <Card fluid>
+                                    <Card.Content className="card-content">
+                                        <Card.Header className="card-header">Requests Sent</Card.Header>
+                                        <Container style={{overflow: 'auto', maxHeight: 140, minHeight: 140 }}>
+                                            {sentRequestCards}
+                                        </Container>
+                                    </Card.Content>
+                                </Card>
+                            </div>
                         );
                     }
                 }}

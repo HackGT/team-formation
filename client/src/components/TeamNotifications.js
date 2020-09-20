@@ -71,15 +71,20 @@ class TeamNotifications extends Component {
                                 />
                             );
                         });
+                        let notificationMesssage = notificationCards.length > 0 ? notificationCards :
+                        "No notifications right now!"
                         return (
-                            <Card fluid>
-                                <Card.Content className="card-content">
-                                    <Card.Header className="card-header">Notifications</Card.Header>
-                                    <Container style={{overflow: 'auto', maxHeight: 200, minHeight: 200 }}>
-                                        {notificationCards}
-                                    </Container>
-                                </Card.Content>
-                            </Card>
+                            <div className="notificationsCard">
+                                <Card fluid>
+                                    <Card.Content className="card-content" textAlign='center'>
+                                        <Card.Header className="card-header">Notifications</Card.Header>
+                                        <Container style={{overflow: 'auto', maxHeight: 200, minHeight: 200, color: '#8895c1', margin: '0 auto', height: "100%",
+                                            'line-height': "100%"}} textAlign='center'>
+                                            {notificationMesssage}
+                                        </Container>
+                                    </Card.Content>
+                                </Card>
+                            </div>
                         );
                     }
                 }}

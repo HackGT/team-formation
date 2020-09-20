@@ -19,6 +19,11 @@ const getTeamsQuery = graphql `
             }
             id
         }
+        user_profile {
+            team {
+                id
+            }
+        }  
     }
 `;
 
@@ -39,12 +44,12 @@ class FeedTeamCards extends Component {
                             console.log('rendering..');
                             return <TeamCard id={team.id} name={team.name} interests={team.interests.filter(function(el) {
                                     return Boolean(el);
-                                })} description={team.description}/>
+                                })} description={team.description} team={props.user_profile.team}/>
                         }
                     })
                     return (<div className='Cards-container'>
 
-                        <Card.Group centered="centered" itemsPerRow={4} className='center-group'>{cards}</Card.Group>
+                        {cards}
                     </div>);
                 }
             }}/>);

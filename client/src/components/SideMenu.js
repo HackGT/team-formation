@@ -68,12 +68,11 @@ class SideMenu extends Component {
                 onClick={this.onSearchClick}
               />
             }
-            size="small"
             focus="focus"
           />
           <h3 className="h3">SEEKING SKILLS</h3>
           <Dropdown
-            id="dropdown"
+            className="filter-box"
             item="item"
             text="Select Skills"
             search="search"
@@ -92,6 +91,7 @@ class SideMenu extends Component {
           placeholder="Search by Anything"
           onChange={this.onSearchChange}
           onKeyPress={this.handleKeyPress}
+          className="filter-box"
           icon={
             <Icon
               name="search"
@@ -100,12 +100,11 @@ class SideMenu extends Component {
               onClick={this.onSearchClick}
             />
           }
-          size="small"
           focus="focus"
         />
         <h3 className="h3">SKILLS</h3>
         <Dropdown
-          id="dropdown"
+          className="filter-box"
           item="item"
           text="Select Skills"
           search="search"
@@ -117,6 +116,7 @@ class SideMenu extends Component {
         />
         <h3 className="h3">YEARS</h3>
         <Dropdown
+          className="filter-box"
           item="item"
           text="Select Years"
           search="search"
@@ -128,6 +128,7 @@ class SideMenu extends Component {
         />
         <h3 className="h3">SCHOOLS</h3>
         <Dropdown
+          className="filter-box"
           item="item"
           text="Select Schools"
           search="search"
@@ -137,7 +138,7 @@ class SideMenu extends Component {
           scrolling="scrolling"
           closeOnChange="false"
         />
-        <img class="moveImage" src={SideMenuPicture} alt="React Logo" />
+        {/* <img class="moveImage" src={SideMenuPicture} alt="React Logo" /> */}
       </div>
     );
   }

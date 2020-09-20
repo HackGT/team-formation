@@ -228,9 +228,11 @@ textarea::placeholder {
   background: none;
 }
 
+
 .ui.modal > .content {
   background: linear-gradient(180deg, #656cae 0%, rgba(255, 255, 255, 0) 100%),
     #8bb2c2;
+  border-radius: 15px !important;
 }
 
 .ui.button.submit {
@@ -238,4 +240,8 @@ textarea::placeholder {
   color: white;
   background: rgba(255, 255, 255, 0.22);
   font-family: Quicksand-Bold;
+}
+
+.ui.button.accept {
+  margin-left: 50px;
 }

@@ -6,6 +6,7 @@ import {QueryRenderer} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import './css/Feed.css';
 import environment from './Environment';
+import {Redirect} from 'react-router-dom';
 
 const getUsersQuery = graphql `
     query FeedCardsQuery($skill: String, $grad_year: String, $school: String, $search: String) {
@@ -19,6 +20,11 @@ const getUsersQuery = graphql `
             visible
             uuid
             id
+        }
+        user_profile {
+            team {
+              id
+            }
         }
     }
 `;
@@ -37,16 +43,22 @@ class FeedCards extends Component {
                 school: school
             }} render={({error, props}) => {
                 if (error) {
-                    return <div>{error.message}</div>;
+                    // return <div>{error.message}</div>;
+                    return <Redirect to='/login' />;
                 } else if (props) {
+                    // if(props.user_profile.team.id == null) {
+                    //     props.user_profile.team.id = "";
+                    // }
+                    // console.log("HELLO" + props.user_profile.team.id);
                     let cards = props.users.map(user => {
                         console.log("Stuff: " + user.id);
-                        return <UserCard name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function(el) {
+                        return <UserCard className='card-individual' name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function(el) {
                                 return Boolean(el);
-                            })} experience={user.experience} id={user.id}/>
+                            })} experience={user.experience} id={user.id} team={props.user_profile.team}/>
                     })
-                    return (<div className='Cards-container'>
-                        <Card.Group centered="centered" itemsPerRow={4} className='center-group'>{cards}</Card.Group>
+                    return (
+                    <div className='Cards-container'>
+                        {cards}
                     </div>);
                 }
             }}/>);

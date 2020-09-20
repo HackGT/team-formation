@@ -145,7 +145,7 @@ let getUser = async function(parent, args, context, info, req) {
     if (!context._id) {
         throw new Error('User not logged in')
     }
-    let user = await User.findById(context._id)
+    let user = await User.findById(args.user_id)
     if (!user) {
         throw new Error('User not found')
     }
@@ -343,6 +343,31 @@ let updateTeam = async function(parent, args, context, info, req) {
     return await Team.findByIdAndUpdate(user.team, { "$set": args }, { new: true });
 }
 
+let leaveTeam = async function(parent, args, context, info, req) {
+    console.log("leaveing team")
+
+    if(!context._id) {
+        throw new Error('User not logged in')
+    }
+    if(!context.team) {
+        throw new Error('User not on team')
+    }
+
+    await Team.findByIdAndUpdate(context.team, {
+        "$pull": {
+            "members": context._id
+        }
+    }, (err, team) => {
+        if(err) {
+            console.log(err)
+            throw new Error("Issue updating team")
+        }
+    })
+    return await User.findByIdAndUpdate(context._id, {
+        "team": null
+    })
+}
+
 let getSentTeamNotifications = async function(parent, args, context, info, req) {
     if(!context._id) {
         throw new Error("User not logged in")
@@ -412,7 +437,7 @@ let acceptTeamRequest = async function(parent, args, context, info, req) {
         console.log(mongoose.Types.ObjectId.isValid(requestedUserId))
         console.log(mongoose.Types.ObjectId.isValid(user.team._id))
 
-        let updatedTeam = await Team.findByIdAndUpdate(user.team._id, {
+        await Team.findByIdAndUpdate(user.team._id, {
             '$push': {
                 'members': requestedUserId
             }
@@ -423,7 +448,10 @@ let acceptTeamRequest = async function(parent, args, context, info, req) {
         console.log("here3")
 
         await User.findByIdAndUpdate(notification.sender._id, {
-            'team': updatedTeam
+            'team': user.team._id
+        })
+        await Notification.findByIdAndUpdate(notification._id, {
+            'resolved': true
         })
     } else {
         throw new Error('Notification invalid')
@@ -440,13 +468,18 @@ let acceptUserRequest = async function(parent, args, context, info, req) {
     }
 
     let notification = await Notification.findById(args.notification_id).populate('sender')
+                                               .populate('receiver')
     if (!notification) {
         throw new Error('Notification not found')
     }
-    if (notification.receiver._id != user._id) {
+    console.log("ACCEPT USER REQUEST")
+    console.log(notification.receiver._id)
+    console.log(user._id)
+
+    if (notification.receiver._id.toString() != user._id.toString()) {
         throw new Error('Notification not valid')
     }
-    await Notification.findByIdAndUpdate(args.notification._id, {
+    await Notification.findByIdAndUpdate(notification._id, {
         'resolved': true
     })
     if (notification.senderType == 'Team') {
@@ -456,7 +489,6 @@ let acceptUserRequest = async function(parent, args, context, info, req) {
         if (!notification.sender) {
             throw new Error('Team no longer exists')
         }
-
         if (notification.sender.members.length >= 4) {
             throw new Error('Team is full')
         }
@@ -499,12 +531,16 @@ let acceptUserRequest = async function(parent, args, context, info, req) {
                 user1.team = team
                 user2.team = team
                 user1.save(function(err) {
-                    console.log(err)
-                    throw new Error(err)
+                    if(err) {
+                        console.log(err)
+                        throw new Error(err)
+                    }
                 })
                 user2.save(function(err) {
-                    console.log(err)
-                    throw new Error(err)
+                    if(err) {
+                        console.log(err)
+                        throw new Error(err)
+                    }
                 })
             });
         } else {
@@ -531,7 +567,7 @@ let makeUserRequest = async function(parent, args, context, info, req) {
         throw new Error("Requested user already on team")
     }
     if (!context.team) {
-        notification = await new Notification({
+        notification = new Notification({
             bio: args.bio,
             idea: args.idea,
             senderType: 'User',
@@ -546,12 +582,12 @@ let makeUserRequest = async function(parent, args, context, info, req) {
         if (!team) {
             throw new Error("Team not found")
         }
-        notification = await new Notification({
+        notification = new Notification({
             bio: args.bio,
             idea: args.idea,
             senderType: 'Team',
             receiverType: 'User',
-            sender: team,
+            sender: team._id,
             receiver: receiver_id,
             resolved: false
         });
@@ -576,18 +612,19 @@ let makeTeamRequest = async function(parent, args, context, info, req) {
     }
     let user = await User.findById(context._id)
     let team_id = args.team_id
+    console.log("TEAEM_ID: ", team_id)
     if (!user) {
         throw new Error("User not found!")
     }
     if (user.team) {
         throw new Error("You are already on a team!")
     }
-    let notification = await new Notification({
+    let notification = new Notification({
         bio: args.bio,
         idea: args.idea,
         senderType: 'User',
         receiverType: 'Team',
-        sender: user,
+        sender: user._id,
         receiver: team_id,
         resolved: false
     })
@@ -626,7 +663,8 @@ let getTeamNotifications = async function(parent, args, context, info, req) {
         receiverType: 'Team',
         receiver: context.team,
         resolved: false
-    })
+    }).populate('sender')
+      .populate('receiver')
 }
 
 // let createTeam = async function(args) {
@@ -648,10 +686,10 @@ const resolvers = {
 			console.log(info)
 			if(context.team) {
 				console.log("team chosen")
-				return 'Team'
+				return 'User'
 			}
 			if(context._id){
-				return 'User'
+				return 'Team'
 			}
 			return null;
 		}
@@ -673,7 +711,8 @@ const resolvers = {
 		accept_user_request: acceptUserRequest,
 		accept_team_request: acceptTeamRequest,
 		make_team_request: makeTeamRequest,
-		make_user_request: makeUserRequest
+		make_user_request: makeUserRequest,
+        leave_team: leaveTeam
 	}
 };
 

@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root';
 import React, {Component} from "react";
 import {
     BrowserRouter as Router,
@@ -10,8 +11,6 @@ import {
 import Login from "./Login";
 import EditProfile from "./EditProfile";
 import Feed from "./Feed";
-import PrivateRoute from "./PrivateRoute";
-import HeaderLogin from "./ui_subcomponents/HeaderLogin";
 import HeaderFeed from "./ui_subcomponents/HeaderFeed";
 import TeamPage from "./TeamPage";
 import "./css/Content.css";
@@ -128,4 +127,4 @@ class Content extends Component {
 
 }
 
-export default Content;
+export default hot(Content);

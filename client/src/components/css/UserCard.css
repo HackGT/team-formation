@@ -73,6 +73,7 @@ body .ui.card:hover {
   background: #ccbedf;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   margin-left: 5px;
+  width: 50%;
   font-family: Quicksand-Bold;
 }
 
@@ -87,7 +88,11 @@ body .ui.card:hover {
 .ui.card.card1 {
   box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
-  padding-bottom: 30px;
+  margin: 15px;
+  min-width: 270px;
+  width: 270px;
+  min-height: 382px;
+  max-height: 382px;
 }
 
 .ui.card > .content > .header:not(.ui),

@@ -54,6 +54,7 @@ class NotificationGroup extends Component {
             var colors = ["#A8C5D6", "#CCBEDF"];
             var count = 0;
             var notificationCards = notifications.map((notif) => {
+              console.log("SENDERR: ", notif.sender)
               return (
                 <NotificationCard
                   message={notif.bio}
@@ -68,14 +69,24 @@ class NotificationGroup extends Component {
                 />
               );
             });
+            var notificationMessage = notificationCards.length > 0 ? notificationCards : "No notifications right now!"
+            console.log(notificationMessage)
             return (
               <Segment
                 style={{
+                  // overflow: "auto",
+                  // maxHeight: 400,
                   overflow: "auto",
                   maxHeight: 400,
+                  width: 400,
+                  borderRightWidth: 0,
+                  borderLeftWidth: 0,
+                  marginLeft: 0,
+                  paddingLeft: 0,
+                  paddingRight: 0
                 }}
               >
-                {notificationCards}
+                {notificationMessage}
               </Segment>
             );
           }

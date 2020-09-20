@@ -18,23 +18,37 @@
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
 
-.Feed-container {
+.feed-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-side {
+  margin-left: 20px;
+  min-width: 250px;
+}
+
+.right-side {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feed-cards {
   padding-top: 2%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   width: 90%;
   display: flex;
   flex-direction: row;
 }
 
 .Cards-container {
-  /* padding-top: 2%; */
-  margin: 0 auto;
-  padding-left: 3%;
-  justify-content: left;
-}
-
-.center-group {
-  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 0 0 auto;
 }
 
 .ui.buttons .button:first-child {
@@ -72,27 +86,21 @@
   padding-bottom: 2%;
 }
 
-.menu {
-  text-align: left;
-}
-
 .user-input {
   padding-left: 3%;
-  padding-bottom: 2%;
   flex-direction: column;
+  align-items: center;
 }
 #dropdown-menu {
   margin: 2%;
   flex-direction: column;
 }
-
-.Side-menu {
-  text-align: left;
-  padding-left: 10%;
-  padding-bottom: 10%;
-}
 .filters-applied {
   padding-bottom: 1%;
+  padding-top: 2%;
+  color: white;
+  font-size: 20px;
+  font-family: Quicksand-Bold;
 }
 
 .ui.buttons .button {
@@ -101,24 +109,21 @@
 
 .teamFormation {
   font-family: Lekton-Bold;
-  font-size: 30px;
+  font-size: 22px;
   color: white;
-  float: left;
-  margin-left: 1%;
+  margin-left: 15px;
 }
 
 .switch-feed {
   padding: 1%;
-  text-align: center;
-  justify-content: center;
 }
 
 .HackGTitle {
   color: white;
   text-shadow: 0px 0px 8px #ffffff;
   font-family: Bavro-Regular;
-  font-size: 25px;
-  margin-left: 2%;
+  font-size: 18px;
+  margin-left: 15px;
 }
 
 .team-info {
@@ -133,10 +138,10 @@
   flex-direction: row;
 }
 
-.team-card-container {
+/* .team-card-container {
   flex: 1;
   padding-right: 2%;
-}
+} */
 
 .ui.centered.cards {
   justify-content: left;
@@ -183,4 +188,16 @@
 .ui.buttons .button:last-child {
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
+}
+
+@media (min-width: 595px) {
+  .side-menu-top {
+    display: none;
+  }
+}
+
+@media (max-width: 595px) {
+  .left-side {
+    display: none;
+  }
 }
