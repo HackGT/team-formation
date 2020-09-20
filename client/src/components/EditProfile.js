@@ -120,7 +120,9 @@ class EditProfile extends Component {
                                 <Form.TextArea className="input-container-large" label='Bio' placeholder='Introduce yourself!' defaultValue={props.experience} onChange={this.onExperienceChange} error={this.state["experience_profane"]}/>
                             </Form.Group>
                             <Form.Group>
-                                <Checkbox label='Make my profile public' onChange={this.onPrivacyChange} defaultChecked={true}/>
+                                <div className="editCheckbox">
+                                    <Checkbox label='Make my profile public' onChange={this.onPrivacyChange} defaultChecked={true}/>
+                                </div>
                             </Form.Group>
                             <div className="button-container">
                                 <Form.Group>
