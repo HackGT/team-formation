@@ -103,6 +103,20 @@ textarea::placeholder {
   resize: none;
   color: #8895c1;
   font-family: Quicksand-Bold;
+  width: 500px;
+  height: 150px;
+}
+
+@media (max-width: 595px) {
+  #writeAMessage {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 370px) {
+  #writeAMessage {
+    max-width: 250px;
+  }
 }
 
 .row {
