@@ -17,6 +17,16 @@ const acceptRequestMutation = graphql`
   }
 `;
 
+
+const acceptRequestMutation = graphql`
+  mutation TeamRequestMutation($notification_id: String) {
+    accept_user_request(notification_id: $notification_id) {
+      id
+      name
+    }
+  }
+`;
+
 class TeamRequest extends Component {
   constructor(props) {
     super(props);

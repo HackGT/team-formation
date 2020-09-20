@@ -144,7 +144,6 @@ class IndividualRequest extends Component {
                             console.log("HIIIIII" + this.state.secondOpen)
                             this.toggleSecondOpen();
                             console.log("HELLO" + this.state.secondOpen)
-                            // this.props.closeModal();
                           }}
                         >
                           Accept
