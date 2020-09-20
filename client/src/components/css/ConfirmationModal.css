@@ -3,17 +3,21 @@
 }
 
 .ui.button.here {
-    margin-left: 100px;
-    /* background-color: #b20000; */
+    background: rgba(255, 255, 255, 0.22);
+    color: white;
+    margin: 10px;
+    font-family: Quicksand-Bold;
 }
+
 .ui.button.cancel {
-    margin-left: 80px;
-    /* border-color: gray; */
-    color: gray;
+    background: rgba(255, 255, 255, 0.22);
+    color: white;
+    margin: 10px;
+    font-family: Quicksand-Bold;
 }
 
 .ui.modal.confirmModal {
-    width: 450px !important;
+    max-width: 500px !important;
     background-color: transparent !important;
 }
 
