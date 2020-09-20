@@ -69,6 +69,11 @@
   border-radius: 25px;
 }
 
-.message {
-  text-align: center;
+.notificationsCard, .requestsSent {
+  min-width: 300px;
+  margin-top: 30px;
 }
+
+/* .requestsSent {
+  min-width: 300px;
+} */

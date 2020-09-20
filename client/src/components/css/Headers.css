@@ -18,6 +18,24 @@
   overflow-y: auto;
 }
 
+@media (max-width: 595px) {
+  .header-name, .desktopTitles {
+    display: none;
+  }
+
+  .innerMobileTitles {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (min-width: 595px) {
+  .mobileTitles {
+    display: none;
+  }
+}
+
 @font-face {
   font-family: Quicksand-Bold;
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");

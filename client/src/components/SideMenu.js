@@ -138,7 +138,7 @@ class SideMenu extends Component {
           scrolling="scrolling"
           closeOnChange="false"
         />
-        <img class="moveImage" src={SideMenuPicture} alt="React Logo" />
+        {/* <img class="moveImage" src={SideMenuPicture} alt="React Logo" /> */}
       </div>
     );
   }

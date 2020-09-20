@@ -54,24 +54,13 @@ class Members extends Component {
         />
       );
     }
-    for (let j = 4 - users.length; j > 0; j--) {
-      memberCards.push(
-        <Card>
-          <Card.Content className="add-card">
-            {/* <Button icon>
-                    <Icon name='plus' />
-                  </Button> */}
-          </Card.Content>
-        </Card>
-      );
-    }
 
     let cards = (
       <Card.Group centered itemsPerRow={2} className="center-group">
         {memberCards}
       </Card.Group>
     );
-    return <div className="member-cards-container">{cards}</div>;
+    return <div className="member-cards-container">{memberCards}</div>;
   }
 }
 
