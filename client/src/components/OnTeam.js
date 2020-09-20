@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Card, Form, Button, Label, Message, Input } from "semantic-ui-react";
 import TeamInformation from "./TeamInformation";
 import JoinTeam from "./ui_subcomponents/JoinTeam";
+import CheckingModal from "./ui_subcomponents/CheckingModal";
 import TeamNotifications from "./TeamNotifications";
 import TeamRequestsSent from "./TeamRequestsSent";
 import Members from "./Members";
@@ -40,11 +41,20 @@ class OnTeam extends Component {
       showNotTeam: false,
       save_message_hidden: true,
       save_success: false,
+      showSecondModal: false,
+      leaveTeam: false,
     };
   }
   closeModal = () => {
     this.setState({ showModal: false });
   };
+  sendInformation = () => {
+    console.log("WOAH IN HERE");
+    commitMutation(environment, {
+      mutation: leaveTeamMutation
+    });
+    window.location.reload();
+  }
   render() {
     return (
       <div id="on-team" class="team-page">
@@ -66,14 +76,22 @@ class OnTeam extends Component {
             border: "1px solid white",
           }}
           onClick={() => {
-              commitMutation(environment, {
-                mutation: leaveTeamMutation
-              });
-              window.location.reload();
+              this.setState({showSecondModal: true});
+              // this.sendInformation();
+              console.log("STATEEEEE: ",this.state.leaveTeam)
           }}
         >
           Leave Team
         </Button>
+        <CheckingModal
+            message="Are you sure you want to leave the team?"
+            closeModal={() => this.setState({ showSecondModal:false})}
+            // secondModal={() => this.props.closeModal()}
+            // onOpen={() => this.setState({ secondOpen:true})}
+            showModal={this.state.showSecondModal}
+            leaveTeam={this.sendInformation}
+            >
+          </CheckingModal>
         <JoinTeam
           {...this.props}
           showModal={this.state.showModal}

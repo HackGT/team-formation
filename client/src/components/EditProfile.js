@@ -13,7 +13,8 @@ import {
     Dropdown,
     TextArea,
     Message,
-    Form
+    Form,
+    Checkbox
 } from 'semantic-ui-react';
 import {QueryRenderer} from 'react-relay';
 import ContactDropdown from './ui_subcomponents/ContactDropdown';
@@ -33,6 +34,9 @@ mutation EditProfileMutation($name: String, $grad_year: String, $school: String,
     skills
     experience
     contact
+  }
+  toggle_visibility {
+    name
   }
 }
 `;
@@ -64,6 +68,7 @@ class EditProfile extends Component {
             grad_year: "",
             skills: [],
             experience: "",
+            public: true,
             contact_method: "",
             contact: "",
             cur_error_message: "",
@@ -116,10 +121,13 @@ class EditProfile extends Component {
                             <Form.Group>
                                 <Form.TextArea className="input-container-large" label='Bio' placeholder='Introduce yourself!' defaultValue={props.experience} onChange={this.onExperienceChange} error={this.state["experience_profane"]}/>
                             </Form.Group>
+                            <Form.Group>
+                                <Checkbox label='Make my profile public' onChange={this.onPrivacyChange} defaultChecked={true}/>
+                            </Form.Group>
                             <div className="button-container">
                                 <Form.Group className="save-button-container">
                                     <Link to="/feed">
-                                        <Button onClick={this.onCancelClick} className="save-button">
+                                        <Button  className="save-button">
                                             cancel
                                         </Button>
                                     </Link>
@@ -175,6 +183,10 @@ class EditProfile extends Component {
 
     onSkillsChange = (e, {value}) => {
         this.setState({skills: value})
+    }
+
+    onPrivacyChange = () => {
+        this.setState((prevState) => ({public: !prevState.public}))
     }
 
     changeContactMethod = (new_contact) => {
