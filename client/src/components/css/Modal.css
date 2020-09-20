@@ -108,6 +108,9 @@ textarea::placeholder {
 .row {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px;
 }
 
 .modal3Column {
@@ -126,6 +129,8 @@ textarea::placeholder {
   flex-direction: column;
   text-align: center;
   flex: 1;
+  min-width: 270px;
+  max-width: 418px;
 }
 
 .modal3Column3 {
