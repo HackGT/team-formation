@@ -26,7 +26,7 @@ textarea::placeholder {
 .modalHeader {
   text-align: center;
   color: white;
-  font-size: 35px;
+  font-size: 30px;
   font-family: Lekton-Bold;
 }
 
@@ -108,6 +108,9 @@ textarea::placeholder {
 .row {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px;
 }
 
 .modal3Column {
@@ -126,6 +129,8 @@ textarea::placeholder {
   flex-direction: column;
   text-align: center;
   flex: 1;
+  min-width: 270px;
+  max-width: 418px;
 }
 
 .modal3Column3 {
@@ -244,4 +249,16 @@ textarea::placeholder {
 
 .ui.button.accept {
   margin-left: 50px;
+}
+
+.checkingModal-column {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.checkingModal-row2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
