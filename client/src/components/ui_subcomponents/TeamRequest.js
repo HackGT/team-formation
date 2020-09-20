@@ -17,16 +17,6 @@ const acceptRequestMutation = graphql`
   }
 `;
 
-
-const acceptRequestMutation = graphql`
-  mutation TeamRequestMutation($notification_id: String) {
-    accept_user_request(notification_id: $notification_id) {
-      id
-      name
-    }
-  }
-`;
-
 class TeamRequest extends Component {
   constructor(props) {
     super(props);
@@ -98,7 +88,7 @@ class TeamRequest extends Component {
                       </Modal.Description>
                     </Modal.Content>
                   </Modal> */}
-                  <ConfirmationModal 
+                  <ConfirmationModal
                   message="You have joined the team!"
                   onClose={() => this.setState({ secondOpen:false})}
                   onOpen={() => this.setState({ secondOpen:true})}

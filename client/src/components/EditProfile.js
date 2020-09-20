@@ -60,8 +60,6 @@ class EditProfile extends Component {
     constructor() {
         super();
         this.state = {
-            first_name: "",
-            last_name: "",
             year: "",
             name: "",
             school: "",
@@ -99,24 +97,24 @@ class EditProfile extends Component {
                     return <div>{error.message}</div>;
                 } else if (props) {
                     props = props.user_profile;
+                    console.log(props)
+                    console.log(years)
                     if (!this.state.name && props.name) {
                         this.setState({
                             ...props
                         })
                     }
-                    return (<div className="form-container">
-                        <Form>
+                    return (<div>
+                        <Form className="form-container">
                             <Form.Group>
-                                <Form.Input className="input-container" label='First Name' placeholder='First Name' defaultValue={props.name} onChange={this.onNameChange} error={this.state["name_profane"]} required="required"/>
-                                <Form.Input className="input-container" label='Last Name' placeholder='Last Name' defaultValue={props.name} onChange={this.onNameChange} error={this.state["name_profane"]} required="required"/>
+                                <Form.Input className="input-container-large" label='Full Name' placeholder='Full Name' defaultValue={props.name} onChange={this.onNameChange} error={this.state["name_profane"]} required="required"/>
+                            </Form.Group>
+                            <Form.Group className="school-and-year">
+                                <Form.Input className="input-container-small" label='School' placeholder='School' defaultValue={props.school} onChange={this.onSchoolChange} error={this.state["school_profane"]} required="required"/>
+                                <Form.Select className="input-container-small" required="required" label='Year in School' defaultValue={props.grad_year} onChange={this.onYearChange} options={years} placeholder='Year in School'/>
                             </Form.Group>
                             <Form.Group>
-                                <Form.Input className="input-container" label='School' placeholder='School' defaultValue={props.school} onChange={this.onSchoolChange} error={this.state["school_profane"]} required="required"/>
-                                <Form.Select className="input-container" required="required" label='Year in School' onChange={this.onYearChange} options={years} placeholder='Year in School'/>
-                            </Form.Group>
-                            <Divider/>
-                            <Form.Group>
-                                <Form.Select className="input-container-large" label="Skills" placeholder='Skills' onChange={this.onSkillsChange} fluid="fluid" multiple="multiple" selection="selection" search="search" options={skills}/>
+                                <Form.Select className="input-container-large" label="Skills" placeholder='Skills' defaultValue={props.skills} onChange={this.onSkillsChange} fluid="fluid" multiple="multiple" selection="selection" search="search" options={skills}/>
                             </Form.Group>
                             <Form.Group>
                                 <Form.TextArea className="input-container-large" label='Bio' placeholder='Introduce yourself!' defaultValue={props.experience} onChange={this.onExperienceChange} error={this.state["experience_profane"]}/>
@@ -125,24 +123,24 @@ class EditProfile extends Component {
                                 <Checkbox label='Make my profile public' onChange={this.onPrivacyChange} defaultChecked={true}/>
                             </Form.Group>
                             <div className="button-container">
-                                <Form.Group className="save-button-container">
+                                <Form.Group>
                                     <Link to="/feed">
-                                        <Button  className="save-button">
-                                            cancel
+                                        <Button className="save-button">
+                                            Cancel
                                         </Button>
                                     </Link>
                                 </Form.Group>
                                 <Form.Group>
                                     <Link to="/feed">
                                         <Button onClick={this.onNextClick} className="save-button">
-                                            save
+                                            Save
                                         </Button>
                                     </Link>
                                 </Form.Group>
-                                <Form.Group>
-                                    {this.state.cur_error_message}
-                                </Form.Group>
                             </div>
+                            <Form.Group>
+                                {this.state.cur_error_message}
+                            </Form.Group>
                         </Form>
                     </div>)
                 }
@@ -178,7 +176,7 @@ class EditProfile extends Component {
     };
 
     onYearChange = (e, {value}) => {
-        this.setState({year: value})
+        this.setState({grad_year: value})
     }
 
     onSkillsChange = (e, {value}) => {

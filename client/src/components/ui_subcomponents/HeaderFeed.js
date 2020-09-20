@@ -1,18 +1,13 @@
 import React, { Component } from "react";
-import TeamRequest from "./TeamRequest";
-import JoinTeam from "./JoinTeam";
 import "../css/Headers.css";
 import "../css/Modal.css";
 import { Menu, Dropdown, Icon, Popup, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
 import { QueryRenderer } from "react-relay";
 import NotificationGroup from "../NotificationGroup";
-import IndividualRequest from "./IndividualRequest";
-import JoinIndividual from "./JoinIndividual";
-import { Input } from "semantic-ui-react";
+
 
 const mutation = graphql`
   mutation HeaderFeedMutation {
@@ -88,7 +83,7 @@ class Headers extends Component {
                 />;
             } else {
               let link = "/team/" + props.user_profile.team.id;
-              teamIcon = 
+              teamIcon =
                 <Popup
                   trigger={
                     <Link to={link}>
@@ -109,17 +104,17 @@ class Headers extends Component {
               <div className="logout-button">
                 <Menu secondary borderless="borderless" size={"massive"}>
                   <Menu.Menu position="right">
-                    <Menu.Item
-                      name={props.user_profile.name}
-                      style={{
-                        fontFamily: "Quicksand-Bold",
-                        fontSize: 20,
-                        color: "white",
-                        paddingRight: 10
-                      }}
-                    />
-                    <Menu.Item>
-                    </Menu.Item>
+                    <div className="header-name">
+                      <Menu.Item
+                        name={props.user_profile.name}
+                        style={{
+                          fontFamily: "Quicksand-Bold",
+                          fontSize: 20,
+                          color: "white",
+                          paddingRight: 10
+                        }}
+                      />
+                    </div>
                     <Menu.Item
                       style={{
                         size: "large",
@@ -186,10 +181,20 @@ class Headers extends Component {
                     </Menu.Item>
                   </Menu.Menu>
                 </Menu>
-                <Link to="/feed">
+                <div className="desktopTitles">
+                  <Link to="/feed">
                     <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
-                    <span class="teamFormation">HackGT Team Formation</span>
-                </Link>
+                    <span class="teamFormation">Team Formation</span>
+                  </Link>
+                </div>
+                <div className="mobileTitles">
+                  <Link to="/feed">
+                    <div className="innerMobileTitles">
+                      <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
+                      <span class="teamFormation">Team Formation</span>
+                    </div>
+                  </Link>
+                </div>
               </div>
             );
           }

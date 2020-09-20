@@ -3,6 +3,27 @@
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
 
+@media (min-width: 595px) {
+  .team-card-container {
+    max-width: 900px;
+    width: 500px;
+    min-width: 300px;
+    margin: 28px;
+  }
+}
+
+@media (max-width: 595px) {
+  .team-card-container {
+    /* max-width: 900px; */
+    /* width: 500px; */
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    min-width: 300px;
+    margin: 28px;
+  }
+}
+
 .header {
   flex-direction: row;
   display: inline-block;
@@ -31,23 +52,22 @@
 .ui.form .disabled.fields .field,
 .ui.form .field :disabled {
   opacity: 1;
+  color: #85808A;
+  font-family: Quicksand-Bold;
 }
 
-.ui.form textarea {
-  color: gray;
+.ui.form .field.disabled :disabled {
+  border: 1px solid #C3BBCD;
 }
 
 .ui.form .field.disabled > label,
 .ui.form .fields.disabled > label {
   opacity: 1;
+  color: #85808A;
 }
 
 .ui.fluid.dropdown {
   border: none;
-}
-
-.ui.form .field > .selection.dropdown {
-  opacity: 1;
 }
 
 .ui.selection.dropdown {
@@ -70,14 +90,6 @@
   padding-right: 4.07142857em !important;
   padding-left: 1.5em !important;
   float: right;
-}
-
-.ui.form .field > label {
-  color: #85808a;
-}
-
-.ui.form textarea {
-  color: #85808a;
 }
 
 .ui.fluid.card {
@@ -107,16 +119,4 @@
 .ui.card > .content,
 .ui.cards > .card > .content {
   padding-bottom: 20px;
-}
-
-.member-cards-container {
-  transform: scale(0.8);
-}
-
-.member-cards-container {
-  margin-top: -2%;
-}
-
-.ui.form .field {
-  border-bottom: 1px solid #c3bbcd;
 }

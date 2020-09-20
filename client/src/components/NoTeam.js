@@ -28,24 +28,20 @@ class NoTeam extends Component {
   render() {
     return (
         <div id="not-team" class="team-page">
-          <h1>{this.props.team.name}</h1>
-          <Button basic color='blue' content='Ask to Join' onClick={() => this.setState({showModal: true})} />
-                <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} showSecond={this.secondModal}/>
-                <ConfirmationModal
-                message="Your request to join the team has been sent!"
-                closeModal={() => this.setState({ showSecondModal:false})}
-                // secondModal={() => this.props.closeModal()}
-                // onOpen={() => this.setState({ secondOpen:true})}
-                showModal={this.state.showSecondModal}
-                >
-                </ConfirmationModal>
-          <div className="first-row">
-            <div className="first-col">
+          <h1 className="no-team-heading">{this.props.team.name}</h1>
+          <Button className="ask-to-join" content='Ask to Join' onClick={() => this.setState({showModal: true})} />
+              <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} showSecond={this.secondModal}/>
+              <ConfirmationModal
+              message="Your request to join the team has been sent!"
+              closeModal={() => this.setState({ showSecondModal:false})}
+              // secondModal={() => this.props.closeModal()}
+              // onOpen={() => this.setState({ secondOpen:true})}
+              showModal={this.state.showSecondModal}
+              >
+              </ConfirmationModal>
+          <div className="noTeam-content">
               <MembersBlank members={this.props.team.members}/>
-            </div>
-            <div className="second-col">
               <TeamInformation editable={false} teamBio={this.props.team.description} projectIdea={this.props.team.project_idea} interests={this.props.team.interests}/>
-            </div>
           </div>
         </div>
     )

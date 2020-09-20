@@ -121,13 +121,13 @@ class IndividualRequest extends Component {
                     </div>
                     <div class="flex-container-modal3">
                       <div class="modal3Button">
-                      <ConfirmationModalRemove 
+                      <ConfirmationModalRemove
                       message="You have added them to the team!"
                       closeModal={() => this.setState({ secondOpen:false})}
                       secondModal={() => this.props.closeModal()}
                       onOpen={() => this.setState({ secondOpen:true})}
                       showModal={this.state.secondOpen}
-                      
+
                       />
                         <Button
                           className="submit"

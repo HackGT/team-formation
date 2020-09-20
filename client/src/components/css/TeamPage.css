@@ -6,10 +6,37 @@
 .first-row {
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-top: 3%;
   margin-bottom: 3%;
   align-items: flex-start;
+}
+
+.ui.button.ask-to-join {
+  font-family: Quicksand-Bold;
+  background: rgba(255, 255, 255, 0.22);
+	color: white;
+}
+
+.ui.button.leaveTeam {
+  font-family: Quicksand-Bold;
+  background: rgba(255, 255, 255, 0.22);
+	color: white;
+}
+
+.no-team-heading {
+  color: white;
+  font-family: Quicksand-Bold;
+}
+
+.noTeam-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .team-page {
@@ -20,11 +47,20 @@
 }
 
 .first-col {
-  width: 40%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 15px;
+  height: 600px;
 }
 
 .second-col {
-  width: 50%;
+  /* max-width: 500px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: 15px;
 }
 
 #header {
@@ -47,12 +83,4 @@
 .ui.input > input {
   padding: 0;
   background: #656cae;
-}
-
-.teamFormation {
-  font-family: Lekton-Bold;
-  font-size: 30px;
-  color: white;
-  float: left;
-  margin-left: 1%;
 }

@@ -69,6 +69,8 @@ class NotificationGroup extends Component {
                 />
               );
             });
+            var notificationMessage = notificationCards.length > 0 ? notificationCards : "No notifications right now!"
+            console.log(notificationMessage)
             return (
               <Segment
                 style={{
@@ -84,7 +86,7 @@ class NotificationGroup extends Component {
                   paddingRight: 0
                 }}
               >
-                {notificationCards}
+                {notificationMessage}
               </Segment>
             );
           }

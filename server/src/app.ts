@@ -664,6 +664,7 @@ let getTeamNotifications = async function(parent, args, context, info, req) {
         receiver: context.team,
         resolved: false
     }).populate('sender')
+      .populate('receiver')
 }
 
 // let createTeam = async function(args) {

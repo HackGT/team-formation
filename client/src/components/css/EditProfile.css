@@ -5,12 +5,64 @@
 	padding-top: 30px;
 }
 
-.input-container {
+.ui.selection.dropdown {
+	border-radius: .28571429rem !important;
+}
+
+.input-container-small {
 	width: 220px;
+}
+
+.ui.form input[type=text] {
+	background: rgba(255, 255, 255, 0.22);
+	font-family: Quicksand-Bold;
+}
+
+.ui.form input[type=text]:focus {
+	background: rgba(255, 255, 255, 0.22);
+	font-family: Quicksand-Bold;
+}
+
+.ui.form div.input-container-large textarea {
+	color: white;
+	background: rgba(255, 255, 255, 0.22);
+	font-family: Quicksand-Bold;
+}
+
+.ui.form div.input-container-large textarea:focus {
+	color: white;
+	background: rgba(255, 255, 255, 0.22);
+	font-family: Quicksand-Bold;
+}
+
+.ui.form div.input-container-large.field>label {
+	color: white;
+	font-family: Quicksand-Bold;
+}
+
+.ui.form div.input-container-small.field>label {
+	color: white;
+	font-family: Quicksand-Bold;
+}
+
+.school-and-year {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .input-container-large {
 	width: 440px;
+}
+
+@media (max-width: 595px) {
+  .input-container-large {
+		width: 220px;
+	}
+	.ui.form .fields .field {
+		margin-bottom: 15px;
+	}
 }
 
 .button-container {
@@ -19,6 +71,9 @@
 	justify-content: center;
 }
 
-.save-button-container {
-	padding-right: 40px;
+.ui.button.save-button {
+	background: rgba(255, 255, 255, 0.22);
+	color: white;
+	margin-right: 15px;
+	margin-left: 15px;
 }
