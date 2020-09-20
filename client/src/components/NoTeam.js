@@ -40,8 +40,8 @@ class NoTeam extends Component {
               >
               </ConfirmationModal>
           <div className="noTeam-content">
-              <MembersBlank members={this.props.team.members}/>
               <TeamInformation editable={false} teamBio={this.props.team.description} projectIdea={this.props.team.project_idea} interests={this.props.team.interests}/>
+              <MembersBlank members={this.props.team.members}/>
           </div>
         </div>
     )
