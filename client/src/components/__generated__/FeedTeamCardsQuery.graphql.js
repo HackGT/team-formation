@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash b9f6e09b25bb0cf59bc5fb4f4048f198
+ * @relayHash 03ad01c68a042a6c48692e2be117f686
  */
 
 /* eslint-disable */
@@ -23,7 +23,12 @@ export type FeedTeamCardsQueryResponse = {|
       +name: ?string
     |}>,
     +id: ?string,
-  |}>
+  |}>,
+  +user_profile: {|
+    +team: ?{|
+      +id: ?string
+    |}
+  |},
 |};
 export type FeedTeamCardsQuery = {|
   variables: FeedTeamCardsQueryVariables,
@@ -44,6 +49,12 @@ query FeedTeamCardsQuery(
     public
     members {
       name
+      id
+    }
+    id
+  }
+  user_profile {
+    team {
       id
     }
     id
@@ -114,6 +125,18 @@ v6 = {
   "name": "id",
   "args": null,
   "storageKey": null
+},
+v7 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "team",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "Team",
+  "plural": false,
+  "selections": [
+    (v6/*: any*/)
+  ]
 };
 return {
   "kind": "Request",
@@ -151,6 +174,18 @@ return {
           },
           (v6/*: any*/)
         ]
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "user_profile",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "User",
+        "plural": false,
+        "selections": [
+          (v7/*: any*/)
+        ]
       }
     ]
   },
@@ -187,6 +222,19 @@ return {
           },
           (v6/*: any*/)
         ]
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "user_profile",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "User",
+        "plural": false,
+        "selections": [
+          (v7/*: any*/),
+          (v6/*: any*/)
+        ]
       }
     ]
   },
@@ -194,11 +242,11 @@ return {
     "operationKind": "query",
     "name": "FeedTeamCardsQuery",
     "id": null,
-    "text": "query FeedTeamCardsQuery(\n  $interests: String\n  $search: String\n) {\n  teams(interests: $interests, search: $search) {\n    name\n    interests\n    description\n    public\n    members {\n      name\n      id\n    }\n    id\n  }\n}\n",
+    "text": "query FeedTeamCardsQuery(\n  $interests: String\n  $search: String\n) {\n  teams(interests: $interests, search: $search) {\n    name\n    interests\n    description\n    public\n    members {\n      name\n      id\n    }\n    id\n  }\n  user_profile {\n    team {\n      id\n    }\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '747ce25799ce9778b3b4df3d9f48618b';
+(node/*: any*/).hash = 'a6204e661d59721b6629dec7b54f1100';
 module.exports = node;

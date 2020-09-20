@@ -7,6 +7,7 @@ import TeamRequestsSent from './TeamRequestsSent';
 import Members from './Members';
 import MembersBlank from './MembersBlank';
 import './css/TeamPage.css';
+import ConfirmationModal from "./ui_subcomponents/ConfirmationModal";
 
 class NoTeam extends Component {
   constructor(props) {
@@ -14,18 +15,30 @@ class NoTeam extends Component {
     this.state = {
         showModal: false,
         showTeam: false,
-        showNotTeam: false
+        showNotTeam: false,
+        showSecondModal: false
     }
   }
   closeModal = () => {
     this.setState({ showModal: false });
   };
+  secondModal = () => {
+    this.setState({showSecondModal: true})
+  }
   render() {
     return (
         <div id="not-team" class="team-page">
           <h1>{this.props.team.name}</h1>
           <Button basic color='blue' content='Ask to Join' onClick={() => this.setState({showModal: true})} />
-                <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
+                <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} showSecond={this.secondModal}/>
+                <ConfirmationModal
+                message="Your request to join the team has been sent!"
+                closeModal={() => this.setState({ showSecondModal:false})}
+                // secondModal={() => this.props.closeModal()}
+                // onOpen={() => this.setState({ secondOpen:true})}
+                showModal={this.state.showSecondModal}
+                >
+                </ConfirmationModal>
           <div className="first-row">
             <div className="first-col">
               <MembersBlank members={this.props.team.members}/>

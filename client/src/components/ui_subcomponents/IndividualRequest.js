@@ -3,8 +3,10 @@ import { Button, Modal } from "semantic-ui-react";
 import { QueryRenderer, commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
+import { setState } from "semantic-ui-react";
 import "../css/Modal.css";
 import UserCard from "../UserCard";
+import ConfirmationModalRemove from "./ConfirmationModalRemove";
 
 const getUserQuery = graphql`
   query IndividualRequestQuery($user_id: String) {
@@ -40,6 +42,20 @@ const acceptTeamRequestMutation = graphql`
 `;
 
 class IndividualRequest extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      secondOpen:false,
+    };
+
+    this.toggleSecondOpen = this.toggleSecondOpen.bind(this)
+  }
+
+  toggleSecondOpen() {
+    console.log("in toggle");
+    this.setState({secondOpen: true});
+  }
+
   render() {
     const sender = this.props.sender;
     console.log(sender)
@@ -105,6 +121,14 @@ class IndividualRequest extends Component {
                     </div>
                     <div class="flex-container-modal3">
                       <div class="modal3Button">
+                      <ConfirmationModalRemove 
+                      message="You have added them to the team!"
+                      closeModal={() => this.setState({ secondOpen:false})}
+                      secondModal={() => this.props.closeModal()}
+                      onOpen={() => this.setState({ secondOpen:true})}
+                      showModal={this.state.secondOpen}
+                      
+                      />
                         <Button
                           className="submit"
                           onClick={() => {
@@ -117,8 +141,9 @@ class IndividualRequest extends Component {
                                 notification_id: this.props.notification_id,
                               },
                             });
-                            this.props.closeModal();
-                            window.location.reload();
+                            console.log("HIIIIII" + this.state.secondOpen)
+                            this.toggleSecondOpen();
+                            console.log("HELLO" + this.state.secondOpen)
                           }}
                         >
                           Accept
