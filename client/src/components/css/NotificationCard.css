@@ -70,10 +70,5 @@
 }
 
 .notificationsCard, .requestsSent {
-  min-width: 300px;
-  margin-top: 30px;
+  margin-top: 28px;
 }
-
-/* .requestsSent {
-  min-width: 300px;
-} */

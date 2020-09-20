@@ -41,6 +41,7 @@
   width: 90%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .Cards-container {
@@ -48,7 +49,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 0 0 0 auto;
+  /* margin: 0 0 0 auto; */
 }
 
 .ui.buttons .button:first-child {
