@@ -73,7 +73,6 @@ body .ui.card:hover {
   background: #ccbedf;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   margin-left: 5px;
-  width: 55%;
   font-family: Quicksand-Bold;
 }
 
@@ -118,10 +117,17 @@ body .ui.card:hover {
 
 .ui.container.about {
   overflow: auto;
-  max-height: 100px;
+  max-height: 70px;
+  min-height: 70px;
   color: #867a96;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 5px;
   font-family: Quicksand-Bold;
+}
+
+.ui.container.skills {
+  overflow: auto;
+  max-height: 72px;
+  min-height: 72px;
 }

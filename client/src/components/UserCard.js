@@ -93,7 +93,9 @@ class UserCard extends Component {
             }}
           />
           <Card.Description className="card-description">
-            {viewskill}
+            <Container className="skills">
+              {viewskill}
+            </Container>
           </Card.Description>
           <Card.Description className="card-description">
             <Container className="about">
@@ -101,30 +103,30 @@ class UserCard extends Component {
             </Container>
           </Card.Description>
           <div className="ui divider" />
-          <Card.Description>
-            <div className="contact-button">
-              {contact}
-              <Button
-                className="teamUp"
-                content={this.props.team ? "Invite to Join" : "Team Up"}
-                onClick={() => {
-                  if(this.props.teamid) {
-                    text="The user is already on a team";
-                  } else {
-                    this.setState({ showModal: true })
-                  }
-                  
-                }
-              }/>
-              {text}
-              <JoinIndividual
-                {...this.props}
-                showModal={this.state.showModal}
-                closeModal={this.closeModal}
-              />
-            </div>
-          </Card.Description>
         </Card.Content>
+      <Card.Description>
+          <div className="contact-button">
+            {contact}
+            <Button
+              className="teamUp"
+              content={this.props.team ? "Invite to Join" : "Team Up"}
+              onClick={() => {
+                if(this.props.teamid) {
+                  text="The user is already on a team";
+                } else {
+                  this.setState({ showModal: true })
+                }
+                
+              }
+            }/>
+            {text}
+            <JoinIndividual
+              {...this.props}
+              showModal={this.state.showModal}
+              closeModal={this.closeModal}
+            />
+          </div>
+        </Card.Description>
       </Card>
     );
   }
