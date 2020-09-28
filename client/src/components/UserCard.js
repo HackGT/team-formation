@@ -93,7 +93,7 @@ class UserCard extends Component {
             }}
           />
           <Card.Description className="card-description">
-            {viewskill}
+            <Container className="skills">{viewskill}</Container>
           </Card.Description>
           <Card.Description className="card-description">
             <Container className="about">

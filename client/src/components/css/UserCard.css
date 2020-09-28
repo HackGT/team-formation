@@ -66,14 +66,17 @@ body .ui.card:hover {
   background: #a8c5d6;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   font-family: Quicksand-Bold;
+  display: flexbox;
 }
 
 .ui.button.teamUp {
   color: white;
+  display: flexbox;
   background: #ccbedf;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   margin-left: 5px;
-  width: 55%;
+  width: 45%;
+  font-size: 13.3px;
   font-family: Quicksand-Bold;
 }
 
@@ -83,6 +86,7 @@ body .ui.card:hover {
   font-family: Quicksand-Bold;
   font-size: 10px;
   margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .ui.card.card1 {
@@ -118,10 +122,15 @@ body .ui.card:hover {
 
 .ui.container.about {
   overflow: auto;
-  max-height: 100px;
+  max-height: 90px;
   color: #867a96;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 5px;
   font-family: Quicksand-Bold;
+}
+
+.ui.container.skills {
+  overflow: auto;
+  max-height: 80px;
 }
