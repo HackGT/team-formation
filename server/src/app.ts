@@ -15,6 +15,7 @@ const { ApolloServer, gql } = require('apollo-server-express');
 import { GroundTruthStrategy } from "./routes/strategies"
 import { IUser, User, Notification, Team } from "./schema";
 import { userRoutes } from "./routes/user";
+import  sendSlackMessage  from "./sendSlackMessage";
 
 dotenv.config();
 
@@ -458,6 +459,8 @@ let acceptTeamRequest = async function(parent, args, context, info, req) {
         await Notification.findByIdAndUpdate(notification._id, {
             'resolved': true
         })
+        sendSlackMessage();
+        console.log('slack message sent');
     } else {
         throw new Error('Notification invalid')
     }
@@ -598,7 +601,6 @@ let makeUserRequest = async function(parent, args, context, info, req) {
         });
     }
 
-
     return await notification.save((err, notif) => {
         if (err) {
             throw new Error("Error creating notification: " + notif)
@@ -608,6 +610,8 @@ let makeUserRequest = async function(parent, args, context, info, req) {
                 "notifications": notif
             }
         })
+        sendSlackMessage();
+        console.log('slack message sent');
     })
 }
 
