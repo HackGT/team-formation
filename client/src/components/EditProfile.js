@@ -67,6 +67,7 @@ class EditProfile extends Component {
             school: "",
             grad_year: "",
             skills: [],
+            skill_options: skills,
             experience: "",
             public: true,
             contact_method: "",
@@ -116,7 +117,7 @@ class EditProfile extends Component {
                             </Form.Group>
                             <Divider/>
                             <Form.Group>
-                                <Form.Select className="input-container-large" label="Skills" placeholder='Skills' onChange={this.onSkillsChange} fluid="fluid" multiple="multiple" selection="selection" search="search" options={skills}/>
+                                <Form.Dropdown className="input-container-large" label="Skills" placeholder='Skills' defaultValue={props.skills} onChange={this.onSkillsChange} allowAdditions="allowAdditions" onAddItem={this.handleAddition} fluid="fluid" multiple="multiple" selection="selection" search="search" options={this.state.skill_options}/>
                             </Form.Group>
                             <Form.Group>
                                 <Form.TextArea className="input-container-large" label='Bio' placeholder='Introduce yourself!' defaultValue={props.experience} onChange={this.onExperienceChange} error={this.state["experience_profane"]}/>
@@ -241,6 +242,20 @@ class EditProfile extends Component {
             });
         }
     };
+
+    handleAddition = (e, { value }) => {
+        console.log(value);
+        this.setState((prevState) => ({
+          skill_options: [
+            {
+              text: value,
+              value,
+            },
+            ...prevState.skill_options,
+          ],
+        }));
+      };
+
 };
 
 export default EditProfile;

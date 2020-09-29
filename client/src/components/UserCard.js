@@ -83,7 +83,7 @@ class UserCard extends Component {
             {this.props.school}
           </Card.Meta>
           <Card.Meta className="gradYear">
-            Graduation Year: {this.props.grad_year}
+            Year in School: {this.props.grad_year}
           </Card.Meta>
           <div
             className="ui divider"

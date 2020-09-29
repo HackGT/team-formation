@@ -27,7 +27,6 @@ class FeedCards extends Component {
     render() {
         let search = this.props.search;
         let skill = this.props.skill.join(',');
-        console.log(`skills: ${this.props.skill}`);
         let grad_year = this.props.grad_year.join(',');
         let school = this.props.school.join(',');
         return (<QueryRenderer environment={environment} query={getUsersQuery} variables={{

@@ -69,7 +69,7 @@ class TeamInformation extends Component {
         {interest}
       </Label>
     ));
-    console.log(this.state.interests)
+    console.log(`interests: ${this.state.interests}`)
     if (this.props.editable) {
       if (!this.state.edit) {
         console.log(this.state.teamBio);
@@ -117,6 +117,8 @@ class TeamInformation extends Component {
           </div>
         );
       } else {
+        console.log('editable')
+        console.log(this.state.interests)
         return (
           <div className="team-card-container">
             <Card fluid="fluid">
@@ -146,15 +148,14 @@ class TeamInformation extends Component {
                     label="Interests"
                     options={this.state.interest_options}
                     placeholder="Select Interests"
-                    search="search"
-                    selection="selection"
-                    fluid="fluid"
-                    multiple="multiple"
-                    allowAdditions="allowAdditions"
+                    search={true}
+                    selection={true}
+                    fluid={true}
+                    multiple={true}
+                    allowAdditions={true}
                     onAddItem={this.handleAddition}
                     onChange={this.handleChange}
                   />
-                  {/* <Message hidden={this.state.save_message_hidden} success={this.state.save_success} header={this.state.save_success ? "Changes Saved" : "Unsaved Changes"}/> */}
                 </Form>
                 <Button icon labelPosition="right" onClick={this.onSaveClick}>
                   Save

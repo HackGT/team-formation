@@ -176,7 +176,8 @@ let getUsers = async function(parent, args, context, info, req) {
         }
     }
     if (args.grad_year) {
-        grad_years = args.grad_year.match(/\w+/g);
+        grad_years = args.grad_year.split(',');
+        console.log(`grad years: ${grad_years}`);
         for (let i = 0; i < grad_years.length; i++) {
             yearSearch.push({ grad_year: grad_years[i] });
         }
