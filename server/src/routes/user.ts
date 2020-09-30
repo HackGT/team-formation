@@ -2,7 +2,7 @@ import express from "express";
 import request from "request"
 import passport from "passport";
 import { createLink, AuthenticateOptions } from "./strategies"
-import { IUser } from "../schema";
+import { IUser, User } from "../schema";
 export let userRoutes = express.Router();
 
 userRoutes.route("/login").get((req, response, next) => {
@@ -55,4 +55,24 @@ userRoutes.route("/logout").all(async (req, response) => {
     else {
         response.redirect("/api/user/login");
     }
+});
+
+userRoutes.route('/slack/callback').all(async (req, response) => {
+    console.log(req.query);
+    const code = req.query.code
+    const urlStr = "https://slack.com/api/oauth.v2.access?client_id=" +
+    process.env.CLIENT_ID + "&client_secret=" + process.env.CLIENT_SECRET + "&code=" + code + "&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fuser%2Fslack%2Fcallback";
+    console.log(urlStr);
+
+    await request(urlStr, async (err, resp, body) => {
+        console.log("BODY")
+        console.log(body);
+        await User.findByIdAndUpdate(req.user.id, {
+            "slackid": JSON.parse(body)["authed_user"]["id"]
+        })
+        console.log("updated user " + JSON.parse(body)["authed_user"]["id"])
+    });
+    response.redirect("/feed");
+
+
 });

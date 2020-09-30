@@ -571,7 +571,7 @@ let makeUserRequest = async function(parent, args, context, info, req) {
     if (receiver.team) {
         throw new Error("Requested user already on team")
     }
-    if (!context.team) {
+    if (!context.team) { //if user is not on a team
         notification = new Notification({
             bio: args.bio,
             idea: args.idea,
@@ -608,6 +608,8 @@ let makeUserRequest = async function(parent, args, context, info, req) {
                 "notifications": notif
             }
         })
+        //POST request to slack
+
     })
 }
 
