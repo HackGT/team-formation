@@ -1,7 +1,7 @@
 //Import request module
 var request = require('request');
 
-async function sendSlackMessage() {
+async function sendSlackMessage(message, slack_id) {
     var url = "https://slack.com/api/chat.postMessage";
     var auth_token = process.env.OAUTH_TOKEN; //Your Bot's auth token
     var headers = {
@@ -9,8 +9,8 @@ async function sendSlackMessage() {
     "Content-Type" : "application/json"
     }
     var body = {
-        channel: "USK5DMHJ4", // Slack user or channel, where you want to send the message
-        text: "Your text goes here."
+        channel: slack_id, // Slack user or channel, where you want to send the message
+        text: message
     }
     request.post({
     "url": url,

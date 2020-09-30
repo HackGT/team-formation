@@ -459,7 +459,7 @@ let acceptTeamRequest = async function(parent, args, context, info, req) {
         await Notification.findByIdAndUpdate(notification._id, {
             'resolved': true
         })
-        sendSlackMessage();
+        sendSlackMessage(`${user!.team!.name} has accepted your request. View your team here: https://teamformation.hack.gt/feed`, "USK5DMHJ4");
         console.log('slack message sent');
     } else {
         throw new Error('Notification invalid')
@@ -508,6 +508,11 @@ let acceptUserRequest = async function(parent, args, context, info, req) {
         await User.findByIdAndUpdate(context._id, {
             'team': notification.sender._id
         })
+        let teamSlackIDs = ["USK5DMHJ4", "UEJDQEH3R"]
+        teamSlackIDs.forEach(id => {
+            sendSlackMessage(`${context.name} has accepted your request. View your team here: https://teamformation.hack.gt/feed`, id);
+        });
+        console.log('slack message sent');
         return team
 
     } else if (notification.senderType == 'User') {
@@ -550,24 +555,26 @@ let acceptUserRequest = async function(parent, args, context, info, req) {
                         throw new Error(err)
                     }
                 })
+            sendSlackMessage(`${context.name} has accepted your request. View your team here: https://teamformation.hack.gt/feed`, "USK5DMHJ4");
+            console.log('slack message sent');
             });
         } else {
             throw new Error('User not defined')
         }
-
     } else {
         throw new Error('Notification invalid')
     }
-
+    
 }
 
 let makeUserRequest = async function(parent, args, context, info, req) {
     if (!context._id) {
-        throw new Error('User not loggeed in')
+        throw new Error('User not logged in')
     }
     let notification
     let receiver_id = args.user_id
     let receiver = await User.findById(receiver_id)
+    let senderName = context.name
     if (!receiver) {
         throw new Error("Receiver user not found")
     }
@@ -584,7 +591,6 @@ let makeUserRequest = async function(parent, args, context, info, req) {
             receiver: receiver_id,
             resolved: false
         });
-
     } else {
         let team = await Team.findById(context.team)
         if (!team) {
@@ -599,6 +605,7 @@ let makeUserRequest = async function(parent, args, context, info, req) {
             receiver: receiver_id,
             resolved: false
         });
+        senderName = team.name
     }
 
     return await notification.save((err, notif) => {
@@ -610,7 +617,10 @@ let makeUserRequest = async function(parent, args, context, info, req) {
                 "notifications": notif
             }
         })
-        sendSlackMessage();
+        sendSlackMessage(`You have received a request from ${senderName}. Accept or deny the request here: https://teamformation.hack.gt/feed.`, "USK5DMHJ4");
+        if (!context.team) {
+            sendSlackMessage(`You have sent a request to ${receiver!.name}`, "USK5DMHJ4")
+        }
         console.log('slack message sent');
     })
 }
@@ -621,7 +631,8 @@ let makeTeamRequest = async function(parent, args, context, info, req) {
     }
     let user = await User.findById(context._id)
     let team_id = args.team_id
-    console.log("TEAEM_ID: ", team_id)
+    let team = await Team.findById(team_id)
+    console.log("TEAM_ID: ", team_id)
     if (!user) {
         throw new Error("User not found!")
     }
@@ -647,6 +658,11 @@ let makeTeamRequest = async function(parent, args, context, info, req) {
                 "notifications": notif
             }
         })
+        let teamSlackIDs = ["USK5DMHJ4", "UEJDQEH3R"]
+        teamSlackIDs.forEach(id => {
+            sendSlackMessage(`You have received a request from ${context.name}. Accept or deny the request here: https://teamformation.hack.gt/feed.`, id);
+        });
+        sendSlackMessage(`You have sent a request to ${team!.name}`, "USK5DMHJ4")
     });
 }
 
