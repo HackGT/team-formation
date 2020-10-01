@@ -362,12 +362,17 @@ let leaveTeam = async function(parent, args, context, info, req) {
         "$pull": {
             "members": context._id
         }
-    }, (err, team) => {
-        if(err) {
+    }, async (err, team) => {
+        if(err || !team) {
             console.log(err)
             throw new Error("Issue updating team")
         }
+        console.log("TTTEAM",team)
+        if(team.members.length <= 1) {
+            await Team.findByIdAndDelete(context.team);
+        }
     })
+
     return await User.findByIdAndUpdate(context._id, {
         "team": null
     })

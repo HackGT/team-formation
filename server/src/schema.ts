@@ -113,8 +113,7 @@ const TeamSchema = new mongoose.Schema({
         type: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
-        }],
-        unique: true
+        }]
     },
     interests: [String],
     description: String,
