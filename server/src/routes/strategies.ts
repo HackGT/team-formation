@@ -27,6 +27,7 @@ interface IProfile {
     name: string;
     email: string;
     token: string;
+    slackid: string;
 }
 
 export type AuthenticateOptions = passport.AuthenticateOptions & {

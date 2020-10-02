@@ -30,7 +30,7 @@ class NoTeam extends Component {
         <div id="not-team" class="team-page">
           <h1 className="no-team-heading">{this.props.team.name}</h1>
           <Button className="ask-to-join" content='Ask to Join' onClick={() => this.setState({showModal: true})} />
-              <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} showSecond={this.secondModal}/>
+              <JoinTeam name={this.props.team.name} id={this.props.team.id} showModal={this.state.showModal} closeModal={this.closeModal} showSecond={this.secondModal}/>
               <ConfirmationModal
               message="Your request to join the team has been sent!"
               closeModal={() => this.setState({ showSecondModal:false})}

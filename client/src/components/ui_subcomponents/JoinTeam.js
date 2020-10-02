@@ -32,6 +32,8 @@ class JoinTeam extends Component {
   }
 
   render() {
+     console.log("TEAM", this.props.team)
+
     return (
       <Modal
         closeIcon
@@ -42,7 +44,7 @@ class JoinTeam extends Component {
       >
         <Modal.Content>
           <Modal.Description>
-            <p class="modalHeader">Request Join {this.props.teamName}?</p>
+            <p class="modalHeader">Request to join {this.props.name}?</p>
             <textarea
               id="writeAMessage"
               rows="7"
@@ -53,7 +55,7 @@ class JoinTeam extends Component {
             {this.state.errorMessage}
             <div class="flex-container-modal3">
               <div>
-                {/* <ConfirmationModal 
+                {/* <ConfirmationModal
                     message="Your request to join the team has been sent!"
                     closeModal={() => this.setState({ secondOpen:false})}
                     secondModal={() => this.props.closeModal()}
@@ -70,7 +72,7 @@ class JoinTeam extends Component {
                     commitMutation(environment, {
                       mutation,
                       variables: {
-                        team_id: this.props.team.id,
+                        team_id: this.props.id,
                         bio: this.state.bio,
                       },
                       onCompleted: (response, errors) => {

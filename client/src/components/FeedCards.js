@@ -21,6 +21,7 @@ const getUsersQuery = graphql `
             visible
             uuid
             id
+            slackid
         }
         user_profile {
             team {
@@ -55,7 +56,12 @@ class FeedCards extends Component {
                         console.log("Stuff: " + user.id);
                         return <UserCard className='card-individual' name={user.name} grad_year={user.grad_year} school={user.school} contact={user.email} skills={user.skills.filter(function(el) {
                                 return Boolean(el);
-                            })} experience={user.experience} id={user.id} team={props.user_profile.team}/>
+                            })}
+                        experience={user.experience}
+                        id={user.id}
+                        team={props.user_profile.team}
+                        slackid={user.slackid}
+                        />
                     })
                     return (
                     <div className='Cards-container'>

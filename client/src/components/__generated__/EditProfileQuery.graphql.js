@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8aa0ad4e5582b4be52b9249970ec97f5
+ * @relayHash 8fded5f6eb36caaa244326997dde2147
  */
 
 /* eslint-disable */
@@ -19,6 +19,7 @@ export type EditProfileQueryResponse = {|
     +skills: ?$ReadOnlyArray<?string>,
     +experience: ?string,
     +contact_method: ?string,
+    +slackid: ?string,
   |}
 |};
 export type EditProfileQuery = {|
@@ -38,6 +39,7 @@ query EditProfileQuery {
     skills
     experience
     contact_method
+    slackid
     id
   }
 }
@@ -92,6 +94,13 @@ v6 = {
   "name": "contact_method",
   "args": null,
   "storageKey": null
+},
+v7 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "slackid",
+  "args": null,
+  "storageKey": null
 };
 return {
   "kind": "Request",
@@ -117,7 +126,8 @@ return {
           (v3/*: any*/),
           (v4/*: any*/),
           (v5/*: any*/),
-          (v6/*: any*/)
+          (v6/*: any*/),
+          (v7/*: any*/)
         ]
       }
     ]
@@ -143,6 +153,7 @@ return {
           (v4/*: any*/),
           (v5/*: any*/),
           (v6/*: any*/),
+          (v7/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -158,11 +169,11 @@ return {
     "operationKind": "query",
     "name": "EditProfileQuery",
     "id": null,
-    "text": "query EditProfileQuery {\n  user_profile {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    contact_method\n    id\n  }\n}\n",
+    "text": "query EditProfileQuery {\n  user_profile {\n    name\n    school\n    grad_year\n    contact\n    skills\n    experience\n    contact_method\n    slackid\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '2a9d18e5e692aa55aef6ede6b7068c0d';
+(node/*: any*/).hash = '01dd9275b93fce5d748a67c317e4e5f5';
 module.exports = node;

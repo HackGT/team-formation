@@ -363,12 +363,17 @@ let leaveTeam = async function(parent, args, context, info, req) {
         "$pull": {
             "members": context._id
         }
-    }, (err, team) => {
-        if(err) {
+    }, async (err, team) => {
+        if(err || !team) {
             console.log(err)
             throw new Error("Issue updating team")
         }
+        console.log("TTTEAM",team)
+        if(team.members.length <= 1) {
+            await Team.findByIdAndDelete(context.team);
+        }
     })
+
     return await User.findByIdAndUpdate(context._id, {
         "team": null
     })
@@ -581,7 +586,7 @@ let makeUserRequest = async function(parent, args, context, info, req) {
     if (receiver.team) {
         throw new Error("Requested user already on team")
     }
-    if (!context.team) {
+    if (!context.team) { //if user is not on a team
         notification = new Notification({
             bio: args.bio,
             idea: args.idea,

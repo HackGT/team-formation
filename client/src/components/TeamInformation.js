@@ -4,7 +4,7 @@ import {
     Form,
     TextArea,
     Button,
-    Label, 
+    Label,
     Icon,
     Message
 } from 'semantic-ui-react'
@@ -38,9 +38,15 @@ const mutation = graphql`
 class TeamInformation extends Component {
   constructor(props) {
     super(props);
-  }
-
-  state = {
+    console.log([...new Set([...skills, ...this.props.interests])]);
+  const skillUpdate = this.props.interests.map(interest => {
+      return {
+          "key": interest,
+          "text": interest,
+          "value": interest
+      }
+  })
+  this.state = {
     teamBio: this.props.teamBio,
     newTeamBio: this.props.teamBio,
     projectIdea: this.props.projectIdea,
@@ -49,13 +55,15 @@ class TeamInformation extends Component {
     interests: this.props.interests,
     newInterests: this.props.interests,
     search: "",
-    interest_options: skills,
+    interest_options: [...new Set([...skills, ...skillUpdate])],
     save_message_hidden: true,
     save_success: false,
     edit: false,
   };
 
+}
   render() {
+    console.log(this.state.interest_options)
     var colors = ["#A0CCC9", "#EBABCA"];
     var count = 0;
     var interestLabels = this.state.interests.map((interest) => (
