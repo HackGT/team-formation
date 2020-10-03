@@ -1,0 +1,92 @@
+@font-face {
+  font-family: Lekton-Bold;
+  src: url("./fonts/lekton/Lekton-Bold.ttf");
+}
+
+.first-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  align-items: flex-start;
+}
+
+@media (max-width: 595px) {
+  .first-row {
+    max-width: 309px;
+  }
+}
+
+.ui.button.ask-to-join {
+  font-family: Quicksand-Bold;
+  background: rgba(255, 255, 255, 0.22);
+	color: white;
+}
+
+.ui.button.leaveTeam {
+  font-family: Quicksand-Bold;
+  background: rgba(255, 255, 255, 0.22);
+  color: white;
+  margin-left: 25px;
+}
+
+.no-team-heading {
+  color: white;
+  font-family: Quicksand-Bold;
+}
+
+.noTeam-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.team-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3%;
+}
+
+.first-col {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+}
+
+.second-col {
+  /* max-width: 500px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: 5px;
+}
+
+#header {
+  display: inline-block;
+  width: 300px;
+  margin-left: 25px;
+}
+
+#field {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-family: Lekton-Bold;
+  text-align: center;
+}
+
+#alert {
+  padding: 1px;
+}
+
+.ui.input > input {
+  padding: 0;
+  background: #656cae;
+}

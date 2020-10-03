@@ -1,0 +1,127 @@
+@font-face {
+  font-family: Lekton-Regular;
+  src: url("./fonts/lekton/Lekton-Regular.ttf");
+}
+
+@font-face {
+  font-family: Lekton-Bold;
+  src: url("./fonts/lekton/Lekton-Bold.ttf");
+}
+
+@font-face {
+  font-family: Quicksand-Bold;
+  src: url("./fonts/quicksand/Quicksand-Bold.ttf");
+}
+
+.UserCard-container {
+  padding-top: 2%;
+  width: 100%;
+}
+
+.button {
+  text-align: center;
+  padding-left: 20%;
+}
+
+.content {
+  text-align: left;
+}
+
+.card-description {
+  padding-bottom: 3%;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2%;
+}
+
+.contact-button {
+  width: 100%;
+  text-align: center;
+  padding-top: 5px;
+}
+
+body .ui.card,
+body .ui.cards > .card {
+  transition: transform 0.2s;
+}
+
+body .ui.card:hover {
+  transform: scale(1.05);
+}
+
+.rectangle1 {
+  background: #c3bbcd;
+  box-sizing: border-box;
+  width: 100%;
+  height: 25px;
+  border-bottom: 2px solid #867a96;
+  border-radius: 0 !important;
+}
+
+.ui.button.contact {
+  color: white;
+  background: #a8c5d6;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  font-family: Quicksand-Bold;
+}
+
+.ui.button.teamUp {
+  color: white;
+  background: #ccbedf;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  margin-left: 5px;
+  width: 55%;
+  font-family: Quicksand-Bold;
+}
+
+.ui.label.labelStyle {
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  font-family: Quicksand-Bold;
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.ui.card.card1 {
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  margin: 15px;
+  min-width: 270px;
+  width: 270px;
+  min-height: 382px;
+  max-height: 382px;
+}
+
+.ui.card > .content > .header:not(.ui),
+.ui.cards > .card > .content > .header:not(.ui) {
+  text-align: center;
+  padding-top: 10px;
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  font-size: 20px;
+}
+
+.ui.divider {
+  border: 1px solid #c3bbcd !important;
+  margin-top: 5px !important;
+}
+
+.ui.card .meta,
+.ui.cards > .card .meta {
+  color: #85808a;
+  padding-left: 15px;
+  font-family: Quicksand-Bold;
+}
+
+.ui.container.about {
+  overflow: auto;
+  max-height: 100px;
+  color: #867a96;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  font-family: Quicksand-Bold;
+}

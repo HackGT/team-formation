@@ -1,0 +1,73 @@
+.h3 {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  font-family: Quicksand-Bold;
+}
+
+.SideMenu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+@font-face {
+  font-family: Lekton-Regular;
+  src: url("./fonts/lekton/Lekton-Regular.ttf");
+}
+
+@font-face {
+  font-family: Lekton-Bold;
+  src: url("./fonts/lekton/Lekton-Bold.ttf");
+}
+
+@font-face {
+  font-family: Quicksand-Bold;
+  src: url("./fonts/quicksand/Quicksand-Bold.ttf");
+}
+
+.ui.input.focus > input {
+  border-color: transparent;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: .28571429rem;
+  width: 200px;
+  font-size: 15px;
+}
+
+.ui.input {
+    text-indent: 5px;
+}
+
+.ui.icon.input > i.icon:after,
+.ui.icon.input > i.icon:before {
+  color: white;
+}
+
+.ui.input > input,
+.ui.input > input::selection {
+  color: white !important;
+  font-family: Quicksand-Bold;
+}
+
+.ui.input > input::placeholder {
+  color: white !important;
+  font-family: Quicksand-Bold;
+}
+
+.moveImage {
+  position: absolute;
+  margin-top: 3%;
+  right: 80%;
+}
+
+.ui.selection.dropdown {
+  background: rgba(255, 255, 255, 0.22);
+  color: white;
+  font-family: Quicksand-Bold;
+  text-align: center;
+  font-size: 15px;
+  border-radius: 12px;
+}

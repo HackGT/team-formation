@@ -1,0 +1,264 @@
+@font-face {
+  font-family: Chango-Regular;
+  src: url("./fonts/chango/Chango-Regular.ttf");
+}
+
+@font-face {
+  font-family: Lekton-Regular;
+  src: url("./fonts/lekton/Lekton-Regular.ttf");
+}
+
+@font-face {
+  font-family: Lekton-Bold;
+  src: url("./fonts/lekton/Lekton-Bold.ttf");
+}
+
+@font-face {
+  font-family: Quicksand-Bold;
+  src: url("./fonts/quicksand/Quicksand-Bold.ttf");
+}
+
+textarea::placeholder {
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+}
+
+.modalHeader {
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  font-family: Lekton-Bold;
+}
+
+.modal1Margins {
+  margin-right: 80px;
+  margin-left: 80px;
+}
+
+.requestMessage {
+  margin-top: 60px;
+  color: white;
+  font-family: Quicksand-Bold;
+  font-size: 15px;
+}
+
+.requestMessageBody {
+  border: transparent;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  background: white;
+}
+
+.projectIdea {
+  margin-top: 30px;
+  color: white;
+  font-family: Quicksand-Bold;
+  font-size: 15px;
+}
+
+.projectIdeaBody {
+  border: transparent;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  background: white;
+}
+
+.flex-container1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
+}
+
+.ui-black-basic-button {
+  border-radius: 20px;
+  font-size: 15px;
+  padding: 12px;
+}
+
+.flex-container2 {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.buttonMargin {
+  margin: 10px;
+}
+
+#writeAMessage {
+  margin-top: 25px;
+  border-radius: 15px;
+  padding: 15px;
+  border-color: transparent;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  resize: none;
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px;
+}
+
+.modal3Column {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal3Column1 {
+  margin-right: 25px;
+  margin-left: 25px;
+  margin-bottom: 25px;
+}
+
+.modal3Column2 {
+  display: inline-block;
+  flex-direction: column;
+  text-align: center;
+  flex: 1;
+  min-width: 270px;
+  max-width: 418px;
+}
+
+.modal3Column3 {
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 25px;
+}
+
+.cardName {
+  text-align: center;
+  font-size: 30px;
+}
+
+.cardInfo {
+  text-align: left;
+  margin-top: 50px;
+  font-size: 17px;
+  margin-left: 30px;
+  margin-right: 30px;
+  padding-bottom: 40px;
+}
+
+.user1RequestMessage {
+  border: transparent;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  background: white;
+}
+
+.user1FirstName {
+  color: white;
+  font-family: Quicksand-Bold;
+  font-size: 15px;
+}
+
+.user1ProjectIdea {
+  border: transparent;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  background: white;
+}
+
+.flex-container-modal3 {
+  display: flex;
+  justify-content: center;
+}
+
+.modal3Button {
+  margin: 10px;
+}
+
+.modal4-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal4-column1 {
+  margin: 25px;
+  margin-top: 0px;
+}
+
+.modal4-column2 {
+  margin-left: 25px;
+  margin-right: 25px;
+  text-align: center;
+}
+
+#introduceYourself {
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-top: 15px;
+  border-color: transparent;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  resize: none;
+  width: 100%;
+}
+
+#describeProject {
+  margin-top: 5%;
+  padding-left: 15px;
+  padding-top: 15px;
+  border-color: transparent;
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  color: #8895c1;
+  font-family: Quicksand-Bold;
+  resize: none;
+  width: 100%;
+}
+
+.ui.modal {
+  background: none;
+}
+
+
+.ui.modal > .content {
+  background: linear-gradient(180deg, #656cae 0%, rgba(255, 255, 255, 0) 100%),
+    #8bb2c2;
+  border-radius: 15px !important;
+}
+
+.ui.button.submit {
+  border-radius: 12px;
+  color: white;
+  background: rgba(255, 255, 255, 0.22);
+  font-family: Quicksand-Bold;
+}
+
+.ui.button.accept {
+  margin-left: 50px;
+}
+
+.checkingModal-column {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.checkingModal-row2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

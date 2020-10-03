@@ -1,0 +1,74 @@
+@font-face {
+  font-family: Lekton-Regular;
+  src: url("./fonts/lekton/Lekton-Regular.ttf");
+}
+
+@font-face {
+  font-family: Lekton-Bold;
+  src: url("./fonts/lekton/Lekton-Bold.ttf");
+}
+
+@font-face {
+  font-family: Quicksand-Bold;
+  src: url("./fonts/quicksand/Quicksand-Bold.ttf");
+}
+
+.notification {
+  width: 90% !important;
+  margin: 5% !important;
+}
+
+.sent-notification {
+  width: 90% !important;
+  margin: 5% !important;
+}
+
+.ui.card.notification:hover {
+  filter: brightness(85%) !important;
+}
+
+.notification-buttonGroup {
+  height: 70px;
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.8);
+}
+
+.content {
+  position: relative !important;
+  color: #ffffff;
+  font-family: Quicksand-Bold;
+}
+
+.notification {
+  height: 70px;
+  border-radius: 1rem!important;
+  transition: auto;
+}
+
+.sent-notification {
+  height: 70px;
+  border-radius: 1rem!important;
+  transition: auto;
+}
+
+.notification:hover {
+  transform: scale(1) !important;
+}
+
+.sent-notification:hover {
+  transform: scale(1) !important;
+}
+
+.ui.icon.button {
+  border-radius: 25px;
+}
+
+.notificationsCard, .requestsSent {
+  margin-top: 28px;
+}

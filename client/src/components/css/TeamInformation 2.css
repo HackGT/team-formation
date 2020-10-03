@@ -1,0 +1,126 @@
+@font-face {
+  font-family: Quicksand-Bold;
+  src: url("./fonts/quicksand/Quicksand-Bold.ttf");
+}
+
+@media (min-width: 595px) {
+  .team-card-container {
+    max-width: 900px;
+    width: 500px;
+    min-width: 300px;
+    margin: 28px;
+  }
+  div.team-card-container .ui.card > .content,
+  .ui.cards > .card > .content {
+    min-height: 543px;
+  }
+}
+
+@media (max-width: 595px) {
+  .team-card-container {
+    /* max-width: 900px; */
+    /* width: 500px; */
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    min-width: 300px;
+    margin: 28px;
+  }
+}
+
+.header {
+  flex-direction: row;
+  display: inline-block;
+}
+.card-content {
+  padding-bottom: 10%;
+}
+
+.card-header {
+  font-size: 20px;
+  padding-top: 4%;
+  text-align: center;
+  padding-bottom: 4%;
+}
+
+.form {
+  padding-bottom: 2%;
+}
+
+.ui.form textarea {
+  min-height: 150px;
+  border: none;
+}
+
+.ui.form .disabled.field,
+.ui.form .disabled.fields .field,
+.ui.form .field :disabled {
+  opacity: 1;
+  color: #85808A;
+  font-family: Quicksand-Bold;
+}
+
+.ui.form .field.disabled :disabled {
+  border: 1px solid #C3BBCD;
+}
+
+.ui.form .field.disabled > label,
+.ui.form .fields.disabled > label {
+  opacity: 1;
+  color: #85808A;
+}
+
+.ui.fluid.dropdown {
+  border: none;
+}
+
+.ui.selection.dropdown {
+  text-align: left;
+}
+
+.ui.label.labelStyle {
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  font-family: Quicksand-Bold;
+  font-size: 100%;
+  margin-top: 5px;
+}
+
+.ui.message .header {
+  color: black;
+}
+
+.ui[class*="right labeled"].icon.button {
+  padding-right: 4.07142857em !important;
+  padding-left: 1.5em !important;
+  float: right;
+}
+
+.ui.fluid.card {
+  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
+
+.ui[class*="right labeled"].icon.button {
+  background-color: #8895c1;
+  color: white;
+}
+
+.ui.multiple.dropdown > .label:nth-child(odd) {
+  background-color: #a0ccc9;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  font-family: Quicksand-Bold;
+}
+
+.ui.multiple.dropdown > .label:nth-child(even) {
+  background-color: #ebabca;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  font-family: Quicksand-Bold;
+}
+
+.ui.card > .content,
+.ui.cards > .card > .content {
+  padding-bottom: 20px;
+}

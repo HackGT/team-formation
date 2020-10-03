@@ -1,0 +1,9 @@
+{
+    "presets": [
+        "env"
+    ],
+    "plugins": [
+        "relay",
+        "react-hot-loader/babel"
+    ]
+}
