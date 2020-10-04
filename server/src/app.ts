@@ -529,7 +529,7 @@ let acceptUserRequest = async function (parent, args, context, info, req) {
     await User.findByIdAndUpdate(context._id, {
       team: notification.sender._id,
     });
-    let teamSlackIDs = [];
+    let teamSlackIDs: any = [];
     team!.members.forEach((member) => {
       teamSlackIDs.push(member.slackid);
     });
@@ -697,10 +697,14 @@ let makeTeamRequest = async function (parent, args, context, info, req) {
         notifications: notif,
       },
     });
-    let teamSlackIDs = [];
+    let teamSlackIDs: any = [];
     team!.members.forEach((member) => {
       teamSlackIDs.push(member.slackid);
     });
+    var index = teamSlackIDs.indexOf(user!.slackid);
+    if (index != -1) {
+      teamSlackIDs.splice(index, 1);
+    }
     teamSlackIDs.forEach((id) => {
       sendSlackMessage(
         `You have received a request from ${context.name}. Accept or deny the request here: https://teamformation.hack.gt/feed.`,
