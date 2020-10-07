@@ -29,6 +29,7 @@ const getTeamQuery = graphql `
           visible
           uuid
           id
+          slackid
         }
         interests
         description
