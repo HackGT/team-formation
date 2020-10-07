@@ -670,7 +670,11 @@ let makeTeamRequest = async function (parent, args, context, info, req) {
   }
   let user = await User.findById(context._id);
   let team_id = args.team_id;
+<<<<<<< HEAD
   let team = await Team.findById(team_id).populate('members');
+=======
+  let team = await Team.findById(team_id).populate("members");
+>>>>>>> 84f3124403c769ce52f35aaf426438d1405afa7b
   console.log("TEAM_ID: ", team_id);
   if (!user) {
     throw new Error("User not found!");
@@ -701,8 +705,12 @@ let makeTeamRequest = async function (parent, args, context, info, req) {
     team!.members.forEach((member) => {
       console.log(member.slackid)
       teamSlackIDs.push(member.slackid);
+      console.log(member.slackid);
     });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 84f3124403c769ce52f35aaf426438d1405afa7b
     teamSlackIDs.forEach((id) => {
       sendSlackMessage(
         `You have received a request from ${context.name}. Accept or deny the request here: https://teamformation.hack.gt/feed.`,
