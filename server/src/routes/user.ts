@@ -61,7 +61,7 @@ userRoutes.route('/slack/callback').all(async (req, response) => {
     console.log(req.query);
     const code = req.query.code
     const urlStr = "https://slack.com/api/oauth.v2.access?client_id=" +
-    process.env.CLIENT_ID + "&client_secret=" + process.env.CLIENT_SECRET + "&code=" + code + "&redirect_uri=http%3A%2F%2Fteamformation.dev.hack.gt%2Fapi%2Fuser%2Fslack%2Fcallback";
+    process.env.CLIENT_ID + "&client_secret=" + process.env.CLIENT_SECRET + "&code=" + code + "&redirect_uri=https%3A%2F%2Fteamformation.dev.hack.gt%2Fapi%2Fuser%2Fslack%2Fcallback";
     console.log(urlStr);
 
     await request(urlStr, async (err, resp, body) => {
