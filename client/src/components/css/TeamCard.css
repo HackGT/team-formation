@@ -73,6 +73,7 @@ body ::-webkit-scrollbar-track {
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   margin-left: 5px;
   font-family: Quicksand-Bold;
+  display: flexbox;
 }
 .ui.container.seeking {
   overflow: auto;
@@ -97,4 +98,6 @@ body ::-webkit-scrollbar-track {
   margin-left: 5px;
   width: 50%;
   font-family: Quicksand-Bold;
+  margin-left: 65px;
+  display: flexbox;
 }
