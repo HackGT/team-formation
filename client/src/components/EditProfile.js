@@ -51,6 +51,7 @@ query EditProfileQuery {
         skills
         experience
         contact_method
+        slackid
     }
 }
 `;
@@ -70,6 +71,7 @@ class EditProfile extends Component {
             contact_method: "",
             contact: "",
             cur_error_message: "",
+            slackid: "",
             "name_profane": false,
             "school_profane": false,
             "grad_year_profane": false,
@@ -135,8 +137,8 @@ class EditProfile extends Component {
                                 <Form.Group>
                                     <Link to="/feed">
                                         <Button onClick={this.onNextClick} className="save-button">
-                                            Save
-                                        </Button>
+                                           Save
+                                       </Button>
                                     </Link>
                                 </Form.Group>
                             </div>
@@ -144,6 +146,10 @@ class EditProfile extends Component {
                                 {this.state.cur_error_message}
                             </Form.Group>
                         </Form>
+                        {!this.state.slackid ?
+                            <a href="https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=15533117780.599676767764&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fuser%2Fslack%2Fcallback"><img alt="Sign in with Slack" height="40" width="172" src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" />
+                            </a> : ""
+                        }
                     </div>)
                 }
             }}/>);

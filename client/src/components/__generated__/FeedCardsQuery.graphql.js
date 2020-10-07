@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash e71e8b3bbba635a3e963f2a4d07d7ff3
+ * @relayHash 560e4192b2945909cff49527da8cac27
  */
 
 /* eslint-disable */
@@ -27,6 +27,7 @@ export type FeedCardsQueryResponse = {|
     +visible: ?number,
     +uuid: ?string,
     +id: ?string,
+    +slackid: ?string,
   |}>,
   +user_profile: {|
     +team: ?{|
@@ -59,6 +60,7 @@ query FeedCardsQuery(
     visible
     uuid
     id
+    slackid
   }
   user_profile {
     team {
@@ -200,7 +202,14 @@ v2 = {
       "args": null,
       "storageKey": null
     },
-    (v1/*: any*/)
+    (v1/*: any*/),
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "slackid",
+      "args": null,
+      "storageKey": null
+    }
   ]
 },
 v3 = {
@@ -264,11 +273,11 @@ return {
     "operationKind": "query",
     "name": "FeedCardsQuery",
     "id": null,
-    "text": "query FeedCardsQuery(\n  $skill: String\n  $grad_year: String\n  $school: String\n  $search: String\n) {\n  users(skill: $skill, grad_year: $grad_year, school: $school, search: $search) {\n    name\n    email\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n  }\n  user_profile {\n    team {\n      id\n    }\n    id\n  }\n}\n",
+    "text": "query FeedCardsQuery(\n  $skill: String\n  $grad_year: String\n  $school: String\n  $search: String\n) {\n  users(skill: $skill, grad_year: $grad_year, school: $school, search: $search) {\n    name\n    email\n    school\n    grad_year\n    contact\n    skills\n    experience\n    visible\n    uuid\n    id\n    slackid\n  }\n  user_profile {\n    team {\n      id\n    }\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '833893d97e52171fa54807fecba1abe5';
+(node/*: any*/).hash = 'bff155ee72ce1b9f578ca07ea150cbd0';
 module.exports = node;

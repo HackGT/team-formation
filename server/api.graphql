@@ -60,6 +60,7 @@ type User {
     contact_method: String
     visible: Int
     team: Team
+    slackid: String
 }
 
 type Notification {

@@ -17,42 +17,22 @@ class UserCard extends Component {
   render() {
     let contact;
     let cur_contact = this.props.contact;
-    if (this.props.contact === null) {
-      contact = (
-        <Popup
-          trigger={<Button className="contact" content="Contact" />}
-          content="no contact available"
-          on="click"
-          hideOnScroll
-        />
-      );
-    } else if (this.props.contact.includes("@")) {
+    if(this.props.slackid) {
+        const dm_url = `slack://user?team=T0FFP3FNY&id=${this.props.slackid}`
+        contact =
+          <Button as="a" className="contact" content="Contact" href={dm_url}/>
+
+    }
+    else if(!this.props.contact) {
+        contact = ""
+    }
+    else if (this.props.contact.includes("@")) {
       contact = (
         <Popup
           trigger={<Button className="contact" content="Contact" />}
           content=<a href={`mailto:${this.props.contact}`} target="_blank">
             {this.props.contact}{" "}
           </a>
-          on="click"
-          hideOnScroll
-        />
-      );
-    } else if (this.props.contact.includes(".")) {
-      contact = (
-        <Popup
-          trigger={<Button className="contact" content="Contact" />}
-          content=<a href={this.props.contact} target="_blank">
-            {this.props.contact}
-          </a>
-          on="click"
-          hideOnScroll
-        />
-      );
-    } else {
-      contact = (
-        <Popup
-          trigger={<Button className="contact" content="Contact" />}
-          content={this.props.contact}
           on="click"
           hideOnScroll
         />
@@ -66,7 +46,7 @@ class UserCard extends Component {
         className="labelStyle"
         style={{
           backgroundColor: colors[count++ % 2],
-        }}
+      }}
       >
         {skill}
       </Label>
@@ -113,7 +93,7 @@ class UserCard extends Component {
                   } else {
                     this.setState({ showModal: true })
                   }
-                  
+
                 }
               }/>
               {text}
