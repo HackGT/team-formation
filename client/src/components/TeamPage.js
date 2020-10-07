@@ -29,6 +29,7 @@ const getTeamQuery = graphql `
           visible
           uuid
           id
+          slackid
         }
         interests
         description
@@ -75,9 +76,10 @@ class TeamPage extends Component {
   render() {
     console.log('rendering team page..');
     console.log(`team id: ${JSON.stringify(this.state.team_id)}`);
+    const curr_team_id = this.props.match.params.id;
     return (
       <QueryRenderer environment={environment} query={getTeamQuery} variables={{
-        team_id: this.state.team_id
+        team_id: curr_team_id
     }} render={({error, props}) => {
         if (error) {
           return <div>{error.message}</div>;
