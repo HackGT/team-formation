@@ -47,8 +47,6 @@ class JoinTeam extends Component {
             <p class="modalHeader">Request to join {this.props.name}?</p>
             <textarea
               id="writeAMessage"
-              rows="7"
-              cols="63"
               placeholder="Write a message..."
               onChange={this.onBioChange}
             />

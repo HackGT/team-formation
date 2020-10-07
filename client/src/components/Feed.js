@@ -78,7 +78,8 @@ class Feed extends Component {
                 Teams
               </Button>
             </Button.Group>
-            {this.state.skills.length ||
+          </div>
+          {this.state.skills.length ||
             this.state.years.length ||
             this.state.schools.length ? (
               <div className="user-input">
@@ -95,7 +96,6 @@ class Feed extends Component {
                 </div>
               </div>
             ) : null}
-          </div>
           <div className="feed-cards">{cards}</div>
         </div>
       </div>
