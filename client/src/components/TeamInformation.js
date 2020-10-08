@@ -207,7 +207,7 @@ class TeamInformation extends Component {
                   disabled="disabled"
                 />
               </Form>
-              <Card.Description>Interests</Card.Description>
+              <Card.Description>Seeeking Skills</Card.Description>
               <Card.Description>{interestLabels}</Card.Description>
             </Card.Content>
           </Card>

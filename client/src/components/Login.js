@@ -52,7 +52,7 @@ class Login extends Component {
 
                         <div class="txt1 text-center p-t-54 p-b-20">
                             <span>
-                                This portal is only available to participants who have registered for HackGT!
+                                This portal is only available to participants who are confirmed for HackGT 7! Please contact hello@hack.gt if you encounter any issues
                             </span>
                         </div>
                     </form>

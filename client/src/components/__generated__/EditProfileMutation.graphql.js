@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 05d56c7a7ec23c5e1fbd49b4cc6d6e22
+ * @relayHash b4e2eb8a310bee405f2b75db403f2d77
  */
 
 /* eslint-disable */
@@ -17,6 +17,7 @@ export type EditProfileMutationVariables = {|
   experience?: ?string,
   contact?: ?string,
   contact_method?: ?string,
+  visible?: ?number,
 |};
 export type EditProfileMutationResponse = {|
   +update_user: {|
@@ -26,10 +27,8 @@ export type EditProfileMutationResponse = {|
     +skills: ?$ReadOnlyArray<?string>,
     +experience: ?string,
     +contact: ?string,
-  |},
-  +toggle_visibility: {|
-    +name: ?string
-  |},
+    +visible: ?number,
+  |}
 |};
 export type EditProfileMutation = {|
   variables: EditProfileMutationVariables,
@@ -47,18 +46,16 @@ mutation EditProfileMutation(
   $experience: String
   $contact: String
   $contact_method: String
+  $visible: Int
 ) {
-  update_user(name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {
+  update_user(name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method, visible: $visible) {
     name
     grad_year
     school
     skills
     experience
     contact
-    id
-  }
-  toggle_visibility {
-    name
+    visible
     id
   }
 }
@@ -107,6 +104,12 @@ var v0 = [
     "name": "contact_method",
     "type": "String",
     "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "visible",
+    "type": "Int",
+    "defaultValue": null
   }
 ],
 v1 = [
@@ -151,6 +154,12 @@ v1 = [
     "name": "skills",
     "variableName": "skills",
     "type": "[String]"
+  },
+  {
+    "kind": "Variable",
+    "name": "visible",
+    "variableName": "visible",
+    "type": "Int"
   }
 ],
 v2 = {
@@ -198,7 +207,7 @@ v7 = {
 v8 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "id",
+  "name": "visible",
   "args": null,
   "storageKey": null
 };
@@ -225,19 +234,8 @@ return {
           (v4/*: any*/),
           (v5/*: any*/),
           (v6/*: any*/),
-          (v7/*: any*/)
-        ]
-      },
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "toggle_visibility",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "User",
-        "plural": false,
-        "selections": [
-          (v2/*: any*/)
+          (v7/*: any*/),
+          (v8/*: any*/)
         ]
       }
     ]
@@ -262,20 +260,14 @@ return {
           (v5/*: any*/),
           (v6/*: any*/),
           (v7/*: any*/),
-          (v8/*: any*/)
-        ]
-      },
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "toggle_visibility",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "User",
-        "plural": false,
-        "selections": [
-          (v2/*: any*/),
-          (v8/*: any*/)
+          (v8/*: any*/),
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "id",
+            "args": null,
+            "storageKey": null
+          }
         ]
       }
     ]
@@ -284,11 +276,11 @@ return {
     "operationKind": "mutation",
     "name": "EditProfileMutation",
     "id": null,
-    "text": "mutation EditProfileMutation(\n  $name: String\n  $grad_year: String\n  $school: String\n  $skills: [String]\n  $experience: String\n  $contact: String\n  $contact_method: String\n) {\n  update_user(name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {\n    name\n    grad_year\n    school\n    skills\n    experience\n    contact\n    id\n  }\n  toggle_visibility {\n    name\n    id\n  }\n}\n",
+    "text": "mutation EditProfileMutation(\n  $name: String\n  $grad_year: String\n  $school: String\n  $skills: [String]\n  $experience: String\n  $contact: String\n  $contact_method: String\n  $visible: Int\n) {\n  update_user(name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method, visible: $visible) {\n    name\n    grad_year\n    school\n    skills\n    experience\n    contact\n    visible\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'e24285fc31e7dd9c0e58b3a55c0e879b';
+(node/*: any*/).hash = '5f606744ddfbce03e95e77c31c46b70f';
 module.exports = node;

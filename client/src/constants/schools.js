@@ -251,4 +251,5 @@ const schools = rawSchools.map((current, index) => {
     }
 })
 
+
 export default schools;

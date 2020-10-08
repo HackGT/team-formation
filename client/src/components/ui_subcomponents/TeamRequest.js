@@ -44,7 +44,7 @@ class TeamRequest extends Component {
             <div class="modal1Margins">
               <p class="requestMessage">{sender.name + 's'} Request Message:</p>
               <p class="requestMessageBody">{this.props.teamRequestMessage}</p>
-              <p class="projectIdea">{sender.name}'s Project Idea:</p>
+              <p class="projectIdea">{sender.name + "'s'"} Project Idea:</p>
               <p class="projectIdeaBody">{this.props.teamProjectIdea}</p>
 
               <div class="flex-container1">
@@ -105,7 +105,7 @@ class TeamRequest extends Component {
                           },
                         });
                       this.props.closeModal();
-                      window.location.reload();
+                      window.location.href = `/team/${sender.id}`
                     }}
                   >
                     Accept

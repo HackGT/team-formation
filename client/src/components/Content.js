@@ -68,9 +68,6 @@ class Content extends Component {
 
             if (login_json.email) {
                 console.log("has a email")
-                if(!login_json.slackid) {
-                    window.location.replace("https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=15533117780.599676767764&redirect_uri=https%3A%2F%2Fteamformation.dev.hack.gt%2Fapi%2Fuser%2Fslack%2Fcallback")
-                }
                 this.setState({loggedIn: true})
             } else {
                 console.log("doesn't have uuid")

@@ -20,7 +20,7 @@ userRoutes.route("/login/callback").get((req, response, next) => {
 
     passport.authenticate("oauth2", {
         failureRedirect: "/",
-        successReturnToOrRedirect: "/",
+        successReturnToOrRedirect: "/edit-profile",
         callbackURL
     } as AuthenticateOptions)(req, response, next);
 });
@@ -60,16 +60,19 @@ userRoutes.route("/logout").all(async (req, response) => {
 userRoutes.route('/slack/callback').all(async (req, response) => {
     console.log(req.query);
     const code = req.query.code
-    const urlStr = "https://slack.com/api/oauth.v2.access?client_id=" +
-    process.env.CLIENT_ID + "&client_secret=" + process.env.CLIENT_SECRET + "&code=" + code + "&redirect_uri=https%3A%2F%2Fteamformation.dev.hack.gt%2Fapi%2Fuser%2Fslack%2Fcallback";
-    console.log(urlStr);
+    const urlStr =  `https://slack.com/api/oauth.v2.access?client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&code=${code}&redirect_uri=https%3A%2F%2F${process.env.HOST_URL}%2Fapi%2Fuser%2Fslack%2Fcallback`;
+
 
     await request(urlStr, async (err, resp, body) => {
         console.log("BODY")
         console.log(body);
-        await User.findByIdAndUpdate(req.user.id, {
-            "slackid": JSON.parse(body)["authed_user"]["id"]
-        })
+        const jsonBody = JSON.parse(body)
+        if(jsonBody["team"]["id"] == process.env.TEAM_ID) {
+            await User.findByIdAndUpdate(req.user.id, {
+                "slackid": JSON.parse(body)["authed_user"]["id"]
+            })
+        }
+
         console.log("updated user " + JSON.parse(body)["authed_user"]["id"])
     });
     response.redirect("/feed");

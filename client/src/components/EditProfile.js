@@ -18,25 +18,26 @@ import {
 } from 'semantic-ui-react';
 import {QueryRenderer} from 'react-relay';
 import ContactDropdown from './ui_subcomponents/ContactDropdown';
+import ConfirmationModal from './ui_subcomponents/ConfirmationModal'
 import './css/EditProfile.css';
 import {commitMutation} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import environment from './Environment';
 import skills from '../constants/skills';
 import years from '../constants/years';
+import schools from '../constants/schools';
 import Filter from 'bad-words'
+
 const mutation = graphql `
-mutation EditProfileMutation($name: String, $grad_year: String, $school: String, $skills: [String], $experience: String, $contact: String, $contact_method: String) {
-  update_user(name: $name, grad_year: $grad_year, school: $school,  skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method) {
+mutation EditProfileMutation($name: String, $grad_year: String, $school: String, $skills: [String], $experience: String, $contact: String, $contact_method: String, $visible: Int) {
+  update_user(name: $name, grad_year: $grad_year, school: $school,  skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method, visible: $visible) {
     name
     grad_year
     school
     skills
     experience
     contact
-  }
-  toggle_visibility {
-    name
+    visible
   }
 }
 `;
@@ -52,6 +53,7 @@ query EditProfileQuery {
         experience
         contact_method
         slackid
+        visible
     }
 }
 `;
@@ -72,11 +74,14 @@ class EditProfile extends Component {
             contact: "",
             cur_error_message: "",
             slackid: "",
+            visible: 0,
+            confirm_slack: false,
             "name_profane": false,
             "school_profane": false,
             "grad_year_profane": false,
             "experience_profane": false,
-            "contact_profane": false
+            "contact_profane": false,
+            next: false
         };
         this.profanityFilter = new Filter();
 
@@ -94,7 +99,22 @@ class EditProfile extends Component {
         } else {
             contact_form = ""
         }
-        return (<QueryRenderer environment={environment} query={getUsersProfile} variables={{}} render={({error, props}) => {
+        console.log("SLACK: ",this.state.confirm_slack)
+        if(this.state.confirm_slack) {
+            console.log("here SLACK")
+            return (
+                <ConfirmationModal message={"Please connect your HackGT 7 Slack Account to receive team formation notifications! If you are not on the event slack, please join before proceeding."} showModal={this.state.confirm_slack} closeModal={() => {
+                        window.location.replace("https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=1368926133911.1420841367108&redirect_uri=https%3A%2F%2Fteamformation.hack.gt%2Fapi%2Fuser%2Fslack%2Fcallback&team=T01AUT83XST")
+                        this.setState({"confirm_slack": false})
+                    }} />
+            )
+        }
+        if(this.state.next) {
+            console.log("nexting")
+            return <Redirect to="/feed" />
+        }
+        return (
+            <QueryRenderer environment={environment} query={getUsersProfile} variables={{}} render={({error, props}) => {
                 if (error) {
                     return <div>{error.message}</div>;
                 } else if (props) {
@@ -106,13 +126,16 @@ class EditProfile extends Component {
                             ...props
                         })
                     }
+                    console.log(this.state.visible, this.state.visible == 1)
                     return (<div>
                         <Form className="form-container">
                             <Form.Group>
                                 <Form.Input className="input-container-large" label='Full Name' placeholder='Full Name' defaultValue={props.name} onChange={this.onNameChange} error={this.state["name_profane"]} required="required"/>
                             </Form.Group>
                             <Form.Group className="school-and-year">
-                                <Form.Input className="input-container-small" label='School' placeholder='School' defaultValue={props.school} onChange={this.onSchoolChange} error={this.state["school_profane"]} required="required"/>
+                                <Form.Select className="input-container-small" label='School' placeholder='School' defaultValue={props.school} onChange={this.onSchoolChange} error={this.state["school_profane"]}
+                                options={schools}
+                                required="required"/>
                                 <Form.Select className="input-container-small" required="required" label='Year in School' defaultValue={props.grad_year} onChange={this.onYearChange} options={years} placeholder='Year in School'/>
                             </Form.Group>
                             <Form.Group>
@@ -123,7 +146,7 @@ class EditProfile extends Component {
                             </Form.Group>
                             <Form.Group>
                                 <div className="editCheckbox">
-                                    <Checkbox label='Make my profile public' onChange={this.onPrivacyChange} defaultChecked={true}/>
+                                    <Checkbox label='Make my profile public' onChange={this.onPrivacyChange} checked={(this.state.visible == 1)}/>
                                 </div>
                             </Form.Group>
                             <div className="button-container">
@@ -135,21 +158,16 @@ class EditProfile extends Component {
                                     </Link>
                                 </Form.Group>
                                 <Form.Group>
-                                    <Link to="/feed">
                                         <Button onClick={this.onNextClick} className="save-button">
                                            Save
                                        </Button>
-                                    </Link>
                                 </Form.Group>
                             </div>
                             <Form.Group>
                                 {this.state.cur_error_message}
                             </Form.Group>
                         </Form>
-                        {!this.state.slackid ?
-                            <a href="https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=15533117780.599676767764&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fuser%2Fslack%2Fcallback"><img alt="Sign in with Slack" height="40" width="172" src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" />
-                            </a> : ""
-                        }
+
                     </div>)
                 }
             }}/>);
@@ -165,10 +183,6 @@ class EditProfile extends Component {
 
     onNameChange = (e) => {
         this.setState({name: e.target.value});
-    };
-
-    onSchoolChange = (e) => {
-        this.setState({school: e.target.value});
     };
 
     onGradYearChange = (e) => {
@@ -187,12 +201,16 @@ class EditProfile extends Component {
         this.setState({grad_year: value})
     }
 
+    onSchoolChange = (e, { value }) => {
+        this.setState({school: value});
+    };
+
     onSkillsChange = (e, {value}) => {
         this.setState({skills: value})
     }
 
     onPrivacyChange = () => {
-        this.setState((prevState) => ({public: !prevState.public}))
+        this.setState((prevState) => ({visible: 1-prevState.visible}))
     }
 
     changeContactMethod = (new_contact) => {
@@ -242,9 +260,18 @@ class EditProfile extends Component {
                     contact: this.state.contact,
                     skills: this.state.skills,
                     experience: this.state.experience,
-                    contact_method: this.state.contact_method
+                    contact_method: this.state.contact_method,
+                    visible: this.state.visible
                 }
             });
+            console.log(this.state.slackid)
+            if(!this.state.slackid) {
+                console.log("NO SLACKID")
+                this.setState({"confirm_slack": true})
+                // window.location.replace("https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=15533117780.599676767764&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fapi%2Fuser%2Fslack%2Fcallback&team=T0FFP3FNY")
+            } else {
+                this.setState({"next": true})
+            }
         }
     };
 };

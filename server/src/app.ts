@@ -191,13 +191,10 @@ let getUsers = async function (parent, args, context, info, req) {
     }
   }
   if (args.school) {
-    console.log(args.school);
     schools = args.school.split(",");
-    console.log(schools);
     for (let i = 0; i < schools.length; i++) {
       schoolSearch.push({ school: schools[i] });
     }
-    console.log(JSON.stringify(schoolSearch));
   }
 
   if (search && skills && grad_years && schools) {
@@ -209,6 +206,7 @@ let getUsers = async function (parent, args, context, info, req) {
         { $or: yearSearch },
         { $or: schoolSearch },
       ],
+      visible: 1
     });
   } else if (search && skills && grad_years) {
     console.log("search, skills, and grad year filters applied...");
@@ -218,6 +216,7 @@ let getUsers = async function (parent, args, context, info, req) {
         { $and: skillSearch },
         { $or: yearSearch },
       ],
+      visible: 1
     });
   } else if (search && skills && schools) {
     console.log("search, skills, and schools filters applied...");
@@ -227,6 +226,7 @@ let getUsers = async function (parent, args, context, info, req) {
         { $and: skillSearch },
         { $or: schoolSearch },
       ],
+      visible: 1
     });
   } else if (search && grad_years && schools) {
     console.log("searc, grad year, and schools filters applied...");
@@ -236,65 +236,66 @@ let getUsers = async function (parent, args, context, info, req) {
         { $or: yearSearch },
         { $or: schoolSearch },
       ],
+      visible: 1
     });
   } else if (skills && grad_years && schools) {
     console.log("skills, grad year, and schools filter applied...");
     users = await User.find({
-      $and: [{ $and: skillSearch }, { $or: yearSearch }, { $or: schoolSearch }],
-    });
+      $and: [{ $and: skillSearch }, { $or: yearSearch }, { $or: schoolSearch }],visible: 1
+    }
+    );
   } else if (search && skills) {
     console.log("search and skills filters applied...");
     users = await User.find({
-      $and: [{ $text: { $search: search } }, { $and: skillSearch }],
+      $and: [{ $text: { $search: search } }, { $and: skillSearch }], visible: 1
     });
   } else if (search && grad_years) {
     console.log("search and grad year filters applied...");
     users = await User.find({
-      $and: [{ $text: { $search: search } }, { $or: yearSearch }],
+      $and: [{ $text: { $search: search } }, { $or: yearSearch }], visible: 1
     });
   } else if (search && schools) {
     console.log("search and schools filters applied...");
     users = await User.find({
-      $and: [{ $text: { $search: search } }, { $or: schoolSearch }],
+      $and: [{ $text: { $search: search } }, { $or: schoolSearch }], visible: 1
     });
   } else if (skills && grad_years) {
     console.log("skill and year filters applied");
     users = await User.find({
-      $and: [{ $and: skillSearch }, { $or: yearSearch }],
+      $and: [{ $and: skillSearch }, { $or: yearSearch }], visible: 1
     });
   } else if (skills && schools) {
     console.log("only skill and school filters applied");
     users = await User.find({
-      $and: [{ $and: skillSearch }, { $or: schoolSearch }],
+      $and: [{ $and: skillSearch }, { $or: schoolSearch }],visible: 1
     });
   } else if (grad_years && schools) {
     console.log("only year and school filters applied");
     users = await User.find({
-      $and: [{ $or: yearSearch }, { $or: schoolSearch }],
+      $and: [{ $or: yearSearch }, { $or: schoolSearch }], visible: 1
     });
   } else if (search) {
     console.log(`searching for ${search}..`);
-    users = await User.find({ $text: { $search: search } });
+    users = await User.find({ $text: { $search: search }, visible: 1 });
     console.log(users);
   } else if (skills) {
     console.log("only skill filter(s) applied");
     users = await User.find({
-      $and: skillSearch,
+      $and: skillSearch, visible: 1
     });
   } else if (grad_years) {
     console.log("only year filter(s) applied");
     users = await User.find({
-      $or: yearSearch,
+      $or: yearSearch, visible: 1
     });
   } else if (schools) {
     console.log("only school filter(s) applied");
     users = await User.find({
-      $or: schoolSearch,
+      $or: schoolSearch, visible: 1
     });
-    console.log(users);
   } else {
     console.log("no filters applied");
-    users = await User.find({});
+    users = await User.find({visible: 1});
   }
 
   if (!users) {
@@ -306,9 +307,7 @@ let getUsers = async function (parent, args, context, info, req) {
       return a.name.toLowerCase() - b.name.toLowerCase();
     })
     .filter((item) => {
-      console.log(item);
-      console.log(context);
-      return item.uuid != context.uuid && !item.team;
+      return item.uuid != context.uuid && !item.team && item.visible == 1;
     });
   return users;
 };
@@ -435,10 +434,8 @@ let acceptTeamRequest = async function (parent, args, context, info, req) {
     );
 
     if (user.team._id.toString() !== notification.receiver._id.toString()) {
-      console.log("TEAM2", user.team._id, notification.receiver._id);
       throw new Error("Team does not own notification");
     }
-    console.log("here1");
     let requestUser = await User.findById(notification.sender._id);
     if (!requestUser) {
       throw new Error("Notificaton sender not found");
@@ -466,18 +463,17 @@ let acceptTeamRequest = async function (parent, args, context, info, req) {
         console.log(err);
       }
     );
-    console.log("here3");
-
     await User.findByIdAndUpdate(notification.sender._id, {
       team: user.team._id,
     });
-    await Notification.findByIdAndUpdate(notification._id, {
+    await Notification.updateMany({ sender: notification.sender._id, receiver: notification.receiver._id }, {
       resolved: true,
     });
+
     sendSlackMessage(
       `${
         user!.team!.name
-      } has accepted your request. View your team here: https://teamformation.hack.gt/feed`,
+      } has accepted your request. View your new team here: https://teamformation.hack.gt/team/${user.team._id}`,
       requestUser.slackid
     );
     console.log("slack message sent");
@@ -651,7 +647,7 @@ let makeUserRequest = async function (parent, args, context, info, req) {
       },
     });
     sendSlackMessage(
-      `You have received a request from ${senderName}. Accept or deny the request here: https://teamformation.hack.gt/feed.`,
+      `You have received a request from ${senderName}. Accept or deny the request here: https://teamformation.hack.gt/feed`,
       receiver!.slackid
     );
     if (!context.team) {
@@ -707,7 +703,7 @@ let makeTeamRequest = async function (parent, args, context, info, req) {
     });
     teamSlackIDs.forEach((id) => {
       sendSlackMessage(
-        `You have received a request from ${context.name}. Accept or deny the request here: https://teamformation.hack.gt/feed.`,
+        `You have received a request from ${context.name}. Accept or deny the request here: https://teamformation.hack.gt/team/${team_id}`,
         id
       );
     });
@@ -759,12 +755,7 @@ let apiRouter = express.Router();
 const resolvers = {
   Source: {
     __resolveType(obj, context, info) {
-      console.log("OBJ");
-      console.log(obj);
-      console.log(context);
-      console.log(info);
       if (context.team) {
-        console.log("team chosen");
         return "User";
       }
       if (context._id) {

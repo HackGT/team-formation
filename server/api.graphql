@@ -25,7 +25,7 @@ type Query {
 
 type Mutation {
     toggle_visibility: User!
-    update_user(name: String email: String, grad_year: String, school: String, contact: String, skills: [String], experience: String, contact_method: String): User!
+    update_user(name: String email: String, grad_year: String, school: String, contact: String, skills: [String], experience: String, contact_method: String, visible: Int): User!
     update_team(name: String, picture: String, interests: [String], description: String, public: Boolean, project_idea: String): Team
     accept_team_request(notification_id: String): Team
     accept_user_request(notification_id: String): Team
