@@ -83,7 +83,8 @@ class NotificationGroup extends Component {
                   borderLeftWidth: 0,
                   marginLeft: 0,
                   paddingLeft: 0,
-                  paddingRight: 0
+                  paddingRight: 0,
+                  color: "#A8C5D6"
                 }}
               >
                 {notificationMessage}

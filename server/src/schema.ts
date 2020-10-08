@@ -42,6 +42,7 @@ export interface IUser extends RootDocument {
     contact_method?: string;
     visible?: number;
     team?: ITeam;
+    slackid: string;
 }
 
 export interface INotification extends RootDocument {
@@ -112,8 +113,7 @@ const TeamSchema = new mongoose.Schema({
         type: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
-        }],
-        unique: true
+        }]
     },
     interests: [String],
     description: String,
@@ -177,7 +177,8 @@ const UserSchema = new mongoose.Schema({
     team: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Team"
-    }
+    },
+    slackid: String
 });
 
 UserSchema.index({
