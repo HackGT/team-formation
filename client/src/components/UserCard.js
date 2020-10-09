@@ -18,7 +18,7 @@ class UserCard extends Component {
     let contact;
     let cur_contact = this.props.contact;
     if(this.props.slackid) {
-        const dm_url = `slack://user?team=T0FFP3FNY&id=${this.props.slackid}`
+        const dm_url = `slack://user?team=T01AUT83XST&id=${this.props.slackid}`
         contact =
           <Button as="a" className="contact" content="Contact" href={dm_url}/>
 
