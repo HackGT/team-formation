@@ -122,7 +122,7 @@ body .ui.card:hover {
 
 .ui.container.about {
   overflow: auto;
-  max-height: 90px;
+  max-height: 80px;
   color: #867a96;
   padding-left: 15px;
   padding-top: 10px;
