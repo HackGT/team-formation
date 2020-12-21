@@ -12,7 +12,7 @@ const { ApolloServer, gql } = require("apollo-server-express");
 import { GroundTruthStrategy } from "./routes/strategies";
 import { IUser, User, Notification, Team } from "./schema";
 import { userRoutes } from "./routes/user";
-import sendSlackMessage from "./sendSlackMessage";
+import { sendSlackMessage } from "./utils";
 
 dotenv.config();
 

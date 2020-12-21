@@ -14,4 +14,4 @@ export interface ITeam extends RootDocument{
     public: boolean;
 }
 
-export type ITeamMongoose = ITeam & Document;
+export type ITeamMongoose = (ITeam & Document);

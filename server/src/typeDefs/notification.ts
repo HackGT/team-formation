@@ -3,8 +3,7 @@ const { gql } = require("apollo-server-express");
 export default gql`
     extend type Query {
         notifications(receiver_id: String): [Notification!]! @auth
-        team_notifications: [Notification]! @auth
-        sent_team_notifications: [Notification]! @auth
+        team_notifications(sent: Boolean): [Notification]! @auth
     }
 
     extend type Mutation {

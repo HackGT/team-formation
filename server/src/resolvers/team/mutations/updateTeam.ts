@@ -8,8 +8,10 @@ const updateTeam = async function (
   info,
   req
 ): Promise<ITeamMongoose | null> {
-  let user: IUserMongoose | null = await User.findById(context._id).populate("team");
-  if(!user) {
+  let user: IUserMongoose | null = await User.findById(context._id).populate(
+    "team"
+  );
+  if (!user) {
     throw new Error("User not found");
   }
   if (!user.team) {

@@ -18,7 +18,7 @@ const getUsers = async function (
   let schoolSearch = [] as {}[];
 
   let andQuery = [] as any;
-
+  console.log(args)
   if (args.search) {
     search = '"' + args.search.split(" ").join('" "') + '"';
     andQuery.push({ $text: { $search: search } });
@@ -48,11 +48,16 @@ const getUsers = async function (
     }
     andQuery.push({ $or: schoolSearch });
   }
-
-  users = await User.find({
-    $and: andQuery,
-    visible: 1,
-  });
+  console.log(andQuery)
+  if(andQuery.length > 0) {
+    users = await User.find({
+      $and: andQuery,
+      visible: 1,
+    });
+  } else {
+    users = await User.find({ visible: 1 });
+  }
+  
   users = users
     .sort(function (a, b) {
       return a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1;

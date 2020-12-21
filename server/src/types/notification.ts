@@ -16,5 +16,5 @@ export interface INotification extends RootDocument {
 
 }
 
-export type INotificationMongoose = INotification & Document;
+export type INotificationMongoose = (INotification & Document);
 

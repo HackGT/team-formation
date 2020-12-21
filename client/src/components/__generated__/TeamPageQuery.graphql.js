@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 6ab7a75ce433c85527ccfb2facf6ada4
+ * @relayHash c4e92d46a7a95e52fa99d1160ba2136c
  */
 
 /* eslint-disable */
@@ -19,6 +19,7 @@ export type TeamPageQueryResponse = {|
     +picture: ?string,
     +members: ?$ReadOnlyArray<?{|
       +name: ?string,
+      +email: ?string,
       +school: ?string,
       +grad_year: ?string,
       +contact: ?string,
@@ -72,6 +73,7 @@ query TeamPageQuery(
     picture
     members {
       name
+      email
       school
       grad_year
       contact
@@ -175,6 +177,13 @@ v4 = {
       "plural": true,
       "selections": [
         (v2/*: any*/),
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "email",
+          "args": null,
+          "storageKey": null
+        },
         {
           "kind": "ScalarField",
           "alias": null,
@@ -386,11 +395,11 @@ return {
     "operationKind": "query",
     "name": "TeamPageQuery",
     "id": null,
-    "text": "query TeamPageQuery(\n  $team_id: String\n) {\n  team(team_id: $team_id) {\n    id\n    name\n    picture\n    members {\n      name\n      school\n      grad_year\n      contact\n      skills\n      experience\n      visible\n      uuid\n      id\n      slackid\n    }\n    interests\n    description\n    project_idea\n    notifications {\n      id\n      bio\n      idea\n      sender {\n        __typename\n        ... on User {\n          id\n          name\n        }\n        ... on Team {\n          id\n          name\n        }\n      }\n      senderType\n    }\n    public\n  }\n  user_profile {\n    team {\n      id\n    }\n    id\n  }\n}\n",
+    "text": "query TeamPageQuery(\n  $team_id: String\n) {\n  team(team_id: $team_id) {\n    id\n    name\n    picture\n    members {\n      name\n      email\n      school\n      grad_year\n      contact\n      skills\n      experience\n      visible\n      uuid\n      id\n      slackid\n    }\n    interests\n    description\n    project_idea\n    notifications {\n      id\n      bio\n      idea\n      sender {\n        __typename\n        ... on User {\n          id\n          name\n        }\n        ... on Team {\n          id\n          name\n        }\n      }\n      senderType\n    }\n    public\n  }\n  user_profile {\n    team {\n      id\n    }\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'cf90cb34f33b89f103e8b9b203c68786';
+(node/*: any*/).hash = '733aca9a2f67c0f8010bf3a1d5d92ad8';
 module.exports = node;

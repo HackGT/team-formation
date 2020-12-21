@@ -21,5 +21,5 @@ export interface IUser extends RootDocument {
     slackid: string;
 }
 
-export type IUserMongoose = IUser & Document;
+export type IUserMongoose = (IUser & Document);
 
