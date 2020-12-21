@@ -1,4 +1,4 @@
-import { updateTeam } from './mutations'
+import { updateTeam, leaveTeam } from './mutations'
 import { getTeam, getTeams } from './queries';
 
 const resolvers = {
@@ -7,7 +7,8 @@ const resolvers = {
         team: getTeam
       },
       Mutation: {
-        update_team: updateTeam
+        update_team: updateTeam,
+        leave_team: leaveTeam
       }
 }
 
