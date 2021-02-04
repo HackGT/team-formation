@@ -101,3 +101,8 @@ body ::-webkit-scrollbar-track {
   margin-left: 65px;
   display: flexbox;
 }
+
+.ui.container.skills {
+  overflow: auto;
+  max-height: 80px;
+}
