@@ -130,7 +130,8 @@ class Headers extends Component {
                               size: "large",
                               color: "white",
                               margin: 0,
-                              padding: 0
+                              padding: 0,
+                              backgroundColor: "transparent",
                             }}
                             direction="left"
                             closeOnChange={false}
@@ -147,6 +148,7 @@ class Headers extends Component {
                       style={{
                         size: "large",
                         color: "white",
+                        backgroundColor: "transparent",
                       }}
                       link={true}
                       href={"/edit-profile"}
@@ -169,6 +171,7 @@ class Headers extends Component {
                       style={{
                         size: "large",
                         color: "white",
+                        backgroundColor: "transparent",
                       }}
                       link={true}
                       href={"/api/user/logout"}
