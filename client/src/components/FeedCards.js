@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import UserCard from './UserCard';
-import {Grid, Row, Card} from 'semantic-ui-react';
+import {Button} from 'semantic-ui-react';
 
 import {QueryRenderer} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
@@ -32,6 +32,10 @@ const getUsersQuery = graphql `
 `;
 
 class FeedCards extends Component {
+    state = {
+        cards: [],
+        sliceIndexStart: 0,
+    }
     render() {
         let search = this.props.search;
         let skill = this.props.skill.join(',');
@@ -63,14 +67,37 @@ class FeedCards extends Component {
                         slackid={user.slackid}
                         />
                     })
+                    this.state.cards = cards
                     return (
+                        <div>
                     <div className='Cards-container'>
-                        {cards}
+                        {this.state.cards.slice(this.state.sliceIndexStart, this.state.sliceIndexStart + 4)}
+                    </div>
+                    {this.state.sliceIndexStart != 0 && <Button onClick={this.moveLeft}>
+                        Left
+                    </Button>}
+                    {Math.floor(this.state.sliceIndexStart / 4)
+                    != Math.floor(this.state.cards.length / 4) && <Button onClick={this.moveRight}>
+                        Right
+                    </Button>}
                     </div>);
                 }
             }}/>);
 
     };
+    moveLeft = (e) => {
+        this.setState({
+            sliceIndexStart: this.state.sliceIndexStart - 4,
+        })
+        console.log(this.state.sliceIndexStart)
+        console.log(this.state.cards.length)
+    }
+    moveRight = (e) => {
+        this.setState({
+            sliceIndexStart: this.state.sliceIndexStart + 4,
+        })
+        console.log(this.state.sliceIndexStart)
+    }
 
 };
 
