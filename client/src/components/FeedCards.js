@@ -67,17 +67,21 @@ class FeedCards extends Component {
                         slackid={user.slackid}
                         />
                     })
-                    this.state.cards = cards
+                    if (this.state.cards.length === 0 && cards.length !== 0) {
+                        this.setState({
+                            cards: cards
+                        })
+                    }
                     return (
                         <div>
                     <div className='Cards-container'>
                         {this.state.cards.slice(this.state.sliceIndexStart, this.state.sliceIndexStart + 4)}
                     </div>
-                    {this.state.sliceIndexStart != 0 && <Button onClick={this.moveLeft}>
+                    {this.state.sliceIndexStart !== 0 && <Button onClick={this.moveLeft}>
                         Left
                     </Button>}
                     {Math.floor(this.state.sliceIndexStart / 4)
-                    != Math.floor(this.state.cards.length / 4) && <Button onClick={this.moveRight}>
+                    !== Math.floor(this.state.cards.length / 4) && <Button onClick={this.moveRight}>
                         Right
                     </Button>}
                     </div>);
