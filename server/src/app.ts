@@ -554,7 +554,7 @@ let acceptUserRequest = async function (parent, args, context, info, req) {
       }
       const capitalizedName: string = uniqueNamesGenerator({
         dictionaries: [adjectives, animals],
-        style: 'capital'
+        style: 'capital',
       });
       var team = new Team({
         name: "Team " + capitalizedName,
