@@ -6,7 +6,7 @@
     "main": "app.js",
     "scripts": {
         "start": "gulp",
-        "serve": "nodemon ./build/app.js",
+        "serve": "node ./build/app.js",
         "build": "gulp build"
     },
     "author": "Abhinav Kumar",
