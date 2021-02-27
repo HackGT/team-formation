@@ -10,13 +10,13 @@ import mongoose from "mongoose";
 // import express_graphql from "express-graphql"
 import cors from "cors";
 import dotenv from "dotenv";
+const { uniqueNamesGenerator, adjectives, animals } = require('unique-names-generator');
 const { ApolloServer, gql } = require("apollo-server-express");
 // import { buildSchema } from "graphql"
 import { GroundTruthStrategy } from "./routes/strategies";
 import { IUser, User, Notification, Team } from "./schema";
 import { userRoutes } from "./routes/user";
 import sendSlackMessage from "./sendSlackMessage";
-
 dotenv.config();
 
 const PORT = 3000;
@@ -552,8 +552,12 @@ let acceptUserRequest = async function (parent, args, context, info, req) {
       if (user2.team) {
         throw new Error("Requesting user already on team");
       }
+      const capitalizedName: string = uniqueNamesGenerator({
+        dictionaries: [adjectives, animals],
+        style: 'capital'
+      });
       var team = new Team({
-        name: "Team " + user1._id + "" + user2._id,
+        name: "Team " + capitalizedName,
         members: [user1, user2],
         public: true,
       });
