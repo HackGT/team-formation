@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import TeamCard from './TeamCard';
-import {Grid, Row, Card} from 'semantic-ui-react';
+import {Grid, Row, Card, Button} from 'semantic-ui-react';
 
 import {QueryRenderer} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
@@ -28,6 +28,10 @@ const getTeamsQuery = graphql `
 `;
 
 class FeedTeamCards extends Component {
+    state = {
+        sliceIndexStart: 0,
+        numCardsPerPage: 4,
+    }
     render() {
         let search = this.props.search;
         let interests = this.props.skill.join(',');
@@ -47,13 +51,30 @@ class FeedTeamCards extends Component {
                                 })} description={team.description} team={props.user_profile.team}/>
                         }
                     })
-                    return (<div className='Cards-container'>
-
-                        {cards}
-                    </div>);
+                    return (<div>
+                    <div className='Cards-container'>
+                        {cards.slice(this.state.sliceIndexStart, this.state.sliceIndexStart + this.state.numCardsPerPage)}
+                    </div>
+                    {this.state.sliceIndexStart !== 0 && <Button onClick={this.moveLeft}>
+                        Previous
+                    </Button>}
+                    {Math.floor(this.state.sliceIndexStart / this.state.numCardsPerPage)
+                    !== Math.floor(cards.length / this.state.numCardsPerPage) && <Button onClick={this.moveRight}>
+                        Next
+                    </Button>}</div>);
                 }
             }}/>);
     };
+    moveLeft = (e) => {
+        this.setState({
+            sliceIndexStart: this.state.sliceIndexStart - this.state.numCardsPerPage,
+        })
+    }
+    moveRight = (e) => {
+        this.setState({
+            sliceIndexStart: this.state.sliceIndexStart + this.state.numCardsPerPage,
+        })
+    }
 
 };
 

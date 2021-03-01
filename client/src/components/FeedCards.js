@@ -33,8 +33,8 @@ const getUsersQuery = graphql `
 
 class FeedCards extends Component {
     state = {
-        cards: [],
         sliceIndexStart: 0,
+        numCardsPerPage: 4,
     }
     render() {
         let search = this.props.search;
@@ -67,22 +67,17 @@ class FeedCards extends Component {
                         slackid={user.slackid}
                         />
                     })
-                    if (this.state.cards.length === 0 && cards.length !== 0) {
-                        this.setState({
-                            cards: cards
-                        })
-                    }
                     return (
                         <div>
                     <div className='Cards-container'>
-                        {this.state.cards.slice(this.state.sliceIndexStart, this.state.sliceIndexStart + 4)}
+                        {cards.slice(this.state.sliceIndexStart, this.state.sliceIndexStart + this.state.numCardsPerPage)}
                     </div>
                     {this.state.sliceIndexStart !== 0 && <Button onClick={this.moveLeft}>
-                        Left
+                        Previous
                     </Button>}
-                    {Math.floor(this.state.sliceIndexStart / 4)
-                    !== Math.floor(this.state.cards.length / 4) && <Button onClick={this.moveRight}>
-                        Right
+                    {Math.floor(this.state.sliceIndexStart / this.state.numCardsPerPage)
+                    !== Math.floor(cards.length / this.state.numCardsPerPage) && <Button onClick={this.moveRight}>
+                        Next
                     </Button>}
                     </div>);
                 }
@@ -91,16 +86,13 @@ class FeedCards extends Component {
     };
     moveLeft = (e) => {
         this.setState({
-            sliceIndexStart: this.state.sliceIndexStart - 4,
+            sliceIndexStart: this.state.sliceIndexStart - this.state.numCardsPerPage,
         })
-        console.log(this.state.sliceIndexStart)
-        console.log(this.state.cards.length)
     }
     moveRight = (e) => {
         this.setState({
-            sliceIndexStart: this.state.sliceIndexStart + 4,
+            sliceIndexStart: this.state.sliceIndexStart + this.state.numCardsPerPage,
         })
-        console.log(this.state.sliceIndexStart)
     }
 
 };
