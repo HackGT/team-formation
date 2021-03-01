@@ -72,6 +72,7 @@ class FeedCards extends Component {
                     <div className='Cards-container'>
                         {cards.slice(this.state.sliceIndexStart, this.state.sliceIndexStart + this.state.numCardsPerPage)}
                     </div>
+                    <div className='buttons-container'>
                     {this.state.sliceIndexStart !== 0 && <Button onClick={this.moveLeft}>
                         Previous
                     </Button>}
@@ -79,6 +80,7 @@ class FeedCards extends Component {
                     !== Math.floor(cards.length / this.state.numCardsPerPage) && <Button onClick={this.moveRight}>
                         Next
                     </Button>}
+                    </div>
                     </div>);
                 }
             }}/>);
