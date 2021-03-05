@@ -119,8 +119,6 @@ class EditProfile extends Component {
                     return <div>{error.message}</div>;
                 } else if (props) {
                     props = props.user_profile;
-                    console.log(props)
-                    console.log(years)
                     if (!this.state.name && props.name) {
                         this.setState({
                             ...props
