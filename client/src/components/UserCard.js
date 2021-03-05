@@ -38,7 +38,7 @@ class UserCard extends Component {
         />
       );
     }
-    var colors = ["#A0CCC9", "#EBABCA"];
+    var colors = ["#68B6E5", "#EB9922"];
     var count = 0;
     var viewskill = this.props.skills.map((skill) => (
       <Label

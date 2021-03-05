@@ -13,6 +13,16 @@
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
 
+@font-face {
+  font-family: Roboto-Regular;
+  src: url("./fonts/roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+  font-family: Roboto-Medium;
+  src: url("./fonts/roboto/Roboto-Medium.ttf");
+}
+
 .UserCard-container {
   padding-top: 2%;
   width: 100%;
@@ -63,17 +73,18 @@ body .ui.card:hover {
 
 .ui.button.contact {
   color: white;
-  background: #a8c5d6;
+  background: var(--teal);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   font-family: Quicksand-Bold;
+  border-radius: 4px;
   display: flexbox;
 }
 
 .ui.button.teamUp {
   color: white;
   display: flexbox;
-  background: #ccbedf;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  background: var(--purple);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
   margin-left: 5px;
   width: 45%;
   font-size: 13.3px;
@@ -90,7 +101,7 @@ body .ui.card:hover {
 }
 
 .ui.card.card1 {
-  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  box-shadow: -20px 20px 0px -8px rgba(255, 255, 255, 0.3); 
   border-radius: 15px;
   margin: 15px;
   min-width: 270px;
@@ -103,7 +114,7 @@ body .ui.card:hover {
 .ui.cards > .card > .content > .header:not(.ui) {
   text-align: center;
   padding-top: 10px;
-  color: #8895c1;
+  color: var(--purple);
   font-family: Quicksand-Bold;
   font-size: 20px;
 }
@@ -115,22 +126,36 @@ body .ui.card:hover {
 
 .ui.card .meta,
 .ui.cards > .card .meta {
-  color: #85808a;
+  color: #10112E;
   padding-left: 15px;
-  font-family: Quicksand-Bold;
+  font-family: Roboto-Medium;
 }
 
 .ui.container.about {
   overflow: auto;
   max-height: 80px;
-  color: #867a96;
+  color: #10112E;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 5px;
-  font-family: Quicksand-Bold;
+  font-family: Roboto-Medium;
 }
 
 .ui.container.skills {
   overflow: auto;
   max-height: 80px;
+}
+
+/* Overriding default scrollbar */
+.ui.container.skills::-webkit-scrollbar {
+  width: 9px;
+}
+
+.ui.container.skills::-webkit-scrollbar-track {
+  background: rgba(165, 98, 166, 0.4);
+  border-radius: 4.5px;
+}
+
+.ui.container.skills::-webkit-scrollbar-thumb {
+  background: var(--purple)
 }
