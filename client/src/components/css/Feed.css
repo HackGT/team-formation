@@ -18,6 +18,11 @@
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
 
+@font-face {
+  font-family: Roboto;
+  src: url("./fonts/roboto/Roboto-Regular.ttf")
+}
+
 .feed-container {
   display: flex;
   flex-direction: row;
@@ -125,7 +130,7 @@
   color: white;
   text-shadow: 0px 0px 8px #ffffff;
   font-family: Bavro-Regular;
-  font-size: 18px;
+  font-size: 48px;
   margin-left: 15px;
 }
 

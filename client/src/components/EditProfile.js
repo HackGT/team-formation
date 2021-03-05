@@ -139,6 +139,9 @@ class EditProfile extends Component {
                                 <Form.Select className="input-container-small" required="required" label='Year in School' defaultValue={props.grad_year} onChange={this.onYearChange} options={years} placeholder='Year in School'/>
                             </Form.Group>
                             <Form.Group>
+                                <Form.Select className="input-container-small" required="required" label='Track'/>
+                            </Form.Group>
+                            <Form.Group>
                                 <Form.Select className="input-container-large" label="Skills" placeholder='Skills' defaultValue={props.skills} onChange={this.onSkillsChange} fluid="fluid" multiple="multiple" selection="selection" search="search" options={skills}/>
                             </Form.Group>
                             <Form.Group>
