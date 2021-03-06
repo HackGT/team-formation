@@ -27,6 +27,14 @@ const InputTagCollection = props => {
         </div>)
     }
 
+    for (const track of props.tracks) {
+        elements.push(
+            <div>
+                <Label data-name={track} horizontal content={track} removeIcon='delete' onRemove={(e, data) => props.allFilterClickListener(data['data-name'], "tracks")}/>
+            </div>
+        )
+    }
+
     return (<div id="chosen-tags">
         {elements}
     </div>);

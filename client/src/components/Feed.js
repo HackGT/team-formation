@@ -17,6 +17,7 @@ class Feed extends Component {
     skills: [],
     years: [],
     schools: [],
+    tracks: [],
     teams: false,
     showSecondModal: false,
   };
@@ -81,7 +82,8 @@ class Feed extends Component {
           </div>
           {this.state.skills.length ||
             this.state.years.length ||
-            this.state.schools.length ? (
+            this.state.schools.length ||
+            this.state.tracks.length ? (
               <div className="user-input">
                 <div className="filters-applied">
                   <text>Filters Applied</text>
@@ -91,6 +93,7 @@ class Feed extends Component {
                     skills={this.state.skills}
                     years={this.state.years}
                     schools={this.state.schools}
+                    tracks={this.state.tracks}
                     allFilterClickListener={this.allFilterClickListener}
                   />
                 </div>

@@ -5,6 +5,7 @@ import "./css/SideMenu.css";
 import skills from "../constants/skills";
 import schools from "../constants/schools";
 import years from "../constants/years";
+import tracks from "../constants/tracks";
 
 import SideMenuPicture from "./css/assets/SideMenuPicture.svg";
 
@@ -51,6 +52,18 @@ class SideMenu extends Component {
         onClick: (e, { value }) =>
           this.props.allFilterClickListener(value, "schools"),
       });
+    }
+
+    const trackOptions = [];
+    for (const track in tracks) {
+      const curr = tracks[track].value;
+      trackOptions.push({
+        key: curr,
+        text: curr,
+        value: curr,
+        onClick: (e, { value }) => 
+          this.props.allFilterClickListener(value, "tracks"),
+      })
     }
 
     if (this.props.onTeamPage) {
@@ -137,6 +150,18 @@ class SideMenu extends Component {
           fullTextSearch="true"
           scrolling="scrolling"
           closeOnChange="false"
+        />
+        <h3 className="h3">TRACKS</h3>
+        <Dropdown
+          className="filter-box"
+          item
+          text="Select Tracks"
+          search
+          selection
+          options={trackOptions}
+          fullTextSearch
+          scrolling
+          closeOnChange={false}
         />
         {/* <img class="moveImage" src={SideMenuPicture} alt="React Logo" /> */}
       </div>
