@@ -6,6 +6,29 @@
   min-width: 800% !important;
 }
 
+@keyframes teamGlow {
+  0% {
+    box-shadow: none;
+    background-color: transparent;
+  }
+  50% {
+    background-color: var(--purple);
+    box-shadow: 0 0 5px 7.5px var(--purple);
+  }
+  100% {
+    box-shadow: none;
+    background-color: transparent;
+  }
+}
+
+.onTeam {
+  border-radius: 10px;
+  animation-name: teamGlow;
+  animation-duration: 0.5s;
+  animation-iteration-count: 5;
+  animation-timing-function: linear;
+}
+
 .ui.popup.fitted {
   padding: 0px;
 }

@@ -126,7 +126,7 @@ body .ui.card:hover {
 }
 
 .ui.divider {
-  border: 1px solid #c3bbcd !important;
+  border: 1px solid var(--purple) !important;
   margin-top: 5px !important;
 }
 

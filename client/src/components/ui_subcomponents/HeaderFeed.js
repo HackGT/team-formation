@@ -86,7 +86,7 @@ class Headers extends Component {
               teamIcon =
                 <Popup
                   trigger={
-                    <Link to={link}>
+                    <Link to={link} className="onTeam">
                       <Icon
                         name='group'
                         link={true}
