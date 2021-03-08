@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9d5cf4599083dea272b32ba28427af22
+ * @relayHash d3d4dd521b2d7470080ea9547d20fb45
  */
 
 /* eslint-disable */
@@ -14,7 +14,8 @@ export type HeaderFeedNameQueryResponse = {|
   +user_profile: {|
     +name: ?string,
     +team: ?{|
-      +id: ?string
+      +id: ?string,
+      +name: ?string,
     |},
   |}
 |};
@@ -31,6 +32,7 @@ query HeaderFeedNameQuery {
     name
     team {
       id
+      name
     }
     id
   }
@@ -61,7 +63,8 @@ v2 = {
   "concreteType": "Team",
   "plural": false,
   "selections": [
-    (v1/*: any*/)
+    (v1/*: any*/),
+    (v0/*: any*/)
   ]
 };
 return {
@@ -113,11 +116,11 @@ return {
     "operationKind": "query",
     "name": "HeaderFeedNameQuery",
     "id": null,
-    "text": "query HeaderFeedNameQuery {\n  user_profile {\n    name\n    team {\n      id\n    }\n    id\n  }\n}\n",
+    "text": "query HeaderFeedNameQuery {\n  user_profile {\n    name\n    team {\n      id\n      name\n    }\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '91111645af4a767c44a30881af1b9eff';
+(node/*: any*/).hash = 'e14a8726e920e1b398d4780687115357';
 module.exports = node;
