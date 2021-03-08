@@ -63,6 +63,7 @@ class FeedCards extends Component {
                         experience={user.experience}
                         id={user.id}
                         team={props.user_profile.team}
+                        track={user.track}
                         slackid={user.slackid}
                         />
                     })

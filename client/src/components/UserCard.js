@@ -66,6 +66,9 @@ class UserCard extends Component {
           <Card.Meta className="gradYear">
             Graduation Year: {this.props.grad_year}
           </Card.Meta>
+          <Card.Meta>
+            Track: {(this.props.track) ? this.props.track : 'None'}
+          </Card.Meta>
           <div
             className="ui divider"
             style={{
