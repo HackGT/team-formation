@@ -177,7 +177,6 @@ interface UserQuery {
  */
 let buildQuery = (search?: string, skills?: Array<string>, grad_years?: Array<string>, schools?: Array<string>, tracks?: Array<string>): UserQuery => {
   let query: UserQuery = {};
-  console.log(search, skills, grad_years, schools, tracks);
   if (search) {
     query['$text'] = {$search: search};
   }
@@ -213,7 +212,6 @@ let getUsers = async (parent, args, context, info, req) => {
   let tracks: string[] = (args.track) ? args.track.split(',') : undefined;
 
   let query = buildQuery(search, skills, grad_years, schools, tracks);
-  console.log(query);
   let users = await User.find(query);
 
   users = users

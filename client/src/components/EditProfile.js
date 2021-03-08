@@ -278,8 +278,7 @@ class EditProfile extends Component {
             console.log(this.state.slackid)
             if(!this.state.slackid) {
                 console.log("NO SLACKID")
-                // DEV ONLY
-                this.setState({"confirm_slack": false, "next": true})
+                this.setState({"confirm_slack": true})
                 // window.location.replace("https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=15533117780.599676767764&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fapi%2Fuser%2Fslack%2Fcallback&team=T0FFP3FNY")
             } else {
                 this.setState({"next": true})
