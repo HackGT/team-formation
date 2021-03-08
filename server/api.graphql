@@ -13,7 +13,7 @@ enum NotificationType {
 union Source = User | Team
 
 type Query {
-    users(search: String, skill: String, name: String, email: String, grad_year: String, school: String, visible: Int): [User!]!
+    users(search: String, skill: String, name: String, email: String, grad_year: String, school: String, track: String, visible: Int): [User!]!
     user(user_id: String): User!
     user_profile: User!
     teams(search: String, name: String, picture: String, team_id: String, interests: String, description: String, public: Boolean): [Team!]!
@@ -25,7 +25,7 @@ type Query {
 
 type Mutation {
     toggle_visibility: User!
-    update_user(name: String email: String, grad_year: String, school: String, contact: String, skills: [String], experience: String, contact_method: String, visible: Int): User!
+    update_user(name: String email: String, grad_year: String, school: String, track: String, contact: String, skills: [String], experience: String, contact_method: String, visible: Int): User!
     update_team(name: String, picture: String, interests: [String], description: String, public: Boolean, project_idea: String): Team
     accept_team_request(notification_id: String): Team
     accept_user_request(notification_id: String): Team
@@ -52,6 +52,7 @@ type User {
     name: String
     email: String
     school: String
+    track: String
     grad_year: String
     beginner: Boolean
     skills: [String]

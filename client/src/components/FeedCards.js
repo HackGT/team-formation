@@ -9,14 +9,15 @@ import environment from './Environment';
 import {Redirect} from 'react-router-dom';
 
 const getUsersQuery = graphql `
-    query FeedCardsQuery($skill: String, $grad_year: String, $school: String, $search: String) {
-        users(skill:$skill, grad_year:$grad_year, school:$school, search:$search) {
+    query FeedCardsQuery($skill: String, $grad_year: String, $school: String, $search: String, $track: String) {
+        users(skill:$skill, grad_year:$grad_year, school:$school, search:$search, track:$track) {
             name
             email
             school
             grad_year
             contact
             skills
+            track
             experience
             visible
             uuid
@@ -38,11 +39,13 @@ class FeedCards extends Component {
         console.log(`skills: ${this.props.skill}`);
         let grad_year = this.props.grad_year.join(',');
         let school = this.props.school.join(',');
+        let track = this.props.track.join(',');
         return (<QueryRenderer environment={environment} query={getUsersQuery} variables={{
                 search: search,
                 skill: skill,
                 grad_year: grad_year,
-                school: school
+                school: school,
+                track: track
             }} render={({error, props}) => {
                 if (error) {
                     // return <div>{error.message}</div>;

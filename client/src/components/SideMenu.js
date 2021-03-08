@@ -154,9 +154,9 @@ class SideMenu extends Component {
         <h3 className="h3">TRACKS</h3>
         <Dropdown
           className="filter-box"
-          item
+          item="item"
           text="Select Tracks"
-          search
+          search="search"
           selection
           options={trackOptions}
           fullTextSearch

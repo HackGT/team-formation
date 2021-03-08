@@ -36,6 +36,7 @@ class Feed extends Component {
         skill={this.state.skills}
         grad_year={this.state.years}
         school={this.state.schools}
+        track={this.state.tracks}
         user_id={this.props.user_id}
       />
     );
@@ -133,6 +134,7 @@ class Feed extends Component {
         teams: false,
         searchTerm: "",
         skills: [],
+        tracks: [],
         years: [],
         schools: [],
       });
