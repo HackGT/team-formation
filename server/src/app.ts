@@ -178,7 +178,7 @@ interface UserQuery {
 let buildQuery = (search?: string, skills?: Array<string>, grad_years?: Array<string>, schools?: Array<string>, tracks?: Array<string>): UserQuery => {
   let query: UserQuery = {};
   if (search) {
-    query['$text'] = {$search: search};
+    query['$text'] = {$search: search.split(' ').join(' ')};
   }
   if (skills) {
     query['skills'] = {$all: skills};
