@@ -14,7 +14,7 @@ const { uniqueNamesGenerator, adjectives, animals } = require('unique-names-gene
 const { ApolloServer, gql } = require("apollo-server-express");
 // import { buildSchema } from "graphql"
 import { GroundTruthStrategy } from "./routes/strategies";
-import { IUser, User, Notification, Team } from "./schema";
+import { IUser, User, Notification, Team, IUserMongoose } from "./schema";
 import { userRoutes } from "./routes/user";
 import sendSlackMessage from "./sendSlackMessage";
 dotenv.config();
@@ -157,6 +157,73 @@ let getUser = async function (parent, args, context, info, req) {
   return user;
 };
 
+
+// Query object for filters
+interface UserQuery {
+  search?: string,
+  skills?: {},
+  grad_years?: {},
+  schools?: {},
+  tracks?: {}
+}
+
+/**
+ * Builds a object containing the information to query for when filtering users
+ * @param search Search string to regex match any part of a profile
+ * @param skills Array of skills to find users by
+ * @param grad_years Graduation years, represented by strings, of users
+ * @param schools Universities and higher education institutions of users
+ * @param tracks Tracks being offered by current hackathon, if applicable
+ */
+let buildQuery = (search?: string, skills?: Array<string>, grad_years?: Array<string>, schools?: Array<string>, tracks?: Array<string>): UserQuery => {
+  let query: UserQuery = {};
+  if (search) {
+    query['$text'] = {$search: search.split(' ').join(' ')};
+  }
+  if (skills) {
+    query['skills'] = {$all: skills};
+  }
+
+  if (grad_years) {
+    query['grad_year'] = {$in: grad_years};
+  }
+
+  if (schools) {
+    query['school'] = {$in: schools};
+  }
+
+  if (tracks) {
+    query['track'] = {$in: tracks};
+  }
+  query['visible'] = 1;
+  return query;
+}
+
+// This will replace the getUsers function
+let getUsers = async (parent, args, context, info, req) => {
+  if (!context._id) {
+    throw new Error("User not logged in");
+  }
+
+  let search: string = args.search;
+  let skills: string[] = (args.skill) ? args.skill.split(',') : undefined;
+  let grad_years: string[] = (args.grad_year) ? args.grad_year.split(',') : undefined;
+  let schools: string[] = (args.school) ? args.school.split(',') : undefined;
+  let tracks: string[] = (args.track) ? args.track.split(',') : undefined;
+
+  let query = buildQuery(search, skills, grad_years, schools, tracks);
+  let users = await User.find(query);
+
+  users = users
+    .sort((a: IUserMongoose, b: IUserMongoose) => 
+      a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+    )
+    .filter((item) => {
+      return item.uuid != context.uuid && !item.team && item.visible == 1;
+    });
+  return users;
+}
+/*
 let getUsers = async function (parent, args, context, info, req) {
   if (!context._id) {
     throw new Error("User not logged in");
@@ -311,6 +378,7 @@ let getUsers = async function (parent, args, context, info, req) {
     });
   return users;
 };
+*/
 
 let updateUser = async function (parent, args, context, info, req) {
   console.log(context._id);

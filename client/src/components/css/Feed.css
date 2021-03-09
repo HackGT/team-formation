@@ -18,6 +18,11 @@
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
 
+@font-face {
+  font-family: Roboto-Regular;
+  src: url("./fonts/roboto/Roboto-Regular.ttf")
+}
+
 .feed-container {
   display: flex;
   flex-direction: row;
@@ -112,9 +117,9 @@
 
 .teamFormation {
   font-family: Lekton-Bold;
-  font-size: 22px;
+  font-size: 32px;
   color: white;
-  margin-left: 15px;
+  margin-left: 35px;
 }
 
 .switch-feed {
@@ -124,9 +129,9 @@
 .HackGTitle {
   color: white;
   text-shadow: 0px 0px 8px #ffffff;
-  font-family: Bavro-Regular;
-  font-size: 18px;
-  margin-left: 15px;
+  font-family: Roboto-Regular;
+  font-size: 48px;
+  margin-left: 35px;
 }
 
 .team-info {
@@ -156,9 +161,10 @@
 }
 
 .ui.button.individuals {
-  background-color: #a8c5d6;
+  background-color: var(--purple);
+  ;
   color: white;
-  border-radius: 15px;
+  border-radius: 12px;
   font-family: Quicksand-Bold;
   display: flex;
   align-items: center;
@@ -166,15 +172,15 @@
 }
 
 .ui.button.teams {
-  background-color: #a8c5d6;
+  background-color: var(--purple);
   color: white;
-  border-radius: 15px;
+  border-radius: 12px;
   font-family: Quicksand-Bold;
 }
 
 .ui.buttons {
-  background: rgba(255, 251, 251, 0.7);
-  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.7);;
+  border-radius: 12px;
   padding: 3px;
 }
 
@@ -184,13 +190,13 @@
 }
 
 .ui.buttons .button:first-child {
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
 }
 
 .ui.buttons .button:last-child {
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 @media (min-width: 595px) {

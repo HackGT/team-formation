@@ -85,7 +85,7 @@ class Content extends Component {
         console.log(this.state.loggedIn)
         return (<div className="Content-container">
             <Switch>
-                <Route exact="exact" path="/login">
+                <Route exact path="/login">
                     <Login/>
                 </Route>
                 <ProtectedRoute loggedIn={this.state.loggedIn} exact="exact" path={["/", "/feed"]} visible={this.state.data.visible} header={HeaderFeed} component={Feed}/>

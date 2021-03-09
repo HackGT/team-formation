@@ -26,14 +26,16 @@ import environment from './Environment';
 import skills from '../constants/skills';
 import years from '../constants/years';
 import schools from '../constants/schools';
+import tracks from '../constants/tracks';
 import Filter from 'bad-words'
 
 const mutation = graphql `
-mutation EditProfileMutation($name: String, $grad_year: String, $school: String, $skills: [String], $experience: String, $contact: String, $contact_method: String, $visible: Int) {
-  update_user(name: $name, grad_year: $grad_year, school: $school,  skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method, visible: $visible) {
+mutation EditProfileMutation($name: String, $grad_year: String, $school: String, $skills: [String], $track: String $experience: String, $contact: String, $contact_method: String, $visible: Int) {
+  update_user(name: $name, grad_year: $grad_year, school: $school,  skills: $skills, track: $track, experience: $experience, contact: $contact, contact_method: $contact_method, visible: $visible) {
     name
     grad_year
     school
+    track
     skills
     experience
     contact
@@ -50,6 +52,7 @@ query EditProfileQuery {
         grad_year
         contact
         skills
+        track
         experience
         contact_method
         slackid
@@ -67,6 +70,7 @@ class EditProfile extends Component {
             name: "",
             school: "",
             grad_year: "",
+            track: "",
             skills: [],
             experience: "",
             public: true,
@@ -119,8 +123,6 @@ class EditProfile extends Component {
                     return <div>{error.message}</div>;
                 } else if (props) {
                     props = props.user_profile;
-                    console.log(props)
-                    console.log(years)
                     if (!this.state.name && props.name) {
                         this.setState({
                             ...props
@@ -139,6 +141,9 @@ class EditProfile extends Component {
                                 <Form.Select className="input-container-small" required="required" label='Year in School' defaultValue={props.grad_year} onChange={this.onYearChange} options={years} placeholder='Year in School'/>
                             </Form.Group>
                             <Form.Group>
+                                <Form.Select className="input-container-large" label='Track' defaultValue={props.track} onChange={this.onChange("track")} options={tracks}/>
+                            </Form.Group>
+                            <Form.Group>
                                 <Form.Select className="input-container-large" label="Skills" placeholder='Skills' defaultValue={props.skills} onChange={this.onSkillsChange} fluid="fluid" multiple="multiple" selection="selection" search="search" options={skills}/>
                             </Form.Group>
                             <Form.Group>
@@ -146,7 +151,7 @@ class EditProfile extends Component {
                             </Form.Group>
                             <Form.Group>
                                 <div className="editCheckbox">
-                                    <Checkbox label='Make my profile public' onChange={this.onPrivacyChange} checked={(this.state.visible == 1)}/>
+                                    <Checkbox label='Make my profile public' onChange={this.onPrivacyChange} checked={(this.state.visible === 1)}/>
                                 </div>
                             </Form.Group>
                             <div className="button-container">
@@ -199,7 +204,12 @@ class EditProfile extends Component {
 
     onYearChange = (e, {value}) => {
         this.setState({grad_year: value})
-    }
+    };
+
+    // Generic state handler, as long as values are reachable at top level
+    onChange = (state) => (e, {value}) => {
+        this.setState({[state]: value});
+    };
 
     onSchoolChange = (e, { value }) => {
         this.setState({school: value});
@@ -259,6 +269,7 @@ class EditProfile extends Component {
                     school: this.state.school,
                     contact: this.state.contact,
                     skills: this.state.skills,
+                    track: this.state.track,
                     experience: this.state.experience,
                     contact_method: this.state.contact_method,
                     visible: this.state.visible

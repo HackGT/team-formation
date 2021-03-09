@@ -51,7 +51,7 @@ class NotificationGroup extends Component {
             console.log(props.notifications);
             var user = this.props.user_id;
             var notifications = props.notifications;
-            var colors = ["#A8C5D6", "#CCBEDF"];
+            var colors = ["#68B6E5", "#A562A6"];
             var count = 0;
             var notificationCards = notifications.map((notif) => {
               console.log("SENDERR: ", notif.sender)
@@ -82,9 +82,9 @@ class NotificationGroup extends Component {
                   borderRightWidth: 0,
                   borderLeftWidth: 0,
                   marginLeft: 0,
-                  paddingLeft: 0,
+                  paddingLeft: (notificationCards.length > 0) ? 0 : "10px",
                   paddingRight: 0,
-                  color: "#A8C5D6"
+                  color: "#A562A6"
                 }}
               >
                 {notificationMessage}

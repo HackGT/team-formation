@@ -65,11 +65,11 @@ element.style {
 }
 
 .ui.bottom.popup:before {
-  background: rgb(168, 197, 214);
+  background: var(--purple);
 }
 
 .ui.visible.popup {
-  background-color: rgb(168, 197, 214);
+  background-color: var(--purple);
 }
 
 .ui.menu:not(.vertical) > .menu {
@@ -83,6 +83,6 @@ element.style {
 }
 
 .ui.visible.popup {
-  background-color: #a8c5d6;
+  background-color: var(--purple);
   border-radius: 15px;
 }

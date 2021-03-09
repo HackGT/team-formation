@@ -31,6 +31,7 @@ export interface IUser extends RootDocument {
     email: string;
     name: string;
     token: string | null;
+    track?: string;
     admin?: boolean;
     school?: string;
     grad_year?: string;
@@ -157,6 +158,10 @@ const UserSchema = new mongoose.Schema({
         required: false
     },
     school: {
+        type: String,
+        required: false
+    },
+    track: {
         type: String,
         required: false
     },

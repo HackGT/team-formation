@@ -7,6 +7,7 @@ import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
 import { QueryRenderer } from "react-relay";
 import NotificationGroup from "../NotificationGroup";
+import { filterExtensionDefinitions } from "@graphql-tools/schema";
 
 
 const mutation = graphql`
@@ -22,6 +23,7 @@ const getName = graphql`
       name
       team {
         id
+        name
       }
     }
   }
@@ -104,17 +106,22 @@ class Headers extends Component {
               <div className="logout-button">
                 <Menu secondary borderless="borderless" size={"massive"}>
                   <Menu.Menu position="right">
-                    <div className="header-name">
-                      <Menu.Item
-                        name={props.user_profile.name}
+                    <Menu.Item>
+                      <div 
+                        className="header-name"
                         style={{
+                          display: "flex",
                           fontFamily: "Quicksand-Bold",
                           fontSize: 20,
                           color: "white",
-                          paddingRight: 10
+                          paddingRight: 10,
+                          justifyContent: "center",
+                          alignContent: "center"
                         }}
-                      />
-                    </div>
+                      >
+                        {(props.user_profile.team) ? `${props.user_profile.name} (${props.user_profile.team.name})` : props.user_profile.name}
+                      </div>
+                    </Menu.Item>
                     <Menu.Item
                       style={{
                         size: "large",
@@ -186,14 +193,14 @@ class Headers extends Component {
                 </Menu>
                 <div className="desktopTitles">
                   <Link to="/feed">
-                    <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
+                    <p class="HackGTitle">HEALTHTECH</p>
                     <span class="teamFormation">Team Formation</span>
                   </Link>
                 </div>
                 <div className="mobileTitles">
                   <Link to="/feed">
                     <div className="innerMobileTitles">
-                      <p class="HackGTitle">HACKGT7: REIMAGINE REALITY</p>
+                      <p class="HackGTitle">HEALTHTECH</p>
                       <span class="teamFormation">Team Formation</span>
                     </div>
                   </Link>

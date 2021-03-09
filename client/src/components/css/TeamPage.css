@@ -22,13 +22,13 @@
 
 .ui.button.ask-to-join {
   font-family: Quicksand-Bold;
-  background: rgba(255, 255, 255, 0.22);
+  background: var(--red);
 	color: white;
 }
 
 .ui.button.leaveTeam {
   font-family: Quicksand-Bold;
-  background: rgba(255, 255, 255, 0.22);
+  background: var(--red);
   color: white;
   margin-left: 25px;
 }

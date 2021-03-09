@@ -42,21 +42,21 @@
 }
 
 body ::-webkit-scrollbar-thumb {
-  background: rgba(135, 147, 192, 0.5);
+  background: rgba(165, 98, 166, 0.4);
 }
 
 body ::-webkit-scrollbar-track {
-  background: rgba(153, 170, 201, 0.4);
+  background: var(--purple);
 }
 
 .ui.card.card1 {
-  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  box-shadow: -20px 20px 0px -8px rgba(255, 255, 255, 0.3);
   border-radius: 15px;
   padding-bottom: 30px;
 }
 
 .ui.container.name {
-  color: rgb(136, 149, 193);
+  color: var(--purple);
   font-family: Quicksand-Bold;
   font-size: 20px;
   text-align: center;
@@ -64,12 +64,12 @@ body ::-webkit-scrollbar-track {
 }
 
 .ui.divider {
-  border: 1px solid #c3bbcd !important;
+  border: 1px solid var(--purple) !important;
 }
 
 .ui.button.joinTeam {
   color: white;
-  background: #ccbedf;
+  background: var(--teal);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   margin-left: 5px;
   font-family: Quicksand-Bold;
@@ -78,7 +78,7 @@ body ::-webkit-scrollbar-track {
 .ui.container.seeking {
   overflow: auto;
   max-height: 42px;
-  color: #867a96;
+  color: var(--background);
   padding-left: 15px;
   font-family: Quicksand-Bold;
 }
@@ -86,14 +86,14 @@ body ::-webkit-scrollbar-track {
 .ui.container.bio {
   overflow: auto;
   max-height: 42px;
-  color: #867a96;
+  color: var(--background);
   padding-left: 15px;
   font-family: Quicksand-Bold;
 }
 
 .ui.button.newTeam {
   color: white;
-  background: #ccbedf;
+  background: var(--purple);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   margin-left: 5px;
   width: 50%;

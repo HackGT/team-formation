@@ -18,9 +18,15 @@
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
 
+@font-face {
+  font-family: Roboto-Regular;
+  src: url("./fonts/roboto/Roboto-Regular.ttf");
+}
+
 textarea::placeholder {
-  color: #8895c1;
-  font-family: Quicksand-Bold;
+  color: var(--purple);
+  font-family: Roboto-Regular;
+  font-weight: 700;
 }
 
 .modalHeader {
@@ -47,15 +53,15 @@ textarea::placeholder {
   border-radius: 15px;
   padding: 20px;
   box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
-  color: #8895c1;
-  font-family: Quicksand-Bold;
+  color: var(--purple);
+  font-family: Roboto-Regular;
   background: white;
 }
 
 .projectIdea {
   margin-top: 30px;
-  color: white;
-  font-family: Quicksand-Bold;
+  color: var(--purple);
+  font-family: Roboto-Regular;
   font-size: 15px;
 }
 
@@ -64,8 +70,8 @@ textarea::placeholder {
   border-radius: 15px;
   padding: 20px;
   box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
-  color: #8895c1;
-  font-family: Quicksand-Bold;
+  color: var(--purple);
+  font-family: Roboto-Regular;
   background: white;
 }
 
@@ -101,8 +107,8 @@ textarea::placeholder {
   margin-left: auto;
   margin-right: auto;
   resize: none;
-  color: #8895c1;
-  font-family: Quicksand-Bold;
+  color: var(--purple);
+  font-family: Roboto-Regular;
   width: 500px;
   height: 150px;
 }
@@ -172,14 +178,14 @@ textarea::placeholder {
   border-radius: 15px;
   padding: 20px;
   box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
-  color: #8895c1;
-  font-family: Quicksand-Bold;
+  color: var(--purple);
+  font-family: Roboto-Regular;
   background: white;
 }
 
 .user1FirstName {
-  color: white;
-  font-family: Quicksand-Bold;
+  color: var(--purple);
+  font-family: Roboto-Regular;
   font-size: 15px;
 }
 
@@ -188,8 +194,8 @@ textarea::placeholder {
   border-radius: 15px;
   padding: 20px;
   box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
-  color: #8895c1;
-  font-family: Quicksand-Bold;
+  color: var(--purple);
+  font-family: Roboto-Regular;
   background: white;
 }
 
@@ -224,8 +230,8 @@ textarea::placeholder {
   padding-top: 15px;
   border-color: transparent;
   box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
-  color: #8895c1;
-  font-family: Quicksand-Bold;
+  color: var(--purple);
+  font-family: Roboto-Regular;
   resize: none;
   width: 100%;
 }
@@ -237,8 +243,8 @@ textarea::placeholder {
   border-color: transparent;
   box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
-  color: #8895c1;
-  font-family: Quicksand-Bold;
+  color: var(--purple);
+  font-family: Roboto-Regular;
   resize: none;
   width: 100%;
 }
@@ -249,16 +255,17 @@ textarea::placeholder {
 
 
 .ui.modal > .content {
-  background: linear-gradient(180deg, #656cae 0%, rgba(255, 255, 255, 0) 100%),
-    #8bb2c2;
-  border-radius: 15px !important;
+  background: url("./assets/blob2.png") no-repeat top right, var(--background);
+  border-radius: 16px !important;
+  box-shadow: 0px 0px 8px #FFFFFF;
 }
 
 .ui.button.submit {
   border-radius: 12px;
   color: white;
-  background: rgba(255, 255, 255, 0.22);
-  font-family: Quicksand-Bold;
+  background: var(--red);
+  font-family: Roboto-Regular;
+  font-weight: 700;
 }
 
 .ui.button.accept {

@@ -23,17 +23,10 @@ class TeamCard extends Component {
 		// on='click'
 		// hideOnScroll
 		// />
-		var colors = [
-			'violet',
-			'yellow',
-			'orange'
-		]
 		var count = 0;
-		var skill;
 		// var viewskill;
 		let link = "/team/" + this.props.id;
-		var colors = ["#A0CCC9", "#EBABCA"];
-		var count = 0;
+		var colors = ["#68B6E5", "#EB9922"];
 		var viewskill = this.props.interests.map((skill) => (
 		<Label
 			size="mini"

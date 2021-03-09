@@ -1,3 +1,13 @@
+/* Variables */
+:root {
+  --purple: #A562A6;
+  --red: #DB3626;
+  --orange: #EB9922;
+  --teal: #66C5C3;
+  --blue: #68B6E5;
+  --background: #10112E;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -6,8 +16,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(180deg, #656cae 0%, rgba(255, 255, 255, 0) 100%),
-    #8bb2c2;
+  background: url('./components/css/assets/BLOB 1.png'), var(--background) no-repeat;
   height: 100%;
   margin: 0;
   background-repeat: no-repeat;

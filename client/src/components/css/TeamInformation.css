@@ -3,6 +3,11 @@
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
 
+@font-face {
+  font-family: Roboto-Regular;
+  src: url("./fonts/roboto/Roboto-Regular.ttf");
+}
+
 @media (min-width: 595px) {
   .team-card-container {
     max-width: 900px;
@@ -56,18 +61,19 @@
 .ui.form .disabled.fields .field,
 .ui.form .field :disabled {
   opacity: 1;
-  color: #85808A;
-  font-family: Quicksand-Bold;
+  color: #000;
+  font-family: Roboto-Regular;
+  font-weight: 500;
 }
 
 .ui.form .field.disabled :disabled {
-  border: 1px solid #C3BBCD;
+  border: 1px solid var(--purple);
 }
 
 .ui.form .field.disabled > label,
 .ui.form .fields.disabled > label {
   opacity: 1;
-  color: #85808A;
+  color: #000;
 }
 
 .ui.fluid.dropdown {
@@ -81,9 +87,11 @@
 .ui.label.labelStyle {
   color: white;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
-  font-family: Quicksand-Bold;
+  font-family: Roboto-Regular;
+  font-weight: 500;
   font-size: 100%;
   margin-top: 5px;
+  border-radius: 4px;
 }
 
 .ui.message .header {
@@ -107,17 +115,17 @@
 }
 
 .ui.multiple.dropdown > .label:nth-child(odd) {
-  background-color: #a0ccc9;
+  background-color: var(--blue);
   color: white;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
-  font-family: Quicksand-Bold;
+  font-family: Roboto-Regular;
 }
 
 .ui.multiple.dropdown > .label:nth-child(even) {
-  background-color: #ebabca;
+  background-color: var(--orange);
   color: white;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
-  font-family: Quicksand-Bold;
+  font-family: Roboto-Regular;
 }
 
 .ui.card > .content,
