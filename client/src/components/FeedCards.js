@@ -67,7 +67,6 @@ class FeedCards extends Component {
                         slackid={user.slackid}
                         />
                     })
-                    console.log(cards.length)
                     return (
                         <div>
                     <div className='Cards-container'>
