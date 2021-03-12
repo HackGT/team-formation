@@ -54,14 +54,15 @@ class TeamCard extends Component {
 					</Card.Description>
 					<Card.Description>
 					<div className="ui divider"></div>
+						<div className="contact-button">
 							{button}
 							<JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
-							<Link to={link}>
-								<Button
-									className={text}
-									content="View Team"
-								/>
-							</Link>
+							<Button
+								className={text}
+								content="View Team"
+								onClick={() => {window.location.href = link}}
+							/>
+						</div>
 					</Card.Description>
 				</Card.Content>
 			</Card>
