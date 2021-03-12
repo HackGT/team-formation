@@ -85,7 +85,7 @@ body .ui.card:hover {
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   font-family: Roboto-Medium;
   font-weight: 500;
-  width: 40%;
+  width: 45%;
   font-size: 13px;
   border-radius: 4px;
   display: flexbox;
@@ -97,7 +97,7 @@ body .ui.card:hover {
   background: var(--purple);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
   margin-left: 5px;
-  width: 40%;
+  width: 45%;
   font-size: 13px;
   font-family: Roboto-Medium;
   font-weight: 500;
