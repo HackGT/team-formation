@@ -32,10 +32,6 @@ const getUsersQuery = graphql `
 `;
 
 class FeedCards extends Component {
-    state = {
-        sliceIndexStart: 0,
-        numCardsPerPage: 4,
-    }
     render() {
         let search = this.props.search;
         let skill = this.props.skill.join(',');
@@ -70,14 +66,14 @@ class FeedCards extends Component {
                     return (
                         <div>
                     <div className='Cards-container'>
-                        {cards.slice(this.state.sliceIndexStart, this.state.sliceIndexStart + this.state.numCardsPerPage)}
+                        {cards.slice(this.props.sliceIndexStart, this.props.sliceIndexStart + this.props.numCardsPerPage)}
                     </div>
                     <div className='buttons-container'>
-                    {this.state.sliceIndexStart !== 0 && <Button onClick={this.moveLeft}>
+                    {this.props.sliceIndexStart !== 0 && <Button onClick={this.props.moveLeft}>
                         Previous
                     </Button>}
-                    {Math.floor(this.state.sliceIndexStart / this.state.numCardsPerPage)
-                    !== Math.floor(cards.length / this.state.numCardsPerPage) && <Button onClick={this.moveRight}>
+                    {Math.floor(this.props.sliceIndexStart / this.props.numCardsPerPage)
+                    !== Math.floor(cards.length / this.props.numCardsPerPage) && <Button onClick={this.props.moveRight}>
                         Next
                     </Button>}
                     </div>
@@ -86,17 +82,6 @@ class FeedCards extends Component {
             }}/>);
 
     };
-    moveLeft = (e) => {
-        this.setState({
-            sliceIndexStart: this.state.sliceIndexStart - this.state.numCardsPerPage,
-        })
-    }
-    moveRight = (e) => {
-        this.setState({
-            sliceIndexStart: this.state.sliceIndexStart + this.state.numCardsPerPage,
-        })
-    }
-
 };
 
 export default FeedCards;
