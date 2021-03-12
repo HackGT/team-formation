@@ -83,7 +83,7 @@ class TeamInformation extends Component {
         console.log(this.state.teamBio);
         return (
           <div className="team-card-container">
-            <Card className="semanticCardContainer" fluid="fluid">
+            <Card className="semanticCardContainer" fluid>
               <Card.Content className="card-content">
                 <div className="header">
                   <Card.Header className="card-header">
@@ -103,7 +103,7 @@ class TeamInformation extends Component {
                       minHeight: 150,
                       resize: "none",
                     }}
-                    disabled="disabled"
+                    disabled
                   />
                   <Form.Field
                     control={TextArea}
@@ -113,7 +113,7 @@ class TeamInformation extends Component {
                       minHeight: 150,
                       resize: "none",
                     }}
-                    disabled="disabled"
+                    disabled
                   />
                 </Form>
                 <Card.Description className="interests">Interests</Card.Description>

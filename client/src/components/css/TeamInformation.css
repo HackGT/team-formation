@@ -110,7 +110,7 @@
 }
 
 .ui[class*="right labeled"].icon.button {
-  background-color: #8895c1;
+  background-color: var(--purple);
   color: white;
 }
 

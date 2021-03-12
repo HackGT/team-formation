@@ -89,7 +89,7 @@ class UserCard extends Component {
               {contact}
               <Button
                 className="teamUp"
-                content={this.props.team ? "Invite to Join" : "Team Up"}
+                content={this.props.team ? "Send Invite" : "Team Up"}
                 onClick={() => {
                   if(this.props.teamid) {
                     text="The user is already on a team";
