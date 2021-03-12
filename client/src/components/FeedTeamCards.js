@@ -56,7 +56,7 @@ class FeedTeamCards extends Component {
                         Previous
                     </Button>}
                     {Math.floor(this.props.sliceIndexStart / this.props.numCardsPerPage)
-                    !== Math.floor((cards.length - 1) / this.props.numCardsPerPage) && <Button onClick={this.props.moveRight}>
+                    !== Math.floor((cards.length - 1) / this.props.numCardsPerPage) && cards.length !== 0 && <Button onClick={this.props.moveRight}>
                         Next
                     </Button>}
                     </div>

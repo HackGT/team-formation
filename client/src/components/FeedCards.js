@@ -67,6 +67,7 @@ class FeedCards extends Component {
                         slackid={user.slackid}
                         />
                     })
+                    console.log(cards.length)
                     return (
                         <div>
                     <div className='Cards-container'>
@@ -77,7 +78,7 @@ class FeedCards extends Component {
                         Previous
                     </Button>}
                     {Math.floor(this.props.sliceIndexStart / this.props.numCardsPerPage)
-                    !== Math.floor((cards.length - 1)/ this.props.numCardsPerPage) && <Button onClick={this.props.moveRight}>
+                    !== Math.floor((cards.length - 1)/ this.props.numCardsPerPage) && cards.length !== 0 && <Button onClick={this.props.moveRight}>
                         Next
                     </Button>}
                     </div>
