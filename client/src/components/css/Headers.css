@@ -55,7 +55,7 @@
 
 
 element.style {
-  color: white;
+  color: var(--purple);
 }
 .ui.secondary.menu .item {
   padding-left: 0;
@@ -66,6 +66,10 @@ element.style {
 
 .ui.bottom.popup:before {
   background: var(--purple);
+}
+
+.ui.top.popup:before {
+  background-color: var(--purple);
 }
 
 .ui.visible.popup {
