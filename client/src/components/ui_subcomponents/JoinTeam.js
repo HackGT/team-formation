@@ -50,7 +50,7 @@ class JoinTeam extends Component {
               placeholder="Write a message..."
               onChange={this.onBioChange}
             />
-            {this.state.errorMessage}
+            <div className="error">{this.state.errorMessage}</div>
             <div class="flex-container-modal3">
               <div>
                 {/* <ConfirmationModal

@@ -6,6 +6,7 @@ import environment from "../Environment";
 import { Link } from "react-router-dom";
 import "../css/Modal.css";
 import ConfirmationModal from "./ConfirmationModal";
+import truncateTeamName from "../../constants/functions"
 
 
 const acceptRequestMutation = graphql`
@@ -26,8 +27,8 @@ class TeamRequest extends Component {
   }
   render() {
 
-
-    const sender = this.props.sender;
+    const sender = this.props.sender
+    const senderName = truncateTeamName(sender.name)
     return (
       <Modal
         closeIcon
@@ -39,12 +40,12 @@ class TeamRequest extends Component {
         <Modal.Content>
           <Modal.Description>
             <p class="modalHeader">
-              {sender.name} Wants You to Join Their Team!
+              {truncateTeamName(senderName)} Wants You to Join Their Team!
             </p>
             <div class="modal1Margins">
-              <p class="requestMessage">{sender.name + 's'} Request Message:</p>
+              <p class="requestMessage">{senderName + 's'} Request Message:</p>
               <p class="requestMessageBody">{this.props.teamRequestMessage}</p>
-              <p class="projectIdea">{sender.name + "'s'"} Project Idea:</p>
+              <p class="projectIdea">{senderName + "'s'"} Project Idea:</p>
               <p class="projectIdeaBody">{this.props.teamProjectIdea}</p>
 
               <div class="flex-container1">
@@ -59,7 +60,7 @@ class TeamRequest extends Component {
                       padding: 12,
                     }}
                   >
-                    View more about {sender.name}
+                    View more about {senderName}
                   </Button>
                 </div>
               </div>

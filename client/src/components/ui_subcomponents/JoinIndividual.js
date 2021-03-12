@@ -70,6 +70,7 @@ class JoinIndividual extends Component {
                     name={this.props.name}
                     school={this.props.school}
                     grad_year={this.props.grad_year}
+                    track={this.props.track}
                     experience={this.props.experience}
                     skills={this.props.skills}
                     contact={this.props.contact}

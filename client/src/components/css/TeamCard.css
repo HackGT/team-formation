@@ -41,10 +41,6 @@
   width: 100%;
 }
 
-body ::-webkit-scrollbar-thumb {
-  background: rgba(165, 98, 166, 0.4);
-}
-
 body ::-webkit-scrollbar-track {
   background: var(--purple);
 }

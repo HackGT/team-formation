@@ -8,6 +8,7 @@ import Members from './Members';
 import MembersBlank from './MembersBlank';
 import './css/TeamPage.css';
 import ConfirmationModal from "./ui_subcomponents/ConfirmationModal";
+import truncateTeamName from "../constants/functions"
 
 class NoTeam extends Component {
   constructor(props) {
@@ -26,11 +27,12 @@ class NoTeam extends Component {
     this.setState({showSecondModal: true})
   }
   render() {
+    var teamName = truncateTeamName(this.props.team.name)
     return (
         <div id="not-team" class="team-page">
-          <h1 className="no-team-heading">{this.props.team.name}</h1>
+          <h1 className="no-team-heading">{teamName}</h1>
           <Button className="ask-to-join" content='Ask to Join' onClick={() => this.setState({showModal: true})} />
-              <JoinTeam name={this.props.team.name} id={this.props.team.id} showModal={this.state.showModal} closeModal={this.closeModal} showSecond={this.secondModal}/>
+              <JoinTeam name={teamName} id={this.props.team.id} showModal={this.state.showModal} closeModal={this.closeModal} showSecond={this.secondModal}/>
               <ConfirmationModal
               message="Your request to join the team has been sent!"
               closeModal={() => this.setState({ showSecondModal:false})}
