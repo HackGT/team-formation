@@ -21,7 +21,7 @@ class Feed extends Component {
     teams: false,
     showSecondModal: false,
     sliceIndexStart: 0,
-    numCardsPerPage: 30,
+    numCardsPerPage: 12,
   };
 
   render() {
