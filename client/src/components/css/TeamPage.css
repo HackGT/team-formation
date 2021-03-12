@@ -3,6 +3,11 @@
   src: url("./fonts/lekton/Lekton-Bold.ttf");
 }
 
+@font-face {
+  font-family: Roboto-Medium;
+  src: url("./fonts/roboto/Roboto-Medium.ttf");
+}
+
 .first-row {
   width: 100%;
   display: flex;
@@ -21,13 +26,15 @@
 }
 
 .ui.button.ask-to-join {
-  font-family: Quicksand-Bold;
+  font-family: Roboto-Medium;
+  font-weight: 500;
   background: var(--red);
 	color: white;
 }
 
 .ui.button.leaveTeam {
-  font-family: Quicksand-Bold;
+  font-family: Roboto-Medium;
+  font-weight: 500;
   background: var(--red);
   color: white;
   margin-left: 25px;
@@ -70,7 +77,7 @@
 
 #header {
   display: inline-block;
-  width: 300px;
+  width: 80%;
   margin-left: 25px;
 }
 

@@ -67,6 +67,7 @@ class OnTeam extends Component {
             onChange={this.onTeamNameChange}
             className="input"
             icon="pencil"
+            fluid
           />
           {/* <Message id="alert" hidden={this.state.save_message_hidden} success={this.state.save_success} header={this.state.save_success ? "Changes Saved" : "Unsaved Changes"}/> */}
         </h1>
