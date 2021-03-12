@@ -75,12 +75,12 @@
 }
 
 #field {
-  width: 100%;
+  width: 364.8px;
   background: transparent;
   border: none;
   font-family: Lekton-Bold;
   text-align: center;
-  padding-left: 2.6em;
+  /* padding-left: 2.6em; */
 }
 
 #alert {
