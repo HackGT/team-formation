@@ -20,6 +20,8 @@ class Feed extends Component {
     tracks: [],
     teams: false,
     showSecondModal: false,
+    sliceIndexStart: 0,
+    numCardsPerPage: 30,
   };
 
   render() {
@@ -29,6 +31,10 @@ class Feed extends Component {
         onTeamPageClick={this.props.onTeamPageClick}
         skill={this.state.skills}
         user_id={this.props.user_id}
+        sliceIndexStart={this.state.sliceIndexStart}
+        numCardsPerPage={this.state.numCardsPerPage}
+        moveLeft={this.moveLeft}
+        moveRight={this.moveRight}
       />
     ) : (
       <FeedCards
@@ -38,6 +44,10 @@ class Feed extends Component {
         school={this.state.schools}
         track={this.state.tracks}
         user_id={this.props.user_id}
+        sliceIndexStart={this.state.sliceIndexStart}
+        numCardsPerPage={this.state.numCardsPerPage}
+        moveLeft={this.moveLeft}
+        moveRight={this.moveRight}
       />
     );
     return (
@@ -112,10 +122,12 @@ class Feed extends Component {
       this.state[filterProp].splice(index, 1);
       this.setState({
         [filterProp]: this.state[filterProp],
+        sliceIndexStart: 0,
       });
     } else {
       this.setState({
         [filterProp]: [...this.state[filterProp], name],
+        sliceIndexStart: 0,
       });
     }
   };
@@ -125,7 +137,7 @@ class Feed extends Component {
   };
 
   onSearchClick = (search_string) => {
-    this.setState({ searchTerm: search_string });
+    this.setState({ searchTerm: search_string, sliceIndexStart: 0 });
   };
 
   feedTypeListener = (e, data) => {
@@ -148,6 +160,16 @@ class Feed extends Component {
       });
     }
   };
+  moveLeft = (e) => {
+    this.setState({
+        sliceIndexStart: this.state.sliceIndexStart - this.state.numCardsPerPage,
+    })
+}
+moveRight = (e) => {
+    this.setState({
+        sliceIndexStart: this.state.sliceIndexStart + this.state.numCardsPerPage,
+    })
+}
 }
 
 export default Feed;

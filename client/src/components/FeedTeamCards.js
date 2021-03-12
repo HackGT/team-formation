@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import TeamCard from './TeamCard';
-import {Grid, Row, Card} from 'semantic-ui-react';
+import {Grid, Row, Card, Button} from 'semantic-ui-react';
 
 import {QueryRenderer} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
@@ -47,14 +47,23 @@ class FeedTeamCards extends Component {
                                 })} description={team.description} team={props.user_profile.team}/>
                         }
                     })
-                    return (<div className='Cards-container'>
-
-                        {cards}
+                    return (<div>
+                    <div className='Cards-container'>
+                        {cards.slice(this.props.sliceIndexStart, this.props.sliceIndexStart + this.props.numCardsPerPage)}
+                    </div>
+                    <div className='buttons-container'>
+                    {this.props.sliceIndexStart !== 0 && <Button onClick={this.props.moveLeft}>
+                        Previous
+                    </Button>}
+                    {Math.floor(this.props.sliceIndexStart / this.props.numCardsPerPage)
+                    !== Math.floor((cards.length - 1) / this.props.numCardsPerPage) && <Button onClick={this.props.moveRight}>
+                        Next
+                    </Button>}
+                    </div>
                     </div>);
                 }
             }}/>);
     };
-
 };
 
 export default FeedTeamCards;
