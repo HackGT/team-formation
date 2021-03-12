@@ -8,6 +8,7 @@ import environment from "../Environment";
 import { QueryRenderer } from "react-relay";
 import NotificationGroup from "../NotificationGroup";
 import { filterExtensionDefinitions } from "@graphql-tools/schema";
+import truncateTeamName from "../../constants/functions"
 
 
 const mutation = graphql`
@@ -119,7 +120,7 @@ class Headers extends Component {
                           alignContent: "center"
                         }}
                       >
-                        {(props.user_profile.team) ? `${props.user_profile.name} (${props.user_profile.team.name})` : props.user_profile.name}
+                        {(props.user_profile.team) ? `${props.user_profile.name} (${truncateTeamName(props.user_profile.team.name)})` : props.user_profile.name}
                       </div>
                     </Menu.Item>
                     <Menu.Item
