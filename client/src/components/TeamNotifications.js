@@ -79,7 +79,7 @@ class TeamNotifications extends Component {
                                     <Card.Content className="card-content" textAlign='center'>
                                         <Card.Header className="card-header">Notifications</Card.Header>
                                         <Container style={{overflow: 'auto', maxHeight: 200, minHeight: 200, color: '#8895c1', margin: '0 auto', height: "100%",
-                                            'line-height': "100%"}} textAlign='center'>
+                                            lineHeight: "100%"}} textAlign='center'>
                                             {notificationMesssage}
                                         </Container>
                                     </Card.Content>
