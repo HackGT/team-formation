@@ -67,7 +67,9 @@ class OnTeam extends Component {
             onChange={this.onTeamNameChange}
             className="input"
             icon="pencil"
-            fluid
+            style={{
+              width: (this.state.name.length < 82) ? `${this.state.name.length + 10}ch` : '90ch'
+            }}
           />
           {/* <Message id="alert" hidden={this.state.save_message_hidden} success={this.state.save_success} header={this.state.save_success ? "Changes Saved" : "Unsaved Changes"}/> */}
         </h1>
@@ -114,7 +116,10 @@ class OnTeam extends Component {
     );
   }
   onTeamNameChange = (e) => {
-    this.setState({ name: e.target.value });
+    this.setState({ name: e.target.value }, () => {
+      let input = document.getElementById('field');
+      input.style.width = (this.state.name.length < 82) ? `${this.state.name.length + 10}ch` : '90ch';
+    });
   };
 
   _onBlur() {
