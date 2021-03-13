@@ -13,6 +13,11 @@
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
 }
 
+@font-face {
+  font-family: Roboto-Medium;
+  src: url("./fonts/roboto/Roboto-Medium.ttf");
+}
+
 .UserCard-container {
   padding-top: 2%;
   width: 100%;
@@ -68,8 +73,10 @@ body ::-webkit-scrollbar-track {
   background: var(--teal);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   margin-left: 5px;
-  font-family: Quicksand-Bold;
-  display: flexbox;
+  font: 'Roboto-Medium';
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
 }
 .ui.container.seeking {
   overflow: auto;
@@ -93,9 +100,11 @@ body ::-webkit-scrollbar-track {
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   margin-left: 5px;
   width: 50%;
-  font-family: Quicksand-Bold;
+  font-family: 'Roboto-Medium';
+  font-weight: 400;
   margin-left: 65px;
-  display: flexbox;
+  display: flex;
+  justify-content: center;
 }
 
 .ui.container.skills {
