@@ -149,6 +149,7 @@ class Feed extends Component {
         tracks: [],
         years: [],
         schools: [],
+        sliceIndexStart: 0,
       });
     } else if (data.children === "Teams") {
       this.setState({
@@ -157,6 +158,7 @@ class Feed extends Component {
         skills: [],
         years: [],
         schools: [],
+        sliceIndexStart: 0,
       });
     }
   };
