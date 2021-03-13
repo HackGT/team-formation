@@ -226,17 +226,20 @@ class EditProfile extends Component {
     };
 
     checkProfanity = () => {
-        var profanityExists = false;
-        const profanities = Object.keys(this.state).map((key) => {
-            if (typeof(this.state[key]) === "string") {
-                const k = `${key}_profane`
-                const isProfane = this.profanityFilter.isProfane(this.state[key])
-                this.setState({[k]: isProfane})
-                profanityExists = profanityExists || isProfane
-                return isProfane
-            }
-        })
-        return profanityExists
+//         var profanityExists = false;
+        const isProfane = this.profanityFilter.isProfane(this.state["experience"])
+        this.setState({"experience_profane": isProfane});
+        return isProfane;
+//         const profanities = Object.keys(this.state).map((key) => {
+//             if (typeof(this.state[key]) === "string") {
+//                 const k = `${key}_profane`
+//                 const isProfane = this.profanityFilter.isProfane(this.state[key])
+//                 this.setState({[k]: isProfane})
+//                 profanityExists = profanityExists || isProfane
+//                 return isProfane
+//             }
+//         })
+//         return profanityExists
     }
 
     onCancelClick = () => {
