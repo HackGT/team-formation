@@ -85,15 +85,17 @@ body .ui.card:hover {
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   font-family: Roboto-Medium;
   font-weight: 500;
+  font-style: normal;
   width: 45%;
   font-size: 13px;
   border-radius: 4px;
-  display: flexbox;
+  display: flex;
+  justify-content: center;
 }
 
 .ui.button.teamUp {
   color: white;
-  display: flexbox;
+  display: flex;
   background: var(--purple);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
   margin-left: 5px;
@@ -101,6 +103,8 @@ body .ui.card:hover {
   font-size: 13px;
   font-family: Roboto-Medium;
   font-weight: 500;
+  font-style: normal;
+  justify-content: center;
 }
 
 .ui.label.labelStyle {
@@ -129,6 +133,7 @@ body .ui.card:hover {
   padding-top: 10px;
   color: var(--purple);
   font-family: Roboto-Bold;
+  font-weight: 400;
   font-size: 20px;
 }
 

@@ -55,6 +55,15 @@ class OnTeam extends Component {
     });
     window.location.reload();
   }
+
+  calcWidth = () => {
+    if (this.state.name) {
+      return (this.state.name.length < 82) ? `${this.state.name.length + 10}ch` : '90ch';
+    } else {
+      return '10ch'
+    }
+  }
+
   render() {
     return (
       <div id="on-team" class="team-page">
@@ -68,7 +77,7 @@ class OnTeam extends Component {
             className="input"
             icon="pencil"
             style={{
-              width: (this.state.name.length < 82) ? `${this.state.name.length + 10}ch` : '90ch'
+              width: this.calcWidth()
             }}
           />
           {/* <Message id="alert" hidden={this.state.save_message_hidden} success={this.state.save_success} header={this.state.save_success ? "Changes Saved" : "Unsaved Changes"}/> */}
@@ -118,7 +127,7 @@ class OnTeam extends Component {
   onTeamNameChange = (e) => {
     this.setState({ name: e.target.value }, () => {
       let input = document.getElementById('field');
-      input.style.width = (this.state.name.length < 82) ? `${this.state.name.length + 10}ch` : '90ch';
+      input.style.width = this.calcWidth();
     });
   };
 
