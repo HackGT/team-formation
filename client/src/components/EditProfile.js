@@ -80,11 +80,9 @@ class EditProfile extends Component {
             slackid: "",
             visible: 0,
             confirm_slack: false,
-            "name_profane": false,
             "school_profane": false,
             "grad_year_profane": false,
             "experience_profane": false,
-            "contact_profane": false,
             next: false
         };
         this.profanityFilter = new Filter();
@@ -95,11 +93,11 @@ class EditProfile extends Component {
 
         let contact_form;
         if (this.state.contact_method === 'phone number') {
-            contact_form = <Form.Input label='Phone Number:' placeholder='(###) ###-####' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} error={this.state["contact_profane"]} required="required"/>
+            contact_form = <Form.Input label='Phone Number:' placeholder='(###) ###-####' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} required="required"/>
         } else if (this.state.contact_method === 'email') {
-            contact_form = <Form.Input label='Email:' placeholder='example@email.com' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} error={this.state["contact_profane"]} required="required"/>
+            contact_form = <Form.Input label='Email:' placeholder='example@email.com' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} required="required"/>
         } else if (this.state.contact_method === "social media") {
-            contact_form = <Form.Input label='Social Media URL:' placeholder='Social Media URL' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} error={this.state["contact_profane"]} required="required"/>
+            contact_form = <Form.Input label='Social Media URL:' placeholder='Social Media URL' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} required="required"/>
         } else {
             contact_form = ""
         }
@@ -107,7 +105,7 @@ class EditProfile extends Component {
         if(this.state.confirm_slack) {
             console.log("here SLACK")
             return (
-                <ConfirmationModal message={"Please connect your HackGT 7 Slack Account to receive team formation notifications! If you are not on the event slack, please join before proceeding."} showModal={this.state.confirm_slack} closeModal={() => {
+                <ConfirmationModal message={"Please connect your HealthTech 2021 Slack Account to receive team formation notifications! If you are not on the event slack, please join before proceeding."} showModal={this.state.confirm_slack} closeModal={() => {
                         window.location.replace("https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=1368926133911.1420841367108&redirect_uri=https%3A%2F%2Fteamformation.healthtech.hack.gt%2Fapi%2Fuser%2Fslack%2Fcallback&team=T01PU25BY7Q")
                         this.setState({"confirm_slack": false})
                     }} />
@@ -132,7 +130,7 @@ class EditProfile extends Component {
                     return (<div>
                         <Form className="form-container">
                             <Form.Group>
-                                <Form.Input className="input-container-large" label='Full Name' placeholder='Full Name' defaultValue={props.name} onChange={this.onNameChange} error={this.state["name_profane"]} required="required"/>
+                                <Form.Input className="input-container-large" label='Full Name' placeholder='Full Name' defaultValue={props.name} onChange={this.onNameChange} required="required"/>
                             </Form.Group>
                             <Form.Group className="school-and-year">
                                 <Form.Select className="input-container-small" label='School' placeholder='School' defaultValue={props.school} onChange={this.onSchoolChange} error={this.state["school_profane"]}
@@ -247,7 +245,7 @@ class EditProfile extends Component {
 
     onNextClick = () => {
         let cur_error;
-        this.setState({name_profane: false, school_profane: false, grad_year_profane: false, experience_profane: false, contact_profane: false})
+        this.setState({school_profane: false, grad_year_profane: false, experience_profane: false})
         if (this.state.name === "" || this.state.school === "" || this.state.grad_year === "" || this.state.contact_method === "") {
             cur_error = <Message error="error" header='Some required fields left empty' content='Make sure to fill in all starred fields'/>;
             this.setState({cur_error_message: cur_error});
