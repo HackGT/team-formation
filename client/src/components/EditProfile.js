@@ -108,7 +108,7 @@ class EditProfile extends Component {
             console.log("here SLACK")
             return (
                 <ConfirmationModal message={"Please connect your HackGT 7 Slack Account to receive team formation notifications! If you are not on the event slack, please join before proceeding."} showModal={this.state.confirm_slack} closeModal={() => {
-                        window.location.replace("https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=1368926133911.1420841367108&redirect_uri=https%3A%2F%2Fteamformation.hack.gt%2Fapi%2Fuser%2Fslack%2Fcallback&team=T01AUT83XST")
+                        window.location.replace("https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=1368926133911.1420841367108&redirect_uri=https%3A%2F%2Fteamformation.healthtech.hack.gt%2Fapi%2Fuser%2Fslack%2Fcallback&team=T01PU25BY7Q")
                         this.setState({"confirm_slack": false})
                     }} />
             )
