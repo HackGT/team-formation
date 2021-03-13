@@ -16,8 +16,8 @@ secrets:
 
 env:
   GROUNDTRUTHID: 8b34468cfa667950563557718eb6b9e804690717324ccf030c3ffbe34554d2c7
-  GROUNDTRUTHURL: https://login.dev.hack.gt
-  GRAPHQLURL: https://registration.2020.hack.gt/graphql
+  GROUNDTRUTHURL: https://login.hack.gt
+  GRAPHQLURL: https://registration.healthtech.hack.gt/graphql
   ISPRODUCTION: true
-  TEAM_ID: T01AUT83XST
-  HOST_URL: teamformation.dev.hack.gt
+  TEAM_ID: T01PU25BY7Q
+  HOST_URL: teamformation.healthtech.hack.gt
