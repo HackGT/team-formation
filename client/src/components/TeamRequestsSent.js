@@ -54,7 +54,7 @@ class TeamRequestsSent extends Component {
                     } else if (props) {
                         console.log(JSON.stringify(props));
                         var sent_requests = props.sent_team_notifications;
-                        var colors = ["#A8C5D6", "#CCBEDF"];
+                        var colors = ["#68B6E5", "#EB9922"];
                         var count = 0;
                         var sentRequestCards = sent_requests.map((notif) => {
                             return (

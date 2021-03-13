@@ -54,7 +54,7 @@ class TeamNotifications extends Component {
                     } else if (props) {
                         console.log(JSON.stringify(props));
                         var notifications = props.team_notifications;
-                        var colors = ["#68B6E5", "#A562A6"];
+                        var colors = ["#68B6E5", "#EB9922"];
                         var count = 0;
                         var notificationCards = notifications.map((notif) => {
                             return (

@@ -27,8 +27,8 @@ class TeamRequest extends Component {
   }
   render() {
 
-    const sender = this.props.sender
-    const senderName = truncateTeamName(sender.name)
+    const sender = this.props.sender;
+    const senderName = sender.name;
     return (
       <Modal
         closeIcon
