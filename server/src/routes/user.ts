@@ -2,7 +2,8 @@ import express from "express";
 import request from "request"
 import passport from "passport";
 import { createLink, AuthenticateOptions } from "./strategies"
-import { IUser, User } from "../schema";
+import { User } from "../models";
+import { IUser } from "../types";
 export let userRoutes = express.Router();
 
 userRoutes.route("/login").get((req, response, next) => {

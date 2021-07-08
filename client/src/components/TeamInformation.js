@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import {
-    Card,
-    Form,
-    TextArea,
-    Button,
-    Label,
-    Icon,
-    Message
-} from 'semantic-ui-react'
-import './css/TeamInformation.css'
-import skills from '../constants/skills'
-import {commitMutation} from 'react-relay';
-import {graphql} from 'babel-plugin-relay/macro';
-import environment from './Environment';
+  Card,
+  Form,
+  TextArea,
+  Button,
+  Label,
+  Icon,
+  Message,
+} from "semantic-ui-react";
+import "./css/TeamInformation.css";
+import skills from "../constants/skills";
+import { commitMutation } from "react-relay";
+import { graphql } from "babel-plugin-relay/macro";
+import environment from "./Environment";
 
 const mutation = graphql`
   mutation TeamInformationMutation(
@@ -39,31 +39,30 @@ class TeamInformation extends Component {
   constructor(props) {
     super(props);
     console.log([...new Set([...skills, ...this.props.interests])]);
-  const skillUpdate = this.props.interests.map(interest => {
+    const skillUpdate = this.props.interests.map((interest) => {
       return {
-          "key": interest,
-          "text": interest,
-          "value": interest
-      }
-  })
-  this.state = {
-    teamBio: this.props.teamBio,
-    newTeamBio: this.props.teamBio,
-    projectIdea: this.props.projectIdea,
-    newProjectIdea: this.props.projectIdea,
-    active: false,
-    interests: this.props.interests,
-    newInterests: this.props.interests,
-    search: "",
-    interest_options: [...new Set([...skills, ...skillUpdate])],
-    save_message_hidden: true,
-    save_success: false,
-    edit: false,
-  };
-
-}
+        key: interest,
+        text: interest,
+        value: interest,
+      };
+    });
+    this.state = {
+      teamBio: this.props.teamBio,
+      newTeamBio: this.props.teamBio,
+      projectIdea: this.props.projectIdea,
+      newProjectIdea: this.props.projectIdea,
+      active: false,
+      interests: this.props.interests,
+      newInterests: this.props.interests,
+      search: "",
+      interest_options: [...new Set([...skills, ...skillUpdate])],
+      save_message_hidden: true,
+      save_success: false,
+      edit: false,
+    };
+  }
   render() {
-    console.log(this.state.interest_options)
+    console.log(this.state.interest_options);
     var colors = ["#A0CCC9", "#EBABCA"];
     var count = 0;
     var interestLabels = this.state.interests.map((interest) => (
@@ -77,7 +76,7 @@ class TeamInformation extends Component {
         {interest}
       </Label>
     ));
-    console.log(this.state.interests)
+    console.log(this.state.interests);
     if (this.props.editable) {
       if (!this.state.edit) {
         console.log(this.state.teamBio);
@@ -116,7 +115,9 @@ class TeamInformation extends Component {
                     disabled="disabled"
                   />
                 </Form>
-                <Card.Description className="interests">Interests</Card.Description>
+                <Card.Description className="interests">
+                  Interests
+                </Card.Description>
                 <Card.Description>{interestLabels}</Card.Description>
               </Card.Content>
             </Card>
@@ -280,7 +281,6 @@ class TeamInformation extends Component {
     this.onChange();
     this.setState({ newInterests: value });
   };
-
 }
 
 export default TeamInformation;

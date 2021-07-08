@@ -8,31 +8,12 @@ import "./css/Members.css";
 import environment from "./Environment";
 import { Link } from "react-router-dom";
 
-// edit this query to pull on the team members
-const getUsersQuery = graphql`
-  query MembersQuery {
-    user_profile {
-      team {
-        members {
-          name
-          school
-          grad_year
-          contact
-          skills
-          experience
-        }
-      }
-    }
-  }
-`;
-
 class Members extends Component {
   render() {
     let memberCards = [];
 
     // sample users array
     let users = [];
-    console.log("Team: " + this.props.members);
     if (this.props.members) {
       users = this.props.members;
     }
@@ -47,11 +28,12 @@ class Members extends Component {
           name={user.name}
           grad_year={user.grad_year}
           school={user.school}
-          contact={user.contact}
+          contact={user.email}
           skills={user.skills.filter(function(el) {
             return Boolean(el);
           })}
           experience={user.experience}
+          slackid={user.slackid}
         />
       );
     }

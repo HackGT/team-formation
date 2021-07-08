@@ -10,6 +10,7 @@
     "build": "gulp build"
   },
   "dependencies": {
+    "@types/express-serve-static-core": "^4.17.17",
     "apollo-server": "^2.16.0",
     "apollo-server-express": "^1.4.0",
     "bad-words": "^3.0.2",

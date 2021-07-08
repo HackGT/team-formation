@@ -4,7 +4,9 @@ import { Strategy as OAuthStrategy } from "passport-oauth2";
 import dotenv from "dotenv"
 import request from "request"
 import { Request } from "express";
-import { createNew, IUser, User } from "../schema";
+import { User } from "../models"
+import { createNew, IUser } from "../types";
+import mongoose from 'mongoose';
 
 dotenv.config()
 
@@ -74,11 +76,14 @@ export class GroundTruthStrategy extends OAuthStrategy {
     }
 
     protected static async passportCallback(req: Request,  accessToken: string, refreshToken: string, profile: IProfile, done: PassportDone) {
+        console.log(mongoose.connection.readyState);
+
         console.log(profile)
+        console.log("hi")
         let user = await User.findOne({ uuid: profile.uuid });
 
         const GRAPHQLURL = process.env.GRAPHQLURL || 'https://registration.hack.gt/graphql'
-
+        console.log("82 here")
         if (!user) {
             let confirmed = false;
             const query = `
@@ -110,6 +115,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
                 if (JSON.parse(body).data.search_user.users.length > 0) {
                     confirmed = JSON.parse(body).data.search_user.users[0].confirmed;
                 }
+                console.log("requesting...")
                 if (!process.env.ISPRODUCTION || confirmed) {
                     console.log("here")
                     user = createNew<IUser>(User, {

@@ -220,7 +220,7 @@ class EditProfile extends Component {
     checkProfanity = () => {
         var profanityExists = false;
         const profanities = Object.keys(this.state).map((key) => {
-            if (typeof(this.state[key]) === "string") {
+            if (typeof(this.state[key]) === "string" && key != "name") {
                 const k = `${key}_profane`
                 const isProfane = this.profanityFilter.isProfane(this.state[key])
                 this.setState({[k]: isProfane})
