@@ -30,9 +30,9 @@ class UserCard extends Component {
       contact = (
         <Popup
           trigger={<Button className="contact" content="Contact" />}
-          content=<a href={`mailto:${this.props.contact}`} target="_blank">
+          content= {<a href={`mailto:${this.props.contact}`} target="_blank">
             {this.props.contact}{" "}
-          </a>
+          </a>}
           on="click"
           hideOnScroll
         />
