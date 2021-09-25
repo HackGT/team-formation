@@ -1,7 +1,11 @@
 import React from "react";
 import './css/Filter.css';
 
-const Filter = props => {
+interface props {
+    allFilterClickListener: (param1: any, param2: any) => any
+}
+
+const Filter = (props: props) => {
     return (<div id="filter">
         <div className="filter-container">
             {/* SKILLS */}
