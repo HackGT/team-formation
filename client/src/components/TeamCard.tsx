@@ -3,9 +3,22 @@ import { Button, Card, Popup, Container, Label, TextArea, Placeholder } from 'se
 import JoinTeam from './ui_subcomponents/JoinTeam';
 import './css/TeamCard.css';
 import { Link, useParams } from "react-router-dom";
+import { Team } from "../types/index"
 
-class TeamCard extends Component {
-	constructor(props) {
+interface props {
+    interests: [boolean],
+    description: string,
+    team: Team,
+    name: string,
+    id: any
+}
+
+interface states {
+    showModal: boolean
+}
+
+class TeamCard extends Component<props, states> {
+	constructor(props: props) {
         super(props)
         this.state = {
             showModal: false
@@ -27,7 +40,7 @@ class TeamCard extends Component {
 		// var viewskill;
 		let link = "/team/" + this.props.id;
 		var colors = ["#68B6E5", "#EB9922"];
-		var viewskill = this.props.interests.map((skill) => (
+		var viewskill = this.props.interests.map((skill: any) => (
 		<Label
 			size="mini"
 			className="labelStyle"
@@ -41,7 +54,7 @@ class TeamCard extends Component {
 		var button = this.props.team ? <Placeholder></Placeholder> : <Button className="contact" content='Join Team' onClick={() => this.setState({showModal: true})} />;
 		var text = this.props.team ? "newTeam" : "teamUp";
 		return (
-			<Card className="card1" basic={false} color='blue' centered='true'>
+			<Card className="card1" basic={false} color='blue' centered={true}>
 				<Card.Content className="content">
 					<Card.Header><Container style={{overflow: 'auto', maxHeight: 60, minHeight: 60 }}>{this.props.name}</Container></Card.Header>
 					{/* <Card.Meta>ID: {this.props.id}</Card.Meta> */}
