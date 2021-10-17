@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 26db915c9b96a5ca8b21056532662923
+ * @relayHash 37825eeed65dc3b460ce54ca21ca52d3
  */
 
 /* eslint-disable */
@@ -18,6 +18,7 @@ export type EditProfileQueryResponse = {|
     +contact: ?string,
     +skills: ?$ReadOnlyArray<?string>,
     +track: ?string,
+    +location: ?string,
     +experience: ?string,
     +contact_method: ?string,
     +slackid: ?string,
@@ -40,6 +41,7 @@ query EditProfileQuery {
     contact
     skills
     track
+    location
     experience
     contact_method
     slackid
@@ -95,25 +97,32 @@ v5 = {
 v6 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "experience",
+  "name": "location",
   "args": null,
   "storageKey": null
 },
 v7 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "contact_method",
+  "name": "experience",
   "args": null,
   "storageKey": null
 },
 v8 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "slackid",
+  "name": "contact_method",
   "args": null,
   "storageKey": null
 },
 v9 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "slackid",
+  "args": null,
+  "storageKey": null
+},
+v10 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "visible",
@@ -147,7 +156,8 @@ return {
           (v6/*: any*/),
           (v7/*: any*/),
           (v8/*: any*/),
-          (v9/*: any*/)
+          (v9/*: any*/),
+          (v10/*: any*/)
         ]
       }
     ]
@@ -176,6 +186,7 @@ return {
           (v7/*: any*/),
           (v8/*: any*/),
           (v9/*: any*/),
+          (v10/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -191,11 +202,11 @@ return {
     "operationKind": "query",
     "name": "EditProfileQuery",
     "id": null,
-    "text": "query EditProfileQuery {\n  user_profile {\n    name\n    school\n    grad_year\n    contact\n    skills\n    track\n    experience\n    contact_method\n    slackid\n    visible\n    id\n  }\n}\n",
+    "text": "query EditProfileQuery {\n  user_profile {\n    name\n    school\n    grad_year\n    contact\n    skills\n    track\n    location\n    experience\n    contact_method\n    slackid\n    visible\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '0b8df911244396e9d3a974c24f88c497';
+(node/*: any*/).hash = '84ab200c903b47fe868b2c4377e63a01';
 module.exports = node;

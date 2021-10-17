@@ -20,6 +20,7 @@ const getUsersQuery = graphql`
           contact
           skills
           experience
+          location
         }
       }
     }
@@ -52,6 +53,7 @@ class Members extends Component {
             return Boolean(el);
           })}
           experience={user.experience}
+          location={user.location}
         />
       );
     }

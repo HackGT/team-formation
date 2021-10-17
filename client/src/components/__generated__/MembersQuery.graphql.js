@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 6d447e2993b792053877d4e8d9a51fb9
+ * @relayHash 93fde5a5f18feec70098c9cc8a2c81cb
  */
 
 /* eslint-disable */
@@ -20,6 +20,7 @@ export type MembersQueryResponse = {|
         +contact: ?string,
         +skills: ?$ReadOnlyArray<?string>,
         +experience: ?string,
+        +location: ?string,
       |}>
     |}
   |}
@@ -42,6 +43,7 @@ query MembersQuery {
         contact
         skills
         experience
+        location
         id
       }
       id
@@ -97,6 +99,13 @@ v5 = {
 v6 = {
   "kind": "ScalarField",
   "alias": null,
+  "name": "location",
+  "args": null,
+  "storageKey": null
+},
+v7 = {
+  "kind": "ScalarField",
+  "alias": null,
   "name": "id",
   "args": null,
   "storageKey": null
@@ -142,7 +151,8 @@ return {
                   (v2/*: any*/),
                   (v3/*: any*/),
                   (v4/*: any*/),
-                  (v5/*: any*/)
+                  (v5/*: any*/),
+                  (v6/*: any*/)
                 ]
               }
             ]
@@ -189,13 +199,14 @@ return {
                   (v3/*: any*/),
                   (v4/*: any*/),
                   (v5/*: any*/),
-                  (v6/*: any*/)
+                  (v6/*: any*/),
+                  (v7/*: any*/)
                 ]
               },
-              (v6/*: any*/)
+              (v7/*: any*/)
             ]
           },
-          (v6/*: any*/)
+          (v7/*: any*/)
         ]
       }
     ]
@@ -204,11 +215,11 @@ return {
     "operationKind": "query",
     "name": "MembersQuery",
     "id": null,
-    "text": "query MembersQuery {\n  user_profile {\n    team {\n      members {\n        name\n        school\n        grad_year\n        contact\n        skills\n        experience\n        id\n      }\n      id\n    }\n    id\n  }\n}\n",
+    "text": "query MembersQuery {\n  user_profile {\n    team {\n      members {\n        name\n        school\n        grad_year\n        contact\n        skills\n        experience\n        location\n        id\n      }\n      id\n    }\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'f3900c2b67de63c1f97f5c341e62ed33';
+(node/*: any*/).hash = '3e63c6223ebff4946f6582e0efb494f0';
 module.exports = node;

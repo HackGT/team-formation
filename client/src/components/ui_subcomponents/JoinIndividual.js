@@ -74,6 +74,7 @@ class JoinIndividual extends Component {
                     experience={this.props.experience}
                     skills={this.props.skills}
                     contact={this.props.contact}
+                    location={this.props.location}
                   />
                 </div>
               </div>

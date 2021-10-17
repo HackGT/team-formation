@@ -251,9 +251,8 @@ const rawSchools = [
   'VIT University',
   'Anna University',
   'SPPU',
-  'Bennett University',
-  'Symbiosis Institute of Technology',
-  'McMaster University'];
+  'Bennett University'
+];
 
 const schools = rawSchools.map((current, index) => {
     return {

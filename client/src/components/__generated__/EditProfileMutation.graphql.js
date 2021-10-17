@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 123d0d7ead233eed77f7a587d9740700
+ * @relayHash aa9d7ea77a5433ddf7ed34a36b940221
  */
 
 /* eslint-disable */
@@ -14,7 +14,6 @@ export type EditProfileMutationVariables = {|
   grad_year?: ?string,
   school?: ?string,
   skills?: ?$ReadOnlyArray<?string>,
-  track?: ?string,
   experience?: ?string,
   contact?: ?string,
   contact_method?: ?string,
@@ -45,13 +44,12 @@ mutation EditProfileMutation(
   $grad_year: String
   $school: String
   $skills: [String]
-  $track: String
   $experience: String
   $contact: String
   $contact_method: String
   $visible: Int
 ) {
-  update_user(name: $name, grad_year: $grad_year, school: $school, skills: $skills, track: $track, experience: $experience, contact: $contact, contact_method: $contact_method, visible: $visible) {
+  update_user(name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method, visible: $visible) {
     name
     grad_year
     school
@@ -89,12 +87,6 @@ var v0 = [
     "kind": "LocalArgument",
     "name": "skills",
     "type": "[String]",
-    "defaultValue": null
-  },
-  {
-    "kind": "LocalArgument",
-    "name": "track",
-    "type": "String",
     "defaultValue": null
   },
   {
@@ -164,12 +156,6 @@ v1 = [
     "name": "skills",
     "variableName": "skills",
     "type": "[String]"
-  },
-  {
-    "kind": "Variable",
-    "name": "track",
-    "variableName": "track",
-    "type": "String"
   },
   {
     "kind": "Variable",
@@ -301,11 +287,11 @@ return {
     "operationKind": "mutation",
     "name": "EditProfileMutation",
     "id": null,
-    "text": "mutation EditProfileMutation(\n  $name: String\n  $grad_year: String\n  $school: String\n  $skills: [String]\n  $track: String\n  $experience: String\n  $contact: String\n  $contact_method: String\n  $visible: Int\n) {\n  update_user(name: $name, grad_year: $grad_year, school: $school, skills: $skills, track: $track, experience: $experience, contact: $contact, contact_method: $contact_method, visible: $visible) {\n    name\n    grad_year\n    school\n    track\n    skills\n    experience\n    contact\n    visible\n    id\n  }\n}\n",
+    "text": "mutation EditProfileMutation(\n  $name: String\n  $grad_year: String\n  $school: String\n  $skills: [String]\n  $experience: String\n  $contact: String\n  $contact_method: String\n  $visible: Int\n) {\n  update_user(name: $name, grad_year: $grad_year, school: $school, skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method, visible: $visible) {\n    name\n    grad_year\n    school\n    track\n    skills\n    experience\n    contact\n    visible\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '678c9ad930dce0a118662e43bff59ca5';
+(node/*: any*/).hash = '7bcfc864867c6b637f505a70522b89be';
 module.exports = node;

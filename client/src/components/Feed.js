@@ -18,6 +18,7 @@ class Feed extends Component {
     years: [],
     schools: [],
     tracks: [],
+    locations: [],
     teams: false,
     showSecondModal: false,
     sliceIndexStart: 0,
@@ -43,6 +44,7 @@ class Feed extends Component {
         grad_year={this.state.years}
         school={this.state.schools}
         track={this.state.tracks}
+        locations={this.state.locations}
         user_id={this.props.user_id}
         sliceIndexStart={this.state.sliceIndexStart}
         numCardsPerPage={this.state.numCardsPerPage}
@@ -94,7 +96,8 @@ class Feed extends Component {
           {this.state.skills.length ||
             this.state.years.length ||
             this.state.schools.length ||
-            this.state.tracks.length ? (
+            this.state.tracks.length ||
+            this.state.locations.length ? (
               <div className="user-input">
                 <div className="filters-applied">
                   <text>Filters Applied</text>
@@ -105,6 +108,7 @@ class Feed extends Component {
                     years={this.state.years}
                     schools={this.state.schools}
                     tracks={this.state.tracks}
+                    locations={this.state.locations}
                     allFilterClickListener={this.allFilterClickListener}
                   />
                 </div>

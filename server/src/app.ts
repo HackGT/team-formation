@@ -1,3 +1,8 @@
+/* eslint-disable camelcase */
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable func-names */
+/* eslint-disable no-underscore-dangle */
 import fs from "fs";
 import path from "path";
 import express from "express";
@@ -6,17 +11,18 @@ import morgan from "morgan";
 import passport from "passport";
 import session from "express-session";
 import mongoose from "mongoose";
-
-// import express_graphql from "express-graphql"
 import cors from "cors";
 import dotenv from "dotenv";
-const { uniqueNamesGenerator, adjectives, animals } = require("unique-names-generator");
-const { ApolloServer, gql } = require("apollo-server-express");
-// import { buildSchema } from "graphql"
+
 import { GroundTruthStrategy } from "./routes/strategies";
 import { IUser, User, Notification, Team, IUserMongoose } from "./schema";
 import { userRoutes } from "./routes/user";
 import sendSlackMessage from "./sendSlackMessage";
+
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { ApolloServer, gql } = require("apollo-server-express");
+const { uniqueNamesGenerator, adjectives, animals } = require("unique-names-generator");
+
 dotenv.config();
 
 const PORT = 3000;
@@ -38,13 +44,13 @@ if (process.env.ISPRODUCTION === "true") {
 app.use(morgan("dev"));
 app.use(compression());
 app.use(cors());
-const session_secret = process.env["SECRET"];
-if (!session_secret) {
+const sessionSecret = process.env.SECRET;
+if (!sessionSecret) {
   throw new Error("Secret not specified");
 }
 app.use(
   session({
-    secret: session_secret,
+    secret: sessionSecret,
     saveUninitialized: false,
     resave: true,
   })
@@ -61,7 +67,6 @@ export function loggedInErr(req, res, next) {
     next();
   } else {
     res.status(401).json({ error: "User not logged in", success: false });
-    return;
   }
 }
 
@@ -77,25 +82,25 @@ passport.deserializeUser((id: string, done) => {
   });
 });
 
-let getTeam = async function (parent, args, context, info, req) {
+const getTeam = async function (parent, args, context, info, req) {
   if (!context._id) {
     throw new Error("User is not logged in!");
   }
-  let team = await Team.findById(args.team_id).populate("members");
+  const team = await Team.findById(args.team_id).populate("members");
   if (!team) {
     throw new Error("Team not found!");
   }
   return team;
 };
-let getTeams = async function (parent, args, context, info, req) {
+const getTeams = async function (parent, args, context, info, req) {
   console.log("getting teams..");
   let teams;
   let search;
   let interests;
-  let interestSearch = [] as {}[];
+  const interestSearch = [] as {}[];
 
   if (args.search) {
-    search = '"' + args.search.split(" ").join('" "') + '"';
+    search = `"${args.search.split(" ").join('" "')}"`;
   }
 
   if (args.interests) {
@@ -103,29 +108,25 @@ let getTeams = async function (parent, args, context, info, req) {
     for (let i = 0; i < interests.length; i++) {
       interestSearch.push({
         interests: {
-          $elemMatch: { $regex: ".*" + interests[i] + ".*", $options: "i" },
+          $elemMatch: { $regex: `.*${interests[i]}.*`, $options: "i" },
         },
       });
     }
   }
 
   if (search && interests) {
-    console.log("search and interest filters applied");
     teams = await Team.find({
       $and: [{ public: true }, { $text: { $search: search } }, { $and: interestSearch }],
     }).populate("members");
   } else if (search) {
-    console.log(`searching for ${search}..`);
     teams = await Team.find({
       $and: [{ public: true }, { $text: { $search: search } }],
     }).populate("members");
   } else if (interests) {
-    console.log(`interest filter(s) applied: ${interestSearch}`);
     teams = await Team.find({
       $and: [{ public: true }, { $and: interestSearch }],
     }).populate("members");
   } else {
-    console.log("no filter applied");
     teams = await Team.find({
       public: true,
     }).populate("members");
@@ -135,17 +136,15 @@ let getTeams = async function (parent, args, context, info, req) {
     return null;
   }
 
-  teams.sort(function (a, b) {
-    return a.name.toLowerCase() - b.name.toLowerCase();
-  });
+  teams.sort((a, b) => a.name.toLowerCase() - b.name.toLowerCase());
   return teams;
 };
 
-let getUser = async function (parent, args, context, info, req) {
+const getUser = async function (parent, args, context, info, req) {
   if (!context._id) {
     throw new Error("User not logged in");
   }
-  let user = await User.findById(args.user_id);
+  const user = await User.findById(args.user_id);
   if (!user) {
     throw new Error("User not found");
   }
@@ -154,11 +153,12 @@ let getUser = async function (parent, args, context, info, req) {
 
 // Query object for filters
 interface UserQuery {
-  search?: string;
+  $text?: {};
   skills?: {};
-  grad_years?: {};
-  schools?: {};
-  tracks?: {};
+  grad_year?: {};
+  school?: {};
+  track?: {};
+  visible?: {};
 }
 
 /**
@@ -169,218 +169,57 @@ interface UserQuery {
  * @param schools Universities and higher education institutions of users
  * @param tracks Tracks being offered by current hackathon, if applicable
  */
-let buildQuery = (
+const buildQuery = (
   search?: string,
   skills?: Array<string>,
   grad_years?: Array<string>,
   schools?: Array<string>,
   tracks?: Array<string>
 ): UserQuery => {
-  let query: UserQuery = {};
+  const query: UserQuery = {};
   if (search) {
-    query["$text"] = { $search: search.split(" ").join(" ") };
+    query.$text = { $search: search.split(" ").join(" ") };
   }
   if (skills) {
-    query["skills"] = { $all: skills };
+    query.skills = { $all: skills };
   }
-
   if (grad_years) {
-    query["grad_year"] = { $in: grad_years };
+    query.grad_year = { $in: grad_years };
   }
-
   if (schools) {
-    query["school"] = { $in: schools };
+    query.school = { $in: schools };
   }
-
   if (tracks) {
-    query["track"] = { $in: tracks };
+    query.track = { $in: tracks };
   }
-  query["visible"] = 1;
+  query.visible = 1;
   return query;
 };
 
 // This will replace the getUsers function
-let getUsers = async (parent, args, context, info, req) => {
+async function getUsers(parent, args, context, info, req): Promise<IUserMongoose[]> {
   if (!context._id) {
     throw new Error("User not logged in");
   }
 
-  let search: string = args.search;
-  let skills: string[] = args.skill ? args.skill.split(",") : undefined;
-  let grad_years: string[] = args.grad_year ? args.grad_year.split(",") : undefined;
-  let schools: string[] = args.school ? args.school.split(",") : undefined;
-  let tracks: string[] = args.track ? args.track.split(",") : undefined;
+  const { search } = args;
+  const skills: string[] = args.skill ? args.skill.split(",") : undefined;
+  const gradYears: string[] = args.grad_year ? args.grad_year.split(",") : undefined;
+  const schools: string[] = args.school ? args.school.split(",") : undefined;
+  const tracks: string[] = args.track ? args.track.split(",") : undefined;
 
-  let query = buildQuery(search, skills, grad_years, schools, tracks);
+  const query = buildQuery(search, skills, gradYears, schools, tracks);
   let users = await User.find(query);
 
   users = users
     .sort((a: IUserMongoose, b: IUserMongoose) =>
       a.name.toLowerCase().localeCompare(b.name.toLowerCase())
     )
-    .filter(item => {
-      return item.uuid != context.uuid && !item.team && item.visible == 1;
-    });
+    .filter(item => item.uuid !== context.uuid && !item.team && item.visible === 1);
   return users;
-};
-/*
-let getUsers = async function (parent, args, context, info, req) {
-  if (!context._id) {
-    throw new Error("User not logged in");
-  }
-  console.log("getting users..");
-  let users;
-  let search;
-  let skills;
-  let grad_years;
-  let schools;
-  let skillSearch = [] as {}[];
-  let yearSearch = [] as {}[];
-  let schoolSearch = [] as {}[];
+}
 
-  if (args.search) {
-    search = '"' + args.search.split(" ").join('" "') + '"';
-  }
-  if (args.skill) {
-    skills = args.skill.match(/\w+/g);
-    for (let i = 0; i < skills.length; i++) {
-      skillSearch.push({
-        skills: {
-          $elemMatch: { $regex: ".*" + skills[i] + ".*", $options: "i" },
-        },
-      });
-    }
-  }
-  if (args.grad_year) {
-    grad_years = args.grad_year.match(/\w+/g);
-    for (let i = 0; i < grad_years.length; i++) {
-      yearSearch.push({ grad_year: grad_years[i] });
-    }
-  }
-  if (args.school) {
-    schools = args.school.split(",");
-    for (let i = 0; i < schools.length; i++) {
-      schoolSearch.push({ school: schools[i] });
-    }
-  }
-
-  if (search && skills && grad_years && schools) {
-    console.log("all filters applied...");
-    users = await User.find({
-      $and: [
-        { $text: { $search: search } },
-        { $and: skillSearch },
-        { $or: yearSearch },
-        { $or: schoolSearch },
-      ],
-      visible: 1
-    });
-  } else if (search && skills && grad_years) {
-    console.log("search, skills, and grad year filters applied...");
-    users = await User.find({
-      $and: [
-        { $text: { $search: search } },
-        { $and: skillSearch },
-        { $or: yearSearch },
-      ],
-      visible: 1
-    });
-  } else if (search && skills && schools) {
-    console.log("search, skills, and schools filters applied...");
-    users = await User.find({
-      $and: [
-        { $text: { $search: search } },
-        { $and: skillSearch },
-        { $or: schoolSearch },
-      ],
-      visible: 1
-    });
-  } else if (search && grad_years && schools) {
-    console.log("searc, grad year, and schools filters applied...");
-    users = await User.find({
-      $and: [
-        { $text: { $search: search } },
-        { $or: yearSearch },
-        { $or: schoolSearch },
-      ],
-      visible: 1
-    });
-  } else if (skills && grad_years && schools) {
-    console.log("skills, grad year, and schools filter applied...");
-    users = await User.find({
-      $and: [{ $and: skillSearch }, { $or: yearSearch }, { $or: schoolSearch }],visible: 1
-    }
-    );
-  } else if (search && skills) {
-    console.log("search and skills filters applied...");
-    users = await User.find({
-      $and: [{ $text: { $search: search } }, { $and: skillSearch }], visible: 1
-    });
-  } else if (search && grad_years) {
-    console.log("search and grad year filters applied...");
-    users = await User.find({
-      $and: [{ $text: { $search: search } }, { $or: yearSearch }], visible: 1
-    });
-  } else if (search && schools) {
-    console.log("search and schools filters applied...");
-    users = await User.find({
-      $and: [{ $text: { $search: search } }, { $or: schoolSearch }], visible: 1
-    });
-  } else if (skills && grad_years) {
-    console.log("skill and year filters applied");
-    users = await User.find({
-      $and: [{ $and: skillSearch }, { $or: yearSearch }], visible: 1
-    });
-  } else if (skills && schools) {
-    console.log("only skill and school filters applied");
-    users = await User.find({
-      $and: [{ $and: skillSearch }, { $or: schoolSearch }],visible: 1
-    });
-  } else if (grad_years && schools) {
-    console.log("only year and school filters applied");
-    users = await User.find({
-      $and: [{ $or: yearSearch }, { $or: schoolSearch }], visible: 1
-    });
-  } else if (search) {
-    console.log(`searching for ${search}..`);
-    users = await User.find({ $text: { $search: search }, visible: 1 });
-    console.log(users);
-  } else if (skills) {
-    console.log("only skill filter(s) applied");
-    users = await User.find({
-      $and: skillSearch, visible: 1
-    });
-  } else if (grad_years) {
-    console.log("only year filter(s) applied");
-    users = await User.find({
-      $or: yearSearch, visible: 1
-    });
-  } else if (schools) {
-    console.log("only school filter(s) applied");
-    users = await User.find({
-      $or: schoolSearch, visible: 1
-    });
-  } else {
-    console.log("no filters applied");
-    users = await User.find({visible: 1});
-  }
-
-  if (!users) {
-    return null;
-  }
-
-  users = users
-    .sort(function (a, b) {
-      return a.name.toLowerCase() - b.name.toLowerCase();
-    })
-    .filter((item) => {
-      return item.uuid != context.uuid && !item.team && item.visible == 1;
-    });
-  return users;
-};
-*/
-
-let updateUser = async function (parent, args, context, info, req) {
+const updateUser = async function (parent, args, context, info, req) {
   console.log(context._id);
   if (!context._id) {
     throw new Error("User not logged in");
@@ -388,12 +227,12 @@ let updateUser = async function (parent, args, context, info, req) {
   return await User.findByIdAndUpdate(context._id, { $set: args }, { new: true });
 };
 
-let updateTeam = async function (parent, args, context, info, req) {
+const updateTeam = async function (parent, args, context, info, req) {
   console.log(context._id);
   if (!context._id) {
     throw new Error("User not logged in");
   }
-  let user = await User.findById(context._id).populate("team");
+  const user = await User.findById(context._id).populate("team");
   if (!user) {
     throw new Error("User not found");
   }
@@ -403,9 +242,7 @@ let updateTeam = async function (parent, args, context, info, req) {
   return await Team.findByIdAndUpdate(user.team, { $set: args }, { new: true });
 };
 
-let leaveTeam = async function (parent, args, context, info, req) {
-  console.log("leaveing team");
-
+const leaveTeam = async function (parent, args, context, info, req) {
   if (!context._id) {
     throw new Error("User not logged in");
   }
@@ -437,11 +274,11 @@ let leaveTeam = async function (parent, args, context, info, req) {
   });
 };
 
-let getSentTeamNotifications = async function (parent, args, context, info, req) {
+const getSentTeamNotifications = async function (parent, args, context, info, req) {
   if (!context._id) {
     throw new Error("User not logged in");
   }
-  let user = await User.findById(context._id);
+  const user = await User.findById(context._id);
   if (!user) {
     throw new Error("User not found");
   }
@@ -454,18 +291,18 @@ let getSentTeamNotifications = async function (parent, args, context, info, req)
   }).populate("receiver");
 };
 
-let getUserProfile = async function (parent, args, context, info, req) {
+const getUserProfile = async function (parent, args, context, info, req) {
   return await User.findById(context._id).populate("team");
 };
 
 /*
     Accepting a user sending request to team
  */
-let acceptTeamRequest = async function (parent, args, context, info, req) {
+const acceptTeamRequest = async function (parent, args, context, info, req) {
   if (!context._id) {
     throw new Error("User not logged in");
   }
-  let user = await User.findById(context._id).populate("team");
+  const user = await User.findById(context._id).populate("team");
   if (!user) {
     throw new Error("User not found");
   }
@@ -475,7 +312,7 @@ let acceptTeamRequest = async function (parent, args, context, info, req) {
   if (user.team.members.length >= 4) {
     throw new Error("Team is full");
   }
-  let notification = await Notification.findById(args.notification_id)
+  const notification = await Notification.findById(args.notification_id)
     .populate("sender")
     .populate("receiver");
   if (!notification) {
@@ -490,7 +327,7 @@ let acceptTeamRequest = async function (parent, args, context, info, req) {
     if (user.team._id.toString() !== notification.receiver._id.toString()) {
       throw new Error("Team does not own notification");
     }
-    let requestUser = await User.findById(notification.sender._id);
+    const requestUser = await User.findById(notification.sender._id);
     if (!requestUser) {
       throw new Error("Notificaton sender not found");
     }
@@ -499,7 +336,7 @@ let acceptTeamRequest = async function (parent, args, context, info, req) {
     }
     console.log("here2");
 
-    let requestedUserId = requestUser._id;
+    const requestedUserId = requestUser._id;
     console.log(requestedUserId);
     console.log(user.team._id);
     console.log(mongoose.Types.ObjectId.isValid(requestedUserId));
@@ -512,8 +349,7 @@ let acceptTeamRequest = async function (parent, args, context, info, req) {
           members: requestedUserId,
         },
       },
-      function (err, user) {
-        console.log("here");
+      err => {
         console.log(err);
       }
     );
@@ -528,29 +364,24 @@ let acceptTeamRequest = async function (parent, args, context, info, req) {
     );
 
     sendSlackMessage(
-      `${
-        user!.team!.name
-      } has accepted your request. View your new team here: https://teamformation.hack.gt/team/${
-        user.team._id
-      }`,
+      `${user?.team?.name} has accepted your request. View your new team here: https://teamformation.hack.gt/team/${user.team._id}`,
       requestUser.slackid
     );
-    console.log("slack message sent");
   } else {
     throw new Error("Notification invalid");
   }
 };
 
-let acceptUserRequest = async function (parent, args, context, info, req) {
+const acceptUserRequest = async function (parent, args, context, info, req) {
   if (!context._id) {
     throw new Error("User not logged in");
   }
-  let user = await User.findById(context._id);
+  const user = await User.findById(context._id);
   if (!user) {
     throw new Error("User not found");
   }
 
-  let notification = await Notification.findById(args.notification_id)
+  const notification = await Notification.findById(args.notification_id)
     .populate("sender")
     .populate("receiver");
   if (!notification) {
@@ -566,7 +397,7 @@ let acceptUserRequest = async function (parent, args, context, info, req) {
   await Notification.findByIdAndUpdate(notification._id, {
     resolved: true,
   });
-  if (notification.senderType == "Team") {
+  if (notification.senderType === "Team") {
     if (user.team) {
       throw new Error("User already on team");
     }
@@ -576,7 +407,7 @@ let acceptUserRequest = async function (parent, args, context, info, req) {
     if (notification.sender.members.length >= 4) {
       throw new Error("Team is full");
     }
-    let team = await Team.findByIdAndUpdate(notification.sender._id, {
+    const team = await Team.findByIdAndUpdate(notification.sender._id, {
       $push: {
         members: user,
       },
@@ -584,11 +415,11 @@ let acceptUserRequest = async function (parent, args, context, info, req) {
     await User.findByIdAndUpdate(context._id, {
       team: notification.sender._id,
     });
-    let teamSlackIDs: any = [];
-    team!.members.forEach(member => {
+    const teamSlackIDs: any = [];
+    team?.members.forEach(member => {
       teamSlackIDs.push(member.slackid);
     });
-    var index = teamSlackIDs.indexOf(user.slackid);
+    const index = teamSlackIDs.indexOf(user.slackid);
     if (index != -1) {
       teamSlackIDs.splice(index, 1);
     }
@@ -600,10 +431,10 @@ let acceptUserRequest = async function (parent, args, context, info, req) {
     });
     console.log("slack message sent");
     return team;
-  } else if (notification.senderType == "User") {
-    let user1 = await User.findById(context._id);
-    let user2 = await User.findById(notification.sender);
-    console.log(user1 + " " + user2);
+  }
+  if (notification.senderType == "User") {
+    const user1 = await User.findById(context._id);
+    const user2 = await User.findById(notification.sender);
     if (user1 && user2) {
       if (user1.team) {
         throw new Error("User already on a team!");
@@ -615,12 +446,12 @@ let acceptUserRequest = async function (parent, args, context, info, req) {
         dictionaries: [adjectives, animals],
         style: "capital",
       });
-      var team = new Team({
-        name: "Team " + capitalizedName,
+      const team = new Team({
+        name: `Team ${capitalizedName}`,
         members: [user1, user2],
         public: true,
       });
-      return await team.save(function (err, team) {
+      return await team.save((err, team) => {
         if (err) {
           console.log(err);
         }
@@ -632,13 +463,13 @@ let acceptUserRequest = async function (parent, args, context, info, req) {
         }
         user1.team = team;
         user2.team = team;
-        user1.save(function (err) {
+        user1.save(err => {
           if (err) {
             console.log(err);
             throw new Error(err);
           }
         });
-        user2.save(function (err) {
+        user2.save(err => {
           if (err) {
             console.log(err);
             throw new Error(err);
@@ -650,21 +481,20 @@ let acceptUserRequest = async function (parent, args, context, info, req) {
         );
         console.log("slack message sent");
       });
-    } else {
-      throw new Error("User not defined");
     }
+    throw new Error("User not defined");
   } else {
     throw new Error("Notification invalid");
   }
 };
 
-let makeUserRequest = async function (parent, args, context, info, req) {
+const makeUserRequest = async function (parent, args, context, info, req) {
   if (!context._id) {
     throw new Error("User not logged in");
   }
   let notification;
-  let receiver_id = args.user_id;
-  let receiver = await User.findById(receiver_id);
+  const receiver_id = args.user_id;
+  const receiver = await User.findById(receiver_id);
   let senderName = context.name;
   if (!receiver) {
     throw new Error("Receiver user not found");
@@ -673,7 +503,6 @@ let makeUserRequest = async function (parent, args, context, info, req) {
     throw new Error("Requested user already on team");
   }
   if (!context.team) {
-    //if user is not on a team
     notification = new Notification({
       bio: args.bio,
       idea: args.idea,
@@ -684,7 +513,7 @@ let makeUserRequest = async function (parent, args, context, info, req) {
       resolved: false,
     });
   } else {
-    let team = await Team.findById(context.team);
+    const team = await Team.findById(context.team);
     if (!team) {
       throw new Error("Team not found");
     }
@@ -702,7 +531,7 @@ let makeUserRequest = async function (parent, args, context, info, req) {
 
   return await notification.save((err, notif) => {
     if (err) {
-      throw new Error("Error creating notification: " + notif);
+      throw new Error(`Error creating notification: ${notif}`);
     }
     User.findByIdAndUpdate(receiver_id, {
       $push: {
@@ -711,7 +540,7 @@ let makeUserRequest = async function (parent, args, context, info, req) {
     });
     sendSlackMessage(
       `You have received a request from ${senderName}. Accept or deny the request here: https://teamformation.hack.gt/feed`,
-      receiver!.slackid
+      receiver?.slackid
     );
     if (!context.team) {
       sendSlackMessage(`You have sent a request to ${receiver!.name}`, context.slackid);
@@ -720,14 +549,14 @@ let makeUserRequest = async function (parent, args, context, info, req) {
   });
 };
 
-let makeTeamRequest = async function (parent, args, context, info, req) {
+const makeTeamRequest = async function (parent, args, context, info, req) {
   if (!context._id) {
     throw new Error("User not logged in");
   }
-  let user = await User.findById(context._id);
-  let team_id = args.team_id;
+  const user = await User.findById(context._id);
+  const { team_id } = args;
 
-  let team = await Team.findById(team_id).populate("members");
+  const team = await Team.findById(team_id).populate("members");
 
   console.log("TEAM_ID: ", team_id);
   if (!user) {
@@ -736,7 +565,7 @@ let makeTeamRequest = async function (parent, args, context, info, req) {
   if (user.team) {
     throw new Error("You are already on a team!");
   }
-  let notification = new Notification({
+  const notification = new Notification({
     bio: args.bio,
     idea: args.idea,
     senderType: "User",
@@ -748,15 +577,15 @@ let makeTeamRequest = async function (parent, args, context, info, req) {
 
   return await notification.save((err, notif) => {
     if (err) {
-      throw new Error("Error creating notification: " + notif);
+      throw new Error(`Error creating notification: ${notif}`);
     }
     Team.findByIdAndUpdate(team_id, {
       $push: {
         notifications: notif,
       },
     });
-    let teamSlackIDs: any = [];
-    team!.members.forEach(member => {
+    const teamSlackIDs: any = [];
+    team?.members.forEach(member => {
       console.log(member.slackid);
       teamSlackIDs.push(member.slackid);
       console.log(member.slackid);
@@ -771,7 +600,7 @@ let makeTeamRequest = async function (parent, args, context, info, req) {
   });
 };
 
-let getUserNotifications = async function (parent, args, context, info, req) {
+const getUserNotifications = async function (parent, args, context, info, req) {
   if (!context._id) {
     throw new Error("User not logged in");
   }
@@ -782,7 +611,7 @@ let getUserNotifications = async function (parent, args, context, info, req) {
   }).populate("sender");
 };
 
-let getTeamNotifications = async function (parent, args, context, info, req) {
+const getTeamNotifications = async function (parent, args, context, info, req) {
   if (!context._id) {
     throw new Error("User not logged in");
   }
@@ -798,15 +627,11 @@ let getTeamNotifications = async function (parent, args, context, info, req) {
     .populate("receiver");
 };
 
-// let createTeam = async function(args) {
-//
-// }
-
-let toggleVisibility = async function (parent, args, context, info, req) {
+const toggleVisibility = async function (parent, args, context, info, req) {
   return User.findByIdAndUpdate(context._id, { $bit: { visible: { xor: 1 } } }, { new: true });
 };
 
-let apiRouter = express.Router();
+const apiRouter = express.Router();
 
 const resolvers = {
   Source: {
@@ -849,9 +674,7 @@ app.use("/api", apiRouter);
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => {
-    return req.user;
-  },
+  context: ({ req }) => req.user,
   playground: {
     settings: {
       "editor.theme": "dark",

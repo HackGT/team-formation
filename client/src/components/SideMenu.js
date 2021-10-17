@@ -6,6 +6,7 @@ import skills from "../constants/skills";
 import schools from "../constants/schools";
 import years from "../constants/years";
 import tracks from "../constants/tracks";
+import locations from "../constants/locations";
 
 import SideMenuPicture from "./css/assets/SideMenuPicture.svg";
 
@@ -63,6 +64,18 @@ class SideMenu extends Component {
         value: curr,
         onClick: (e, { value }) => 
           this.props.allFilterClickListener(value, "tracks"),
+      })
+    }
+
+    const locationOptions = [];
+    for (const location in locations) {
+      const curr = locations[location].value;
+      locationOptions.push({
+        key: curr,
+        text: curr,
+        value: curr,
+        onClick: (e, { value }) => 
+          this.props.allFilterClickListener(value, "locations"),
       })
     }
 
@@ -161,6 +174,18 @@ class SideMenu extends Component {
           options={trackOptions}
           fullTextSearch
           scrolling
+          closeOnChange={false}
+        />
+        <h3 className="h3">LOCATION</h3>
+        <Dropdown
+          className="filter-box"
+          item="item"
+          text="Select Location"
+          search="search"
+          selection
+          fullTextSearch
+          scrolling
+          options={locationOptions}
           closeOnChange={false}
         />
       </div>
