@@ -55,7 +55,7 @@
 
 
 element.style {
-  color: var(--purple);
+  color: var(--orange);
 }
 .ui.secondary.menu .item {
   padding-left: 0;
@@ -65,15 +65,15 @@ element.style {
 }
 
 .ui.bottom.popup:before {
-  background: var(--purple);
+  background: var(--orange);
 }
 
 .ui.top.popup:before {
-  background-color: var(--purple);
+  background-color: var(--orange);
 }
 
 .ui.visible.popup {
-  background-color: var(--purple);
+  background-color: var(--orange);
 }
 
 .ui.menu:not(.vertical) > .menu {
@@ -87,6 +87,6 @@ element.style {
 }
 
 .ui.visible.popup {
-  background-color: var(--purple);
+  background-color: var(--orange);
   border-radius: 15px;
 }
