@@ -45,7 +45,7 @@ class Login extends Component<{}, states> {
 
                         <div className="txt1 text-center p-t-54 p-b-20">
                             <span>
-                                This portal is only available to participants who are confirmed for HealthTech! Please contact hello@hack.gt if you encounter any issues
+                                This portal is only available to participants who are confirmed for HackGT 8! Please contact hello@hexlabs.org if you encounter any issues
                             </span>
                         </div>
                     </form>
