@@ -9,8 +9,8 @@ import environment from './Environment';
 import {Redirect} from 'react-router-dom';
 
 const getUsersQuery = graphql `
-    query FeedCardsQuery($skill: String, $grad_year: String, $school: String, $search: String, $track: String) {
-        users(skill:$skill, grad_year:$grad_year, school:$school, search:$search, track:$track) {
+    query FeedCardsQuery($skill: String, $grad_year: String, $school: String, $search: String, $track: String, $location: String) {
+        users(skill:$skill, grad_year:$grad_year, school:$school, search:$search, track:$track, location:$location) {
             name
             email
             school
