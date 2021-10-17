@@ -67,7 +67,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
                 };
                 done(null, profile);
             }
-            catch (err) {
+            catch (err: any) {
                 return done(err);
             }
         });

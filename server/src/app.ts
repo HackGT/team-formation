@@ -10,7 +10,7 @@ import mongoose from "mongoose";
 // import express_graphql from "express-graphql"
 import cors from "cors";
 import dotenv from "dotenv";
-const { uniqueNamesGenerator, adjectives, animals } = require('unique-names-generator');
+const { uniqueNamesGenerator, adjectives, animals } = require("unique-names-generator");
 const { ApolloServer, gql } = require("apollo-server-express");
 // import { buildSchema } from "graphql"
 import { GroundTruthStrategy } from "./routes/strategies";
@@ -26,9 +26,8 @@ const typeDefs = gql`
 const VERSION_NUMBER = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, "../package.json"), "utf8")
 ).version;
-//const VERSION_HASH = require("git-rev-sync").short();
 
-export let app = express();
+export const app = express();
 
 if (process.env.ISPRODUCTION === "true") {
   app.enable("trust proxy");
@@ -72,7 +71,7 @@ passport.use(groundTruthStrategy);
 passport.serializeUser<IUser, string>((user, done) => {
   done(null, user.uuid);
 });
-passport.deserializeUser<IUser, string>((id, done) => {
+passport.deserializeUser((id: string, done) => {
   User.findOne({ uuid: id }, (err, user) => {
     done(err, user!);
   });
@@ -113,11 +112,7 @@ let getTeams = async function (parent, args, context, info, req) {
   if (search && interests) {
     console.log("search and interest filters applied");
     teams = await Team.find({
-      $and: [
-        { public: true },
-        { $text: { $search: search } },
-        { $and: interestSearch },
-      ],
+      $and: [{ public: true }, { $text: { $search: search } }, { $and: interestSearch }],
     }).populate("members");
   } else if (search) {
     console.log(`searching for ${search}..`);
@@ -157,14 +152,13 @@ let getUser = async function (parent, args, context, info, req) {
   return user;
 };
 
-
 // Query object for filters
 interface UserQuery {
-  search?: string,
-  skills?: {},
-  grad_years?: {},
-  schools?: {},
-  tracks?: {}
+  search?: string;
+  skills?: {};
+  grad_years?: {};
+  schools?: {};
+  tracks?: {};
 }
 
 /**
@@ -175,29 +169,35 @@ interface UserQuery {
  * @param schools Universities and higher education institutions of users
  * @param tracks Tracks being offered by current hackathon, if applicable
  */
-let buildQuery = (search?: string, skills?: Array<string>, grad_years?: Array<string>, schools?: Array<string>, tracks?: Array<string>): UserQuery => {
+let buildQuery = (
+  search?: string,
+  skills?: Array<string>,
+  grad_years?: Array<string>,
+  schools?: Array<string>,
+  tracks?: Array<string>
+): UserQuery => {
   let query: UserQuery = {};
   if (search) {
-    query['$text'] = {$search: search.split(' ').join(' ')};
+    query["$text"] = { $search: search.split(" ").join(" ") };
   }
   if (skills) {
-    query['skills'] = {$all: skills};
+    query["skills"] = { $all: skills };
   }
 
   if (grad_years) {
-    query['grad_year'] = {$in: grad_years};
+    query["grad_year"] = { $in: grad_years };
   }
 
   if (schools) {
-    query['school'] = {$in: schools};
+    query["school"] = { $in: schools };
   }
 
   if (tracks) {
-    query['track'] = {$in: tracks};
+    query["track"] = { $in: tracks };
   }
-  query['visible'] = 1;
+  query["visible"] = 1;
   return query;
-}
+};
 
 // This will replace the getUsers function
 let getUsers = async (parent, args, context, info, req) => {
@@ -206,23 +206,23 @@ let getUsers = async (parent, args, context, info, req) => {
   }
 
   let search: string = args.search;
-  let skills: string[] = (args.skill) ? args.skill.split(',') : undefined;
-  let grad_years: string[] = (args.grad_year) ? args.grad_year.split(',') : undefined;
-  let schools: string[] = (args.school) ? args.school.split(',') : undefined;
-  let tracks: string[] = (args.track) ? args.track.split(',') : undefined;
+  let skills: string[] = args.skill ? args.skill.split(",") : undefined;
+  let grad_years: string[] = args.grad_year ? args.grad_year.split(",") : undefined;
+  let schools: string[] = args.school ? args.school.split(",") : undefined;
+  let tracks: string[] = args.track ? args.track.split(",") : undefined;
 
   let query = buildQuery(search, skills, grad_years, schools, tracks);
   let users = await User.find(query);
 
   users = users
-    .sort((a: IUserMongoose, b: IUserMongoose) => 
+    .sort((a: IUserMongoose, b: IUserMongoose) =>
       a.name.toLowerCase().localeCompare(b.name.toLowerCase())
     )
-    .filter((item) => {
+    .filter(item => {
       return item.uuid != context.uuid && !item.team && item.visible == 1;
     });
   return users;
-}
+};
 /*
 let getUsers = async function (parent, args, context, info, req) {
   if (!context._id) {
@@ -385,11 +385,7 @@ let updateUser = async function (parent, args, context, info, req) {
   if (!context._id) {
     throw new Error("User not logged in");
   }
-  return await User.findByIdAndUpdate(
-    context._id,
-    { $set: args },
-    { new: true }
-  );
+  return await User.findByIdAndUpdate(context._id, { $set: args }, { new: true });
 };
 
 let updateTeam = async function (parent, args, context, info, req) {
@@ -441,13 +437,7 @@ let leaveTeam = async function (parent, args, context, info, req) {
   });
 };
 
-let getSentTeamNotifications = async function (
-  parent,
-  args,
-  context,
-  info,
-  req
-) {
+let getSentTeamNotifications = async function (parent, args, context, info, req) {
   if (!context._id) {
     throw new Error("User not logged in");
   }
@@ -495,11 +485,7 @@ let acceptTeamRequest = async function (parent, args, context, info, req) {
     throw new Error("Cannot accept request from a team");
   }
   if (notification.senderType == "User") {
-    console.log(
-      "TEAM",
-      user.team._id.toString(),
-      notification.receiver._id.toString()
-    );
+    console.log("TEAM", user.team._id.toString(), notification.receiver._id.toString());
 
     if (user.team._id.toString() !== notification.receiver._id.toString()) {
       throw new Error("Team does not own notification");
@@ -534,14 +520,19 @@ let acceptTeamRequest = async function (parent, args, context, info, req) {
     await User.findByIdAndUpdate(notification.sender._id, {
       team: user.team._id,
     });
-    await Notification.updateMany({ sender: notification.sender._id, receiver: notification.receiver._id }, {
-      resolved: true,
-    });
+    await Notification.updateMany(
+      { sender: notification.sender._id, receiver: notification.receiver._id },
+      {
+        resolved: true,
+      }
+    );
 
     sendSlackMessage(
       `${
         user!.team!.name
-      } has accepted your request. View your new team here: https://teamformation.hack.gt/team/${user.team._id}`,
+      } has accepted your request. View your new team here: https://teamformation.hack.gt/team/${
+        user.team._id
+      }`,
       requestUser.slackid
     );
     console.log("slack message sent");
@@ -594,14 +585,14 @@ let acceptUserRequest = async function (parent, args, context, info, req) {
       team: notification.sender._id,
     });
     let teamSlackIDs: any = [];
-    team!.members.forEach((member) => {
+    team!.members.forEach(member => {
       teamSlackIDs.push(member.slackid);
     });
     var index = teamSlackIDs.indexOf(user.slackid);
     if (index != -1) {
       teamSlackIDs.splice(index, 1);
     }
-    teamSlackIDs.forEach((id) => {
+    teamSlackIDs.forEach(id => {
       sendSlackMessage(
         `${context.name} has accepted your request. View your team here: https://teamformation.hack.gt/feed`,
         id
@@ -622,7 +613,7 @@ let acceptUserRequest = async function (parent, args, context, info, req) {
       }
       const capitalizedName: string = uniqueNamesGenerator({
         dictionaries: [adjectives, animals],
-        style: 'capital',
+        style: "capital",
       });
       var team = new Team({
         name: "Team " + capitalizedName,
@@ -723,10 +714,7 @@ let makeUserRequest = async function (parent, args, context, info, req) {
       receiver!.slackid
     );
     if (!context.team) {
-      sendSlackMessage(
-        `You have sent a request to ${receiver!.name}`,
-        context.slackid
-      );
+      sendSlackMessage(`You have sent a request to ${receiver!.name}`, context.slackid);
     }
     console.log("slack message sent");
   });
@@ -739,7 +727,7 @@ let makeTeamRequest = async function (parent, args, context, info, req) {
   let user = await User.findById(context._id);
   let team_id = args.team_id;
 
-  let team = await Team.findById(team_id).populate('members');
+  let team = await Team.findById(team_id).populate("members");
 
   console.log("TEAM_ID: ", team_id);
   if (!user) {
@@ -768,12 +756,12 @@ let makeTeamRequest = async function (parent, args, context, info, req) {
       },
     });
     let teamSlackIDs: any = [];
-    team!.members.forEach((member) => {
-      console.log(member.slackid)
+    team!.members.forEach(member => {
+      console.log(member.slackid);
       teamSlackIDs.push(member.slackid);
       console.log(member.slackid);
     });
-    teamSlackIDs.forEach((id) => {
+    teamSlackIDs.forEach(id => {
       sendSlackMessage(
         `You have received a request from ${context.name}. Accept or deny the request here: https://teamformation.hack.gt/team/${team_id}`,
         id
@@ -815,11 +803,7 @@ let getTeamNotifications = async function (parent, args, context, info, req) {
 // }
 
 let toggleVisibility = async function (parent, args, context, info, req) {
-  return User.findByIdAndUpdate(
-    context._id,
-    { $bit: { visible: { xor: 1 } } },
-    { new: true }
-  );
+  return User.findByIdAndUpdate(context._id, { $bit: { visible: { xor: 1 } } }, { new: true });
 };
 
 let apiRouter = express.Router();
@@ -887,7 +871,5 @@ app.get("*", (request, response) => {
 });
 
 app.listen(PORT, () => {
-  console.log(
-    `Team Formation system v${VERSION_NUMBER} started on port ${PORT}`
-  );
+  console.log(`Team Formation system v${VERSION_NUMBER} started on port ${PORT}`);
 });

@@ -16,7 +16,6 @@ const PrivateRoute = async ({
     const authed = await isLogin().then(authed => {
         return authed;
     })
-    console.log("authed state: ", authed)
     return (<Route {...rest} render={(
             props) => authed
             ? <Component {...props}/>

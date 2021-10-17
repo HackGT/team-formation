@@ -163,7 +163,6 @@ class SideMenu extends Component {
           scrolling
           closeOnChange={false}
         />
-        {/* <img class="moveImage" src={SideMenuPicture} alt="React Logo" /> */}
       </div>
     );
   }
@@ -175,7 +174,6 @@ class SideMenu extends Component {
 
   onSearchChange = (e) => {
     this.setState({ search_string: e.target.value });
-    // this.props.onSearchClick(e.target.value);
   };
 
   onSearchClick = (e) => {

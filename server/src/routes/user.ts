@@ -66,9 +66,10 @@ userRoutes.route('/slack/callback').all(async (req, response) => {
     await request(urlStr, async (err, resp, body) => {
         console.log("BODY")
         console.log(body);
+        const user = req.user as IUser | undefined;
         const jsonBody = JSON.parse(body)
         if(jsonBody["team"]["id"] == process.env.TEAM_ID) {
-            await User.findByIdAndUpdate(req.user.id, {
+            await User.findByIdAndUpdate(user?._id, {
                 "slackid": JSON.parse(body)["authed_user"]["id"]
             })
         }
