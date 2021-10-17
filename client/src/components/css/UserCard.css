@@ -151,7 +151,7 @@ body .ui.card:hover {
 
 .ui.container.about {
   overflow: auto;
-  max-height: 80px;
+  max-height: 65px;
   color: #10112E;
   padding-left: 15px;
   padding-top: 10px;
@@ -161,7 +161,7 @@ body .ui.card:hover {
 
 .ui.container.skills {
   overflow: auto;
-  max-height: 80px;
+  max-height: 65px;
 }
 
 /* Overriding default scrollbar */
