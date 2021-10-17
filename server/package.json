@@ -65,7 +65,7 @@
         "@types/multer": "0.0.32",
         "@types/node": "^11.13.0",
         "@types/oauth": "^0.9.1",
-        "@types/passport": "^1.0.0",
+        "@types/passport": "1.0.3",
         "@types/passport-oauth2": "^1.4.8",
         "@types/qwest": "^1.7.28",
         "@types/request": "^2.48.1",
