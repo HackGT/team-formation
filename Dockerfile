@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:15-alpine
 
 # Bundle Source
 RUN mkdir -p /usr/src/team-formation
