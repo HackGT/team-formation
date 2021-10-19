@@ -98,30 +98,31 @@ class UserCard extends Component {
               {viewskill}
             </Card.Description>
           </Container>
-          <div className="ui divider" />
-          <Card.Description>
+          {/* Separating to test absolute position */}
+          <div className="buttons-anchor">
+            <div className="ui divider" />
             <div className="contact-button">
-              {contact}
-              <Button
-                className="teamUp"
-                content={this.props.team ? "Send Invite" : "Team Up"}
-                onClick={() => {
-                  if(this.props.teamid) {
-                    text="The user is already on a team";
-                  } else {
-                    this.setState({ showModal: true })
-                  }
+                {contact}
+                <Button
+                  className="teamUp"
+                  content={this.props.team ? "Send Invite" : "Team Up"}
+                  onClick={() => {
+                    if(this.props.teamid) {
+                      text="The user is already on a team";
+                    } else {
+                      this.setState({ showModal: true })
+                    }
 
-                }
-              }/>
-              {text}
-              <JoinIndividual
-                {...this.props}
-                showModal={this.state.showModal}
-                closeModal={this.closeModal}
-              />
+                  }
+                }/>
+                {text}
+                <JoinIndividual
+                  {...this.props}
+                  showModal={this.state.showModal}
+                  closeModal={this.closeModal}
+                />
             </div>
-          </Card.Description>
+          </div>
         </Card.Content>
       </Card>
     );

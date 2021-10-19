@@ -61,6 +61,13 @@
   padding-top: 5px;
 }
 
+.buttons-anchor {
+  position: absolute;
+  width: 100%;
+  padding-right: 24px;
+  bottom: -11.5px;
+}
+
 body .ui.card,
 body .ui.cards > .card {
   transition: transform 0.2s;
