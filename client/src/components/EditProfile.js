@@ -150,7 +150,7 @@ class EditProfile extends Component {
                             </Form.Group>
                             <Form.Group>
                                 <Form.Input className="input-container-large" label='Location' defaultValue={props.track} onChange={this.onTrackChange}>
-                                    <input defaultValue={props.location ? "In-Person" : "Virtual"} disabled/>
+                                    <input defaultValue={props.location} disabled/>
                                 </Form.Input>
                             </Form.Group>
                             <Form.Group>
