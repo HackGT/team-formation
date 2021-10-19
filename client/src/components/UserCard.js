@@ -93,9 +93,7 @@ class UserCard extends Component {
               className="ui divider"
             />
             <Card.Description className="card-description">
-              <Container className="about">
-                About Them: {this.props.experience}
-              </Container>
+              About Them: {this.props.experience}
             </Card.Description>
           </Container>
           <div className="ui divider" />
