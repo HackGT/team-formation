@@ -159,6 +159,7 @@ interface UserQuery {
   school?: {};
   track?: {};
   visible?: {};
+  location?: {};
 }
 
 /**
@@ -174,7 +175,8 @@ const buildQuery = (
   skills?: Array<string>,
   grad_years?: Array<string>,
   schools?: Array<string>,
-  tracks?: Array<string>
+  tracks?: Array<string>,
+  locations?: Array<string>
 ): UserQuery => {
   const query: UserQuery = {};
   if (search) {
@@ -192,6 +194,9 @@ const buildQuery = (
   if (tracks) {
     query.track = { $in: tracks };
   }
+  if (locations) {
+    query.location = { $in: locations };
+  }
   query.visible = 1;
   return query;
 };
@@ -207,8 +212,9 @@ async function getUsers(parent, args, context, info, req): Promise<IUserMongoose
   const gradYears: string[] = args.grad_year ? args.grad_year.split(",") : undefined;
   const schools: string[] = args.school ? args.school.split(",") : undefined;
   const tracks: string[] = args.track ? args.track.split(",") : undefined;
+  const locations: string[] = args.location ? args.location.split(",") : undefined;
+  const query = buildQuery(search, skills, gradYears, schools, tracks, locations);
 
-  const query = buildQuery(search, skills, gradYears, schools, tracks);
   let users = await User.find(query);
 
   users = users

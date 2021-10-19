@@ -42,6 +42,7 @@ class FeedCards extends Component {
         let school = this.props.school.join(',');
         let track = this.props.track.join(',');
         let location = this.props.locations.join(',');
+        console.log(`location: ${location}`);
         return (<QueryRenderer environment={environment} query={getUsersQuery} variables={{
                 search: search,
                 skill: skill,
@@ -54,6 +55,7 @@ class FeedCards extends Component {
                     // return <div>{error.message}</div>;
                     return <Redirect to='/login' />;
                 } else if (props) {
+                    console.log(props.user);
                     let cards = props.users.map(user => {
                         return <UserCard className='card-individual' name={user.name} grad_year={user.grad_year} school={user.school} contact={user.contact} skills={user.skills.filter(function(el) {
                                 return Boolean(el);
