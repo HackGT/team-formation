@@ -87,13 +87,15 @@ class UserCard extends Component {
           />
           <Container className="data">
             <Card.Description className="card-description">
-              {viewskill}
+              <div style={{color: '#10112E'}}>
+                About Them: {this.props.experience}
+              </div>
             </Card.Description>
             <div
               className="ui divider"
             />
             <Card.Description className="card-description">
-              About Them: {this.props.experience}
+              {viewskill}
             </Card.Description>
           </Container>
           <div className="ui divider" />

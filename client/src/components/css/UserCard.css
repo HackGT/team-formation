@@ -179,11 +179,13 @@ body .ui.card:hover {
 }
 
 .ui.container.data {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 5px;
-  max-height: 36%;
+  max-height: 143px;
+  word-wrap: break-word;
 }
 
 .ui.container.data::-webkit-scrollbar {
