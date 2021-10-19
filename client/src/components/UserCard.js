@@ -85,14 +85,19 @@ class UserCard extends Component {
               marginBottom: 10,
             }}
           />
-          <Card.Description className="card-description">
-            <Container className="skills">{viewskill}</Container>
-          </Card.Description>
-          <Card.Description className="card-description">
-            <Container className="about">
-              About Them: {this.props.experience}
-            </Container>
-          </Card.Description>
+          <Container className="data">
+            <Card.Description className="card-description">
+              {viewskill}
+            </Card.Description>
+            <div
+              className="ui divider"
+            />
+            <Card.Description className="card-description">
+              <Container className="about">
+                About Them: {this.props.experience}
+              </Container>
+            </Card.Description>
+          </Container>
           <div className="ui divider" />
           <Card.Description>
             <div className="contact-button">

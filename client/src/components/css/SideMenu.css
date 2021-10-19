@@ -71,3 +71,8 @@
   font-size: 15px;
   border-radius: 12px;
 }
+
+/* Fix Unusual bolding */
+.ui.dropdown .menu .active.item {
+  font-weight: 400 !important
+}

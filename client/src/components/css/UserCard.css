@@ -177,3 +177,23 @@ body .ui.card:hover {
 .ui.container.skills::-webkit-scrollbar-thumb {
   background: var(--orange)
 }
+
+.ui.container.data {
+  overflow: auto;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  max-height: 36%;
+}
+
+.ui.container.data::-webkit-scrollbar {
+  width: 9px;
+}
+
+.ui.container.data::-webkit-scrollbar-track {
+  background: rgba(225, 127, 98, 0.4);
+}
+
+.ui.container.data::-webkit-scrollbar-thumb {
+  background: var(--orange);
+}
