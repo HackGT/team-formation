@@ -97,7 +97,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
     console.log(profile);
     let user = await User.findOne({ uuid: profile.uuid });
 
-    const GRAPHQLURL = process.env.GRAPHQLURL || "https://registration.hack.gt/graphql";
+    const GRAPHQLURL = process.env.GRAPHQLURL || "https://registration.2021.hack.gt/graphql";
 
     if (!user) {
       let confirmed = false;
@@ -144,15 +144,15 @@ export class GroundTruthStrategy extends OAuthStrategy {
             : "Virtual";
         const track =
           confirmationBranch === confirmationBranches.EMERGING_INPERSON ||
-          confirmationBranch === confirmationBranches.EMERGING_INPERSON
+          confirmationBranch === confirmationBranches.EMERGING_VIRTUAL
             ? "Emerging"
             : "General";
         if (process.env.ISPRODUCTION === "false" || confirmed) {
           user = createNew<IUser>(User, {
             ...profile,
             visible: 1,
-            location: location,
-            track: track,
+            location,
+            track,
           });
           await user.save();
           done(null, user);
