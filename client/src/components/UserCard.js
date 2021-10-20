@@ -85,38 +85,44 @@ class UserCard extends Component {
               marginBottom: 10,
             }}
           />
-          <Card.Description className="card-description">
-            <Container className="skills">{viewskill}</Container>
-          </Card.Description>
-          <Card.Description className="card-description">
-            <Container className="about">
-              About Them: {this.props.experience}
-            </Container>
-          </Card.Description>
-          <div className="ui divider" />
-          <Card.Description>
+          <Container className="data">
+            <Card.Description className="card-description">
+              <div style={{color: '#10112E'}}>
+                About Them: {this.props.experience}
+              </div>
+            </Card.Description>
+            <div
+              className="ui divider"
+            />
+            <Card.Description className="card-description">
+              {viewskill}
+            </Card.Description>
+          </Container>
+          {/* Separating to test absolute position */}
+          <div className="buttons-anchor">
+            <div className="ui divider" />
             <div className="contact-button">
-              {contact}
-              <Button
-                className="teamUp"
-                content={this.props.team ? "Send Invite" : "Team Up"}
-                onClick={() => {
-                  if(this.props.teamid) {
-                    text="The user is already on a team";
-                  } else {
-                    this.setState({ showModal: true })
-                  }
+                {contact}
+                <Button
+                  className="teamUp"
+                  content={this.props.team ? "Send Invite" : "Team Up"}
+                  onClick={() => {
+                    if(this.props.teamid) {
+                      text="The user is already on a team";
+                    } else {
+                      this.setState({ showModal: true })
+                    }
 
-                }
-              }/>
-              {text}
-              <JoinIndividual
-                {...this.props}
-                showModal={this.state.showModal}
-                closeModal={this.closeModal}
-              />
+                  }
+                }/>
+                {text}
+                <JoinIndividual
+                  {...this.props}
+                  showModal={this.state.showModal}
+                  closeModal={this.closeModal}
+                />
             </div>
-          </Card.Description>
+          </div>
         </Card.Content>
       </Card>
     );
