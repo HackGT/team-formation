@@ -15,7 +15,7 @@ Team Formation application
 Make sure to make a `.env` and fill in the environmental variables(DM project lead or team member for them).
 
 ### Client ###
-1. `cd client
+1. `cd client`
 2. `yarn install`
 3. `yarn start`
 4. When prompted with `Would you like to run the app on another port instead? (y/n)`, type `y`
