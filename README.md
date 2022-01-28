@@ -8,6 +8,7 @@ Team Formation application
 ### Server ###
 1. `cd server`
 2. `yarn install`
+3. `yarn build`
 4. `yarn serve`
 5. Visit `localhost:3000` to check out the server.
 
