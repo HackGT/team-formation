@@ -51,10 +51,9 @@ class NotificationGroup extends Component {
             console.log(props.notifications);
             var user = this.props.user_id;
             var notifications = props.notifications;
-            var colors = ["#68B6E5", "#A562A6"];
+            var colors = ["#ACBA4A", "#A562A6"];
             var count = 0;
             var notificationCards = notifications.map((notif) => {
-              console.log("SENDERR: ", notif.sender)
               return (
                 <NotificationCard
                   message={notif.bio}
@@ -74,8 +73,6 @@ class NotificationGroup extends Component {
             return (
               <Segment
                 style={{
-                  // overflow: "auto",
-                  // maxHeight: 400,
                   overflow: "auto",
                   maxHeight: 400,
                   width: 400,

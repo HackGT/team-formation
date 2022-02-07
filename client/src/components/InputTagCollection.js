@@ -6,6 +6,7 @@ const InputTagCollection = props => {
     const skillsSelected = props.skills;
     const yearsSelected = props.years;
     const schoolsSelected = props.schools;
+    const locationsSelected = props.locations;
 
     let elements = []
 
@@ -31,6 +32,14 @@ const InputTagCollection = props => {
         elements.push(
             <div>
                 <Label data-name={track} horizontal content={track} removeIcon='delete' onRemove={(e, data) => props.allFilterClickListener(data['data-name'], "tracks")}/>
+            </div>
+        )
+    }
+
+    for (const location of locationsSelected) {
+        elements.push(
+            <div>
+                <Label data-name={location} horizontal content={location} removeIcon='delete' onRemove={(e, data) => props.allFilterClickListener(data['data-name'], "locations")}/>
             </div>
         )
     }

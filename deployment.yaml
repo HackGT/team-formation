@@ -1,6 +1,3 @@
-git:
-  branch: master
-
 wants:
   mongo: true
 
@@ -8,16 +5,10 @@ secrets:
   - SECRET
   - GROUNDTRUTHSECRET
   - GRAPHQLAUTH
-  - CLIENT_ID
-  - CLIENT_SECRET
-  - SIGNING_SECRET
-  - OAUTH_TOKEN
-
 
 env:
-  GROUNDTRUTHID: 8b34468cfa667950563557718eb6b9e804690717324ccf030c3ffbe34554d2c7
-  GROUNDTRUTHURL: https://login.dev.hack.gt
-  GRAPHQLURL: https://registration.2020.hack.gt/graphql
+  GROUNDTRUTHID: 9a76e3279d70edc9896ebb003ab7adcc3b1dcddafdaa780018941bec39b43bc8
+  GROUNDTRUTHURL: https://login.hack.gt
+  GRAPHQLURL: https://registration.2021.hack.gt/graphql
   ISPRODUCTION: true
-  TEAM_ID: T01AUT83XST
-  HOST_URL: teamformation.dev.hack.gt
+  HOST_URL: teamformation.2021.hack.gt

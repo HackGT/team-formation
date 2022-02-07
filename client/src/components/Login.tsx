@@ -21,20 +21,7 @@ class Login extends Component<{}, states> {
     };
 
     render() {
-        // const { redirect } = this.state;
-        // console.log("redirect: ", redirect)
-        // if (redirect ==  "feed") {
-        //     console.log("redirect to feed");
-        //     return <Redirect to="/feed/" />;
-        // } else if (redirect == "edit-profile") {
-        //     console.log("redirect to edit profile");
-        //     return <Redirect to="/edit-profile/" />
-        // }
         return (
-        // <div className="Login-container">
-        // 	<Button href = {"/api/user/login"}> Login </Button>
-        //     <h3 id="login-message"> Participants must be confirmed for the Horizons event to access Team Formation</h3>
-        // </div>
         <div className="limiter">
             <div className="container-login100">
                 <div className="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
@@ -58,7 +45,7 @@ class Login extends Component<{}, states> {
 
                         <div className="txt1 text-center p-t-54 p-b-20">
                             <span>
-                                This portal is only available to participants who are confirmed for HealthTech! Please contact hello@hack.gt if you encounter any issues
+                                This portal is only available to participants who are confirmed for HackGT 8! Please contact hello@hexlabs.org if you encounter any issues
                             </span>
                         </div>
                     </form>

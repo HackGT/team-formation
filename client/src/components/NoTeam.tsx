@@ -48,8 +48,6 @@ class NoTeam extends Component<props, states> {
               <ConfirmationModal
               message="Your request to join the team has been sent!"
               closeModal={() => this.setState({ showSecondModal:false})}
-              // secondModal={() => this.props.closeModal()}
-              // onOpen={() => this.setState({ secondOpen:true})}
               showModal={this.state.showSecondModal}
               >
               </ConfirmationModal>

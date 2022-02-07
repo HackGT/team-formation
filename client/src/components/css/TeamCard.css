@@ -47,7 +47,7 @@
 }
 
 body ::-webkit-scrollbar-track {
-  background: var(--purple);
+  background: var(--orange);
 }
 
 .ui.card.card1 {
@@ -57,7 +57,7 @@ body ::-webkit-scrollbar-track {
 }
 
 .ui.container.name {
-  color: var(--purple);
+  color: var(--orange);
   font-family: Quicksand-Bold;
   font-size: 20px;
   text-align: center;
@@ -65,12 +65,12 @@ body ::-webkit-scrollbar-track {
 }
 
 .ui.divider {
-  border: 1px solid var(--purple) !important;
+  border: 1px solid var(--orange) !important;
 }
 
 .ui.button.joinTeam {
   color: white;
-  background: var(--teal);
+  background: var(--dark-green);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   margin-left: 5px;
   font: 'Roboto-Medium';
@@ -96,7 +96,7 @@ body ::-webkit-scrollbar-track {
 
 .ui.button.newTeam {
   color: white;
-  background: var(--purple);
+  background: var(--orange);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   margin-left: 5px;
   width: 50%;
@@ -109,5 +109,5 @@ body ::-webkit-scrollbar-track {
 
 .ui.container.skills {
   overflow: auto;
-  max-height: 80px;
+  max-height: 65px;
 }

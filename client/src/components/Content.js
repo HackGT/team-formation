@@ -22,8 +22,6 @@ const ProtectedRoute = ({
     path,
     ...rest
 }) => {
-    console.log("log", loggedIn)
-    console.log(path)
     return (<Route path={path} {...rest} render={(props) => {
             return loggedIn
                 ? (<div>
@@ -77,7 +75,6 @@ class Content extends Component {
     };
 
     render() {
-
         const {
             state = {}
         } = this.props.location;

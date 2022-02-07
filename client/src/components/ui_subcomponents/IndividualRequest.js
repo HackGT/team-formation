@@ -11,6 +11,7 @@ import ConfirmationModalRemove from "./ConfirmationModalRemove";
 const getUserQuery = graphql`
   query IndividualRequestQuery($user_id: String) {
     user(user_id: $user_id) {
+      uuid
       name
       school
       grad_year
@@ -18,7 +19,7 @@ const getUserQuery = graphql`
       skills
       experience
       visible
-      uuid
+      location
     }
   }
 `;
@@ -93,6 +94,7 @@ class IndividualRequest extends Component {
                           experience={props.user.experience}
                           skills={props.user.skills}
                           contact={props.user.contact}
+                          location={props.user.location}
                         />
                       </div>
                       <div class="modal3Column2">

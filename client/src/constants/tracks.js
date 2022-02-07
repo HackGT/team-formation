@@ -1,9 +1,6 @@
 const rawTracks = [
-    "Mental Health",
-    "Inpatient Health",
-    "Fitness & Nutrition",
-    "Women's and Reproductive Health",
-    "Global/Rural Health"
+    "General",
+    "Emerging"
 ]
 
 const tracks = rawTracks.map((value, index) => {

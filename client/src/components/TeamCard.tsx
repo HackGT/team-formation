@@ -39,8 +39,8 @@ class TeamCard extends Component<props, states> {
 		var count = 0;
 		// var viewskill;
 		let link = "/team/" + this.props.id;
-		var colors = ["#68B6E5", "#EB9922"];
-		var viewskill = this.props.interests.map((skill: any) => (
+		var colors = ["#ACBA4A", "#F8B52C"];
+		var viewskill = this.props.interests.map((skill) => (
 		<Label
 			size="mini"
 			className="labelStyle"

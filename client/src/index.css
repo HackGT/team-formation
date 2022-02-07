@@ -2,10 +2,12 @@
 :root {
   --purple: #A562A6;
   --red: #DB3626;
-  --orange: #EB9922;
-  --teal: #66C5C3;
+  --orange:#E17F62;
+  --dark-green: #3EA788;
   --blue: #68B6E5;
-  --background: #10112E;
+  --light-green: #ACBA4A;
+  --background: #182341;
+  ;
 }
 
 body {
@@ -16,7 +18,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url('./components/css/assets/BLOB 1.png'), var(--background) no-repeat;
+  background: url('./components/css/assets/lights_layer.png'), var(--background) no-repeat;
   height: 100%;
   margin: 0;
   background-repeat: no-repeat;

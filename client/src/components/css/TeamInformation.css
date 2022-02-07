@@ -67,7 +67,7 @@
 }
 
 .ui.form .field.disabled :disabled {
-  border: 1px solid var(--purple);
+  border: 1px solid var(--orange);
 }
 
 .ui.form .field.disabled > label,
@@ -110,12 +110,12 @@
 }
 
 .ui[class*="right labeled"].icon.button {
-  background-color: var(--purple);
+  background-color: var(--orange);
   color: white;
 }
 
 .ui.multiple.dropdown > .label:nth-child(odd) {
-  background-color: var(--blue);
+  background-color: var(--light-green);
   color: white;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   font-family: Roboto-Regular;

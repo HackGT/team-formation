@@ -74,8 +74,6 @@ class TeamPage extends Component {
     this.setState({ showModal: false });
   };
   render() {
-    console.log('rendering team page..');
-    console.log(`team id: ${JSON.stringify(this.state.team_id)}`);
     const curr_team_id = this.props.match.params.id;
     return (
       <QueryRenderer environment={environment} query={getTeamQuery} variables={{
@@ -84,8 +82,6 @@ class TeamPage extends Component {
         if (error) {
           return <div>{error.message}</div>;
         } else if (props) {
-          console.log(JSON.stringify(props));
-          console.log(props.team.members.skills);
           var doc;
           if(props.user_profile.team == null) {
             doc = <NoTeam team={props.team}/>;

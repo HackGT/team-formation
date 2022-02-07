@@ -1,76 +1,113 @@
 schema {
-    query: Query
-    mutation: Mutation
+  query: Query
+  mutation: Mutation
 }
 
 enum NotificationType {
-    USER_JOIN_TEAM
-    TEAM_REQUEST_USER
-    USER_JOIN_USER
-    USER_REQUEST_USER
+  USER_JOIN_TEAM
+  TEAM_REQUEST_USER
+  USER_JOIN_USER
+  USER_REQUEST_USER
 }
 
 union Source = User | Team
 
 type Query {
-    users(search: String, skill: String, name: String, email: String, grad_year: String, school: String, track: String, visible: Int): [User!]!
-    user(user_id: String): User!
-    user_profile: User!
-    teams(search: String, name: String, picture: String, team_id: String, interests: String, description: String, public: Boolean): [Team!]!
-    team(team_id: String): Team!
-    notifications(receiver_type: NotificationType, receiver_id: String): [Notification!]!
-    team_notifications: [Notification]!
-    sent_team_notifications: [Notification]!
+  users(
+    search: String
+    skill: String
+    name: String
+    email: String
+    grad_year: String
+    school: String
+    track: String
+    location: String
+    visible: Int
+  ): [User!]!
+  user(user_id: String): User!
+  user_profile: User!
+  teams(
+    search: String
+    name: String
+    picture: String
+    team_id: String
+    interests: String
+    description: String
+    public: Boolean
+  ): [Team!]!
+  team(team_id: String): Team!
+  notifications(receiver_type: NotificationType, receiver_id: String): [Notification!]!
+  team_notifications: [Notification]!
+  sent_team_notifications: [Notification]!
 }
 
 type Mutation {
-    toggle_visibility: User!
-    update_user(name: String email: String, grad_year: String, school: String, track: String, contact: String, skills: [String], experience: String, contact_method: String, visible: Int): User!
-    update_team(name: String, picture: String, interests: [String], description: String, public: Boolean, project_idea: String): Team
-    accept_team_request(notification_id: String): Team
-    accept_user_request(notification_id: String): Team
-    make_team_request(team_id: String, user_id: String, bio: String, idea: String): Notification
-    make_user_request(user_id: String, bio: String, idea: String): Notification
-    leave_team: User
+  toggle_visibility: User!
+  update_user(
+    name: String
+    email: String
+    grad_year: String
+    school: String
+    track: String
+    contact: String
+    skills: [String]
+    experience: String
+    contact_method: String
+    visible: Int
+  ): User!
+  update_team(
+    name: String
+    picture: String
+    interests: [String]
+    description: String
+    public: Boolean
+    project_idea: String
+  ): Team
+  accept_team_request(notification_id: String): Team
+  accept_user_request(notification_id: String): Team
+  make_team_request(team_id: String, user_id: String, bio: String, idea: String): Notification
+  make_user_request(user_id: String, bio: String, idea: String): Notification
+  leave_team: User
 }
 
 type Team {
-    id: ID
-    name: String
-    picture: String
-    members: [User]
-    interests: [String]
-    description: String
-    project_idea: String
-    notifications: [Notification!]!
-    public: Boolean
+  id: ID
+  name: String
+  picture: String
+  members: [User]
+  interests: [String]
+  description: String
+  project_idea: String
+  notifications: [Notification!]!
+  public: Boolean
 }
 
 type User {
-    id: ID
-    uuid: String
-    name: String
-    email: String
-    school: String
-    track: String
-    grad_year: String
-    beginner: Boolean
-    skills: [String]
-    experience: String
-    contact: String
-    contact_method: String
-    visible: Int
-    team: Team
-    slackid: String
+  id: ID
+  uuid: String
+  name: String
+  email: String
+  school: String
+  track: String
+  location: String
+  grad_year: String
+  beginner: Boolean
+  skills: [String]
+  experience: String
+  contact: String
+  contact_method: String
+  visible: Int
+  team: Team
+  slackid: String
 }
 
 type Notification {
-    id: ID
-    message: String
-    bio: String
-    idea: String
-    sender: Source
-    senderType: String
-    receiver: Source
-    resolved: Boolean
+  id: ID
+  message: String
+  bio: String
+  idea: String
+  sender: Source
+  senderType: String
+  receiver: Source
+  resolved: Boolean
 }

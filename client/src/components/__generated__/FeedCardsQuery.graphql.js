@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 0641a4b44f60cbd8e0c04e4f4368bfc7
+ * @relayHash 993a52d8d838b4945b2e7931277eb4d6
  */
 
 /* eslint-disable */
@@ -15,6 +15,7 @@ export type FeedCardsQueryVariables = {|
   school?: ?string,
   search?: ?string,
   track?: ?string,
+  location?: ?string,
 |};
 export type FeedCardsQueryResponse = {|
   +users: $ReadOnlyArray<{|
@@ -30,6 +31,7 @@ export type FeedCardsQueryResponse = {|
     +uuid: ?string,
     +id: ?string,
     +slackid: ?string,
+    +location: ?string,
   |}>,
   +user_profile: {|
     +team: ?{|
@@ -51,8 +53,9 @@ query FeedCardsQuery(
   $school: String
   $search: String
   $track: String
+  $location: String
 ) {
-  users(skill: $skill, grad_year: $grad_year, school: $school, search: $search, track: $track) {
+  users(skill: $skill, grad_year: $grad_year, school: $school, search: $search, track: $track, location: $location) {
     name
     email
     school
@@ -65,6 +68,7 @@ query FeedCardsQuery(
     uuid
     id
     slackid
+    location
   }
   user_profile {
     team {
@@ -106,6 +110,12 @@ var v0 = [
     "name": "track",
     "type": "String",
     "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "location",
+    "type": "String",
+    "defaultValue": null
   }
 ],
 v1 = {
@@ -125,6 +135,12 @@ v2 = {
       "kind": "Variable",
       "name": "grad_year",
       "variableName": "grad_year",
+      "type": "String"
+    },
+    {
+      "kind": "Variable",
+      "name": "location",
+      "variableName": "location",
       "type": "String"
     },
     {
@@ -232,6 +248,13 @@ v2 = {
       "name": "slackid",
       "args": null,
       "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "location",
+      "args": null,
+      "storageKey": null
     }
   ]
 },
@@ -296,11 +319,11 @@ return {
     "operationKind": "query",
     "name": "FeedCardsQuery",
     "id": null,
-    "text": "query FeedCardsQuery(\n  $skill: String\n  $grad_year: String\n  $school: String\n  $search: String\n  $track: String\n) {\n  users(skill: $skill, grad_year: $grad_year, school: $school, search: $search, track: $track) {\n    name\n    email\n    school\n    grad_year\n    contact\n    skills\n    track\n    experience\n    visible\n    uuid\n    id\n    slackid\n  }\n  user_profile {\n    team {\n      id\n    }\n    id\n  }\n}\n",
+    "text": "query FeedCardsQuery(\n  $skill: String\n  $grad_year: String\n  $school: String\n  $search: String\n  $track: String\n  $location: String\n) {\n  users(skill: $skill, grad_year: $grad_year, school: $school, search: $search, track: $track, location: $location) {\n    name\n    email\n    school\n    grad_year\n    contact\n    skills\n    track\n    experience\n    visible\n    uuid\n    id\n    slackid\n    location\n  }\n  user_profile {\n    team {\n      id\n    }\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '75a72ea4127280d21cb8dd0c73564e31';
+(node/*: any*/).hash = '2417d533a065e98cab9a98a977df204e';
 module.exports = node;

@@ -30,8 +30,8 @@ import tracks from '../constants/tracks';
 import Filter from 'bad-words'
 
 const mutation = graphql `
-mutation EditProfileMutation($name: String, $grad_year: String, $school: String, $skills: [String], $track: String $experience: String, $contact: String, $contact_method: String, $visible: Int) {
-  update_user(name: $name, grad_year: $grad_year, school: $school,  skills: $skills, track: $track, experience: $experience, contact: $contact, contact_method: $contact_method, visible: $visible) {
+mutation EditProfileMutation($name: String, $grad_year: String, $school: String, $skills: [String], $experience: String, $contact: String, $contact_method: String, $visible: Int) {
+  update_user(name: $name, grad_year: $grad_year, school: $school,  skills: $skills, experience: $experience, contact: $contact, contact_method: $contact_method, visible: $visible) {
     name
     grad_year
     school
@@ -53,6 +53,7 @@ query EditProfileQuery {
         contact
         skills
         track
+        location
         experience
         contact_method
         slackid
@@ -70,7 +71,6 @@ class EditProfile extends Component {
             name: "",
             school: "",
             grad_year: "",
-            track: "",
             skills: [],
             experience: "",
             public: true,
@@ -103,16 +103,16 @@ class EditProfile extends Component {
         } else {
             contact_form = ""
         }
-        console.log("SLACK: ",this.state.confirm_slack)
-        if(this.state.confirm_slack) {
-            console.log("here SLACK")
-            return (
-                <ConfirmationModal message={"Please connect your HackGT 7 Slack Account to receive team formation notifications! If you are not on the event slack, please join before proceeding."} showModal={this.state.confirm_slack} closeModal={() => {
-                        window.location.replace("https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=1368926133911.1420841367108&redirect_uri=https%3A%2F%2Fteamformation.hack.gt%2Fapi%2Fuser%2Fslack%2Fcallback&team=T01AUT83XST")
-                        this.setState({"confirm_slack": false})
-                    }} />
-            )
-        }
+        // console.log("SLACK: ",this.state.confirm_slack)
+        // if(this.state.confirm_slack) {
+        //     console.log("here SLACK")
+        //     return (
+        //         <ConfirmationModal message={"Please connect your HackGT 7 Slack Account to receive team formation notifications! If you are not on the event slack, please join before proceeding."} showModal={this.state.confirm_slack} closeModal={() => {
+        //                 window.location.replace("https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=1368926133911.1420841367108&redirect_uri=https%3A%2F%2Fteamformation.hack.gt%2Fapi%2Fuser%2Fslack%2Fcallback&team=T01AUT83XST")
+        //                 this.setState({"confirm_slack": false})
+        //             }} />
+        //     )
+        // }
         if(this.state.next) {
             console.log("nexting")
             return <Redirect to="/feed" />
@@ -141,13 +141,28 @@ class EditProfile extends Component {
                                 <Form.Select className="input-container-small" required="required" label='Year in School' defaultValue={props.grad_year} onChange={this.onYearChange} options={years} placeholder='Year in School'/>
                             </Form.Group>
                             <Form.Group>
-                                <Form.Select className="input-container-large" label='Track' defaultValue={props.track} onChange={this.onChange("track")} options={tracks}/>
+                                {/* <Form.Input className="input-container-large" label='Track' defaultValue={props.track} options={tracks}
+                                /> */}
+                                <Form.Input className="input-container-large" label='Track' defaultValue={props.track} onChange={this.onTrackChange}>
+                                    <input defaultValue={props.track} disabled/>
+                                </Form.Input>
+                                
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Input className="input-container-large" label='Location' defaultValue={props.track} onChange={this.onTrackChange}>
+                                    <input defaultValue={props.location} disabled/>
+                                </Form.Input>
                             </Form.Group>
                             <Form.Group>
                                 <Form.Select className="input-container-large" label="Skills" placeholder='Skills' defaultValue={props.skills} onChange={this.onSkillsChange} fluid="fluid" multiple="multiple" selection="selection" search="search" options={skills}/>
                             </Form.Group>
                             <Form.Group>
                                 <Form.TextArea className="input-container-large" label='Bio' placeholder='Introduce yourself!' defaultValue={props.experience} onChange={this.onExperienceChange} error={this.state["experience_profane"]}/>
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Input className="input-container-large" label='Discord Username' placeholder='<username>#<4-digit number>'
+                                defaultValue={props.contact}
+                                onChange={this.onContactChange} error={this.state["contact_profane"]} required="required"/>
                             </Form.Group>
                             <Form.Group>
                                 <div className="editCheckbox">
@@ -245,6 +260,7 @@ class EditProfile extends Component {
         this.props.onNextClick('feed', this.props.user_id);
     }
 
+
     onNextClick = () => {
         let cur_error;
         this.setState({name_profane: false, school_profane: false, grad_year_profane: false, experience_profane: false, contact_profane: false})
@@ -269,22 +285,22 @@ class EditProfile extends Component {
                     school: this.state.school,
                     contact: this.state.contact,
                     skills: this.state.skills,
-                    track: this.state.track,
+                    // track: this.state.track,
                     experience: this.state.experience,
                     contact_method: this.state.contact_method,
                     visible: this.state.visible
                 }
             });
-            console.log(this.state.slackid)
-            if(!this.state.slackid) {
-                console.log("NO SLACKID")
-                this.setState({"confirm_slack": true})
-                // window.location.replace("https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=15533117780.599676767764&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fapi%2Fuser%2Fslack%2Fcallback&team=T0FFP3FNY")
-            } else {
-                this.setState({"next": true})
-            }
+            // console.log(this.state.slackid)
+            // if(!this.state.slackid) {
+            //     console.log("NO SLACKID")
+            //     this.setState({"confirm_slack": true})
+            //     // window.location.replace("https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=15533117780.599676767764&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fapi%2Fuser%2Fslack%2Fcallback&team=T0FFP3FNY")
+            // } else {
+            this.setState({"next": true})
         }
-    };
+    }
 };
+
 
 export default EditProfile;
