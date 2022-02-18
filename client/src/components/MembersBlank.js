@@ -46,11 +46,12 @@ class Members extends Component {
           name={user.name}
           grad_year={user.grad_year}
           school={user.school}
-          contact={user.contact}
+          contact={user.email}
           skills={user.skills.filter(function(el) {
             return Boolean(el);
           })}
           experience={user.experience}
+          slackid={user.slackid}
         />
       );
     }

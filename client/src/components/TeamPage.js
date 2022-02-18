@@ -21,6 +21,7 @@ const getTeamQuery = graphql `
         picture
         members {
           name
+          email
           school
           grad_year
           contact

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 37609fe8c7b13eb8bf27e39e7f825127
+ * @relayHash 99b49c848f2863683af222fa58820450
  */
 
 /* eslint-disable */
@@ -9,9 +9,11 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type TeamRequestsSentQueryVariables = {||};
+export type TeamRequestsSentQueryVariables = {|
+  sent?: ?boolean
+|};
 export type TeamRequestsSentQueryResponse = {|
-  +sent_team_notifications: $ReadOnlyArray<?{|
+  +team_notifications: $ReadOnlyArray<?{|
     +id: ?string,
     +message: ?string,
     +bio: ?string,
@@ -46,8 +48,10 @@ export type TeamRequestsSentQuery = {|
 
 
 /*
-query TeamRequestsSentQuery {
-  sent_team_notifications {
+query TeamRequestsSentQuery(
+  $sent: Boolean
+) {
+  team_notifications(sent: $sent) {
     id
     message
     bio
@@ -81,90 +85,106 @@ query TeamRequestsSentQuery {
 */
 
 const node/*: ConcreteRequest*/ = (function(){
-var v0 = {
+var v0 = [
+  {
+    "kind": "LocalArgument",
+    "name": "sent",
+    "type": "Boolean",
+    "defaultValue": null
+  }
+],
+v1 = [
+  {
+    "kind": "Variable",
+    "name": "sent",
+    "variableName": "sent",
+    "type": "Boolean"
+  }
+],
+v2 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
   "args": null,
   "storageKey": null
 },
-v1 = {
+v3 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "message",
   "args": null,
   "storageKey": null
 },
-v2 = {
+v4 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "bio",
   "args": null,
   "storageKey": null
 },
-v3 = {
+v5 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "idea",
   "args": null,
   "storageKey": null
 },
-v4 = {
+v6 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "__typename",
   "args": null,
   "storageKey": null
 },
-v5 = {
+v7 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "name",
   "args": null,
   "storageKey": null
 },
-v6 = {
+v8 = {
   "kind": "InlineFragment",
   "type": "User",
   "selections": [
-    (v0/*: any*/),
-    (v5/*: any*/)
+    (v2/*: any*/),
+    (v7/*: any*/)
   ]
 },
-v7 = [
-  (v4/*: any*/),
+v9 = [
   (v6/*: any*/),
+  (v8/*: any*/),
   {
     "kind": "InlineFragment",
     "type": "Team",
     "selections": [
-      (v5/*: any*/)
+      (v7/*: any*/)
     ]
   }
 ],
-v8 = {
+v10 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "senderType",
   "args": null,
   "storageKey": null
 },
-v9 = {
+v11 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "resolved",
   "args": null,
   "storageKey": null
 },
-v10 = [
-  (v4/*: any*/),
+v12 = [
   (v6/*: any*/),
+  (v8/*: any*/),
   {
     "kind": "InlineFragment",
     "type": "Team",
     "selections": [
-      (v5/*: any*/),
-      (v0/*: any*/)
+      (v7/*: any*/),
+      (v2/*: any*/)
     ]
   }
 ];
@@ -175,21 +195,21 @@ return {
     "name": "TeamRequestsSentQuery",
     "type": "Query",
     "metadata": null,
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "sent_team_notifications",
+        "name": "team_notifications",
         "storageKey": null,
-        "args": null,
+        "args": (v1/*: any*/),
         "concreteType": "Notification",
         "plural": true,
         "selections": [
-          (v0/*: any*/),
-          (v1/*: any*/),
           (v2/*: any*/),
           (v3/*: any*/),
+          (v4/*: any*/),
+          (v5/*: any*/),
           {
             "kind": "LinkedField",
             "alias": null,
@@ -198,9 +218,9 @@ return {
             "args": null,
             "concreteType": null,
             "plural": false,
-            "selections": (v7/*: any*/)
+            "selections": (v9/*: any*/)
           },
-          (v8/*: any*/),
+          (v10/*: any*/),
           {
             "kind": "LinkedField",
             "alias": null,
@@ -209,9 +229,9 @@ return {
             "args": null,
             "concreteType": null,
             "plural": false,
-            "selections": (v7/*: any*/)
+            "selections": (v9/*: any*/)
           },
-          (v9/*: any*/)
+          (v11/*: any*/)
         ]
       }
     ]
@@ -219,21 +239,21 @@ return {
   "operation": {
     "kind": "Operation",
     "name": "TeamRequestsSentQuery",
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "sent_team_notifications",
+        "name": "team_notifications",
         "storageKey": null,
-        "args": null,
+        "args": (v1/*: any*/),
         "concreteType": "Notification",
         "plural": true,
         "selections": [
-          (v0/*: any*/),
-          (v1/*: any*/),
           (v2/*: any*/),
           (v3/*: any*/),
+          (v4/*: any*/),
+          (v5/*: any*/),
           {
             "kind": "LinkedField",
             "alias": null,
@@ -242,9 +262,9 @@ return {
             "args": null,
             "concreteType": null,
             "plural": false,
-            "selections": (v10/*: any*/)
+            "selections": (v12/*: any*/)
           },
-          (v8/*: any*/),
+          (v10/*: any*/),
           {
             "kind": "LinkedField",
             "alias": null,
@@ -253,9 +273,9 @@ return {
             "args": null,
             "concreteType": null,
             "plural": false,
-            "selections": (v10/*: any*/)
+            "selections": (v12/*: any*/)
           },
-          (v9/*: any*/)
+          (v11/*: any*/)
         ]
       }
     ]
@@ -264,11 +284,11 @@ return {
     "operationKind": "query",
     "name": "TeamRequestsSentQuery",
     "id": null,
-    "text": "query TeamRequestsSentQuery {\n  sent_team_notifications {\n    id\n    message\n    bio\n    idea\n    sender {\n      __typename\n      ... on User {\n        id\n        name\n      }\n      ... on Team {\n        name\n        id\n      }\n    }\n    senderType\n    receiver {\n      __typename\n      ... on User {\n        id\n        name\n      }\n      ... on Team {\n        name\n        id\n      }\n    }\n    resolved\n  }\n}\n",
+    "text": "query TeamRequestsSentQuery(\n  $sent: Boolean\n) {\n  team_notifications(sent: $sent) {\n    id\n    message\n    bio\n    idea\n    sender {\n      __typename\n      ... on User {\n        id\n        name\n      }\n      ... on Team {\n        name\n        id\n      }\n    }\n    senderType\n    receiver {\n      __typename\n      ... on User {\n        id\n        name\n      }\n      ... on Team {\n        name\n        id\n      }\n    }\n    resolved\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'a0f663963064ab2d189ad9db8fd29f6a';
+(node/*: any*/).hash = '05bdc59b9613319a5bd0a20195b6c467';
 module.exports = node;
