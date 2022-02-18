@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
-import {Button} from 'semantic-ui-react';
 import './css/login-css/main.css';
 import './css/login-css/util.css';
 
-interface states {
+// interface representing the state of the Login component
+// All logins must contain a user's UUID, the user data, and redirects
+interface LoginState {
     user_id: string,
     data: object,
     redirect: string
 };
 
-class Login extends Component<{}, states> {
+class Login extends Component<{}, LoginState> {
     constructor() {
         super({});
         this.state = {

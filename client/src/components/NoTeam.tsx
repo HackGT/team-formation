@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import TeamInformation from './TeamInformation';
 import JoinTeam from './ui_subcomponents/JoinTeam';
-import TeamNotifications from './TeamNotifications';
-import TeamRequestsSent from './TeamRequestsSent';
-import Members from './Members';
 import MembersBlank from './MembersBlank';
 import './css/TeamPage.css';
 import ConfirmationModal from "./ui_subcomponents/ConfirmationModal";
@@ -32,13 +29,17 @@ class NoTeam extends Component<props, states> {
         showSecondModal: false
     }
   }
+  // Closes all modals
   closeModal = () => {
     this.setState({ showModal: false });
   };
+
+  // Displays confirmation of request
   secondModal = () => {
     this.setState({showSecondModal: true})
   }
   render() {
+    // Reduce size of team name if too long for the header
     var teamName = truncateTeamName(this.props.team.name)
     return (
         <div id="not-team" className="team-page">

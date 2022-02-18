@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import UserCard from "./UserCard";
-import { Card, Button, Icon } from "semantic-ui-react";
-
-import { QueryRenderer } from "react-relay";
+import { Icon } from "semantic-ui-react";
 import { graphql } from "babel-plugin-relay/macro";
 import "./css/Members.css";
 import environment from "./Environment";
@@ -38,6 +36,7 @@ class Members extends Component {
       users = this.props.members;
     }
 
+    // Populates team member's component with cards representing each user
     for (let i = 0; i < users.length; i++) {
       let user = users[i];
 
@@ -57,6 +56,7 @@ class Members extends Component {
         />
       );
     }
+    // Fills in remaining slots with placeholders that redirect back the non-team users Feed
     for (let j = 4 - users.length; j > 0; j--) {
       memberCards.push(
         <div className="emptyCard">

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import TeamCard from './TeamCard';
-import {Grid, Row, Card, Button} from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 
 import {QueryRenderer} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
@@ -27,6 +27,10 @@ const getTeamsQuery = graphql `
     }
 `;
 
+/**
+ * Component that houses the cards of all teams that have been created that
+ * are not full or private. Very similar to FeedCards.
+ */
 class FeedTeamCards extends Component {
     render() {
         let search = this.props.search;
