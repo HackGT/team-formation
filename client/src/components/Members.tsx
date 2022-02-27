@@ -7,6 +7,8 @@ import { graphql } from "babel-plugin-relay/macro";
 import "./css/Members.css";
 import environment from "./Environment";
 import { Link } from "react-router-dom";
+import { processImport } from "@graphql-tools/import";
+import { User } from "../types/index"
 
 // edit this query to pull on the team members
 const getUsersQuery = graphql`
@@ -27,12 +29,16 @@ const getUsersQuery = graphql`
   }
 `;
 
-class Members extends Component {
+interface props {
+    members: [User]
+}
+
+class Members extends Component<props, {}> {
   render() {
     let memberCards = [];
 
     // sample users array
-    let users = [];
+    let users: User[] = [];
     console.log("Team: " + this.props.members);
     if (this.props.members) {
       users = this.props.members;
@@ -49,11 +55,11 @@ class Members extends Component {
           grad_year={user.grad_year}
           school={user.school}
           contact={user.contact}
-          skills={user.skills.filter(function(el) {
+          skills={user.skills.filter(function(el: string) {
             return Boolean(el);
           })}
           experience={user.experience}
-          location={user.location}
+        //   location={user.location}
         />
       );
     }
