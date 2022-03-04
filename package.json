@@ -10,7 +10,7 @@
     "build": "gulp build"
   },
   "dependencies": {
-    "apollo-server": "^2.16.0",
+    "apollo-server": "^2.25.3",
     "apollo-server-express": "^1.4.0",
     "bad-words": "^3.0.2",
     "body-parser": "^1.19.0",
