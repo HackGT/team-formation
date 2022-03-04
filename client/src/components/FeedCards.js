@@ -52,7 +52,6 @@ class FeedCards extends Component {
                 location: location
             }} render={({error, props}) => {
                 if (error) {
-                    // return <div>{error.message}</div>;
                     return <Redirect to='/login' />;
                 } else if (props) {
                     console.log(props.user);

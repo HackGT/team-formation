@@ -160,7 +160,6 @@ class TeamInformation extends Component {
                     onAddItem={this.handleAddition}
                     onChange={this.handleChange}
                   />
-                  {/* <Message hidden={this.state.save_message_hidden} success={this.state.save_success} header={this.state.save_success ? "Changes Saved" : "Unsaved Changes"}/> */}
                 </Form>
                 <Button icon labelPosition="right" onClick={this.onSaveClick}>
                   Save

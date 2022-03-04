@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import FeedTeamCards from "./FeedTeamCards";
 import FeedCards from "./FeedCards";
 import SideMenu from "./SideMenu";
-import { Button, Grid } from "semantic-ui-react";
-import { setState } from "semantic-ui-react";
-import Members from "./Members";
+import { Button } from "semantic-ui-react";
 import InputTagCollection from "./InputTagCollection";
 import "./css/Feed.css";
-import TeamInformation from "./TeamInformation";
 
 
 

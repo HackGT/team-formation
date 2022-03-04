@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import TeamCard from './TeamCard';
-import {Grid, Row, Card, Button} from 'semantic-ui-react';
+import {Button} from 'semantic-ui-react';
 
 import {QueryRenderer} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';

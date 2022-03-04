@@ -1,11 +1,5 @@
 import React, { Component } from "react";
 import {
-  Button,
-  Card,
-  Popup,
-  Container,
-  Label,
-  Icon,
   Segment,
 } from "semantic-ui-react";
 import NotificationCard from "./NotificationCard";

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Button} from 'semantic-ui-react';
 import './css/login-css/main.css';
 import './css/login-css/util.css';
 

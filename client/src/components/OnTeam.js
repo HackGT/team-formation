@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { Card, Form, Button, Label, Message, Input } from "semantic-ui-react";
+import {Form, Button} from "semantic-ui-react";
 import TeamInformation from "./TeamInformation";
 import JoinTeam from "./ui_subcomponents/JoinTeam";
 import CheckingModal from "./ui_subcomponents/CheckingModal";
 import TeamNotifications from "./TeamNotifications";
 import TeamRequestsSent from "./TeamRequestsSent";
 import Members from "./Members";
-import MembersBlank from "./MembersBlank";
 import "./css/TeamPage.css";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
@@ -67,7 +66,6 @@ class OnTeam extends Component {
   render() {
     return (
       <div id="on-team" class="team-page">
-        {/* <h1>{this.props.team.name}</h1> */}
         <h1 id="header">
           <Form.Input
             id="field"
@@ -80,13 +78,11 @@ class OnTeam extends Component {
               width: this.calcWidth()
             }}
           />
-          {/* <Message id="alert" hidden={this.state.save_message_hidden} success={this.state.save_success} header={this.state.save_success ? "Changes Saved" : "Unsaved Changes"}/> */}
         </h1>
         <Button
           className="leaveTeam"
           onClick={() => {
               this.setState({showSecondModal: true});
-              // this.sendInformation();
               console.log("STATEEEEE: ",this.state.leaveTeam)
           }}
         >
@@ -95,8 +91,6 @@ class OnTeam extends Component {
         <CheckingModal
             message="Are you sure you want to leave the team?"
             closeModal={() => this.setState({ showSecondModal:false})}
-            // secondModal={() => this.props.closeModal()}
-            // onOpen={() => this.setState({ secondOpen:true})}
             showModal={this.state.showSecondModal}
             leaveTeam={this.sendInformation}
             >

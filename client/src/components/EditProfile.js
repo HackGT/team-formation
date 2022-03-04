@@ -1,24 +1,16 @@
 import React, {Component} from 'react';
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
     Link,
-    useParams,
     Redirect
 } from "react-router-dom";
 import {
     Button,
-    Divider,
-    Dropdown,
-    TextArea,
     Message,
     Form,
     Checkbox
 } from 'semantic-ui-react';
 import {QueryRenderer} from 'react-relay';
-import ContactDropdown from './ui_subcomponents/ContactDropdown';
-import ConfirmationModal from './ui_subcomponents/ConfirmationModal'
 import './css/EditProfile.css';
 import {commitMutation} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
@@ -26,7 +18,6 @@ import environment from './Environment';
 import skills from '../constants/skills';
 import years from '../constants/years';
 import schools from '../constants/schools';
-import tracks from '../constants/tracks';
 import Filter from 'bad-words'
 
 const mutation = graphql `
@@ -103,16 +94,6 @@ class EditProfile extends Component {
         } else {
             contact_form = ""
         }
-        // console.log("SLACK: ",this.state.confirm_slack)
-        // if(this.state.confirm_slack) {
-        //     console.log("here SLACK")
-        //     return (
-        //         <ConfirmationModal message={"Please connect your HackGT 7 Slack Account to receive team formation notifications! If you are not on the event slack, please join before proceeding."} showModal={this.state.confirm_slack} closeModal={() => {
-        //                 window.location.replace("https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=1368926133911.1420841367108&redirect_uri=https%3A%2F%2Fteamformation.hack.gt%2Fapi%2Fuser%2Fslack%2Fcallback&team=T01AUT83XST")
-        //                 this.setState({"confirm_slack": false})
-        //             }} />
-        //     )
-        // }
         if(this.state.next) {
             console.log("nexting")
             return <Redirect to="/feed" />
@@ -141,8 +122,6 @@ class EditProfile extends Component {
                                 <Form.Select className="input-container-small" required="required" label='Year in School' defaultValue={props.grad_year} onChange={this.onYearChange} options={years} placeholder='Year in School'/>
                             </Form.Group>
                             <Form.Group>
-                                {/* <Form.Input className="input-container-large" label='Track' defaultValue={props.track} options={tracks}
-                                /> */}
                                 <Form.Input className="input-container-large" label='Track' defaultValue={props.track} onChange={this.onTrackChange}>
                                     <input defaultValue={props.track} disabled/>
                                 </Form.Input>
@@ -291,12 +270,6 @@ class EditProfile extends Component {
                     visible: this.state.visible
                 }
             });
-            // console.log(this.state.slackid)
-            // if(!this.state.slackid) {
-            //     console.log("NO SLACKID")
-            //     this.setState({"confirm_slack": true})
-            //     // window.location.replace("https://slack.com/oauth/v2/authorize?user_scope=identity.basic,identity.email,identity.team&client_id=15533117780.599676767764&redirect_uri=http%3A%2F%2Flocalhost:3000%2Fapi%2Fuser%2Fslack%2Fcallback&team=T0FFP3FNY")
-            // } else {
             this.setState({"next": true})
         }
     }

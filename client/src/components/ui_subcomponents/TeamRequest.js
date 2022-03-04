@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
-import { QueryRenderer, commitMutation } from "react-relay";
+import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
 import { Link } from "react-router-dom";
@@ -66,29 +66,6 @@ class TeamRequest extends Component {
               </div>
               <div class="flex-container2">
                 <div class="buttonMargin">
-                  {/* <Modal
-                    id="joined-team"
-                    class="hidden"
-                    onClose={() => {
-                      this.props.closeModal();
-                    }}
-                  >
-                    <Modal.Content>
-                      <Modal.Description>
-                        <p class="modalHeader">
-                            You have joined the team!
-                        </p>
-                        <Button
-                          className="submit"
-                          onClick={() => {
-                            this.props.closeModal();
-                          }}
-                        >
-                          Ok
-                        </Button>
-                      </Modal.Description>
-                    </Modal.Content>
-                  </Modal> */}
                   <ConfirmationModal
                   message="You have joined the team!"
                   onClose={() => this.setState({ secondOpen:false})}
@@ -134,11 +111,6 @@ class TeamRequest extends Component {
     this.props.onTeamPageClick("some team_id");
     this.props.closeModal();
   };
-
-  // onSubmit = () => {
-  //   var obj = ("joined-team");
-  //   obj.classList.remove("hidden");
-  // };
 }
 
 export default TeamRequest;

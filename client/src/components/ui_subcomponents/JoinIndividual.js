@@ -31,26 +31,6 @@ class JoinIndividual extends Component {
     };
   }
   render() {
-    // var openPopup = false;
-    if(this.props.teamid) {
-      // var popup = 
-      // <Popup 
-      // content="User is already on a team."
-      // trigger={<}
-      // on="click"
-      // hideOnScroll
-      // ></Popup>;
-    } else {
-      // var popup = 
-      // <Popup 
-      // content="User is already on a team."
-      // trigger={id="submitButton"}
-      // on="click"
-      // hideOnScroll
-      // ></Popup>;
-    }
-    // console.log("Content: "+popup.content)
-    // console.log("STATE: "+this.state.openPopup);
     return (
       <Modal
         id="modal"

@@ -1,27 +1,6 @@
 import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
-import { QueryRenderer, commitMutation } from "react-relay";
 import "../css/ConfirmationModal.css";
-import UserCard from "../UserCard";
-import { graphql } from "babel-plugin-relay/macro";
-import environment from "../Environment";
-import IndividualRequest from "./IndividualRequest"
-
-// const mutation = graphql`
-//   mutation JoinIndividualMutation(
-//     $user_id: String
-//     $bio: String
-//     $idea: String
-//   ) {
-//     make_user_request(user_id: $user_id, bio: $bio, idea: $idea) {
-//       id
-//       message
-//       bio
-//       idea
-//       resolved
-//     }
-//   }
-// `;
 
 class ConfirmationModal extends Component {
     constructor(props) {
@@ -37,7 +16,6 @@ class ConfirmationModal extends Component {
         this.setState({showModal: false});
     }
   render() {
-    //   this.props.secondModal();
     return (
       <Modal
         className="confirmModal"

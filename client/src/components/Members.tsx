@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import UserCard from "./UserCard";
-import { Card, Button, Icon } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
 
-import { QueryRenderer } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import "./css/Members.css";
-import environment from "./Environment";
 import { Link } from "react-router-dom";
-import { processImport } from "@graphql-tools/import";
 import { User } from "../types/index"
 
 // edit this query to pull on the team members
@@ -59,7 +56,6 @@ class Members extends Component<props, {}> {
             return Boolean(el);
           })}
           experience={user.experience}
-        //   location={user.location}
         />
       );
     }

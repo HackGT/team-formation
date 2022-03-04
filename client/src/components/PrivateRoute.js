@@ -1,10 +1,7 @@
 import React from "react";
 import {
     BrowserRouter as Router,
-    Switch,
     Route,
-    Link,
-    useParams,
     Redirect
 } from "react-router-dom";
 import isLogin from "../utils";

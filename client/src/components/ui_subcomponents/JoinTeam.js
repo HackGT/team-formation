@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 import "../css/Modal.css";
-import TeamCard from "../TeamCard";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
-import ConfirmationModal from "./ConfirmationModal";
 
 const mutation = graphql`
   mutation JoinTeamMutation($team_id: String, $bio: String, $idea: String) {
@@ -53,20 +51,12 @@ class JoinTeam extends Component {
             <div className="error">{this.state.errorMessage}</div>
             <div class="flex-container-modal3">
               <div>
-                {/* <ConfirmationModal
-                    message="Your request to join the team has been sent!"
-                    closeModal={() => this.setState({ secondOpen:false})}
-                    secondModal={() => this.props.closeModal()}
-                    onOpen={() => this.setState({ secondOpen:true})}
-                    showModal={this.state.secondOpen}
-                  /> */}
                   <Button
                   className="submit"
                   style={{
                     marginTop: 30,
                   }}
                   onClick={() => {
-                    // this.props.closeModal();
                     commitMutation(environment, {
                       mutation,
                       variables: {
