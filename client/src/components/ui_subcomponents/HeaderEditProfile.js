@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import '../css/Headers.css';
 import {Button, Menu} from 'semantic-ui-react';
 
+// Contains the headers for the user in their profile page
+/*
+Note: Does not appear to be in use. However the title will not display without it.
+Status: UNKNOWN
+Suggestion: Unless it's possible to work out how this is being used, do not touch it.
+*/
 class Headers extends Component {
     render() {
         return (<div className="Header-container">

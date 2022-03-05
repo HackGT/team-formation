@@ -6,6 +6,7 @@ import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
 
+// Update user's data to include the message sent from this component
 const mutation = graphql`
   mutation JoinIndividualMutation(
     $user_id: String
@@ -22,6 +23,12 @@ const mutation = graphql`
   }
 `;
 
+/**
+ * Component that comprises the "Team Up" functionality
+ * - Creates modal for user to send info about ideas, bio
+ * - Sends data in the form of a notification and message to
+ *   the target user.
+ */
 class JoinIndividual extends Component {
   constructor(props) {
     super(props);
@@ -31,26 +38,6 @@ class JoinIndividual extends Component {
     };
   }
   render() {
-    // var openPopup = false;
-    if(this.props.teamid) {
-      // var popup = 
-      // <Popup 
-      // content="User is already on a team."
-      // trigger={<}
-      // on="click"
-      // hideOnScroll
-      // ></Popup>;
-    } else {
-      // var popup = 
-      // <Popup 
-      // content="User is already on a team."
-      // trigger={id="submitButton"}
-      // on="click"
-      // hideOnScroll
-      // ></Popup>;
-    }
-    // console.log("Content: "+popup.content)
-    // console.log("STATE: "+this.state.openPopup);
     return (
       <Modal
         id="modal"
@@ -141,6 +128,8 @@ class JoinIndividual extends Component {
       </Modal>
     );
   }
+
+  // State updaters
   onBioChange = (e) => {
     this.setState({ bio: e.target.value });
   };
