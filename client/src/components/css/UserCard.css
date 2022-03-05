@@ -87,9 +87,8 @@ body .ui.card:hover {
 }
 
 .ui.button.contact {
-  color: white;
-  background: var(--dark-green);
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  color: var(--dark-green);
+  background: white;
   font-family: Roboto-Medium;
   font-weight: 500;
   font-style: normal;
@@ -98,13 +97,13 @@ body .ui.card:hover {
   border-radius: 4px;
   display: flex;
   justify-content: center;
+  border: 1px var(--green) solid;
 }
 
 .ui.button.teamUp {
   color: white;
   display: flex;
-  background: var(--orange);
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
+  background: var(--green);
   margin-left: 5px;
   width: 45%;
   font-size: 13px;
@@ -138,14 +137,15 @@ body .ui.card:hover {
 .ui.cards > .card > .content > .header:not(.ui) {
   text-align: center;
   padding-top: 10px;
-  color: var(--orange);
+  color: black;
   font-family: Roboto-Bold;
   font-weight: 400;
   font-size: 20px;
 }
 
 .ui.divider {
-  border: 1px solid var(--orange) !important;
+  border: 1px solid var(--green) !important;
+  opacity: 0.25;
   margin-top: 5px !important;
 }
 
@@ -177,12 +177,13 @@ body .ui.card:hover {
 }
 
 .ui.container.skills::-webkit-scrollbar-track {
-  background: rgba(165, 98, 166, 0.4);
+  background: var(--gray);
+  opacity: 0.4;
   border-radius: 4.5px;
 }
 
 .ui.container.skills::-webkit-scrollbar-thumb {
-  background: var(--orange)
+  background: #858585
 }
 
 .ui.container.data {
@@ -200,9 +201,10 @@ body .ui.card:hover {
 }
 
 .ui.container.data::-webkit-scrollbar-track {
-  background: rgba(225, 127, 98, 0.4);
+  background: var(--gray);
+  opacity: 0.4;
 }
 
 .ui.container.data::-webkit-scrollbar-thumb {
-  background: var(--orange);
+  background: #858585;
 }

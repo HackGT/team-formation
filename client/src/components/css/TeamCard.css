@@ -47,7 +47,8 @@
 }
 
 body ::-webkit-scrollbar-track {
-  background: var(--orange);
+	background: var(--gray);
+	opacity: 0.4;
 }
 
 .ui.card.card1 {
@@ -65,7 +66,8 @@ body ::-webkit-scrollbar-track {
 }
 
 .ui.divider {
-  border: 1px solid var(--orange) !important;
+  border: 1px solid var(--green) !important;
+  opacity: 0.25;
 }
 
 .ui.button.joinTeam {
@@ -96,8 +98,7 @@ body ::-webkit-scrollbar-track {
 
 .ui.button.newTeam {
   color: white;
-  background: var(--orange);
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  background: var(--green);
   margin-left: 5px;
   width: 50%;
   font-family: 'Roboto-Medium';

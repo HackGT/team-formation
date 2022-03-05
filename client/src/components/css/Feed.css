@@ -176,7 +176,7 @@
 }
 
 .ui.button.individuals {
-  background-color: var(--orange);
+  background-color: var(--green);
   ;
   color: white;
   border-radius: 12px;
@@ -188,7 +188,7 @@
 }
 
 .ui.button.teams {
-  background-color: var(--orange);
+  background-color: var(--green);
   color: white;
   border-radius: 12px;
   font-family: Quicksand-Bold;
@@ -196,7 +196,7 @@
 }
 
 .ui.buttons {
-  background: rgba(255, 255, 255, 0.7);;
+  background: white;
   border-radius: 12px;
   padding: 3px;
 }
