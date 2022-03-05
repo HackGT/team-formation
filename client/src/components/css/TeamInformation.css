@@ -67,7 +67,7 @@
 }
 
 .ui.form .field.disabled :disabled {
-  border: 1px solid var(--orange);
+  border: 1px solid var(--green);
 }
 
 .ui.form .field.disabled > label,
@@ -105,12 +105,12 @@
 }
 
 .ui.fluid.card {
-  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 6px 10px 6px rgba(0, 0, 0, 0.3);
   border-radius: 15px;
 }
 
 .ui[class*="right labeled"].icon.button {
-  background-color: var(--orange);
+  background-color: var(--yellow);
   color: white;
 }
 
