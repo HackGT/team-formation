@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Card } from "semantic-ui-react";
 import "./css/NotificationCard.css";
-import IndividualRequest from "./ui_subcomponents/IndividualRequest";
-import TeamRequest from "./ui_subcomponents/TeamRequest";
+import IndividualRequest from "../modals/join_requests/IndividualRequest";
+import TeamRequest from "../modals/join_requests/TeamRequest";
 
 
 class NotificationCard extends Component {

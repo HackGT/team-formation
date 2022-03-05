@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 import { QueryRenderer, commitMutation } from "react-relay";
 import "../css/ConfirmationModal.css";
-import UserCard from "../UserCard";
+import UserCard from "../user/card/UserCard";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
-import IndividualRequest from "./IndividualRequest"
+import IndividualRequest from "./join_requests/IndividualRequest"
 
 // const mutation = graphql`
 //   mutation JoinIndividualMutation(

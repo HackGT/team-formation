@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Card, Container, Label, Placeholder } from 'semantic-ui-react';
-import JoinTeam from './ui_subcomponents/JoinTeam';
+import JoinTeam from '../modals/join_requests/JoinTeam';
 import './css/TeamCard.css';
-import { Team } from "../types/index"
+import { Team } from "../../types/index"
 
 interface props {
     interests: [boolean],

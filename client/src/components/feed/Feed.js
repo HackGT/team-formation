@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import FeedTeamCards from "./FeedTeamCards";
 import FeedCards from "./FeedCards";
-import SideMenu from "./SideMenu";
+import SideMenu from "../filter_and_search/SideMenu";
 import { Button } from "semantic-ui-react";
-import InputTagCollection from "./InputTagCollection";
+import InputTagCollection from "../filter_and_search/InputTagCollection";
 import "./css/Feed.css";
 
 

@@ -7,10 +7,10 @@ import {
     Redirect
 } from "react-router-dom";
 import Login from "./Login";
-import EditProfile from "./EditProfile";
-import Feed from "./Feed";
-import HeaderFeed from "./ui_subcomponents/HeaderFeed";
-import TeamPage from "./TeamPage";
+import EditProfile from "../user/EditProfile";
+import Feed from "../feed/Feed";
+import HeaderFeed from "../header/HeaderFeed";
+import TeamPage from "../team/team_page/TeamPage";
 import "./css/Content.css";
 
 const ProtectedRoute = ({

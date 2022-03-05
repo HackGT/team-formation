@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import OnTeam from './OnTeam';
-import NoTeam from './NoTeam';
+import OnTeam from '../OnTeam';
+import NoTeam from '../../user/NoTeam';
 import './css/TeamPage.css';
 import {QueryRenderer} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
-import environment from './Environment';
+import environment from '../../Environment';
 import { withRouter } from "react-router-dom";
 
 const getTeamQuery = graphql `

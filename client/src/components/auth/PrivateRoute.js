@@ -4,7 +4,7 @@ import {
     Route,
     Redirect
 } from "react-router-dom";
-import isLogin from "../utils";
+import isLogin from "../../utils";
 
 const PrivateRoute = async ({
     component: Component,

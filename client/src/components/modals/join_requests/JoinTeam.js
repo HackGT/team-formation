@@ -3,7 +3,7 @@ import { Button, Modal } from "semantic-ui-react";
 import "../css/Modal.css";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-import environment from "../Environment";
+import environment from "../../Environment";
 
 const mutation = graphql`
   mutation JoinTeamMutation($team_id: String, $bio: String, $idea: String) {

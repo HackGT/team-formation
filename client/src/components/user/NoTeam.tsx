@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
-import TeamInformation from './TeamInformation';
-import JoinTeam from './ui_subcomponents/JoinTeam';
-import MembersBlank from './MembersBlank';
+import TeamInformation from '../team/team_page/TeamInformation';
+import JoinTeam from '../modals/join_requests/JoinTeam';
+import MembersBlank from '../team/team_page/MembersBlank';
 import './css/TeamPage.css';
-import ConfirmationModal from "./ui_subcomponents/ConfirmationModal";
-import truncateTeamName from "../constants/functions"
-import { Team } from "../types/index"
+import ConfirmationModal from "../modals/ConfirmationModal";
+import truncateTeamName from "../../constants/functions"
+import { Team } from "../../types/index"
 
 interface props {
     team: Team,

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Card, Popup, Container, Label } from "semantic-ui-react";
-import JoinIndividual from "./ui_subcomponents/JoinIndividual";
+import JoinIndividual from "../../modals/join_requests/JoinIndividual";
 import "./css/UserCard.css";
 
 class UserCard extends Component {

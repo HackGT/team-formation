@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import UserCard from './UserCard';
+import UserCard from '../user/card/UserCard';
 import {Button} from 'semantic-ui-react';
 
 import {QueryRenderer} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import './css/Feed.css';
-import environment from './Environment';
+import environment from '../Environment';
 import {Redirect} from 'react-router-dom';
 
 const getUsersQuery = graphql `

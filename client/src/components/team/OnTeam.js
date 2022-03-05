@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import {Form, Button} from "semantic-ui-react";
-import TeamInformation from "./TeamInformation";
-import JoinTeam from "./ui_subcomponents/JoinTeam";
-import CheckingModal from "./ui_subcomponents/CheckingModal";
+import TeamInformation from "./team_page/TeamInformation";
+import JoinTeam from "../modals/join_requests/JoinTeam";
+import CheckingModal from "../modals/CheckingModal";
 import TeamNotifications from "./TeamNotifications";
 import TeamRequestsSent from "./TeamRequestsSent";
-import Members from "./Members";
+import Members from "./team_page/Members";
 import "./css/TeamPage.css";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-import environment from "./Environment";
+import environment from "../Environment";
 
 const mutation = graphql`
   mutation OnTeamMutation($name: String) {

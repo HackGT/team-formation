@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 import { QueryRenderer, commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-import environment from "../Environment";
+import environment from "../../Environment";
 import { setState } from "semantic-ui-react";
 import "../css/Modal.css";
-import UserCard from "../UserCard";
-import ConfirmationModalRemove from "./ConfirmationModalRemove";
+import UserCard from "../../user/card/UserCard";
+import ConfirmationModalRemove from "../ConfirmationModalRemove";
 
 const getUserQuery = graphql`
   query IndividualRequestQuery($user_id: String) {

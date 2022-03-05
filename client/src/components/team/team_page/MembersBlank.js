@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import UserCard from "./UserCard";
+import UserCard from "../../user/card/UserCard";
 import { Card } from "semantic-ui-react";
 
 import { graphql } from "babel-plugin-relay/macro";

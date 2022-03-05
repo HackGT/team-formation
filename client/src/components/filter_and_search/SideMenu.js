@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Dropdown, Input, Icon } from "semantic-ui-react";
 import "./css/SideMenu.css";
-import skills from "../constants/skills";
-import schools from "../constants/schools";
-import years from "../constants/years";
-import tracks from "../constants/tracks";
-import locations from "../constants/locations";
+import skills from "../../constants/skills";
+import schools from "../../constants/schools";
+import years from "../../constants/years";
+import tracks from "../../constants/tracks";
+import locations from "../../constants/locations";
 
 class SideMenu extends Component {
   constructor() {

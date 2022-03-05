@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
 import { QueryRenderer } from "react-relay";
-import NotificationGroup from "../NotificationGroup";
+import NotificationGroup from "../notifications/NotificationGroup";
 import truncateTeamName from "../../constants/functions"
 
 

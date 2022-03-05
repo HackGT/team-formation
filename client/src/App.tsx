@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Content from './components/Content'
+import Content from './components/auth/Content'
 
 class App extends Component {
 
