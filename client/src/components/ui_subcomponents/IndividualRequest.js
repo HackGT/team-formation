@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Modal } from "semantic-ui-react";
+import { Modal } from "semantic-ui-react";
 import { QueryRenderer, commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
@@ -7,6 +7,7 @@ import { setState } from "semantic-ui-react";
 import "../css/Modal.css";
 import UserCard from "../UserCard";
 import ConfirmationModalRemove from "./ConfirmationModalRemove";
+import { Text, Box, Flex, Button } from '@chakra-ui/react';
 
 const getUserQuery = graphql`
   query IndividualRequestQuery($user_id: String) {
@@ -82,11 +83,11 @@ class IndividualRequest extends Component {
               >
                 <Modal.Content>
                   <Modal.Description>
-                    <p class="modalHeader">
+                    <Text sx={{textAlign: "center", color: "white", fontSize: "30px", fontFamily: "Roboto-Regular"}}>
                       {props.user.name} Wants to Team Up With You!
-                    </p>
-                    <div class="row">
-                      <div class="modal3Column1">
+                    </Text>
+                    <Flex sx={{flexDirection: "row", flexWrap: "wrap", justifyContent: "center", margin: "20px"}}>
+                      <Box sx={{mr: "25px", ml: "25px", mb: "25px"}}>
                         <UserCard
                           name={props.user.name}
                           school={props.user.school}
@@ -96,39 +97,33 @@ class IndividualRequest extends Component {
                           contact={props.user.contact}
                           location={props.user.location}
                         />
-                      </div>
-                      <div class="modal3Column2">
-                        <p class="user1FirstName">
+                      </Box>
+                      <Box sx={{display: "inline-block", flexDirection: "column", textAlign: "center", flex: "1", minWidth: "270px", maxWidth: "418px"}}>
+                        <Text sx={{color: "var(--orange)", fontFamily: "Roboto-Regular", fontSize: "15px"}}>
                           {props.user.name + "'s"} Request Message:
-                        </p>
-                        <p class="user1RequestMessage">
+                        </Text>
+                        <Text sx={{border: "transparent", borderRadius: "15px", p: "20px", boxShadow: "-20px 20px 0px -8px rgba(0, 0, 0, 0.2)", color: "var(--orange)", fontFamily: "Roboto-Regular", bg: "white"}}>
                           {this.props.requestMessage}
-                        </p>
-                        <p
-                          class="user1FirstName"
-                          style={{
-                            marginTop: 30,
-                          }}
-                        >
+                        </Text>
+                        <Text sx={{color: "var(--orange)", fontFamily: "Roboto-Regular", fontSize: "15px", mt: "30px"}}>
                           {props.user.name + "'s'"} Project Idea:
-                        </p>
-                        <p class="user1ProjectIdea">
+                        </Text>
+                        <Text sx={{border: "transparent", borderRadius: "15px", p: "20px", boxShadow: "-20px 20px 0px -8px rgba(0, 0, 0, 0.2)", color: "var(--orange)", fontFamily: "Roboto-Regular", bg: "white"}}>
                           {this.props.userProjectIdea}
-                        </p>
-                      </div>
-                    </div>
-                    <div class="flex-container-modal3">
-                      <div class="modal3Button">
-                      <ConfirmationModalRemove
-                      message="You have added them to the team!"
-                      closeModal={() => this.setState({ secondOpen:false})}
-                      secondModal={() => this.props.closeModal()}
-                      onOpen={() => this.setState({ secondOpen:true})}
-                      showModal={this.state.secondOpen}
-
-                      />
+                        </Text>
+                      </Box>
+                    </Flex>
+                    <Flex sx={{justifyContent: "center"}}>
+                      <Box sx={{m: "10px"}}>
+                        <ConfirmationModalRemove
+                          message="You have added them to the team!"
+                          closeModal={() => this.setState({ secondOpen:false})}
+                          secondModal={() => this.props.closeModal()}
+                          onOpen={() => this.setState({ secondOpen:true})}
+                          showModal={this.state.secondOpen}
+                        />
                         <Button
-                          className="submit"
+                          sx={{borderRadius: "12px", p: "10px", color: "white", bg: "var(--red)", fontFamily: "Roboto-Regular", fontWeight: "bold"}}
                           onClick={() => {
                             console.log(this.props.receiver)
                             const requestMutation =
@@ -146,18 +141,18 @@ class IndividualRequest extends Component {
                         >
                           Accept
                         </Button>
-                      </div>
-                      <div class="modal3Button">
+                      </Box>
+                      <Box sx={{m: "10px"}}>
                         <Button
-                          className="submit"
+                          sx={{borderRadius: "12px", p: "10px", color: "white", bg: "var(--red)", fontFamily: "Roboto-Regular", fontWeight: "bold"}}
                           onClick={() => {
                             this.props.closeModal();
                           }}
                         >
                           Deny
                         </Button>
-                      </div>
-                    </div>
+                      </Box>
+                    </Flex>
                   </Modal.Description>
                 </Modal.Content>
               </Modal>

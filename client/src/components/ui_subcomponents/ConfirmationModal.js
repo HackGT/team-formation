@@ -1,27 +1,12 @@
 import React, { Component } from "react";
-import { Button, Modal } from "semantic-ui-react";
+import { Modal } from "semantic-ui-react";
 import { QueryRenderer, commitMutation } from "react-relay";
 import "../css/ConfirmationModal.css";
 import UserCard from "../UserCard";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../Environment";
-import IndividualRequest from "./IndividualRequest"
-
-// const mutation = graphql`
-//   mutation JoinIndividualMutation(
-//     $user_id: String
-//     $bio: String
-//     $idea: String
-//   ) {
-//     make_user_request(user_id: $user_id, bio: $bio, idea: $idea) {
-//       id
-//       message
-//       bio
-//       idea
-//       resolved
-//     }
-//   }
-// `;
+import IndividualRequest from "./IndividualRequest";
+import { Button, Text } from '@chakra-ui/react';
 
 class ConfirmationModal extends Component {
     constructor(props) {
@@ -49,14 +34,17 @@ class ConfirmationModal extends Component {
       >
         <Modal.Content>
           <Modal.Description>
-            <p class="modalHeader">{this.props.message}</p>
+            <Text sx={{textAlign: "center", color: "white", fontSize: "30px", fontFamily: "Roboto-Regular", p: "10px"}}>
+              {this.props.message}
+            </Text>
             <Button 
-            className="done"
+            sx={{ml: "173px"}}
             onClick={() => {
                 this.props.closeModal();
                 // this.props.secondModal();
             }}
-            >Ok</Button>
+            >Ok
+            </Button>
           </Modal.Description>
         </Modal.Content>
       </Modal>
