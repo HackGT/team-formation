@@ -10,7 +10,7 @@ import NotificationGroup from "../NotificationGroup";
 import { filterExtensionDefinitions } from "@graphql-tools/schema";
 import truncateTeamName from "../../constants/functions"
 
-
+// Mutation that changes the name on the page
 const mutation = graphql`
   mutation HeaderFeedMutation {
     toggle_visibility {
@@ -18,6 +18,7 @@ const mutation = graphql`
     }
   }
 `;
+// Query to get the user data
 const getName = graphql`
   query HeaderFeedNameQuery {
     user_profile {
@@ -30,6 +31,12 @@ const getName = graphql`
   }
 `;
 
+// Full set of headers for the user on the Feed component
+/*
+Note: Does not appear to be in use. However the data will not display without it.
+Status: UNKNOWN
+Suggestion: Unless it's possible to work out how this is being used, do not touch it.
+*/
 class Headers extends Component {
   constructor(props) {
     super(props);
