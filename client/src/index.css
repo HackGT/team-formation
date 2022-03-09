@@ -4,9 +4,13 @@
   --red: #DB3626;
   --orange:#E17F62;
   --dark-green: #3EA788;
-  --blue: #68B6E5;
+  --blue: #4289CA;
   --light-green: #ACBA4A;
-  --background: #182341;
+  --green: #63A887;
+  --background: #63A887;
+  --gray: #C6C6C6;
+  --yellow: #E1C531;
+  --dark-gray: #858585;
   ;
 }
 
@@ -18,7 +22,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url('./components/css/assets/lights_layer.png'), var(--background) no-repeat;
+  background: var(--background);
   height: 100%;
   margin: 0;
   background-repeat: no-repeat;

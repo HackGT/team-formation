@@ -23,17 +23,22 @@
   src: url("./fonts/roboto/Roboto-Regular.ttf");
 }
 
+@font-face {
+	font-family: ElMessiri-Regular;
+	src: url("./fonts/elmessiri/ElMessiri-Regular.ttf")
+}
+
 textarea::placeholder {
-  color: var(--orange);
+  color: var(--dark-gray);
   font-family: Roboto-Regular;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .modalHeader {
   text-align: center;
-  color: white;
+  color: black;
   font-size: 30px;
-  font-family: Roboto-Regular;
+  font-family: ElMessiri-Regular;
 }
 
 .modal1Margins {
@@ -101,13 +106,12 @@ textarea::placeholder {
   margin-top: 25px;
   border-radius: 15px;
   padding: 15px;
-  border-color: transparent;
-  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(99, 168, 135, 0.25);
   display: block;
   margin-left: auto;
   margin-right: auto;
   resize: none;
-  color: var(--orange);
+  color: var(--dark-gray);
   font-family: Roboto-Regular;
   width: 500px;
   height: 150px;
@@ -228,9 +232,8 @@ textarea::placeholder {
   border-radius: 15px;
   padding-left: 15px;
   padding-top: 15px;
-  border-color: transparent;
-  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
-  color: var(--orange);
+  border: 1px solid rgba(99, 168, 135, 0.25);
+  color: var(--dark-gray);
   font-family: Roboto-Regular;
   resize: none;
   width: 100%;
@@ -240,10 +243,9 @@ textarea::placeholder {
   margin-top: 5%;
   padding-left: 15px;
   padding-top: 15px;
-  border-color: transparent;
-  box-shadow: -20px 20px 0px -8px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(99, 168, 135, 0.25);
   border-radius: 15px;
-  color: var(--orange);
+  color: var(--dark-gray);
   font-family: Roboto-Regular;
   resize: none;
   width: 100%;
@@ -255,7 +257,7 @@ textarea::placeholder {
 
 
 .ui.modal > .content {
-  background: url("./assets/lights_layer.png") no-repeat top right, var(--background);
+  background: white;
   border-radius: 16px !important;
   box-shadow: 0px 0px 8px #FFFFFF;
 }
@@ -263,7 +265,8 @@ textarea::placeholder {
 .ui.button.submit {
   border-radius: 12px;
   color: white;
-  background: var(--red);
+  background: var(--yellow);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   font-family: Roboto-Regular;
   font-weight: 700;
 }
