@@ -50,10 +50,7 @@ class UserCard extends Component {
     var viewskill = this.props.skills.map((skill) => (
       <Label
         size="mini"
-        className="labelStyle"
-        style={{
-          backgroundColor: colors[count++ % 2],
-      }}
+        className="userskill"
       >
         {skill}
       </Label>
@@ -87,15 +84,12 @@ class UserCard extends Component {
           />
           <Container className="data">
             <Card.Description className="card-description">
-              <div style={{color: '#10112E'}}>
+              {viewskill}
+            </Card.Description>
+            <Card.Description className="card-description">
+              <div>
                 About Them: {this.props.experience}
               </div>
-            </Card.Description>
-            <div
-              className="ui divider"
-            />
-            <Card.Description className="card-description">
-              {viewskill}
             </Card.Description>
           </Container>
           {/* Separating to test absolute position */}
