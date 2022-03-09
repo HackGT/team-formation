@@ -87,6 +87,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
     );
   }
 
+  // modify this to have no dependency on registration, cause that does not exist for horizons currently
   protected static async passportCallback(
     req: Request,
     accessToken: string,
@@ -97,75 +98,26 @@ export class GroundTruthStrategy extends OAuthStrategy {
     console.log(profile);
     let user = await User.findOne({ uuid: profile.uuid });
 
-    const GRAPHQLURL = process.env.GRAPHQLURL || "https://registration.2021.hack.gt/graphql";
 
+    // don't check registration, just check the database and make a new account if they don't exist
     if (!user) {
-      let confirmed = false;
-      const query = `
-            query($search: String!) {
-                search_user(search: $search, offset: 0, n: 1) {
-                    users {
-                        confirmed
-                        confirmationBranch
-                    }
-                }
-            }`;
-      const variables = {
-        search: profile.email,
-      };
-      const options = {
-        method: "POST",
-        url: GRAPHQLURL,
-        headers: {
-          "Authorization": `Bearer ${process.env.GRAPHQLAUTH}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          query,
-          variables,
-        }),
-      };
+      // Horizons data
+      const location = "In-Person";
+      const track = "Horizons"; 
 
-      request(options, async (err, res, body) => {
-        if (err) {
-          return console.log(err);
-        }
-
-        const data = JSON.parse(body);
-        let confirmationBranch;
-        if (data.data.search_user.users.length > 0) {
-          confirmed = data.data.search_user.users[0].confirmed;
-          confirmationBranch = data.data.search_user.users[0].confirmationBranch;
-        }
-        const location =
-          confirmationBranch === confirmationBranches.EMERGING_INPERSON ||
-          confirmationBranch === confirmationBranches.GENERAL_INPERSON
-            ? "In-Person"
-            : "Virtual";
-        const track =
-          confirmationBranch === confirmationBranches.EMERGING_INPERSON ||
-          confirmationBranch === confirmationBranches.EMERGING_VIRTUAL
-            ? "Emerging"
-            : "General";
-        if (process.env.ISPRODUCTION === "false" || confirmed) {
-          user = createNew<IUser>(User, {
-            ...profile,
-            visible: 1,
-            location,
-            track,
-          });
-          await user.save();
-          done(null, user);
-        } else {
-          done(null, undefined);
-        }
+      user = createNew<IUser>(User, {
+        ...profile,
+        visible: 1,
+        location,
+        track,
       });
+      
     } else {
       user.token = accessToken;
       user.admin = false;
-      await user.save();
-      done(null, user);
     }
+    await user.save();
+    done(null, user);
   }
 }
 
