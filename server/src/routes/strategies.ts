@@ -3,10 +3,9 @@ import { URL } from "url";
 import passport from "passport";
 import { Strategy as OAuthStrategy } from "passport-oauth2";
 import dotenv from "dotenv";
-import request from "request";
 import { Request } from "express";
+
 import { createNew, IUser, User } from "../schema";
-import { confirmationBranches } from "../constants/confirmationBranches";
 
 dotenv.config();
 
@@ -111,7 +110,7 @@ export class GroundTruthStrategy extends OAuthStrategy {
         location,
         track,
       });
-      
+
     } else {
       user.token = accessToken;
       user.admin = false;
