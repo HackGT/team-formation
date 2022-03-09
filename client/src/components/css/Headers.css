@@ -18,6 +18,16 @@
   overflow-y: auto;
 }
 
+.header-name {
+  display: flex;
+  font-family: ElMessiri-Regular;
+  font-size: 20;
+  color: white;
+  padding-right: 10;
+  justify-content: center;
+  align-content: center;
+}
+
 @media (max-width: 595px) {
   .header-name, .desktopTitles {
     display: none;
@@ -39,6 +49,11 @@
 @font-face {
   font-family: Quicksand-Bold;
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
+}
+
+@font-face {
+	font-family: ElMessiri-Regular;
+	src: url("./fonts/elmessiri/ElMessiri-Regular.ttf")
 }
 
 .ui.inverted.popup {

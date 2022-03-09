@@ -18,6 +18,11 @@
   src: url("./fonts/roboto/Roboto-Medium.ttf");
 }
 
+@font-face {
+	font-family: ElMessiri-Regular;
+	src: url("./fonts/elmessiri/ElMessiri-Regular.ttf")
+}
+
 .UserCard-container {
   padding-top: 2%;
   width: 100%;
@@ -101,7 +106,7 @@ body ::-webkit-scrollbar-track {
   background: var(--green);
   margin-left: 5px;
   width: 50%;
-  font-family: 'Roboto-Medium';
+  font-family: ELMessiri-Regular;
   font-weight: 400;
   margin-left: 65px;
   display: flex;

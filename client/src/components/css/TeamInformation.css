@@ -67,7 +67,7 @@
 }
 
 .ui.form .field.disabled :disabled {
-  border: 1px solid var(--green);
+  border: 1px solid rgba(99, 168, 135, 0.25);
 }
 
 .ui.form .field.disabled > label,
@@ -115,14 +115,14 @@
 }
 
 .ui.multiple.dropdown > .label:nth-child(odd) {
-  background-color: var(--light-green);
+  background-color: var(--yellow);
   color: white;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   font-family: Roboto-Regular;
 }
 
 .ui.multiple.dropdown > .label:nth-child(even) {
-  background-color: var(--orange);
+  background-color: var(--blue);
   color: white;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   font-family: Roboto-Regular;

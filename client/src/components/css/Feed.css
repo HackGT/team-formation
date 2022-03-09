@@ -24,8 +24,18 @@
 }
 
 @font-face {
+  font-family: ElMessiri-Regular;
+  src: url("./fonts/elmessiri/ElMessiri-Regular.ttf")
+}
+
+@font-face {
   font-family: Service-Station;
   src: url("./fonts/servicestation/ServiceStation-Rough.woff")
+}
+
+@font-face {
+  font-family: ElMessiri-Regular;
+  src: url("./fonts/elmessiri/ElMessiri-Regular.ttf")
 }
 
 @import url("https://use.typekit.net/djq6mbs.css");
@@ -131,7 +141,7 @@
 }
 
 .teamFormation {
-  font-family: Futura, "futura-pt", "Trebuchet MS", sans-serif;
+  font-family: ElMessiri-Regular;
   font-size: 32px;
   color: white;
   margin-left: 35px;
@@ -142,8 +152,8 @@
 }
 
 .HackGTitle {
-  color: #F9F0D7;
-  font-family: Service-Station;
+  color: white;
+  font-family: ELMessiri-Regular;
   font-size: 48px;
   margin-left: 35px;
   margin-bottom: 6px;

@@ -28,6 +28,11 @@
   src: url("./fonts/roboto/Roboto-Bold.ttf");
 }
 
+@font-face {
+	font-family: ElMessiri-Regular;
+	src: url("./fonts/elmessiri/ElMessiri-Regular.ttf")
+}
+
 .UserCard-container {
   padding-top: 2%;
   width: 100%;
@@ -89,7 +94,7 @@ body .ui.card:hover {
 .ui.button.contact {
   color: var(--dark-green);
   background: white;
-  font-family: Roboto-Medium;
+  font-family: ELMessiri-Regular;
   font-weight: 500;
   font-style: normal;
   width: 45%;
@@ -107,7 +112,7 @@ body .ui.card:hover {
   margin-left: 5px;
   width: 45%;
   font-size: 13px;
-  font-family: Roboto-Medium;
+  font-family: ELMessiri-Regular;
   font-weight: 500;
   font-style: normal;
   justify-content: center;
@@ -138,9 +143,13 @@ body .ui.card:hover {
   text-align: center;
   padding-top: 10px;
   color: black;
-  font-family: Roboto-Bold;
-  font-weight: 400;
+  font-family: ELMessiri-Regular;
+  font-weight: 700;
   font-size: 20px;
+}
+
+.card-description {
+	color: var(--dark-gray);
 }
 
 .ui.divider {
@@ -183,7 +192,7 @@ body .ui.card:hover {
 }
 
 .ui.container.skills::-webkit-scrollbar-thumb {
-  background: #858585
+  background: var(--dark-gray)
 }
 
 .ui.container.data {
@@ -206,5 +215,5 @@ body .ui.card:hover {
 }
 
 .ui.container.data::-webkit-scrollbar-thumb {
-  background: #858585;
+  background: var(--dark-gray);
 }

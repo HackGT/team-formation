@@ -108,18 +108,7 @@ class Headers extends Component {
                 <Menu secondary borderless="borderless" size={"massive"}>
                   <Menu.Menu position="right">
                     <Menu.Item>
-                      <div 
-                        className="header-name"
-                        style={{
-                          display: "flex",
-                          fontFamily: "Quicksand-Bold",
-                          fontSize: 20,
-                          color: "white",
-                          paddingRight: 10,
-                          justifyContent: "center",
-                          alignContent: "center"
-                        }}
-                      >
+                      <div className="header-name">
                         {(props.user_profile.team) ? `${props.user_profile.name} (${truncateTeamName(props.user_profile.team.name)})` : props.user_profile.name}
                       </div>
                     </Menu.Item>
@@ -194,14 +183,14 @@ class Headers extends Component {
                 </Menu>
                 <div className="desktopTitles">
                   <Link to="/feed">
-                    <p class="HackGTitle">HackGT8</p>
+                    <p class="HackGTitle">Horizons 2022</p>
                     <span class="teamFormation">Team Formation</span>
                   </Link>
                 </div>
                 <div className="mobileTitles">
                   <Link to="/feed">
                     <div className="innerMobileTitles">
-                      <p class="HackGTitle">HackGT8</p>
+                      <p class="HackGTitle">Horizons 2022</p>
                       <span class="teamFormation">Team Formation</span>
                     </div>
                   </Link>
