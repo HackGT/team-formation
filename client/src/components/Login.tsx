@@ -28,7 +28,7 @@ class Login extends Component<{}, LoginState> {
                 <div className="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
                     <form className="login100-form validate-form" action="/api/user/login">
                         <span className="login100-form-title p-b-49">
-                            HackGT
+                            HexLabs
                         </span>
 
                         <span className="login100-form-title2 p-b-49">
@@ -39,14 +39,14 @@ class Login extends Component<{}, LoginState> {
                             <div className="wrap-login100-form-btn">
                                 <div className="login100-form-bgbtn"></div>
                                 <button className="login100-form-btn" type="submit">
-                                    Login with HackGT
+                                    Login with HexLabs
                                 </button>
                             </div>
                         </div>
 
                         <div className="txt1 text-center p-t-54 p-b-20">
                             <span>
-                                This portal is only available to participants who are confirmed for HackGT 8! Please contact hello@hexlabs.org if you encounter any issues
+                                This portal is only available to participants who are confirmed for Horizons! Please contact hello@hexlabs.org if you encounter any issues
                             </span>
                         </div>
                     </form>
