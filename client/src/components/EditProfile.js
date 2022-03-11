@@ -144,7 +144,7 @@ class EditProfile extends Component {
                                 <Form.TextArea className="input-container-large" label='Bio' placeholder='Introduce yourself!' defaultValue={props.experience} onChange={this.onExperienceChange} error={this.state["experience_profane"]}/>
                             </Form.Group>
                             <Form.Group>
-                                <Form.Input className="input-container-large" label='Discord Username' placeholder='<username>#<4-digit number>'
+                                <Form.Input className="input-container-large" label='Slack Username' placeholder='George P Beardell'
                                 defaultValue={props.contact}
                                 onChange={this.onContactChange} error={this.state["contact_profane"]} required="required"/>
                             </Form.Group>

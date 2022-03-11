@@ -18,7 +18,7 @@ class UserCard extends Component {
     let contact = this.props.contact;
     contact = <Popup
           trigger={<Button className="contact" content="Contact" />}
-          content= {`Discord: ${this.props.contact}`}
+          content= {`Slack: ${this.props.contact}`}
           on="click"
           hideOnScroll
         />
