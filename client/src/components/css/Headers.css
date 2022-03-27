@@ -64,6 +64,10 @@
   color: black
 }
 
+/* i.icon:before {
+  margin-left: 10px;
+} */
+
 
 element.style {
   color: var(--orange);

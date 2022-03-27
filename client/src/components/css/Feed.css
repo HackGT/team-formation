@@ -171,6 +171,11 @@
   flex-direction: row;
 }
 
+/* .team-card-container {
+  flex: 1;
+  padding-right: 2%;
+} */
+
 .ui.centered.cards {
   justify-content: left;
 }

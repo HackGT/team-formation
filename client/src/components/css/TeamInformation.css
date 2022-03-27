@@ -23,6 +23,8 @@
 
 @media (max-width: 595px) {
   .team-card-container {
+    /* max-width: 900px; */
+    /* width: 500px; */
     display: flex;
     flex-direction: row;
     align-items: stretch;
