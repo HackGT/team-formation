@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import FeedTeamCards from "./FeedTeamCards";
 import FeedCards from "./FeedCards";
-import SideMenu from "../filter_and_search/SideMenu";
+import SideMenu from "./SideMenu";
 import { Button } from "semantic-ui-react";
-import InputTagCollection from "../filter_and_search/InputTagCollection";
+import InputTagCollection from "./InputTagCollection";
 import "./css/Feed.css";
-
-
 
 class Feed extends Component {
   state = {
@@ -23,6 +21,7 @@ class Feed extends Component {
   };
 
   render() {
+    // Ternary - If teams is true, show the teams made on the app. If not, show the users without a team
     var cards = this.state.teams ? (
       <FeedTeamCards
         search={this.state.searchTerm}
@@ -116,7 +115,7 @@ class Feed extends Component {
       </div>
     );
   }
-
+  // Set filters when clicked
   allFilterClickListener = (name, filterProp) => {
     let index = this.state[filterProp].indexOf(name);
     if (index > -1) {
@@ -133,14 +132,17 @@ class Feed extends Component {
     }
   };
 
+  // Search term state mutator
   searchListener = (e) => {
     this.setState({ searchTerm: e.target.value });
   };
 
+  // Search term listener
   onSearchClick = (search_string) => {
     this.setState({ searchTerm: search_string, sliceIndexStart: 0 });
   };
 
+  // Listener to swap feeds
   feedTypeListener = (e, data) => {
     if (data.children === "Individuals") {
       this.setState({
@@ -161,16 +163,18 @@ class Feed extends Component {
       });
     }
   };
+
+  // Pagination - Handles the page numbers and data shown
   moveLeft = (e) => {
     this.setState({
         sliceIndexStart: this.state.sliceIndexStart - this.state.numCardsPerPage,
     })
 }
-moveRight = (e) => {
+  moveRight = (e) => {
     this.setState({
         sliceIndexStart: this.state.sliceIndexStart + this.state.numCardsPerPage,
     })
-}
+  }
 }
 
 export default Feed;

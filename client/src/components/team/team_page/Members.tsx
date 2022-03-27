@@ -41,6 +41,7 @@ class Members extends Component<props, {}> {
       users = this.props.members;
     }
 
+    // Populates team member's component with cards representing each user
     for (let i = 0; i < users.length; i++) {
       let user = users[i];
 
@@ -59,6 +60,7 @@ class Members extends Component<props, {}> {
         />
       );
     }
+    // Fills in remaining slots with placeholders that redirect back the non-team users Feed
     for (let j = 4 - users.length; j > 0; j--) {
       memberCards.push(
         <div className="emptyCard">

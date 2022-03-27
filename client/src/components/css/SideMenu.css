@@ -2,7 +2,7 @@
   text-align: center;
   color: white;
   font-size: 20px;
-  font-family: Quicksand-Bold;
+  font-family: ELMessiri-Regular;
 }
 
 .SideMenu-container {
@@ -26,6 +26,11 @@
 @font-face {
   font-family: Quicksand-Bold;
   src: url("./fonts/quicksand/Quicksand-Bold.ttf");
+}
+
+@font-face {
+  font-family: ElMessiri-Regular;
+  src: url("./fonts/elmessiri/ElMessiri-Regular.ttf")
 }
 
 .ui.input.focus > input {

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 import "../css/ConfirmationModal.css";
 
+// Modal to contain the leaving team option
+// Query not required due to propagation of props
 class CheckingModal extends Component {
     constructor(props) {
         super(props);
@@ -10,7 +12,7 @@ class CheckingModal extends Component {
         };
         this.toggleClose = this.toggleClose.bind(this)
     }
-
+    // updates modal upon submission
     toggleClose() {
         console.log("In closed")
         this.setState({showModal: false});

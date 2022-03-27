@@ -33,6 +33,11 @@ const getUsersQuery = graphql `
     }
 `;
 
+/**
+ * Component that houses the user cards of those who
+ * do not have teams already and have selected to make
+ * themselves visible.
+ */
 class FeedCards extends Component {
     render() {
         let search = this.props.search;

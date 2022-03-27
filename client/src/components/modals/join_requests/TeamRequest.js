@@ -8,7 +8,7 @@ import "../css/Modal.css";
 import ConfirmationModal from "../ConfirmationModal";
 import truncateTeamName from "../../../constants/functions"
 
-
+// Mutation to update a user's team status from none to existing
 const acceptRequestMutation = graphql`
   mutation TeamRequestMutation($notification_id: String) {
     accept_user_request(notification_id: $notification_id) {
@@ -18,6 +18,12 @@ const acceptRequestMutation = graphql`
   }
 `;
 
+/**
+ * Component that comprises the "Join Team" functionality
+ * - Displays information to a team-less user about a team
+ *   or other user.
+ * - Receiving user can accept or deny the request
+ */
 class TeamRequest extends Component {
   constructor(props) {
     super(props);

@@ -8,6 +8,11 @@
   src: url("./fonts/roboto/Roboto-Medium.ttf");
 }
 
+@font-face {
+	font-family: ElMessiri-Regular;
+	src: url("./fonts/elmessiri/ElMessiri-Regular.ttf")
+}
+
 .first-row {
   width: 100%;
   display: flex;
@@ -28,7 +33,8 @@
 .ui.button.ask-to-join {
   font-family: Roboto-Medium;
   font-weight: 500;
-  background: var(--red);
+  background: var(--yellow);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
 	color: white;
 }
 
@@ -36,13 +42,14 @@
   font-family: Roboto-Medium;
   font-weight: 500;
   background: var(--red);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
   color: white;
   margin-left: 25px;
 }
 
 .no-team-heading {
-  color: white;
-  font-family: Quicksand-Bold;
+  color: var(--yellow);
+  font-family: ElMessiri-Regular;
 }
 
 .noTeam-content {
@@ -86,7 +93,8 @@
 #field {
   background: transparent;
   border: none;
-  font-family: Lekton-Bold;
+  color: var(--yellow);
+  font-family: ElMessiri-Regular;
   text-align: center;
   padding-left: 2.6em;
 }

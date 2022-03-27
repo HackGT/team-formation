@@ -5,6 +5,7 @@ import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../../Environment";
 
+// Updates user to have sent a request to a team to join
 const mutation = graphql`
   mutation JoinTeamMutation($team_id: String, $bio: String, $idea: String) {
     make_team_request(team_id: $team_id, bio: $bio, idea: $idea) {
@@ -14,6 +15,12 @@ const mutation = graphql`
     }
   }
 `;
+
+/**
+ * Component that comprises the "Ask to Join" team functionality
+ * - Creates modal for user to input information
+ * - Sends message to team members (visible on the team page)
+ */
 class JoinTeam extends Component {
   constructor(props) {
     super(props);
@@ -24,6 +31,7 @@ class JoinTeam extends Component {
     this.toggleSecondOpen = this.toggleSecondOpen.bind(this)
   }
 
+  // Opens second modal
   toggleSecondOpen() {
     console.log("in toggle");
     this.props.showSecond();

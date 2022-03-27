@@ -64,7 +64,7 @@ class TeamInformation extends Component {
 }
   render() {
     console.log(this.state.interest_options)
-    var colors = ["#ACBA4A", "#F8B52C"];
+    var colors = ["#E1C531", "#4289CA"];
     var count = 0;
     var interestLabels = this.state.interests.map((interest) => (
       <Label

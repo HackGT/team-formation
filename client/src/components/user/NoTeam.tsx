@@ -29,13 +29,17 @@ class NoTeam extends Component<props, states> {
         showSecondModal: false
     }
   }
+  // Closes all modals
   closeModal = () => {
     this.setState({ showModal: false });
   };
+
+  // Displays confirmation of request
   secondModal = () => {
     this.setState({showSecondModal: true})
   }
   render() {
+    // Reduce size of team name if too long for the header
     var teamName = truncateTeamName(this.props.team.name)
     return (
         <div id="not-team" className="team-page">

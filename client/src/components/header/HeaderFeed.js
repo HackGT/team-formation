@@ -9,7 +9,7 @@ import { QueryRenderer } from "react-relay";
 import NotificationGroup from "../notifications/NotificationGroup";
 import truncateTeamName from "../../constants/functions"
 
-
+// Mutation that changes the name on the page
 const mutation = graphql`
   mutation HeaderFeedMutation {
     toggle_visibility {
@@ -17,6 +17,7 @@ const mutation = graphql`
     }
   }
 `;
+// Query to get the user data
 const getName = graphql`
   query HeaderFeedNameQuery {
     user_profile {
@@ -29,6 +30,12 @@ const getName = graphql`
   }
 `;
 
+// Full set of headers for the user on the Feed component
+/*
+Note: Does not appear to be in use. However the data will not display without it.
+Status: UNKNOWN
+Suggestion: Unless it's possible to work out how this is being used, do not touch it.
+*/
 class Headers extends Component {
   constructor(props) {
     super(props);
@@ -107,18 +114,7 @@ class Headers extends Component {
                 <Menu secondary borderless="borderless" size={"massive"}>
                   <Menu.Menu position="right">
                     <Menu.Item>
-                      <div 
-                        className="header-name"
-                        style={{
-                          display: "flex",
-                          fontFamily: "Quicksand-Bold",
-                          fontSize: 20,
-                          color: "white",
-                          paddingRight: 10,
-                          justifyContent: "center",
-                          alignContent: "center"
-                        }}
-                      >
+                      <div className="header-name">
                         {(props.user_profile.team) ? `${props.user_profile.name} (${truncateTeamName(props.user_profile.team.name)})` : props.user_profile.name}
                       </div>
                     </Menu.Item>
@@ -193,14 +189,14 @@ class Headers extends Component {
                 </Menu>
                 <div className="desktopTitles">
                   <Link to="/feed">
-                    <p class="HackGTitle">HackGT8</p>
+                    <p class="HackGTitle">Horizons 2022</p>
                     <span class="teamFormation">Team Formation</span>
                   </Link>
                 </div>
                 <div className="mobileTitles">
                   <Link to="/feed">
                     <div className="innerMobileTitles">
-                      <p class="HackGTitle">HackGT8</p>
+                      <p class="HackGTitle">Horizons 2022</p>
                       <span class="teamFormation">Team Formation</span>
                     </div>
                   </Link>

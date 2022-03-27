@@ -22,15 +22,35 @@ class UserCard extends Component {
           on="click"
           hideOnScroll
         />
-    var colors = ["#ACBA4A", "#F8B52C"];
+
+    
+    // if(this.props.slackid) {
+    //     const dm_url = `slack://user?team=T01AUT83XST&id=${this.props.slackid}`
+    //     contact =
+    //       <Button as="a" className="contact" content="Contact" href={dm_url}/>
+
+    // }
+    // else if(!this.props.contact) {
+    //     contact = ""
+    // }
+    // else if (this.props.contact.includes("@")) {
+    //   contact = (
+    //     <Popup
+    //       trigger={<Button className="contact" content="Contact" />}
+    //       content= {<a href={`mailto:${this.props.contact}`} target="_blank">
+    //         {this.props.contact}{" "}
+    //       </a>}
+    //       on="click"
+    //       hideOnScroll
+    //     />
+    //   );
+    // }
+    var colors = ["#E1C531", "#4289CA"];
     var count = 0;
     var viewskill = this.props.skills.map((skill) => (
       <Label
         size="mini"
-        className="labelStyle"
-        style={{
-          backgroundColor: colors[count++ % 2],
-      }}
+        className="userskill"
       >
         {skill}
       </Label>
@@ -64,15 +84,12 @@ class UserCard extends Component {
           />
           <Container className="data">
             <Card.Description className="card-description">
-              <div style={{color: '#10112E'}}>
+              {viewskill}
+            </Card.Description>
+            <Card.Description className="card-description">
+              <div>
                 About Them: {this.props.experience}
               </div>
-            </Card.Description>
-            <div
-              className="ui divider"
-            />
-            <Card.Description className="card-description">
-              {viewskill}
             </Card.Description>
           </Container>
           <div className="buttons-anchor">

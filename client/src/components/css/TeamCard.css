@@ -18,6 +18,11 @@
   src: url("./fonts/roboto/Roboto-Medium.ttf");
 }
 
+@font-face {
+	font-family: ElMessiri-Regular;
+	src: url("./fonts/elmessiri/ElMessiri-Regular.ttf")
+}
+
 .UserCard-container {
   padding-top: 2%;
   width: 100%;
@@ -47,12 +52,13 @@
 }
 
 body ::-webkit-scrollbar-track {
-  background: var(--orange);
+	background: var(--gray);
+	opacity: 0.4;
 }
 
 .ui.card.card1 {
-  box-shadow: -20px 20px 0px -8px rgba(255, 255, 255, 0.3);
-  border-radius: 15px;
+  box-shadow: 0px 6px 10px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
   padding-bottom: 30px;
 }
 
@@ -65,7 +71,8 @@ body ::-webkit-scrollbar-track {
 }
 
 .ui.divider {
-  border: 1px solid var(--orange) !important;
+  border: 1px solid var(--green) !important;
+  opacity: 0.25;
 }
 
 .ui.button.joinTeam {
@@ -96,11 +103,10 @@ body ::-webkit-scrollbar-track {
 
 .ui.button.newTeam {
   color: white;
-  background: var(--orange);
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px 0px;
+  background: var(--green);
   margin-left: 5px;
   width: 50%;
-  font-family: 'Roboto-Medium';
+  font-family: ELMessiri-Regular;
   font-weight: 400;
   margin-left: 65px;
   display: flex;
