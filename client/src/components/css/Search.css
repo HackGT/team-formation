@@ -9,9 +9,7 @@
     box-sizing: border-box;
     font-family: Raleway;
     font-size: 18px;
-    /* left: 50%; */
     padding: 10px 0px;
-    /* top: 50%; */
     width: 200px;
 }
 .input:focus {
