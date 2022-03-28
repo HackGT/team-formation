@@ -21,7 +21,7 @@ const OnTeam: React.FC<Props> = (props) => {
   const [showCheckModal, setShowCheckModal] = useState(false);
 
   // mainly used to remove a user from a team
-  const updateUserTeamStatus = (status: boolean) => {
+  const updateUserTeamStatus = async (status: boolean) => {
     if (!status) {
       // remove the current user from the team
       // to do so, make a POST request to the route "/teams/leave"
@@ -39,7 +39,8 @@ const OnTeam: React.FC<Props> = (props) => {
     }
   }
 
-  const onBlur = () => {
+  // with the use of requests, async and await come into play
+  const onBlur = async () => {
     setSaveMessageHidden(false);
     setSaveSuccess(true);
     
@@ -47,8 +48,8 @@ const OnTeam: React.FC<Props> = (props) => {
     // here make a POST request to TBD (there is not a route for this yet)
   }
 
-  const updateTeamName = (e:React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
+  const updateTeamName = (e: string) => {
+    setName(e);
     let input = document.getElementById('field');
     if (input) {
       input.style.width = calculateWidth();
@@ -64,7 +65,7 @@ const OnTeam: React.FC<Props> = (props) => {
             id="field"
             defaultValue={props.team.name}
             onBlur={onBlur}
-            onChange={e => updateTeamName(e)}
+            onChange={e => updateTeamName(e.target.value)}
             className="input"
             icon="pencil"
             style={{
