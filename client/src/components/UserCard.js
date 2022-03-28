@@ -22,31 +22,6 @@ class UserCard extends Component {
           on="click"
           hideOnScroll
         />
-
-    
-    // if(this.props.slackid) {
-    //     const dm_url = `slack://user?team=T01AUT83XST&id=${this.props.slackid}`
-    //     contact =
-    //       <Button as="a" className="contact" content="Contact" href={dm_url}/>
-
-    // }
-    // else if(!this.props.contact) {
-    //     contact = ""
-    // }
-    // else if (this.props.contact.includes("@")) {
-    //   contact = (
-    //     <Popup
-    //       trigger={<Button className="contact" content="Contact" />}
-    //       content= {<a href={`mailto:${this.props.contact}`} target="_blank">
-    //         {this.props.contact}{" "}
-    //       </a>}
-    //       on="click"
-    //       hideOnScroll
-    //     />
-    //   );
-    // }
-    var colors = ["#E1C531", "#4289CA"];
-    var count = 0;
     var viewskill = this.props.skills.map((skill) => (
       <Label
         size="mini"

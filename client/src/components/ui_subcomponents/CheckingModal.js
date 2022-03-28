@@ -49,7 +49,7 @@ class CheckingModal extends Component {
                   className="here"
                   onClick={() => {
                       this.props.closeModal();
-                      this.props.leaveTeam();
+                      this.props.InTeam(false);
                   }}
                   >Leave</Button>
                 </div>
