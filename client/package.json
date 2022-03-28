@@ -24,7 +24,7 @@
     "css-loader": "1.0.0",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
-    "eslint": "5.12.0",
+    "eslint": "^8.12.0",
     "eslint-config-react-app": "^3.0.6",
     "eslint-loader": "2.1.1",
     "eslint-plugin-flowtype": "2.50.1",
@@ -81,7 +81,6 @@
     "start": "node ./setup &&react-scripts start",
     "relay": "relay-compiler --src ./src --schema ../server/api.graphql",
     "lint": "eslint src/ --fix; stylelint src/**/*.css --fix; prettier src/ --write"
-
   },
   "watch": {
     "build": {
@@ -109,5 +108,12 @@
       "react-app"
     ]
   },
-  "proxy": "http://localhost:3000"
+  "proxy": "http://localhost:3000",
+  "devDependencies": {
+    "@hex-labs/eslint-config-react": "^1.2.3",
+    "@hex-labs/prettier-config": "^1.2.4",
+    "@hex-labs/stylelint-config": "^1.2.0",
+    "prettier": "^2.6.1",
+    "stylelint": "^14.6.1"
+  }
 }
