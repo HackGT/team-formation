@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import UserCard from "./UserCard";
 import { Card, Button, Icon } from "semantic-ui-react";

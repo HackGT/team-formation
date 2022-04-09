@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import "../css/Headers.css";
 import "../css/Modal.css";

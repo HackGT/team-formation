@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import { Button, Card, Popup, Container, Label } from "semantic-ui-react";
 import JoinIndividual from "./ui_subcomponents/JoinIndividual";

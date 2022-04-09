@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import UserCard from "./UserCard";
 import { Icon } from "semantic-ui-react";
@@ -6,7 +7,7 @@ import "./css/Members.css";
 import environment from "./Environment";
 import { Link } from "react-router-dom";
 import { processImport } from "@graphql-tools/import";
-import { User } from "../types/index"
+import { User } from "../types/index";
 
 // edit this query to pull on the team members
 const getUsersQuery = graphql`
@@ -28,7 +29,7 @@ const getUsersQuery = graphql`
 `;
 
 interface props {
-    members: [User]
+  members: [User];
 }
 
 class Members extends Component<props, {}> {
@@ -54,11 +55,11 @@ class Members extends Component<props, {}> {
           grad_year={user.grad_year}
           school={user.school}
           contact={user.contact}
-          skills={user.skills.filter(function(el: string) {
+          skills={user.skills.filter(function (el: string) {
             return Boolean(el);
           })}
           experience={user.experience}
-        //   location={user.location}
+          //   location={user.location}
         />
       );
     }
@@ -67,7 +68,7 @@ class Members extends Component<props, {}> {
       memberCards.push(
         <div className="emptyCard">
           <Link to="/feed/">
-            <Icon name="plus"/>
+            <Icon name="plus" />
           </Link>
         </div>
       );

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import './css/InputTagCollection.css';
 import {Label} from 'semantic-ui-react'

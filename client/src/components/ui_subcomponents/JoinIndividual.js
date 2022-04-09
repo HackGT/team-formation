@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import { Button, Modal, Popup } from "semantic-ui-react";
 import "../css/Modal.css";

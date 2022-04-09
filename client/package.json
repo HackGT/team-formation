@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.1.6",
+    "@babel/plugin-proposal-private-property-in-object": "^7.16.7",
     "@svgr/webpack": "2.4.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.9.3",
@@ -12,9 +13,7 @@
     "@types/react-relay": "^11.0.2",
     "@types/react-router-dom": "^5.1.9",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "9.0.0",
-    "babel-jest": "23.6.0",
-    "babel-loader": "8.0.5",
+    "babel-loader": "8.1.0",
     "babel-plugin-named-asset-import": "^0.3.0",
     "babel-plugin-relay": "^3.0.0",
     "babel-preset-react-app": "^7.0.0",
@@ -24,7 +23,7 @@
     "css-loader": "1.0.0",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
-    "eslint": "5.12.0",
+    "eslint": "^7.11.0",
     "eslint-config-react-app": "^3.0.6",
     "eslint-loader": "2.1.1",
     "eslint-plugin-flowtype": "2.50.1",
@@ -55,7 +54,7 @@
     "react-relay": "^3.0.0",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^2.1.8",
+    "react-scripts": "^4.0.3",
     "react-search-field": "^1.0.0",
     "relay-compiler": "^3.0.0",
     "relay-runtime": "^3.0.0",
@@ -68,8 +67,8 @@
     "typescript": "^4.4.4",
     "url-loader": "1.1.1",
     "watchman": "^1.0.0",
-    "webpack": "4.28.3",
-    "webpack-dev-server": "3.1.14",
+    "webpack": "4.44.2",
+    "webpack-dev-server": "3.11.1",
     "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "3.6.3",
     "yarn": "^1.22.0"
@@ -81,7 +80,6 @@
     "start": "node ./setup &&react-scripts start",
     "relay": "relay-compiler --src ./src --schema ../server/api.graphql",
     "lint": "eslint src/ --fix; stylelint src/**/*.css --fix; prettier src/ --write"
-
   },
   "watch": {
     "build": {
@@ -109,5 +107,12 @@
       "react-app"
     ]
   },
-  "proxy": "http://localhost:3000"
+  "proxy": "http://localhost:3000",
+  "devDependencies": {
+    "@hex-labs/eslint-config-react": "^1.2.3",
+    "@hex-labs/prettier-config": "^1.2.4",
+    "@hex-labs/stylelint-config": "^1.2.0",
+    "prettier": "^2.6.2",
+    "stylelint": "^14.6.1"
+  }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { Card, Container } from 'semantic-ui-react';
 import NotificationCard from './NotificationCard';

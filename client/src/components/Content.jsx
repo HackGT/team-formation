@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { hot } from 'react-hot-loader/root';
 import React, {Component} from "react";
 import {
@@ -52,7 +53,7 @@ class Content extends Component {
     };
 
     async componentDidMount() {
-        await this.handleLogin();
+        this.handleLogin();
     }
 
     handleLogin = () => {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, {Component} from 'react';
 import TeamCard from './TeamCard';
 import { Button } from 'semantic-ui-react';

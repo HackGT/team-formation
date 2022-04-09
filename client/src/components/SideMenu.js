@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from "react";
 // import {Fuse} from 'fuse.js'
 import { Dropdown, Input, Icon } from "semantic-ui-react";

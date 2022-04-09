@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import { Card, Form, Button, Label, Message, Input } from "semantic-ui-react";
 import TeamInformation from "./TeamInformation";
