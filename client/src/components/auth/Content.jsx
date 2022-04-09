@@ -10,11 +10,11 @@ import {
     Redirect
 } from "react-router-dom";
 import Login from "./Login";
-import EditProfile from "./EditProfile";
-import Feed from "./Feed";
-import HeaderFeed from "./ui_subcomponents/HeaderFeed";
-import TeamPage from "./TeamPage";
-import "./css/Content.css";
+import EditProfile from "../profile/EditProfile";
+import Feed from "../feed/Feed";
+import HeaderFeed from "../ui_subcomponents/HeaderFeed";
+import TeamPage from "../team/TeamPage";
+import "../css/Content.css";
 
 const ProtectedRoute = ({
     component: Comp,

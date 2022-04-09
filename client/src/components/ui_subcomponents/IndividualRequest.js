@@ -3,10 +3,10 @@ import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 import { QueryRenderer, commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-import environment from "../Environment";
+import environment from "../auth/Environment";
 import { setState } from "semantic-ui-react";
 import "../css/Modal.css";
-import UserCard from "../UserCard";
+import UserCard from "../profile/UserCard";
 import ConfirmationModalRemove from "./ConfirmationModalRemove";
 
 // Get the user that you are trying to contact's information

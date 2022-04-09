@@ -2,16 +2,16 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import TeamInformation from './TeamInformation';
-import JoinTeam from './ui_subcomponents/JoinTeam';
+import JoinTeam from './JoinTeam';
 import TeamNotifications from './TeamNotifications';
 import TeamRequestsSent from './TeamRequestsSent';
 import OnTeam from './OnTeam';
 import NoTeam from './NoTeam';
 import Members from './Members';
-import './css/TeamPage.css';
+import '../css/TeamPage.css';
 import {QueryRenderer} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
-import environment from './Environment';
+import environment from '../auth/Environment';
 import { withRouter } from "react-router-dom";
 
 const getTeamQuery = graphql `

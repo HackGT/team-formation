@@ -2,11 +2,11 @@
 import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 import "../css/Modal.css";
-import TeamCard from "../TeamCard";
+import TeamCard from "./TeamCard";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-import environment from "../Environment";
-import ConfirmationModal from "./ConfirmationModal";
+import environment from "../auth/Environment";
+import ConfirmationModal from "../ui_subcomponents/ConfirmationModal";
 
 // Updates user to have sent a request to a team to join
 const mutation = graphql`

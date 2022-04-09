@@ -2,16 +2,16 @@
 import React, { Component } from "react";
 import { Card, Form, Button, Label, Message, Input } from "semantic-ui-react";
 import TeamInformation from "./TeamInformation";
-import JoinTeam from "./ui_subcomponents/JoinTeam";
-import CheckingModal from "./ui_subcomponents/CheckingModal";
+import JoinTeam from "./JoinTeam";
+import CheckingModal from "../ui_subcomponents/CheckingModal";
 import TeamNotifications from "./TeamNotifications";
 import TeamRequestsSent from "./TeamRequestsSent";
 import Members from "./Members";
 import MembersBlank from "./MembersBlank";
-import "./css/TeamPage.css";
+import "../css/TeamPage.css";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-import environment from "./Environment";
+import environment from "../auth/Environment";
 
 const mutation = graphql`
   mutation OnTeamMutation($name: String) {

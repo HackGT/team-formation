@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
 import { QueryRenderer, commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-import environment from "../Environment";
+import environment from "../auth/Environment";
 import { Link } from "react-router-dom";
 import "../css/Modal.css";
 import ConfirmationModal from "./ConfirmationModal";

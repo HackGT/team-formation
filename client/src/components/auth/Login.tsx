@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from "react";
-import "./css/login-css/main.css";
-import "./css/login-css/util.css";
+import "../css/login-css/main.css";
+import "../css/login-css/util.css";
 
 // interface representing the state of the Login component
 // All logins must contain a user's UUID, the user data, and redirects

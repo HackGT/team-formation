@@ -1,10 +1,10 @@
 /* eslint-disable */
 import React, { Component } from "react";
 import { Button, Card, Popup, Container, Label, TextArea, Placeholder } from "semantic-ui-react";
-import JoinTeam from "./ui_subcomponents/JoinTeam";
-import "./css/TeamCard.css";
+import JoinTeam from "./JoinTeam";
+import "../css/TeamCard.css";
 import { Link, useParams } from "react-router-dom";
-import { Team } from "../types/index";
+import { Team } from "../../types/index";
 
 interface props {
   interests: [boolean];

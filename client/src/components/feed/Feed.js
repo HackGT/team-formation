@@ -2,10 +2,10 @@
 import React, { Component } from "react";
 import FeedTeamCards from "./FeedTeamCards";
 import FeedCards from "./FeedCards";
-import SideMenu from "./SideMenu";
+import SideMenu from "../search-filter/SideMenu";
 import { Button } from "semantic-ui-react";
-import InputTagCollection from "./InputTagCollection";
-import "./css/Feed.css";
+import InputTagCollection from "../search-filter/InputTagCollection";
+import "../css/Feed.css";
 
 class Feed extends Component {
   state = {
