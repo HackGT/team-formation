@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+//import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import TeamInformation from './TeamInformation';
 import JoinTeam from './ui_subcomponents/JoinTeam';
@@ -12,7 +12,8 @@ import {QueryRenderer} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
 import environment from './Environment';
 import { withRouter } from "react-router-dom";
-
+import React, { useState, useEffect} from 'react';
+/*
 const getTeamQuery = graphql `
   query TeamPageQuery($team_id: String) {
     team(team_id:$team_id) {
@@ -99,3 +100,46 @@ class TeamPage extends Component {
 }
 
 export default withRouter(TeamPage);
+*/
+
+export default function TeamPage(props) {
+  const [newTeam, setNewTeam] = useState(null);
+  /*
+  useAsyncEffect(async () => {
+    const myHeaders = new Headers();
+    const BEARER_TOKEN = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY0ZTc2NDk3ZGE3Y2ZhOWNjMDkwZDcwZTIyNDQ2YTc0YjVjNTBhYTkiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoicHJhbml0IiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FBVFhBSnhVZjZ6UEVNOEVHVjlRenR6b0hRdHFKZ195bGd5VGxQNXhDLTFCY3c9czk2LWMiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vaGV4bGFicy1jbG91ZCIsImF1ZCI6ImhleGxhYnMtY2xvdWQiLCJhdXRoX3RpbWUiOjE2NTQ1MjcxNTQsInVzZXJfaWQiOiJzZWtRNTl4Q1F1TzlzSWNkMjZrdUQ0cm9HaXUyIiwic3ViIjoic2VrUTU5eENRdU85c0ljZDI2a3VENHJvR2l1MiIsImlhdCI6MTY1NDUyNzE1NCwiZXhwIjoxNjU0NTMwNzU0LCJlbWFpbCI6ImRvZGRhcHJhbml0QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTAyMjU5Njg2MDM4MTA3MzA1MDA5Il0sImVtYWlsIjpbImRvZGRhcHJhbml0QGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6ImN1c3RvbSJ9fQ.MRFCYgTBWMSYMNyoRmdgxS6MKiRIihecDcIYqOfZEZs3ypWlEDela34vQYhacgp4iGTglMq8acMxMOfqcsIISA5Blu_z1ujC2ciHhWdYk6z9CzOBqbbKODeksnUVYJgHJZw4ziNr9LYfy4wqcXHXhcd-u9Y8c7ZvpuupZfEX0WpokN8HcPin7ZAuhH-n4tBuBBxvldOHb1G-kUKExbZTeyBYCHJdfRQCfaN7BHfxlw70b2Y9Iq-7Ce2ze6Ezla0hfRRpRop23alAomxUqkV4VTpK3VzkWRG3URTJqxiDTZtYg01UwAfhpoRvN_mOwkKxQr_S0c2B8aL8Z_fkD9sLSw";
+    myHeaders.append("Authorization", "Bearer " + BEARER_TOKEN);
+    fetch("http://localhost:8001/teams/629d147df5dd1abb8b3aea0d", {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    })
+    .then((res) => {
+      return res.json();
+    })
+    .then((json) => {
+      console.log(json);
+    });
+  }, []);
+ */
+ useEffect(() => {
+  const fetchData = async () => {
+    const myHeaders = new Headers();
+    //insert token for "token"
+    const BEARER_TOKEN = "token";
+    myHeaders.append("Authorization", "Bearer " + BEARER_TOKEN);
+    //insert id for ":id"
+    const res = await fetch("http://localhost:8001/teams/:id", {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+    });
+    setNewTeam(await res.json());
+  }
+  fetchData();
+}, []);
+  console.log(newTeam);
+    return (
+      <Button></Button>
+    );
+  }
