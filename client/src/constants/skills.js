@@ -1,3 +1,4 @@
+/* eslint-disable */
 const rawSkills = [
           "Java",
           "Python",

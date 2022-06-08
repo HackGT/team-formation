@@ -1,11 +1,12 @@
+/* eslint-disable */
 import React, { Component } from "react";
-import UserCard from "./UserCard";
+import UserCard from "../profile/UserCard";
 import { Card, Button, Icon } from "semantic-ui-react";
 
 import { QueryRenderer } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-import "./css/MembersBlank.css";
-import environment from "./Environment";
+import "../css/MembersBlank.css";
+import environment from "../auth/Environment";
 
 // edit this query to pull on the team members
 const getUsersQuery = graphql`

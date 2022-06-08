@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../css/Headers.css';
+import { Box } from '@chakra-ui/react';
 
 // Renders an empty div
 /*
@@ -9,13 +10,11 @@ Suggestion: Deletion
 */
 class Headers extends Component {
     render() {
-        return (<div className="Header-container">
-            {/* <div className="headers"> */}
-            {/* <h1>HackGT</h1>
-					<h2>Team Formation</h2> */
-            }
-            {/* </div> */}
-        </div>);
+        return (
+            <Box>
+                
+            </Box>
+        );
     };
 }
 

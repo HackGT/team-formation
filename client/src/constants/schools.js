@@ -253,7 +253,7 @@ const rawSchools = [
   'SPPU',
   'Bennett University'
 ];
-
+/* eslint-disable */
 const schools = rawSchools.map((current, index) => {
     return {
         key: index,

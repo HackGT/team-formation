@@ -1,5 +1,6 @@
+/* eslint-disable */
 import React from 'react';
-import './css/InputTagCollection.css';
+import '../css/InputTagCollection.css';
 import {Label} from 'semantic-ui-react'
 
 const InputTagCollection = props => {

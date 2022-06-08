@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, {Component} from 'react';
 import {
     BrowserRouter as Router,
@@ -11,13 +12,13 @@ import {
     Checkbox
 } from 'semantic-ui-react';
 import {QueryRenderer} from 'react-relay';
-import './css/EditProfile.css';
+import '../css/EditProfile.css';
 import {commitMutation} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
-import environment from './Environment';
-import skills from '../constants/skills';
-import years from '../constants/years';
-import schools from '../constants/schools';
+import environment from '../auth/Environment';
+import skills from '../../constants/skills';
+import years from '../../constants/years';
+import schools from '../../constants/schools';
 import Filter from 'bad-words'
 
 const mutation = graphql `

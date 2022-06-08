@@ -1,11 +1,12 @@
+/* eslint-disable */
 import React, {Component} from 'react';
-import UserCard from './UserCard';
+import UserCard from '../profile/UserCard';
 import {Button} from 'semantic-ui-react';
 
 import {QueryRenderer} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
-import './css/Feed.css';
-import environment from './Environment';
+import '../css/Feed.css';
+import environment from '../auth/Environment';
 import {Redirect} from 'react-router-dom';
 
 const getUsersQuery = graphql `
