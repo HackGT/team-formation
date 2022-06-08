@@ -1,7 +1,8 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import { Button, Card, Popup, Container, Label } from "semantic-ui-react";
-import JoinIndividual from "./ui_subcomponents/JoinIndividual";
-import "./css/UserCard.css";
+import JoinIndividual from "../ui_subcomponents/JoinIndividual";
+import "../css/UserCard.css";
 
 class UserCard extends Component {
   constructor(props) {
@@ -45,15 +46,12 @@ class UserCard extends Component {
     //     />
     //   );
     // }
-    var colors = ["#ACBA4A", "#F8B52C"];
+    var colors = ["#E1C531", "#4289CA"];
     var count = 0;
     var viewskill = this.props.skills.map((skill) => (
       <Label
         size="mini"
-        className="labelStyle"
-        style={{
-          backgroundColor: colors[count++ % 2],
-      }}
+        className="userskill"
       >
         {skill}
       </Label>
@@ -87,15 +85,12 @@ class UserCard extends Component {
           />
           <Container className="data">
             <Card.Description className="card-description">
-              <div style={{color: '#10112E'}}>
+              {viewskill}
+            </Card.Description>
+            <Card.Description className="card-description">
+              <div>
                 About Them: {this.props.experience}
               </div>
-            </Card.Description>
-            <div
-              className="ui divider"
-            />
-            <Card.Description className="card-description">
-              {viewskill}
             </Card.Description>
           </Container>
           {/* Separating to test absolute position */}

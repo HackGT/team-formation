@@ -14,6 +14,11 @@ const contactOptions = [
         value: "social media"
     }
 ];
+// Dropdown containing method of contacting the user
+/*
+Note: This component is not in use. If there is no planned use
+of this component, consider deletion.
+*/
 class YearDropdown extends Component {
 
     constructor() {

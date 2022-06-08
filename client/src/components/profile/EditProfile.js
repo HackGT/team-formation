@@ -1,32 +1,24 @@
+/* eslint-disable */
 import React, {Component} from 'react';
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
     Link,
-    useParams,
     Redirect
 } from "react-router-dom";
 import {
     Button,
-    Divider,
-    Dropdown,
-    TextArea,
     Message,
     Form,
     Checkbox
 } from 'semantic-ui-react';
 import {QueryRenderer} from 'react-relay';
-import ContactDropdown from './ui_subcomponents/ContactDropdown';
-import ConfirmationModal from './ui_subcomponents/ConfirmationModal'
-import './css/EditProfile.css';
+import '../css/EditProfile.css';
 import {commitMutation} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
-import environment from './Environment';
-import skills from '../constants/skills';
-import years from '../constants/years';
-import schools from '../constants/schools';
-import tracks from '../constants/tracks';
+import environment from '../auth/Environment';
+import skills from '../../constants/skills';
+import years from '../../constants/years';
+import schools from '../../constants/schools';
 import Filter from 'bad-words'
 
 const mutation = graphql `
@@ -61,7 +53,10 @@ query EditProfileQuery {
     }
 }
 `;
-
+/**
+ * Class component that comprises the form whenever a user who is logged in
+ * clicks on the profile icon in the upper right-hand corner of the page.
+ */
 class EditProfile extends Component {
 
     constructor() {
@@ -92,7 +87,7 @@ class EditProfile extends Component {
     };
 
     render() {
-
+        // Contact Form set up - May be deprecated
         let contact_form;
         if (this.state.contact_method === 'phone number') {
             contact_form = <Form.Input label='Phone Number:' placeholder='(###) ###-####' defaultValue={this.state.contact} width={5} onChange={this.onContactChange} error={this.state["contact_profane"]} required="required"/>
@@ -113,6 +108,8 @@ class EditProfile extends Component {
         //             }} />
         //     )
         // }
+        
+        // Redirect page if true
         if(this.state.next) {
             console.log("nexting")
             return <Redirect to="/feed" />
@@ -122,6 +119,7 @@ class EditProfile extends Component {
                 if (error) {
                     return <div>{error.message}</div>;
                 } else if (props) {
+                    {/* Extract data from props after validating the name */}
                     props = props.user_profile;
                     if (!this.state.name && props.name) {
                         this.setState({
@@ -193,6 +191,7 @@ class EditProfile extends Component {
             }}/>);
     };
 
+    // State mutators
     onFirstNameChange = (e) => {
         this.setState({first_name: e.target.value});
     }
@@ -256,11 +255,12 @@ class EditProfile extends Component {
         return profanityExists
     }
 
+    // Cancel editing the profile
     onCancelClick = () => {
         this.props.onNextClick('feed', this.props.user_id);
     }
 
-
+    // Checks for possible errors like profanity before updating the database
     onNextClick = () => {
         let cur_error;
         this.setState({name_profane: false, school_profane: false, grad_year_profane: false, experience_profane: false, contact_profane: false})

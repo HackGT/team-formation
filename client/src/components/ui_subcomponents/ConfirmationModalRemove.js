@@ -1,13 +1,16 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import { Modal } from "semantic-ui-react";
-import { QueryRenderer, commitMutation } from "react-relay";
 import "../css/ConfirmationModal.css";
-import UserCard from "../UserCard";
-import { graphql } from "babel-plugin-relay/macro";
-import environment from "../Environment";
-import IndividualRequest from "./IndividualRequest";
 import { Button, Text } from '@chakra-ui/react';
 
+// Confirmation of the removal of teammates
+/*
+Note: This is an exact duplicate of ConfirmationModal.js
+Condition: REDUNDANT
+Suggestion: Refactor any mention of this to use the other component
+as there is no need for two of the same.
+*/
 class ConfirmationModalRemove extends Component {
     constructor(props) {
         super(props);
@@ -17,6 +20,7 @@ class ConfirmationModalRemove extends Component {
         this.toggleClose = this.toggleClose.bind(this)
     }
 
+    // closes the modal
     toggleClose() {
         console.log("In closed")
         this.setState({showModal: false});

@@ -1,8 +1,9 @@
+/* eslint-disable */
 import React, { Component } from "react";
-import { Button, Card, Popup, Container, Label, Icon } from "semantic-ui-react";
-import "./css/NotificationCard.css";
-import IndividualRequest from "./ui_subcomponents/IndividualRequest";
-import TeamRequest from "./ui_subcomponents/TeamRequest";
+import { Card } from "semantic-ui-react";
+import "../css/NotificationCard.css";
+import IndividualRequest from "../ui_subcomponents/IndividualRequest";
+import TeamRequest from "../ui_subcomponents/TeamRequest";
 
 
 class NotificationCard extends Component {

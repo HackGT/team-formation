@@ -1,14 +1,16 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import { Modal } from "semantic-ui-react";
 import { QueryRenderer, commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-import environment from "../Environment";
+import environment from "../auth/Environment";
 import { setState } from "semantic-ui-react";
 import "../css/Modal.css";
-import UserCard from "../UserCard";
+import UserCard from "../profile/UserCard";
 import ConfirmationModalRemove from "./ConfirmationModalRemove";
 import { Text, Box, Flex, Button } from '@chakra-ui/react';
 
+// Get the user that you are trying to contact's information
 const getUserQuery = graphql`
   query IndividualRequestQuery($user_id: String) {
     user(user_id: $user_id) {
@@ -25,6 +27,7 @@ const getUserQuery = graphql`
   }
 `;
 
+// Mutation to update a notification message for a team-up
 const acceptRequestMutation = graphql`
   mutation IndividualRequestMutation($notification_id: String) {
     accept_user_request(notification_id: $notification_id) {
@@ -34,6 +37,7 @@ const acceptRequestMutation = graphql`
   }
 `;
 
+// Mutation to update a notification for joining a team
 const acceptTeamRequestMutation = graphql`
   mutation IndividualRequest2Mutation($notification_id: String) {
     accept_team_request(notification_id: $notification_id) {
@@ -43,6 +47,13 @@ const acceptTeamRequestMutation = graphql`
   }
 `;
 
+/**
+ * Component that handles the sending of single user requests
+ * to other users or teams.
+ * 
+ * Individual-made requests are one type of team-up requests,
+ * the other being from the established teams.
+ */
 class IndividualRequest extends Component {
   constructor(props) {
     super(props);
@@ -53,6 +64,7 @@ class IndividualRequest extends Component {
     this.toggleSecondOpen = this.toggleSecondOpen.bind(this)
   }
 
+  // Open the second modal following the first
   toggleSecondOpen() {
     console.log("in toggle");
     this.setState({secondOpen: true});
@@ -134,6 +146,7 @@ class IndividualRequest extends Component {
                                 notification_id: this.props.notification_id,
                               },
                             });
+                            {/* HIIIIII */}
                             console.log("HIIIIII" + this.state.secondOpen)
                             this.toggleSecondOpen();
                             console.log("HELLO" + this.state.secondOpen)

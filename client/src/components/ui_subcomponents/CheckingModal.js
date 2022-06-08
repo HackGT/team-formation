@@ -1,14 +1,11 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import { Modal } from "semantic-ui-react";
-import { QueryRenderer, commitMutation } from "react-relay";
 import "../css/ConfirmationModal.css";
-import onTeam from "../OnTeam";
-import UserCard from "../UserCard";
-import { graphql } from "babel-plugin-relay/macro";
-import environment from "../Environment";
-import IndividualRequest from "./IndividualRequest";
 import { Button, Box, Flex, Text } from '@chakra-ui/react';
 
+// Modal to contain the leaving team option
+// Query not required due to propagation of props
 class CheckingModal extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +14,7 @@ class CheckingModal extends Component {
         };
         this.toggleClose = this.toggleClose.bind(this)
     }
-
+    // updates modal upon submission
     toggleClose() {
         console.log("In closed")
         this.setState({showModal: false});

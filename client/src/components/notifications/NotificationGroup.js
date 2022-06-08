@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import {
   Button,
@@ -9,10 +10,10 @@ import {
   Segment,
 } from "semantic-ui-react";
 import NotificationCard from "./NotificationCard";
-import "./css/NotificationCard.css";
+import "../css/NotificationCard.css";
 import { QueryRenderer } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-import environment from "./Environment";
+import environment from "../auth/Environment";
 
 const getNotificationsQuery = graphql`
   query NotificationGroupQuery {

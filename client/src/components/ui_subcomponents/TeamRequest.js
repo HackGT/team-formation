@@ -1,8 +1,9 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import { Modal } from "semantic-ui-react";
 import { QueryRenderer, commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-import environment from "../Environment";
+import environment from "../auth/Environment";
 import { Link } from "react-router-dom";
 import "../css/Modal.css";
 import ConfirmationModal from "./ConfirmationModal";
@@ -18,6 +19,12 @@ const acceptRequestMutation = graphql`
   }
 `;
 
+/**
+ * Component that comprises the "Join Team" functionality
+ * - Displays information to a team-less user about a team
+ *   or other user.
+ * - Receiving user can accept or deny the request
+ */
 class TeamRequest extends Component {
   constructor(props) {
     super(props);

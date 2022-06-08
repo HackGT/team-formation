@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import {
     Card,
@@ -8,11 +9,11 @@ import {
     Icon,
     Message
 } from 'semantic-ui-react'
-import './css/TeamInformation.css'
-import skills from '../constants/skills'
+import '../css/TeamInformation.css'
+import skills from '../../constants/skills'
 import {commitMutation} from 'react-relay';
 import {graphql} from 'babel-plugin-relay/macro';
-import environment from './Environment';
+import environment from '../auth/Environment';
 
 const mutation = graphql`
   mutation TeamInformationMutation(
@@ -64,7 +65,7 @@ class TeamInformation extends Component {
 }
   render() {
     console.log(this.state.interest_options)
-    var colors = ["#ACBA4A", "#F8B52C"];
+    var colors = ["#E1C531", "#4289CA"];
     var count = 0;
     var interestLabels = this.state.interests.map((interest) => (
       <Label
