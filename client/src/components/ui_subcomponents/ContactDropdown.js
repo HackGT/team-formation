@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Dropdown} from 'semantic-ui-react';
+import { Box } from '@chakra-ui/react';
 
 const contactOptions = [
     {
@@ -28,9 +29,11 @@ class YearDropdown extends Component {
     };
 
     render() {
-        return (<div className="YearDropdown-container">
-            <Dropdown placeholder="Method of contact" selection="selection" options={contactOptions} onChange={this.onHandleChange} defaultValue={this.props.contact_method}/>
-        </div>);
+        return (
+            <Box>
+                <Dropdown placeholder="Method of contact" selection="selection" options={contactOptions} onChange={this.onHandleChange} defaultValue={this.props.contact_method}/>
+            </Box>
+        );
     };
 
     onHandleChange = (e, d) => {
