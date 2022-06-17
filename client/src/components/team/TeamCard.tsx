@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { Button, Card, Popup, Container, Label, TextArea, Placeholder } from "semantic-ui-react";
 import JoinTeam from "./JoinTeam";
 import "../css/TeamCard.css";
-import { Link, useParams } from "react-router-dom";
 import { Team } from "../../types/index";
 
 interface props {
@@ -30,13 +29,6 @@ class TeamCard extends Component<props, states> {
     this.setState({ showModal: false });
   };
   render() {
-    // let contact;
-    // contact = <Popup
-    // trigger={<Button basic={true} color='blue' content='Join Team!' />}
-    // content="Team has been joined!"
-    // on='click'
-    // hideOnScroll
-    // />
     var count = 0;
     // var viewskill;
     let link = "/team/" + this.props.id;

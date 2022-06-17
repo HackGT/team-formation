@@ -1,28 +1,9 @@
 /* eslint-disable */
 import React, { Component } from "react";
 import UserCard from "../profile/UserCard";
-import { Card, Button, Icon } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 
-import { QueryRenderer } from "react-relay";
-import { graphql } from "babel-plugin-relay/macro";
 import "../css/MembersBlank.css";
-import environment from "../auth/Environment";
-
-// edit this query to pull on the team members
-const getUsersQuery = graphql`
-  query MembersBlankQuery($skill: String) {
-    users(skill: $skill) {
-      name
-      school
-      grad_year
-      contact
-      skills
-      experience
-      visible
-      uuid
-    }
-  }
-`;
 
 class Members extends Component {
   render() {
@@ -43,7 +24,7 @@ class Members extends Component {
           grad_year={user.grad_year}
           school={user.school}
           contact={user.contact}
-          skills={user.skills.filter(function(el) {
+          skills={user.skills.filter(function (el) {
             return Boolean(el);
           })}
           experience={user.experience}

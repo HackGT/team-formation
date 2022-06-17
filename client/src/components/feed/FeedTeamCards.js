@@ -1,74 +1,47 @@
 /* eslint-disable */
-import React, {Component} from 'react';
-import TeamCard from '../team/TeamCard';
-import { Button } from 'semantic-ui-react';
+import React, { useState, useEffect } from "react";
+import TeamCard from "../team/TeamCard";
+import { Button } from "semantic-ui-react";
 
-import {QueryRenderer} from 'react-relay';
-import {graphql} from 'babel-plugin-relay/macro';
-import '../css/Feed.css';
-import environment from '../auth/Environment';
-
-const getTeamsQuery = graphql `
-    query FeedTeamCardsQuery($interests: String, $search: String) {
-        teams(interests:$interests, search:$search) {
-            name
-            interests
-            description
-            public
-            members {
-                name
-            }
-            id
-        }
-        user_profile {
-            team {
-                id
-            }
-        }  
-    }
-`;
+import "../css/Feed.css";
 
 /**
  * Component that houses the cards of all teams that have been created that
  * are not full or private. Very similar to FeedCards.
  */
-class FeedTeamCards extends Component {
-    render() {
-        let search = this.props.search;
-        let interests = this.props.skill.join(',');
-        console.log(`interests: ${interests}`)
-        return (<QueryRenderer environment={environment} query={getTeamsQuery} variables={{
-                search: search,
-                interests: interests
-            }} render={({error, props}) => {
-                if (error) {
-                    return <div>{error.message}</div>;
-                } else if (props) {
-                    let cards = props.teams.map(team => {
-                        if (team.public == true) {
-                            console.log('rendering..');
-                            return <TeamCard id={team.id} name={team.name} interests={team.interests.filter(function(el) {
-                                    return Boolean(el);
-                                })} description={team.description} team={props.user_profile.team}/>
-                        }
-                    })
-                    return (<div>
-                    <div className='Cards-container'>
-                        {cards.slice(this.props.sliceIndexStart, this.props.sliceIndexStart + this.props.numCardsPerPage)}
-                    </div>
-                    <div className='buttons-container'>
-                    {this.props.sliceIndexStart !== 0 && <Button onClick={this.props.moveLeft}>
-                        Previous
-                    </Button>}
-                    {Math.floor(this.props.sliceIndexStart / this.props.numCardsPerPage)
-                    !== Math.floor((cards.length - 1) / this.props.numCardsPerPage) && cards.length !== 0 && <Button onClick={this.props.moveRight}>
-                        Next
-                    </Button>}
-                    </div>
-                    </div>);
-                }
-            }}/>);
-    };
-};
+export default function FeedTeamCards(props) {
+  const [teams, setTeams] = useState([]);
 
-export default FeedTeamCards;
+  useEffect(async () => {
+    const myHeaders = new Headers();
+    const BEARER_TOKEN =
+      "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY5MGZiMWFlMDQ4YTU0OGZiNjgxYWQ2MDkyYjBiODY5ZWE0NjdhYzYiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiWXUgUGFuIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FBVFhBSndncHl0Zm9rTlFJMjVJUFo1TkExTXlySzdNZFJhU1RjU2JqZ1RiPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2hleGxhYnMtY2xvdWQiLCJhdWQiOiJoZXhsYWJzLWNsb3VkIiwiYXV0aF90aW1lIjoxNjU1NDM4ODk1LCJ1c2VyX2lkIjoiM1N6M2c4VW5SM096Y25qUXdzYjhZRGZPdUR6MSIsInN1YiI6IjNTejNnOFVuUjNPemNualF3c2I4WURmT3VEejEiLCJpYXQiOjE2NTU0Mzg4OTUsImV4cCI6MTY1NTQ0MjQ5NSwiZW1haWwiOiJ5dS5wYW5AaGV4bGFicy5vcmciLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjEwNjU2MTA3NjgxODYzNTc4MzEyMSJdLCJlbWFpbCI6WyJ5dS5wYW5AaGV4bGFicy5vcmciXX0sInNpZ25faW5fcHJvdmlkZXIiOiJjdXN0b20ifX0.jHLbLEzpIqObi6qTWqz4tDcKAxWR54R6s5Q4nZ0tidkb3KTXTgvWn0qcIgjRoZxTcIRyqDdGXhkbWcXO6OliJ6hmTXZy2rbtNsK7bwg_n-ZiVn914NIl_yjqzslKbwP0XxjzWPOysczDX5RPN59F9hU8iWyzdBxOdq91CIh-eWJoMj4efm-xIfYa2e-cw5QG1EL33JQr9u7NMDvfE5SlrXGn4vaR5ksETyK7BuyyVDqhegYpfeQ0eVh30_bhWM3Q7RgN2fO-jUDUNDxz5qJu_-2g5YCPmMA_fgEXQDUQPw15MgsBFHHD3Oytpw02PrTSC5WcQq6uThPrLsFw-ZvvEA";
+    myHeaders.append("Authorization", "Bearer " + BEARER_TOKEN);
+
+    const res = await fetch("http://localhost:8001/teams", {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    });
+
+    setTeams(await res.json());
+  }, []);
+
+  let teamCards = teams.map(team => {
+    return <TeamCard id={team.id} description={team.description} team={team} name={team.name} />;
+  });
+
+  return (
+    <div>
+      <div className="Cards-container">
+        {teamCards.slice(props.sliceIndexStart, props.sliceIndexStart + props.numCardsPerPage)}
+      </div>
+      <div className="buttons-container">
+        {props.sliceIndexStart !== 0 && <Button onClick={props.moveLeft}>Previous</Button>}
+        {Math.floor(props.sliceIndexStart / props.numCardsPerPage) !==
+          Math.floor((teamCards.length - 1) / props.numCardsPerPage) &&
+          teamCards.length !== 0 && <Button onClick={props.moveRight}>Next</Button>}
+      </div>
+    </div>
+  );
+}

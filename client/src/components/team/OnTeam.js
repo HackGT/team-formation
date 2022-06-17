@@ -52,18 +52,18 @@ class OnTeam extends Component {
   sendInformation = () => {
     console.log("WOAH IN HERE");
     commitMutation(environment, {
-      mutation: leaveTeamMutation
+      mutation: leaveTeamMutation,
     });
     window.location.reload();
-  }
+  };
 
   calcWidth = () => {
     if (this.state.name) {
-      return (this.state.name.length < 82) ? `${this.state.name.length + 10}ch` : '90ch';
+      return this.state.name.length < 82 ? `${this.state.name.length + 10}ch` : "90ch";
     } else {
-      return '10ch'
+      return "10ch";
     }
-  }
+  };
 
   render() {
     return (
@@ -78,7 +78,7 @@ class OnTeam extends Component {
             className="input"
             icon="pencil"
             style={{
-              width: this.calcWidth()
+              width: this.calcWidth(),
             }}
           />
           {/* <Message id="alert" hidden={this.state.save_message_hidden} success={this.state.save_success} header={this.state.save_success ? "Changes Saved" : "Unsaved Changes"}/> */}
@@ -86,27 +86,20 @@ class OnTeam extends Component {
         <Button
           className="leaveTeam"
           onClick={() => {
-              this.setState({showSecondModal: true});
-              // this.sendInformation();
-              console.log("STATEEEEE: ",this.state.leaveTeam)
+            this.setState({ showSecondModal: true });
+            // this.sendInformation();
+            console.log("STATEEEEE: ", this.state.leaveTeam);
           }}
         >
           Leave Team
         </Button>
         <CheckingModal
-            message="Are you sure you want to leave the team?"
-            closeModal={() => this.setState({ showSecondModal:false})}
-            // secondModal={() => this.props.closeModal()}
-            // onOpen={() => this.setState({ secondOpen:true})}
-            showModal={this.state.showSecondModal}
-            leaveTeam={this.sendInformation}
-            >
-          </CheckingModal>
-        <JoinTeam
-          {...this.props}
-          showModal={this.state.showModal}
-          closeModal={this.closeModal}
-        />
+          message="Are you sure you want to leave the team?"
+          closeModal={() => this.setState({ showSecondModal: false })}
+          showModal={this.state.showSecondModal}
+          leaveTeam={this.sendInformation}
+        ></CheckingModal>
+        <JoinTeam {...this.props} showModal={this.state.showModal} closeModal={this.closeModal} />
         <div className="first-row">
           <div className="first-col">
             <TeamNotifications />
@@ -125,9 +118,9 @@ class OnTeam extends Component {
       </div>
     );
   }
-  onTeamNameChange = (e) => {
+  onTeamNameChange = e => {
     this.setState({ name: e.target.value }, () => {
-      let input = document.getElementById('field');
+      let input = document.getElementById("field");
       input.style.width = this.calcWidth();
     });
   };

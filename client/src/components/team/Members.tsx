@@ -2,31 +2,11 @@
 import React, { Component } from "react";
 import UserCard from "../profile/UserCard";
 import { Icon } from "semantic-ui-react";
-import { graphql } from "babel-plugin-relay/macro";
-import "../css/Members.css";
-import environment from "../auth/Environment";
-import { Link } from "react-router-dom";
-import { processImport } from "@graphql-tools/import";
-import { User } from "../../types/index";
 
-// edit this query to pull on the team members
-const getUsersQuery = graphql`
-  query MembersQuery {
-    user_profile {
-      team {
-        members {
-          name
-          school
-          grad_year
-          contact
-          skills
-          experience
-          location
-        }
-      }
-    }
-  }
-`;
+import "../css/Members.css";
+
+import { Link } from "react-router-dom";
+import { User } from "../../types/index";
 
 interface props {
   members: [User];
@@ -59,7 +39,6 @@ class Members extends Component<props, {}> {
             return Boolean(el);
           })}
           experience={user.experience}
-          //   location={user.location}
         />
       );
     }
