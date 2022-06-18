@@ -1,14 +1,15 @@
+/* eslint-disable */
 import React, { Component } from "react";
-import { Button, Modal } from "semantic-ui-react";
+import { Modal } from "semantic-ui-react";
 import { QueryRenderer, commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-import environment from "../Environment";
+import environment from "../auth/Environment";
 import { Link } from "react-router-dom";
 import "../css/Modal.css";
 import ConfirmationModal from "./ConfirmationModal";
 import truncateTeamName from "../../constants/functions"
+import { Box, Flex, Text, Button } from "@chakra-ui/react";
 
-// Mutation to update a user's team status from none to existing
 const acceptRequestMutation = graphql`
   mutation TeamRequestMutation($notification_id: String) {
     accept_user_request(notification_id: $notification_id) {
@@ -45,92 +46,66 @@ class TeamRequest extends Component {
       >
         <Modal.Content>
           <Modal.Description>
-            <p class="modalHeader">
+            <Text sx={{align: "center", color: "white", fontSize: "3xl", fontFamily: "Roboto-Regular"}}>
               {truncateTeamName(senderName)} Wants You to Join Their Team!
-            </p>
-            <div class="modal1Margins">
-              <p class="requestMessage">{senderName + 's'} Request Message:</p>
-              <p class="requestMessageBody">{this.props.teamRequestMessage}</p>
-              <p class="projectIdea">{senderName + "'s'"} Project Idea:</p>
-              <p class="projectIdeaBody">{this.props.teamProjectIdea}</p>
+            </Text>
+            <Box mr="80px" ml="80px">
+              <Text mt="60px" color="white" fontFamily="Quicksand-Bold" fontSize="15px">{senderName + 's'} Request Message:</Text>
+              <Text border="transparent" borderRadius = "15px" p="20px" boxShadow="-20px 20px 0px -8px rgba(0, 0, 0, 0.2)" color="orange" fontFamily="Roboto-regular" bg="white">{this.props.teamRequestMessage}</Text>
+              <Text mt="30px" color="orange" fontFamily="Roboto-Regular" fontSize="15px">{senderName + "'s'"}</Text>
+              <Text border="transparent" borderRadius="15px" p="20px" boxShadow="-20px 20px 0px -8px rgba(0, 0, 0, 0.2)" color="orange" fontFamily="Roboto-Regular" bg="white">{this.props.teamProjectIdea}</Text>
 
-              <div class="flex-container1">
-                <div>
-                  <Button
-                     onClick = {() => {
-                        this.props.closeModal();
-                     }}
-                     as={Link} to={'/team/' + sender.id}
-                    className="submit"
-                    style={{
-                      padding: 12,
+              <Flex justifyContent = "center" mt="35px">
+                <Box>
+                  <Button 
+                    onClick = {() => {
+                      this.props.closeModal();
                     }}
+                    as={Link} to={'/team/' + sender.id}
+                    borderRadius="12px" color="white" bg="red" fontFamily="Roboto-Regular" fontWeight = "700px" p="12px"
                   >
                     View more about {senderName}
                   </Button>
-                </div>
-              </div>
-              <div class="flex-container2">
-                <div class="buttonMargin">
-                  {/* <Modal
-                    id="joined-team"
-                    class="hidden"
-                    onClose={() => {
-                      this.props.closeModal();
-                    }}
-                  >
-                    <Modal.Content>
-                      <Modal.Description>
-                        <p class="modalHeader">
-                            You have joined the team!
-                        </p>
-                        <Button
-                          className="submit"
-                          onClick={() => {
-                            this.props.closeModal();
-                          }}
-                        >
-                          Ok
-                        </Button>
-                      </Modal.Description>
-                    </Modal.Content>
-                  </Modal> */}
-                  <ConfirmationModal
+                </Box>
+              </Flex>
+              <Flex justifyContent = "center" mt="20px">
+                <Box m="10px">
+                <ConfirmationModal
                   message="You have joined the team!"
                   onClose={() => this.setState({ secondOpen:false})}
                   onOpen={() => this.setState({ secondOpen:true})}
                   open={this.state.secondOpen}
                   ></ConfirmationModal>
                   <Button
-                    className="submit"
                     onClick={() => {
-                        console.log(this.props.receiver)
-                        commitMutation(environment, {
-                          mutation: acceptRequestMutation,
-                          variables: {
-                            notification_id: this.props.notification_id,
-                          },
-                        });
+                      console.log(this.props.receiver)
+                      commitMutation(environment, {
+                        mutation: acceptRequestMutation,
+                        variables: {
+                          notification_id: this.props.notification_id,
+                        },
+                      });
                       this.props.closeModal();
                       window.location.href = `/team/${sender.id}`
                     }}
+                    borderRadius="12px" color="white" bg="red" fontFamily="Roboto-Regular" fontWeight = "700px"
                   >
                     Accept
                   </Button>
-                </div>
-                <div class="buttonMargin">
+                </Box>
+                <Box m="10px">
                   <Button
-                    className="submit"
                     onClick={() => {
                       this.props.closeModal();
 
                     }}
+                    borderRadius="12px" color="white" bg="red" fontFamily="Roboto-Regular" fontWeight = "700px"
                   >
                     Deny
                   </Button>
-                </div>
-              </div>
-            </div>
+                </Box>
+              </Flex>
+            </Box>
           </Modal.Description>
         </Modal.Content>
       </Modal>

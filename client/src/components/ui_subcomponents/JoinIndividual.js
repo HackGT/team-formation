@@ -1,10 +1,12 @@
+/* eslint-disable */
 import React, { Component } from "react";
-import { Button, Modal, Popup } from "semantic-ui-react";
+import { Modal, Popup } from "semantic-ui-react";
+import { Button, Text, Flex, Box, Textarea } from '@chakra-ui/react';
 import "../css/Modal.css";
-import UserCard from "../UserCard";
+import UserCard from "../profile/UserCard";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-import environment from "../Environment";
+import environment from "../auth/Environment";
 
 // Update user's data to include the message sent from this component
 const mutation = graphql`
@@ -49,12 +51,14 @@ class JoinIndividual extends Component {
       >
         <Modal.Content>
           <Modal.Description>
-            <p class="modalHeader">Team Up With {this.props.name}?</p>
-            <div class="row">
-              <div class="modal4-column">
-                <div class="modal4-column1">
+            <Text sx={{textAlign: "center", color: "white", fontSize: "30px", fontFamily: "Roboto-Regular"}}>
+              Team Up With {this.props.name}?
+            </Text>
+            <Flex sx={{flexDirection: "row", flexWrap: "wrap", justifyContent: "center", m: "20px"}}>
+              <Flex sx={{flexDirection: "column"}}>
+                <Box sx={{m: "25px", mt: "0px"}}>
                   <UserCard
-                    name={this.props.name}
+                     name={this.props.name}
                     school={this.props.school}
                     grad_year={this.props.grad_year}
                     track={this.props.track}
@@ -63,33 +67,27 @@ class JoinIndividual extends Component {
                     contact={this.props.contact}
                     location={this.props.location}
                   />
-                </div>
-              </div>
-              <div class="modal3Column2">
-                <div class="modal4-column2">
-                  <textarea
-                    id="introduceYourself"
+                </Box>
+              </Flex>
+              <Box sx={{display: "inline-block", flexDirection: "column", textAlign: "center", flex: "1", minWidth: "270px", maxWidth: "418px"}}>
+                <Box sx={{ml: "25px", mr: "25px", textAlign: "center"}}>
+                  <Textarea sx={{borderRadius: "15px", pl: "15px", pt: "15px", borderColor: "transparent", boxShadow: "-20px 20px 0px -8px rgba(0, 0, 0, 0.2)", color: "var(--orange)", fontFamily: "Roboto-Regular", resize: "none", w: "100%"}}
                     rows="8"
                     cols="68"
                     placeholder="Introduce yourself..."
                     onChange={this.onBioChange}
                   />
 
-                  <div className="rectangle2" />
-                  <textarea
-                    id="describeProject"
+                  <Textarea
+                    sx={{mt: "5%", pl: "15px", pt: "15px", borderColor: "transparent", boxShadow: "-20px 20px 0px -8px rgba(0, 0, 0, 0.2)", borderRadius: "15px", color: "var(--orange)", fontFamily: "Roboto-Regular", resize: "none", w: "100%"}}
                     rows="8"
                     cols="68"
                     placeholder="Describe your project idea..."
                     onChange={this.onIdeaChange}
                   />
                   {this.state.errorMessage}
-                  <div className="popup" />
                   <Button
-                    className="submit"
-                    style={{
-                      marginTop: 25,
-                    }}
+                    sx={{borderRadius: "12px", color: "white", bg: "var(--red)", fontFamily: "Roboto-Regular", fontWeight: "bold", mt: "25px", p: "10px"}}
                     onClick={() => {
                       this.setState({ openPopup:true})
                       commitMutation(environment, {
@@ -120,9 +118,9 @@ class JoinIndividual extends Component {
                   >
                     Submit
                   </Button>
-                </div>
-              </div>
-            </div>
+                </Box>
+              </Box>
+            </Flex>
           </Modal.Description>
         </Modal.Content>
       </Modal>

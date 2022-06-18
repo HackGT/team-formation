@@ -1,6 +1,8 @@
+/* eslint-disable */
 import React, { Component } from "react";
-import { Button, Modal } from "semantic-ui-react";
+import { Modal } from "semantic-ui-react";
 import "../css/ConfirmationModal.css";
+import { Button, Text } from '@chakra-ui/react';
 
 // Confirmation of the removal of teammates
 /*
@@ -36,14 +38,17 @@ class ConfirmationModalRemove extends Component {
       >
         <Modal.Content>
           <Modal.Description>
-            <p class="modalHeader">{this.props.message}</p>
+            <Text sx={{textAlign: "center", color: "white", fontSize: "30px", fontFamily: "Roboto-Regular"}}>
+              {this.props.message}
+            </Text>
             <Button 
-            className="done"
+            sx={{ml: "173px", p: "10px"}}
             onClick={() => {
                 this.props.closeModal();
                 this.props.secondModal();
             }}
-            >Ok</Button>
+            >Ok
+            </Button>
           </Modal.Description>
         </Modal.Content>
       </Modal>
