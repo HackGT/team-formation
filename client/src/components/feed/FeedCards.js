@@ -13,26 +13,32 @@ import '../css/Feed.css';
     const [users, setUsers] = useState([]);  
     
     useEffect(async () => {
-        const myHeaders = new Headers();
-        const BEARER_TOKEN="token"
-        myHeaders.append("Authorization", "Bearer " + BEARER_TOKEN);
+      const myHeaders = new Headers();
+      // TODO: Integrate this with auth api
+      const BEARER_TOKEN="token"
+      myHeaders.append("Authorization", "Bearer " + BEARER_TOKEN);
+      // TODO pass in hexathon id
+      const params = new URLSearchParams({
+          hexathon: 'hexathonid',
+      })
 
-        const res = await fetch("http://localhost:8004/applications", {
+      const res = await fetch("http://localhost:8004/applications?" + params, {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow'
       });
 
-      setUsers(await res.json());
+      const val = await res.json();
+      setUsers(val.applications);
     }, []);
   
     let cards = users.map(user => {
         return (
           <UserCard className='card-individual' 
-            name={user.userId}
+            name={user.name}
             grad_year="1st"
             school="Georgia Tech"
-            contact={user.userId} 
+            contact={user.email} 
             skills={["Python", "Java", "Android", "App Development"]}
             experience="Very good teamate"
             id={user.userId}
