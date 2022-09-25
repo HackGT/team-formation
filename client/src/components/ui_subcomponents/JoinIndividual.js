@@ -6,6 +6,7 @@ import UserCard from "../profile/UserCard";
 import { commitMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import environment from "../auth/Environment";
+import { runInThisContext } from "vm";
 
 // Update user's data to include the message sent from this component
 const mutation = graphql`
@@ -72,8 +73,8 @@ class JoinIndividual extends Component {
                     id="introduceYourself"
                     rows="8"
                     cols="68"
-                    placeholder="Introduce yourself..."
-                    onChange={this.onBioChange}
+                    placeholder="Email subject"
+                    onChange={this.onSubjectChange}
                   />
 
                   <div className="rectangle2" />
@@ -81,8 +82,8 @@ class JoinIndividual extends Component {
                     id="describeProject"
                     rows="8"
                     cols="68"
-                    placeholder="Describe your project idea..."
-                    onChange={this.onIdeaChange}
+                    placeholder="Email message"
+                    onChange={this.onMessageChange}
                   />
                   {this.state.errorMessage}
                   <div className="popup" />
@@ -91,32 +92,35 @@ class JoinIndividual extends Component {
                     style={{
                       marginTop: 25,
                     }}
-                    onClick={() => {
+                    onClick={async () => {
                       this.setState({ openPopup:true})
-                      commitMutation(environment, {
-                        mutation,
-                        variables: {
-                          user_id: this.props.id,
-                          bio: this.state.bio,
-                          idea: this.state.idea,
-                        },
-                        onCompleted: (response, errors) => {
-                          console.log("RESPONSE: ",response);
-                          console.log("ERRORS: ",errors);
-                          if(!errors) {
-                            this.props.closeModal();
-                          } else if(errors[0].message=="Requested user already on team") {
-                              // text="The user is already on a team"
-                              console.log("User is on a team");
-                              this.setState({ errorMessage:"The user is already on a team" });
-                          } else if(errors[0].message=="You are already on a team!") {
-                            // text="You are already on a team."
-                            this.setState({ errorMessage:"You are already on a team." });
-                          } else {
-                            this.setState({ errorMessage:"There is an error here, try again later." });
-                          }
-                        }
+                      
+                      const myHeaders = new Headers();
+                      // TODO: Integrate this with auth api
+                      const BEARER_TOKEN="token"
+                      myHeaders.append("Authorization", "Bearer " + BEARER_TOKEN);
+                      myHeaders.append("Content-Type", "application/json");
+
+                      var raw = JSON.stringify({
+                        "message": this.state.message,
+                        "emails": [this.props.contact],
+                        "subject": this.state.subject,
                       });
+
+                      const res = await fetch("https://notifications.api.hexlabs.org/email/send", {
+                        method: 'POST',
+                        headers: myHeaders,
+                        body: raw,
+                        redirect: 'follow'
+                      });
+                      const val = await res.json();
+                      const error = val[0].error;
+
+                      if(!error) {
+                        this.props.closeModal();
+                      } else {
+                        this.setState({ errorMessage:"There is an error here, try again later." });
+                      }
                     }}
                   >
                     Submit
@@ -131,12 +135,12 @@ class JoinIndividual extends Component {
   }
 
   // State updaters
-  onBioChange = (e) => {
-    this.setState({ bio: e.target.value });
+  onSubjectChange = (e) => {
+    this.setState({ subject: e.target.value });
   };
 
-  onIdeaChange = (e) => {
-    this.setState({ idea: e.target.value });
+  onMessageChange = (e) => {
+    this.setState({ message: e.target.value });
   };
 }
 
