@@ -11,7 +11,7 @@ import Members from "./Members";
 import "../css/TeamPage.css";
 import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-import environment from "../auth/Environment";
+import environment from "../../Environment";
 import { useMatch, useParams } from "react-router-dom";
 
 const getTeamQuery = graphql`

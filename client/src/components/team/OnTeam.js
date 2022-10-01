@@ -11,7 +11,7 @@ import MembersBlank from "./MembersBlank";
 import "../css/TeamPage.css";
 import { commitMutation } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-import environment from "../auth/Environment";
+import environment from "../../Environment";
 
 const mutation = graphql`
   mutation OnTeamMutation($name: String) {

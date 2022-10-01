@@ -13,7 +13,7 @@ import "../css/TeamInformation.css";
 import skills from "../../constants/skills";
 import { commitMutation } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-import environment from "../auth/Environment";
+import environment from "../../Environment";
 
 const mutation = graphql`
   mutation TeamInformationMutation(

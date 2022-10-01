@@ -4,7 +4,6 @@ import axios from "axios";
 import { initializeApp } from "firebase/app";
 import { setPersistence, getAuth, inMemoryPersistence } from "firebase/auth";
 import { useLogin, LoadingScreen, AuthProvider } from "@hex-labs/core";
-import Login from "./components/auth/Login";
 import Feed from "./components/feed/Feed";
 import EditProfile from "./components/profile/EditProfile";
 import TeamPage from "./components/team/TeamPage";
@@ -33,7 +32,6 @@ const App: React.FC = () => {
     <AuthProvider app={app}>
       <Routes>
         <Route path="/" element={<Feed />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/team/:teamId" element={<TeamPage />} />
       </Routes>

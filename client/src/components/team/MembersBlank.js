@@ -6,7 +6,7 @@ import { Card, Button, Icon } from "semantic-ui-react";
 import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
 import "../css/MembersBlank.css";
-import environment from "../auth/Environment";
+import environment from "../../Environment";
 
 // edit this query to pull on the team members
 const getUsersQuery = graphql`

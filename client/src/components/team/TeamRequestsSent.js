@@ -4,7 +4,7 @@ import { Card, Container } from "semantic-ui-react";
 import NotificationCard from "../notifications/NotificationCard";
 import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-import environment from "../auth/Environment";
+import environment from "../../Environment";
 import "../css/NotificationCard.css";
 
 const getSentRequestsQuery = graphql`

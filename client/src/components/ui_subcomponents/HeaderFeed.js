@@ -4,7 +4,7 @@ import "../css/Modal.css";
 import { Menu, Dropdown, Icon, Popup, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import graphql from "babel-plugin-relay/macro";
-import environment from "../auth/Environment";
+import environment from "../../Environment";
 import { QueryRenderer } from "react-relay";
 import NotificationGroup from "../notifications/NotificationGroup";
 import { filterExtensionDefinitions } from "@graphql-tools/schema";

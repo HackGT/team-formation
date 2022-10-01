@@ -6,7 +6,7 @@ import "../css/Modal.css";
 import UserCard from "../profile/UserCard";
 import { commitMutation } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-import environment from "../auth/Environment";
+import environment from "../../Environment";
 
 // Update user's data to include the message sent from this component
 const mutation = graphql`

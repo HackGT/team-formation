@@ -6,7 +6,7 @@ import { QueryRenderer } from "react-relay";
 import "../css/EditProfile.css";
 import { commitMutation } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-import environment from "../auth/Environment";
+import environment from "../../Environment";
 import skills from "../../constants/skills";
 import years from "../../constants/years";
 import schools from "../../constants/schools";

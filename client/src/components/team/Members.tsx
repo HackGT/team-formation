@@ -4,7 +4,7 @@ import UserCard from "../profile/UserCard";
 import { Icon } from "semantic-ui-react";
 import graphql from "babel-plugin-relay/macro";
 import "../css/Members.css";
-import environment from "../auth/Environment";
+import environment from "../../Environment";
 import { Link } from "react-router-dom";
 import { User } from "../../types/index";
 

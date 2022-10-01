@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Modal } from "semantic-ui-react";
 import { QueryRenderer, commitMutation } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
-import environment from "../auth/Environment";
+import environment from "../../Environment";
 import { setState } from "semantic-ui-react";
 import "../css/Modal.css";
 import UserCard from "../profile/UserCard";

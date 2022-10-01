@@ -6,7 +6,7 @@ import { Button } from "semantic-ui-react";
 import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
 import "../css/Feed.css";
-import environment from "../auth/Environment";
+import environment from "../../Environment";
 
 const getTeamsQuery = graphql`
   query FeedTeamCardsQuery($interests: String, $search: String) {
