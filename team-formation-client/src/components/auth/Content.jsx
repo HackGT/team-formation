@@ -1,13 +1,5 @@
-/* eslint-disable */
 import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import EditProfile from "../profile/EditProfile";
 import Feed from "../feed/Feed";
@@ -88,7 +80,7 @@ class Content extends Component {
     console.log(this.state.loggedIn);
     return (
       <div className="Content-container">
-        <Switch>
+        <Routes>
           <Route exact path="/login">
             <Login />
           </Route>
@@ -111,12 +103,12 @@ class Content extends Component {
           <ProtectedRoute
             loggedIn={this.state.loggedIn}
             exact="exact"
-            path="/team/:id"
+            path="/team/:teamId"
             visible={this.state.data.visible}
             header={HeaderFeed}
             component={TeamPage}
           />
-        </Switch>
+        </Routes>
       </div>
     );
   }

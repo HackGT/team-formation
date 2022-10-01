@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Component } from "react";
-import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Link, Navigate } from "react-router-dom";
 import { Button, Message, Form, Checkbox } from "semantic-ui-react";
 import { QueryRenderer } from "react-relay";
 import "../css/EditProfile.css";
@@ -146,10 +146,10 @@ class EditProfile extends Component {
     //     )
     // }
 
-    // Redirect page if true
+    // Navigate page if true
     if (this.state.next) {
       console.log("nexting");
-      return <Redirect to="/feed" />;
+      return <Navigate to="/feed" />;
     }
     return (
       <QueryRenderer

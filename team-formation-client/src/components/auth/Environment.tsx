@@ -1,20 +1,24 @@
-/* eslint-disable */
-const { Environment, Network, RecordSource, Store } = require("relay-runtime");
+import { Environment, Network, RecordSource, Store } from "relay-runtime";
 
 // Define a function that fetches the results of an operation (query/mutation/etc)
 // and returns its results as a Promise:
-function fetchQuery(operation: any, variables: any, cacheConfig: any, uploadables: any) {
+function fetchQuery(
+  operation: any,
+  variables: any,
+  cacheConfig: any,
+  uploadables: any
+) {
   return fetch("/graphql", {
     method: "POST",
     headers: {
-      "Accept": "application/json",
+      Accept: "application/json",
       "Content-Type": "application/json",
     }, // Add authentication and other headers here
     body: JSON.stringify({
       query: operation.text, // GraphQL text from input
       variables,
     }),
-  }).then(response => {
+  }).then((response) => {
     return response.json();
   });
 }

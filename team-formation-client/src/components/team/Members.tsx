@@ -6,7 +6,6 @@ import graphql from "babel-plugin-relay/macro";
 import "../css/Members.css";
 import environment from "../auth/Environment";
 import { Link } from "react-router-dom";
-import { processImport } from "@graphql-tools/import";
 import { User } from "../../types/index";
 
 // edit this query to pull on the team members
