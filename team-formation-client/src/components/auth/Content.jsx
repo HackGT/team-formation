@@ -7,39 +7,6 @@ import HeaderFeed from "../ui_subcomponents/HeaderFeed";
 import TeamPage from "../team/TeamPage";
 import "../css/Content.css";
 
-const ProtectedRoute = ({
-  component: Comp,
-  header: Header,
-  loggedIn,
-  path,
-  ...rest
-}) => {
-  return (
-    <Route
-      path={path}
-      {...rest}
-      render={(props) => {
-        return loggedIn ? (
-          <div>
-            <Header visible={props.visible} />
-            <Comp {...props} />
-          </div>
-        ) : (
-          <Navigate
-            to={{
-              pathname: "/login",
-              state: {
-                prevLocation: path,
-                error: "You need to login first!",
-              },
-            }}
-          />
-        );
-      }}
-    />
-  );
-};
-
 class Content extends Component {
   constructor(props) {
     super(props);
