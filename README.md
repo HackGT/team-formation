@@ -3,6 +3,8 @@ Team Formation application
 
 ## Getting Started ##
 
+Note: this is likely deprecated, will update.
+
 #### Note: start the server before the client ####
 
 ### Server ###
