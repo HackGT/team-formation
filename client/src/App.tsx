@@ -18,6 +18,7 @@ axios.defaults.withCredentials = true;
 
 const App: React.FC = () => {
   const [loading, loggedIn] = useLogin(app);
+  const hexathonId = "62d9ed68d0a69b88c06bdfb2";
 
   if (loading) {
     return <LoadingScreen />;
@@ -31,9 +32,9 @@ const App: React.FC = () => {
   return (
     <AuthProvider app={app}>
       <Routes>
-        <Route path="/" element={<Feed />} />
-        <Route path="/edit-profile" element={<EditProfile />} />
-        <Route path="/team/:teamId" element={<TeamPage />} />
+        <Route path="/" element={<Feed hexathonId={hexathonId} />} />
+        <Route path="/edit-profile" element={<EditProfile hexathonId={hexathonId} />} />
+        <Route path="/team/:teamId" element={<TeamPage hexathonId={hexathonId} />} />
       </Routes>
     </AuthProvider>
   );
